@@ -2,8 +2,8 @@
   "id": "test-bngl.omex",
   "filename": "test-bngl.omex",
   "type": "archive",
-  "modeling_framework": "non_spatial_discrete",
-  "model_format": "bngl",
-  "simulation_format": "sedml",
-  "archive_format": "combine"
+  "modeling-framework": "non_spatial_discrete",
+  "model-format": "bngl",
+  "simulation-format": "sedml",
+  "archive-format": "combine"
 }
