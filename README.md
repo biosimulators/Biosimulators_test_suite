@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/github/license/KarrLab/Biosimulations_COMBINE_archive_test_suite.svg)](LICENSE)
+[![License](https://img.shields.io/github/license/reproducible-biomedical-modeling/Biosimulations_COMBINE_archive_test_suite.svg)](LICENSE)
 
 # BioSimulations COMBINE archive test suite
 
