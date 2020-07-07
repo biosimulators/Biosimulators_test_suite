@@ -9,7 +9,7 @@ Before getting started, please contact the lead developers at [info@reproducible
 ## Repository organization
 
 * `README.md`: Overview of the test suite
-* `Biosimulations_combine_archive_test_suite/`: collection of COMBINE/OMEX archives (`.omex` files) and metadata about each archive (one `.json` file per archive)
+* `Biosimulations_combine_archive_test_suite/`: collection of COMBINE/OMEX archives (`.omex` files) and metadata about each archive (one JSON file per archive)
 * `LICENSE`: License
 * `CONTRIBUTING.md`: Guide to contributing to the test suite (this document)
 * `CODE_OF_CONDUCT.md`: Code of conduct for developers
