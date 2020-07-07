@@ -24,7 +24,7 @@ valid_cases, failed_cases = validator.run(dockerhub_id, properties_filename)
 ```
 
 ## License
-This package is released under the [Creative Commons CC0](LICENSE).
+This package is released under the [Creative Commons CC0 license](LICENSE).
 
 ## Development team
 This package was developed by the [Center for Reproducible Biomedical Modeling](http://reproduciblebiomodels.org) and the [Karr Lab](https://www.karrlab.org) at the Icahn School of Medicine at Mount Sinai in New York.
