@@ -1,0 +1,9 @@
+{
+  "id": "BIOMD0000000297.omex",
+  "filename": "BIOMD0000000297.omex",
+  "type": "archive",
+  "modeling_framework": "non_spatial_continuous",
+  "model_format": "sbml",
+  "simulation_format": "sedml",
+  "archive_format": "combine"
+}

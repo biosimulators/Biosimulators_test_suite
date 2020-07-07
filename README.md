@@ -4,12 +4,24 @@
 
 Collection of [COMBINE/OMEX](http://co.mbine.org/standards/omex) archives for testing [BioSimulations-compliant containerized simulation software tools](https://github.com/reproducible-biomedical-modeling/Biosimulations_SimulatorDockerImageTemplate). The collection also serves as examples of COMBINE/OMEX archives.
 
+[BioSimulations-utils](https://github.com/reproducible-biomedical-modeling/Biosimulations_utils) provides a utility for using the test suite to test containerized simulation tools. See below for more information.
+
 ## Contents
+* [Usage: using the test suite to test a simulation tool](#usage-using-the-test-suite-to-test-a-biosimulations-compliant-containerized-simulation-tool)
 * [License](#license)
 * [Development team](#development-team)
 * [Contributing to the test suite](#contributing-to-the-test-suite)
 * [Acknowledgements](#acknowledgements)
 * [Questions and comments](#questions-and-comments)
+
+## Usage: using the test suite to test a BioSimulations-compliant containerized simulation tool
+```python
+from biosimulations_utils.simulator.testing import SimulatorValidator
+dockerhub_id = 'crbm/biosimulations_tellurium'
+properties_filename = '/path/to/Biosimulations_tellurium/properties.json'
+validator = SimulatorValidator()
+valid_cases, failed_cases = validator.run(dockerhub_id, properties_filename)
+```
 
 ## License
 This package is released under the [Creative Commons CC0](LICENSE).
