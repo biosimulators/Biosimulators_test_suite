@@ -16,7 +16,7 @@ Collection of [COMBINE/OMEX](http://co.mbine.org/standards/omex) archives for te
 
 ## Usage: using the test suite to test a BioSimulations-compliant containerized simulation tool
 ```python
-from biosimulations_utils.simulator.testing import SimulatorValidator
+from Biosimulations_utils.simulator.testing import SimulatorValidator
 dockerhub_id = 'crbm/biosimulations_tellurium'
 properties_filename = '/path/to/Biosimulations_tellurium/properties.json'
 validator = SimulatorValidator()
