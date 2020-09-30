@@ -1,24 +1,24 @@
-[![License](https://img.shields.io/github/license/KarrLab/Biosimulations_COMBINE_archive_test_suite.svg)](LICENSE)
+[![License](https://img.shields.io/github/license/biosimulators/Biosimulators_test_suite.svg)](LICENSE)
 
-# BioSimulations COMBINE archive test suite
+# BioSimulators test suite
 
-Collection of [COMBINE/OMEX](http://co.mbine.org/standards/omex) archives for testing [BioSimulations-compliant containerized simulation software tools](https://github.com/reproducible-biomedical-modeling/Biosimulations_SimulatorDockerImageTemplate). The collection also serves as examples of COMBINE/OMEX archives.
+Collection of [COMBINE/OMEX](http://co.mbine.org/standards/omex) archives for testing [BioSimulators-compliant containerized simulation software tools](https://github.com/biosimulators/Biosimulators_simulator_template). The collection also serves as examples of COMBINE/OMEX archives.
 
-[BioSimulations-utils](https://github.com/reproducible-biomedical-modeling/Biosimulations_utils) provides a utility for using the test suite to test containerized simulation tools. See below for more information.
+[BioSimulations-utils](https://github.com/biosimulations/Biosimulations_utils) provides a utility for using the test suite to test containerized simulation tools. See below for more information.
 
 ## Contents
-* [Usage: using the test suite to test a simulation tool](#usage-using-the-test-suite-to-test-a-biosimulations-compliant-containerized-simulation-tool)
+* [Usage: using the test suite to test a simulation tool](#usage-using-the-test-suite-to-test-a-biosimulators-compliant-containerized-simulation-tool)
 * [License](#license)
 * [Development team](#development-team)
 * [Contributing to the test suite](#contributing-to-the-test-suite)
 * [Acknowledgements](#acknowledgements)
 * [Questions and comments](#questions-and-comments)
 
-## Usage: using the test suite to test a BioSimulations-compliant containerized simulation tool
+## Usage: using the test suite to test a BioSimulators-compliant containerized simulation tool
 ```python
 from Biosimulations_utils.simulator.testing import SimulatorValidator
-dockerhub_id = 'crbm/biosimulations_tellurium'
-properties_filename = '/path/to/Biosimulations_tellurium/properties.json'
+dockerhub_id = 'biosimulators/tellurium'
+properties_filename = '/path/to/Biosimulators_tellurium/properties.json'
 validator = SimulatorValidator()
 valid_cases, failed_cases = validator.run(dockerhub_id, properties_filename)
 ```
@@ -36,4 +36,4 @@ We enthusiastically welcome contributions to the test suite! Please see the [gui
 This work was supported by National Institutes of Health awards P41EB023912 and R35GM119771 and the Icahn Institute for Data Science and Genomic Technology.
 
 ## Questions and comments
-Please contact the [Center for Reproducible Biomedical Modeling](mailto:info@reproduciblebiomodels.org) with any questions or comments.
+Please contact the [BioSimulators Team](mailto:info@biosimulators.org) with any questions or comments.
