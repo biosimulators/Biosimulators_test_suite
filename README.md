@@ -18,7 +18,7 @@ Collection of [COMBINE/OMEX](http://co.mbine.org/standards/omex) archives for te
 ```python
 from Biosimulations_utils.simulator.testing import SimulatorValidator
 dockerhub_id = 'biosimulators/tellurium'
-properties_filename = '/path/to/Biosimulators_tellurium/properties.json'
+properties_filename = '/path/to/Biosimulators_tellurium/biosimulators.json'
 validator = SimulatorValidator()
 valid_cases, failed_cases = validator.run(dockerhub_id, properties_filename)
 ```
