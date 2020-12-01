@@ -18,9 +18,9 @@ Before getting started, please contact the lead developers at [info@biosimulator
 
 Please use GitHub pull requests to submit changes. Each request should include a brief description of the new and/or modified features.
 
-## Releasing and deploying new versions
+## Releasing new versions
 
-Contact [info@biosimulators.org](mailto:info@biosimulators.org) to request release and deployment of new changes. 
+Contact [info@biosimulators.org](mailto:info@biosimulators.org) to request release new changes. 
 
 ## Reporting issues
 
