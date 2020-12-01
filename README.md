@@ -4,7 +4,7 @@
 
 Collection of [COMBINE/OMEX](http://co.mbine.org/standards/omex) archives for testing [BioSimulators-compliant containerized simulation software tools](https://github.com/biosimulators/Biosimulators_simulator_template). The collection also serves as examples of COMBINE/OMEX archives.
 
-[BioSimulations-utils](https://github.com/biosimulations/Biosimulations_utils) provides a utility for using the test suite to test containerized simulation tools. See below for more information.
+[BioSimulations utils](https://github.com/biosimulations/biosimulations_utils) provides a utility for using the test suite to test containerized simulation tools. See below for more information.
 
 ## Contents
 * [Usage: using the test suite to test a simulation tool](#usage-using-the-test-suite-to-test-a-biosimulators-compliant-containerized-simulation-tool)
@@ -16,7 +16,7 @@ Collection of [COMBINE/OMEX](http://co.mbine.org/standards/omex) archives for te
 
 ## Usage: using the test suite to test a BioSimulators-compliant containerized simulation tool
 ```python
-from Biosimulations_utils.simulator.testing import SimulatorValidator
+from biosimulations_utils.simulator.testing import SimulatorValidator
 dockerhub_id = 'biosimulators/tellurium'
 properties_filename = '/path/to/Biosimulators_tellurium/biosimulators.json'
 validator = SimulatorValidator()
