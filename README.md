@@ -1,5 +1,3 @@
-[![License](https://img.shields.io/github/license/biosimulators/Biosimulators_test_suite.svg)](LICENSE)
-
 # BioSimulators test suite
 
 Collection of [COMBINE/OMEX](http://co.mbine.org/standards/omex) archives for testing [BioSimulators-compliant containerized simulation software tools](https://github.com/biosimulators/Biosimulators_simulator_template). The collection also serves as examples of COMBINE/OMEX archives.
