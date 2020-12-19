@@ -35,7 +35,7 @@ The archives in this directory involve numerous simulation algorithms such as:
 
 | Name                            | Acronym | KiSAO id                                                                                                                             |
 | ------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| CVODE                           |         | [KISAO_0000019](https://www.ebi.ac.uk/ols/ontologies/kisao/terms?iri=http%3A%2F%2Fwww.biomodels.net%2Fkisao%2FKISAO%23KISAO_0000019) |
+| Code Value Ordinary Differential Equation Solver | CVODE | [KISAO_0000019](https://www.ebi.ac.uk/ols/ontologies/kisao/terms?iri=http%3A%2F%2Fwww.biomodels.net%2Fkisao%2FKISAO%23KISAO_0000019) |
 | Stochastic Simulation Algorithm | SSA     | [KISAO_0000029](https://www.ebi.ac.uk/ols/ontologies/kisao/terms?iri=http%3A%2F%2Fwww.biomodels.net%2Fkisao%2FKISAO%23KISAO_0000029) |
 
 ## Model formats employed by the example archives
