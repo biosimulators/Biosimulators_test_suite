@@ -1,6 +1,6 @@
 {
   "name": "Varusai & Nguyen Scientific Reports 2018: mTOR signalling network",
-  "filename": "BIOMD0000000823.omex",
+  "filename": "Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML.omex",
   "modelingFrameworkSboIds": ["SBO_0000293"],
   "modelFormatEdamIds": ["format_2585"],
   "simulationFormatEdamIds": ["format_3685"],
