@@ -1,6 +1,6 @@
 {
   "name": "Parmar et al. BMC Systems Biology 2017: Mouse iron distribution",
-  "filename": "BIOMD0000000734.omex",
+  "filename": "Parmar-BMC-Syst-Biol-2017-iron-distribution.omex",
   "modelingFrameworkSboIds": ["SBO_0000293"],
   "modelFormatEdamIds": ["format_2585"],
   "simulationFormatEdamIds": ["format_3685"],
