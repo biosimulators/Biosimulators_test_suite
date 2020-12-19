@@ -1,9 +1,12 @@
 {
-  "id": "BIOMD0000000297.omex",
+  "name": "Ciliberto et al. Journal Cell Biology 2003: Morphogenesis checkpoint in budding yeast",
   "filename": "BIOMD0000000297.omex",
-  "type": "archive",
-  "modeling-framework": "non_spatial_continuous",
-  "model-format": "sbml",
-  "simulation-format": "sedml",
-  "archive-format": "combine"
+  "modelingFrameworkSboIds": ["SBO_0000293"],
+  "modelFormatEdamIds": ["format_2585"],
+  "simulationFormatEdamIds": ["format_3685"],
+  "archiveFormatEdamId": "format_3686",
+  "identifiers": [
+    {"namespace": "biomodels.db", "id": "BIOMD0000000297"}
+    {"namespace": "doi", "id": "10.1083/jcb.200306139"}
+  ]
 }

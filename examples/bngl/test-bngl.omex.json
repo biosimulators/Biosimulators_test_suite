@@ -1,9 +1,10 @@
 {
-  "id": "test-bngl.omex",
+  "name": "Example BioNetGen model",
   "filename": "test-bngl.omex",
-  "type": "archive",
-  "modeling-framework": "non_spatial_discrete",
-  "model-format": "bngl",
-  "simulation-format": "sedml",
-  "archive-format": "combine"
+  "modelingFrameworkSboIds": ["SBO_0000295"],
+  "modelFormatEdamIds": ["format_3972"],
+  "simulationFormatEdamIds": ["format_3685"],
+  "archiveFormatEdamId": "format_3686",
+  "identifiers": [
+  ]
 }

@@ -1,0 +1,12 @@
+{
+  "name": "Vilar et al. PNAS 2002: Minimal circadian clock",
+  "filename": "Vilar-PNAS-2002-minimal-circardian-clock.omex",
+  "modelingFrameworkSboIds": ["SBO_0000293", "SBO_0000295"],
+  "modelFormatEdamIds": ["format_2585"],
+  "simulationFormatEdamIds": ["format_3685"],
+  "archiveFormatEdamId": "format_3686",
+  "identifiers": [
+    {"namespace": "biomodels.db", "id": "BIOMD0000000035"}
+    {"namespace": "doi", "id": "10.1073/pnas.092133899"}
+  ]
+}
