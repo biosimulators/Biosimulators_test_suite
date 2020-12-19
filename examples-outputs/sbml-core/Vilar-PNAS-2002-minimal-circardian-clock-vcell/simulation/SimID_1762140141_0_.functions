@@ -1,0 +1,33 @@
+##---------------------------------------------
+##  /tmp/out/simulation/SimID_1762140141_0_.functions
+##---------------------------------------------
+
+Compartment::J_A_decay; A; ; Nonspatial_VariableType; false
+Compartment::J_A_trnscr; (50.0 * PrmA); ; Nonspatial_VariableType; false
+Compartment::J_A_trnsl; (50.0 * mRNA_A_); ; Nonspatial_VariableType; false
+Compartment::J_active_A_trnscr; (500.0 * PrmA_bound); ; Nonspatial_VariableType; false
+Compartment::J_active_R_trnsc; (50.0 * PrmR_bound); ; Nonspatial_VariableType; false
+Compartment::J_AR_binding; (1204.4283579999994 * A * R); ; Nonspatial_VariableType; false
+Compartment::J_C_decay; C; ; Nonspatial_VariableType; false
+Compartment::J_mRNA_A_decay; (10.0 * mRNA_A_); ; Nonspatial_VariableType; false
+Compartment::J_mRNA_R_decay; (0.5 * mRNA_R); ; Nonspatial_VariableType; false
+Compartment::J_PrmA_activation; ((602.2141789999997 * A * PrmA) - (50.0 * PrmA_bound)); ; Nonspatial_VariableType; false
+Compartment::J_PrmR_activation; ((602.2141789999997 * A * PrmR) - (100.0 * PrmR_bound)); ; Nonspatial_VariableType; false
+Compartment::J_R_decay; (0.2 * R); ; Nonspatial_VariableType; false
+Compartment::J_R_trnsc; (0.01 * PrmR); ; Nonspatial_VariableType; false
+Compartment::J_R_trnsl; (5.0 * mRNA_R); ; Nonspatial_VariableType; false
+Compartment::Kf_A_decay; 1.0; ; Nonspatial_VariableType; false
+Compartment::Kf_A_trnscr; 50.0; ; Nonspatial_VariableType; false
+Compartment::Kf_A_trnsl; 50.0; ; Nonspatial_VariableType; false
+Compartment::Kf_active_A_trnscr; 500.0; ; Nonspatial_VariableType; false
+Compartment::Kf_active_R_trnsc; 50.0; ; Nonspatial_VariableType; false
+Compartment::Kf_AR_binding; 1.9999999999999998; ; Nonspatial_VariableType; false
+Compartment::Kf_C_decay; 1.0; ; Nonspatial_VariableType; false
+Compartment::Kf_PrmA_activation; 0.9999999999999999; ; Nonspatial_VariableType; false
+Compartment::Kf_PrmR_activation; 0.9999999999999999; ; Nonspatial_VariableType; false
+Compartment::Kf_R_decay; 0.2; ; Nonspatial_VariableType; false
+Compartment::Kf_R_trnsc; 0.01; ; Nonspatial_VariableType; false
+Compartment::Kf_R_trnsl; 5.0; ; Nonspatial_VariableType; false
+Compartment::PrmA_init_uM; 3.9642443330422327E-4; ; Nonspatial_VariableType; false
+Compartment::PrmR_init_uM; 3.9642443330422327E-4; ; Nonspatial_VariableType; false
+
