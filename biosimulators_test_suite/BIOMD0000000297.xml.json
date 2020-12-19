@@ -1,9 +1,0 @@
-{
-  "id": "BIOMD0000000297.xml",
-  "filename": "BIOMD0000000297.xml",
-  "type": "biomodel",
-  "modeling-framework": "non_spatial_continuous",
-  "model-format": "sbml",
-  "simulation-format": "sedml",
-  "archive-format": "combine"
-}
