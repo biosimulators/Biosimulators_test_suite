@@ -12,7 +12,13 @@ The purpose of this directory is two-fold:
 * The directory serves as a test suite for the [BioSimulators](https://biosimulators.org) registry of biosimulation tools.
   Tools submitted to the registry are validated using the software in this repository and the examples in this directory.
 
-## Modeling frameworks employed by the archives in this directory
+## Contents
+* [Modeling frameworks employed by the archives](#modeling-frameworks-employed-by-the-example-archives)
+* [Simulation algorithms employed by the archives](#simulation-algorithms-employed-by-the-example-archives)
+* [Model formats employed by the archives](#model-formats-employed-by-the-example-archives)
+* [Compatibility of the archives with simulation tools](#compatibility-of-the-example-archives-with-simulation-tools)
+
+## Modeling frameworks employed by the example archives
 
 The archives in this directory involve the following modeling frameworks:
 
@@ -23,7 +29,7 @@ The archives in this directory involve the following modeling frameworks:
 | non-spatial continuous |             | [SBO_0000293](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000293) |
 | non-spatial discrete   |             | [SBO_0000295](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000295) |
 
-## Simulation algorithms employed by the archives in this directory
+## Simulation algorithms employed by the example archives
 
 The archives in this directory involve numerous simulation algorithm such as:
 
@@ -32,7 +38,7 @@ The archives in this directory involve numerous simulation algorithm such as:
 | CVODE                           |         | [KISAO_0000019](https://www.ebi.ac.uk/ols/ontologies/kisao/terms?iri=http%3A%2F%2Fwww.biomodels.net%2Fkisao%2FKISAO%23KISAO_0000019) |
 | Stochastic Simulation Algorithm | SSA     | [KISAO_0000029](https://www.ebi.ac.uk/ols/ontologies/kisao/terms?iri=http%3A%2F%2Fwww.biomodels.net%2Fkisao%2FKISAO%23KISAO_0000029) |
 
-## Model formats employed by the archives in this directory
+## Model formats employed by the example archives
 
 The archives in this directory involve the following model formats:
 
