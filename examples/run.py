@@ -41,6 +41,17 @@ EXAMPLES = [
         ]
     },
     {
+        'filename': os.path.join(BASE_DIR, 'bngl', 'test-bngl.omex'),
+        'simulators': ['bionetgen'],
+        'reports': [
+            {
+                'filename': 'test.sedml/simulation_1.csv',
+                'number_of_points': 101,
+                'data_sets': 9,
+            },
+        ]
+    },
+    {
         'filename': os.path.join(BASE_DIR, 'sbml-core', 'Parmar-BMC-Syst-Biol-2017-iron-distribution.omex'),
         'simulators': ['tellurium'],
         'reports': [
