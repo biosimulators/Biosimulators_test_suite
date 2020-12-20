@@ -31,23 +31,12 @@ EXAMPLES = [
     },
     {
         'filename': os.path.join(BASE_DIR, 'sbml-core', 'Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint.omex'),
-        'simulators': ['tellurium'],
+        'simulators': ['gillespy2'],
         'reports': [
             {
                 'filename': 'simulation_1.sedml/simulation_1.csv',
                 'number_of_points': 101,
                 'data_sets': 20,
-            },
-        ]
-    },
-    {
-        'filename': os.path.join(BASE_DIR, 'sbml-core', 'Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint.omex'),
-        'simulators': ['vcell'],
-        'reports': [
-            {
-                'filename': 'simulation_1.sedml/simulation 1.csv',
-                'number_of_points': 101,
-                'data_sets': 22,  # VCell ignores reports
             },
         ]
     },
@@ -163,6 +152,7 @@ def run():
                 example['filename'],
                 example_out_dir,
                 'ghcr.io/biosimulators/{}:latest'.format(simulator),
+                pull_docker_image=False,
             )
 
             reports = set([os.path.relpath(report.replace('.sedml', ''), example_out_dir)
