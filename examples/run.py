@@ -19,6 +19,17 @@ EXAMPLES = [
         ]
     },
     {
+        'filename': os.path.join(BASE_DIR, 'sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex'),
+        'simulators': ['vcell'],
+        'reports': [
+            {
+                'filename': 'BIOMD0000000912_sim.sedml/Caravagna2010.csv',
+                'number_of_points': 5001,
+                'data_sets': 4,
+            },
+        ]
+    },
+    {
         'filename': os.path.join(BASE_DIR, 'sbml-core', 'Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint.omex'),
         'simulators': ['tellurium'],
         'reports': [
