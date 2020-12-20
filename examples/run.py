@@ -97,10 +97,10 @@ EXAMPLES = [
                 'data_sets': 2,
             },
         ]
-    }
+    },
 ]
 
-BASE_OUTPUTS_DIR = os.path.join(os.path.dirname(__file__), '..', 'examples-outputs')
+BASE_OUTPUTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'examples-outputs'))
 
 
 def run():
@@ -110,7 +110,8 @@ def run():
     errors = []
     for example in EXAMPLES:
         for simulator in example['simulators']:
-            example_out_dir = os.path.join(BASE_OUTPUTS_DIR, example['filename'].replace('.omex', '') + '-' + simulator)
+            example_out_dir = os.path.join(BASE_OUTPUTS_DIR, os.path.relpath(
+                example['filename'].replace('.omex', '') + '-' + simulator, BASE_DIR))
             if os.path.isdir(example_out_dir):
                 shutil.rmtree(example_out_dir)
 
@@ -162,7 +163,8 @@ def run():
 
     if errors:
         raise SystemExit(
-            'The simulators did not consistently execute the examples:\n\n  {}'.format('\n\n'.join(errors).replace('\n', '\n  ')))
+            'The simulators did not consistently execute the examples:\n\n  {}'.format(
+                '\n\n'.join(errors).replace('\n', '\n  ')))
 
 
 if __name__ == "__main__":
