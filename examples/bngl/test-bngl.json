@@ -1,7 +1,7 @@
 {
   "name": "Example BioNetGen model",
   "filename": "test-bngl.omex",
-  "modelingFrameworkSboIds": ["SBO_0000295"],
+  "modelingFrameworkSboIds": ["SBO_0000293"],
   "modelFormatEdamIds": ["format_3972"],
   "simulationFormatEdamIds": ["format_3685"],
   "archiveFormatEdamId": "format_3686",
