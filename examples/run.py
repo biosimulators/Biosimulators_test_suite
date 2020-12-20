@@ -31,7 +31,7 @@ EXAMPLES = [
     },
     {
         'filename': os.path.join(BASE_DIR, 'sbml-core', 'Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint.omex'),
-        'simulators': ['gillespy2'],
+        'simulators': ['gillespy2', 'tellurium'],
         'reports': [
             {
                 'filename': 'simulation_1.sedml/simulation_1.csv',
