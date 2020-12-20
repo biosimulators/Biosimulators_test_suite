@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2. Tutorial &#8212; BioSimulators test suite 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. biosimulators_test_suite package" href="source/biosimulators_test_suite.html" />
+    <link rel="prev" title="1. Installation instructions" href="installation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">BioSimulators test suite</a></h1>
+
+
+
+<p class="blurb">Tool for validating that biosimulation software tools implement the BioSimulators standards for biosimulation tools</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=biosimulators&repo=Biosimulators_test_suite&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installation instructions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-public-cloud-deployment-of-the-test-suite">2.1. Using the public cloud deployment of the test suite</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#issue-content-and-format">2.1.1. Issue content and format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validating-and-submitting-simulators-via-the-github-api">2.1.2. Validating and submitting simulators via the GitHub API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="source/biosimulators_test_suite.html">3. API documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">4. About the BioSimulators test suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">5. Index</a></li>
+</ul>
+
+
+<hr />
+<ul>
+    
+    <li class="toctree-l1"><a href="https://biosimulators.org">BioSimulators</a></li>
+    
+    <li class="toctree-l1"><a href="https://run.biosimulations.org">runBioSimulations</a></li>
+    
+    <li class="toctree-l1"><a href="https://biosimulations.org">BioSimulations</a></li>
+    
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="installation.html" title="previous chapter"><span class="section-number">1. </span>Installation instructions</a></li>
+      <li>Next: <a href="source/biosimulators_test_suite.html" title="next chapter"><span class="section-number">3. </span>biosimulators_test_suite package</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="tutorial">
+<h1><span class="section-number">2. </span>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>Simulation software developers can utilize the test suite in two ways. First, developers can install and execute the test suite locally on their own machines. Second, developers can use the public cloud deployment of the test suite. In most cases, we recommend that developers use the public cloud deployment, which is easy to use. We recommend that developers deploy the test suite locally if they wish to test their simulator offline or wish to continuously test their simulator such as within their own continuous integration workflows (e.g., CircleCI, GitHub Actions).</p>
+<div class="section" id="using-the-public-cloud-deployment-of-the-test-suite">
+<h2><span class="section-number">2.1. </span>Using the public cloud deployment of the test suite<a class="headerlink" href="#using-the-public-cloud-deployment-of-the-test-suite" title="Permalink to this headline">¶</a></h2>
+<p>The test suite is deployed as a GitHub Action workflow on issues submitted to the BioSimulators repository. Developers can run the test suite on their simulation tool by creating an issue with the label <code class="docutils literal notranslate"><span class="pre">Validate/submit</span> <span class="pre">simulator</span></code>. Developers can create issues either using this <a class="reference external" href="https://github.com/biosimulators/Biosimulators/issues/new?assignees=&amp;labels=Validate%2Fsubmit+simulator&amp;template=validate-submit-a-simulator.md&amp;title=">form</a> or using the GitHub API.</p>
+<p>Once an issue is created, a GitHub Action workflow will use the test suite to validate and/or commit your simulator to the BioSimulators registry. If your simulator is valid, the workflow will post a success message to your issue. If the test suite finds that your simulator is invalid, the workflow will post a description of the error to your workflow.</p>
+<div class="section" id="issue-content-and-format">
+<h3><span class="section-number">2.1.1. </span>Issue content and format<a class="headerlink" href="#issue-content-and-format" title="Permalink to this headline">¶</a></h3>
+<p>The body of the issue should contain a YAML-encoded description of your simulator. This should describe the id of your simulator, the version of your simulator that you would like to validate or submit, a URL where the specifications of your simulator can be retrieved, and two flags which indicate whether you would like the Docker image for your simulator to be validated and whether you would like your simulator to be committed to the BioSimulators registry. Below is an example body for an issue.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>---
+id: tellurium
+version: 2.1.6
+specificationsUrl: https://raw.githubusercontent.com/biosimulators/Biosimulators_tellurium/2.1.6/biosimulators.json
+validateImage: true
+commitSimulator: true
+---
+</pre></div>
+</div>
+</div>
+<div class="section" id="validating-and-submitting-simulators-via-the-github-api">
+<h3><span class="section-number">2.1.2. </span>Validating and submitting simulators via the GitHub API<a class="headerlink" href="#validating-and-submitting-simulators-via-the-github-api" title="Permalink to this headline">¶</a></h3>
+<p>Please follow these steps to use the GitHub API to programmatically submit issues to validate and/or submit simulators to the BioSimulators registry.</p>
+<ol class="arabic simple">
+<li><p>Create a GitHub account</p></li>
+<li><p>Create a token for your GitHub account with the scope <code class="docutils literal notranslate"><span class="pre">public_repo</span></code></p></li>
+<li><p>Execute HTTP POST requests to create issues. The body of the issue should be a JSON-encoded dictionary as illustrated below. The dictionary should have the following keys:</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">labels</span></code>: Its value should be equal to <code class="docutils literal notranslate"><span class="pre">[&quot;Validate/submit</span> <span class="pre">simulator&quot;]</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code>: A descriptive title for your issue such as <code class="docutils literal notranslate"><span class="pre">Submit</span> <span class="pre">tellurium</span> <span class="pre">2.1.6</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">body</span></code>: A YAML-encoded description of your simulator as outlined above.</p></li>
+</ul>
+</div></blockquote>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>GH_USERNAME=*********
+GH_TOKEN=*********
+curl \
+  -X POST \
+  -u ${GH_USERNAME}:${GH_TOKEN} \
+  -H &quot;Accept: application/vnd.github.v3+json&quot; \
+  https://api.github.com/repos/biosimulators/Biosimulators/issues \
+  -d &#39;{&quot;labels&quot;: [&quot;Validate/submit simulator&quot;], &quot;title&quot;: &quot;Submit tellurium 2.1.6&quot;, &quot;body&quot;: &quot;---\nname: tellurium\nversion: 2.1.6\nspecificationsUrl: https://raw.githubusercontent.com/biosimulators/Biosimulators_tellurium/2.1.6/biosimulators.json\nvalidateImage: true\ncommitSimulator: true\n\n---&quot;}&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2020, BioSimulators Team.
+      
+      |
+      <a href="_sources/tutorial.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+    <a href="https://github.com/biosimulators/Biosimulators_test_suite" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+    </a>
+    
+
+    
+  </body>
+</html>
