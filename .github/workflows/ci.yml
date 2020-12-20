@@ -137,9 +137,9 @@ jobs:
           git config pull.rebase false
           git stash
           git pull
+          set +e
           git stash pop
           git add docs
-          set +e
           git commit -m "Updating compiled documentation"
           if [[ $? = 0 ]]; then
             docsChanged=1
