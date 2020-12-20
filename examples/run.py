@@ -130,7 +130,7 @@ EXAMPLES = [
                 'data_sets': 2,
             },
         ]
-    },    
+    },
 ]
 
 BASE_OUTPUTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'examples-outputs'))
