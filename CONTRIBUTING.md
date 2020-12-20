@@ -1,6 +1,6 @@
-# Contributing to the BioSimulations COMBINE archive test suite
+# Contributing to the BioSimulators test suite
 
-We enthusiastically welcome contributions to the BioSimulations COMBINE archive test suite!
+We enthusiastically welcome contributions to the BioSimulators test suite!
 
 ## Coordinating contributions
 
@@ -8,11 +8,40 @@ Before getting started, please contact the lead developers at [info@biosimulator
 
 ## Repository organization
 
-* `README.md`: Overview of the test suite
-* `biosimulators_test_suite/`: collection of COMBINE/OMEX archives (`.omex` files) and metadata about each archive (one JSON file per archive)
-* `LICENSE`: License
-* `CONTRIBUTING.md`: Guide to contributing to the test suite (this document)
-* `CODE_OF_CONDUCT.md`: Code of conduct for developers
+This repository follows standard Python conventions:
+
+* `README.md`: Overview of this repository
+* `biosimulators_test_suite/`: Source code for this package
+* `examples`: Example modeling projects that the source code uses to test biosimulation software tools
+* `examples-ouputs`: Example outputs (reports and plots) of executing the example modeling projects
+* `tests/`: Unit tests for the code for this package
+* `setup.py`: pip installation script for this package
+* `setup.cfg`: Configuration for the pip installation script
+* `requirements.txt`: Dependencies of this package
+* `requirements.optional.txt`: Optional dependencies of this package
+* `MANIFEST.in`: List of files to include when the BioSimulators test suite is packaged for distribution through PyPI
+* `LICENSE`: License for the sofware of this package
+* `LICENSE-DATA`: License for the example modeling projects in this package
+* `CONTRIBUTING.md`: Guide to contributing to this package (this document)
+* `CODE_OF_CONDUCT.md`: Code of conduct for developers of this package
+
+## Coding convention
+
+The code in this repository follows standard Python style conventions:
+
+* Class names: `UpperCamelCase`
+* Function names: `lower_snake_case`
+* Variable names: `lower_snake_case`
+
+## Documentation convention
+
+The code in the BioSimulators test suite is documented using [reStructuredText](https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html) and the [napoleon Sphinx plugin](https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html). The documentation can be compiled with [Sphinx](https://www.sphinx-doc.org/) by running the following commands:
+
+```
+python -m pip install -r docs-src/requirements.txt
+sphinx-apidoc . setup.py --output-dir docs-src/source --force --module-first --no-toc
+sphinx-build docs-src docs
+```
 
 ## Submitting changes
 
