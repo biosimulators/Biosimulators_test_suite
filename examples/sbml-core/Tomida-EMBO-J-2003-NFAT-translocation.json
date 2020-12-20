@@ -1,0 +1,12 @@
+{
+  "name": "Tomida et al. EMBO Journal 2003: Calcium-induced NFAT translocation",
+  "filename": "Tomida-EMBO-J-2003-NFAT-translocation.omex",
+  "modelingFrameworkSboIds": ["SBO_0000293"],
+  "modelFormatEdamIds": ["format_2585"],
+  "simulationFormatEdamIds": ["format_3685"],
+  "archiveFormatEdamId": "format_3686",
+  "identifiers": [
+    {"namespace": "biomodels.db", "id": "BIOMD0000000678"}
+    {"namespace": "doi", "id": "10.1093/emboj/cdg381"}
+  ]
+}

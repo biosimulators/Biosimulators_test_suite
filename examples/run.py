@@ -52,6 +52,17 @@ EXAMPLES = [
         ]
     },
     {
+        'filename': os.path.join(BASE_DIR, 'sbml-core', 'Tomida-EMBO-J-2003-NFAT-translocation.omex'),
+        'simulators': ['copasi'],
+        'reports': [
+            {
+                'filename': 'BIOMD0000000678_sim.sedml/BIOMD0000000678_sim.csv',
+                'number_of_points': 801,
+                'data_sets': 5,
+            },
+        ]
+    },
+    {
         'filename': os.path.join(BASE_DIR, 'sbml-core', 'Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML.omex'),
         'simulators': ['copasi'],
         'reports': [
@@ -95,6 +106,17 @@ EXAMPLES = [
                 'filename': 'simulation.sedml/tsk_1_1.csv',
                 'number_of_points': 401,
                 'data_sets': 2,
+            },
+        ]
+    },
+    {
+        'filename': os.path.join(BASE_DIR, 'sbml-core', 'Szymanska-J-Theor-Biol-2009-HSP-synthesis.omex'),
+        'simulators': ['amici'],
+        'reports': [
+            {
+                'filename': 'BIOMD0000000896_sim.sedml/BIOMD0000000896_sim.csv',
+                'number_of_points': 4001,
+                'data_sets': 10,
             },
         ]
     },
@@ -143,7 +165,7 @@ def run():
                     errors.append('{} did not produce report {} for {}'.format(simulator, report['filename'], example['filename']))
                     continue
 
-                if simulator in ['copasi']:
+                if simulator in ['amici', 'copasi', 'gillespy2']:
                     df = pandas.read_csv(report_filename, index_col=0, header=None)
                     df.columns = pandas.RangeIndex(start=0, stop=df.shape[1], step=1)
                 else:
