@@ -1,0 +1,12 @@
+{
+  "name": "Caravagna et al. Journal of Theoretical Biology 2010: Tumor-suppressive oscillations",
+  "filename": "Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex",
+  "modelingFrameworkSboIds": ["SBO_0000293"],
+  "modelFormatEdamIds": ["format_2585"],
+  "simulationFormatEdamIds": ["format_3685"],
+  "archiveFormatEdamId": "format_3686",
+  "identifiers": [
+    {"namespace": "biomodels.db", "id": "BIOMD0000000297"}
+    {"namespace": "doi", "id": "10.1083/jcb.200306139"}
+  ]
+}

@@ -8,6 +8,17 @@ import shutil
 BASE_DIR = os.path.dirname(__file__)
 EXAMPLES = [
     {
+        'filename': os.path.join(BASE_DIR, 'sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex'),
+        'simulators': ['tellurium'],
+        'reports': [
+            {
+                'filename': 'BIOMD0000000912_sim.sedml/BIOMD0000000912_sim.csv',
+                'number_of_points': 5001,
+                'data_sets': 4,
+            },
+        ]
+    },
+    {
         'filename': os.path.join(BASE_DIR, 'sbml-core', 'Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint.omex'),
         'simulators': ['tellurium'],
         'reports': [
@@ -48,6 +59,17 @@ EXAMPLES = [
                 'filename': 'Parmar2017_Deficient_Rich_tracer.sedml/simulation_1.csv',
                 'number_of_points': 301,
                 'data_sets': 23,  # VCell ignores reports
+            },
+        ]
+    },
+    {
+        'filename': os.path.join(BASE_DIR, 'sbml-core', 'Szymanska-J-Theor-Biol-2009-HSP-synthesis.omex'),
+        'simulators': ['amici'],
+        'reports': [
+            {
+                'filename': 'BIOMD0000000896_sim.sedml/BIOMD0000000896_sim.csv',
+                'number_of_points': 4001,
+                'data_sets': 10,
             },
         ]
     },
@@ -108,18 +130,7 @@ EXAMPLES = [
                 'data_sets': 2,
             },
         ]
-    },
-    {
-        'filename': os.path.join(BASE_DIR, 'sbml-core', 'Szymanska-J-Theor-Biol-2009-HSP-synthesis.omex'),
-        'simulators': ['amici'],
-        'reports': [
-            {
-                'filename': 'BIOMD0000000896_sim.sedml/BIOMD0000000896_sim.csv',
-                'number_of_points': 4001,
-                'data_sets': 10,
-            },
-        ]
-    },
+    },    
 ]
 
 BASE_OUTPUTS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'examples-outputs'))
