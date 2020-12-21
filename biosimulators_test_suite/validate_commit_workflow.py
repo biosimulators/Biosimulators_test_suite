@@ -36,8 +36,7 @@ def get_uncaught_exception_msg(exception):
     """
     return ''.join([
         'The validation/submission of your simulator failed.\n\n',
-        '  Type: {}\n\n'.format(exception.__class__.__name__),
-        '  Details:\n\n    {}\n\n'.format(str(exception).replace('\n', '\n  ')),
+        '  {}\n\n'.format(str(exception).strip().replace('\n', '\n  ')),
         'Once you have fixed the problem, edit the first block of this issue to re-initiate this validation.\n\n',
         'The BioSimulators Team is happy to help. '
         'Questions and feedback can be directed to the BioSimulators Team by posting comments to this issues that '
@@ -63,35 +62,41 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         super(ValidateCommitSimulatorGitHubAction, self).__init__()
         self.issue_number = self.get_issue_number()
 
-    @GitHubActionErrorHandling.catch_errors(GitHubAction.get_issue_number(),
-                                            uncaught_exception_msg_func=get_uncaught_exception_msg,
+    @GitHubActionErrorHandling.catch_errors(uncaught_exception_msg_func=get_uncaught_exception_msg,
                                             caught_error_labels=[IssueLabel.invalid],
                                             uncaught_error_labels=[IssueLabel.invalid])
     def run(self):
         """ Validate and commit a simulator."""
+
+        # Get properties of submission
         issue_props = self.get_issue(self.issue_number)
         submission = get_simulator_submission_from_gh_issue_body(issue_props['body'])
         submitter = issue_props['user']['login']
 
+        # Send message that validation is starting
         self.add_comment_to_issue(self.issue_number, self.get_initial_message(submission, submitter))
 
-        self.reset_issue_labels([IssueLabel.validated.value, IssueLabel.invalid.value, IssueLabel.action_error.value])
+        # reset labels except approved
+        self.reset_issue_labels(self.issue_number, [IssueLabel.validated.value, IssueLabel.invalid.value, IssueLabel.action_error.value])
 
-        # get specifications of simulator
+        # get specifications of simulator and validate simulator
         specifications = self.validate_simulator(submission)
 
         # label issue as validated
         self.add_labels_to_issue(self.issue_number, [IssueLabel.validated.value])
 
-        # get other versions of simulator
+        # get specifications of other versions of simulator
         existing_version_specifications = get_simulator_version_specs(specifications['id'])
 
-        # label the issue as approved if the issue is a revision of an existing version of a validated simulator or
-        # a new version of a validated simulator
-        approved = self.is_simulator_approved(existing_version_specifications)
+        # determine if simulator is approved: issue is a revision of an existing version of a validated simulator,
+        # a new version of a validated simulator, or the issue has been manually approved by the BioSimulators Team
+        approved = self.is_simulator_approved(specifications, existing_version_specifications)
+
+        # if approved, label the issue as approved
         if approved and IssueLabel.approved.value not in self.get_labels_for_issue(self.issue_number):
             self.add_labels_to_issue(self.issue_number, [IssueLabel.approved.value])
 
+        # commit simulator or indicate that further review is required
         if submission.commit_simulator:
             if approved:
                 self.commit_simulator(submission, specifications, existing_version_specifications)
@@ -129,21 +134,22 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         if submission.validate_image:
             actions.append('validating your Docker image')
         else:
-            not_actions.append('You have declined to have your Docker image validated.')
+            not_actions.append('You have chosen not to have the Docker image for your simulator validated.')
         if submission.commit_simulator:
             actions.append('committing your simulator to the BioSimulators registry')
         else:
-            not_actions.append('You have declined to commit your simulator to the BioSimulators registry.')
+            not_actions.append('You have chosen not to submit your simulator to the BioSimulators registry.')
 
         if len(actions) == 1:
             actions = actions[0]
         else:
             actions = ', '.join(actions[0:-1]) + ' and ' + actions[-1]
-        not_actions = ''.join(action.strip() + ' ' for action in not_actions)
+        not_actions = ' '.join(action.strip() for action in not_actions)
 
-        return ('Thank you @{} for your submission to the BioSimulators registry of containerized simulation tools! '
-                '[Run {}]({}) is {}. {}We will discuss any issues with your submission here.'
-                ).format(submitter, self.gh_action_run_id, self.gh_action_run_url, actions, not_actions)
+        return ('Thank you @{} for your submission to the BioSimulators simulator validation/submission system!\n\n'
+                'The BioSimulators validator bot is [{}]({}). {}\n\n'
+                'We will discuss any concerns with your submission in this issue.'
+                ).format(submitter, self.gh_action_run_url, actions, not_actions)
 
     def validate_simulator(self, submission):
         """ Validate simulator
@@ -254,10 +260,6 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             specifications (:obj:`dict`): specifications of a simulation tool
             existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
         """
-        self.add_comment_to_issue(
-            self.issue_number,
-            'Your simulatory will be committed to the BioSimulators registry.')
-
         # copy image to BioSimulators namespace of Docker registry
         if submission.validate_image:
             self.push_image(specifications, existing_version_specifications)

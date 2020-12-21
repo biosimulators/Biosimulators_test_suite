@@ -8,13 +8,14 @@ import biosimulators_utils.simulator.io
 import docker
 import os
 import re
+import requests
 import unittest
 
 
 class ValidateCommitWorkflowTestCase(unittest.TestCase):
     def setUp(self):
         self.env = {
-            'GH_REPO': 'biosimulators/Biosimulators_tellurium',
+            'GH_REPO': 'biosimulators/Biosimulators',
             'GH_ISSUE_NUMBER': '11',
             'GH_ACTION_RUN_ID': '17',
             'GH_ISSUES_USER': 'biosimulatorsdaemon',
@@ -41,23 +42,19 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         msg = 'My custom message'
         exception = Exception(msg)
         self.assertRegex(validate_commit_workflow.get_uncaught_exception_msg(exception),
-                         '\n\n  Type: Exception\n\n', re.MULTILINE)
-        self.assertRegex(validate_commit_workflow.get_uncaught_exception_msg(exception),
-                         '\n\n  Details:\n\n    ' + msg + '\n\n', re.MULTILINE)
+                         '\n\n  ' + msg + '\n\n', re.MULTILINE)
 
         msg = 'My custom message'
         exception = ValueError(msg)
         self.assertRegex(validate_commit_workflow.get_uncaught_exception_msg(exception),
-                         '\n\n  Type: ValueError\n\n', re.MULTILINE)
-        self.assertRegex(validate_commit_workflow.get_uncaught_exception_msg(exception),
-                         '\n\n  Details:\n\n    ' + msg + '\n\n', re.MULTILINE)
+                         '\n\n  ' + msg + '\n\n', re.MULTILINE)
 
     def test_get_initial_message(self):
         with mock.patch.dict(os.environ, self.env):
             action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
         msg = action.get_initial_message(self.submission, self.submitter)
         self.assertTrue(msg.startswith('Thank you @{} for your submission to the BioSimulators'.format(self.submitter)))
-        self.assertTrue(msg.endswith('We will discuss any issues with your submission here.'))
+        self.assertTrue(msg.endswith('We will discuss any concerns with your submission in this issue.'))
 
         self.submission.validate_image = False
         self.submission.commit_simulator = False
@@ -65,7 +62,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
         msg = action.get_initial_message(self.submission, self.submitter)
         self.assertTrue(msg.startswith('Thank you @{} for your submission to the BioSimulators'.format(self.submitter)))
-        self.assertTrue(msg.endswith('We will discuss any issues with your submission here.'))
+        self.assertTrue(msg.endswith('We will discuss any concerns with your submission in this issue.'))
 
     def test_validate_image(self):
         with mock.patch.dict(os.environ, self.env):
@@ -327,17 +324,435 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.5'}]
         with mock.patch('requests.post', side_effect=requests_mock.post):
             action.commit_simulator(SimulatorSubmission(validate_image=False), specs, existing_version_specs)
-        self.assertEqual(requests_mock.n_post, 3)
+        self.assertEqual(requests_mock.n_post, 2)
 
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.5'}]
         with mock.patch('requests.post', side_effect=requests_mock.post):
             with mock.patch.object(validate_commit_workflow.ValidateCommitSimulatorGitHubAction, 'push_image', return_value=None):
                 action.commit_simulator(SimulatorSubmission(validate_image=True), specs, existing_version_specs)
-        self.assertEqual(requests_mock.n_post, 6)
+        self.assertEqual(requests_mock.n_post, 4)
 
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.6'}]
         with mock.patch('requests.post', side_effect=requests_mock.post):
             with mock.patch('requests.put', side_effect=requests_mock.put):
                 action.commit_simulator(SimulatorSubmission(validate_image=False), specs, existing_version_specs)
-        self.assertEqual(requests_mock.n_post, 8)
+        self.assertEqual(requests_mock.n_post, 5)
         self.assertEqual(requests_mock.n_put, 1)
+
+    def test_run(self):
+        # validate specs of valid new simulator, fail on invalid specs
+        requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
+            new_simulator=True, previous_version_validated=False,
+            validate_image=False, commit_simulator=False,
+            previous_run_valid=None, manually_approved=False,
+            specs_valid=False, singularity_error=False, validation_state='passes')
+        with self.assertRaisesRegex(ValueError, 'Specifications must be adhere to the BioSimulators schema'):
+            self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
+        self.assertEqual(requests_mock.issue_state, 'open')
+        self.assertEqual(requests_mock.simulator_versions, [])
+        self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Invalid']))
+        self.assertEqual(len(requests_mock.issue_messages), 2)
+        self.assertRegex(requests_mock.issue_messages[-1], 'Specifications must be adhere to the BioSimulators schema')
+        self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
+        self.assertEqual(docker_mock.local_images, set([]))
+
+        # validate specs of valid new simulator
+        requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
+            new_simulator=True, previous_version_validated=False,
+            validate_image=False, commit_simulator=False,
+            previous_run_valid=None, manually_approved=False,
+            specs_valid=True, singularity_error=False, validation_state='passes')
+        self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
+        self.assertEqual(requests_mock.issue_state, 'open')
+        self.assertEqual(requests_mock.simulator_versions, [])
+        self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated']))
+        self.assertEqual(len(requests_mock.issue_messages), 2)
+        self.assertEqual(requests_mock.issue_messages[-1], 'The specifications of your simulator is valid!')
+        self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
+        self.assertEqual(docker_mock.local_images, set([]))
+
+        # validate specs and image of valid new simulator; fail on singularity error
+        requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
+            new_simulator=True, previous_version_validated=False,
+            validate_image=True, commit_simulator=False,
+            previous_run_valid=None, manually_approved=False,
+            specs_valid=True, singularity_error=True, validation_state='passes')
+        with self.assertRaisesRegex(Exception, 'Singularity error'):
+            self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
+        self.assertEqual(requests_mock.issue_state, 'open')
+        self.assertEqual(requests_mock.simulator_versions, [])
+        self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Invalid']))
+        self.assertEqual(len(requests_mock.issue_messages), 3)
+        self.assertRegex(requests_mock.issue_messages[-1], 'Singularity error')
+        self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
+        self.assertEqual(docker_mock.local_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
+
+        # validate specs and image of valid new simulator; fail on validation error
+        requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
+            new_simulator=True, previous_version_validated=False,
+            validate_image=True, commit_simulator=False,
+            previous_run_valid=None, manually_approved=False,
+            specs_valid=True, singularity_error=False, validation_state='fails')
+        with self.assertRaisesRegex(GitHubActionCaughtError, 'Your simulator did not pass 1 test cases'):
+            self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
+        self.assertEqual(requests_mock.issue_state, 'open')
+        self.assertEqual(requests_mock.simulator_versions, [])
+        self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Invalid']))
+        self.assertEqual(len(requests_mock.issue_messages), 3)
+        self.assertRegex(requests_mock.issue_messages[-1], 'Your simulator did not pass 1 test cases')
+        self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
+        self.assertEqual(docker_mock.local_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
+
+        # validate specs and image of valid new simulator
+        requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
+            new_simulator=True, previous_version_validated=False,
+            validate_image=True, commit_simulator=False,
+            previous_run_valid=None, manually_approved=False,
+            specs_valid=True, singularity_error=False, validation_state='skips')
+        with self.assertRaisesRegex(GitHubActionCaughtError, 'No test cases are applicable'):
+            self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
+        self.assertEqual(requests_mock.issue_state, 'open')
+        self.assertEqual(requests_mock.simulator_versions, [])
+        self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Invalid']))
+        self.assertEqual(len(requests_mock.issue_messages), 3)
+        self.assertRegex(requests_mock.issue_messages[-1], 'No test cases are applicable')
+        self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
+        self.assertEqual(docker_mock.local_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
+
+        # validate specs and image of valid new simulator
+        requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
+            new_simulator=True, previous_version_validated=False,
+            validate_image=True, commit_simulator=False,
+            previous_run_valid=None, manually_approved=False,
+            specs_valid=True, singularity_error=False, validation_state='passes')
+        self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
+        self.assertEqual(requests_mock.issue_state, 'open')
+        self.assertEqual(requests_mock.simulator_versions, [])
+        self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated']))
+        self.assertEqual(len(requests_mock.issue_messages), 4)
+        self.assertEqual(requests_mock.issue_messages[-2], 'Your simulator passed 1 test cases.')
+        self.assertEqual(requests_mock.issue_messages[-1], 'The image for your simulator is valid!')
+        self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
+        self.assertEqual(docker_mock.local_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
+
+        # validate specs and image of valid new simulator, previous run passed and was approved
+        requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
+            new_simulator=True, previous_version_validated=False,
+            validate_image=True, commit_simulator=True,
+            previous_run_valid=True, manually_approved=True,
+            specs_valid=True, singularity_error=False, validation_state='passes')
+        self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
+        self.assertEqual(requests_mock.issue_state, 'closed')
+        self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.6']))
+        self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
+        self.assertEqual(len(requests_mock.issue_messages), 5)
+        self.assertRegex(requests_mock.issue_messages[-1], 'Your submission was committed to the BioSimulators registry.')
+        self.assertEqual(docker_mock.remote_images, set([
+            'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
+            'ghcr.io/biosimulators/tellurium:2.1.6',
+            'ghcr.io/biosimulators/tellurium:latest',
+        ]))
+        self.assertEqual(docker_mock.local_images, set([
+            'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
+            'ghcr.io/biosimulators/tellurium:2.1.6',
+            'ghcr.io/biosimulators/tellurium:latest',
+        ]))
+
+        # validate specs and image of valid new simulator, previous run failed and was not approved
+        requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
+            new_simulator=True, previous_version_validated=False,
+            validate_image=True, commit_simulator=True,
+            previous_run_valid=False, manually_approved=False,
+            specs_valid=True, singularity_error=False, validation_state='passes')
+        self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
+        self.assertEqual(requests_mock.issue_state, 'open')
+        self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set([]))
+        self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated']))
+        self.assertEqual(len(requests_mock.issue_messages), 5)
+        self.assertRegex(requests_mock.issue_messages[-1], 'A member of the BioSimulators team will review your submission')
+        self.assertEqual(docker_mock.remote_images, set([
+            'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
+        ]))
+        self.assertEqual(docker_mock.local_images, set([
+            'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
+        ]))
+
+        # validate specs and image of valid new simulator, previous run failed and was not approved
+        requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
+            new_simulator=False, previous_version_validated=False,
+            validate_image=True, commit_simulator=True,
+            previous_run_valid=False, manually_approved=False,
+            specs_valid=True, singularity_error=False, validation_state='passes')
+        self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
+        self.assertEqual(requests_mock.issue_state, 'open')
+        self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.5']))
+        self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated']))
+        self.assertEqual(len(requests_mock.issue_messages), 5)
+        self.assertRegex(requests_mock.issue_messages[-1], 'A member of the BioSimulators team will review your submission')
+        self.assertEqual(docker_mock.remote_images, set([
+            'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
+        ]))
+        self.assertEqual(docker_mock.local_images, set([
+            'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
+        ]))
+
+        # validate specs and image of valid new simulator, previous run passed and was approved
+        requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
+            new_simulator=False, previous_version_validated=True,
+            validate_image=True, commit_simulator=True,
+            previous_run_valid=False, manually_approved=False,
+            specs_valid=True, singularity_error=False, validation_state='passes')
+        self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
+        self.assertEqual(requests_mock.issue_state, 'closed')
+        self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.5', '2.1.6']))
+        self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
+        self.assertEqual(len(requests_mock.issue_messages), 5)
+        self.assertRegex(requests_mock.issue_messages[-1], 'Your submission was committed to the BioSimulators registry.')
+        self.assertEqual(docker_mock.remote_images, set([
+            'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
+            'ghcr.io/biosimulators/tellurium:2.1.6',
+            'ghcr.io/biosimulators/tellurium:latest',
+        ]))
+        self.assertEqual(docker_mock.local_images, set([
+            'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
+            'ghcr.io/biosimulators/tellurium:2.1.6',
+            'ghcr.io/biosimulators/tellurium:latest',
+        ]))
+
+        # validate specs and image of valid new simulator, previous run passed and was approved; not latest version
+        requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
+            submitted_version='2.1.4',
+            new_simulator=False, previous_version_validated=True,
+            validate_image=True, commit_simulator=True,
+            previous_run_valid=False, manually_approved=False,
+            specs_valid=True, singularity_error=False, validation_state='passes')
+        self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
+        self.assertEqual(requests_mock.issue_state, 'closed')
+        self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.5', '2.1.4']))
+        self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
+        self.assertEqual(len(requests_mock.issue_messages), 5)
+        self.assertRegex(requests_mock.issue_messages[-1], 'Your submission was committed to the BioSimulators registry.')
+        self.assertEqual(docker_mock.remote_images, set([
+            'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.4',
+            'ghcr.io/biosimulators/tellurium:2.1.4',
+        ]))
+        self.assertEqual(docker_mock.local_images, set([
+            'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.4',
+            'ghcr.io/biosimulators/tellurium:2.1.4',
+        ]))
+
+        # validate specs and image of valid new simulator, previous run passed and was approved; not latest version
+        requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
+            submitted_version='2.1.5',
+            new_simulator=False, previous_version_validated=True,
+            validate_image=True, commit_simulator=True,
+            previous_run_valid=False, manually_approved=False,
+            specs_valid=True, singularity_error=False, validation_state='passes')
+        self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
+        self.assertEqual(requests_mock.issue_state, 'closed')
+        self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.5']))
+        self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
+        self.assertEqual(len(requests_mock.issue_messages), 5)
+        self.assertRegex(requests_mock.issue_messages[-1], 'Your submission was committed to the BioSimulators registry.')
+        self.assertEqual(docker_mock.remote_images, set([
+            'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.5',
+            'ghcr.io/biosimulators/tellurium:2.1.5',
+            'ghcr.io/biosimulators/tellurium:latest',
+        ]))
+        self.assertEqual(docker_mock.local_images, set([
+            'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.5',
+            'ghcr.io/biosimulators/tellurium:2.1.5',
+            'ghcr.io/biosimulators/tellurium:latest',
+        ]))
+
+    def _build_run_mock_objs(self, submitted_version='2.1.6', new_simulator=True, previous_version_validated=False,
+                             validate_image=False, commit_simulator=False, previous_run_valid=None, manually_approved=False,
+                             specs_valid=True, singularity_error=False, validation_state='passes'):
+        class RequestsMock(object):
+            def __init__(self, submitted_version='2.1.6', new_simulator=True, previous_version_validated=False,
+                         validate_image=False, commit_simulator=False,
+                         previous_run_valid=None, manually_approved=False, issue_state='open', specs_valid=True):
+                self.submitted_version = submitted_version
+                self.specs_valid = specs_valid
+                self.validate_image = validate_image
+                self.commit_simulator = commit_simulator
+                self.issue_state = issue_state
+
+                if new_simulator:
+                    self.simulator_versions = []
+                else:
+                    self.simulator_versions = [
+                        {
+                            'version': '2.1.5',
+                            'image': {'url': 'ghcr.io/biosimulators/tellurium/2.1.5'},
+                            'biosimulators': {'validated': previous_version_validated},
+                        },
+                    ]
+
+                self.issue_labels = set(['Validate/commit simulator'])
+                if previous_run_valid == True:
+                    self.issue_labels.add('Validated')
+                elif previous_run_valid == False:
+                    self.issue_labels.add('Invalid')
+                if manually_approved:
+                    self.issue_labels.add('Approved')
+
+                self.issue_messages = []
+
+            def get(self, url, json=None, auth=None, headers=None):
+                if url == 'https://raw.githubusercontent.com/biosimulators/Biosimulators_tellurium/d08f33/biosimulators.json':
+                    response = {
+                        'id': 'tellurium',
+                        'version': self.submitted_version,
+                        'image': {
+                            'url': 'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:' + self.submitted_version
+                        },
+                    }
+                elif url == 'https://api.github.com/repos/biosimulators/Biosimulators/issues/11':
+                    response = {
+                        'user': {
+                            'login': 'biosimulatorsdaemon',
+                        },
+                        'body': '\n'.join([
+                            '---',
+                            'id: vcell',
+                            'version: 2.1.6',
+                            ('specificationsUrl: https://raw.githubusercontent.com/biosimulators/'
+                                'Biosimulators_tellurium/d08f33/biosimulators.json'),
+                            'validateImage: {}'.format('true' if self.validate_image else 'false'),
+                            'commitSimulator: {}'.format('true' if self.commit_simulator else 'false'),
+                            '',
+                            '---',
+                        ]),
+                    }
+                elif url == 'https://api.github.com/repos/biosimulators/Biosimulators/issues/11/labels':
+                    response = [{'name': label} for label in self.issue_labels]
+                elif url == validate_commit_workflow.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators/tellurium':
+                    response = self.simulator_versions
+                else:
+                    raise ValueError('Invalid url: {}'.format(url))
+                return mock.Mock(raise_for_status=lambda: None, json=lambda: response)
+
+            def post(self, url, json=None, auth=None, headers=None):
+                if url == validate_commit_workflow.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_AUTH_ENDPOINT:
+                    error = None
+                    response = {'token_type': 'Bearer', 'access_token': '******'}
+                elif url == validate_commit_workflow.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators':
+                    self.simulator_versions.append(json)
+                    error = None
+                    response = None
+                elif url == validate_commit_workflow.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators/validate':
+                    if self.specs_valid:
+                        error = None
+                    else:
+                        error = 'Specs are invalid'
+                    response = None
+                elif url == 'https://api.github.com/repos/biosimulators/Biosimulators/issues/11/labels':
+                    for label in json['labels']:
+                        self.issue_labels.add(label)
+                    error = None
+                    response = None
+                elif url == 'https://api.github.com/repos/biosimulators/Biosimulators/issues/11/comments':
+                    self.issue_messages.append(json['body'])
+                    error = None
+                    response = None
+                else:
+                    raise ValueError('Invalid url: {}'.format(url))
+
+                if error is None:
+                    def raise_for_status(): return None
+                else:
+                    def raise_for_status(error=error):
+                        raise requests.RequestException(error)
+                return mock.Mock(raise_for_status=raise_for_status, json=lambda: response)
+
+            def patch(self, url, json=None, auth=None, headers=None):
+                if url == 'https://api.github.com/repos/biosimulators/Biosimulators/issues/11':
+                    self.issue_state = json['state']
+                    response = None
+                else:
+                    raise ValueError('Invalid url: {}'.format(url))
+
+                return mock.Mock(raise_for_status=lambda: None, json=lambda: response)
+
+            def put(self, url, json=None, auth=None, headers=None):
+                if url.startswith(validate_commit_workflow.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators/tellurium/'):
+                    for i_version, version in enumerate(self.simulator_versions):
+                        if version['version'] == json['version']:
+                            self.simulator_versions[i_version] = json
+                            break
+
+                    response = None
+                else:
+                    raise ValueError('Invalid url: {}'.format(url))
+
+                return mock.Mock(raise_for_status=lambda: None, json=lambda: response)
+
+            def delete(self, url, json=None, auth=None, headers=None):
+                if url.startswith('https://api.github.com/repos/biosimulators/Biosimulators/issues/11/labels/'):
+                    _, _, label = url.rpartition('/')
+                    self.issue_labels.remove(label)
+
+                else:
+                    raise ValueError('Invalid url: {}'.format(url))
+
+                return mock.Mock(raise_for_status=lambda: None)
+
+        class DockerMock(object):
+            def __init__(self, local_images=None, remote_images=None, singularity_error=False, submitted_version='2.1.6'):
+                self.auths = {}
+                self.local_images = local_images or set()
+                self.remote_images = remote_images or set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:' + submitted_version])
+                self.singularity_error = singularity_error
+
+            def login(self, registry=None, username=None, password=None):
+                self.auths[registry] = (username, password)
+
+            def pull(self, old_url):
+                assert old_url in self.remote_images
+                self.local_images.add(old_url)
+                return mock.Mock(tag=self.tag)
+
+            def tag(self, new_url):
+                self.local_images.add(new_url)
+                return True
+
+            def push(self, new_url):
+                self.remote_images.add(new_url)
+                return '{}'
+
+            def convert_docker_image_to_singularity(self, image):
+                if self.singularity_error:
+                    raise Exception('Singularity error')
+
+        if validation_state == 'passes':
+            validation_run_results = ([None], [], None)
+        elif validation_state == 'fails':
+            validation_run_results = ([], [mock.Mock(test_case='x', exception='y')], None)
+        else:
+            validation_run_results = ([], [], None)
+
+        requests_mock = RequestsMock(submitted_version=submitted_version,
+                                     new_simulator=new_simulator, previous_version_validated=previous_version_validated,
+                                     validate_image=validate_image, commit_simulator=commit_simulator,
+                                     previous_run_valid=previous_run_valid, manually_approved=manually_approved,
+                                     specs_valid=specs_valid)
+        docker_mock = DockerMock(singularity_error=singularity_error, submitted_version=submitted_version)
+
+        return (requests_mock, docker_mock, validation_run_results)
+
+    def _exec_run_mock_objs(self, requests_mock, docker_mock, validation_run_results):
+        with mock.patch.dict(os.environ, self.env):
+            with mock.patch('requests.get', side_effect=requests_mock.get):
+                with mock.patch('requests.post', side_effect=requests_mock.post):
+                    with mock.patch('requests.put', side_effect=requests_mock.put):
+                        with mock.patch('requests.patch', side_effect=requests_mock.patch):
+                            with mock.patch('requests.delete', side_effect=requests_mock.delete):
+                                with mock.patch.object(docker.client.DockerClient, 'login', side_effect=docker_mock.login):
+                                    with mock.patch.object(docker.models.images.ImageCollection, 'pull', side_effect=docker_mock.pull):
+                                        with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', side_effect=docker_mock.convert_docker_image_to_singularity):
+                                            with mock.patch.object(docker.models.images.Image, 'tag', side_effect=docker_mock.tag):
+                                                with mock.patch.object(docker.models.images.ImageCollection, 'push', side_effect=docker_mock.push):
+                                                    with mock.patch.object(validate_simulator.SimulatorValidator, 'run', return_value=validation_run_results):
+                                                        action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
+                                                        action.run()
