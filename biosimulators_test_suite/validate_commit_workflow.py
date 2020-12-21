@@ -1,0 +1,354 @@
+""" Methods for processing submissions to the BioSimulators registry
+(CI workflows for reviewing and committing simulators to the registry)
+
+:Author: Jonathan Karr <karr@mssm.edu>
+:Date: 2020-12-06
+:Copyright: 2020, Center for Reproducible Biomedical Modeling
+:License: MIT
+"""
+
+from .validate_simulator import SimulatorValidator
+from biosimulators_utils.gh_action.core import GitHubAction, GitHubActionErrorHandling, GitHubActionCaughtError  # noqa: F401
+from biosimulators_utils.simulator_registry.data_model import SimulatorSubmission, IssueLabel  # noqa: F401
+from biosimulators_utils.simulator_registry.process_submission import get_simulator_submission_from_gh_issue_body
+from biosimulators_utils.simulator_registry.query import get_simulator_version_specs
+from natsort import natsort_keygen
+import biosimulators_utils.image
+import biosimulators_utils.simulator.io
+import os
+import requests
+
+
+__all__ = [
+    'ValidateCommitSimulatorGitHubAction',
+]
+
+
+def get_uncaught_exception_msg(exception):
+    """ Create an error message to display to users for all exceptions not caught during the
+    exception of the :obj:`run` method (exceptions of all types except :obj:`GitHubActionCaughtError`)
+
+    Args:
+        exception (:obj:`Exception`): a failure encountered during the exception of the :obj:`run` method
+
+    Returns:
+        :obj:`str`: error message to display to users
+    """
+    return ''.join([
+        'The validation/submission of your simulator failed.\n\n',
+        '  Type: {}\n\n'.format(exception.__class__.__name__),
+        '  Details:\n\n    {}\n\n'.format(str(exception).replace('\n', '\n  ')),
+        'Once you have fixed the problem, edit the first block of this issue to re-initiate this validation.\n\n',
+        'The BioSimulators Team is happy to help. '
+        'Questions and feedback can be directed to the BioSimulators Team by posting comments to this issues that '
+        'reference the GitHub team `@biosimulators/biosimulators` (without the backticks).'
+    ])
+
+
+class ValidateCommitSimulatorGitHubAction(GitHubAction):
+    """ Action to validate a containerized simulator
+
+    Attributes:
+        issue_number (:obj:`str`): number of GitHub issue which triggered the action
+    """
+    BIOSIMULATORS_AUTH_ENDPOINT = 'https://auth.biosimulations.org/oauth/token'
+    BIOSIMULATORS_AUDIENCE = 'api.biosimulators.org'
+    BIOSIMULATORS_API_ENDPOINT = 'https://api.biosimulators.org/'
+    BIOSIMULTORS_DOCKER_REGISTRY = 'ghcr.io'
+    BIOSIMULTORS_DOCKER_REGISTRY_IMAGE_URL_PATTERN = 'ghcr.io/biosimulators/{}:{}'
+    DEFAULT_SPECIFICATIONS_VERSION = '1.0.0'
+    DEFAULT_IMAGE_VERSION = '1.0.0'
+
+    def __init__(self):
+        super(ValidateCommitSimulatorGitHubAction, self).__init__()
+        self.issue_number = self.get_issue_number()
+
+    @GitHubActionErrorHandling.catch_errors(GitHubAction.get_issue_number(),
+                                            uncaught_exception_msg_func=get_uncaught_exception_msg,
+                                            caught_error_labels=[IssueLabel.invalid],
+                                            uncaught_error_labels=[IssueLabel.invalid])
+    def run(self):
+        """ Validate and commit a simulator."""
+        issue_props = self.get_issue(self.issue_number)
+        submission = get_simulator_submission_from_gh_issue_body(issue_props['body'])
+        submitter = issue_props['user']['login']
+
+        self.add_comment_to_issue(self.issue_number, self.get_initial_message(submission, submitter))
+
+        self.reset_issue_labels([IssueLabel.validated.value, IssueLabel.invalid.value, IssueLabel.action_error.value])
+
+        # get specifications of simulator
+        specifications = self.validate_simulator(submission)
+
+        # label issue as validated
+        self.add_labels_to_issue(self.issue_number, [IssueLabel.validated.value])
+
+        # get other versions of simulator
+        existing_version_specifications = get_simulator_version_specs(specifications['id'])
+
+        # label the issue as approved if the issue is a revision of an existing version of a validated simulator or
+        # a new version of a validated simulator
+        approved = self.is_simulator_approved(existing_version_specifications)
+        if approved and IssueLabel.approved.value not in self.get_labels_for_issue(self.issue_number):
+            self.add_labels_to_issue(self.issue_number, [IssueLabel.approved.value])
+
+        if submission.commit_simulator:
+            if approved:
+                self.commit_simulator(submission, specifications, existing_version_specifications)
+
+                # post success message
+                self.add_comment_to_issue(
+                    self.issue_number,
+                    ''.join([
+                        'Your submission was committed to the BioSimulators registry. Thank you!\n',
+                        '\n',
+                        'Future submissions of subsequent versions of {} to the BioSimulators registry '.format(specifications['id']),
+                        'will be automatically validated. These submissions will not require manual review by the BioSimulators Team.',
+                    ])
+                )
+
+                # close issue
+                self.close_issue(self.issue_number)
+            else:
+                self.add_comment_to_issue(
+                    self.issue_number,
+                    ('A member of the BioSimulators team will review your submission and '
+                     'publish your image before final committment to the registry.'))
+
+    def get_initial_message(self, submission, submitter):
+        """ Peport message that validation is starting
+
+        Args:
+            submission (:obj:`SimulatorSubmission`): simulator submission
+            submitter (:obj:`str`): GitHub user name of person who executed the submission
+        """
+        actions = []
+        not_actions = []
+
+        actions.append('validating the specifications of your simulator')
+        if submission.validate_image:
+            actions.append('validating your Docker image')
+        else:
+            not_actions.append('You have declined to have your Docker image validated.')
+        if submission.commit_simulator:
+            actions.append('committing your simulator to the BioSimulators registry')
+        else:
+            not_actions.append('You have declined to commit your simulator to the BioSimulators registry.')
+
+        if len(actions) == 1:
+            actions = actions[0]
+        else:
+            actions = ', '.join(actions[0:-1]) + ' and ' + actions[-1]
+        not_actions = ''.join(action.strip() + ' ' for action in not_actions)
+
+        return ('Thank you @{} for your submission to the BioSimulators registry of containerized simulation tools! '
+                '[Run {}]({}) is {}. {}We will discuss any issues with your submission here.'
+                ).format(submitter, self.gh_action_run_id, self.gh_action_run_url, actions, not_actions)
+
+    def validate_simulator(self, submission):
+        """ Validate simulator
+
+        * Validate specifications
+        * Validate image
+
+        Args:
+            submission (:obj:`SimulatorSubmission`): simulator submission
+
+        Returns:
+            :obj:`dict`: specifications of a simulation tool
+        """
+        # validate specifications
+        specifications = biosimulators_utils.simulator.io.read_simulator_specs(submission.specifications_url)
+        self.add_comment_to_issue(self.issue_number, 'The specifications of your simulator is valid!')
+
+        # validate image
+        if submission.validate_image:
+            self.validate_image(specifications)
+            self.add_comment_to_issue(self.issue_number, 'The image for your simulator is valid!')
+
+        # return specifications
+        return specifications
+
+    def validate_image(self, specifications):
+        """ Validate a Docker image for simulation tool
+
+        Args:
+            specifications (:obj:`dict`): specifications of a simulation tool
+        """
+        biosimulators_utils.image.login_to_docker_registry('docker.io', os.getenv('DOCKER_HUB_USERNAME'), os.getenv('DOCKER_HUB_TOKEN'))
+
+        # validate that container (Docker image) exists
+        image_url = specifications['image']['url']
+        biosimulators_utils.image.pull_docker_image(image_url)
+
+        # validate that Docker image can be converted to a Singularity image
+        biosimulators_utils.image.convert_docker_image_to_singularity(image_url)
+
+        # validate that image is consistent with the BioSimulators standards
+        validator = SimulatorValidator()
+        valid_cases, test_exceptions, _ = validator.run(image_url, specifications)
+
+        if valid_cases:
+            self.add_comment_to_issue(self.issue_number, 'Your simulator passed {} test cases.'.format(len(valid_cases)))
+
+        if test_exceptions:
+            msgs = []
+            for exception in test_exceptions:
+                msgs.append('  - {}\n    {}\n\n'.format(exception.test_case, str(exception.exception).replace('\n', '\n    ')))
+
+            error_msg = (
+                'Your simulator did not pass {} test cases.\n\n{}'
+                'After correcting your simulator, please edit the first block of this issue to re-initiate this validation.'
+            ).format(len(test_exceptions), ''.join(msgs))
+            self.add_error_comment_to_issue(self.issue_number, error_msg)
+
+        if not valid_cases:
+            self.add_error_comment_to_issue(self.issue_number, (
+                'No test cases are applicable to your simulator. '
+                'Please use this issue to share appropriate test COMBINE/OMEX files. '
+                'The BioSimulators Team will add these files to this validation program and then re-review your simulator.'
+            ))
+
+    def is_simulator_approved(self, specifications, existing_version_specifications):
+        """ Determine whether a simulation tool has already been approved
+
+        Args:
+            specifications (:obj:`dict`): specifications of a simulation tool
+            existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
+
+        Returns:
+            :obj:`bool`: :obj:`True`, if the simulation tool has already been approved
+        """
+        return (self.does_submission_have_approved_label()
+                or self.is_other_version_of_simulator_validated(specifications, existing_version_specifications))
+
+    def does_submission_have_approved_label(self):
+        """ Determine whether an issue for submitting a simulator already has the approved label
+
+        Returns:
+            :obj:`bool`: :obj:`True`, if the issue for the submission already has the approved label
+        """
+        if IssueLabel.approved.value in self.get_labels_for_issue(self.issue_number):
+            return True
+
+    def is_other_version_of_simulator_validated(self, specifications, existing_version_specifications):
+        """ Determine whether another version of the simulation tool has already been approved
+
+        Args:
+            specifications (:obj:`dict`): specifications of a simulation tool
+            existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
+
+        Returns:
+            :obj:`bool`: :obj:`True`, if the simulation tool has already been approved
+        """
+        for version_spec in existing_version_specifications:
+            if version_spec.get('biosimulators', {}).get('validated', False):
+                return True
+        return False
+
+    def commit_simulator(self, submission, specifications, existing_version_specifications):
+        """ Commit simulator to the BioSimulators registry
+
+        Args:
+            submission (:obj:`SimulatorSubmission`): simulator submission
+            specifications (:obj:`dict`): specifications of a simulation tool
+            existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
+        """
+        self.add_comment_to_issue(
+            self.issue_number,
+            'Your simulatory will be committed to the BioSimulators registry.')
+
+        # copy image to BioSimulators namespace of Docker registry
+        if submission.validate_image:
+            self.push_image(specifications, existing_version_specifications)
+
+        # commit submission to BioSimulators database
+        self.post_entry_to_biosimulators_api(specifications, existing_version_specifications)
+
+    def push_image(self, specifications, existing_version_specifications):
+        """ Push the image for a simulation tool to the GitHub Container Registry
+
+        Args:
+            specifications (:obj:`dict`): specifications of a simulation tool
+            existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
+        """
+        # pull image
+        original_image_url = specifications['image']['url']
+        biosimulators_utils.image.login_to_docker_registry(
+            'docker.io',
+            os.getenv('DOCKER_HUB_USERNAME'),
+            os.getenv('DOCKER_HUB_TOKEN'))
+        image = biosimulators_utils.image.pull_docker_image(original_image_url)
+
+        # push image to BioSimulators namespace of Docker registry
+        biosimulators_utils.image.login_to_docker_registry(
+            self.BIOSIMULTORS_DOCKER_REGISTRY,
+            os.getenv('BIOSIMULATORS_DOCKER_REGISTRY_USERNAME'),
+            os.getenv('BIOSIMULATORS_DOCKER_REGISTRY_TOKEN'))
+
+        copy_image_url = self.BIOSIMULTORS_DOCKER_REGISTRY_IMAGE_URL_PATTERN \
+            .format(specifications['id'], specifications['version']) \
+            .lower()
+        biosimulators_utils.image.tag_and_push_docker_image(image, copy_image_url)
+        specifications['image']['url'] = copy_image_url
+
+        is_latest = self.is_submission_latest_version_of_simulator(specifications, existing_version_specifications)
+
+        if is_latest:
+            latest_copy_image_url = self.BIOSIMULTORS_DOCKER_REGISTRY_IMAGE_URL_PATTERN \
+                .format(specifications['id'], 'latest') \
+                .lower()
+            biosimulators_utils.image.tag_and_push_docker_image(image, latest_copy_image_url)
+
+        # make image public -- must be done manually; cannot be done via API as of 2020-11-11
+
+    def is_submission_latest_version_of_simulator(self, specifications, existing_version_specifications):
+        """ Determine whether the submitted version the latest version of the simulator (greatest tag)
+
+        Args:
+            specifications (:obj:`dict`): specifications of a simulation tool
+            existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
+
+        Returns:
+            :obj:`bool`: :obj:`True` if the submitted version if the latest version of the simulator
+        """
+        version_comparison_func = natsort_keygen()
+        for existing_version_spec in existing_version_specifications:
+            if (
+                existing_version_spec['image']
+                and existing_version_spec.get('biosimulators', {}).get('validated', False)
+                and version_comparison_func(existing_version_spec['version']) > version_comparison_func(specifications['version'])
+            ):
+                return False
+        return True
+
+    def post_entry_to_biosimulators_api(self, specifications, existing_version_specifications):
+        """ Post the simulation to the BioSimulators database
+
+        Args:
+            specifications (:obj:`dict`): specifications of a simulation tool
+            existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
+        """
+        api_id = os.getenv('BIOSIMULATORS_API_CLIENT_ID')
+        api_secret = os.getenv('BIOSIMULATORS_API_CLIENT_SECRET')
+
+        response = requests.post(self.BIOSIMULATORS_AUTH_ENDPOINT, json={
+            'client_id': api_id,
+            'client_secret': api_secret,
+            'audience': self.BIOSIMULATORS_AUDIENCE,
+            "grant_type": "client_credentials",
+        })
+        response.raise_for_status()
+        response_data = response.json()
+        auth_headers = {'Authorization': response_data['token_type'] + ' ' + response_data['access_token']}
+
+        existing_versions = [existing_version_spec['version'] for existing_version_spec in existing_version_specifications]
+        update_simulator = specifications['version'] in existing_versions
+        if update_simulator:
+            endpoint = '{}simulators/{}/{}'.format(self.BIOSIMULATORS_API_ENDPOINT, specifications['id'], specifications['version'])
+            requests_method = requests.put
+        else:
+            endpoint = '{}simulators'.format(self.BIOSIMULATORS_API_ENDPOINT)
+            requests_method = requests.post
+        response = requests_method(endpoint, headers=auth_headers, json=specifications)
+        response.raise_for_status()
