@@ -1,3 +1,2 @@
-biosimulators_utils
-docker
+biosimulators_utils[docker]
 natsort
