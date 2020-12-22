@@ -187,7 +187,10 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         Args:
             specifications (:obj:`dict`): specifications of a simulation tool
         """
-        docker_client = biosimulators_utils.image.login_to_docker_registry('docker.io', os.getenv('DOCKER_HUB_USERNAME'), os.getenv('DOCKER_HUB_TOKEN'))
+        docker_client = biosimulators_utils.image.login_to_docker_registry(
+            'docker.io',
+            os.getenv('DOCKER_HUB_USERNAME'),
+            os.getenv('DOCKER_HUB_TOKEN'))
 
         # validate that container (Docker image) exists
         image_url = specifications['image']['url']
