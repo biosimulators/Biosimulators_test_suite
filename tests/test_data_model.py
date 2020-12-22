@@ -62,7 +62,7 @@ class DataModelTestCase(unittest.TestCase):
         case = data_model.CombineArchiveTestCase().from_json(base_path, filename)
         self.assertEqual(case.id, 'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations')
         self.assertEqual(case.name, "Caravagna et al. Journal of Theoretical Biology 2010: Tumor-suppressive oscillations")
-        self.assertEqual(case.filename, 'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex')
+        self.assertTrue(case.filename.endswith('sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex'))
         self.assertEqual(len(case.task_requirements), 1)
         self.assertEqual(case.task_requirements[0].model_format, 'format_2585')
         self.assertEqual(case.task_requirements[0].simulation_algorithm, 'KISAO_0000019')

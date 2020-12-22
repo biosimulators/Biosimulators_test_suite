@@ -28,11 +28,11 @@ __all__ = ['AbstractTestCase', 'SedTaskRequirements', 'ExpectedSedReport', 'Expe
 
 
 class AbstractTestCase(abc.ABC):
-    """ A test case for validating a simulator 
+    """ A test case for validating a simulator
 
     Attributes:
         id (:obj:`str`): id
-        name (:obj:`str`): name    
+        name (:obj:`str`): name
     """
 
     def __init__(self, id=None, name=None):
@@ -82,8 +82,8 @@ class ExpectedSedReport(object):
     Attributes
         id (:obj:`str`): id
         data_sets (:obj:`list` of :obj:`str`): ids of expected datasets
-        points (:obj:`tuple` of :obj:`int`): number of expected points of 
-        values (:obj:`dict` of :obj:`str` to :obj:`dict` of :obj:`list`): expected values of datasets or elements of datasets        
+        points (:obj:`tuple` of :obj:`int`): number of expected points of
+        values (:obj:`dict` of :obj:`str` to :obj:`dict` of :obj:`list`): expected values of datasets or elements of datasets
     """
 
     def __init__(self, id=None, data_sets=None, points=None, values=None):
@@ -91,8 +91,8 @@ class ExpectedSedReport(object):
         Args:
             id (:obj:`str`, optional): id
             data_sets (:obj:`set` of :obj:`str`, optional): ids of expected datasets
-            points (:obj:`tuple` of :obj:`int`, optional): number of expected points of 
-            values (:obj:`dict` of :obj:`str` to :obj:`dict` of :obj:`list`, optional): expected values of datasets or elements of datasets        
+            points (:obj:`tuple` of :obj:`int`, optional): number of expected points of
+            values (:obj:`dict` of :obj:`str` to :obj:`dict` of :obj:`list`, optional): expected values of datasets or elements of datasets
         """
         self.id = id
         self.data_sets = data_sets or set()
@@ -175,7 +175,7 @@ class CombineArchiveTestCase(AbstractTestCase):
 
         self.id = os.path.splitext(filename)[0]
         self.name = data['name']
-        self.filename = os.path.relpath(os.path.join(os.path.dirname(os.path.join(base_path, filename)), data['filename']), base_path)
+        self.filename = os.path.join(os.path.dirname(os.path.join(base_path, filename)), data['filename'])
 
         return self.from_dict(data)
 
@@ -270,7 +270,7 @@ class CombineArchiveTestCase(AbstractTestCase):
                 for expected_report in self.expected_reports:
                     try:
                         report = report_reader.run(out_dir, expected_report.id, format=ReportFormat.h5)
-                    except:
+                    except Exception:
                         errors.append('Report {} could not be read'.format(expected_report.id))
                         continue
 
@@ -328,10 +328,10 @@ class CombineArchiveTestCase(AbstractTestCase):
                 if extra_report_ids:
                     if self.assert_no_extra_reports:
                         errors.append('Unexpected reports were produced:\n  {}'.format(
-                            expected_report.id, '\n  '.join(sorted(extra_report_ids))))
+                            '\n  '.join(sorted(extra_report_ids))))
                     else:
                         warnings.warn('Unexpected reports were produced:\n  {}'.format(
-                            expected_report.id, '\n  '.join(sorted(extra_report_ids))), InvalidOuputsWarning)
+                            '\n  '.join(sorted(extra_report_ids))), InvalidOuputsWarning)
 
             # check expected outputs created: plots
             if os.path.isfile(os.path.join(out_dir, get_config().PLOTS_PATH)):

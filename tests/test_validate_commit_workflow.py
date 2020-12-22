@@ -1,3 +1,4 @@
+from biosimulators_test_suite.data_model import CombineArchiveTestCase, TestCaseResult, TestCaseResultType
 from biosimulators_test_suite import validate_commit_workflow
 from biosimulators_test_suite import validate_simulator
 from biosimulators_utils.gh_action.core import GitHubActionCaughtError
@@ -69,9 +70,9 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
 
         specs = {'id': 'tellurium', 'image': {'url': 'ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.1.6'}}
-        run_results = (
-            [None], [], None
-        )
+        run_results = [
+            TestCaseResult(type=TestCaseResultType.passed)
+        ]
 
         def requests_post(url, json=None, auth=None, headers=None):
             self.assertEqual(json['body'], 'Your simulator passed 1 test cases.')
@@ -84,9 +85,9 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                         with mock.patch('requests.post', side_effect=requests_post):
                             action.validate_image(specs)
 
-        run_results = (
-            [], [mock.Mock(test_case='x', exception='y')], None
-        )
+        run_results = [
+            TestCaseResult(case=CombineArchiveTestCase(id='x'), type=TestCaseResultType.failed, exception=Exception('y')),
+        ]
 
         def requests_post(url, json=None, auth=None, headers=None):
             self.assertRegex(json['body'], 'Your simulator did not pass 1 test cases.')
@@ -99,9 +100,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                             with mock.patch('requests.post', side_effect=requests_post):
                                 action.validate_image(specs)
 
-        run_results = (
-            [], [], None
-        )
+        run_results = []
 
         def requests_post(url, json=None, auth=None, headers=None):
             self.assertRegex(json['body'], 'No test cases are applicable to your simulator.')
@@ -726,11 +725,12 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                     raise Exception('Singularity error')
 
         if validation_state == 'passes':
-            validation_run_results = ([None], [], None)
+            validation_run_results = [TestCaseResult(type=TestCaseResultType.passed)]
         elif validation_state == 'fails':
-            validation_run_results = ([], [mock.Mock(test_case='x', exception='y')], None)
+            validation_run_results = [TestCaseResult(case=CombineArchiveTestCase(
+                id='x'), type=TestCaseResultType.failed, exception=Exception('y'))]
         else:
-            validation_run_results = ([], [], None)
+            validation_run_results = []
 
         requests_mock = RequestsMock(submitted_version=submitted_version,
                                      new_simulator=new_simulator, previous_version_validated=previous_version_validated,

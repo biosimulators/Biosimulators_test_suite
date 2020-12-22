@@ -7,6 +7,7 @@
 :License: MIT
 """
 
+from .data_model import TestCaseResultType
 from .validate_simulator import SimulatorValidator
 from biosimulators_utils.gh_action.core import GitHubAction, GitHubActionErrorHandling, GitHubActionCaughtError  # noqa: F401
 from biosimulators_utils.simulator_registry.data_model import SimulatorSubmission, IssueLabel  # noqa: F401
@@ -192,20 +193,22 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
 
         # validate that image is consistent with the BioSimulators standards
         validator = SimulatorValidator()
-        valid_cases, test_exceptions, _ = validator.run(image_url, specifications)
+        case_results = validator.run(image_url, specifications)
 
+        valid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.passed]
         if valid_cases:
             self.add_comment_to_issue(self.issue_number, 'Your simulator passed {} test cases.'.format(len(valid_cases)))
 
-        if test_exceptions:
+        invalid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.failed]
+        if invalid_cases:
             msgs = []
-            for exception in test_exceptions:
-                msgs.append('  - {}\n    {}\n\n'.format(exception.test_case, str(exception.exception).replace('\n', '\n    ')))
+            for invalid_case in invalid_cases:
+                msgs.append('  - {}\n    {}\n\n'.format(invalid_case.case.id, str(invalid_case.exception).replace('\n', '\n    ')))
 
             error_msg = (
                 'Your simulator did not pass {} test cases.\n\n{}'
                 'After correcting your simulator, please edit the first block of this issue to re-initiate this validation.'
-            ).format(len(test_exceptions), ''.join(msgs))
+            ).format(len(invalid_cases), ''.join(msgs))
             self.add_error_comment_to_issue(self.issue_number, error_msg)
 
         if not valid_cases:
