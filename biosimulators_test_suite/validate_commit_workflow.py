@@ -150,7 +150,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         return ('Thank you @{} for your submission to the BioSimulators simulator validation/submission system!\n\n'
                 'The BioSimulators validator bot is [{}]({}). {}\n\n'
                 'We will discuss any concerns with your submission in this issue.'
-                ).format(submitter, self.gh_action_run_url, actions, not_actions)
+                ).format(submitter, actions, self.gh_action_run_url, not_actions)
 
     def validate_simulator(self, submission):
         """ Validate simulator
