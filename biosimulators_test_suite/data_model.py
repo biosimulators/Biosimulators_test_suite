@@ -24,7 +24,7 @@ import warnings
 __all__ = ['AbstractTestCase', 'SedTaskRequirements', 'ExpectedSedReport', 'ExpectedSedPlot',
            'CombineArchiveTestCase', 'TestCaseResultType', 'TestCaseResult',
            'InvalidOuputsException', 'InvalidOuputsWarning',
-           'SkippedTestCaseException']
+           'SkippedTestCaseException', 'IgnoreTestCaseWarning']
 
 
 class AbstractTestCase(abc.ABC):
@@ -433,4 +433,9 @@ class InvalidOuputsWarning(UserWarning):
 
 class SkippedTestCaseException(Exception):
     """ Exception raised that indicates that a test case should be skipped """
+    pass  # pragma: no cover
+
+
+class IgnoreTestCaseWarning(UserWarning):
+    """ Warning raised that indicates that a test case was ignored """
     pass  # pragma: no cover

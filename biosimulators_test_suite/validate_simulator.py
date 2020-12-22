@@ -6,11 +6,13 @@
 :License: MIT
 """
 
-from .data_model import AbstractTestCase, CombineArchiveTestCase, TestCaseResult, TestCaseResultType, SkippedTestCaseException  # noqa: F401
+from .data_model import (AbstractTestCase, CombineArchiveTestCase, TestCaseResult,  # noqa: F401
+                         TestCaseResultType, SkippedTestCaseException, IgnoreTestCaseWarning)
 import biosimulators_utils.simulator.io
 import datetime
 import glob
 import os
+import warnings
 
 __all__ = ['SimulatorValidator']
 
@@ -48,6 +50,7 @@ class SimulatorValidator(object):
 
         cases = []
         found_ids = set()
+        ignored_ids = set()
         for md_filename in glob.glob(os.path.join(dirname, '**/*.json'), recursive=True):
             rel_filename = os.path.relpath(md_filename, dirname)
             id = os.path.splitext(rel_filename)[0]
@@ -55,11 +58,16 @@ class SimulatorValidator(object):
                 found_ids.add(id)
                 case = CombineArchiveTestCase().from_json(dirname, rel_filename)
                 cases.append(case)
+            else:
+                skipped_ids.add(id)
 
         if ids is not None:
             missing_ids = set(ids).difference(found_ids)
             if missing_ids:
                 raise ValueError('Some test case(s) were not found:\n  {}'.format('\n  '.join(sorted(missing_ids))))
+
+        if ignored_ids:
+            warnings.warn('Some test case(s) were ignored:\n  {}'.format('\n  '.join(sorted(ignored_ids))), IgnoreTestCaseWarning)
 
         # return cases
         return cases
