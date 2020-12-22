@@ -271,11 +271,15 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             specifications (:obj:`dict`): specifications of a simulation tool
             existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
         """
-        # copy image to BioSimulators namespace of Docker registry
+        # copy image to BioSimulators namespace of Docker registry (GitHub Container Registry)
         if submission.validate_image:
             self.push_image(specifications, existing_version_specifications)
 
         # commit submission to BioSimulators database
+        if submission.validate_image:
+            if 'biosimulators' not in specifications:
+                specifications['biosimulators'] = {}    
+            specifications['biosimulators']['validated'] = True
         self.post_entry_to_biosimulators_api(specifications, existing_version_specifications)
 
     def push_image(self, specifications, existing_version_specifications):

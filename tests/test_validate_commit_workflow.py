@@ -620,6 +620,9 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                         'image': {
                             'url': 'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:' + self.submitted_version
                         },
+                        'biosimulators': {
+                            'validated': False,
+                        },
                     }
                 elif url == 'https://api.github.com/repos/biosimulators/Biosimulators/issues/11':
                     response = {
