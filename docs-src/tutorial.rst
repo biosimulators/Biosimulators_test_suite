@@ -48,3 +48,20 @@ Please follow these steps to use the GitHub API to programmatically submit issue
       -H "Accept: application/vnd.github.v3+json" \
       https://api.github.com/repos/biosimulators/Biosimulators/issues \
       -d '{"labels": ["Validate/submit simulator"], "title": "Submit tellurium 2.1.6", "body": "---\nname: tellurium\nversion: 2.1.6\nspecificationsUrl: https://raw.githubusercontent.com/biosimulators/Biosimulators_tellurium/2.1.6/biosimulators.json\nvalidateImage: true\ncommitSimulator: true\n\n---"}'
+
+
+Running the test suite locally
+---------------------------------------------------
+
+The test suite can also be run locally as illustrated below.
+
+.. code-block:: text
+
+    # Run all tests
+    biosimulators-test-suite /path/to/simulator/specifications.json
+
+    # Run specific tests
+    biosimulators-test-suite /path/to/simulator/specifications.json \
+      --combine-case \
+        sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations
+        sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint
