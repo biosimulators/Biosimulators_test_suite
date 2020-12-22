@@ -47,9 +47,6 @@ class SimulatorValidator(object):
             :obj:`list` of :obj:`CombineArchiveTestCase`: test cases
         """
         dirname = os.path.join(os.path.dirname(__file__), '..', 'examples')
-        print(ids.__class__, ids)
-        print(dirname)
-        print(glob.glob(os.path.join(dirname, '**/*.json'), recursive=True))
 
         cases = []
         found_ids = set()
