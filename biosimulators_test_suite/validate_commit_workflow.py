@@ -58,6 +58,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
     BIOSIMULTORS_DOCKER_REGISTRY_IMAGE_URL_PATTERN = 'ghcr.io/biosimulators/{}:{}'
     DEFAULT_SPECIFICATIONS_VERSION = '1.0.0'
     DEFAULT_IMAGE_VERSION = '1.0.0'
+    CURATOR_GH_IDS = ['jonrkarr']
 
     def __init__(self):
         super(ValidateCommitSimulatorGitHubAction, self).__init__()
@@ -116,6 +117,10 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                 # close issue
                 self.close_issue(self.issue_number)
             else:
+                assigned = set([assignee['login'] for assignee in issue_props['assignees']])
+                new_assignees = set(self.CURATOR_GH_IDS).difference(assigned)
+                if new_assignees:
+                    self.assign_issue(self.issue_number,  list(new_assignees))
                 self.add_comment_to_issue(
                     self.issue_number,
                     ('A member of the BioSimulators team will review your submission and '

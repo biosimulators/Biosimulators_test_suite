@@ -354,6 +354,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertRegex(requests_mock.issue_messages[-1], 'Specifications must be adhere to the BioSimulators schema')
         self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
         self.assertEqual(docker_mock.local_images, set([]))
+        self.assertEqual(requests_mock.issue_assignees, set())
 
         # validate specs of valid new simulator
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -369,6 +370,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(requests_mock.issue_messages[-1], 'The specifications of your simulator is valid!')
         self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
         self.assertEqual(docker_mock.local_images, set([]))
+        self.assertEqual(requests_mock.issue_assignees, set())
 
         # validate specs and image of valid new simulator; fail on singularity error
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -385,6 +387,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertRegex(requests_mock.issue_messages[-1], 'Singularity error')
         self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
         self.assertEqual(docker_mock.local_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
+        self.assertEqual(requests_mock.issue_assignees, set())
 
         # validate specs and image of valid new simulator; fail on validation error
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -401,6 +404,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertRegex(requests_mock.issue_messages[-1], 'Your simulator did not pass 1 test cases')
         self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
         self.assertEqual(docker_mock.local_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
+        self.assertEqual(requests_mock.issue_assignees, set())
 
         # validate specs and image of valid new simulator
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -417,6 +421,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertRegex(requests_mock.issue_messages[-1], 'No test cases are applicable')
         self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
         self.assertEqual(docker_mock.local_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
+        self.assertEqual(requests_mock.issue_assignees, set())
 
         # validate specs and image of valid new simulator
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -433,6 +438,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(requests_mock.issue_messages[-1], 'The image for your simulator is valid!')
         self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
         self.assertEqual(docker_mock.local_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
+        self.assertEqual(requests_mock.issue_assignees, set())
 
         # validate specs and image of valid new simulator, previous run passed and was approved
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -456,6 +462,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             'ghcr.io/biosimulators/tellurium:2.1.6',
             'ghcr.io/biosimulators/tellurium:latest',
         ]))
+        self.assertEqual(requests_mock.issue_assignees, set())
 
         # validate specs and image of valid new simulator, previous run failed and was not approved
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -475,6 +482,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(docker_mock.local_images, set([
             'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
         ]))
+        self.assertEqual(requests_mock.issue_assignees, set(validate_commit_workflow.ValidateCommitSimulatorGitHubAction.CURATOR_GH_IDS))
 
         # validate specs and image of valid new simulator, previous run failed and was not approved
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -494,6 +502,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(docker_mock.local_images, set([
             'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
         ]))
+        self.assertEqual(requests_mock.issue_assignees, set(validate_commit_workflow.ValidateCommitSimulatorGitHubAction.CURATOR_GH_IDS))
 
         # validate specs and image of valid new simulator, previous run passed and was approved
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -517,6 +526,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             'ghcr.io/biosimulators/tellurium:2.1.6',
             'ghcr.io/biosimulators/tellurium:latest',
         ]))
+        self.assertEqual(requests_mock.issue_assignees, set())
 
         # validate specs and image of valid new simulator, previous run passed and was approved; not latest version
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -539,6 +549,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.4',
             'ghcr.io/biosimulators/tellurium:2.1.4',
         ]))
+        self.assertEqual(requests_mock.issue_assignees, set())
 
         # validate specs and image of valid new simulator, previous run passed and was approved; not latest version
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -563,6 +574,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             'ghcr.io/biosimulators/tellurium:2.1.5',
             'ghcr.io/biosimulators/tellurium:latest',
         ]))
+        self.assertEqual(requests_mock.issue_assignees, set())
 
     def _build_run_mock_objs(self, submitted_version='2.1.6', new_simulator=True, previous_version_validated=False,
                              validate_image=False, commit_simulator=False, previous_run_valid=None, manually_approved=False,
@@ -598,6 +610,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
 
                 self.issue_messages = []
 
+                self.issue_assignees = set()
+
             def get(self, url, json=None, auth=None, headers=None):
                 if url == 'https://raw.githubusercontent.com/biosimulators/Biosimulators_tellurium/d08f33/biosimulators.json':
                     response = {
@@ -623,6 +637,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                             '',
                             '---',
                         ]),
+                        'assignees': [
+                        ],
                     }
                 elif url == 'https://api.github.com/repos/biosimulators/Biosimulators/issues/11/labels':
                     response = [{'name': label} for label in self.issue_labels]
@@ -653,6 +669,11 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                     response = None
                 elif url == 'https://api.github.com/repos/biosimulators/Biosimulators/issues/11/comments':
                     self.issue_messages.append(json['body'])
+                    error = None
+                    response = None
+                elif url == 'https://api.github.com/repos/biosimulators/Biosimulators/issues/11/assignees':
+                    for assignee in json['assignees']:
+                        self.issue_assignees.add(assignee)
                     error = None
                     response = None
                 else:
