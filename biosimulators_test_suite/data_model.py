@@ -57,6 +57,15 @@ class AbstractTestCase(abc.ABC):
         """
         pass  # pragma: no cover
 
+    @abc.abstractmethod
+    def get_description(self):
+        """ Get a description of the case
+
+        Returns:
+            :obj:`str`: description of the case
+        """
+        pass  # pragma: no cover
+
 
 class SedTaskRequirements(object):
     """ Required model format for simulation algorithm for each task in a SED document
@@ -159,6 +168,19 @@ class CombineArchiveTestCase(AbstractTestCase):
         self.assert_no_extra_plots = assert_no_extra_plots
         self.r_tol = r_tol
         self.a_tol = a_tol
+
+    def get_description(self):
+        """ Get a description of the case
+
+        Returns:
+            :obj:`str`: description of the case
+        """
+        model_formats = set()
+        simulation_algorithms = set()
+        for req in self.task_requirements:
+            model_formats.add(req.model_format)
+            simulation_algorithms.add(req.simulation_algorithm)
+        return '{} / {}'.format(', '.join(sorted(model_formats)), ', '.join(sorted(simulation_algorithms)))
 
     def from_json(self, base_path, filename):
         """ Read test case from JSON file

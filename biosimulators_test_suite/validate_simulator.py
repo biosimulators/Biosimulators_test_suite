@@ -127,11 +127,14 @@ class SimulatorValidator(object):
         skipped = []
         for result in sorted(results, key=lambda result: result.case.id):
             if result.type == TestCaseResultType.passed:
-                result_str = '  {} ({:.3f} s)\n'.format(result.case.id, result.duration)
+                result_str = '  {} ({}, {:.3f} s)\n'.format(result.case.get_description(), result.case.id, result.duration)
                 passed.append(result_str)
+
             elif result.type == TestCaseResultType.failed:
-                result_str = '  {}: {} ({:.3f} s)\n'.format(result.case.id, result.exception.__class__.__name__, result.duration)
+                result_str = '  {}: {} ({}, {:.3f} s)\n'.format(result.case.get_description(), result.case.id,
+                                                                result.exception.__class__.__name__, result.duration)
                 failed.append(result_str)
+
             elif result.type == TestCaseResultType.skipped:
                 result_str = '  {}\n'.format(result.case.id)
                 skipped.append(result_str)

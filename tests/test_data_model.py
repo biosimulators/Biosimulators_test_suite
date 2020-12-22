@@ -47,6 +47,13 @@ class DataModelTestCase(unittest.TestCase):
         plot = data_model.ExpectedSedPlot(id='plot-1')
         self.assertEqual(plot.id, 'plot-1')
 
+    def test_CombineArchiveTestCase_get_description(self):
+        case = data_model.CombineArchiveTestCase(task_requirements=[
+            data_model.SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000027'),
+            data_model.SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000019'),
+        ])
+        self.assertEqual(case.get_description(), 'format_2585 / KISAO_0000019, KISAO_0000027')
+
     def test_CombineArchiveTestCase_from_dict(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', 'examples')
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
