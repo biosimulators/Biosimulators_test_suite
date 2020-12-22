@@ -16,6 +16,11 @@ class ValidateSimulatorTestCase(unittest.TestCase):
             "Ciliberto et al. Journal Cell Biology 2003: Morphogenesis checkpoint in budding yeast",
         ]))
 
+        with self.assertRaisesRegex(ValueError, r'Some test case\(s\) were not found'):
+            SimulatorValidator.get_combine_archive_cases([
+                'non-existent-case',
+            ])
+
     def test_summarize_results(self):
         results = [
             TestCaseResult(case=CombineArchiveTestCase(id='A'), type=TestCaseResultType.passed, duration=1.),

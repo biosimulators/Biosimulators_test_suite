@@ -47,12 +47,19 @@ class SimulatorValidator(object):
         dirname = os.path.join(os.path.dirname(__file__), '..', 'examples')
 
         cases = []
+        found_ids = set()
         for md_filename in glob.glob(os.path.join(dirname, '**/*.json'), recursive=True):
             rel_filename = os.path.relpath(md_filename, dirname)
             id = os.path.splitext(rel_filename)[0]
             if ids is None or id in ids:
+                found_ids.add(id)
                 case = CombineArchiveTestCase().from_json(dirname, rel_filename)
                 cases.append(case)
+
+        if ids is not None:
+            missing_ids = set(ids).difference(found_ids)
+            if missing_ids:
+                raise ValueError('Some test case(s) were not found:\n  {}'.format('\n  '.join(sorted(missing_ids))))
 
         # return cases
         return cases
@@ -62,7 +69,7 @@ class SimulatorValidator(object):
         checking that the image produces the correct outputs for test cases (e.g., COMBINE archive)
 
         Args:
-            specifications (:obj:`str` or :obj:`dict`): path or URL to the specifications of the simulator or the specifications of the simulator
+            specifications (:obj:`str` or :obj:`dict`): path or URL to the specifications of the simulator, or the specifications of the simulator
 
         Returns:
             :obj:`list` :obj:`TestCaseResult`: results of executing test cases
