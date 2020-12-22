@@ -1,12 +1,29 @@
 {
   "name": "Szymańska & Zylicz. Journal of Theoretical Biology 2009: heat shock protein synthesis in response to temperature change",
   "filename": "Szymanska-J-Theor-Biol-2009-HSP-synthesis.omex",
-  "modelingFrameworkSboIds": ["SBO_0000293"],
-  "modelFormatEdamIds": ["format_2585"],
-  "simulationFormatEdamIds": ["format_3685"],
-  "archiveFormatEdamId": "format_3686",
-  "identifiers": [
-    {"namespace": "biomodels.db", "id": "BIOMD0000000896"}
-    {"namespace": "doi", "id": "10.1016/j.jtbi.2009.03.021"}
+  "taskRequirements": [{
+    "modelFormat": "format_2585",
+    "simulationAlgorithm": "KISAO_0000496"
+  }],
+  "expectedReports": [{
+    "id": "BIOMD0000000896_sim.sedml/BIOMD0000000896_sim",
+    "dataSets": ["time", "Hsp70", "HSF", "S", "Hsp70_HSF", "Hsp70_S", "HSF_3", "HSE", "HSF_3_HSE", "mRNA"],
+    "points": [4001],
+    "values": {
+      "time": {
+        "0": 0.0,
+        "4000": 1000
+      }
+    }
+  }],
+  "expectedPlots": [],
+  "identifiers": [{
+      "namespace": "biomodels.db",
+      "id": "BIOMD0000000896"
+    },
+    {
+      "namespace": "doi",
+      "id": "10.1016/j.jtbi.2009.03.021"
+    }
   ]
 }

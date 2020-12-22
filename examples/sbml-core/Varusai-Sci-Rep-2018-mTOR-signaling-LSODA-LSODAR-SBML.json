@@ -1,12 +1,27 @@
 {
   "name": "Varusai & Nguyen Scientific Reports 2018: mTOR signalling network",
   "filename": "Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML.omex",
-  "modelingFrameworkSboIds": ["SBO_0000293"],
-  "modelFormatEdamIds": ["format_2585"],
-  "simulationFormatEdamIds": ["format_3685"],
-  "archiveFormatEdamId": "format_3686",
-  "identifiers": [
-    {"namespace": "biomodels.db", "id": "BIOMD0000000823"}
-    {"namespace": "doi", "id": "10.1038/s41598-017-18400-z"}
-  ]
+  "taskRequirements": [{
+    "modelFormat": "format_2585",
+    "simulationAlgorithm": "KISAO_0000560"
+  }],
+  "expectedReports": [{
+    "id": "LSODA.sedml/report_1_task1",
+    "dataSets": ["time", "pmTORC1"],
+    "points": [1001],
+    "values": {
+      "time": {
+        "0": 0.0,
+        "1000": 3600
+      }
+    }
+  }],
+  "expectedPlots": [],
+  "identifiers": [{
+    "namespace": "biomodels.db",
+    "id": "BIOMD0000000823"
+  }, {
+    "namespace": "doi",
+    "id": "10.1038/s41598-017-18400-z"
+  }]
 }

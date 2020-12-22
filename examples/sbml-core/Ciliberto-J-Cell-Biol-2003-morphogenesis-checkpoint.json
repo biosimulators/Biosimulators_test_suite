@@ -1,12 +1,32 @@
 {
   "name": "Ciliberto et al. Journal Cell Biology 2003: Morphogenesis checkpoint in budding yeast",
   "filename": "Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint.omex",
-  "modelingFrameworkSboIds": ["SBO_0000295"],
-  "modelFormatEdamIds": ["format_2585"],
-  "simulationFormatEdamIds": ["format_3685"],
-  "archiveFormatEdamId": "format_3686",
-  "identifiers": [
-    {"namespace": "biomodels.db", "id": "BIOMD0000000297"}
-    {"namespace": "doi", "id": "10.1083/jcb.200306139"}
+  "taskRequirements": [{
+    "modelFormat": "format_2585",
+    "simulationAlgorithm": "KISAO_0000029"
+  }],
+  "expectedReports": [{
+    "id": "simulation_1.sedml/simulation_1",
+    "dataSets": ["time", "Cdh1", "Trim", "Clb", "Sic", "PTrim", "PClb", "SBF", "IE", "Cdc20a", "Cdc20", "Swe1", "Swe1M", "PSwe1", "PSwe1M", "Mih1a", "Mcm", "BE", "Cln", "mass"],
+    "points": [101],
+    "values": {
+      "time": {
+        "0": 0.0,
+        "1": 1.0,
+        "2": 2.0,
+        "99": 99.0,
+        "100": 100.0
+      }
+    }
+  }],
+  "expectedPlots": [],
+  "identifiers": [{
+      "namespace": "biomodels.db",
+      "id": "BIOMD0000000297"
+    },
+    {
+      "namespace": "doi",
+      "id": "10.1083/jcb.200306139"
+    }
   ]
 }

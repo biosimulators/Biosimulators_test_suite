@@ -1,12 +1,29 @@
 {
   "name": "Parmar et al. BMC Systems Biology 2017: Mouse iron distribution",
   "filename": "Parmar-BMC-Syst-Biol-2017-iron-distribution.omex",
-  "modelingFrameworkSboIds": ["SBO_0000293"],
-  "modelFormatEdamIds": ["format_2585"],
-  "simulationFormatEdamIds": ["format_3685"],
-  "archiveFormatEdamId": "format_3686",
-  "identifiers": [
-    {"namespace": "biomodels.db", "id": "BIOMD0000000734"}
-    {"namespace": "doi", "id": "10.1186/s12918-017-0431-3"}
+  "taskRequirements": [{
+    "modelFormat": "format_2585",
+    "simulationAlgorithm": "KISAO_0000019"
+  }],
+  "expectedReports": [{
+    "id": "Parmar2017_Deficient_Rich_tracer.sedml/simulation_1",
+    "dataSets": ["time", "FeDuo"],
+    "points": [301],
+    "values": {
+      "time": {
+        "0": 0.0,
+        "301": 5100.0
+      }
+    }
+  }],
+  "expectedPlots": [],
+  "identifiers": [{
+      "namespace": "biomodels.db",
+      "id": "BIOMD0000000734"
+    },
+    {
+      "namespace": "doi",
+      "id": "10.1186/s12918-017-0431-3"
+    }
   ]
 }

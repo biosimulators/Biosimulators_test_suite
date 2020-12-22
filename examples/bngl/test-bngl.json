@@ -1,10 +1,21 @@
 {
   "name": "Example BioNetGen model",
   "filename": "test-bngl.omex",
-  "modelingFrameworkSboIds": ["SBO_0000293"],
-  "modelFormatEdamIds": ["format_3972"],
-  "simulationFormatEdamIds": ["format_3685"],
-  "archiveFormatEdamId": "format_3686",
-  "identifiers": [
-  ]
+  "taskRequirements": [{
+    "modelFormat": "format_3972",
+    "simulationAlgorithm": "KISAO_0000019"
+  }],
+  "expectedReports": [{
+    "id": "test.sedml/report",
+    "dataSets": ["time", "Atot", "Btot", "GA00tot", "GA01tot", "GA10tot", "GB00tot", "GB01tot", "GB10tot"],
+    "points": [101],
+    "values": {
+      "time": {
+        "0": 0.0,
+        "100": 10
+      }
+    }
+  }],
+  "expectedPlots": [],
+  "identifiers": []
 }
