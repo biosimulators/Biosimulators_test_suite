@@ -32,13 +32,12 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
     def test_run(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
-        validator = SimulatorValidator()
-        validator.cases.extend(validator.get_combine_archive_cases([
+        validator = SimulatorValidator(combine_archive_case_ids=[
             'sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
             'sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
             'sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
             'sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
-        ]))
+        ])
         self.assertEqual(len(validator.cases), 4)
 
         results = validator.run(specifications)

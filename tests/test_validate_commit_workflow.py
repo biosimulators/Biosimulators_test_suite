@@ -725,10 +725,22 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                     raise Exception('Singularity error')
 
         if validation_state == 'passes':
-            validation_run_results = [TestCaseResult(type=TestCaseResultType.passed)]
+            validation_run_results = [
+                TestCaseResult(
+                    case=CombineArchiveTestCase(id='case-passed'),
+                    type=TestCaseResultType.passed,
+                    duration=1.,
+                ),
+            ]
         elif validation_state == 'fails':
-            validation_run_results = [TestCaseResult(case=CombineArchiveTestCase(
-                id='x'), type=TestCaseResultType.failed, exception=Exception('y'))]
+            validation_run_results = [
+                TestCaseResult(
+                    case=CombineArchiveTestCase(id='case-failed'),
+                    type=TestCaseResultType.failed,
+                    exception=Exception('Big error'),
+                    duration=2.,
+                ),
+            ]
         else:
             validation_run_results = []
 
@@ -753,6 +765,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                                         with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', side_effect=docker_mock.convert_docker_image_to_singularity):
                                             with mock.patch.object(docker.models.images.Image, 'tag', side_effect=docker_mock.tag):
                                                 with mock.patch.object(docker.models.images.ImageCollection, 'push', side_effect=docker_mock.push):
-                                                    with mock.patch.object(validate_simulator.SimulatorValidator, 'run', return_value=validation_run_results):
-                                                        action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
-                                                        action.run()
+                                                    with mock.patch.object(validate_simulator.SimulatorValidator, 'get_combine_archive_cases', return_value=validation_run_results):
+                                                        with mock.patch.object(validate_simulator.SimulatorValidator, 'eval_case', side_effect=validation_run_results):
+                                                            action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
+                                                            action.run()

@@ -193,7 +193,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
 
         # validate that image is consistent with the BioSimulators standards
         validator = SimulatorValidator()
-        case_results = validator.run(image_url, specifications)
+        case_results = validator.run(specifications)
 
         valid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.passed]
         if valid_cases:

@@ -23,8 +23,15 @@ class SimulatorValidator(object):
         cases (:obj:`list` of :obj:`TestCase`): test cases
     """
 
-    def __init__(self):
-        self.cases = []
+    def __init__(self, cases=None, combine_archive_case_ids=None):
+        """
+        Args:
+            cases (:obj:`list` of :obj:`AbstractTestCase`, optional): test cases
+            combine_archive_case_ids (:obj:`list` of :obj:`str`, optional): List of ids of test cases to verify. If :obj:`ids`
+                is none, all test cases are verified.
+        """
+        self.cases = cases or []
+        self.cases.extend(self.get_combine_archive_cases(ids=combine_archive_case_ids))
 
     @staticmethod
     def get_combine_archive_cases(ids=None):
@@ -35,7 +42,7 @@ class SimulatorValidator(object):
                 is none, all test cases are verified.
 
         Returns:
-            cases (:obj:`list` of :obj:`AbstractTestCase`): test cases
+            :obj:`list` of :obj:`CombineArchiveTestCase`: test cases
         """
         dirname = os.path.join(os.path.dirname(__file__), '..', 'examples')
 
@@ -67,24 +74,7 @@ class SimulatorValidator(object):
         # execute test cases and collect results
         results = []
         for case in self.cases:
-            start_time = datetime.datetime.now()
-            try:
-                case.eval(specifications)
-                type = TestCaseResultType.passed
-                exception = None
-                duration = (datetime.datetime.now() - start_time).total_seconds()
-
-            except SkippedTestCaseException:
-                type = TestCaseResultType.skipped
-                exception = None
-                duration = None
-
-            except Exception as caught_exception:
-                type = TestCaseResultType.failed
-                exception = caught_exception
-                duration = (datetime.datetime.now() - start_time).total_seconds()
-
-            result = TestCaseResult(case=case, type=type, duration=duration, exception=exception)
+            result = self.eval_case(specifications, case)
             results.append(result)
 
         # summarize results
@@ -92,6 +82,35 @@ class SimulatorValidator(object):
 
         # return results
         return results
+
+    def eval_case(self, specifications, case):
+        """ Evaluate a test case for a simulator
+
+        Args:
+            specifications (:obj:`str` or :obj:`dict`): path or URL to the specifications of the simulator or the specifications of the simulator
+            case (:obj:`TestCase`): test case
+
+        Returns:
+            :obj:`TestCaseResult`: test case result
+        """
+        start_time = datetime.datetime.now()
+        try:
+            case.eval(specifications)
+            type = TestCaseResultType.passed
+            exception = None
+            duration = (datetime.datetime.now() - start_time).total_seconds()
+
+        except SkippedTestCaseException:
+            type = TestCaseResultType.skipped
+            exception = None
+            duration = None
+
+        except Exception as caught_exception:
+            type = TestCaseResultType.failed
+            exception = caught_exception
+            duration = (datetime.datetime.now() - start_time).total_seconds()
+
+        return TestCaseResult(case=case, type=type, duration=duration, exception=exception)
 
     @staticmethod
     def summarize_results(results):
