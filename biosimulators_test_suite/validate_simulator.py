@@ -59,7 +59,7 @@ class SimulatorValidator(object):
                 case = CombineArchiveTestCase().from_json(dirname, rel_filename)
                 cases.append(case)
             else:
-                skipped_ids.add(id)
+                ignored_ids.add(id)
 
         if ids is not None:
             missing_ids = set(ids).difference(found_ids)
