@@ -1,2 +1,2 @@
-biosimulators_utils[docker] >= 0.1.13
+biosimulators_utils[docker] >= 0.1.14
 natsort
