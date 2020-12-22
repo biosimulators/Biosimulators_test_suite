@@ -278,7 +278,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         # commit submission to BioSimulators database
         if submission.validate_image:
             if 'biosimulators' not in specifications:
-                specifications['biosimulators'] = {}    
+                specifications['biosimulators'] = {}
             specifications['biosimulators']['validated'] = True
         self.post_entry_to_biosimulators_api(specifications, existing_version_specifications)
 
