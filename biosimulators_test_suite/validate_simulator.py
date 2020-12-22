@@ -47,6 +47,8 @@ class SimulatorValidator(object):
             :obj:`list` of :obj:`CombineArchiveTestCase`: test cases
         """
         dirname = os.path.join(os.path.dirname(__file__), '..', 'examples')
+        if not os.path.isdir(dirname):
+            warnings.warn('Directory of example COMBINE/OMEX archives is not available', UserWarning)
 
         cases = []
         found_ids = set()
