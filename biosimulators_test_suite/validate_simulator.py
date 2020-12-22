@@ -24,6 +24,7 @@ class SimulatorValidator(object):
     Attributes:
         cases (:obj:`list` of :obj:`TestCase`): test cases
     """
+    COMBINE_ARCHIVES_DIR = os.path.join(os.path.dirname(__file__), '..', 'examples')
 
     def __init__(self, cases=None, combine_archive_case_ids=None):
         """
@@ -35,30 +36,32 @@ class SimulatorValidator(object):
         self.cases = cases or []
         self.cases.extend(self.get_combine_archive_cases(ids=combine_archive_case_ids))
 
-    @staticmethod
-    def get_combine_archive_cases(ids=None):
+    @classmethod
+    def get_combine_archive_cases(cls, dir_name=None, ids=None):
         """ Collect test cases from a directory
 
         Args:
+            dir_name (:obj:`str`, optional): path to find example COMBINE/OMEX archives
             id (:obj:`list` of :obj:`str`, optional): List of ids of test cases to verify. If :obj:`ids`
                 is none, all test cases are verified.
 
         Returns:
             :obj:`list` of :obj:`CombineArchiveTestCase`: test cases
         """
-        dirname = os.path.join(os.path.dirname(__file__), '..', 'examples')
-        if not os.path.isdir(dirname):
-            warnings.warn('Directory of example COMBINE/OMEX archives is not available', UserWarning)
+        if dir_name is None:
+            dir_name = cls.COMBINE_ARCHIVES_DIR
+        if not os.path.isdir(dir_name):
+            warnings.warn('Directory of example COMBINE/OMEX archives is not available', IgnoreTestCaseWarning)
 
         cases = []
         found_ids = set()
         ignored_ids = set()
-        for md_filename in glob.glob(os.path.join(dirname, '**/*.json'), recursive=True):
-            rel_filename = os.path.relpath(md_filename, dirname)
+        for md_filename in glob.glob(os.path.join(dir_name, '**/*.json'), recursive=True):
+            rel_filename = os.path.relpath(md_filename, dir_name)
             id = os.path.splitext(rel_filename)[0]
             if ids is None or id in ids:
                 found_ids.add(id)
-                case = CombineArchiveTestCase().from_json(dirname, rel_filename)
+                case = CombineArchiveTestCase().from_json(dir_name, rel_filename)
                 cases.append(case)
             else:
                 ignored_ids.add(id)

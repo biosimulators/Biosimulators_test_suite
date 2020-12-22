@@ -187,11 +187,11 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         Args:
             specifications (:obj:`dict`): specifications of a simulation tool
         """
-        biosimulators_utils.image.login_to_docker_registry('docker.io', os.getenv('DOCKER_HUB_USERNAME'), os.getenv('DOCKER_HUB_TOKEN'))
+        docker_client = biosimulators_utils.image.login_to_docker_registry('docker.io', os.getenv('DOCKER_HUB_USERNAME'), os.getenv('DOCKER_HUB_TOKEN'))
 
         # validate that container (Docker image) exists
         image_url = specifications['image']['url']
-        biosimulators_utils.image.pull_docker_image(image_url)
+        biosimulators_utils.image.pull_docker_image(docker_client, image_url)
 
         # validate that Docker image can be converted to a Singularity image
         biosimulators_utils.image.convert_docker_image_to_singularity(image_url)
@@ -284,11 +284,11 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         """
         # pull image
         original_image_url = specifications['image']['url']
-        biosimulators_utils.image.login_to_docker_registry(
+        docker_client = biosimulators_utils.image.login_to_docker_registry(
             'docker.io',
             os.getenv('DOCKER_HUB_USERNAME'),
             os.getenv('DOCKER_HUB_TOKEN'))
-        image = biosimulators_utils.image.pull_docker_image(original_image_url)
+        image = biosimulators_utils.image.pull_docker_image(docker_client, original_image_url)
 
         # push image to BioSimulators namespace of Docker registry
         biosimulators_utils.image.login_to_docker_registry(
@@ -299,7 +299,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         copy_image_url = self.DOCKER_REGISTRY_IMAGE_URL_PATTERN \
             .format(specifications['id'], specifications['version']) \
             .lower()
-        biosimulators_utils.image.tag_and_push_docker_image(image, copy_image_url)
+        biosimulators_utils.image.tag_and_push_docker_image(docker_client, image, copy_image_url)
         specifications['image']['url'] = copy_image_url
 
         is_latest = self.is_submission_latest_version_of_simulator(specifications, existing_version_specifications)
@@ -308,7 +308,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             latest_copy_image_url = self.DOCKER_REGISTRY_IMAGE_URL_PATTERN \
                 .format(specifications['id'], 'latest') \
                 .lower()
-            biosimulators_utils.image.tag_and_push_docker_image(image, latest_copy_image_url)
+            biosimulators_utils.image.tag_and_push_docker_image(docker_client, image, latest_copy_image_url)
 
         # make image public -- must be done manually; cannot be done via API as of 2020-11-11
 

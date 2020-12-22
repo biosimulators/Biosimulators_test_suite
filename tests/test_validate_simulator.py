@@ -1,12 +1,12 @@
 from biosimulators_test_suite.validate_simulator import SimulatorValidator
-from biosimulators_test_suite.data_model import TestCaseResult, TestCaseResultType, CombineArchiveTestCase
+from biosimulators_test_suite.data_model import TestCaseResult, TestCaseResultType, CombineArchiveTestCase, IgnoreTestCaseWarning
 from unittest import mock
 import unittest
 
 
 class ValidateSimulatorTestCase(unittest.TestCase):
     def test_get_combine_archive_cases(self):
-        cases = SimulatorValidator.get_combine_archive_cases([
+        cases = SimulatorValidator.get_combine_archive_cases(ids=[
             'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations',
             'sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
         ])
@@ -17,9 +17,12 @@ class ValidateSimulatorTestCase(unittest.TestCase):
         ]))
 
         with self.assertRaisesRegex(ValueError, r'Some test case\(s\) were not found'):
-            SimulatorValidator.get_combine_archive_cases([
+            SimulatorValidator.get_combine_archive_cases(ids=[
                 'non-existent-case',
             ])
+
+        with self.assertWarnsRegex(IgnoreTestCaseWarning, 'archives is not available'):
+            SimulatorValidator.get_combine_archive_cases(dir_name='does-not-exist')
 
     def test_summarize_results(self):
         results = [
