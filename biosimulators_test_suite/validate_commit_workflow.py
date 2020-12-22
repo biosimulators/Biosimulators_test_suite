@@ -54,8 +54,8 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
     BIOSIMULATORS_AUTH_ENDPOINT = 'https://auth.biosimulations.org/oauth/token'
     BIOSIMULATORS_AUDIENCE = 'api.biosimulators.org'
     BIOSIMULATORS_API_ENDPOINT = 'https://api.biosimulators.org/'
-    BIOSIMULTORS_DOCKER_REGISTRY = 'ghcr.io'
-    BIOSIMULTORS_DOCKER_REGISTRY_IMAGE_URL_PATTERN = 'ghcr.io/biosimulators/{}:{}'
+    DOCKER_REGISTRY_URL = 'ghcr.io'
+    DOCKER_REGISTRY_IMAGE_URL_PATTERN = 'ghcr.io/biosimulators/{}:{}'
     DEFAULT_SPECIFICATIONS_VERSION = '1.0.0'
     DEFAULT_IMAGE_VERSION = '1.0.0'
     CURATOR_GH_IDS = ['jonrkarr']
@@ -292,11 +292,11 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
 
         # push image to BioSimulators namespace of Docker registry
         biosimulators_utils.image.login_to_docker_registry(
-            self.BIOSIMULTORS_DOCKER_REGISTRY,
-            os.getenv('BIOSIMULATORS_DOCKER_REGISTRY_USERNAME'),
-            os.getenv('BIOSIMULATORS_DOCKER_REGISTRY_TOKEN'))
+            self.DOCKER_REGISTRY_URL,
+            os.getenv('DOCKER_REGISTRY_USERNAME'),
+            os.getenv('DOCKER_REGISTRY_TOKEN'))
 
-        copy_image_url = self.BIOSIMULTORS_DOCKER_REGISTRY_IMAGE_URL_PATTERN \
+        copy_image_url = self.DOCKER_REGISTRY_IMAGE_URL_PATTERN \
             .format(specifications['id'], specifications['version']) \
             .lower()
         biosimulators_utils.image.tag_and_push_docker_image(image, copy_image_url)
@@ -305,7 +305,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         is_latest = self.is_submission_latest_version_of_simulator(specifications, existing_version_specifications)
 
         if is_latest:
-            latest_copy_image_url = self.BIOSIMULTORS_DOCKER_REGISTRY_IMAGE_URL_PATTERN \
+            latest_copy_image_url = self.DOCKER_REGISTRY_IMAGE_URL_PATTERN \
                 .format(specifications['id'], 'latest') \
                 .lower()
             biosimulators_utils.image.tag_and_push_docker_image(image, latest_copy_image_url)
