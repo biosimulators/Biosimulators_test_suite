@@ -23,8 +23,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             'GH_ISSUES_ACCESS_TOKEN':  '**********',
             'DOCKER_HUB_USERNAME': 'biosimulatorsdaemon',
             'DOCKER_HUB_TOKEN': '**********',
-            'BIOSIMULATORS_DOCKER_REGISTRY_USERNAME': 'biosimulatorsdaemon',
-            'BIOSIMULATORS_DOCKER_REGISTRY_TOKEN': '**********',
+            'DOCKER_REGISTRY_USERNAME': 'biosimulatorsdaemon',
+            'DOCKER_REGISTRY_TOKEN': '**********',
             'BIOSIMULATORS_API_CLIENT_ID': '**********',
             'BIOSIMULATORS_API_CLIENT_SECRET': '**********',
         }
