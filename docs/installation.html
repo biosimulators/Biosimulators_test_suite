@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1. Installation instructions &#8212; BioSimulators test suite 0.0.1 documentation</title>
+    <title>1. Installation instructions &#8212; BioSimulators test suite 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -50,8 +50,9 @@
 <h3>Navigation</h3>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. Installation instructions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installing-the-latest-release-from-pypi">1.1. Installing the latest release from PyPI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installing-the-latest-revision-from-github">1.2. Installing the latest revision from GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-the-dependencies-for-the-test-suite">1.1. Install the dependencies for the test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-the-optional-dependencies-for-the-test-suite">1.2. Install the optional dependencies for the test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-the-test-suite">1.3. Install the test suite</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">2. Tutorial</a></li>
@@ -108,17 +109,24 @@
             
   <div class="section" id="installation-instructions">
 <h1><span class="section-number">1. </span>Installation instructions<a class="headerlink" href="#installation-instructions" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="installing-the-latest-release-from-pypi">
-<h2><span class="section-number">1.1. </span>Installing the latest release from PyPI<a class="headerlink" href="#installing-the-latest-release-from-pypi" title="Permalink to this headline">¶</a></h2>
-<p>After installing <a class="reference external" href="https://www.python.org/downloads/">Python</a> (&gt;= 3.7) and <a class="reference external" href="https://pip.pypa.io/">pip</a>, run the following command to install the BioSimulators test suite:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pip install biosimulators-test-suite
-</pre></div>
+<div class="section" id="install-the-dependencies-for-the-test-suite">
+<h2><span class="section-number">1.1. </span>Install the dependencies for the test suite<a class="headerlink" href="#install-the-dependencies-for-the-test-suite" title="Permalink to this headline">¶</a></h2>
+<p>First, install the following dependencies of the test suite:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.docker.com/">Docker</a></p></li>
+<li><p><a class="reference external" href="https://www.python.org/downloads/">Python</a> (&gt;= 3.7)</p></li>
+<li><p><a class="reference external" href="https://pip.pypa.io/">pip</a></p></li>
+</ul>
 </div>
+<div class="section" id="install-the-optional-dependencies-for-the-test-suite">
+<h2><span class="section-number">1.2. </span>Install the optional dependencies for the test suite<a class="headerlink" href="#install-the-optional-dependencies-for-the-test-suite" title="Permalink to this headline">¶</a></h2>
+<p>To check that Docker image for simulation tools can be converted into Singularity images, also install Singularity. Installation instructions are available at <a class="reference external" href="https://sylabs.io/docs/">https://sylabs.io/docs/</a>.</p>
 </div>
-<div class="section" id="installing-the-latest-revision-from-github">
-<h2><span class="section-number">1.2. </span>Installing the latest revision from GitHub<a class="headerlink" href="#installing-the-latest-revision-from-github" title="Permalink to this headline">¶</a></h2>
-<p>After installing <a class="reference external" href="https://www.python.org/downloads/">Python</a> (&gt;= 3.7) and <a class="reference external" href="https://pip.pypa.io/">pip</a>, run the following command to install the BioSimulators test suite:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>pip install git+https://github.com/biosimulators/Biosimulators_test_suite#egg=Biosimulators_test_suite
+<div class="section" id="install-the-test-suite">
+<h2><span class="section-number">1.3. </span>Install the test suite<a class="headerlink" href="#install-the-test-suite" title="Permalink to this headline">¶</a></h2>
+<p>After installing the dependencies outlined above, run the command below to install the BioSimulators test suite. Although the test suite is available from PyPI, we recommend installing the test suite from the Git repository because the package in PyPI does not include the example COMBINE archives needed for most of the tests.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>git clone --branch deploy https://github.com/biosimulators/Biosimulators_test_suite.git
+pip install -e Biosimulators_test_suite
 </pre></div>
 </div>
 </div>
