@@ -32,11 +32,11 @@ class MainTestCase(unittest.TestCase):
             ),
         ]
 
-        def get_combine_archive_cases(ids=None, results=results):
+        def find_cases(ids=None, results=results):
             return [result.case for result in results]
 
         with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
-                               'get_combine_archive_cases', side_effect=get_combine_archive_cases):
+                               'find_cases', side_effect=find_cases):
             with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
                                    'eval_case', side_effect=results):
                 with exec_cli.App(argv=[specs]) as app:
@@ -63,12 +63,12 @@ class MainTestCase(unittest.TestCase):
             ),
         ]
 
-        def get_combine_archive_cases(ids=None, results=results):
+        def find_cases(ids=None, results=results):
             return [result.case for result in results]
 
         with self.assertRaises(SystemExit) as exception_cm:
             with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
-                                   'get_combine_archive_cases', side_effect=get_combine_archive_cases):
+                                   'find_cases', side_effect=find_cases):
                 with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
                                        'eval_case', side_effect=results):
                     with exec_cli.App(argv=[specs]) as app:
@@ -80,12 +80,12 @@ class MainTestCase(unittest.TestCase):
 
         results = []
 
-        def get_combine_archive_cases(ids=None, results=results):
+        def find_cases(ids=None, results=results):
             return [result.case for result in results]
 
         with self.assertRaises(SystemExit) as exception_cm:
             with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
-                                   'get_combine_archive_cases', side_effect=get_combine_archive_cases):
+                                   'find_cases', side_effect=find_cases):
                 with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
                                        'eval_case', side_effect=results):
                     with exec_cli.App(argv=[specs]) as app:

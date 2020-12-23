@@ -27,9 +27,9 @@ class BaseController(cement.Controller):
                 type=str,
                 nargs='+',
                 default=None,
-                dest='combine_archive_case_ids',
+                dest='case_ids',
                 help=(
-                    "Ids of COMBINE archive test cases of evaluate (e.g., "
+                    "Ids of test cases of evaluate (e.g., "
                       "'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'). "
                       "Default: evaluate all test cases"
                 ),
@@ -49,7 +49,7 @@ class BaseController(cement.Controller):
         args = self.app.pargs
         try:
             validator = biosimulators_test_suite.exec_core.SimulatorValidator(
-                combine_archive_case_ids=args.combine_archive_case_ids,
+                case_ids=args.case_ids,
                 verbose=args.verbose)
             results = validator.run(args.specifications)
             summary, failure_details = validator.summarize_results(results)

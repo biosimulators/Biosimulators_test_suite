@@ -12,8 +12,6 @@ from .test_case.combine_archive import CuratedCombineArchiveTestCase
 import biosimulators_utils.simulator.io
 import capturer
 import datetime
-import glob
-import os
 import sys
 import warnings
 
@@ -25,62 +23,38 @@ class SimulatorValidator(object):
     checking that the image produces the correct outputs for one of more test cases (e.g., COMBINE archive)
 
     Attributes:
-        cases (:obj:`list` of :obj:`TestCase`): test cases
+        cases (:obj:`list` of :obj:`AbstractTestCase`): test cases
         verbose (:obj:`bool`): if :obj:`True`, display stdout/stderr from executing cases in real time
     """
-    COMBINE_ARCHIVES_DIR = os.path.join(os.path.dirname(__file__), '..', 'examples')
 
-    def __init__(self, cases=None, combine_archive_case_ids=None, verbose=False):
+    def __init__(self, case_ids=None, verbose=False):
         """
         Args:
-            cases (:obj:`list` of :obj:`AbstractTestCase`, optional): test cases
-            combine_archive_case_ids (:obj:`list` of :obj:`str`, optional): List of ids of test cases to verify. If :obj:`ids`
+            case_ids (:obj:`list` of :obj:`str`, optional): List of ids of test cases to verify. If :obj:`ids`
                 is none, all test cases are verified.
             verbose (:obj:`bool`, optional): if :obj:`True`, display stdout/stderr from executing cases in real time
         """
-        self.cases = cases or []
-        self.cases.extend(self.get_combine_archive_cases(ids=combine_archive_case_ids))
+        self.cases = self.find_cases(ids=case_ids)
         self.verbose = verbose
 
     @classmethod
-    def get_combine_archive_cases(cls, dir_name=None, ids=None):
-        """ Collect test cases from a directory
+    def find_cases(cls, ids=None):
+        """ Find test cases
 
         Args:
-            dir_name (:obj:`str`, optional): path to find example COMBINE/OMEX archives
-            id (:obj:`list` of :obj:`str`, optional): List of ids of test cases to verify. If :obj:`ids`
+            ids (:obj:`list` of :obj:`str`, optional): List of ids of test cases to verify. If :obj:`ids`
                 is none, all test cases are verified.
 
         Returns:
-            :obj:`list` of :obj:`CuratedCombineArchiveTestCase`: test cases
+            :obj:`list` of :obj:`AbstractTestCase`: test cases
         """
-        if dir_name is None:
-            dir_name = cls.COMBINE_ARCHIVES_DIR
-        if not os.path.isdir(dir_name):
-            warnings.warn('Directory of example COMBINE/OMEX archives is not available', IgnoreTestCaseWarning)
-
-        cases = []
-        found_ids = set()
-        ignored_ids = set()
-        for md_filename in glob.glob(os.path.join(dir_name, '**/*.json'), recursive=True):
-            rel_filename = os.path.relpath(md_filename, dir_name)
-            id = os.path.splitext(rel_filename)[0]
-            if ids is None or id in ids:
-                found_ids.add(id)
-                case = CuratedCombineArchiveTestCase().from_json(dir_name, rel_filename)
-                cases.append(case)
-            else:
-                ignored_ids.add(id)
+        cases = CuratedCombineArchiveTestCase.find_cases(ids=ids)
 
         if ids is not None:
-            missing_ids = set(ids).difference(found_ids)
+            missing_ids = set(ids).difference(set(case.id for case in cases))
             if missing_ids:
-                raise ValueError('Some test case(s) were not found:\n  {}'.format('\n  '.join(sorted(missing_ids))))
+                warnings.warn('Some test case(s) were not found:\n  {}'.format('\n  '.join(sorted(missing_ids))), IgnoreTestCaseWarning)
 
-        if ignored_ids:
-            warnings.warn('Some test case(s) were ignored:\n  {}'.format('\n  '.join(sorted(ignored_ids))), IgnoreTestCaseWarning)
-
-        # return cases
         return cases
 
     def run(self, specifications):
@@ -116,7 +90,7 @@ class SimulatorValidator(object):
 
         Args:
             specifications (:obj:`str` or :obj:`dict`): path or URL to the specifications of the simulator or the specifications of the simulator
-            case (:obj:`TestCase`): test case
+            case (:obj:`AbstractTestCase`): test case
 
         Returns:
             :obj:`TestCaseResult`: test case result

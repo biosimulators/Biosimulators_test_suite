@@ -798,7 +798,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                                             with mock.patch.object(docker.models.images.Image, 'tag', side_effect=docker_mock.tag):
                                                 with mock.patch.object(docker.models.images.ImageCollection, 'push', side_effect=docker_mock.push):
                                                     cases = [result.case for result in validation_run_results]
-                                                    with mock.patch.object(exec_core.SimulatorValidator, 'get_combine_archive_cases', return_value=cases):
+                                                    with mock.patch.object(exec_core.SimulatorValidator, 'find_cases', return_value=cases):
                                                         with mock.patch.object(exec_core.SimulatorValidator, 'eval_case', side_effect=validation_run_results):
                                                             action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
                                                             action.run()

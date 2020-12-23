@@ -7,24 +7,11 @@ import unittest
 
 
 class ValidateSimulatorTestCase(unittest.TestCase):
-    def test_get_combine_archive_cases(self):
-        cases = SimulatorValidator.get_combine_archive_cases(ids=[
-            'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations',
-            'sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
-        ])
-        self.assertEqual(len(cases), 2)
-        self.assertEqual(set(case.name for case in cases), set([
-            "Caravagna et al. Journal of Theoretical Biology 2010: Tumor-suppressive oscillations",
-            "Ciliberto et al. Journal Cell Biology 2003: Morphogenesis checkpoint in budding yeast",
-        ]))
-
-        with self.assertRaisesRegex(ValueError, r'Some test case\(s\) were not found'):
-            SimulatorValidator.get_combine_archive_cases(ids=[
+    def test_find_cases(self):
+        with self.assertWarnsRegex(IgnoreTestCaseWarning, r'Some test case\(s\) were not found'):
+            SimulatorValidator().find_cases(ids=[
                 'non-existent-case',
             ])
-
-        with self.assertWarnsRegex(IgnoreTestCaseWarning, 'archives is not available'):
-            SimulatorValidator.get_combine_archive_cases(dir_name='does-not-exist')
 
     def test_summarize_results(self):
         reqs = [
@@ -49,7 +36,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
     def test_run(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
-        validator = SimulatorValidator(combine_archive_case_ids=[
+        validator = SimulatorValidator(case_ids=[
             'sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
             'sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
             'sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',

@@ -15,6 +15,20 @@ import unittest
 
 
 class TestCuratedCombineArchiveTestCase(unittest.TestCase):
+    def test_find_cases(self):
+        cases = CuratedCombineArchiveTestCase.find_cases(ids=[
+            'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations',
+            'sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+        ])
+        self.assertEqual(len(cases), 2)
+        self.assertEqual(set(case.name for case in cases), set([
+            "Caravagna et al. Journal of Theoretical Biology 2010: Tumor-suppressive oscillations",
+            "Ciliberto et al. Journal Cell Biology 2003: Morphogenesis checkpoint in budding yeast",
+        ]))
+
+        with self.assertWarnsRegex(data_model.IgnoreTestCaseWarning, 'archives is not available'):
+            CuratedCombineArchiveTestCase.find_cases(dir_name='does-not-exist')
+
     def test_CuratedCombineArchiveTestCase_get_description(self):
         case = CuratedCombineArchiveTestCase(task_requirements=[
             data_model.SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000027'),
