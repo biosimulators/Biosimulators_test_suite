@@ -31,8 +31,9 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
 
         self.submission = SimulatorSubmission(
             id='gillespy2',
-            version='1.5.6',
+            version='1.5.5',
             specifications_url='https://raw.githubusercontent.com/biosimulators/Biosimulators_GillesPy2/dev/biosimulators.json',
+            specifications_patch={'version': '1.5.6'},
             validate_image=True,
             commit_simulator=True,
         )
