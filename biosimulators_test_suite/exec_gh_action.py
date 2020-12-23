@@ -177,7 +177,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         """
         # validate specifications
         specifications = biosimulators_utils.simulator.io.read_simulator_specs(
-            submission.specifications_url, submission.specifications_patch)        
+            submission.specifications_url, submission.specifications_patch)
         self.add_comment_to_issue(self.issue_number, 'The specifications of your simulator is valid!')
 
         # validate image
