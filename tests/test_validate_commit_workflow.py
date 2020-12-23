@@ -55,7 +55,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
         msg = action.get_initial_message(self.submission, self.submitter)
         self.assertTrue(msg.startswith('Thank you @{} for your submission to the BioSimulators'.format(self.submitter)))
-        self.assertTrue(msg.endswith('We will discuss any concerns with your submission in this issue.'))
+        self.assertIn('We will discuss any concerns with your submission in this issue.', msg)
 
         self.submission.validate_image = False
         self.submission.commit_simulator = False
@@ -63,7 +63,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
         msg = action.get_initial_message(self.submission, self.submitter)
         self.assertTrue(msg.startswith('Thank you @{} for your submission to the BioSimulators'.format(self.submitter)))
-        self.assertTrue(msg.endswith('We will discuss any concerns with your submission in this issue.'))
+        self.assertIn('We will discuss any concerns with your submission in this issue.', msg)
 
     def test_validate_image(self):
         with mock.patch.dict(os.environ, self.env):
