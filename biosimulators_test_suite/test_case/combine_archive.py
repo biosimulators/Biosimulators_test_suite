@@ -9,18 +9,23 @@
 from ..data_model import (AbstractTestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedPlot,
                           AlertType, InvalidOuputsException, InvalidOuputsWarning, SkippedTestCaseException,
                           IgnoredTestCaseWarning)
+from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContentFormatPattern  # noqa: F401
+from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
 from biosimulators_utils.config import get_config
 from biosimulators_utils.report.data_model import ReportFormat
+from biosimulators_utils.sedml.io import SedmlSimulationReader, SedmlSimulationWriter
 import biosimulators_utils.archive.io
 import biosimulators_utils.simulator.exec
 import biosimulators_utils.report.io
+import abc
 import glob
 import json
 import numpy
 import numpy.testing
 import os
-import tempfile
+import re
 import shutil
+import tempfile
 import warnings
 
 __all__ = ['CuratedCombineArchiveTestCase']
@@ -314,6 +319,132 @@ class CuratedCombineArchiveTestCase(AbstractTestCase):
         # raise errors
         if errors:
             raise InvalidOuputsException('\n\n'.join(errors))
+
+
+class SyntheticCombineArchiveTestCase(AbstractTestCase):
+    """ Test that involves a computationally-generated COMBINE/OMEX archive
+
+    Attributes:
+        id (:obj:`str`): id
+        name (:obj:`str`): name
+        description (:obj:`str`): description
+        curated_combine_archive_test_cases (:obj:`list` of :obj:`CuratedCombineArchiveTestCase`):
+            curated COMBINE/OMEX archives that can be used to generate example archives for testing
+    """
+
+    def __init__(self, id=None, name=None, description=None, curated_combine_archive_test_cases=None):
+        """
+        Args:
+            id (:obj:`str`, optional): id
+            name (:obj:`str`, optional): name
+            description (:obj:`str`): description
+            curated_combine_archive_test_cases (:obj:`list` of :obj:`CuratedCombineArchiveTestCase`, optional):
+                curated COMBINE/OMEX archives that can be used to generate example archives for testing
+        """
+        self.id = id
+        self.name = name
+        self.description = description
+        self.curated_combine_archive_test_cases = curated_combine_archive_test_cases or []
+
+    def eval(self, specifications):
+        """ Evaluate a simulator's performance on a test case
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+
+        Raises:
+            :obj:`Exception`: if the simulator did not pass the test case
+        """
+        temp_dir = tempfile.mkdtemp()
+
+        # read curated archives and find one that is suitable for testing
+        suitable_curated_archive = False
+        for curated_combine_archive_test_case in self.curated_combine_archive_test_cases:
+            # read archive
+            curated_archive_filename = curated_combine_archive_test_case.filename
+            shared_archive_dir = os.path.join(temp_dir, 'archive')
+
+            curated_archive = CombineArchiveReader().run(curated_archive_filename, shared_archive_dir)
+            curated_sed_docs = {}
+            sedml_reader = SedmlSimulationReader()
+            for content in curated_archive.contents:
+                if re.match(CombineArchiveContentFormatPattern.SED_ML, content.format):
+                    sed_doc = sedml_reader.run(os.path.join(shared_archive_dir, content.location))
+                    curated_sed_docs[content.location] = sed_doc
+
+            # see if archive is suitable for testing
+            if self.is_curated_archive_suitable_for_building_synthetic_archive(curated_archive, curated_sed_docs):
+                suitable_curated_archive = True
+                break
+
+            # cleanup
+            shutil.rmtree(shared_archive_dir)
+
+        if not suitable_curated_archive:
+            warnings.warn('No curated COMBINE/OMEX archives are available to generate archives for testing',
+                          IgnoredTestCaseWarning)
+            shutil.rmtree(temp_dir)
+            return
+
+        synthetic_archive_filename = os.path.join(temp_dir, 'archive.omex')
+        synthetic_archive, synthetic_sed_docs = self.build_synthetic_archive(curated_archive, curated_sed_docs)
+        sedml_writer = SedmlSimulationWriter()
+        for location, sed_doc in synthetic_sed_docs.items():
+            sedml_writer.run(sed_doc, os.path.join(shared_archive_dir, location))
+        CombineArchiveWriter().run(synthetic_archive, shared_archive_dir, synthetic_archive_filename)
+
+        # use synthetic archive to test simulator
+        outputs_dir = os.path.join(temp_dir, 'outputs')
+        try:
+            biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
+                synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=True)
+
+            self.eval_outputs(specifications, synthetic_archive, outputs_dir)
+        finally:
+            shutil.rmtree(temp_dir)
+
+    @abc.abstractmethod
+    def is_curated_archive_suitable_for_building_synthetic_archive(self, archive, sed_docs):
+        """ Determine if a curated archive is suitable for generating a synthetic archive for testing
+
+        Args:
+            archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
+                SED documents in curated archive
+
+        Returns:
+            :obj:`bool`: :obj:`True`, if the curated archive is suitable for generating a synthetic
+                archive for testing
+        """
+        pass  # pragma: no cover
+
+    @abc.abstractmethod
+    def build_synthetic_archive(self, curated_archive, curated_sed_docs):
+        """ Generate a synthetic archive for testing
+
+        Args:
+            curated_archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            curated_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
+                SED documents in curated archive
+
+        Returns:
+            :obj:`tuple`:
+
+                * :obj:`CombineArchive`: synthetic COMBINE/OMEX archive for testing the simulator
+                * :obj:`dict` of :obj:`str` to :obj:`SedDocument`: map from locations to
+                  SED documents in synthetic archive
+        """
+        pass  # pragma: no cover
+
+    def eval_outputs(self, specifications, synthetic_archive, outputs_dir):
+        """ Test that the expected outputs were created for the synthetic archive
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            synthetic_archive (:obj:`CombineArchive`): synthetic COMBINE/OMEX archive for testing the simulator
+            outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
+        """
+        pass  # pragma: no cover
 
 
 def find_cases(dir_name=None, ids=None):

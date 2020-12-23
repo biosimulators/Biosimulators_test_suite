@@ -10,9 +10,11 @@ from .data_model import (AbstractTestCase, TestCaseResult,  # noqa: F401
                          TestCaseResultType, SkippedTestCaseException, IgnoredTestCaseWarning)
 from .test_case import combine_archive
 from .test_case import docker_image
+from .test_case import sedml
 import biosimulators_utils.simulator.io
 import capturer
 import datetime
+import inspect
 import sys
 import warnings
 
@@ -51,11 +53,15 @@ class SimulatorValidator(object):
         """
         cases = []
 
-        # get SED-ML cases
-        cases.extend(cls.find_cases_in_module(docker_image, ids=ids))
-
         # get curated COMBINE/OMEX archive cases
-        cases.extend(combine_archive.find_cases(ids=ids))
+        curated_combine_archive_test_cases = combine_archive.find_cases(ids=ids)
+        cases.extend(curated_combine_archive_test_cases)
+
+        # get Docker image cases
+        cases.extend(cls.find_cases_in_module(docker_image, curated_combine_archive_test_cases, ids=ids))
+
+        # get SED-ML cases
+        cases.extend(cls.find_cases_in_module(sedml, curated_combine_archive_test_cases, ids=ids))
 
         # warn if desired cases weren't found
         if ids is not None:
@@ -67,13 +73,15 @@ class SimulatorValidator(object):
         return cases
 
     @classmethod
-    def find_cases_in_module(cls, module, ids=None):
+    def find_cases_in_module(cls, module, curated_combine_archive_test_cases, ids=None):
         """ Discover test cases in a module
 
         Args:
             module (:obj:`types.ModuleType`): module
             ids (:obj:`list` of :obj:`str`, optional): List of ids of test cases to verify. If :obj:`ids`
                 is none, all test cases are verified.
+            curated_combine_archive_test_cases (:obj:`list` of :obj:`combine_archive.CuratedCombineArchiveTestCase`): test cases involving
+                executing curated COMBINE/OMEX archives
 
         Returns:
             :obj:`list` of :obj:`AbstractTestCase`: test cases
@@ -83,13 +91,17 @@ class SimulatorValidator(object):
         module_name = module.__name__.rpartition('.')[2]
         for child_name in dir(module):
             child = getattr(module, child_name)
-            if isinstance(child, type) and issubclass(child, AbstractTestCase) and child != AbstractTestCase:
+            if isinstance(child, type) and issubclass(child, AbstractTestCase) and not inspect.isabstract(child):
                 id = module_name + '/' + child_name
                 if ids is None or id in ids:
                     description = child.__doc__ or None
                     if description:
                         description = description.strip() or None
-                    cases.append(child(id=id, description=description))
+                    if issubclass(child, combine_archive.SyntheticCombineArchiveTestCase):
+                        case = child(id=id, description=description, curated_combine_archive_test_cases=curated_combine_archive_test_cases)
+                    else:
+                        case = child(id=id, description=description)
+                    cases.append(case)
                 else:
                     ignored_ids.append(id)
 
