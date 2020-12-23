@@ -19,11 +19,11 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             'GH_REPO': 'biosimulators/Biosimulators',
             'GH_ISSUE_NUMBER': '11',
             'GH_ACTION_RUN_ID': '17',
-            'GH_ISSUES_USER': 'biosimulatorsdaemon',
+            'GH_ISSUES_USER': 'biosimulators-daemon',
             'GH_ISSUES_ACCESS_TOKEN':  '**********',
-            'DOCKER_HUB_USERNAME': 'biosimulatorsdaemon',
+            'DOCKER_HUB_USERNAME': 'biosimulators-daemon',
             'DOCKER_HUB_TOKEN': '**********',
-            'DOCKER_REGISTRY_USERNAME': 'biosimulatorsdaemon',
+            'DOCKER_REGISTRY_USERNAME': 'biosimulators-daemon',
             'DOCKER_REGISTRY_TOKEN': '**********',
             'BIOSIMULATORS_API_CLIENT_ID': '**********',
             'BIOSIMULATORS_API_CLIENT_SECRET': '**********',
@@ -629,14 +629,16 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                 elif url == 'https://api.github.com/repos/biosimulators/Biosimulators/issues/11':
                     response = {
                         'user': {
-                            'login': 'biosimulatorsdaemon',
+                            'login': 'biosimulators-daemon',
                         },
                         'body': '\n'.join([
                             '---',
                             'id: vcell',
-                            'version: 2.1.6',
+                            'version: ' + self.submitted_version,
                             ('specificationsUrl: https://raw.githubusercontent.com/biosimulators/'
                                 'Biosimulators_tellurium/d08f33/biosimulators.json'),
+                            'specificationsPatch:',
+                            '  version: ' + self.submitted_version,
                             'validateImage: {}'.format('true' if self.validate_image else 'false'),
                             'commitSimulator: {}'.format('true' if self.commit_simulator else 'false'),
                             '',
