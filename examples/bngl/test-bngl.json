@@ -17,5 +17,6 @@
     }
   }],
   "expectedPlots": [],
+  "runtimeFailureAlertType": "exception",
   "identifiers": []
 }

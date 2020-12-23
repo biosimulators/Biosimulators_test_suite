@@ -7,8 +7,8 @@
 """
 
 from ..data_model import (AbstractTestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedPlot,
-                          InvalidOuputsException, InvalidOuputsWarning, SkippedTestCaseException,
-                          IgnoreTestCaseWarning)
+                          AlertType, InvalidOuputsException, InvalidOuputsWarning, SkippedTestCaseException,
+                          IgnoredTestCaseWarning)
 from biosimulators_utils.config import get_config
 from biosimulators_utils.report.data_model import ReportFormat
 import biosimulators_utils.archive.io
@@ -39,9 +39,17 @@ class CuratedCombineArchiveTestCase(AbstractTestCase):
             for each task in the COMBINE/OMEX archive
         expected_reports (:obj:`list` of :obj:`ExpectedSedReport`): list of reports expected to be produced by algorithm
         expected_plots (:obj:`list` of :obj:`ExpectedSedPlot`): list of plots expected to be produced by algorithm
+        runtime_failure_alert_type (:obj:`AlertType`): whether a run-time failure should be raised as an error or warning
+        assert_no_extra_reports (:obj:`bool`): if :obj:`True`, raise an exception if the simulator produces unexpected reports
+        assert_no_extra_datasets (:obj:`bool`): if :obj:`True`, raise an exception if the simulator produces unexpected datasets
+        assert_no_missing_plots (:obj:`bool`): if :obj:`True`, raise an exception if the simulator doesn't produce the expected plots
+        assert_no_extra_plots (:obj:`bool`): if :obj:`True`, raise an exception if the simulator produces unexpected plots
+        r_tol (:obj:`float`): relative tolerence
+        a_tol (:obj:`float`): absolute tolerence
     """
 
     def __init__(self, id=None, name=None, filename=None, task_requirements=None, expected_reports=None, expected_plots=None,
+                 runtime_failure_alert_type=AlertType.exception,
                  assert_no_extra_reports=False, assert_no_extra_datasets=False, assert_no_missing_plots=False, assert_no_extra_plots=False,
                  r_tol=1e-4, a_tol=0.):
         """
@@ -53,6 +61,7 @@ class CuratedCombineArchiveTestCase(AbstractTestCase):
                 for each task in the COMBINE/OMEX archive
             expected_reports (:obj:`list` of :obj:`ExpectedSedReport`, optional): list of reports expected to be produced by algorithm
             expected_plots (:obj:`list` of :obj:`ExpectedSedPlot`, optional): list of plots expected to be produced by algorithm
+            runtime_failure_alert_type (:obj:`AlertType`, optional): whether a run-time failure should be raised as an error or warning
             assert_no_extra_reports (:obj:`bool`, optional): if :obj:`True`, raise an exception if the simulator produces unexpected reports
             assert_no_extra_datasets (:obj:`bool`, optional): if :obj:`True`, raise an exception if the simulator produces unexpected datasets
             assert_no_missing_plots (:obj:`bool`, optional): if :obj:`True`, raise an exception if the simulator doesn't produce the expected plots
@@ -68,6 +77,7 @@ class CuratedCombineArchiveTestCase(AbstractTestCase):
 
         self.description = self.get_description()
 
+        self.runtime_failure_alert_type = runtime_failure_alert_type
         self.assert_no_extra_reports = assert_no_extra_reports
         self.assert_no_extra_datasets = assert_no_extra_datasets
         self.assert_no_missing_plots = assert_no_missing_plots
@@ -147,10 +157,11 @@ class CuratedCombineArchiveTestCase(AbstractTestCase):
                 id=exp_plot_def['id'],
             ))
 
-        self.assert_no_extra_reports = data.get('assert_no_extra_reports', False)
-        self.assert_no_extra_datasets = data.get('assert_no_extra_datasets', False)
-        self.assert_no_missing_plots = data.get('assert_no_missing_plots', False)
-        self.assert_no_extra_plots = data.get('assert_no_extra_plots', False)
+        self.runtime_failure_alert_type = AlertType(data.get('runtimeFailureAlertType', 'exception'))
+        self.assert_no_extra_reports = data.get('assertNoExtraReports', False)
+        self.assert_no_extra_datasets = data.get('assertNoExtraDatasets', False)
+        self.assert_no_missing_plots = data.get('assertNoMissingPlots', False)
+        self.assert_no_extra_plots = data.get('assertNoExtraPlots', False)
         self.r_tol = data.get('r_tol', 1e-4)
         self.a_tol = data.get('a_tol', 0.)
 
@@ -181,119 +192,128 @@ class CuratedCombineArchiveTestCase(AbstractTestCase):
         # create output directory for case
         out_dir = tempfile.mkdtemp()
 
+        # pull image and execute COMBINE/OMEX archive for case
         try:
-            # pull image and execute COMBINE/OMEX archive for case
             biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
                 self.filename, out_dir, specifications['image']['url'], pull_docker_image=True)
 
-            # check expected outputs created
-            errors = []
-
-            # check expected outputs created: reports
-            if not os.path.isfile(os.path.join(out_dir, get_config().H5_REPORTS_PATH)):
-                errors.append('No reports were generated')
-
+        except Exception as exception:
+            shutil.rmtree(out_dir)
+            if self.runtime_failure_alert_type == AlertType.exception:
+                raise
             else:
-                report_reader = biosimulators_utils.report.io.ReportReader()
-                for expected_report in self.expected_reports:
-                    try:
-                        report = report_reader.run(out_dir, expected_report.id, format=ReportFormat.h5)
-                    except Exception:
-                        errors.append('Report {} could not be read'.format(expected_report.id))
+                warnings.warn(str(exception), RuntimeWarning)
+                return
+
+        # check expected outputs created
+        errors = []
+
+        # check expected outputs created: reports
+        if not os.path.isfile(os.path.join(out_dir, get_config().H5_REPORTS_PATH)):
+            errors.append('No reports were generated')
+
+        else:
+            report_reader = biosimulators_utils.report.io.ReportReader()
+            for expected_report in self.expected_reports:
+                try:
+                    report = report_reader.run(out_dir, expected_report.id, format=ReportFormat.h5)
+                except Exception:
+                    errors.append('Report {} could not be read'.format(expected_report.id))
+                    continue
+
+                missing_data_sets = set(expected_report.data_sets).difference(set(report.index))
+                if missing_data_sets:
+                    errors.append('Report {} does not contain expected data sets:\n  {}'.format(
+                        expected_report.id, '\n  '.join(sorted(missing_data_sets))))
+                    continue
+
+                extra_data_sets = set(report.index).difference(set(expected_report.data_sets))
+                if extra_data_sets:
+                    if self.assert_no_extra_datasets:
+                        errors.append('Report {} contains unexpected data sets:\n  {}'.format(
+                            expected_report.id, '\n  '.join(sorted(extra_data_sets))))
                         continue
+                    else:
+                        warnings.warn('Report {} contains unexpected data sets:\n  {}'.format(
+                            expected_report.id, '\n  '.join(sorted(extra_data_sets))), InvalidOuputsWarning)
 
-                    missing_data_sets = set(expected_report.data_sets).difference(set(report.index))
-                    if missing_data_sets:
-                        errors.append('Report {} does not contain expected data sets:\n  {}'.format(
-                            expected_report.id, '\n  '.join(sorted(missing_data_sets))))
-                        continue
+                if report.shape[1:] != expected_report.points:
+                    errors.append('Report {} contains incorrect number of points: {} != {}'.format(
+                                  expected_report.id, report.shape[1:], expected_report.points))
+                    continue
 
-                    extra_data_sets = set(report.index).difference(set(expected_report.data_sets))
-                    if extra_data_sets:
-                        if self.assert_no_extra_datasets:
-                            errors.append('Report {} contains unexpected data sets:\n  {}'.format(
-                                expected_report.id, '\n  '.join(sorted(extra_data_sets))))
-                            continue
-                        else:
-                            warnings.warn('Report {} contains unexpected data sets:\n  {}'.format(
-                                expected_report.id, '\n  '.join(sorted(extra_data_sets))), InvalidOuputsWarning)
-
-                    if report.shape[1:] != expected_report.points:
-                        errors.append('Report {} contains incorrect number of points: {} != {}'.format(
-                                      expected_report.id, report.shape[1:], expected_report.points))
-                        continue
-
-                    for data_set_id, expected_value in expected_report.values.items():
-                        if isinstance(expected_value, dict):
-                            value = report.loc[data_set_id, :]
-                            for el_id, expected_el_value in expected_value.items():
-                                el_index = numpy.ravel_multi_index([el_id], value.shape)[0]
-                                try:
-                                    numpy.testing.assert_allclose(
-                                        value[el_index],
-                                        expected_el_value,
-                                        rtol=self.r_tol,
-                                        atol=self.a_tol,
-                                    )
-                                except AssertionError:
-                                    errors.append('Data set {} of report {} does not have expected value at {}: {} != {}'.format(
-                                        data_set_id, expected_report.id, el_id, value[el_index], expected_el_value))
-                        else:
+                for data_set_id, expected_value in expected_report.values.items():
+                    if isinstance(expected_value, dict):
+                        value = report.loc[data_set_id, :]
+                        for el_id, expected_el_value in expected_value.items():
+                            el_index = numpy.ravel_multi_index([el_id], value.shape)[0]
                             try:
                                 numpy.testing.assert_allclose(
-                                    report.loc[data_set_id, :],
-                                    expected_value,
+                                    value[el_index],
+                                    expected_el_value,
                                     rtol=self.r_tol,
                                     atol=self.a_tol,
                                 )
                             except AssertionError:
-                                errors.append('Data set {} of report {} does not have expected values'.format(
-                                    data_set_id, expected_report.id))
-
-                report_ids = report_reader.get_ids(out_dir)
-                expected_report_ids = set(report.id for report in self.expected_reports)
-                extra_report_ids = report_ids.difference(expected_report_ids)
-                if extra_report_ids:
-                    if self.assert_no_extra_reports:
-                        errors.append('Unexpected reports were produced:\n  {}'.format(
-                            '\n  '.join(sorted(extra_report_ids))))
+                                errors.append('Data set {} of report {} does not have expected value at {}: {} != {}'.format(
+                                    data_set_id, expected_report.id, el_id, value[el_index], expected_el_value))
                     else:
-                        warnings.warn('Unexpected reports were produced:\n  {}'.format(
-                            '\n  '.join(sorted(extra_report_ids))), InvalidOuputsWarning)
+                        try:
+                            numpy.testing.assert_allclose(
+                                report.loc[data_set_id, :],
+                                expected_value,
+                                rtol=self.r_tol,
+                                atol=self.a_tol,
+                            )
+                        except AssertionError:
+                            errors.append('Data set {} of report {} does not have expected values'.format(
+                                data_set_id, expected_report.id))
 
-            # check expected outputs created: plots
-            if os.path.isfile(os.path.join(out_dir, get_config().PLOTS_PATH)):
-                archive = biosimulators_utils.archive.io.ArchiveReader().run(os.path.join(out_dir, 'plots.zip'))
-                plot_ids = set(file.archive_path for file in archive.files)
+            report_ids = report_reader.get_ids(out_dir)
+            expected_report_ids = set(report.id for report in self.expected_reports)
+            extra_report_ids = report_ids.difference(expected_report_ids)
+            if extra_report_ids:
+                if self.assert_no_extra_reports:
+                    errors.append('Unexpected reports were produced:\n  {}'.format(
+                        '\n  '.join(sorted(extra_report_ids))))
+                else:
+                    warnings.warn('Unexpected reports were produced:\n  {}'.format(
+                        '\n  '.join(sorted(extra_report_ids))), InvalidOuputsWarning)
+
+        # check expected outputs created: plots
+        if os.path.isfile(os.path.join(out_dir, get_config().PLOTS_PATH)):
+            archive = biosimulators_utils.archive.io.ArchiveReader().run(os.path.join(out_dir, 'plots.zip'))
+            plot_ids = set(file.archive_path for file in archive.files)
+        else:
+            plot_ids = set()
+
+        expected_plot_ids = set(plot.id for plot in self.expected_plots)
+
+        missing_plot_ids = expected_plot_ids.difference(plot_ids)
+        extra_plot_ids = plot_ids.difference(expected_plot_ids)
+
+        if missing_plot_ids:
+            if self.assert_no_missing_plots:
+                errors.append('Plots were not produced:\n  {}'.format(
+                    '\n  '.join(sorted(missing_plot_ids))))
             else:
-                plot_ids = set()
+                warnings.warn('Plots were not produced:\n  {}'.format(
+                    '\n  '.join(sorted(missing_plot_ids))), InvalidOuputsWarning)
 
-            expected_plot_ids = set(plot.id for plot in self.expected_plots)
+        if extra_plot_ids:
+            if self.assert_no_extra_plots:
+                errors.append('Extra plots were not produced:\n  {}'.format(
+                    '\n  '.join(sorted(extra_plot_ids))))
+            else:
+                warnings.warn('Extra plots were not produced:\n  {}'.format(
+                    '\n  '.join(sorted(extra_plot_ids))), InvalidOuputsWarning)
 
-            missing_plot_ids = expected_plot_ids.difference(plot_ids)
-            extra_plot_ids = plot_ids.difference(expected_plot_ids)
+        # cleanup outputs
+        shutil.rmtree(out_dir)
 
-            if missing_plot_ids:
-                if self.assert_no_missing_plots:
-                    errors.append('Plots were not produced:\n  {}'.format(
-                        '\n  '.join(sorted(missing_plot_ids))))
-                else:
-                    warnings.warn('Plots were not produced:\n  {}'.format(
-                        '\n  '.join(sorted(missing_plot_ids))), InvalidOuputsWarning)
-
-            if extra_plot_ids:
-                if self.assert_no_extra_plots:
-                    errors.append('Extra plots were not produced:\n  {}'.format(
-                        '\n  '.join(sorted(extra_plot_ids))))
-                else:
-                    warnings.warn('Extra plots were not produced:\n  {}'.format(
-                        '\n  '.join(sorted(extra_plot_ids))), InvalidOuputsWarning)
-
-            if errors:
-                raise InvalidOuputsException('\n\n'.join(errors))
-
-        finally:
-            shutil.rmtree(out_dir)
+        # raise errors
+        if errors:
+            raise InvalidOuputsException('\n\n'.join(errors))
 
 
 def find_cases(dir_name=None, ids=None):
@@ -310,7 +330,7 @@ def find_cases(dir_name=None, ids=None):
     if dir_name is None:
         dir_name = EXAMPLES_DIR
     if not os.path.isdir(dir_name):
-        warnings.warn('Directory of example COMBINE/OMEX archives is not available', IgnoreTestCaseWarning)
+        warnings.warn('Directory of example COMBINE/OMEX archives is not available', IgnoredTestCaseWarning)
 
     cases = []
     ignored_ids = set()
@@ -324,7 +344,7 @@ def find_cases(dir_name=None, ids=None):
             ignored_ids.add(id)
 
     if ignored_ids:
-        warnings.warn('Some test case(s) were ignored:\n  {}'.format('\n  '.join(sorted(ignored_ids))), IgnoreTestCaseWarning)
+        warnings.warn('Some test case(s) were ignored:\n  {}'.format('\n  '.join(sorted(ignored_ids))), IgnoredTestCaseWarning)
 
     # return cases
     return cases

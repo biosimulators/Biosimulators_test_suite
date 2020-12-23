@@ -26,7 +26,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
             "Ciliberto et al. Journal Cell Biology 2003: Morphogenesis checkpoint in budding yeast",
         ]))
 
-        with self.assertWarnsRegex(data_model.IgnoreTestCaseWarning, 'archives is not available'):
+        with self.assertWarnsRegex(data_model.IgnoredTestCaseWarning, 'archives is not available'):
             find_cases(dir_name='does-not-exist')
 
     def test_CuratedCombineArchiveTestCase_description(self):
@@ -177,6 +177,13 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, True, False, False, False, False, False, False, False, False, False)):
                 case.eval(specs)
+
+        case.runtime_failure_alert_type = data_model.AlertType.warning
+        with self.assertWarnsRegex(RuntimeWarning, 'Could not execute task'):
+            with mock.patch(exec_archive_method, functools.partial(
+                    exec_archive, True, False, False, False, False, False, False, False, False, False)):
+                case.eval(specs)
+        case.runtime_failure_alert_type = data_model.AlertType.exception
 
         with self.assertRaisesRegex(data_model.InvalidOuputsException, 'No reports were generated'):
             with mock.patch(exec_archive_method, functools.partial(

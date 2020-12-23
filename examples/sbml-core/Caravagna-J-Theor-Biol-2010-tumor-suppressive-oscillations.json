@@ -22,6 +22,7 @@
   "expectedPlots": [{
     "id": "BIOMD0000000912_sim.sedml/plot_1"
   }],
+  "runtimeFailureAlertType": "exception",
   "identifiers": [{
     "namespace": "biomodels.db",
     "id": "BIOMD0000000297"

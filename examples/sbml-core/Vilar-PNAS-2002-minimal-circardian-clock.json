@@ -30,6 +30,7 @@
       "id": "simulation.sedml.sedml/plot2d_low_delta_R_stoch"
     }
   ],
+  "runtimeFailureAlertType": "exception",
   "identifiers": [{
     "namespace": "biomodels.db",
     "id": "BIOMD0000000035"

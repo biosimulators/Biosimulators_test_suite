@@ -1,6 +1,6 @@
 from biosimulators_test_suite.exec_core import SimulatorValidator
 from biosimulators_test_suite.data_model import (TestCaseResult, TestCaseResultType,
-                                                 IgnoreTestCaseWarning, SedTaskRequirements)
+                                                 IgnoredTestCaseWarning, SedTaskRequirements)
 from biosimulators_test_suite.test_case.combine_archive import CuratedCombineArchiveTestCase
 from unittest import mock
 import unittest
@@ -8,7 +8,7 @@ import unittest
 
 class ValidateSimulatorTestCase(unittest.TestCase):
     def test_find_cases(self):
-        with self.assertWarnsRegex(IgnoreTestCaseWarning, r'Some test case\(s\) were not found'):
+        with self.assertWarnsRegex(IgnoredTestCaseWarning, r'Some test case\(s\) were not found'):
             SimulatorValidator().find_cases(ids=[
                 'non-existent-case',
             ])

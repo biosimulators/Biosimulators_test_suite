@@ -17,6 +17,7 @@
     }
   }],
   "expectedPlots": [],
+  "runtimeFailureAlertType": "exception",
   "identifiers": [{
     "namespace": "biomodels.db",
     "id": "BIOMD0000000823"

@@ -11,8 +11,10 @@ import enum
 
 __all__ = ['AbstractTestCase', 'SedTaskRequirements', 'ExpectedSedReport', 'ExpectedSedPlot',
            'TestCaseResultType', 'TestCaseResult',
+           'AlertType',
            'InvalidOuputsException', 'InvalidOuputsWarning',
-           'SkippedTestCaseException', 'IgnoreTestCaseWarning']
+           'SkippedTestCaseException', 'IgnoredTestCaseWarning',
+           ]
 
 
 class AbstractTestCase(abc.ABC):
@@ -140,6 +142,12 @@ class TestCaseResult(object):
         self.log = log
 
 
+class AlertType(str, enum.Enum):
+    """ Type of alert upon the failure of a test case """
+    exception = 'exception'
+    warning = 'warning'
+
+
 class InvalidOuputsException(Exception):
     """ Exception raised when outputs of execution of COMBINE/OMEX archive are not as expected """
     pass  # pragma: no cover
@@ -155,6 +163,6 @@ class SkippedTestCaseException(Exception):
     pass  # pragma: no cover
 
 
-class IgnoreTestCaseWarning(UserWarning):
+class IgnoredTestCaseWarning(UserWarning):
     """ Warning raised that indicates that a test case was ignored """
     pass  # pragma: no cover

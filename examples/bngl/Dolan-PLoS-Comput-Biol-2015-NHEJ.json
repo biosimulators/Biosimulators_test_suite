@@ -17,6 +17,7 @@
     }
   }],
   "expectedPlots": [],
+  "runtimeFailureAlertType": "exception",
   "identifiers": [{
       "namespace": "doi",
       "id": "10.1371/journal.pcbi.1004246"

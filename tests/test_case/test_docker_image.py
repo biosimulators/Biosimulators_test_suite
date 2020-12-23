@@ -9,7 +9,7 @@ class DockerImageTestCaseTest(unittest.TestCase):
         with self.assertWarnsRegex(UserWarning, 'should have the following'):
             case.eval({'image': {'url': 'hello-world'}})
 
-    def test_OciLabelsTestCase(self):
+    def test_BioContainersLabelsTestCase(self):
         case = docker_image.BioContainersLabelsTestCase()
         case.eval({'image': {'url': 'ghcr.io/biosimulators/biosimulators_copasi/copasi:latest'}})
         with self.assertWarnsRegex(UserWarning, 'should have the following'):

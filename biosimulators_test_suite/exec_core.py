@@ -7,7 +7,7 @@
 """
 
 from .data_model import (AbstractTestCase, TestCaseResult,  # noqa: F401
-                         TestCaseResultType, SkippedTestCaseException, IgnoreTestCaseWarning)
+                         TestCaseResultType, SkippedTestCaseException, IgnoredTestCaseWarning)
 from .test_case import combine_archive
 from .test_case import docker_image
 import biosimulators_utils.simulator.io
@@ -61,7 +61,7 @@ class SimulatorValidator(object):
         if ids is not None:
             missing_ids = set(ids).difference(set(case.id for case in cases))
             if missing_ids:
-                warnings.warn('Some test case(s) were not found:\n  {}'.format('\n  '.join(sorted(missing_ids))), IgnoreTestCaseWarning)
+                warnings.warn('Some test case(s) were not found:\n  {}'.format('\n  '.join(sorted(missing_ids))), IgnoredTestCaseWarning)
 
         # return discovered cases
         return cases
@@ -92,7 +92,7 @@ class SimulatorValidator(object):
                     ignored_ids.append(id)
 
         if ignored_ids:
-            warnings.warn('Some test case(s) were ignored:\n  {}'.format('\n  '.join(sorted(ignored_ids))), IgnoreTestCaseWarning)
+            warnings.warn('Some test case(s) were ignored:\n  {}'.format('\n  '.join(sorted(ignored_ids))), IgnoredTestCaseWarning)
 
         return cases
 
