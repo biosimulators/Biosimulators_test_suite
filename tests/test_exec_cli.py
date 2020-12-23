@@ -1,7 +1,7 @@
-from biosimulators_test_suite import __main__
+from biosimulators_test_suite import exec_cli
 from unittest import mock
 import biosimulators_test_suite.data_model
-import biosimulators_test_suite.validate_simulator
+import biosimulators_test_suite.exec_core
 import unittest
 
 
@@ -9,7 +9,7 @@ class MainTestCase(unittest.TestCase):
     def test_raw(self):
         with mock.patch('sys.argv', ['', '--help']):
             with self.assertRaises(SystemExit) as context:
-                __main__.main()
+                exec_cli.main()
                 self.assertRegex(context.Exception, 'usage: ')
 
     def test_passes(self):
@@ -34,11 +34,11 @@ class MainTestCase(unittest.TestCase):
         def get_combine_archive_cases(ids=None, results=results):
             return [result.case for result in results]
 
-        with mock.patch.object(biosimulators_test_suite.validate_simulator.SimulatorValidator,
+        with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
                                'get_combine_archive_cases', side_effect=get_combine_archive_cases):
-            with mock.patch.object(biosimulators_test_suite.validate_simulator.SimulatorValidator,
+            with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
                                    'eval_case', side_effect=results):
-                with __main__.App(argv=[specs]) as app:
+                with exec_cli.App(argv=[specs]) as app:
                     app.run()
 
     def test_failed(self):
@@ -66,11 +66,11 @@ class MainTestCase(unittest.TestCase):
             return [result.case for result in results]
 
         with self.assertRaises(SystemExit) as exception_cm:
-            with mock.patch.object(biosimulators_test_suite.validate_simulator.SimulatorValidator,
+            with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
                                    'get_combine_archive_cases', side_effect=get_combine_archive_cases):
-                with mock.patch.object(biosimulators_test_suite.validate_simulator.SimulatorValidator,
+                with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
                                        'eval_case', side_effect=results):
-                    with __main__.App(argv=[specs]) as app:
+                    with exec_cli.App(argv=[specs]) as app:
                         app.run()
             self.assertEqual(exception_cm.exception.code, 1)
 
@@ -83,11 +83,11 @@ class MainTestCase(unittest.TestCase):
             return [result.case for result in results]
 
         with self.assertRaises(SystemExit) as exception_cm:
-            with mock.patch.object(biosimulators_test_suite.validate_simulator.SimulatorValidator,
+            with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
                                    'get_combine_archive_cases', side_effect=get_combine_archive_cases):
-                with mock.patch.object(biosimulators_test_suite.validate_simulator.SimulatorValidator,
+                with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
                                        'eval_case', side_effect=results):
-                    with __main__.App(argv=[specs]) as app:
+                    with exec_cli.App(argv=[specs]) as app:
                         app.run()
             self.assertEqual(exception_cm.exception.code, 3)
 
@@ -97,7 +97,7 @@ class MainTestCase(unittest.TestCase):
         results = []
 
         with self.assertRaises(SystemExit) as exception_cm:
-            with __main__.App(argv=[specs]) as app:
+            with exec_cli.App(argv=[specs]) as app:
                 app.run()
             self.assertEqual(exception_cm.exception.code, 2)
 
@@ -107,6 +107,6 @@ class MainTestCase(unittest.TestCase):
         results = []
 
         with self.assertRaises(SystemExit) as exception_cm:
-            with __main__.App(argv=[specs, '-c', 'adf']) as app:
+            with exec_cli.App(argv=[specs, '-c', 'adf']) as app:
                 app.run()
             self.assertEqual(exception_cm.exception.code, 2)

@@ -50,7 +50,7 @@ setuptools.setup(
     ],
     entry_points={
         'console_scripts': [
-            'biosimulators-test-suite = biosimulators_test_suite.__main__:main',
+            'biosimulators-test-suite = biosimulators_test_suite.exec_cli:main',
         ],
     },
 )

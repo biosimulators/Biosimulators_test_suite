@@ -8,7 +8,7 @@
 """
 
 from .data_model import TestCaseResultType
-from .validate_simulator import SimulatorValidator
+from .exec_core import SimulatorValidator
 from biosimulators_utils.gh_action.core import GitHubAction, GitHubActionErrorHandling, GitHubActionCaughtError  # noqa: F401
 from biosimulators_utils.simulator_registry.data_model import SimulatorSubmission, IssueLabel  # noqa: F401
 from biosimulators_utils.simulator_registry.process_submission import get_simulator_submission_from_gh_issue_body
@@ -85,7 +85,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         self.reset_issue_labels(self.issue_number, [IssueLabel.validated.value, IssueLabel.invalid.value, IssueLabel.action_error.value])
 
         # get specifications of simulator and validate simulator
-        specifications = self.validate_simulator(submission)
+        specifications = self.exec_core(submission)
 
         # label issue as validated
         self.add_labels_to_issue(self.issue_number, [IssueLabel.validated.value])
@@ -163,7 +163,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                 'A complete log of your simulator {} job is available [here]({}).\n\n'
                 ).format(submitter, actions, not_actions, job_type, self.get_gh_action_run_url())
 
-    def validate_simulator(self, submission):
+    def exec_core(self, submission):
         """ Validate simulator
 
         * Validate specifications

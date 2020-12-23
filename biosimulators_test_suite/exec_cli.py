@@ -7,7 +7,7 @@
 """
 
 from biosimulators_test_suite.data_model import TestCaseResultType
-import biosimulators_test_suite.validate_simulator
+import biosimulators_test_suite.exec_core
 import cement
 
 
@@ -48,7 +48,7 @@ class BaseController(cement.Controller):
     def _default(self):
         args = self.app.pargs
         try:
-            validator = biosimulators_test_suite.validate_simulator.SimulatorValidator(
+            validator = biosimulators_test_suite.exec_core.SimulatorValidator(
                 combine_archive_case_ids=args.combine_archive_case_ids,
                 verbose=args.verbose)
             results = validator.run(args.specifications)

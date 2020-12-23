@@ -1,6 +1,6 @@
 from biosimulators_test_suite.data_model import CombineArchiveTestCase, TestCaseResult, TestCaseResultType
-from biosimulators_test_suite import validate_commit_workflow
-from biosimulators_test_suite import validate_simulator
+from biosimulators_test_suite import exec_gh_action
+from biosimulators_test_suite import exec_core
 from biosimulators_utils.gh_action.core import GitHubActionCaughtError
 from biosimulators_utils.simulator_registry.data_model import SimulatorSubmission, IssueLabel
 from unittest import mock
@@ -43,17 +43,17 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
     def test_get_uncaught_exception_msg(self):
         msg = 'My custom message'
         exception = Exception(msg)
-        self.assertRegex(validate_commit_workflow.get_uncaught_exception_msg(exception),
+        self.assertRegex(exec_gh_action.get_uncaught_exception_msg(exception),
                          '\n\n  ' + msg + '\n\n', re.MULTILINE)
 
         msg = 'My custom message'
         exception = ValueError(msg)
-        self.assertRegex(validate_commit_workflow.get_uncaught_exception_msg(exception),
+        self.assertRegex(exec_gh_action.get_uncaught_exception_msg(exception),
                          '\n\n  ' + msg + '\n\n', re.MULTILINE)
 
     def test_get_initial_message(self):
         with mock.patch.dict(os.environ, self.env):
-            action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
+            action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
         msg = action.get_initial_message(self.submission, self.submitter)
         self.assertTrue(msg.startswith('Thank you @{} for your submission to the BioSimulators'.format(self.submitter)))
         self.assertIn('We will discuss any concerns with your submission in this issue.', msg)
@@ -61,14 +61,14 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.submission.validate_image = False
         self.submission.commit_simulator = False
         with mock.patch.dict(os.environ, self.env):
-            action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
+            action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
         msg = action.get_initial_message(self.submission, self.submitter)
         self.assertTrue(msg.startswith('Thank you @{} for your submission to the BioSimulators'.format(self.submitter)))
         self.assertIn('We will discuss any concerns with your submission in this issue.', msg)
 
     def test_validate_image(self):
         with mock.patch.dict(os.environ, self.env):
-            action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
+            action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
 
         specs = {'id': 'tellurium', 'image': {'url': 'ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.1.6'}}
         run_results = [
@@ -82,7 +82,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         with mock.patch.object(docker.client.DockerClient, 'login', return_value=None):
             with mock.patch.object(docker.models.images.ImageCollection, 'pull', return_value=None):
                 with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', return_value=None):
-                    with mock.patch.object(validate_simulator.SimulatorValidator, 'run', return_value=run_results):
+                    with mock.patch.object(exec_core.SimulatorValidator, 'run', return_value=run_results):
                         with mock.patch('requests.post', side_effect=requests_post):
                             action.validate_image(specs)
 
@@ -98,7 +98,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             with mock.patch.object(docker.client.DockerClient, 'login', return_value=None):
                 with mock.patch.object(docker.models.images.ImageCollection, 'pull', return_value=None):
                     with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', return_value=None):
-                        with mock.patch.object(validate_simulator.SimulatorValidator, 'run', return_value=run_results):
+                        with mock.patch.object(exec_core.SimulatorValidator, 'run', return_value=run_results):
                             with mock.patch('requests.post', side_effect=requests_post):
                                 action.validate_image(specs)
 
@@ -111,13 +111,13 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             with mock.patch.object(docker.client.DockerClient, 'login', return_value=None):
                 with mock.patch.object(docker.models.images.ImageCollection, 'pull', return_value=None):
                     with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', return_value=None):
-                        with mock.patch.object(validate_simulator.SimulatorValidator, 'run', return_value=run_results):
+                        with mock.patch.object(exec_core.SimulatorValidator, 'run', return_value=run_results):
                             with mock.patch('requests.post', side_effect=requests_post):
                                 action.validate_image(specs)
 
-    def test_validate_simulator(self):
+    def test_exec_core(self):
         with mock.patch.dict(os.environ, self.env):
-            action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
+            action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
 
         class RequestMock(object):
             def __init__(self, parent):
@@ -136,15 +136,15 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
 
         specs = {'id': 'tellurium'}
         with mock.patch('biosimulators_utils.simulator.io.read_simulator_specs', return_value=specs):
-            with mock.patch.object(validate_commit_workflow.ValidateCommitSimulatorGitHubAction, 'validate_image', return_value=None):
+            with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'validate_image', return_value=None):
                 with mock.patch('requests.post', side_effect=requests_mock.post):
-                    specs2 = action.validate_simulator(self.submission)
+                    specs2 = action.exec_core(self.submission)
         self.assertEqual(specs2, specs)
         self.assertEqual(requests_mock.n_post, 2)
 
     def test_is_simulator_approved(self):
         with mock.patch.dict(os.environ, self.env):
-            action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
+            action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
 
         requests_get_1_true = mock.Mock(raise_for_status=lambda: None, json=lambda: [{'name': IssueLabel.approved.value}])
         with mock.patch('requests.get', return_value=requests_get_1_true):
@@ -179,7 +179,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
 
     def test_is_submission_latest_version_of_simulator(self):
         with mock.patch.dict(os.environ, self.env):
-            action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
+            action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
 
         existing_version_specs = [
             {'version': '2.1.5', 'image': True, 'biosimulators': {'validated': True}},
@@ -195,7 +195,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
 
     def test_push_image(self):
         with mock.patch.dict(os.environ, self.env):
-            action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
+            action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
 
         specs = {
             'id': 'Tellurium',
@@ -258,7 +258,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
 
     def test_post_entry_to_biosimulators_api(self):
         with mock.patch.dict(os.environ, self.env):
-            action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
+            action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
 
         class RequestMock(object):
             def __init__(self, parent, action):
@@ -305,7 +305,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
 
     def test_commit_simulator(self):
         with mock.patch.dict(os.environ, self.env):
-            action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
+            action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
 
         class RequestMock(object):
             def __init__(self):
@@ -329,7 +329,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
 
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.5'}]
         with mock.patch('requests.post', side_effect=requests_mock.post):
-            with mock.patch.object(validate_commit_workflow.ValidateCommitSimulatorGitHubAction, 'push_image', return_value=None):
+            with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'push_image', return_value=None):
                 action.commit_simulator(SimulatorSubmission(validate_image=True), specs, existing_version_specs)
         self.assertEqual(requests_mock.n_post, 4)
 
@@ -484,7 +484,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(docker_mock.local_images, set([
             'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
         ]))
-        self.assertEqual(requests_mock.issue_assignees, set(validate_commit_workflow.ValidateCommitSimulatorGitHubAction.CURATOR_GH_IDS))
+        self.assertEqual(requests_mock.issue_assignees, set(exec_gh_action.ValidateCommitSimulatorGitHubAction.CURATOR_GH_IDS))
 
         # validate specs and image of valid new simulator, previous run failed and was not approved
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -504,7 +504,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(docker_mock.local_images, set([
             'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
         ]))
-        self.assertEqual(requests_mock.issue_assignees, set(validate_commit_workflow.ValidateCommitSimulatorGitHubAction.CURATOR_GH_IDS))
+        self.assertEqual(requests_mock.issue_assignees, set(exec_gh_action.ValidateCommitSimulatorGitHubAction.CURATOR_GH_IDS))
 
         # validate specs and image of valid new simulator, previous run passed and was approved
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -649,21 +649,21 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                     }
                 elif url == 'https://api.github.com/repos/biosimulators/Biosimulators/issues/11/labels':
                     response = [{'name': label} for label in self.issue_labels]
-                elif url == validate_commit_workflow.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators/tellurium':
+                elif url == exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators/tellurium':
                     response = self.simulator_versions
                 else:
                     raise ValueError('Invalid url: {}'.format(url))
                 return mock.Mock(raise_for_status=lambda: None, json=lambda: response)
 
             def post(self, url, json=None, auth=None, headers=None):
-                if url == validate_commit_workflow.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_AUTH_ENDPOINT:
+                if url == exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_AUTH_ENDPOINT:
                     error = None
                     response = {'token_type': 'Bearer', 'access_token': '******'}
-                elif url == validate_commit_workflow.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators':
+                elif url == exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators':
                     self.simulator_versions.append(json)
                     error = None
                     response = None
-                elif url == validate_commit_workflow.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators/validate':
+                elif url == exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators/validate':
                     if self.specs_valid:
                         error = None
                     else:
@@ -703,7 +703,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                 return mock.Mock(raise_for_status=lambda: None, json=lambda: response)
 
             def put(self, url, json=None, auth=None, headers=None):
-                if url.startswith(validate_commit_workflow.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators/tellurium/'):
+                if url.startswith(exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators/tellurium/'):
                     for i_version, version in enumerate(self.simulator_versions):
                         if version['version'] == json['version']:
                             self.simulator_versions[i_version] = json
@@ -795,7 +795,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                                             with mock.patch.object(docker.models.images.Image, 'tag', side_effect=docker_mock.tag):
                                                 with mock.patch.object(docker.models.images.ImageCollection, 'push', side_effect=docker_mock.push):
                                                     cases = [result.case for result in validation_run_results]
-                                                    with mock.patch.object(validate_simulator.SimulatorValidator, 'get_combine_archive_cases', return_value=cases):
-                                                        with mock.patch.object(validate_simulator.SimulatorValidator, 'eval_case', side_effect=validation_run_results):
-                                                            action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
+                                                    with mock.patch.object(exec_core.SimulatorValidator, 'get_combine_archive_cases', return_value=cases):
+                                                        with mock.patch.object(exec_core.SimulatorValidator, 'eval_case', side_effect=validation_run_results):
+                                                            action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
                                                             action.run()

@@ -1,4 +1,4 @@
-from biosimulators_test_suite.validate_simulator import SimulatorValidator
+from biosimulators_test_suite.exec_core import SimulatorValidator
 from biosimulators_test_suite.data_model import (TestCaseResult, TestCaseResultType,
                                                  CombineArchiveTestCase, IgnoreTestCaseWarning, SedTaskRequirements)
 from unittest import mock
