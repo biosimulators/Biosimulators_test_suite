@@ -84,10 +84,12 @@ class SimulatorValidator(object):
         for child_name in dir(module):
             child = getattr(module, child_name)
             if isinstance(child, type) and issubclass(child, AbstractTestCase) and child != AbstractTestCase:
-                print(child)
                 id = module_name + '/' + child_name
                 if ids is None or id in ids:
-                    cases.append(child(id=id))
+                    description = child.__doc__ or None
+                    if description:
+                        description = description.strip() or None
+                    cases.append(child(id=id, description=description))
                 else:
                     ignored_ids.append(id)
 
