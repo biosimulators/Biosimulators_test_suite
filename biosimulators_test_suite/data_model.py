@@ -405,20 +405,23 @@ class TestCaseResult(object):
         type (:obj:`obj:`TestCaseResultType`): type
         duration (:obj:`float`): execution duration in seconds
         exception (:obj:`Exception`): exception
+        log (:obj:`str`): log of execution
     """
 
-    def __init__(self, case=None, type=None, duration=None, exception=None):
+    def __init__(self, case=None, type=None, duration=None, exception=None, log=None):
         """
         Args:
             case (:obj:`TestCase`, optional): test case
             type (:obj:`obj:`TestCaseResultType`, optional): type
             duration (:obj:`float`, optional): execution duration in seconds
             exception (:obj:`Exception`, optional): exception
+            log (:obj:`str`, optional): log of execution
         """
         self.case = case
         self.type = type
         self.duration = duration
         self.exception = exception
+        self.log = log
 
 
 class InvalidOuputsException(Exception):

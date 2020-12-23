@@ -208,23 +208,18 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         # validate that image is consistent with the BioSimulators standards
         validator = SimulatorValidator()
         case_results = validator.run(specifications)
-
-        valid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.passed]
-        if valid_cases:
-            self.add_comment_to_issue(self.issue_number, 'Your simulator passed {} test cases.'.format(len(valid_cases)))
+        summary, failure_details = validator.summarize_results(case_results)
+        msg = '## Summary\n{}'.format(summary)
+        if failure_details:
+            msg += '\n## Failures\n{}'.format(failure_details)
+        self.add_comment_to_issue(self.issue_number, msg)
 
         invalid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.failed]
         if invalid_cases:
-            msgs = []
-            for invalid_case in invalid_cases:
-                msgs.append('  - {}\n    {}\n\n'.format(invalid_case.case.id, str(invalid_case.exception).replace('\n', '\n    ')))
-
-            error_msg = (
-                'Your simulator did not pass {} test cases.\n\n{}'
-                'After correcting your simulator, please edit the first block of this issue to re-initiate this validation.'
-            ).format(len(invalid_cases), ''.join(msgs))
+            error_msg = 'After correcting your simulator, please edit the first block of this issue to re-initiate this validation.'
             self.add_error_comment_to_issue(self.issue_number, error_msg)
 
+        valid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.passed]
         if not valid_cases:
             self.add_error_comment_to_issue(self.issue_number, (
                 'No test cases are applicable to your simulator. '

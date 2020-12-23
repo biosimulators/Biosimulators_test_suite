@@ -71,11 +71,11 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
 
         specs = {'id': 'tellurium', 'image': {'url': 'ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.1.6'}}
         run_results = [
-            TestCaseResult(type=TestCaseResultType.passed)
+            TestCaseResult(case=CombineArchiveTestCase(id='case-1'), type=TestCaseResultType.passed, log='', duration=1.)
         ]
 
         def requests_post(url, json=None, auth=None, headers=None):
-            self.assertEqual(json['body'], 'Your simulator passed 1 test cases.')
+            self.assertIn('Passed 1 test cases:', json['body'])
             return mock.Mock(raise_for_status=lambda: None)
 
         with mock.patch.object(docker.client.DockerClient, 'login', return_value=None):
@@ -86,13 +86,14 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                             action.validate_image(specs)
 
         run_results = [
-            TestCaseResult(case=CombineArchiveTestCase(id='x'), type=TestCaseResultType.failed, exception=Exception('y')),
+            TestCaseResult(case=CombineArchiveTestCase(id='x'), type=TestCaseResultType.failed,
+                           exception=Exception('y'), log='', duration=2.),
         ]
 
         def requests_post(url, json=None, auth=None, headers=None):
-            self.assertRegex(json['body'], 'Your simulator did not pass 1 test cases.')
+            self.assertTrue('Failed 1 test cases:' in json['body'] or 'After correcting your simulator' in json['body'])
             return mock.Mock(raise_for_status=lambda: None)
-        with self.assertRaisesRegex(GitHubActionCaughtError, '^Your simulator did not pass 1 test cases.'):
+        with self.assertRaisesRegex(GitHubActionCaughtError, '^After correcting your simulator,'):
             with mock.patch.object(docker.client.DockerClient, 'login', return_value=None):
                 with mock.patch.object(docker.models.images.ImageCollection, 'pull', return_value=None):
                     with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', return_value=None):
@@ -103,9 +104,9 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         run_results = []
 
         def requests_post(url, json=None, auth=None, headers=None):
-            self.assertRegex(json['body'], 'No test cases are applicable to your simulator.')
+            self.assertTrue('Executed 0 test cases' in json['body'] or 'No test cases are applicable to your simulator' in json['body'])
             return mock.Mock(raise_for_status=lambda: None)
-        with self.assertRaisesRegex(GitHubActionCaughtError, '^No test cases are applicable to your simulator.'):
+        with self.assertRaisesRegex(GitHubActionCaughtError, 'No test cases are applicable to your simulator.'):
             with mock.patch.object(docker.client.DockerClient, 'login', return_value=None):
                 with mock.patch.object(docker.models.images.ImageCollection, 'pull', return_value=None):
                     with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', return_value=None):
@@ -395,13 +396,13 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             validate_image=True, commit_simulator=False,
             previous_run_valid=None, manually_approved=False,
             specs_valid=True, singularity_error=False, validation_state='fails')
-        with self.assertRaisesRegex(GitHubActionCaughtError, 'Your simulator did not pass 1 test cases'):
+        with self.assertRaisesRegex(GitHubActionCaughtError, 'After correcting your simulator'):
             self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'open')
         self.assertEqual(requests_mock.simulator_versions, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Invalid']))
-        self.assertEqual(len(requests_mock.issue_messages), 3)
-        self.assertRegex(requests_mock.issue_messages[-1], 'Your simulator did not pass 1 test cases')
+        self.assertEqual(len(requests_mock.issue_messages), 4)
+        self.assertRegex(requests_mock.issue_messages[-2], 'Passed 0 test cases')
         self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
         self.assertEqual(docker_mock.local_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
         self.assertEqual(requests_mock.issue_assignees, set())
@@ -417,7 +418,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(requests_mock.issue_state, 'open')
         self.assertEqual(requests_mock.simulator_versions, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Invalid']))
-        self.assertEqual(len(requests_mock.issue_messages), 3)
+        self.assertEqual(len(requests_mock.issue_messages), 4)
         self.assertRegex(requests_mock.issue_messages[-1], 'No test cases are applicable')
         self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
         self.assertEqual(docker_mock.local_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
@@ -434,7 +435,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(requests_mock.simulator_versions, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated']))
         self.assertEqual(len(requests_mock.issue_messages), 4)
-        self.assertEqual(requests_mock.issue_messages[-2], 'Your simulator passed 1 test cases.')
+        self.assertRegex(requests_mock.issue_messages[-2], 'Passed 1 test cases:')
         self.assertEqual(requests_mock.issue_messages[-1], 'The image for your simulator is valid!')
         self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
         self.assertEqual(docker_mock.local_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
@@ -762,6 +763,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                     case=CombineArchiveTestCase(id='case-failed'),
                     type=TestCaseResultType.failed,
                     exception=Exception('Big error'),
+                    log='Long log',
                     duration=2.,
                 ),
             ]
@@ -789,7 +791,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                                         with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', side_effect=docker_mock.convert_docker_image_to_singularity):
                                             with mock.patch.object(docker.models.images.Image, 'tag', side_effect=docker_mock.tag):
                                                 with mock.patch.object(docker.models.images.ImageCollection, 'push', side_effect=docker_mock.push):
-                                                    with mock.patch.object(validate_simulator.SimulatorValidator, 'get_combine_archive_cases', return_value=validation_run_results):
+                                                    cases = [result.case for result in validation_run_results]
+                                                    with mock.patch.object(validate_simulator.SimulatorValidator, 'get_combine_archive_cases', return_value=cases):
                                                         with mock.patch.object(validate_simulator.SimulatorValidator, 'eval_case', side_effect=validation_run_results):
                                                             action = validate_commit_workflow.ValidateCommitSimulatorGitHubAction()
                                                             action.run()

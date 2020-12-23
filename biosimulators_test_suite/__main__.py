@@ -34,6 +34,10 @@ class BaseController(cement.Controller):
                       "Default: evaluate all test cases"
                 ),
             )),
+            (['--verbose'], dict(
+                action='store_true',
+                help="If set, print the stdout and stderr of the execution of the tests in real time.",
+            )),
             (['-v', '--version'], dict(
                 action='version',
                 version=biosimulators_test_suite.__version__,
@@ -44,8 +48,16 @@ class BaseController(cement.Controller):
     def _default(self):
         args = self.app.pargs
         try:
-            validator = biosimulators_test_suite.validate_simulator.SimulatorValidator(combine_archive_case_ids=args.combine_archive_case_ids)
+            validator = biosimulators_test_suite.validate_simulator.SimulatorValidator(
+                combine_archive_case_ids=args.combine_archive_case_ids,
+                verbose=args.verbose)
             results = validator.run(args.specifications)
+            summary, failure_details = validator.summarize_results(results)
+            print('=============== SUMMARY ===============')
+            print(summary + '\n')
+            if failure_details:
+                print('=============== FAILURES ===============')
+                print(failure_details)
         except Exception as exception:
             raise SystemExit(str(exception))
 

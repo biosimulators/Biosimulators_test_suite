@@ -1,5 +1,6 @@
 from biosimulators_test_suite.validate_simulator import SimulatorValidator
-from biosimulators_test_suite.data_model import TestCaseResult, TestCaseResultType, CombineArchiveTestCase, IgnoreTestCaseWarning
+from biosimulators_test_suite.data_model import (TestCaseResult, TestCaseResultType,
+                                                 CombineArchiveTestCase, IgnoreTestCaseWarning, SedTaskRequirements)
 from unittest import mock
 import unittest
 
@@ -25,18 +26,25 @@ class ValidateSimulatorTestCase(unittest.TestCase):
             SimulatorValidator.get_combine_archive_cases(dir_name='does-not-exist')
 
     def test_summarize_results(self):
-        results = [
-            TestCaseResult(case=CombineArchiveTestCase(id='A'), type=TestCaseResultType.passed, duration=1.),
-            TestCaseResult(case=CombineArchiveTestCase(id='B'), type=TestCaseResultType.passed, duration=2.),
-            TestCaseResult(case=CombineArchiveTestCase(id='C'), type=TestCaseResultType.failed, duration=3., exception=Exception()),
-            TestCaseResult(case=CombineArchiveTestCase(id='D'), type=TestCaseResultType.skipped),
-            TestCaseResult(case=CombineArchiveTestCase(id='E'), type=TestCaseResultType.skipped),
-            TestCaseResult(case=CombineArchiveTestCase(id='F'), type=TestCaseResultType.skipped),
+        reqs = [
+            SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000019'),
         ]
-        summary = SimulatorValidator.summarize_results(results)
+        results = [
+            TestCaseResult(case=CombineArchiveTestCase(id='A', task_requirements=reqs), type=TestCaseResultType.passed, duration=1.),
+            TestCaseResult(case=CombineArchiveTestCase(id='B', task_requirements=reqs), type=TestCaseResultType.passed, duration=2.),
+            TestCaseResult(case=CombineArchiveTestCase(id='C', task_requirements=reqs), type=TestCaseResultType.failed, duration=3.,
+                           exception=Exception('Summary of error'), log="Detail of error"),
+            TestCaseResult(case=CombineArchiveTestCase(id='D', task_requirements=reqs), type=TestCaseResultType.skipped),
+            TestCaseResult(case=CombineArchiveTestCase(id='E', task_requirements=reqs), type=TestCaseResultType.skipped),
+            TestCaseResult(case=CombineArchiveTestCase(id='F', task_requirements=reqs), type=TestCaseResultType.skipped),
+        ]
+        summary, failure_details = SimulatorValidator.summarize_results(results)
         self.assertRegex(summary, 'Passed 2 test cases')
         self.assertRegex(summary, 'Failed 1 test cases')
         self.assertRegex(summary, 'Skipped 3 test cases')
+
+        print(summary)
+        print(failure_details)
 
     def test_run(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
