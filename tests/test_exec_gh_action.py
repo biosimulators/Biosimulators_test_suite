@@ -1,6 +1,7 @@
-from biosimulators_test_suite.data_model import CombineArchiveTestCase, TestCaseResult, TestCaseResultType
 from biosimulators_test_suite import exec_gh_action
 from biosimulators_test_suite import exec_core
+from biosimulators_test_suite.data_model import TestCaseResult, TestCaseResultType
+from biosimulators_test_suite.test_case.combine_archive import CuratedCombineArchiveTestCase
 from biosimulators_utils.gh_action.data_model import GitHubActionCaughtError
 from biosimulators_utils.simulator_registry.data_model import SimulatorSubmission, IssueLabel
 from unittest import mock
@@ -74,7 +75,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
 
         specs = {'id': 'tellurium', 'image': {'url': 'ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.1.6'}}
         run_results = [
-            TestCaseResult(case=CombineArchiveTestCase(id='case-1'), type=TestCaseResultType.passed, log='', duration=1.)
+            TestCaseResult(case=CuratedCombineArchiveTestCase(id='case-1'), type=TestCaseResultType.passed, log='', duration=1.)
         ]
 
         def requests_post(url, json=None, auth=None, headers=None):
@@ -89,7 +90,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                             action.validate_image(specs)
 
         run_results = [
-            TestCaseResult(case=CombineArchiveTestCase(id='x'), type=TestCaseResultType.failed,
+            TestCaseResult(case=CuratedCombineArchiveTestCase(id='x'), type=TestCaseResultType.failed,
                            exception=Exception('y'), log='', duration=2.),
         ]
 
@@ -757,7 +758,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         if validation_state == 'passes':
             validation_run_results = [
                 TestCaseResult(
-                    case=CombineArchiveTestCase(id='case-passed'),
+                    case=CuratedCombineArchiveTestCase(id='case-passed'),
                     type=TestCaseResultType.passed,
                     duration=1.,
                 ),
@@ -765,7 +766,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         elif validation_state == 'fails':
             validation_run_results = [
                 TestCaseResult(
-                    case=CombineArchiveTestCase(id='case-failed'),
+                    case=CuratedCombineArchiveTestCase(id='case-failed'),
                     type=TestCaseResultType.failed,
                     exception=Exception('Big error'),
                     log='Long log',

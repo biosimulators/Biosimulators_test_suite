@@ -2,6 +2,7 @@ from biosimulators_test_suite import exec_cli
 from unittest import mock
 import biosimulators_test_suite.data_model
 import biosimulators_test_suite.exec_core
+import biosimulators_test_suite.test_case.combine_archive
 import unittest
 
 
@@ -17,7 +18,7 @@ class MainTestCase(unittest.TestCase):
 
         results = [
             biosimulators_test_suite.data_model.TestCaseResult(
-                case=biosimulators_test_suite.data_model.CombineArchiveTestCase(
+                case=biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase(
                     id='case-id',
                     task_requirements=[
                         biosimulators_test_suite.data_model.SedTaskRequirements(
@@ -46,7 +47,7 @@ class MainTestCase(unittest.TestCase):
 
         results = [
             biosimulators_test_suite.data_model.TestCaseResult(
-                case=biosimulators_test_suite.data_model.CombineArchiveTestCase(
+                case=biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase(
                     id='case-id',
                     task_requirements=[
                         biosimulators_test_suite.data_model.SedTaskRequirements(

@@ -1,6 +1,7 @@
 from biosimulators_test_suite.exec_core import SimulatorValidator
 from biosimulators_test_suite.data_model import (TestCaseResult, TestCaseResultType,
-                                                 CombineArchiveTestCase, IgnoreTestCaseWarning, SedTaskRequirements)
+                                                 IgnoreTestCaseWarning, SedTaskRequirements)
+from biosimulators_test_suite.test_case.combine_archive import CuratedCombineArchiveTestCase
 from unittest import mock
 import unittest
 
@@ -30,13 +31,13 @@ class ValidateSimulatorTestCase(unittest.TestCase):
             SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000019'),
         ]
         results = [
-            TestCaseResult(case=CombineArchiveTestCase(id='A', task_requirements=reqs), type=TestCaseResultType.passed, duration=1.),
-            TestCaseResult(case=CombineArchiveTestCase(id='B', task_requirements=reqs), type=TestCaseResultType.passed, duration=2.),
-            TestCaseResult(case=CombineArchiveTestCase(id='C', task_requirements=reqs), type=TestCaseResultType.failed, duration=3.,
+            TestCaseResult(case=CuratedCombineArchiveTestCase(id='A', task_requirements=reqs), type=TestCaseResultType.passed, duration=1.),
+            TestCaseResult(case=CuratedCombineArchiveTestCase(id='B', task_requirements=reqs), type=TestCaseResultType.passed, duration=2.),
+            TestCaseResult(case=CuratedCombineArchiveTestCase(id='C', task_requirements=reqs), type=TestCaseResultType.failed, duration=3.,
                            exception=Exception('Summary of error'), log="Detail of error"),
-            TestCaseResult(case=CombineArchiveTestCase(id='D', task_requirements=reqs), type=TestCaseResultType.skipped),
-            TestCaseResult(case=CombineArchiveTestCase(id='E', task_requirements=reqs), type=TestCaseResultType.skipped),
-            TestCaseResult(case=CombineArchiveTestCase(id='F', task_requirements=reqs), type=TestCaseResultType.skipped),
+            TestCaseResult(case=CuratedCombineArchiveTestCase(id='D', task_requirements=reqs), type=TestCaseResultType.skipped),
+            TestCaseResult(case=CuratedCombineArchiveTestCase(id='E', task_requirements=reqs), type=TestCaseResultType.skipped),
+            TestCaseResult(case=CuratedCombineArchiveTestCase(id='F', task_requirements=reqs), type=TestCaseResultType.skipped),
         ]
         summary, failure_details = SimulatorValidator.summarize_results(results)
         self.assertRegex(summary, 'Passed 2 test cases')
@@ -74,7 +75,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
         def eval(*args, **kwargs):
             raise RuntimeError("Bad")
 
-        with mock.patch.object(CombineArchiveTestCase, 'eval', side_effect=eval):
+        with mock.patch.object(CuratedCombineArchiveTestCase, 'eval', side_effect=eval):
             results = validator.run(specifications)
         self.assertEqual(len(results), 4)
         for result in results:

@@ -6,8 +6,9 @@
 :License: MIT
 """
 
-from .data_model import (AbstractTestCase, CombineArchiveTestCase, TestCaseResult,  # noqa: F401
+from .data_model import (AbstractTestCase, TestCaseResult,  # noqa: F401
                          TestCaseResultType, SkippedTestCaseException, IgnoreTestCaseWarning)
+from .test_case.combine_archive import CuratedCombineArchiveTestCase
 import biosimulators_utils.simulator.io
 import capturer
 import datetime
@@ -51,7 +52,7 @@ class SimulatorValidator(object):
                 is none, all test cases are verified.
 
         Returns:
-            :obj:`list` of :obj:`CombineArchiveTestCase`: test cases
+            :obj:`list` of :obj:`CuratedCombineArchiveTestCase`: test cases
         """
         if dir_name is None:
             dir_name = cls.COMBINE_ARCHIVES_DIR
@@ -66,7 +67,7 @@ class SimulatorValidator(object):
             id = os.path.splitext(rel_filename)[0]
             if ids is None or id in ids:
                 found_ids.add(id)
-                case = CombineArchiveTestCase().from_json(dir_name, rel_filename)
+                case = CuratedCombineArchiveTestCase().from_json(dir_name, rel_filename)
                 cases.append(case)
             else:
                 ignored_ids.add(id)
