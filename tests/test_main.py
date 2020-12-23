@@ -56,6 +56,8 @@ class MainTestCase(unittest.TestCase):
                     ],
                 ),
                 type=biosimulators_test_suite.data_model.TestCaseResultType.failed,
+                exception=Exception('Error'),
+                log='Error',
                 duration=1.,
             ),
         ]
