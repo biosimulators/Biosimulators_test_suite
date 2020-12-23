@@ -1,5 +1,5 @@
 from biosimulators_test_suite import data_model
-from biosimulators_test_suite.test_case.combine_archive import CuratedCombineArchiveTestCase
+from biosimulators_test_suite.test_case.combine_archive import CuratedCombineArchiveTestCase, find_cases
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
 from biosimulators_utils.report.io import ReportWriter, ReportFormat
@@ -16,7 +16,7 @@ import unittest
 
 class TestCuratedCombineArchiveTestCase(unittest.TestCase):
     def test_find_cases(self):
-        cases = CuratedCombineArchiveTestCase.find_cases(ids=[
+        cases = find_cases(ids=[
             'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations',
             'sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
         ])
@@ -27,14 +27,14 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         ]))
 
         with self.assertWarnsRegex(data_model.IgnoreTestCaseWarning, 'archives is not available'):
-            CuratedCombineArchiveTestCase.find_cases(dir_name='does-not-exist')
+            find_cases(dir_name='does-not-exist')
 
-    def test_CuratedCombineArchiveTestCase_get_description(self):
+    def test_CuratedCombineArchiveTestCase_description(self):
         case = CuratedCombineArchiveTestCase(task_requirements=[
             data_model.SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000027'),
             data_model.SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000019'),
         ])
-        self.assertEqual(case.get_description(), 'format_2585 / KISAO_0000019, KISAO_0000027')
+        self.assertEqual(case.description, 'format_2585 / KISAO_0000019, KISAO_0000027')
 
     def test_CuratedCombineArchiveTestCase_from_dict(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')

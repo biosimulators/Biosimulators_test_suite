@@ -8,7 +8,8 @@
 
 from .data_model import (AbstractTestCase, TestCaseResult,  # noqa: F401
                          TestCaseResultType, SkippedTestCaseException, IgnoreTestCaseWarning)
-from .test_case.combine_archive import CuratedCombineArchiveTestCase
+from .test_case import combine_archive
+from .test_case import docker_image
 import biosimulators_utils.simulator.io
 import capturer
 import datetime
@@ -48,12 +49,50 @@ class SimulatorValidator(object):
         Returns:
             :obj:`list` of :obj:`AbstractTestCase`: test cases
         """
-        cases = CuratedCombineArchiveTestCase.find_cases(ids=ids)
+        cases = []
 
+        # get SED-ML cases
+        cases.extend(cls.find_cases_in_module(docker_image, ids=ids))
+
+        # get curated COMBINE/OMEX archive cases
+        cases.extend(combine_archive.find_cases(ids=ids))
+
+        # warn if desired cases weren't found
         if ids is not None:
             missing_ids = set(ids).difference(set(case.id for case in cases))
             if missing_ids:
                 warnings.warn('Some test case(s) were not found:\n  {}'.format('\n  '.join(sorted(missing_ids))), IgnoreTestCaseWarning)
+
+        # return discovered cases
+        return cases
+
+    @classmethod
+    def find_cases_in_module(cls, module, ids=None):
+        """ Discover test cases in a module
+
+        Args:
+            module (:obj:`types.ModuleType`): module
+            ids (:obj:`list` of :obj:`str`, optional): List of ids of test cases to verify. If :obj:`ids`
+                is none, all test cases are verified.
+
+        Returns:
+            :obj:`list` of :obj:`AbstractTestCase`: test cases
+        """
+        cases = []
+        ignored_ids = []
+        module_name = module.__name__.rpartition('.')[2]
+        for child_name in dir(module):
+            child = getattr(module, child_name)
+            if isinstance(child, type) and issubclass(child, AbstractTestCase) and child != AbstractTestCase:
+                print(child)
+                id = module_name + '/' + child_name
+                if ids is None or id in ids:
+                    cases.append(child(id=id))
+                else:
+                    ignored_ids.append(id)
+
+        if ignored_ids:
+            warnings.warn('Some test case(s) were ignored:\n  {}'.format('\n  '.join(sorted(ignored_ids))), IgnoreTestCaseWarning)
 
         return cases
 
@@ -89,7 +128,7 @@ class SimulatorValidator(object):
         """ Evaluate a test case for a simulator
 
         Args:
-            specifications (:obj:`str` or :obj:`dict`): path or URL to the specifications of the simulator or the specifications of the simulator
+            specifications (:obj:`dict`): specifications of the simulator
             case (:obj:`AbstractTestCase`): test case
 
         Returns:
@@ -131,11 +170,18 @@ class SimulatorValidator(object):
         failure_details = []
         for result in sorted(results, key=lambda result: result.case.id):
             if result.type == TestCaseResultType.passed:
-                result_str = '  * {} ({}, {:.3f} s)\n'.format(result.case.get_description(), result.case.id, result.duration)
+                if result.case.description:
+                    result_str = '  * {}: {} ({:.3f} s)\n'.format(result.case.id, result.case.description, result.duration)
+                else:
+                    result_str = '  * {} ({:.3f} s)\n'.format(result.case.id, result.duration)
                 passed.append(result_str)
 
             elif result.type == TestCaseResultType.failed:
-                result_str = '* {}: {} ({}, {:.3f} s)\n'.format(result.case.get_description(), result.case.id,
+                if result.case.description:
+                    result_str = '* {}: {} ({}, {:.3f} s)\n'.format(result.case.id, result.case.description,
+                                                                    result.exception.__class__.__name__, result.duration)
+                else:
+                    result_str = '* {} ({}, {:.3f} s)\n'.format(result.case.id,
                                                                 result.exception.__class__.__name__, result.duration)
                 failed.append('  ' + result_str)
                 failure_details.append(result_str + '    ```\n    {}\n\n    {}\n    ```\n'.format(

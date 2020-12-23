@@ -25,6 +25,8 @@ import warnings
 
 __all__ = ['CuratedCombineArchiveTestCase']
 
+EXAMPLES_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
+
 
 class CuratedCombineArchiveTestCase(AbstractTestCase):
     """ A test case for validating a simulator that involves executing a COMBINE/OMEX archive
@@ -38,8 +40,6 @@ class CuratedCombineArchiveTestCase(AbstractTestCase):
         expected_reports (:obj:`list` of :obj:`ExpectedSedReport`): list of reports expected to be produced by algorithm
         expected_plots (:obj:`list` of :obj:`ExpectedSedPlot`): list of plots expected to be produced by algorithm
     """
-
-    EXAMPLES_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
 
     def __init__(self, id=None, name=None, filename=None, task_requirements=None, expected_reports=None, expected_plots=None,
                  assert_no_extra_reports=False, assert_no_extra_datasets=False, assert_no_missing_plots=False, assert_no_extra_plots=False,
@@ -66,6 +66,8 @@ class CuratedCombineArchiveTestCase(AbstractTestCase):
         self.expected_reports = expected_reports or []
         self.expected_plots = expected_plots or []
 
+        self.description = self.get_description()
+
         self.assert_no_extra_reports = assert_no_extra_reports
         self.assert_no_extra_datasets = assert_no_extra_datasets
         self.assert_no_missing_plots = assert_no_missing_plots
@@ -85,40 +87,6 @@ class CuratedCombineArchiveTestCase(AbstractTestCase):
             model_formats.add(req.model_format)
             simulation_algorithms.add(req.simulation_algorithm)
         return '{} / {}'.format(', '.join(sorted(model_formats)), ', '.join(sorted(simulation_algorithms)))
-
-    @classmethod
-    def find_cases(cls, dir_name=None, ids=None):
-        """ Collect test cases from a directory
-
-        Args:
-            dir_name (:obj:`str`, optional): path to find example COMBINE/OMEX archives
-            id (:obj:`list` of :obj:`str`, optional): List of ids of test cases to verify. If :obj:`ids`
-                is none, all test cases are verified.
-
-        Returns:
-            :obj:`list` of :obj:`CuratedCombineArchiveTestCase`: test cases
-        """
-        if dir_name is None:
-            dir_name = cls.EXAMPLES_DIR
-        if not os.path.isdir(dir_name):
-            warnings.warn('Directory of example COMBINE/OMEX archives is not available', IgnoreTestCaseWarning)
-
-        cases = []
-        ignored_ids = set()
-        for md_filename in glob.glob(os.path.join(dir_name, '**/*.json'), recursive=True):
-            rel_filename = os.path.relpath(md_filename, dir_name)
-            id = os.path.splitext(rel_filename)[0]
-            if ids is None or id in ids:
-                case = CuratedCombineArchiveTestCase().from_json(dir_name, rel_filename)
-                cases.append(case)
-            else:
-                ignored_ids.add(id)
-
-        if ignored_ids:
-            warnings.warn('Some test case(s) were ignored:\n  {}'.format('\n  '.join(sorted(ignored_ids))), IgnoreTestCaseWarning)
-
-        # return cases
-        return cases
 
     def from_json(self, base_path, filename):
         """ Read test case from JSON file
@@ -326,3 +294,37 @@ class CuratedCombineArchiveTestCase(AbstractTestCase):
 
         finally:
             shutil.rmtree(out_dir)
+
+
+def find_cases(dir_name=None, ids=None):
+    """ Collect test cases from a directory
+
+    Args:
+        dir_name (:obj:`str`, optional): path to find example COMBINE/OMEX archives
+        id (:obj:`list` of :obj:`str`, optional): List of ids of test cases to verify. If :obj:`ids`
+            is none, all test cases are verified.
+
+    Returns:
+        :obj:`list` of :obj:`CuratedCombineArchiveTestCase`: test cases
+    """
+    if dir_name is None:
+        dir_name = EXAMPLES_DIR
+    if not os.path.isdir(dir_name):
+        warnings.warn('Directory of example COMBINE/OMEX archives is not available', IgnoreTestCaseWarning)
+
+    cases = []
+    ignored_ids = set()
+    for md_filename in glob.glob(os.path.join(dir_name, '**/*.json'), recursive=True):
+        rel_filename = os.path.relpath(md_filename, dir_name)
+        id = os.path.splitext(rel_filename)[0]
+        if ids is None or id in ids:
+            case = CuratedCombineArchiveTestCase().from_json(dir_name, rel_filename)
+            cases.append(case)
+        else:
+            ignored_ids.add(id)
+
+    if ignored_ids:
+        warnings.warn('Some test case(s) were ignored:\n  {}'.format('\n  '.join(sorted(ignored_ids))), IgnoreTestCaseWarning)
+
+    # return cases
+    return cases

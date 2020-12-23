@@ -21,16 +21,19 @@ class AbstractTestCase(abc.ABC):
     Attributes:
         id (:obj:`str`): id
         name (:obj:`str`): name
+        description (:obj:`str`): description
     """
 
-    def __init__(self, id=None, name=None):
+    def __init__(self, id=None, name=None, description=None):
         """
         Args:
             id (:obj:`str`, optional): id
             name (:obj:`str`, optional): name
+            description (:obj:`str`): description
         """
         self.id = id
         self.name = name
+        self.description = description
 
     @abc.abstractmethod
     def eval(self, specifications):
@@ -42,15 +45,6 @@ class AbstractTestCase(abc.ABC):
         Raises:
             :obj:`SkippedTestCaseException`: if the test case is not applicable to the simulator
             :obj:`Exception`: if the simulator did not pass the test case
-        """
-        pass  # pragma: no cover
-
-    @abc.abstractmethod
-    def get_description(self):
-        """ Get a description of the case
-
-        Returns:
-            :obj:`str`: description of the case
         """
         pass  # pragma: no cover
 

@@ -1,4 +1,5 @@
 biosimulators_utils[docker] >= 0.1.19
 capturer
 cement
+docker
 natsort
