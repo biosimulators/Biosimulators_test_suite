@@ -2,6 +2,7 @@ from biosimulators_test_suite.exec_core import SimulatorValidator
 from biosimulators_test_suite.data_model import (TestCaseResult, TestCaseResultType,
                                                  IgnoredTestCaseWarning, SedTaskRequirements)
 from biosimulators_test_suite.test_case.combine_archive import CuratedCombineArchiveTestCase
+from biosimulators_test_suite.test_case.docker_image import BioContainersLabelsTestCase
 from unittest import mock
 import unittest
 
@@ -25,14 +26,16 @@ class ValidateSimulatorTestCase(unittest.TestCase):
             TestCaseResult(case=CuratedCombineArchiveTestCase(id='D', task_requirements=reqs), type=TestCaseResultType.skipped),
             TestCaseResult(case=CuratedCombineArchiveTestCase(id='E', task_requirements=reqs), type=TestCaseResultType.skipped),
             TestCaseResult(case=CuratedCombineArchiveTestCase(id='F', task_requirements=reqs), type=TestCaseResultType.skipped),
+            TestCaseResult(case=BioContainersLabelsTestCase(id='docker_image.BioContainersLabelsTestCase'),
+                           type=TestCaseResultType.passed, duration=3.),
+            TestCaseResult(case=BioContainersLabelsTestCase(id='docker_image.BioContainersLabelsTestCase'),
+                           type=TestCaseResultType.failed, duration=3.,
+                           exception=Exception('Summary of error'), log="Detail of error"),
         ]
         summary, failure_details = SimulatorValidator.summarize_results(results)
-        self.assertRegex(summary, 'Passed 2 test cases')
-        self.assertRegex(summary, 'Failed 1 test cases')
+        self.assertRegex(summary, 'Passed 3 test cases')
+        self.assertRegex(summary, 'Failed 2 test cases')
         self.assertRegex(summary, 'Skipped 3 test cases')
-
-        print(summary)
-        print(failure_details)
 
     def test_run(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
