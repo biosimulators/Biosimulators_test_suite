@@ -1,7 +1,7 @@
 from biosimulators_test_suite.data_model import CombineArchiveTestCase, TestCaseResult, TestCaseResultType
 from biosimulators_test_suite import exec_gh_action
 from biosimulators_test_suite import exec_core
-from biosimulators_utils.gh_action.core import GitHubActionCaughtError
+from biosimulators_utils.gh_action.data_model import GitHubActionCaughtError
 from biosimulators_utils.simulator_registry.data_model import SimulatorSubmission, IssueLabel
 from unittest import mock
 import biosimulators_utils.image
@@ -43,13 +43,15 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
     def test_get_uncaught_exception_msg(self):
         msg = 'My custom message'
         exception = Exception(msg)
-        self.assertRegex(exec_gh_action.get_uncaught_exception_msg(exception),
-                         '\n\n  ' + msg + '\n\n', re.MULTILINE)
+        comments = exec_gh_action.get_uncaught_exception_msg(exception)
+        error_comments = [comment.text for comment in comments if comment.error]
+        self.assertEqual(error_comments, [msg])
 
         msg = 'My custom message'
         exception = ValueError(msg)
-        self.assertRegex(exec_gh_action.get_uncaught_exception_msg(exception),
-                         '\n\n  ' + msg + '\n\n', re.MULTILINE)
+        comments = exec_gh_action.get_uncaught_exception_msg(exception)
+        error_comments = [comment.text for comment in comments if comment.error]
+        self.assertEqual(error_comments, [msg])
 
     def test_get_initial_message(self):
         with mock.patch.dict(os.environ, self.env):

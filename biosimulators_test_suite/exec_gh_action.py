@@ -9,7 +9,8 @@
 
 from .data_model import TestCaseResultType
 from .exec_core import SimulatorValidator
-from biosimulators_utils.gh_action.core import GitHubAction, GitHubActionErrorHandling, GitHubActionCaughtError  # noqa: F401
+from biosimulators_utils.gh_action.data_model import Comment, GitHubActionCaughtError  # noqa: F401
+from biosimulators_utils.gh_action.core import GitHubAction, GitHubActionErrorHandling
 from biosimulators_utils.simulator_registry.data_model import SimulatorSubmission, IssueLabel  # noqa: F401
 from biosimulators_utils.simulator_registry.process_submission import get_simulator_submission_from_gh_issue_body
 from biosimulators_utils.simulator_registry.query import get_simulator_version_specs
@@ -36,16 +37,16 @@ def get_uncaught_exception_msg(exception):
         :obj:`str`: error message to display to users
     """
     gh_action_run_url = GitHubAction.get_gh_action_run_url()
-    return ''.join([
-        'The validation/submission of your simulator failed.\n\n',
-        '  {}\n\n'.format(str(exception).strip().replace('\n', '\n  ')),
-        'The complete log of your validation/submission job, including further information about the failure, ',
-        'is available [here]({}).\n\n'.format(gh_action_run_url),
-        'Once you have fixed the problem, edit the first block of this issue to re-initiate this validation.\n\n',
-        'The BioSimulators Team is happy to help. '
-        'Questions and feedback can be directed to the BioSimulators Team by posting comments to this issues that '
-        'reference the GitHub team `@biosimulators/biosimulators` (without the backticks).'
-    ])
+    return [
+        Comment(text='The validation/submission of your simulator failed.'),
+        Comment(text=str(exception), error=True),
+        Comment(text=('The complete log of your validation/submission job, including further information about the failure, '
+                      + 'is available [here]({}).'.format(gh_action_run_url))),
+        Comment(text='Once you have fixed the problem, edit the first block of this issue to re-initiate this validation.'),
+        Comment(text=('The BioSimulators Team is happy to help. '
+                      'Questions and feedback can be directed to the BioSimulators Team by posting comments to this issues that '
+                      'reference the GitHub team `@biosimulators/biosimulators` (without the backticks).')),
+    ]
 
 
 class ValidateCommitSimulatorGitHubAction(GitHubAction):
@@ -218,15 +219,15 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         invalid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.failed]
         if invalid_cases:
             error_msg = 'After correcting your simulator, please edit the first block of this issue to re-initiate this validation.'
-            self.add_error_comment_to_issue(self.issue_number, error_msg)
+            self.add_error_comment_to_issue(self.issue_number, [Comment(text=error_msg, error=True)])
 
         valid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.passed]
         if not valid_cases:
-            self.add_error_comment_to_issue(self.issue_number, (
+            self.add_error_comment_to_issue(self.issue_number, [Comment(text=(
                 'No test cases are applicable to your simulator. '
                 'Please use this issue to share appropriate test COMBINE/OMEX files. '
                 'The BioSimulators Team will add these files to this validation program and then re-review your simulator.'
-            ))
+            ))])
 
     def is_simulator_approved(self, specifications, existing_version_specifications):
         """ Determine whether a simulation tool has already been approved
