@@ -1,6 +1,6 @@
 from biosimulators_test_suite import exec_gh_action
 from biosimulators_test_suite import exec_core
-from biosimulators_test_suite.data_model import TestCaseResult, TestCaseResultType
+from biosimulators_test_suite.data_model import TestCaseResult, TestCaseResultType, TestCaseWarning
 from biosimulators_test_suite.test_case.published_project import PublishedProjectTestCase
 from biosimulators_utils.gh_action.data_model import GitHubActionCaughtError
 from biosimulators_utils.simulator_registry.data_model import SimulatorSubmission, IssueLabel
@@ -769,8 +769,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                     type=TestCaseResultType.passed,
                     duration=1.,
                     warnings=[
-                        mock.Mock(message='Warning-1'),
-                        mock.Mock(message='Warning-2'),
+                        mock.Mock(message=TestCaseWarning('Warning-1')),
+                        mock.Mock(message=TestCaseWarning('Warning-2')),
                     ],
                 ),
             ]

@@ -59,8 +59,8 @@ class MainTestCase(unittest.TestCase):
                 type=biosimulators_test_suite.data_model.TestCaseResultType.passed,
                 duration=1.,
                 warnings=[
-                    mock.Mock(message='Warning-1'),
-                    mock.Mock(message='Warning-2'),
+                    mock.Mock(message=biosimulators_test_suite.data_model.TestCaseWarning('Warning-1')),
+                    mock.Mock(message=biosimulators_test_suite.data_model.TestCaseWarning('Warning-2')),
                 ],
             ),
         ]

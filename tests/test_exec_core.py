@@ -41,8 +41,8 @@ class ValidateSimulatorTestCase(unittest.TestCase):
                 ),
                 type=TestCaseResultType.passed,
                 warnings=[
-                    mock.Mock(message='Summary of warning 1'),
-                    mock.Mock(message='Summary of warning 2'),
+                    mock.Mock(message=TestCaseWarning('Summary of warning 1')),
+                    mock.Mock(message=TestCaseWarning('Summary of warning 2')),
                 ],
                 duration=3.,
             ),
@@ -55,8 +55,8 @@ class ValidateSimulatorTestCase(unittest.TestCase):
                 duration=3.,
                 exception=Exception('Summary of error'),
                 warnings=[
-                    mock.Mock(message='Summary of warning 1'),
-                    mock.Mock(message='Summary of warning 2'),
+                    mock.Mock(message=TestCaseWarning('Summary of warning 1')),
+                    mock.Mock(message=TestCaseWarning('Summary of warning 2')),
                 ],
                 log="Detail of error",
             ),

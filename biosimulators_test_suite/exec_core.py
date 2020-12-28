@@ -292,7 +292,7 @@ class SimulatorValidator(object):
                 for warning in result.warnings:
                     detail += '\n'
                     detail += '  ```\n'
-                    detail += '  {}\n'.format(warning.message.replace('\n', '\n  '))
+                    detail += '  {}\n'.format(str(warning.message).replace('\n', '\n  '))
                     detail += '  ```\n'
                 detail += '\n'
                 detail += '  Log:\n'
