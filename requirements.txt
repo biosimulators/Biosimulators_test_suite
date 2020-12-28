@@ -3,3 +3,4 @@ capturer
 cement
 docker
 natsort
+termcolor

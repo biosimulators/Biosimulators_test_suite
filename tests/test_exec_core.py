@@ -1,10 +1,13 @@
 from biosimulators_test_suite.exec_core import SimulatorValidator
-from biosimulators_test_suite.data_model import (TestCaseResult, TestCaseResultType,
-                                                 IgnoredTestCaseWarning, SedTaskRequirements)
-from biosimulators_test_suite.test_case.combine_archive import CuratedCombineArchiveTestCase
+from biosimulators_test_suite.data_model import (TestCase, TestCaseResult, TestCaseResultType,
+                                                 TestCaseWarning, SkippedTestCaseException, IgnoredTestCaseWarning,
+                                                 SedTaskRequirements)
+from biosimulators_test_suite.test_case import published_project
 from biosimulators_test_suite.test_case.docker_image import BioContainersLabelsTestCase
 from unittest import mock
+import sys
 import unittest
+import warnings
 
 
 class ValidateSimulatorTestCase(unittest.TestCase):
@@ -19,35 +22,208 @@ class ValidateSimulatorTestCase(unittest.TestCase):
             SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000019'),
         ]
         results = [
-            TestCaseResult(case=CuratedCombineArchiveTestCase(id='A', task_requirements=reqs), type=TestCaseResultType.passed, duration=1.),
-            TestCaseResult(case=CuratedCombineArchiveTestCase(id='B', task_requirements=reqs), type=TestCaseResultType.passed, duration=2.),
-            TestCaseResult(case=CuratedCombineArchiveTestCase(id='C', task_requirements=reqs), type=TestCaseResultType.failed, duration=3.,
-                           exception=Exception('Summary of error'), log="Detail of error"),
-            TestCaseResult(case=CuratedCombineArchiveTestCase(id='D', task_requirements=reqs), type=TestCaseResultType.skipped),
-            TestCaseResult(case=CuratedCombineArchiveTestCase(id='E', task_requirements=reqs), type=TestCaseResultType.skipped),
-            TestCaseResult(case=CuratedCombineArchiveTestCase(id='F', task_requirements=reqs), type=TestCaseResultType.skipped),
-            TestCaseResult(case=BioContainersLabelsTestCase(id='docker_image.BioContainersLabelsTestCase'),
-                           type=TestCaseResultType.passed, duration=3.),
-            TestCaseResult(case=BioContainersLabelsTestCase(id='docker_image.BioContainersLabelsTestCase'),
-                           type=TestCaseResultType.failed, duration=3.,
-                           exception=Exception('Summary of error'), log="Detail of error"),
+            TestCaseResult(case=published_project.PublishedProjectTestCase(
+                id='A', task_requirements=reqs), type=TestCaseResultType.passed, duration=1.),
+            TestCaseResult(case=published_project.PublishedProjectTestCase(
+                id='B', task_requirements=reqs), type=TestCaseResultType.passed, duration=2.),
+            TestCaseResult(case=published_project.PublishedProjectTestCase(
+                id='C', task_requirements=reqs), type=TestCaseResultType.failed, duration=3.,
+                exception=Exception('Summary of error'), log="Detail of error"),
+            TestCaseResult(case=published_project.PublishedProjectTestCase(
+                id='D', task_requirements=reqs), type=TestCaseResultType.skipped),
+            TestCaseResult(case=published_project.PublishedProjectTestCase(
+                id='E', task_requirements=reqs), type=TestCaseResultType.skipped),
+            TestCaseResult(case=published_project.PublishedProjectTestCase(
+                id='F', task_requirements=reqs), type=TestCaseResultType.skipped),
+            TestCaseResult(
+                case=BioContainersLabelsTestCase(
+                    id='docker_image.BioContainersLabelsTestCase',
+                ),
+                type=TestCaseResultType.passed,
+                warnings=[
+                    mock.Mock(message='Summary of warning 1'),
+                    mock.Mock(message='Summary of warning 2'),
+                ],
+                duration=3.,
+            ),
+            TestCaseResult(
+                case=BioContainersLabelsTestCase(
+                    id='docker_image.BioContainersLabelsTestCase',
+                    description='Description of test case'
+                ),
+                type=TestCaseResultType.failed,
+                duration=3.,
+                exception=Exception('Summary of error'),
+                warnings=[
+                    mock.Mock(message='Summary of warning 1'),
+                    mock.Mock(message='Summary of warning 2'),
+                ],
+                log="Detail of error",
+            ),
         ]
-        summary, failure_details = SimulatorValidator.summarize_results(results)
+        summary, failure_details, warning_details = SimulatorValidator.summarize_results(results)
         self.assertRegex(summary, 'Passed 3 test cases')
         self.assertRegex(summary, 'Failed 2 test cases')
         self.assertRegex(summary, 'Skipped 3 test cases')
+        self.assertEqual(len(failure_details), 2)
+        self.assertEqual(len(warning_details), 2)
+
+    def test_find_cases(self):
+        specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
+        case_ids = [
+            'published_project.PublishedProjectTestCase:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.PublishedProjectTestCase:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
+            'published_project.PublishedProjectTestCase:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
+            'published_project.PublishedProjectTestCase:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+        ]
+        validator = SimulatorValidator(specifications, case_ids=case_ids)
+        self.assertGreaterEqual(len(validator.cases), 5)
+        n_cases = 0
+        for suite_cases in validator.cases.values():
+            n_cases += len(suite_cases)
+        self.assertEqual(n_cases, 4)
+        self.assertEqual(len(validator.cases['published_project']), 4)
+        self.assertEqual(set(case_ids).difference(set(case.id for case in validator.cases['published_project'])), set())
+
+        case_ids.append('doesn_not_exist')
+        with self.assertWarnsRegex(IgnoredTestCaseWarning, 'were not found'):
+            validator = SimulatorValidator(specifications, case_ids=case_ids)
+        n_cases = 0
+        for suite_cases in validator.cases.values():
+            n_cases += len(suite_cases)
+        self.assertEqual(n_cases, 4)
+
+        case_ids.append('docker_image.OciLabelsTestCase')
+        case_ids.append('sedml.MultipleTasksPerSedDocumentTestCase')
+        with self.assertWarnsRegex(IgnoredTestCaseWarning, 'were not found'):
+            validator = SimulatorValidator(specifications, case_ids=case_ids)
+        n_cases = 0
+        for suite_cases in validator.cases.values():
+            n_cases += len(suite_cases)
+        self.assertEqual(n_cases, 6)
+        self.assertEqual(len(validator.cases['docker_image']), 1)
+        self.assertEqual(validator.cases['docker_image'][0].description,
+                         'Test that a Docker image has Open Container Initiative (OCI) labels with metadata about the image')
+        self.assertEqual(len(validator.cases['sedml']), 1)
+        self.assertEqual(validator.cases['sedml'][0].description,
+                         'Test that a simulator supports multiple tasks per SED document')
+
+    def test_eval_case(self):
+        specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
+        case_ids = []
+        validator = SimulatorValidator(specifications, case_ids=case_ids)
+        n_cases = 0
+        for suite_cases in validator.cases.values():
+            n_cases += len(suite_cases)
+        self.assertEqual(n_cases, 0)
+
+        # passed
+        class Case(TestCase):
+            def eval(self, specifications):
+                pass
+
+        case = Case()
+        result = validator.eval_case(case)
+        self.assertEqual(result.case, case)
+        self.assertEqual(result.type, TestCaseResultType.passed)
+        self.assertGreater(result.duration, 0.)
+        self.assertLess(result.duration, 1.)
+        self.assertEqual(result.exception, None)
+        self.assertEqual(result.warnings, [])
+        self.assertEqual(result.log, '')
+
+        # passed, stdout
+        class Case(TestCase):
+            def eval(self, specifications):
+                print('Message')
+
+        case = Case()
+        result = validator.eval_case(case)
+        self.assertEqual(result.case, case)
+        self.assertEqual(result.type, TestCaseResultType.passed)
+        self.assertGreater(result.duration, 0.)
+        self.assertLess(result.duration, 1.)
+        self.assertEqual(result.exception, None)
+        self.assertEqual(result.warnings, [])
+        self.assertEqual(result.log, 'Message')
+
+        # passed, stdout and std errr
+        class Case(TestCase):
+            def eval(self, specifications):
+                print('Stdout', file=sys.stdout)
+                print('Stderr', file=sys.stderr)
+
+        case = Case()
+        result = validator.eval_case(case)
+        self.assertEqual(result.case, case)
+        self.assertEqual(result.type, TestCaseResultType.passed)
+        self.assertGreater(result.duration, 0.)
+        self.assertLess(result.duration, 1.)
+        self.assertEqual(result.exception, None)
+        self.assertEqual(result.warnings, [])
+        self.assertEqual(result.log, 'Stdout\nStderr')
+
+        # passed, warnings
+        class Case(TestCase):
+            def eval(self, specifications):
+                warnings.warn('Warning-1', TestCaseWarning)
+                warnings.warn('Warning-2', UserWarning)
+                warnings.warn('Warning-3', TestCaseWarning)
+
+        case = Case()
+        result = validator.eval_case(case)
+        self.assertEqual(result.case, case)
+        self.assertEqual(result.type, TestCaseResultType.passed)
+        self.assertGreater(result.duration, 0.)
+        self.assertLess(result.duration, 1.)
+        self.assertEqual(result.exception, None)
+        self.assertEqual(len(result.warnings), 2)
+        self.assertEqual(str(result.warnings[0].message), 'Warning-1')
+        self.assertEqual(str(result.warnings[1].message), 'Warning-3')
+        self.assertEqual(result.log, '')
+
+        # error
+        class Case(TestCase):
+            def eval(self, specifications):
+                raise Exception('Big error')
+
+        case = Case()
+        result = validator.eval_case(case)
+        self.assertEqual(result.case, case)
+        self.assertEqual(result.type, TestCaseResultType.failed)
+        self.assertGreater(result.duration, 0.)
+        self.assertLess(result.duration, 1.)
+        self.assertEqual(str(result.exception), 'Big error')
+        self.assertEqual(result.warnings, [])
+        self.assertEqual(result.log, '')
+
+        # skipped
+        class Case(TestCase):
+            def eval(self, specifications):
+                raise SkippedTestCaseException('Reason for skipping')
+
+        case = Case()
+        result = validator.eval_case(case)
+        self.assertEqual(result.case, case)
+        self.assertEqual(result.type, TestCaseResultType.skipped)
+        self.assertGreater(result.duration, 0.)
+        self.assertLess(result.duration, 1.)
+        self.assertEqual(str(result.exception), 'Reason for skipping')
+        self.assertEqual(result.warnings, [])
+        self.assertEqual(result.log, '')
 
     def test_run(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
-        validator = SimulatorValidator(case_ids=[
-            'sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
-            'sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
-            'sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
-            'sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
-        ])
-        self.assertEqual(len(validator.cases), 4)
+        case_ids = [
+            'published_project.PublishedProjectTestCase:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.PublishedProjectTestCase:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
+            'published_project.PublishedProjectTestCase:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
+            'published_project.PublishedProjectTestCase:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+        ]
+        validator = SimulatorValidator(specifications, case_ids=case_ids)
+        self.assertGreaterEqual(len(validator.cases), 4)
 
-        results = validator.run(specifications)
+        results = validator.run()
 
         passed = []
         failed = []
@@ -62,11 +238,59 @@ class ValidateSimulatorTestCase(unittest.TestCase):
         self.assertEqual(len(passed), 3)
         self.assertEqual(len(skipped), 1)
 
+    def test_run_with_passed(self):
+        specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
+        case_ids = [
+            'published_project.PublishedProjectTestCase:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.PublishedProjectTestCase:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
+            'published_project.PublishedProjectTestCase:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
+            'published_project.PublishedProjectTestCase:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+        ]
+        validator = SimulatorValidator(specifications, case_ids=case_ids)
+
+        def eval(*args, **kwargs):
+            warnings.warn('Important warning', TestCaseWarning)
+
+        with mock.patch.object(published_project.PublishedProjectTestCase, 'eval', side_effect=eval):
+            results = validator.run()
+        self.assertEqual(len(results), 4)
+        for result in results:
+            self.assertEqual(result.type, TestCaseResultType.passed)
+
+    def test_run_with_failures(self):
+        specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
+        case_ids = [
+            'published_project.PublishedProjectTestCase:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.PublishedProjectTestCase:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
+            'published_project.PublishedProjectTestCase:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
+            'published_project.PublishedProjectTestCase:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+        ]
+        validator = SimulatorValidator(specifications, case_ids=case_ids)
+
         def eval(*args, **kwargs):
             raise RuntimeError("Bad")
 
-        with mock.patch.object(CuratedCombineArchiveTestCase, 'eval', side_effect=eval):
-            results = validator.run(specifications)
+        with mock.patch.object(published_project.PublishedProjectTestCase, 'eval', side_effect=eval):
+            results = validator.run()
         self.assertEqual(len(results), 4)
         for result in results:
             self.assertEqual(result.type, TestCaseResultType.failed)
+
+    def test_run_with_skips(self):
+        specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
+        case_ids = [
+            'published_project.PublishedProjectTestCase:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.PublishedProjectTestCase:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
+            'published_project.PublishedProjectTestCase:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
+            'published_project.PublishedProjectTestCase:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+        ]
+        validator = SimulatorValidator(specifications, case_ids=case_ids)
+
+        def eval(*args, **kwargs):
+            raise SkippedTestCaseException("Not applicable")
+
+        with mock.patch.object(published_project.PublishedProjectTestCase, 'eval', side_effect=eval):
+            results = validator.run()
+        self.assertEqual(len(results), 4)
+        for result in results:
+            self.assertEqual(result.type, TestCaseResultType.skipped)

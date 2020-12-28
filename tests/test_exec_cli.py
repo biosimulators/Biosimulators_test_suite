@@ -2,7 +2,7 @@ from biosimulators_test_suite import exec_cli
 from unittest import mock
 import biosimulators_test_suite.data_model
 import biosimulators_test_suite.exec_core
-import biosimulators_test_suite.test_case.combine_archive
+import biosimulators_test_suite.test_case.published_project
 import unittest
 
 
@@ -18,7 +18,7 @@ class MainTestCase(unittest.TestCase):
 
         results = [
             biosimulators_test_suite.data_model.TestCaseResult(
-                case=biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase(
+                case=biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase(
                     id='case-id',
                     task_requirements=[
                         biosimulators_test_suite.data_model.SedTaskRequirements(
@@ -33,7 +33,40 @@ class MainTestCase(unittest.TestCase):
         ]
 
         def find_cases(ids=None, results=results):
-            return [result.case for result in results]
+            return {'published_project': [result.case for result in results]}
+
+        with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
+                               'find_cases', side_effect=find_cases):
+            with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
+                                   'eval_case', side_effect=results):
+                with exec_cli.App(argv=[specs]) as app:
+                    app.run()
+
+    def test_warnings(self):
+        specs = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
+
+        results = [
+            biosimulators_test_suite.data_model.TestCaseResult(
+                case=biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase(
+                    id='case-id',
+                    task_requirements=[
+                        biosimulators_test_suite.data_model.SedTaskRequirements(
+                            model_format='format_2585',
+                            simulation_algorithm='KISAO_000019',
+                        )
+                    ],
+                ),
+                type=biosimulators_test_suite.data_model.TestCaseResultType.passed,
+                duration=1.,
+                warnings=[
+                    mock.Mock(message='Warning-1'),
+                    mock.Mock(message='Warning-2'),
+                ],
+            ),
+        ]
+
+        def find_cases(ids=None, results=results):
+            return {'published_project': [result.case for result in results]}
 
         with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
                                'find_cases', side_effect=find_cases):
@@ -47,7 +80,7 @@ class MainTestCase(unittest.TestCase):
 
         results = [
             biosimulators_test_suite.data_model.TestCaseResult(
-                case=biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase(
+                case=biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase(
                     id='case-id',
                     task_requirements=[
                         biosimulators_test_suite.data_model.SedTaskRequirements(
@@ -64,7 +97,7 @@ class MainTestCase(unittest.TestCase):
         ]
 
         def find_cases(ids=None, results=results):
-            return [result.case for result in results]
+            return {'published_project': [result.case for result in results]}
 
         with self.assertRaises(SystemExit) as exception_cm:
             with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
@@ -81,7 +114,7 @@ class MainTestCase(unittest.TestCase):
         results = []
 
         def find_cases(ids=None, results=results):
-            return [result.case for result in results]
+            return {'published_project': [result.case for result in results]}
 
         with self.assertRaises(SystemExit) as exception_cm:
             with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,

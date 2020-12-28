@@ -208,12 +208,14 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         biosimulators_utils.image.convert_docker_image_to_singularity(image_url)
 
         # validate that image is consistent with the BioSimulators standards
-        validator = SimulatorValidator()
-        case_results = validator.run(specifications)
-        summary, failure_details = validator.summarize_results(case_results)
-        msg = '## Summary\n{}'.format(summary)
+        validator = SimulatorValidator(specifications)
+        case_results = validator.run()
+        summary, failure_details, warning_details = validator.summarize_results(case_results)
+        msg = '## Summary of tests\n\n{}\n\n'.format(summary)
         if failure_details:
-            msg += '\n## Failures\n{}'.format(failure_details)
+            msg += '\n## Failures\n\n{}\n\n'.format('### ' + '\n### '.join(failure_details))
+        if warning_details:
+            msg += '\n## Warnings\n\n{}\n\n'.format('### ' + '\n### '.join(warning_details))
         self.add_comment_to_issue(self.issue_number, msg)
 
         invalid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.failed]

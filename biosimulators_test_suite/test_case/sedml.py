@@ -5,7 +5,7 @@
 :Copyright: 2020, Center for Reproducible Biomedical Modeling
 :License: MIT
 """
-from .combine_archive import SyntheticCombineArchiveTestCase
+from .published_project import SyntheticCombineArchiveTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import (SedDocument, Report, DataSet,  # noqa: F401
@@ -25,20 +25,6 @@ class MultipleTasksPerSedDocumentTestCase(SyntheticCombineArchiveTestCase):
         _expected_reports (:obj:`list` of :obj:`tuple` of :obj:`str`): list of pairs of
             original reports and their expected duplicates
     """
-
-    def is_curated_archive_suitable_for_building_synthetic_archive(self, archive, sed_docs):
-        """ Find an archive with at least one report
-
-        Args:
-            archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
-            sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
-                SED documents in curated archive
-
-        Returns:
-            :obj:`bool`: :obj:`True`, if the curated archive is suitable for generating a synthetic
-                archive for testing
-        """
-        return self.get_suitable_sed_doc(sed_docs) is not None
 
     def build_synthetic_archive(self, curated_archive, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
@@ -98,24 +84,6 @@ class MultipleTasksPerSedDocumentTestCase(SyntheticCombineArchiveTestCase):
 
         # return modified SED document
         return (curated_archive, curated_sed_docs)
-
-    @staticmethod
-    def get_suitable_sed_doc(sed_docs):
-        """ Get the location of a suitable SED document for testing
-
-        Args:
-            sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
-                SED documents in curated archive
-
-        Returns:
-            :obj:`str`: location of a suitable SED document
-        """
-        for location, sed_doc in sed_docs.items():
-            if sed_doc.tasks:
-                for output in sed_doc.outputs:
-                    if isinstance(output, Report):
-                        return location
-        return None
 
     def eval_outputs(self, specifications, synthetic_archive, outputs_dir):
         """ Test that the expected outputs were created for the synthetic archive

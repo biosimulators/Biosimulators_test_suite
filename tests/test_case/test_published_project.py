@@ -1,7 +1,9 @@
 from biosimulators_test_suite import data_model
-from biosimulators_test_suite.test_case.combine_archive import CuratedCombineArchiveTestCase, find_cases
+from biosimulators_test_suite.test_case.published_project import (PublishedProjectTestCase, find_cases, SyntheticCombineArchiveTestCase)
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
+from biosimulators_utils.combine.data_model import CombineArchive
+from biosimulators_utils.combine.io import CombineArchiveReader
 from biosimulators_utils.report.io import ReportWriter, ReportFormat
 from unittest import mock
 import biosimulators_utils.simulator.exec
@@ -16,25 +18,46 @@ import unittest
 
 class TestCuratedCombineArchiveTestCase(unittest.TestCase):
     def test_find_cases(self):
-        cases = find_cases(ids=[
-            'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations',
-            'sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
-        ])
-        self.assertEqual(len(cases), 2)
-        self.assertEqual(set(case.name for case in cases), set([
+        all_cases, _ = find_cases({
+            'algorithms': [
+                {
+                    'kisaoId': {'id': 'KISAO_0000019'},
+                    'modelFormats': [{'id': 'format_2585'}],
+                }
+            ]
+        })
+        self.assertGreater(len(all_cases), 2)
+        self.assertEqual(set([
             "Caravagna et al. Journal of Theoretical Biology 2010: Tumor-suppressive oscillations",
             "Ciliberto et al. Journal Cell Biology 2003: Morphogenesis checkpoint in budding yeast",
-        ]))
+        ]).difference(set(case.name for case in all_cases)), set())
 
-        with self.assertWarnsRegex(data_model.IgnoredTestCaseWarning, 'archives is not available'):
-            find_cases(dir_name='does-not-exist')
+        with self.assertWarnsRegex(data_model.IgnoredTestCaseWarning, 'not available'):
+            all_cases, compatible_cases = find_cases({
+                'algorithms': [
+                    {
+                        'kisaoId': {'id': 'KISAO_0000019'},
+                        'modelFormats': [{'id': 'format_2585'}],
+                    }
+                ]
+            }, dir_name='does_not_exist')
+        self.assertEqual(len(all_cases), 0)
+        self.assertEqual(len(compatible_cases), 0)
 
     def test_CuratedCombineArchiveTestCase_description(self):
-        case = CuratedCombineArchiveTestCase(task_requirements=[
+        case = PublishedProjectTestCase(task_requirements=[
             data_model.SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000027'),
             data_model.SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000019'),
         ])
-        self.assertEqual(case.description, 'format_2585 / KISAO_0000019, KISAO_0000027')
+        expected_description = '\n'.join([
+            'Required model formats and simulation algorithms for SED tasks:',
+            '',
+            '* Format: format_2585',
+            '  Algorithm: KISAO_0000019',
+            '* Format: format_2585',
+            '  Algorithm: KISAO_0000027',
+        ])
+        self.assertEqual(case.description, expected_description)
 
     def test_CuratedCombineArchiveTestCase_from_dict(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
@@ -42,14 +65,15 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         with open(os.path.join(base_path, filename), 'r') as file:
             data = json.load(file)
         data['expectedReports'][0]['values']['T'] = [0, 1, 2, 3, 4, 5]
-        case = CuratedCombineArchiveTestCase().from_dict(data)
+        case = PublishedProjectTestCase().from_dict(data)
         numpy.testing.assert_allclose(case.expected_reports[0].values['T'], numpy.array([0, 1, 2, 3, 4, 5]))
 
     def test_CuratedCombineArchiveTestCase_from_json(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
-        case = CuratedCombineArchiveTestCase().from_json(base_path, filename)
-        self.assertEqual(case.id, 'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations')
+        case = PublishedProjectTestCase().from_json(base_path, filename)
+        self.assertEqual(case.id, ('published_project.PublishedProjectTestCase:'
+                                   'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'))
         self.assertEqual(case.name, "Caravagna et al. Journal of Theoretical Biology 2010: Tumor-suppressive oscillations")
         self.assertTrue(case.filename.endswith('sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex'))
         self.assertEqual(len(case.task_requirements), 1)
@@ -81,7 +105,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
     def test_CuratedCombineArchiveTestCase_eval(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
-        case = CuratedCombineArchiveTestCase().from_json(base_path, filename)
+        case = PublishedProjectTestCase().from_json(base_path, filename)
         case.expected_reports[0].values['T'] = numpy.zeros((5001,))
 
         # skips
@@ -264,10 +288,29 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         case.assert_no_extra_plots = False
 
     def test_TestCaseResult(self):
-        case = CuratedCombineArchiveTestCase(id='case')
+        case = PublishedProjectTestCase(id='case')
         exception = Exception('message')
         result = data_model.TestCaseResult(case=case, type=data_model.TestCaseResultType.skipped, duration=10., exception=exception)
         self.assertEqual(result.case, case)
         self.assertEqual(result.type, data_model.TestCaseResultType.skipped)
         self.assertEqual(result.duration, 10.)
         self.assertEqual(result.exception, exception)
+
+    def test_SyntheticCombineArchiveTestCase_no_suitable_archives(self):
+        class TestCase(SyntheticCombineArchiveTestCase):
+            def is_curated_archive_suitable_for_building_synthetic_archive(self, archive, sed_docs):
+                return False
+
+            def build_synthetic_archive(self):
+                pass
+
+            def eval_outputs(self):
+                pass
+
+        case = TestCase(published_projects_test_cases=[
+            PublishedProjectTestCase()
+        ])
+
+        with self.assertWarnsRegex(data_model.IgnoredTestCaseWarning, 'No curated COMBINE/OMEX archives are available'):
+            with mock.patch.object(CombineArchiveReader, 'run', return_value=CombineArchive()):
+                case.eval(None)

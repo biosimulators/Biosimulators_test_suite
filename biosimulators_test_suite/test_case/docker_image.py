@@ -6,15 +6,17 @@
 :License: MIT
 """
 
-from ..data_model import AbstractTestCase
+from ..data_model import TestCase
 import docker
 import warnings
 
 __all__ = ['OciLabelsTestCase', 'BioContainersLabelsTestCase']
 
 
-class OciLabelsTestCase(AbstractTestCase):
-    """ Test that a Docker image has Open Container Initiative (OCI) labels with metadata about image """
+class OciLabelsTestCase(TestCase):
+    """ Test that a Docker image has Open Container Initiative (OCI) labels
+    with metadata about the image
+    """
     EXPECTED_LABELS = [
         'org.opencontainers.image.authors',
         'org.opencontainers.image.description',
@@ -46,8 +48,10 @@ class OciLabelsTestCase(AbstractTestCase):
                 '\n  '.join(sorted(missing_labels))))
 
 
-class BioContainersLabelsTestCase(AbstractTestCase):
-    """ Test that a Docker image has BioContainers labels with metadata about image """
+class BioContainersLabelsTestCase(TestCase):
+    """ Test that a Docker image has BioContainers labels with metadata
+    about the image
+    """
     EXPECTED_LABELS = [
         "about.documentation",
         "about.home",
