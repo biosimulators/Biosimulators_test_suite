@@ -8,6 +8,7 @@
 
 from .config import TERMINAL_COLORS
 from .data_model import TestCaseResultType
+import biosimulators_test_suite
 import biosimulators_test_suite.exec_core
 import cement
 import termcolor
