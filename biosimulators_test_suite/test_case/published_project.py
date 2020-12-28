@@ -8,7 +8,7 @@
 
 from ..data_model import (TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedPlot,
                           AlertType, InvalidOuputsException, InvalidOuputsWarning, SkippedTestCaseException,
-                          IgnoredTestCaseWarning)
+                          IgnoredTestCaseWarning, OutputMedium)
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContentFormatPattern  # noqa: F401
 from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
 from biosimulators_utils.config import get_config
@@ -57,7 +57,8 @@ class PublishedProjectTestCase(TestCase):
     def __init__(self, id=None, name=None, filename=None, task_requirements=None, expected_reports=None, expected_plots=None,
                  runtime_failure_alert_type=AlertType.exception,
                  assert_no_extra_reports=False, assert_no_extra_datasets=False, assert_no_missing_plots=False, assert_no_extra_plots=False,
-                 r_tol=1e-4, a_tol=0.):
+                 r_tol=1e-4, a_tol=0.,
+                 output_medium=OutputMedium.console):
         """
         Args:
             id (:obj:`str`, optional): id
@@ -74,8 +75,9 @@ class PublishedProjectTestCase(TestCase):
             assert_no_extra_plots (:obj:`bool`, optional): if :obj:`True`, raise an exception if the simulator produces unexpected plots
             r_tol (:obj:`float`, optional): relative tolerence
             a_tol (:obj:`float`, optional): absolute tolerence
+            output_medium (:obj:`OutputMedium`, optional): medium the description should be formatted for
         """
-        super(PublishedProjectTestCase, self).__init__(id, name)
+        super(PublishedProjectTestCase, self).__init__(id, name, output_medium=output_medium)
         self.filename = filename
         self.task_requirements = task_requirements or []
         self.expected_reports = expected_reports or []
@@ -99,9 +101,26 @@ class PublishedProjectTestCase(TestCase):
         """
         task_descriptions = []
         for req in self.task_requirements:
+            format = '`{}`'.format(req.model_format)
+            alg = '`{}`'.format(req.simulation_algorithm)
+
+            if self.output_medium == OutputMedium.gh_issue:
+                format_url = (
+                    'https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri='
+                    + 'http%3A%2F%2Fedamontology.org%2F'
+                    + req.model_format
+                )
+                alg_url = (
+                    'https://www.ebi.ac.uk/ols/ontologies/kisao/terms?iri='
+                    + 'http%3A%2F%2Fwww.biomodels.net%2Fkisao%2FKISAO%23'
+                    + req.simulation_algorithm
+                )
+                format = '[{}]({})'.format(format, format_url)
+                alg = '[{}]({})'.format(alg, alg_url)
+
             task_descriptions.append(''.join([
-                '\n* Format: {}'.format(req.model_format),
-                '\n  Algorithm: {}'.format(req.simulation_algorithm),
+                '\n* Format: {}'.format(format),
+                '\n  Algorithm: {}'.format(alg),
             ]))
         task_descriptions.sort()
         return 'Required model formats and simulation algorithms for SED tasks:\n' + ''.join(task_descriptions)
@@ -362,22 +381,22 @@ class SyntheticCombineArchiveTestCase(TestCase):
         id (:obj:`str`): id
         name (:obj:`str`): name
         description (:obj:`str`): description
+        output_medium (:obj:`OutputMedium`): medium the description should be formatted for
         published_projects_test_cases (:obj:`list` of :obj:`PublishedProjectTestCase`):
             curated COMBINE/OMEX archives that can be used to generate example archives for testing
     """
 
-    def __init__(self, id=None, name=None, description=None, published_projects_test_cases=None):
+    def __init__(self, id=None, name=None, description=None, output_medium=OutputMedium.console, published_projects_test_cases=None):
         """
         Args:
             id (:obj:`str`, optional): id
             name (:obj:`str`, optional): name
             description (:obj:`str`): description
+            output_medium (:obj:`OutputMedium`, optional): medium the description should be formatted for
             published_projects_test_cases (:obj:`list` of :obj:`PublishedProjectTestCase`, optional):
                 curated COMBINE/OMEX archives that can be used to generate example archives for testing
         """
-        self.id = id
-        self.name = name
-        self.description = description
+        super(SyntheticCombineArchiveTestCase, self).__init__(id=id, name=name, description=description, output_medium=output_medium)
         self.published_projects_test_cases = published_projects_test_cases or []
 
     def eval(self, specifications):
@@ -500,12 +519,13 @@ class SyntheticCombineArchiveTestCase(TestCase):
         pass  # pragma: no cover
 
 
-def find_cases(specifications, dir_name=None):
+def find_cases(specifications, dir_name=None, output_medium=OutputMedium.console):
     """ Collect test cases
 
     Args:
         specifications (:obj:`dict`): specifications of the simulator to validate
         dir_name (:obj:`str`, optional): path to find example COMBINE/OMEX archives
+        output_medium (:obj:`OutputMedium`, optional): medium the description should be formatted for
 
     Returns:
         :obj:`list` of :obj:`PublishedProjectTestCase`: test cases
@@ -519,7 +539,7 @@ def find_cases(specifications, dir_name=None):
     compatible_cases = []
     for md_filename in glob.glob(os.path.join(dir_name, '**/*.json'), recursive=True):
         rel_filename = os.path.relpath(md_filename, dir_name)
-        case = PublishedProjectTestCase().from_json(dir_name, rel_filename)
+        case = PublishedProjectTestCase(output_medium=output_medium).from_json(dir_name, rel_filename)
         all_cases.append(case)
         if case.compatible_with_specifications(specifications):
             compatible_cases.append(case)

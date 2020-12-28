@@ -9,12 +9,20 @@
 import abc
 import enum
 
-__all__ = ['TestCase', 'SedTaskRequirements', 'ExpectedSedReport', 'ExpectedSedPlot',
-           'TestCaseResultType', 'TestCaseResult',
-           'AlertType',
-           'TestCaseWarning', 'InvalidOuputsException', 'InvalidOuputsWarning',
-           'SkippedTestCaseException', 'IgnoredTestCaseWarning',
-           ]
+__all__ = [
+    'OutputMedium',
+    'TestCase', 'SedTaskRequirements', 'ExpectedSedReport', 'ExpectedSedPlot',
+    'TestCaseResultType', 'TestCaseResult',
+    'AlertType',
+    'TestCaseWarning', 'InvalidOuputsException', 'InvalidOuputsWarning',
+    'SkippedTestCaseException', 'IgnoredTestCaseWarning',
+]
+
+
+class OutputMedium(str, enum.Enum):
+    """ Output medium """
+    console = 'console'
+    gh_issue = 'gh_issue'
 
 
 class TestCase(abc.ABC):
@@ -24,18 +32,21 @@ class TestCase(abc.ABC):
         id (:obj:`str`): id
         name (:obj:`str`): name
         description (:obj:`str`): description
+        output_medium (:obj:`OutputMedium`): medium the description should be formatted for
     """
 
-    def __init__(self, id=None, name=None, description=None):
+    def __init__(self, id=None, name=None, description=None, output_medium=OutputMedium.console):
         """
         Args:
             id (:obj:`str`, optional): id
             name (:obj:`str`, optional): name
             description (:obj:`str`): description
+            output_medium (:obj:`OutputMedium`, optional): medium the description should be formatted
         """
         self.id = id
         self.name = name
         self.description = description
+        self.output_medium = output_medium
 
     @abc.abstractmethod
     def eval(self, specifications):

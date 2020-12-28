@@ -7,7 +7,7 @@
 """
 
 from .config import TERMINAL_COLORS
-from .data_model import TestCaseResultType
+from .data_model import TestCaseResultType, OutputMedium
 import biosimulators_test_suite
 import biosimulators_test_suite.exec_core
 import cement
@@ -54,7 +54,8 @@ class BaseController(cement.Controller):
             validator = biosimulators_test_suite.exec_core.SimulatorValidator(
                 args.specifications,
                 case_ids=args.case_ids,
-                verbose=args.verbose)
+                verbose=args.verbose,
+                output_medium=OutputMedium.console)
             results = validator.run()
             summary, failure_details, warning_details = validator.summarize_results(results)
             print('')

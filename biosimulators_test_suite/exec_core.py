@@ -8,7 +8,8 @@
 
 from .config import TERMINAL_COLORS
 from .data_model import (TestCase, TestCaseResult,  # noqa: F401
-                         TestCaseResultType, TestCaseWarning, SkippedTestCaseException, IgnoredTestCaseWarning)
+                         TestCaseResultType, TestCaseWarning, SkippedTestCaseException, IgnoredTestCaseWarning,
+                         OutputMedium)
 from .test_case import cli
 from .test_case import combine_archive
 from .test_case import docker_image
@@ -34,23 +35,27 @@ class SimulatorValidator(object):
         specifications (:obj:`str` or :obj:`dict`): path or URL to the specifications of the simulator, or the specifications of the simulator
         cases (:obj:`collections.OrderedDict` of :obj:`types.ModuleType` to :obj:`TestCase`): groups of test cases
         verbose (:obj:`bool`): if :obj:`True`, display stdout/stderr from executing cases in real time
+        output_medium (:obj:`OutputMedium`): environment where outputs will be sent
     """
 
-    def __init__(self, specifications, case_ids=None, verbose=False):
+    def __init__(self, specifications, case_ids=None, verbose=False, output_medium=OutputMedium.console):
         """
         Args:
             specifications (:obj:`str` or :obj:`dict`): path or URL to the specifications of the simulator, or the specifications of the simulator
             case_ids (:obj:`list` of :obj:`str`, optional): List of ids of test cases to verify. If :obj:`ids`
                 is none, all test cases are verified.
             verbose (:obj:`bool`, optional): if :obj:`True`, display stdout/stderr from executing cases in real time
+            output_medium (:obj:`OutputMedium`, optional): environment where outputs will be sent
         """
         # if necessary, get and validate specifications of simulator
         if isinstance(specifications, str):
             specifications = biosimulators_utils.simulator.io.read_simulator_specs(specifications)
 
         self.specifications = specifications
-        self.cases = self.find_cases(ids=case_ids)
         self.verbose = verbose
+        self.output_medium = output_medium
+
+        self.cases = self.find_cases(ids=case_ids)
 
     def find_cases(self, ids=None):
         """ Find test cases
@@ -65,7 +70,8 @@ class SimulatorValidator(object):
         cases = collections.OrderedDict()
 
         # get cases involving curated published COMBINE/OMEX archives
-        all_published_projects_test_cases, compatible_published_projects_test_cases = published_project.find_cases(self.specifications)
+        all_published_projects_test_cases, compatible_published_projects_test_cases = published_project.find_cases(
+            self.specifications, output_medium=self.output_medium)
 
         # get Docker image cases
         suite_name = docker_image.__name__.replace('biosimulators_test_suite.test_case.', '')
@@ -104,8 +110,7 @@ class SimulatorValidator(object):
         # return discovered cases
         return cases
 
-    @classmethod
-    def find_cases_in_module(cls, module, published_projects_test_cases, ids=None):
+    def find_cases_in_module(self, module, published_projects_test_cases, ids=None):
         """ Discover test cases in a module
 
         Args:
@@ -136,9 +141,10 @@ class SimulatorValidator(object):
                                              .split('\n'))
                         description = ' '.join(line.strip() for line in description_lines) or None
                     if issubclass(child, published_project.SyntheticCombineArchiveTestCase):
-                        case = child(id=id, description=description, published_projects_test_cases=published_projects_test_cases)
+                        case = child(id=id, description=description, output_medium=self.output_medium,
+                                     published_projects_test_cases=published_projects_test_cases)
                     else:
-                        case = child(id=id, description=description)
+                        case = child(id=id, description=description, output_medium=self.output_medium)
                     cases.append(case)
                 else:
                     ignored_ids.append(id)
@@ -251,15 +257,15 @@ class SimulatorValidator(object):
         failure_details = []
         for result in sorted(results, key=lambda result: result.case.id):
             if result.type == TestCaseResultType.passed:
-                result_str = '  * {}\n'.format(result.case.id)
+                result_str = '  * `{}`\n'.format(result.case.id)
                 passed.append(result_str)
 
             elif result.type == TestCaseResultType.failed:
-                result_str = '  * {}\n'.format(result.case.id)
+                result_str = '  * `{}`\n'.format(result.case.id)
                 failed.append(result_str)
 
                 detail = ''
-                detail += '{} ({:.1f} s)\n'.format(result.case.id, result.duration)
+                detail += '`{}` ({:.1f} s)\n'.format(result.case.id, result.duration)
                 detail += '\n'
                 if result.case.description:
                     detail += '  {}\n'.format(result.case.description.replace('\n', '\n  '))
@@ -278,12 +284,12 @@ class SimulatorValidator(object):
                 failure_details.append(detail)
 
             elif result.type == TestCaseResultType.skipped:
-                result_str = '  * {}\n'.format(result.case.id)
+                result_str = '  * `{}`\n'.format(result.case.id)
                 skipped.append(result_str)
 
             if result.warnings:
                 detail = ''
-                detail += '{} ({:.1f} s)\n'.format(result.case.id, result.duration)
+                detail += '`{}` ({:.1f} s)\n'.format(result.case.id, result.duration)
                 detail += '\n'
                 if result.case.description:
                     detail += '  {}\n'.format(result.case.description.replace('\n', '\n  '))
