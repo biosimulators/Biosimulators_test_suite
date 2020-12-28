@@ -159,7 +159,7 @@ class SimulatorValidator(object):
         n_cases = 0
         for suite_cases in self.cases.values():
             n_cases += len(suite_cases)
-        print('Collected {} test cases.\n'.format(n_cases))
+        print('Collected {} test cases.'.format(n_cases))
 
         # get start time
         start = datetime.datetime.now()
@@ -167,7 +167,7 @@ class SimulatorValidator(object):
         # execute test cases and collect results
         results = []
         for suite_name, suite_cases in self.cases.items():
-            print('Executing {} {} tests ... {}'.format(len(suite_cases), suite_name, 'done' if not suite_cases else ''))
+            print('\nExecuting {} {} tests ... {}'.format(len(suite_cases), suite_name, 'done' if not suite_cases else ''))
             for i_case, case in enumerate(suite_cases):
                 print('  {}: {} ... '.format(i_case + 1, case.id), end='')
                 sys.stdout.flush()
