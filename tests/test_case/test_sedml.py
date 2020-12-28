@@ -1,6 +1,6 @@
 from biosimulators_test_suite.data_model import IgnoredTestCaseWarning
 from biosimulators_test_suite.test_case import sedml
-from biosimulators_test_suite.test_case.combine_archive import CuratedCombineArchiveTestCase
+from biosimulators_test_suite.test_case.published_project import PublishedProjectTestCase
 from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml.data_model import SedDocument, Task, Report
 import numpy
@@ -58,15 +58,15 @@ class SedmlTestCaseTest(unittest.TestCase):
 
     def test_MultipleTasksPerSedDocumentTestCase(self):
         specs = {'image': {'url': self.IMAGE}}
-        curated_case = CuratedCombineArchiveTestCase(filename=self.CURATED_ARCHIVE_FILENAME)
+        curated_case = PublishedProjectTestCase(filename=self.CURATED_ARCHIVE_FILENAME)
 
         # test synthetic case generated and used to test simulator
         case = sedml.MultipleTasksPerSedDocumentTestCase(
-            curated_combine_archive_test_cases=[curated_case])
+            published_projects_test_cases=[curated_case])
         case.eval(specs)
 
         # no curated cases to use
         case = sedml.MultipleTasksPerSedDocumentTestCase(
-            curated_combine_archive_test_cases=[])
+            published_projects_test_cases=[])
         with self.assertWarnsRegex(IgnoredTestCaseWarning, 'No curated COMBINE/OMEX archives are available'):
             case.eval(specs)

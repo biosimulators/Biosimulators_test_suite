@@ -6,9 +6,12 @@
 :License: MIT
 """
 
-from biosimulators_test_suite.data_model import TestCaseResultType
+from .config import TERMINAL_COLORS
+from .data_model import TestCaseResultType
+import biosimulators_test_suite
 import biosimulators_test_suite.exec_core
 import cement
+import termcolor
 
 
 class BaseController(cement.Controller):
@@ -49,15 +52,27 @@ class BaseController(cement.Controller):
         args = self.app.pargs
         try:
             validator = biosimulators_test_suite.exec_core.SimulatorValidator(
+                args.specifications,
                 case_ids=args.case_ids,
                 verbose=args.verbose)
-            results = validator.run(args.specifications)
-            summary, failure_details = validator.summarize_results(results)
+            results = validator.run()
+            summary, failure_details, warning_details = validator.summarize_results(results)
+            print('')
             print('=============== SUMMARY ===============')
-            print(summary + '\n')
+            print('')
+            print(summary + '\n\n')
             if failure_details:
-                print('=============== FAILURES ===============')
-                print(failure_details)
+                color = TERMINAL_COLORS['failure']
+                print(termcolor.colored('=============== FAILURES ===============', color))
+                print(termcolor.colored('', color))
+                print(termcolor.colored('* ' + '\n\n* '.join(failure_details), color))
+                print('')
+            if warning_details:
+                color = TERMINAL_COLORS['warning']
+                print(termcolor.colored('=============== WARNINGS ===============', color))
+                print(termcolor.colored('', color))
+                print(termcolor.colored('* ' + '\n\n* '.join(warning_details), color))
+                print('')
         except Exception as exception:
             raise SystemExit(str(exception))
 

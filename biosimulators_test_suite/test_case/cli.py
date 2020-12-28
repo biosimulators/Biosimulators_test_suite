@@ -1,4 +1,4 @@
-""" Methods for test cases involving checking support for the COMBINE/OMEX standards
+""" Methods for test cases involving checking command-line interfaces
 
 :Author: Jonathan Karr <karr@mssm.edu>
 :Date: 2020-12-21

@@ -1,7 +1,7 @@
 from biosimulators_test_suite import exec_gh_action
 from biosimulators_test_suite import exec_core
-from biosimulators_test_suite.data_model import TestCaseResult, TestCaseResultType
-from biosimulators_test_suite.test_case.combine_archive import CuratedCombineArchiveTestCase
+from biosimulators_test_suite.data_model import TestCaseResult, TestCaseResultType, TestCaseWarning
+from biosimulators_test_suite.test_case.published_project import PublishedProjectTestCase
 from biosimulators_utils.gh_action.data_model import GitHubActionCaughtError
 from biosimulators_utils.simulator_registry.data_model import SimulatorSubmission, IssueLabel
 from unittest import mock
@@ -73,9 +73,16 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         with mock.patch.dict(os.environ, self.env):
             action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
 
-        specs = {'id': 'tellurium', 'image': {'url': 'ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.1.6'}}
+        specs = {
+            'id': 'tellurium',
+            'image': {
+                'url': 'ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.1.6',
+            },
+            'algorithms': [
+            ],
+        }
         run_results = [
-            TestCaseResult(case=CuratedCombineArchiveTestCase(id='case-1'), type=TestCaseResultType.passed, log='', duration=1.)
+            TestCaseResult(case=PublishedProjectTestCase(id='sedml.case-1'), type=TestCaseResultType.passed, log='', duration=1.)
         ]
 
         def requests_post(url, json=None, auth=None, headers=None):
@@ -90,7 +97,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                             action.validate_image(specs)
 
         run_results = [
-            TestCaseResult(case=CuratedCombineArchiveTestCase(id='x'), type=TestCaseResultType.failed,
+            TestCaseResult(case=PublishedProjectTestCase(id='sedml.x'), type=TestCaseResultType.failed,
                            exception=Exception('y'), log='', duration=2.),
         ]
 
@@ -758,15 +765,19 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         if validation_state == 'passes':
             validation_run_results = [
                 TestCaseResult(
-                    case=CuratedCombineArchiveTestCase(id='case-passed'),
+                    case=PublishedProjectTestCase(id='sedml.case-passed'),
                     type=TestCaseResultType.passed,
                     duration=1.,
+                    warnings=[
+                        mock.Mock(message=TestCaseWarning('Warning-1')),
+                        mock.Mock(message=TestCaseWarning('Warning-2')),
+                    ],
                 ),
             ]
         elif validation_state == 'fails':
             validation_run_results = [
                 TestCaseResult(
-                    case=CuratedCombineArchiveTestCase(id='case-failed'),
+                    case=PublishedProjectTestCase(id='sedml.case-failed'),
                     type=TestCaseResultType.failed,
                     exception=Exception('Big error'),
                     log='Long log',
@@ -797,7 +808,9 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                                         with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', side_effect=docker_mock.convert_docker_image_to_singularity):
                                             with mock.patch.object(docker.models.images.Image, 'tag', side_effect=docker_mock.tag):
                                                 with mock.patch.object(docker.models.images.ImageCollection, 'push', side_effect=docker_mock.push):
-                                                    cases = [result.case for result in validation_run_results]
+                                                    cases = {
+                                                        'suite': [result.case for result in validation_run_results]
+                                                    }
                                                     with mock.patch.object(exec_core.SimulatorValidator, 'find_cases', return_value=cases):
                                                         with mock.patch.object(exec_core.SimulatorValidator, 'eval_case', side_effect=validation_run_results):
                                                             action = exec_gh_action.ValidateCommitSimulatorGitHubAction()

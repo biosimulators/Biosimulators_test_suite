@@ -7,10 +7,10 @@
   }],
   "expectedReports": [{
     "id": "LSODA.sedml/report_1_task1",
-    "dataSets": ["time", "pmTORC1"],
+    "dataSets": ["Time", "pmTORC1"],
     "points": [1001],
     "values": {
-      "time": {
+      "Time": {
         "0": 0.0,
         "1000": 3600
       }

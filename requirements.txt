@@ -1,5 +1,6 @@
-biosimulators_utils[docker] >= 0.1.19
+biosimulators_utils[docker] >= 0.1.21
 capturer
 cement
 docker
 natsort
+termcolor

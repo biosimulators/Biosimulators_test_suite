@@ -9,15 +9,15 @@
 import abc
 import enum
 
-__all__ = ['AbstractTestCase', 'SedTaskRequirements', 'ExpectedSedReport', 'ExpectedSedPlot',
+__all__ = ['TestCase', 'SedTaskRequirements', 'ExpectedSedReport', 'ExpectedSedPlot',
            'TestCaseResultType', 'TestCaseResult',
            'AlertType',
-           'InvalidOuputsException', 'InvalidOuputsWarning',
+           'TestCaseWarning', 'InvalidOuputsException', 'InvalidOuputsWarning',
            'SkippedTestCaseException', 'IgnoredTestCaseWarning',
            ]
 
 
-class AbstractTestCase(abc.ABC):
+class TestCase(abc.ABC):
     """ A test case for validating a simulator
 
     Attributes:
@@ -123,22 +123,25 @@ class TestCaseResult(object):
         type (:obj:`obj:`TestCaseResultType`): type
         duration (:obj:`float`): execution duration in seconds
         exception (:obj:`Exception`): exception
+        warnings (:obj:`list` of :obj:`TestCaseWarning`): warnings
         log (:obj:`str`): log of execution
     """
 
-    def __init__(self, case=None, type=None, duration=None, exception=None, log=None):
+    def __init__(self, case=None, type=None, duration=None, exception=None, warnings=None, log=None):
         """
         Args:
             case (:obj:`TestCase`, optional): test case
             type (:obj:`obj:`TestCaseResultType`, optional): type
             duration (:obj:`float`, optional): execution duration in seconds
             exception (:obj:`Exception`, optional): exception
+            warnings (:obj:`list` of :obj:`TestCaseWarning`): warnings
             log (:obj:`str`, optional): log of execution
         """
         self.case = case
         self.type = type
         self.duration = duration
         self.exception = exception
+        self.warnings = warnings or []
         self.log = log
 
 
@@ -148,12 +151,17 @@ class AlertType(str, enum.Enum):
     warning = 'warning'
 
 
+class TestCaseWarning(UserWarning):
+    """ Base class for warnings collected from test cases """
+    pass
+
+
 class InvalidOuputsException(Exception):
     """ Exception raised when outputs of execution of COMBINE/OMEX archive are not as expected """
     pass  # pragma: no cover
 
 
-class InvalidOuputsWarning(UserWarning):
+class InvalidOuputsWarning(TestCaseWarning):
     """ Warning raised when outputs of execution of COMBINE/OMEX archive are not as expected """
     pass  # pragma: no cover
 
