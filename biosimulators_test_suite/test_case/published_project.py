@@ -143,6 +143,10 @@ class PublishedProjectTestCase(TestCase):
 
         self.expected_reports = []
         for exp_report_def in data.get('expectedReports', []):
+            id = exp_report_def['id']
+
+            data_set_labels = set(exp_report_def.get('dataSets', []))
+
             values = {}
             for key, val in exp_report_def.get('values', {}).items():
                 if isinstance(val, list):
@@ -152,9 +156,18 @@ class PublishedProjectTestCase(TestCase):
                     for k, v in val.items():
                         values[key][tuple(int(index) for index in k.split(","))] = v
 
+            invalid_dataset_ids = set(values.keys()).difference(set(data_set_labels))
+            if invalid_dataset_ids:
+                raise ValueError((
+                    "The keys of the expected values of report '{}' of published project test case '{}' "
+                    "should be defined in the 'dataSets' property. "
+                    "The following keys were not in the 'dataSets' property:\n  - {}").format(
+                    id, self.id.replace('published_project.PublishedProjectTestCase:', ''),
+                    '\n  - '.join(sorted(invalid_dataset_ids))))
+
             self.expected_reports.append(ExpectedSedReport(
-                id=exp_report_def['id'],
-                data_sets=set(exp_report_def.get('dataSets', [])),
+                id=id,
+                data_sets=data_set_labels,
                 points=tuple(exp_report_def['points']),
                 values=values,
             ))
@@ -268,9 +281,9 @@ class PublishedProjectTestCase(TestCase):
                                   expected_report.id, report.shape[1:], expected_report.points))
                     continue
 
-                for data_set_id, expected_value in expected_report.values.items():
+                for data_set_label, expected_value in expected_report.values.items():
                     if isinstance(expected_value, dict):
-                        value = report.loc[data_set_id, :]
+                        value = report.loc[data_set_label, :]
                         for el_id, expected_el_value in expected_value.items():
                             el_index = numpy.ravel_multi_index([el_id], value.shape)[0]
                             try:
@@ -282,18 +295,18 @@ class PublishedProjectTestCase(TestCase):
                                 )
                             except AssertionError:
                                 errors.append('Data set {} of report {} does not have expected value at {}: {} != {}'.format(
-                                    data_set_id, expected_report.id, el_id, value[el_index], expected_el_value))
+                                    data_set_label, expected_report.id, el_id, value[el_index], expected_el_value))
                     else:
                         try:
                             numpy.testing.assert_allclose(
-                                report.loc[data_set_id, :],
+                                report.loc[data_set_label, :],
                                 expected_value,
                                 rtol=self.r_tol,
                                 atol=self.a_tol,
                             )
                         except AssertionError:
                             errors.append('Data set {} of report {} does not have expected values'.format(
-                                data_set_id, expected_report.id))
+                                data_set_label, expected_report.id))
 
             report_ids = report_reader.get_ids(out_dir)
             expected_report_ids = set(report.id for report in self.expected_reports)
