@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3.1.1. biosimulators_test_suite.test_case package &#8212; BioSimulators test suite 0.1.2 documentation</title>
+    <title>3.1.1. biosimulators_test_suite.test_case package &#8212; BioSimulators test suite 0.1.3 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -57,10 +57,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#submodules">3.2. Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.data_model">3.3. biosimulators_test_suite.data_model module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_cli">3.4. biosimulators_test_suite.exec_cli module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_core">3.5. biosimulators_test_suite.exec_core module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_gh_action">3.6. biosimulators_test_suite.exec_gh_action module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.config">3.3. biosimulators_test_suite.config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.data_model">3.4. biosimulators_test_suite.data_model module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_cli">3.5. biosimulators_test_suite.exec_cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_core">3.6. biosimulators_test_suite.exec_core module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_gh_action">3.7. biosimulators_test_suite.exec_gh_action module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">4. About the BioSimulators test suite</a></li>
@@ -120,9 +121,9 @@
 <div class="section" id="submodules">
 <h2><span class="section-number">3.1.1.1. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-biosimulators_test_suite.test_case.combine_archive">
-<span id="biosimulators-test-suite-test-case-combine-archive-module"></span><h2><span class="section-number">3.1.1.2. </span>biosimulators_test_suite.test_case.combine_archive module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.combine_archive" title="Permalink to this headline">¶</a></h2>
-<p>Methods for test cases involving manually curated COMBINE/OMEX archives</p>
+<div class="section" id="module-biosimulators_test_suite.test_case.cli">
+<span id="biosimulators-test-suite-test-case-cli-module"></span><h2><span class="section-number">3.1.1.2. </span>biosimulators_test_suite.test_case.cli module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.cli" title="Permalink to this headline">¶</a></h2>
+<p>Methods for test cases involving checking command-line interfaces</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
 <dd class="field-odd"><p>Jonathan Karr &lt;<a class="reference external" href="mailto:karr&#37;&#52;&#48;mssm&#46;edu">karr<span>&#64;</span>mssm<span>&#46;</span>edu</a>&gt;</p>
@@ -137,228 +138,27 @@
 <dd class="field-even"><p>MIT</p>
 </dd>
 </dl>
-<dl class="py class">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase">
-<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.combine_archive.</code><code class="sig-name descname">CuratedCombineArchiveTestCase</code><span class="sig-paren">(</span><em class="sig-param">id=None</em>, <em class="sig-param">name=None</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">task_requirements=None</em>, <em class="sig-param">expected_reports=None</em>, <em class="sig-param">expected_plots=None</em>, <em class="sig-param">runtime_failure_alert_type=&lt;AlertType.exception: 'exception'&gt;</em>, <em class="sig-param">assert_no_extra_reports=False</em>, <em class="sig-param">assert_no_extra_datasets=False</em>, <em class="sig-param">assert_no_missing_plots=False</em>, <em class="sig-param">assert_no_extra_plots=False</em>, <em class="sig-param">r_tol=0.0001</em>, <em class="sig-param">a_tol=0.0</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.AbstractTestCase" title="biosimulators_test_suite.data_model.AbstractTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.AbstractTestCase</span></code></a></p>
-<p>A test case for validating a simulator that involves executing a COMBINE/OMEX archive</p>
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.id">
-<code class="sig-name descname">id</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.id" title="Permalink to this definition">¶</a></dt>
-<dd><p>id</p>
+</div>
+<div class="section" id="module-biosimulators_test_suite.test_case.combine_archive">
+<span id="biosimulators-test-suite-test-case-combine-archive-module"></span><h2><span class="section-number">3.1.1.3. </span>biosimulators_test_suite.test_case.combine_archive module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.combine_archive" title="Permalink to this headline">¶</a></h2>
+<p>Methods for test cases involving checking support for the COMBINE/OMEX standards</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jonathan Karr &lt;<a class="reference external" href="mailto:karr&#37;&#52;&#48;mssm&#46;edu">karr<span>&#64;</span>mssm<span>&#46;</span>edu</a>&gt;</p>
+</dd>
+<dt class="field-even">Date</dt>
+<dd class="field-even"><p>2020-12-21</p>
+</dd>
+<dt class="field-odd">Copyright</dt>
+<dd class="field-odd"><p>2020, Center for Reproducible Biomedical Modeling</p>
+</dd>
+<dt class="field-even">License</dt>
+<dd class="field-even"><p>MIT</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.name">
-<code class="sig-name descname">name</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>name</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.filename">
-<code class="sig-name descname">filename</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.filename" title="Permalink to this definition">¶</a></dt>
-<dd><p>path to archive</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.task_requirements">
-<code class="sig-name descname">task_requirements</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.task_requirements" title="Permalink to this definition">¶</a></dt>
-<dd><p>list of the required model format and simulation algorithm
-for each task in the COMBINE/OMEX archive</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedTaskRequirements</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.expected_reports">
-<code class="sig-name descname">expected_reports</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.expected_reports" title="Permalink to this definition">¶</a></dt>
-<dd><p>list of reports expected to be produced by algorithm</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpectedSedReport</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.expected_plots">
-<code class="sig-name descname">expected_plots</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.expected_plots" title="Permalink to this definition">¶</a></dt>
-<dd><p>list of plots expected to be produced by algorithm</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpectedSedPlot</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.runtime_failure_alert_type">
-<code class="sig-name descname">runtime_failure_alert_type</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.runtime_failure_alert_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>whether a run-time failure should be raised as an error or warning</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">AlertType</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.assert_no_extra_reports">
-<code class="sig-name descname">assert_no_extra_reports</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.assert_no_extra_reports" title="Permalink to this definition">¶</a></dt>
-<dd><p>if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, raise an exception if the simulator produces unexpected reports</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.assert_no_extra_datasets">
-<code class="sig-name descname">assert_no_extra_datasets</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.assert_no_extra_datasets" title="Permalink to this definition">¶</a></dt>
-<dd><p>if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, raise an exception if the simulator produces unexpected datasets</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.assert_no_missing_plots">
-<code class="sig-name descname">assert_no_missing_plots</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.assert_no_missing_plots" title="Permalink to this definition">¶</a></dt>
-<dd><p>if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, raise an exception if the simulator doesn’t produce the expected plots</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.assert_no_extra_plots">
-<code class="sig-name descname">assert_no_extra_plots</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.assert_no_extra_plots" title="Permalink to this definition">¶</a></dt>
-<dd><p>if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, raise an exception if the simulator produces unexpected plots</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.r_tol">
-<code class="sig-name descname">r_tol</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.r_tol" title="Permalink to this definition">¶</a></dt>
-<dd><p>relative tolerence</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.a_tol">
-<code class="sig-name descname">a_tol</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.a_tol" title="Permalink to this definition">¶</a></dt>
-<dd><p>absolute tolerence</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.eval">
-<code class="sig-name descname">eval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate a simulator’s performance on a test case</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.SkippedTestCaseException" title="biosimulators_test_suite.data_model.SkippedTestCaseException"><strong>SkippedTestCaseException</strong></a> – if the test case is not applicable to the simulator</p></li>
-<li><p><strong>Exception</strong> – if the simulator did not pass the test case</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.from_dict">
-<code class="sig-name descname">from_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.from_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read test case from dictionary</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>data</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – dictionary with test case data</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>this object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase" title="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CuratedCombineArchiveTestCase</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.from_json">
-<code class="sig-name descname">from_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base_path</span></em>, <em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.from_json" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read test case from JSON file</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>base_path</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – bath directory for test cases</p></li>
-<li><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – JSON file relative to <code class="xref py py-obj docutils literal notranslate"><span class="pre">base_path</span></code></p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>this object</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase" title="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CuratedCombineArchiveTestCase</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.get_description">
-<code class="sig-name descname">get_description</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CuratedCombineArchiveTestCase.get_description" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get a description of the case</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>description of the case</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-biosimulators_test_suite.test_case.docker_image">
-<span id="biosimulators-test-suite-test-case-docker-image-module"></span><h2><span class="section-number">3.1.1.3. </span>biosimulators_test_suite.test_case.docker_image module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.docker_image" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-test-case-docker-image-module"></span><h2><span class="section-number">3.1.1.4. </span>biosimulators_test_suite.test_case.docker_image module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.docker_image" title="Permalink to this headline">¶</a></h2>
 <p>Methods for test cases involving checking Docker images</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -377,8 +177,9 @@ for each task in the COMBINE/OMEX archive</p>
 <dl class="py class">
 <dt id="biosimulators_test_suite.test_case.docker_image.BioContainersLabelsTestCase">
 <em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.docker_image.</code><code class="sig-name descname">BioContainersLabelsTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">description</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.BioContainersLabelsTestCase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.AbstractTestCase" title="biosimulators_test_suite.data_model.AbstractTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.AbstractTestCase</span></code></a></p>
-<p>Test that a Docker image has BioContainers labels with metadata about image</p>
+<dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.TestCase" title="biosimulators_test_suite.data_model.TestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.TestCase</span></code></a></p>
+<p>Test that a Docker image has BioContainers labels with metadata
+about the image</p>
 <dl class="py attribute">
 <dt id="biosimulators_test_suite.test_case.docker_image.BioContainersLabelsTestCase.EXPECTED_LABELS">
 <code class="sig-name descname">EXPECTED_LABELS</code><em class="property"> = ['about.documentation', 'about.home', 'about.license', 'about.license_file', 'about.summary', 'about.tags', 'base_image', 'extra.identifiers.biotools', 'maintainer', 'software', 'software.version', 'version']</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.BioContainersLabelsTestCase.EXPECTED_LABELS" title="Permalink to this definition">¶</a></dt>
@@ -403,8 +204,9 @@ for each task in the COMBINE/OMEX archive</p>
 <dl class="py class">
 <dt id="biosimulators_test_suite.test_case.docker_image.OciLabelsTestCase">
 <em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.docker_image.</code><code class="sig-name descname">OciLabelsTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">description</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.OciLabelsTestCase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.AbstractTestCase" title="biosimulators_test_suite.data_model.AbstractTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.AbstractTestCase</span></code></a></p>
-<p>Test that a Docker image has Open Container Initiative (OCI) labels with metadata about image</p>
+<dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.TestCase" title="biosimulators_test_suite.data_model.TestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.TestCase</span></code></a></p>
+<p>Test that a Docker image has Open Container Initiative (OCI) labels
+with metadata about the image</p>
 <dl class="py attribute">
 <dt id="biosimulators_test_suite.test_case.docker_image.OciLabelsTestCase.EXPECTED_LABELS">
 <code class="sig-name descname">EXPECTED_LABELS</code><em class="property"> = ['org.opencontainers.image.authors', 'org.opencontainers.image.description', 'org.opencontainers.image.documentation', 'org.opencontainers.image.licenses', 'org.opencontainers.image.revision', 'org.opencontainers.image.source', 'org.opencontainers.image.title', 'org.opencontainers.image.url', 'org.opencontainers.image.vendor', 'org.opencontainers.image.version', 'org.opencontainers.image.created']</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.OciLabelsTestCase.EXPECTED_LABELS" title="Permalink to this definition">¶</a></dt>
@@ -427,8 +229,250 @@ for each task in the COMBINE/OMEX archive</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-biosimulators_test_suite.test_case.published_project">
+<span id="biosimulators-test-suite-test-case-published-project-module"></span><h2><span class="section-number">3.1.1.5. </span>biosimulators_test_suite.test_case.published_project module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.published_project" title="Permalink to this headline">¶</a></h2>
+<p>Methods for test cases involving manually curated COMBINE/OMEX archives</p>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jonathan Karr &lt;<a class="reference external" href="mailto:karr&#37;&#52;&#48;mssm&#46;edu">karr<span>&#64;</span>mssm<span>&#46;</span>edu</a>&gt;</p>
+</dd>
+<dt class="field-even">Date</dt>
+<dd class="field-even"><p>2020-12-21</p>
+</dd>
+<dt class="field-odd">Copyright</dt>
+<dd class="field-odd"><p>2020, Center for Reproducible Biomedical Modeling</p>
+</dd>
+<dt class="field-even">License</dt>
+<dd class="field-even"><p>MIT</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.published_project.</code><code class="sig-name descname">PublishedProjectTestCase</code><span class="sig-paren">(</span><em class="sig-param">id=None</em>, <em class="sig-param">name=None</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">task_requirements=None</em>, <em class="sig-param">expected_reports=None</em>, <em class="sig-param">expected_plots=None</em>, <em class="sig-param">runtime_failure_alert_type=&lt;AlertType.exception: 'exception'&gt;</em>, <em class="sig-param">assert_no_extra_reports=False</em>, <em class="sig-param">assert_no_extra_datasets=False</em>, <em class="sig-param">assert_no_missing_plots=False</em>, <em class="sig-param">assert_no_extra_plots=False</em>, <em class="sig-param">r_tol=0.0001</em>, <em class="sig-param">a_tol=0.0</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.TestCase" title="biosimulators_test_suite.data_model.TestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.TestCase</span></code></a></p>
+<p>A test case for validating a simulator that involves executing a COMBINE/OMEX archive</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.id">
+<code class="sig-name descname">id</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>id</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.name">
+<code class="sig-name descname">name</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>name</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.filename">
+<code class="sig-name descname">filename</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>path to archive</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.task_requirements">
+<code class="sig-name descname">task_requirements</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.task_requirements" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of the required model format and simulation algorithm
+for each task in the COMBINE/OMEX archive</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedTaskRequirements</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.expected_reports">
+<code class="sig-name descname">expected_reports</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.expected_reports" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of reports expected to be produced by algorithm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpectedSedReport</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.expected_plots">
+<code class="sig-name descname">expected_plots</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.expected_plots" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of plots expected to be produced by algorithm</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpectedSedPlot</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.runtime_failure_alert_type">
+<code class="sig-name descname">runtime_failure_alert_type</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.runtime_failure_alert_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>whether a run-time failure should be raised as an error or warning</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">AlertType</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.assert_no_extra_reports">
+<code class="sig-name descname">assert_no_extra_reports</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.assert_no_extra_reports" title="Permalink to this definition">¶</a></dt>
+<dd><p>if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, raise an exception if the simulator produces unexpected reports</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.assert_no_extra_datasets">
+<code class="sig-name descname">assert_no_extra_datasets</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.assert_no_extra_datasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, raise an exception if the simulator produces unexpected datasets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.assert_no_missing_plots">
+<code class="sig-name descname">assert_no_missing_plots</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.assert_no_missing_plots" title="Permalink to this definition">¶</a></dt>
+<dd><p>if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, raise an exception if the simulator doesn’t produce the expected plots</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.assert_no_extra_plots">
+<code class="sig-name descname">assert_no_extra_plots</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.assert_no_extra_plots" title="Permalink to this definition">¶</a></dt>
+<dd><p>if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, raise an exception if the simulator produces unexpected plots</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.r_tol">
+<code class="sig-name descname">r_tol</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.r_tol" title="Permalink to this definition">¶</a></dt>
+<dd><p>relative tolerence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.a_tol">
+<code class="sig-name descname">a_tol</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.a_tol" title="Permalink to this definition">¶</a></dt>
+<dd><p>absolute tolerence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.compatible_with_specifications">
+<code class="sig-name descname">compatible_with_specifications</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.compatible_with_specifications" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.eval">
+<code class="sig-name descname">eval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate a simulator’s performance on a test case</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.SkippedTestCaseException" title="biosimulators_test_suite.data_model.SkippedTestCaseException"><strong>SkippedTestCaseException</strong></a> – if the test case is not applicable to the simulator</p></li>
+<li><p><strong>Exception</strong> – if the simulator did not pass the test case</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.from_dict">
+<code class="sig-name descname">from_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read test case from dictionary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – dictionary with test case data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>this object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase" title="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PublishedProjectTestCase</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.from_json">
+<code class="sig-name descname">from_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">base_path</span></em>, <em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.from_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Read test case from JSON file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – bath directory for test cases</p></li>
+<li><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – JSON file relative to <code class="xref py py-obj docutils literal notranslate"><span class="pre">base_path</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>this object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase" title="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PublishedProjectTestCase</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.get_description">
+<code class="sig-name descname">get_description</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase.get_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a description of the case</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>description of the case</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="module-biosimulators_test_suite.test_case.sedml">
-<span id="biosimulators-test-suite-test-case-sedml-module"></span><h2><span class="section-number">3.1.1.4. </span>biosimulators_test_suite.test_case.sedml module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.sedml" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-test-case-sedml-module"></span><h2><span class="section-number">3.1.1.6. </span>biosimulators_test_suite.test_case.sedml module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.sedml" title="Permalink to this headline">¶</a></h2>
 <p>Methods for testing that simulators support the features of SED-ML</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -446,8 +490,8 @@ for each task in the COMBINE/OMEX archive</p>
 </dl>
 <dl class="py class">
 <dt id="biosimulators_test_suite.test_case.sedml.MultipleTasksPerSedDocumentTestCase">
-<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.sedml.</code><code class="sig-name descname">MultipleTasksPerSedDocumentTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">description</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">curated_combine_archive_test_cases</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.MultipleTasksPerSedDocumentTestCase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.combine_archive.SyntheticCombineArchiveTestCase</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.sedml.</code><code class="sig-name descname">MultipleTasksPerSedDocumentTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">description</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">published_projects_test_cases</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.MultipleTasksPerSedDocumentTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase</span></code></p>
 <p>Test that a simulator supports multiple tasks per SED document</p>
 <dl class="py attribute">
 <dt id="biosimulators_test_suite.test_case.sedml.MultipleTasksPerSedDocumentTestCase._expected_reports">
@@ -498,49 +542,6 @@ SED documents in synthetic archive</p></li>
 <li><p><strong>synthetic_archive</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code>) – synthetic COMBINE/OMEX archive for testing the simulator</p></li>
 <li><p><strong>outputs_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory that contains the outputs produced from the execution of the synthetic archive</p></li>
 </ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="biosimulators_test_suite.test_case.sedml.MultipleTasksPerSedDocumentTestCase.get_suitable_sed_doc">
-<em class="property">static </em><code class="sig-name descname">get_suitable_sed_doc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.MultipleTasksPerSedDocumentTestCase.get_suitable_sed_doc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the location of a suitable SED document for testing</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>sed_docs</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>) – map from locations to
-SED documents in curated archive</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>location of a suitable SED document</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="biosimulators_test_suite.test_case.sedml.MultipleTasksPerSedDocumentTestCase.is_curated_archive_suitable_for_building_synthetic_archive">
-<code class="sig-name descname">is_curated_archive_suitable_for_building_synthetic_archive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">archive</span></em>, <em class="sig-param"><span class="n">sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.MultipleTasksPerSedDocumentTestCase.is_curated_archive_suitable_for_building_synthetic_archive" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find an archive with at least one report</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>archive</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code>) – curated COMBINE/OMEX archive</p></li>
-<li><p><strong>sed_docs</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>) – map from locations to
-SED documents in curated archive</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, if the curated archive is suitable for generating a synthetic</dt><dd><p>archive for testing</p>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
 </dl>
 </dd></dl>
