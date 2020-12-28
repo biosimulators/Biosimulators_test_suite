@@ -74,10 +74,18 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         with open(os.path.join(base_path, filename), 'r') as file:
             data = json.load(file)
-        data['expectedReports'][0]['values']['t'] = [0, 1, 2, 3, 4, 5]
+        id = 'published_project.PublishedProjectTestCase:sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json'
+
+        data['expectedReports'][0]['values'] = {'t': [0, 1, 2, 3, 4, 5]}
         with self.assertRaisesRegex(ValueError, "keys were not in the 'dataSets' property"):
-            id = 'published_project.PublishedProjectTestCase:sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json'
             PublishedProjectTestCase(id=id).from_dict(data)
+
+        data['expectedReports'][0]['values'] = {'T': {'5001': 1000.2}}
+        with self.assertRaisesRegex(ValueError, "Key must be less than or equal to"):
+            PublishedProjectTestCase(id=id).from_dict(data)
+
+        data['expectedReports'][0]['values'] = {'T': {'5000': 1000.}}
+        PublishedProjectTestCase(id=id).from_dict(data)
 
     def test_CuratedCombineArchiveTestCase_from_json(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')

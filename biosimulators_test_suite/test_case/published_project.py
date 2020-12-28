@@ -165,6 +165,7 @@ class PublishedProjectTestCase(TestCase):
             id = exp_report_def['id']
 
             data_set_labels = set(exp_report_def.get('dataSets', []))
+            points = tuple(exp_report_def['points'])
 
             values = {}
             for key, val in exp_report_def.get('values', {}).items():
@@ -173,7 +174,20 @@ class PublishedProjectTestCase(TestCase):
                 else:
                     values[key] = {}
                     for k, v in val.items():
-                        values[key][tuple(int(index) for index in k.split(","))] = v
+                        multi_index = tuple(int(index) for index in k.split(","))
+                        try:
+                            numpy.ravel_multi_index([multi_index], points)[0]
+                        except ValueError:
+                            raise ValueError((
+                                "Key '{}' of the expected values of report '{}' of published project test case '{}' is invalid. "
+                                "Key must be less than or equal to '{}'."
+                            ).format(
+                                multi_index,
+                                self.id,
+                                self.id.replace('published_project.PublishedProjectTestCase:', ''),
+                                tuple(p - 1 for p in points),
+                            ))
+                        values[key][multi_index] = v
 
             invalid_dataset_ids = set(values.keys()).difference(set(data_set_labels))
             if invalid_dataset_ids:
@@ -187,7 +201,7 @@ class PublishedProjectTestCase(TestCase):
             self.expected_reports.append(ExpectedSedReport(
                 id=id,
                 data_sets=data_set_labels,
-                points=tuple(exp_report_def['points']),
+                points=points,
                 values=values,
             ))
 
@@ -305,16 +319,17 @@ class PublishedProjectTestCase(TestCase):
                         value = report.loc[data_set_label, :]
                         for el_id, expected_el_value in expected_value.items():
                             el_index = numpy.ravel_multi_index([el_id], value.shape)[0]
+                            actual_el_value = value[el_index]
                             try:
                                 numpy.testing.assert_allclose(
-                                    value[el_index],
+                                    actual_el_value,
                                     expected_el_value,
                                     rtol=self.r_tol,
                                     atol=self.a_tol,
                                 )
                             except AssertionError:
                                 errors.append('Data set {} of report {} does not have expected value at {}: {} != {}'.format(
-                                    data_set_label, expected_report.id, el_id, value[el_index], expected_el_value))
+                                    data_set_label, expected_report.id, el_id, actual_el_value, expected_el_value))
                     else:
                         try:
                             numpy.testing.assert_allclose(
