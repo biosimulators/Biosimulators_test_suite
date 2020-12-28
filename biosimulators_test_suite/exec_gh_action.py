@@ -7,7 +7,7 @@
 :License: MIT
 """
 
-from .data_model import TestCaseResultType
+from .data_model import TestCaseResultType, OutputMedium
 from .exec_core import SimulatorValidator
 from biosimulators_utils.gh_action.data_model import Comment, GitHubActionCaughtError  # noqa: F401
 from biosimulators_utils.gh_action.core import GitHubAction, GitHubActionErrorHandling
@@ -208,7 +208,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         biosimulators_utils.image.convert_docker_image_to_singularity(image_url)
 
         # validate that image is consistent with the BioSimulators standards
-        validator = SimulatorValidator(specifications)
+        validator = SimulatorValidator(specifications, output_medium=OutputMedium.gh_issue)
         case_results = validator.run()
         summary, failure_details, warning_details = validator.summarize_results(case_results)
         msg = '## Summary of tests\n\n{}\n\n'.format(summary)

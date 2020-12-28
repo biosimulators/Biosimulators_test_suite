@@ -52,10 +52,10 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         expected_description = '\n'.join([
             'Required model formats and simulation algorithms for SED tasks:',
             '',
-            '* Format: format_2585',
-            '  Algorithm: KISAO_0000019',
-            '* Format: format_2585',
-            '  Algorithm: KISAO_0000027',
+            '* Format: `format_2585`',
+            '  Algorithm: `KISAO_0000019`',
+            '* Format: `format_2585`',
+            '  Algorithm: `KISAO_0000027`',
         ])
         self.assertEqual(case.description, expected_description)
 
