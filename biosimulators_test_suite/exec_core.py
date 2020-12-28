@@ -184,7 +184,7 @@ class SimulatorValidator(object):
                 print(termcolor.colored(result.type.value, TERMINAL_COLORS[result.type.value]), end='')
                 print(' (', end='')
                 if result.warnings:
-                    print(termcolor.colored(str(len(result.warnings)) + ', ', TERMINAL_COLORS['warned']), end='')
+                    print(termcolor.colored(str(len(result.warnings)) + ' warnings, ', TERMINAL_COLORS['warned']), end='')
                 print('{:.1f} s'.format(result.duration), end='')
                 print(').')
 
