@@ -223,7 +223,8 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             error_msg = 'After correcting your simulator, please edit the first block of this issue to re-initiate this validation.'
             self.add_error_comment_to_issue(self.issue_number, [Comment(text=error_msg, error=True)])
 
-        valid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.passed]
+        valid_cases = [case_result for case_result in case_results
+                       if case_result.type == TestCaseResultType.passed and case_result.case.id.startswith('sedml.')]
         if not valid_cases:
             self.add_error_comment_to_issue(self.issue_number, [Comment(text=(
                 'No test cases are applicable to your simulator. '

@@ -82,7 +82,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             ],
         }
         run_results = [
-            TestCaseResult(case=PublishedProjectTestCase(id='case-1'), type=TestCaseResultType.passed, log='', duration=1.)
+            TestCaseResult(case=PublishedProjectTestCase(id='sedml.case-1'), type=TestCaseResultType.passed, log='', duration=1.)
         ]
 
         def requests_post(url, json=None, auth=None, headers=None):
@@ -97,7 +97,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                             action.validate_image(specs)
 
         run_results = [
-            TestCaseResult(case=PublishedProjectTestCase(id='x'), type=TestCaseResultType.failed,
+            TestCaseResult(case=PublishedProjectTestCase(id='sedml.x'), type=TestCaseResultType.failed,
                            exception=Exception('y'), log='', duration=2.),
         ]
 
@@ -765,7 +765,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         if validation_state == 'passes':
             validation_run_results = [
                 TestCaseResult(
-                    case=PublishedProjectTestCase(id='case-passed'),
+                    case=PublishedProjectTestCase(id='sedml.case-passed'),
                     type=TestCaseResultType.passed,
                     duration=1.,
                     warnings=[
@@ -777,7 +777,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         elif validation_state == 'fails':
             validation_run_results = [
                 TestCaseResult(
-                    case=PublishedProjectTestCase(id='case-failed'),
+                    case=PublishedProjectTestCase(id='sedml.case-failed'),
                     type=TestCaseResultType.failed,
                     exception=Exception('Big error'),
                     log='Long log',
