@@ -245,8 +245,12 @@ class PublishedProjectTestCase(TestCase):
 
                 missing_data_sets = set(expected_report.data_sets).difference(set(report.index))
                 if missing_data_sets:
-                    errors.append('Report {} does not contain expected data sets:\n  {}'.format(
-                        expected_report.id, '\n  '.join(sorted(missing_data_sets))))
+                    errors.append(('Report {} does not contain expected data sets:\n  {}\n\n'
+                                   'Report contained these data sets:\n  {}').format(
+                        expected_report.id,
+                        '\n  '.join(sorted(missing_data_sets)),
+                        '\n  '.join(sorted(report.index)),
+                    ))
                     continue
 
                 extra_data_sets = set(report.index).difference(set(expected_report.data_sets))
