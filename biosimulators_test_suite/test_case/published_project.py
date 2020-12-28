@@ -173,6 +173,8 @@ class PublishedProjectTestCase(TestCase):
         self.r_tol = data.get('r_tol', 1e-4)
         self.a_tol = data.get('a_tol', 0.)
 
+        self.description = self.get_description()
+
         return self
 
     def compatible_with_specifications(self, specifications):
