@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3. biosimulators_test_suite package &#8212; BioSimulators test suite 0.1.6 documentation</title>
+    <title>3. biosimulators_test_suite package &#8212; BioSimulators test suite 0.1.7 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -59,9 +59,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#submodules">3.2. Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.config">3.3. biosimulators_test_suite.config module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.data_model">3.4. biosimulators_test_suite.data_model module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exec_cli">3.5. biosimulators_test_suite.exec_cli module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exec_core">3.6. biosimulators_test_suite.exec_core module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exec_gh_action">3.7. biosimulators_test_suite.exec_gh_action module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exceptions">3.5. biosimulators_test_suite.exceptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exec_cli">3.6. biosimulators_test_suite.exec_cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exec_core">3.7. biosimulators_test_suite.exec_core module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exec_gh_action">3.8. biosimulators_test_suite.exec_gh_action module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.warnings">3.9. biosimulators_test_suite.warnings module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">4. About the BioSimulators test suite</a></li>
@@ -212,27 +214,6 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 </dl>
 </dd></dl>
 
-<dl class="py exception">
-<dt id="biosimulators_test_suite.data_model.IgnoredTestCaseWarning">
-<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.data_model.</code><code class="sig-name descname">IgnoredTestCaseWarning</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.IgnoredTestCaseWarning" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserWarning</span></code></p>
-<p>Warning raised that indicates that a test case was ignored</p>
-</dd></dl>
-
-<dl class="py exception">
-<dt id="biosimulators_test_suite.data_model.InvalidOuputsException">
-<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.data_model.</code><code class="sig-name descname">InvalidOuputsException</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.InvalidOuputsException" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>Exception raised when outputs of execution of COMBINE/OMEX archive are not as expected</p>
-</dd></dl>
-
-<dl class="py exception">
-<dt id="biosimulators_test_suite.data_model.InvalidOuputsWarning">
-<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.data_model.</code><code class="sig-name descname">InvalidOuputsWarning</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.InvalidOuputsWarning" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.data_model.TestCaseWarning" title="biosimulators_test_suite.data_model.TestCaseWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.TestCaseWarning</span></code></a></p>
-<p>Warning raised when outputs of execution of COMBINE/OMEX archive are not as expected</p>
-</dd></dl>
-
 <dl class="py class">
 <dt id="biosimulators_test_suite.data_model.OutputMedium">
 <em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.data_model.</code><code class="sig-name descname">OutputMedium</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.OutputMedium" title="Permalink to this definition">¶</a></dt>
@@ -277,13 +258,6 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 </dl>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="py exception">
-<dt id="biosimulators_test_suite.data_model.SkippedTestCaseException">
-<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.data_model.</code><code class="sig-name descname">SkippedTestCaseException</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.SkippedTestCaseException" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>Exception raised that indicates that a test case should be skipped</p>
 </dd></dl>
 
 <dl class="py class">
@@ -345,7 +319,7 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="#biosimulators_test_suite.data_model.SkippedTestCaseException" title="biosimulators_test_suite.data_model.SkippedTestCaseException"><strong>SkippedTestCaseException</strong></a> – if the test case is not applicable to the simulator</p></li>
+<li><p><a class="reference internal" href="#biosimulators_test_suite.exceptions.SkippedTestCaseException" title="biosimulators_test_suite.exceptions.SkippedTestCaseException"><strong>SkippedTestCaseException</strong></a> – if the test case is not applicable to the simulator</p></li>
 <li><p><strong>Exception</strong> – if the simulator did not pass the test case</p></li>
 </ul>
 </dd>
@@ -409,7 +383,7 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 <dd><p>warnings</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#biosimulators_test_suite.data_model.TestCaseWarning" title="biosimulators_test_suite.data_model.TestCaseWarning"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TestCaseWarning</span></code></a></p>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">TestCaseWarning</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -449,16 +423,48 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 
 </dd></dl>
 
+</div>
+<div class="section" id="module-biosimulators_test_suite.exceptions">
+<span id="biosimulators-test-suite-exceptions-module"></span><h2><span class="section-number">3.5. </span>biosimulators_test_suite.exceptions module<a class="headerlink" href="#module-biosimulators_test_suite.exceptions" title="Permalink to this headline">¶</a></h2>
+<p>Common exceptions for test cases</p>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jonathan Karr &lt;<a class="reference external" href="mailto:karr&#37;&#52;&#48;mssm&#46;edu">karr<span>&#64;</span>mssm<span>&#46;</span>edu</a>&gt;</p>
+</dd>
+<dt class="field-even">Date</dt>
+<dd class="field-even"><p>2020-12-21</p>
+</dd>
+<dt class="field-odd">Copyright</dt>
+<dd class="field-odd"><p>2020, Center for Reproducible Biomedical Modeling</p>
+</dd>
+<dt class="field-even">License</dt>
+<dd class="field-even"><p>MIT</p>
+</dd>
+</dl>
 <dl class="py exception">
-<dt id="biosimulators_test_suite.data_model.TestCaseWarning">
-<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.data_model.</code><code class="sig-name descname">TestCaseWarning</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCaseWarning" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserWarning</span></code></p>
-<p>Base class for warnings collected from test cases</p>
+<dt id="biosimulators_test_suite.exceptions.InvalidOuputsException">
+<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.exceptions.</code><code class="sig-name descname">InvalidOuputsException</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exceptions.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exceptions.InvalidOuputsException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.exceptions.TestCaseException" title="biosimulators_test_suite.exceptions.TestCaseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.exceptions.TestCaseException</span></code></a></p>
+<p>Exception raised when outputs of execution of COMBINE/OMEX archive are not as expected</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="biosimulators_test_suite.exceptions.SkippedTestCaseException">
+<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.exceptions.</code><code class="sig-name descname">SkippedTestCaseException</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exceptions.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exceptions.SkippedTestCaseException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.exceptions.TestCaseException" title="biosimulators_test_suite.exceptions.TestCaseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.exceptions.TestCaseException</span></code></a></p>
+<p>Exception raised that indicates that a test case should be skipped</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="biosimulators_test_suite.exceptions.TestCaseException">
+<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.exceptions.</code><code class="sig-name descname">TestCaseException</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exceptions.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exceptions.TestCaseException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Exception raised when outputs of execution of COMBINE/OMEX archive are not as expected</p>
 </dd></dl>
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.exec_cli">
-<span id="biosimulators-test-suite-exec-cli-module"></span><h2><span class="section-number">3.5. </span>biosimulators_test_suite.exec_cli module<a class="headerlink" href="#module-biosimulators_test_suite.exec_cli" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-exec-cli-module"></span><h2><span class="section-number">3.6. </span>biosimulators_test_suite.exec_cli module<a class="headerlink" href="#module-biosimulators_test_suite.exec_cli" title="Permalink to this headline">¶</a></h2>
 <p>Program for validating that simulation tools are consistent with the BioSimulators standards</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -513,7 +519,7 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt id="biosimulators_test_suite.exec_cli.BaseController.Meta.arguments">
-<code class="sig-name descname">arguments</code><em class="property"> = [(['specifications'], {'type': &lt;class 'str'&gt;, 'help': 'Path or URL to the specifications of the simulator'}), (['-c', '--combine-case'], {'type': &lt;class 'str'&gt;, 'nargs': '+', 'default': None, 'dest': 'case_ids', 'help': &quot;Ids of test cases of evaluate (e.g., 'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'). Default: evaluate all test cases&quot;}), (['--verbose'], {'action': 'store_true', 'help': 'If set, print the stdout and stderr of the execution of the tests in real time.'}), (['-v', '--version'], {'action': 'version', 'version': '0.1.6'})]</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_cli.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_cli.BaseController.Meta.arguments" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">arguments</code><em class="property"> = [(['specifications'], {'type': &lt;class 'str'&gt;, 'help': 'Path or URL to the specifications of the simulator'}), (['-c', '--combine-case'], {'type': &lt;class 'str'&gt;, 'nargs': '+', 'default': None, 'dest': 'case_ids', 'help': &quot;Ids of test cases of evaluate (e.g., 'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'). Default: evaluate all test cases&quot;}), (['--verbose'], {'action': 'store_true', 'help': 'If set, print the stdout and stderr of the execution of the tests in real time.'}), (['-v', '--version'], {'action': 'version', 'version': '0.1.7'})]</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_cli.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_cli.BaseController.Meta.arguments" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -542,7 +548,7 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.exec_core">
-<span id="biosimulators-test-suite-exec-core-module"></span><h2><span class="section-number">3.6. </span>biosimulators_test_suite.exec_core module<a class="headerlink" href="#module-biosimulators_test_suite.exec_core" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-exec-core-module"></span><h2><span class="section-number">3.7. </span>biosimulators_test_suite.exec_core module<a class="headerlink" href="#module-biosimulators_test_suite.exec_core" title="Permalink to this headline">¶</a></h2>
 <p>Utilities for validate containerized simulators</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -707,7 +713,7 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.exec_gh_action">
-<span id="biosimulators-test-suite-exec-gh-action-module"></span><h2><span class="section-number">3.7. </span>biosimulators_test_suite.exec_gh_action module<a class="headerlink" href="#module-biosimulators_test_suite.exec_gh_action" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-exec-gh-action-module"></span><h2><span class="section-number">3.8. </span>biosimulators_test_suite.exec_gh_action module<a class="headerlink" href="#module-biosimulators_test_suite.exec_gh_action" title="Permalink to this headline">¶</a></h2>
 <p>Methods for processing submissions to the BioSimulators registry
 (CI workflows for reviewing and committing simulators to the registry)</p>
 <dl class="field-list simple">
@@ -949,6 +955,52 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+</div>
+<div class="section" id="module-biosimulators_test_suite.warnings">
+<span id="biosimulators-test-suite-warnings-module"></span><h2><span class="section-number">3.9. </span>biosimulators_test_suite.warnings module<a class="headerlink" href="#module-biosimulators_test_suite.warnings" title="Permalink to this headline">¶</a></h2>
+<p>Common warnings for test cases</p>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jonathan Karr &lt;<a class="reference external" href="mailto:karr&#37;&#52;&#48;mssm&#46;edu">karr<span>&#64;</span>mssm<span>&#46;</span>edu</a>&gt;</p>
+</dd>
+<dt class="field-even">Date</dt>
+<dd class="field-even"><p>2020-12-21</p>
+</dd>
+<dt class="field-odd">Copyright</dt>
+<dd class="field-odd"><p>2020, Center for Reproducible Biomedical Modeling</p>
+</dd>
+<dt class="field-even">License</dt>
+<dd class="field-even"><p>MIT</p>
+</dd>
+</dl>
+<dl class="py exception">
+<dt id="biosimulators_test_suite.warnings.IgnoredTestCaseWarning">
+<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.warnings.</code><code class="sig-name descname">IgnoredTestCaseWarning</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/warnings.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.warnings.IgnoredTestCaseWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.warnings.TestCaseWarning" title="biosimulators_test_suite.warnings.TestCaseWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.warnings.TestCaseWarning</span></code></a></p>
+<p>Warning that a test case was ignored</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="biosimulators_test_suite.warnings.InvalidOuputsWarning">
+<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.warnings.</code><code class="sig-name descname">InvalidOuputsWarning</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/warnings.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.warnings.InvalidOuputsWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.warnings.TestCaseWarning" title="biosimulators_test_suite.warnings.TestCaseWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.warnings.TestCaseWarning</span></code></a></p>
+<p>Warning that the outputs of the execution of a COMBINE/OMEX archive were not as expected</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="biosimulators_test_suite.warnings.SimulatorRuntimeErrorWarning">
+<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.warnings.</code><code class="sig-name descname">SimulatorRuntimeErrorWarning</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/warnings.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.warnings.SimulatorRuntimeErrorWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.warnings.TestCaseWarning" title="biosimulators_test_suite.warnings.TestCaseWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.warnings.TestCaseWarning</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></p>
+<p>Warning that the execution of a test case failed</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="biosimulators_test_suite.warnings.TestCaseWarning">
+<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.warnings.</code><code class="sig-name descname">TestCaseWarning</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/warnings.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.warnings.TestCaseWarning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserWarning</span></code></p>
+<p>Base class for warnings collected from test cases</p>
 </dd></dl>
 
 </div>
