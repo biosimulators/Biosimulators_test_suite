@@ -7,6 +7,7 @@
 """
 
 from ..data_model import TestCase
+from ..warnings import TestCaseWarning
 import docker
 import warnings
 
@@ -45,7 +46,7 @@ class OciLabelsTestCase(TestCase):
         missing_labels = set(self.EXPECTED_LABELS).difference(set(image.labels.keys()))
         if missing_labels:
             warnings.warn('The Docker image should have the following Open Container Initiative (OCI) labels:\n  {}'.format(
-                '\n  '.join(sorted(missing_labels))))
+                '\n  '.join(sorted(missing_labels))), TestCaseWarning)
 
 
 class BioContainersLabelsTestCase(TestCase):
@@ -81,4 +82,4 @@ class BioContainersLabelsTestCase(TestCase):
         missing_labels = set(self.EXPECTED_LABELS).difference(set(image.labels.keys()))
         if missing_labels:
             warnings.warn('The Docker image should have the following BioContainers labels:\n  {}'.format(
-                '\n  '.join(sorted(missing_labels))))
+                '\n  '.join(sorted(missing_labels))), TestCaseWarning)

@@ -1,6 +1,6 @@
-from biosimulators_test_suite.data_model import IgnoredTestCaseWarning
 from biosimulators_test_suite.test_case import sedml
 from biosimulators_test_suite.test_case.published_project import PublishedProjectTestCase
+from biosimulators_test_suite.warnings import IgnoredTestCaseWarning
 from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml.data_model import SedDocument, Task, Report
 import numpy
