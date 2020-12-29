@@ -8,7 +8,6 @@
 
 from ..data_model import TestCase
 from ..warnings import TestCaseWarning
-import docker
 import warnings
 
 __all__ = ['OciLabelsTestCase', 'BioContainersLabelsTestCase']
@@ -41,8 +40,7 @@ class OciLabelsTestCase(TestCase):
         Raises:
             :obj:`Exception`: if the simulator did not pass the test case
         """
-        docker_client = docker.from_env()
-        image = docker_client.images.pull(specifications['image']['url'])
+        image = self.get_simulator_docker_image(specifications)
         missing_labels = set(self.EXPECTED_LABELS).difference(set(image.labels.keys()))
         if missing_labels:
             warnings.warn('The Docker image should have the following Open Container Initiative (OCI) labels:\n  {}'.format(
@@ -77,8 +75,7 @@ class BioContainersLabelsTestCase(TestCase):
         Raises:
             :obj:`Exception`: if the simulator did not pass the test case
         """
-        docker_client = docker.from_env()
-        image = docker_client.images.pull(specifications['image']['url'])
+        image = self.get_simulator_docker_image(specifications)
         missing_labels = set(self.EXPECTED_LABELS).difference(set(image.labels.keys()))
         if missing_labels:
             warnings.warn('The Docker image should have the following BioContainers labels:\n  {}'.format(

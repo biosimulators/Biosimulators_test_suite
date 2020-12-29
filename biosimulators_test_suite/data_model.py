@@ -8,7 +8,9 @@
 
 from .exceptions import SkippedTestCaseException  # noqa: F401
 from .warnings import TestCaseWarning  # noqa: F401
+from biosimulators_utils.image import get_docker_image
 import abc
+import docker
 import enum
 
 __all__ = [
@@ -60,6 +62,19 @@ class TestCase(abc.ABC):
             :obj:`Exception`: if the simulator did not pass the test case
         """
         pass  # pragma: no cover
+
+    def get_simulator_docker_image(self, specifications, pull=True):
+        """ Get the Docker image for a simulator, pulling if necessary
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+
+        Returns:
+            :obj:`docker.models.images.Image`: Docker image
+        """
+        docker_client = docker.from_env()
+        image_url = specifications['image']['url']
+        return get_docker_image(docker_client, image_url, pull=pull)
 
 
 class SedTaskRequirements(object):

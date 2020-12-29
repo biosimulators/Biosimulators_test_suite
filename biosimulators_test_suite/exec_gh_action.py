@@ -11,9 +11,11 @@ from .data_model import TestCaseResultType, OutputMedium
 from .exec_core import SimulatorValidator
 from biosimulators_utils.gh_action.data_model import Comment, GitHubActionCaughtError  # noqa: F401
 from biosimulators_utils.gh_action.core import GitHubAction, GitHubActionErrorHandling
+from biosimulators_utils.image import get_docker_image
 from biosimulators_utils.simulator_registry.data_model import SimulatorSubmission, IssueLabel  # noqa: F401
 from biosimulators_utils.simulator_registry.process_submission import get_simulator_submission_from_gh_issue_body
 from biosimulators_utils.simulator_registry.query import get_simulator_version_specs
+
 from natsort import natsort_keygen
 import biosimulators_utils.image
 import biosimulators_utils.simulator.io
@@ -202,7 +204,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
 
         # validate that container (Docker image) exists
         image_url = specifications['image']['url']
-        biosimulators_utils.image.pull_docker_image(docker_client, image_url)
+        get_docker_image(docker_client, image_url, pull=True)
 
         # validate that Docker image can be converted to a Singularity image
         biosimulators_utils.image.convert_docker_image_to_singularity(image_url)
@@ -295,13 +297,13 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             specifications (:obj:`dict`): specifications of a simulation tool
             existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
         """
-        # pull image
+        # get image, pulling if necessary
         original_image_url = specifications['image']['url']
         docker_client = biosimulators_utils.image.login_to_docker_registry(
             'docker.io',
             os.getenv('DOCKER_HUB_USERNAME'),
             os.getenv('DOCKER_HUB_TOKEN'))
-        image = biosimulators_utils.image.pull_docker_image(docker_client, original_image_url)
+        image = get_docker_image(docker_client, original_image_url, pull=True)
 
         # push image to BioSimulators namespace of Docker registry
         biosimulators_utils.image.login_to_docker_registry(
