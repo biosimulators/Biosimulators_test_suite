@@ -1,0 +1,31 @@
+{
+  "name": "Edelstein et al. Biological Cybernetics 1996: Nicotinic excitatory post-synaptic potential",
+  "filename": "Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex",
+  "taskRequirements": [{
+    "modelFormat": "format_2585",
+    "simulationAlgorithm": "KISAO_0000088"
+  }],
+  "expectedReports": [{
+    "id": "BIOMD0000000002_sim.sedml/BIOMD0000000002_sim",
+    "dataSets": ["time", "BLL", "IL", "AL"],
+    "points": [1001],
+    "values": {
+      "time": {
+        "0": 0.0,
+        "1": 0.0005,
+        "2": 0.0010,
+        "999": 0.4995,
+        "1000": 0.5000
+      }
+    }
+  }],
+  "expectedPlots": [],
+  "runtimeFailureAlertType": "exception",
+  "identifiers": [{
+    "namespace": "biomodels.db",
+    "id": "BIOMD0000000002"
+  }, {
+    "namespace": "doi",
+    "id": "10.1007/s004220050302"
+  }]
+}
