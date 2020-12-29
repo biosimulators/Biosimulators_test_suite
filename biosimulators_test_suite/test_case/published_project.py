@@ -7,8 +7,9 @@
 """
 
 from ..data_model import (TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedPlot,
-                          AlertType, InvalidOuputsException, InvalidOuputsWarning, SkippedTestCaseException,
-                          IgnoredTestCaseWarning, OutputMedium)
+                          AlertType, OutputMedium)
+from ..exceptions import InvalidOuputsException, SkippedTestCaseException
+from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOuputsWarning
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContentFormatPattern  # noqa: F401
 from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
 from biosimulators_utils.config import get_config
@@ -270,7 +271,7 @@ class PublishedProjectTestCase(TestCase):
             if self.runtime_failure_alert_type == AlertType.exception:
                 raise
             else:
-                warnings.warn(str(exception), RuntimeWarning)
+                warnings.warn(str(exception), SimulatorRuntimeErrorWarning)
                 return
 
         # check expected outputs created

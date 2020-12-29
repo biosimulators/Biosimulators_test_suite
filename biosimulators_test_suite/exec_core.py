@@ -8,13 +8,15 @@
 
 from .config import TERMINAL_COLORS
 from .data_model import (TestCase, TestCaseResult,  # noqa: F401
-                         TestCaseResultType, TestCaseWarning, SkippedTestCaseException, IgnoredTestCaseWarning,
+                         TestCaseResultType,
                          OutputMedium)
+from .exceptions import SkippedTestCaseException
 from .test_case import cli
 from .test_case import combine_archive
 from .test_case import docker_image
 from .test_case import published_project
 from .test_case import sedml
+from .warnings import TestCaseWarning, IgnoredTestCaseWarning
 import biosimulators_utils.simulator.io
 import capturer
 import collections

@@ -1,9 +1,10 @@
 from biosimulators_test_suite.exec_core import SimulatorValidator
 from biosimulators_test_suite.data_model import (TestCase, TestCaseResult, TestCaseResultType,
-                                                 TestCaseWarning, SkippedTestCaseException, IgnoredTestCaseWarning,
                                                  SedTaskRequirements)
+from biosimulators_test_suite.exceptions import SkippedTestCaseException
 from biosimulators_test_suite.test_case import published_project
 from biosimulators_test_suite.test_case.docker_image import BioContainersLabelsTestCase
+from biosimulators_test_suite.warnings import TestCaseWarning, IgnoredTestCaseWarning
 from unittest import mock
 import sys
 import unittest

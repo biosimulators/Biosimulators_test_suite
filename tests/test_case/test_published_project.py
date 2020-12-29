@@ -1,5 +1,7 @@
 from biosimulators_test_suite import data_model
+from biosimulators_test_suite.exceptions import InvalidOuputsException, SkippedTestCaseException
 from biosimulators_test_suite.test_case.published_project import (PublishedProjectTestCase, find_cases, SyntheticCombineArchiveTestCase)
+from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOuputsWarning
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
 from biosimulators_utils.combine.data_model import CombineArchive
@@ -32,7 +34,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
             "Ciliberto et al. Journal Cell Biology 2003: Morphogenesis checkpoint in budding yeast",
         ]).difference(set(case.name for case in all_cases)), set())
 
-        with self.assertWarnsRegex(data_model.IgnoredTestCaseWarning, 'not available'):
+        with self.assertWarnsRegex(IgnoredTestCaseWarning, 'not available'):
             all_cases, compatible_cases = find_cases({
                 'algorithms': [
                     {
@@ -131,7 +133,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         specs = {
             'algorithms': [],
         }
-        with self.assertRaisesRegex(data_model.SkippedTestCaseException, 'requires'):
+        with self.assertRaisesRegex(SkippedTestCaseException, 'requires'):
             case.eval(specs)
 
         specs = {
@@ -140,7 +142,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
                 'modelFormats': [{'id': 'format_2584'}],
             }],
         }
-        with self.assertRaisesRegex(data_model.SkippedTestCaseException, 'requires'):
+        with self.assertRaisesRegex(SkippedTestCaseException, 'requires'):
             case.eval(specs)
 
         specs = {
@@ -149,7 +151,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
                 'modelFormats': [{'id': 'format_2585'}],
             }],
         }
-        with self.assertRaisesRegex(data_model.SkippedTestCaseException, 'requires'):
+        with self.assertRaisesRegex(SkippedTestCaseException, 'requires'):
             case.eval(specs)
 
         # execute case
@@ -222,85 +224,85 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
                 case.eval(specs)
 
         case.runtime_failure_alert_type = data_model.AlertType.warning
-        with self.assertWarnsRegex(RuntimeWarning, 'Could not execute task'):
+        with self.assertWarnsRegex(SimulatorRuntimeErrorWarning, 'Could not execute task'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, True, False, False, False, False, False, False, False, False, False)):
                 case.eval(specs)
         case.runtime_failure_alert_type = data_model.AlertType.exception
 
-        with self.assertRaisesRegex(data_model.InvalidOuputsException, 'No reports were generated'):
+        with self.assertRaisesRegex(InvalidOuputsException, 'No reports were generated'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, True, False, False, False, False, False, False, False, False)):
                 case.eval(specs)
 
-        with self.assertRaisesRegex(data_model.InvalidOuputsException, 'could not be read'):
+        with self.assertRaisesRegex(InvalidOuputsException, 'could not be read'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, True, True, False, False, False, False, False, False, False)):
                 case.eval(specs)
 
-        with self.assertWarnsRegex(data_model.InvalidOuputsWarning, 'Unexpected reports were produced'):
+        with self.assertWarnsRegex(InvalidOuputsWarning, 'Unexpected reports were produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, True, False, False, False, False, False, False, False)):
                 case.eval(specs)
 
-        with self.assertRaisesRegex(data_model.InvalidOuputsException, 'does not contain expected data sets'):
+        with self.assertRaisesRegex(InvalidOuputsException, 'does not contain expected data sets'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, True, False, False, False, False, False, False)):
                 case.eval(specs)
 
-        with self.assertWarnsRegex(data_model.InvalidOuputsWarning, 'contains unexpected data sets'):
+        with self.assertWarnsRegex(InvalidOuputsWarning, 'contains unexpected data sets'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, True, False, False, False, False, False)):
                 case.eval(specs)
 
-        with self.assertRaisesRegex(data_model.InvalidOuputsException, 'incorrect number of points'):
+        with self.assertRaisesRegex(InvalidOuputsException, 'incorrect number of points'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, True, False, False, False, False)):
                 case.eval(specs)
 
-        with self.assertRaisesRegex(data_model.InvalidOuputsException, 'does not have expected value'):
+        with self.assertRaisesRegex(InvalidOuputsException, 'does not have expected value'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, True, False, False, False)):
                 case.eval(specs)
 
-        with self.assertWarnsRegex(data_model.InvalidOuputsWarning, 'Plots were not produced'):
+        with self.assertWarnsRegex(InvalidOuputsWarning, 'Plots were not produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, True, False, False)):
                 case.eval(specs)
 
-        with self.assertWarnsRegex(data_model.InvalidOuputsWarning, 'Plots were not produced'):
+        with self.assertWarnsRegex(InvalidOuputsWarning, 'Plots were not produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, False, True, False)):
                 case.eval(specs)
 
-        with self.assertWarnsRegex(data_model.InvalidOuputsWarning, 'Extra plots were not produced'):
+        with self.assertWarnsRegex(InvalidOuputsWarning, 'Extra plots were not produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, False, False, True)):
                 case.eval(specs)
 
         case.assert_no_extra_reports = True
-        with self.assertRaisesRegex(data_model.InvalidOuputsException, 'Unexpected reports were produced'):
+        with self.assertRaisesRegex(InvalidOuputsException, 'Unexpected reports were produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, True, False, False, False, False, False, False, False)):
                 case.eval(specs)
         case.assert_no_extra_reports = False
 
         case.assert_no_extra_datasets = True
-        with self.assertRaisesRegex(data_model.InvalidOuputsException, 'contains unexpected data sets'):
+        with self.assertRaisesRegex(InvalidOuputsException, 'contains unexpected data sets'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, True, False, False, False, False, False)):
                 case.eval(specs)
         case.assert_no_extra_datasets = False
 
         case.assert_no_missing_plots = True
-        with self.assertRaisesRegex(data_model.InvalidOuputsException, 'Plots were not produced'):
+        with self.assertRaisesRegex(InvalidOuputsException, 'Plots were not produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, True, False, False)):
                 case.eval(specs)
         case.assert_no_missing_plots = False
 
         case.assert_no_extra_plots = True
-        with self.assertRaisesRegex(data_model.InvalidOuputsException, 'Extra plots were not produced'):
+        with self.assertRaisesRegex(InvalidOuputsException, 'Extra plots were not produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, False, False, True)):
                 case.eval(specs)
@@ -330,6 +332,6 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
             PublishedProjectTestCase()
         ])
 
-        with self.assertWarnsRegex(data_model.IgnoredTestCaseWarning, 'No curated COMBINE/OMEX archives are available'):
+        with self.assertWarnsRegex(IgnoredTestCaseWarning, 'No curated COMBINE/OMEX archives are available'):
             with mock.patch.object(CombineArchiveReader, 'run', return_value=CombineArchive()):
                 case.eval(None)

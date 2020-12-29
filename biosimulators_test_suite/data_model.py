@@ -6,6 +6,8 @@
 :License: MIT
 """
 
+from .exceptions import SkippedTestCaseException  # noqa: F401
+from .warnings import TestCaseWarning  # noqa: F401
 import abc
 import enum
 
@@ -14,8 +16,6 @@ __all__ = [
     'TestCase', 'SedTaskRequirements', 'ExpectedSedReport', 'ExpectedSedPlot',
     'TestCaseResultType', 'TestCaseResult',
     'AlertType',
-    'TestCaseWarning', 'InvalidOuputsException', 'InvalidOuputsWarning',
-    'SkippedTestCaseException', 'IgnoredTestCaseWarning',
 ]
 
 
@@ -160,28 +160,3 @@ class AlertType(str, enum.Enum):
     """ Type of alert upon the failure of a test case """
     exception = 'exception'
     warning = 'warning'
-
-
-class TestCaseWarning(UserWarning):
-    """ Base class for warnings collected from test cases """
-    pass
-
-
-class InvalidOuputsException(Exception):
-    """ Exception raised when outputs of execution of COMBINE/OMEX archive are not as expected """
-    pass  # pragma: no cover
-
-
-class InvalidOuputsWarning(TestCaseWarning):
-    """ Warning raised when outputs of execution of COMBINE/OMEX archive are not as expected """
-    pass  # pragma: no cover
-
-
-class SkippedTestCaseException(Exception):
-    """ Exception raised that indicates that a test case should be skipped """
-    pass  # pragma: no cover
-
-
-class IgnoredTestCaseWarning(UserWarning):
-    """ Warning raised that indicates that a test case was ignored """
-    pass  # pragma: no cover
