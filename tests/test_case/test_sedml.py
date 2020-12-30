@@ -3,7 +3,7 @@ from biosimulators_test_suite.test_case import sedml
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
 from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, InvalidOuputsWarning
 from biosimulators_utils.report.io import ReportWriter
-from biosimulators_utils.sedml.data_model import SedDocument, Task, Report, DataSet
+from biosimulators_utils.sedml.data_model import SedDocument, Task, Report, DataSet, DataGenerator, DataGeneratorVariable
 import numpy
 import os
 import pandas
@@ -69,23 +69,86 @@ class SedmlTestCaseTest(unittest.TestCase):
         self.assertTrue(case.eval(specs))
 
     def test_SimulatorSupportsMultipleTasksPerSedDocument_get_suitable_sed_doc(self):
-        self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
-            'loc': SedDocument(),
-        }), None)
-
+        good_doc = SedDocument()
+        good_doc.tasks.append(Task())
+        good_doc.data_generators.append(
+            DataGenerator(
+                variables=[
+                    DataGeneratorVariable(
+                        id='var_1',
+                        task=good_doc.tasks[0]
+                    ),
+                ],
+            ),
+        )
+        good_doc.outputs.append(
+            Report(
+                data_sets=[
+                    DataSet(data_generator=good_doc.data_generators[0]),
+                ],
+            ),
+        )
         self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
             'loc-1': SedDocument(),
-            'loc-2': SedDocument(tasks=[Task()], outputs=[Report()]),
+            'loc-2': good_doc,
+        }), None)
+
+        good_doc.data_generators[0].variables.append(
+            DataGeneratorVariable(
+                id='var_2',
+                task=good_doc.tasks[0]
+            ),
+        )
+        self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
+            'loc-1': SedDocument(),
+            'loc-2': good_doc,
         }), 'loc-2')
 
+        good_doc = SedDocument()
+        good_doc.tasks.append(Task())
+        good_doc.data_generators.append(
+            DataGenerator(
+                variables=[
+                    DataGeneratorVariable(
+                        id='var_1',
+                        task=good_doc.tasks[0]
+                    ),
+                ],
+            ),
+        )
+        good_doc.data_generators.append(
+            DataGenerator(
+                variables=[
+                    DataGeneratorVariable(
+                        id='var_2',
+                        task=good_doc.tasks[0]
+                    ),
+                ],
+            ),
+        )
+        good_doc.outputs.append(
+            Report(
+                data_sets=[
+                    DataSet(data_generator=good_doc.data_generators[0]),
+                ],
+            ),
+        )
         self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
             'loc-1': SedDocument(tasks=[Task()]),
-            'loc-2': SedDocument(tasks=[Task()], outputs=[Report()]),
+            'loc-2': good_doc,
+        }), None)
+
+        good_doc.outputs[0].data_sets.append(
+            DataSet(data_generator=good_doc.data_generators[1]),
+        )
+        self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
+            'loc-1': SedDocument(tasks=[Task()]),
+            'loc-2': good_doc,
         }), 'loc-2')
 
         self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
             'loc-1': SedDocument(outputs=[Report()]),
-            'loc-2': SedDocument(tasks=[Task()], outputs=[Report()]),
+            'loc-2': good_doc,
         }), 'loc-2')
 
     def test_SimulatorSupportsMultipleTasksPerSedDocument_eval_outputs(self):
@@ -115,3 +178,46 @@ class SedmlTestCaseTest(unittest.TestCase):
             published_projects_test_cases=[])
         with self.assertWarnsRegex(IgnoredTestCaseWarning, 'No curated COMBINE/OMEX archives are available'):
             case.eval(specs)
+
+    def test_SimulatorSupportsMultipleReportsPerSedDocument_eval_outputs(self):
+        case = sedml.SimulatorSupportsMultipleReportsPerSedDocument()
+
+        doc = SedDocument(
+            outputs=[
+                Report(
+                    id='report_1',
+                    data_sets=[
+                        DataSet(label='x'),
+                    ],
+                ),
+                Report(
+                    id='report_2',
+                    data_sets=[
+                        DataSet(label='y'),
+                    ],
+                ),
+            ],
+        )
+
+        with self.assertRaisesRegex(InvalidOuputsException, 'did not produce the following reports'):
+            case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
+
+        data_frame = pandas.DataFrame(numpy.array([[1, 2, 3]]), index=['x'])
+        ReportWriter().run(data_frame, self.dirname, 'a.sedml/report_1')
+        data_frame = pandas.DataFrame(numpy.array([[4, 5, 6]]), index=['y'])
+        ReportWriter().run(data_frame, self.dirname, 'a.sedml/report_2')
+        self.assertTrue(case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname))
+
+        data_frame = pandas.DataFrame(numpy.array([[7, 8, 9]]), index=['z'])
+        ReportWriter().run(data_frame, self.dirname, 'a.sedml/report_3')
+        with self.assertWarnsRegex(InvalidOuputsWarning, 'extra reports'):
+            self.assertFalse(case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname))
+
+    def test_SimulatorSupportsMultipleReportsPerSedDocument(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        # test synthetic case generated and used to test simulator
+        case = sedml.SimulatorSupportsMultipleReportsPerSedDocument(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))

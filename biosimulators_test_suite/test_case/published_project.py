@@ -516,7 +516,16 @@ class SyntheticCombineArchiveTestCase(TestCase):
             if sed_doc.tasks:
                 for output in sed_doc.outputs:
                     if isinstance(output, Report):
-                        return location
+                        task_variables = {}
+                        for data_set in output.data_sets:
+                            for variable in data_set.data_generator.variables:
+                                if variable.task not in task_variables:
+                                    task_variables[variable.task] = set()
+                                task_variables[variable.task].add(variable.id)
+
+                        for task, variables in task_variables.items():
+                            if len(variables) > 1:
+                                return location
         return None
 
     def build_synthetic_archive(self, curated_archive, curated_archive_dir, curated_sed_docs):
@@ -594,6 +603,7 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
             involve multiple variables or parameters (and data sets, curves, and surfaces) with multiple
             data generators for each variable
         _remove_plots (:obj:`bool`): if :obj:`True`, remove plots
+        _keep_one_task_one_report (:obj:`bool`): if :obj:`True`, keep only 1 task and only 1 report
         _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
     """
 
@@ -613,6 +623,7 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
         self._remove_algorithm_parameter_changes = True
         self._use_single_variable_data_generators = True
         self._remove_plots = True
+        self._keep_one_task_one_report = True
 
     def build_synthetic_archive(self, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with master and non-master SED documents
@@ -664,6 +675,24 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
         # remove plots
         if self._remove_plots:
             remove_plots(doc)
+
+        # keep only single task and single report
+        if self._keep_one_task_one_report and self._use_single_variable_data_generators and self._remove_plots:
+            for output in list(doc.outputs):
+                task_data_sets = {}
+                for data_set in output.data_sets:
+                    task = data_set.data_generator.variables[0].task
+                    if task in task_data_sets:
+                        key_report = output
+                        key_task = task
+                        break
+                    else:
+                        task_data_sets[task] = True
+
+            doc.tasks = [key_task]
+            doc.data_generators = [data_gen for data_gen in doc.data_generators if data_gen.variables[0].task == key_task]
+            doc.outputs = [key_report]
+            key_report.data_sets = [data_set for data_set in key_report.data_sets if data_set.data_generator in doc.data_generators]
 
         curated_sed_docs = {
             doc_content.location: doc,

@@ -19,6 +19,7 @@ import warnings
 __all__ = [
     'SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports',
     'SimulatorSupportsMultipleTasksPerSedDocument',
+    'SimulatorSupportsMultipleReportsPerSedDocument',
 ]
 
 
@@ -207,3 +208,85 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombin
         if missing_reports:
             raise ValueError('Reports for duplicate tasks were not generated:\n  {}'.format(
                 '\n  '.join(sorted(missing_reports))))
+
+
+class SimulatorSupportsMultipleReportsPerSedDocument(SingleMasterSedDocumentCombineArchiveTestCase):
+    """ Test that a simulator supports multiple reports per SED document
+
+    Attributes:
+        _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
+        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
+        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
+            the values of the parameters of algorithms
+        _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
+    """
+
+    def build_synthetic_archive(self, curated_archive, curated_archive_dir, curated_sed_docs):
+        """ Generate a synthetic archive with a copy of each task and each report
+
+        Args:
+            curated_archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            curated_archive_dir (:obj:`str`): directory with the contents of the curated COMBINE/OMEX archive
+            curated_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
+                SED documents in curated archive
+
+        Returns:
+            :obj:`tuple`:
+
+                * :obj:`CombineArchive`: synthetic COMBINE/OMEX archive for testing the simulator
+                * :obj:`dict` of :obj:`str` to :obj:`SedDocument`: map from locations to
+                  SED documents in synthetic archive
+        """
+        curated_archive, curated_sed_docs = super(SimulatorSupportsMultipleReportsPerSedDocument, self).build_synthetic_archive(
+            curated_archive, curated_archive_dir, curated_sed_docs)
+
+        # get a suitable SED document to modify
+        sed_doc = list(curated_sed_docs.values())[0]
+
+        # divide data sets between two reports
+        original_data_sets = sed_doc.outputs[0].data_sets
+        sed_doc.outputs = [
+            Report(id='report_1'),
+            Report(id='report_2'),
+        ]
+        for i_dataset, data_set in enumerate(original_data_sets):
+            sed_doc.outputs[i_dataset % 2].data_sets.append(data_set)
+
+        # return modified SED document
+        return (curated_archive, curated_sed_docs)
+
+    def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
+        """ Test that the expected outputs were created for the synthetic archive
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            synthetic_archive (:obj:`CombineArchive`): synthetic COMBINE/OMEX archive for testing the simulator
+            synthetic_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from the location of each SED
+                document in the synthetic archive to the document
+            outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
+        """
+        has_warnings = False
+
+        try:
+            report_ids = ReportReader().get_ids(outputs_dir)
+        except Exception:
+            report_ids = []
+
+        doc_location = os.path.relpath(list(synthetic_sed_docs.keys())[0], './')
+        expected_report_ids = set([os.path.join(doc_location, 'report_1'), os.path.join(doc_location, 'report_2')])
+
+        missing_report_ids = expected_report_ids.difference(set(report_ids))
+        extra_report_ids = set(report_ids).difference(expected_report_ids)
+
+        if missing_report_ids:
+            raise InvalidOuputsException('Simulator did not produce the following reports:\n  - {}'.format(
+                '\n  - '.join(sorted('`' + id + '`' for id in missing_report_ids))
+            ))
+
+        if extra_report_ids:
+            msg = 'Simulator produced extra reports:\n  - {}'.format(
+                '\n  - '.join(sorted('`' + id + '`' for id in extra_report_ids)))
+            warnings.warn(msg, InvalidOuputsWarning)
+            has_warnings = True
+
+        return not has_warnings
