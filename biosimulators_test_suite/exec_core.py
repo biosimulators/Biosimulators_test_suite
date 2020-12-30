@@ -14,7 +14,9 @@ from .exceptions import SkippedTestCaseException
 from .test_case import cli
 from .test_case import combine_archive
 from .test_case import docker_image
+from .test_case import exec_status_report
 from .test_case import published_project
+from .test_case import results_report
 from .test_case import sedml
 from .warnings import TestCaseWarning, IgnoredTestCaseWarning
 import biosimulators_utils.simulator.io
@@ -90,6 +92,14 @@ class SimulatorValidator(object):
         # get SED-ML cases
         suite_name = sedml.__name__.replace('biosimulators_test_suite.test_case.', '')
         cases[suite_name] = self.find_cases_in_module(sedml, compatible_published_projects_test_cases, ids=ids)
+
+        # get cases for reports of simulation results
+        suite_name = results_report.__name__.replace('biosimulators_test_suite.test_case.', '')
+        cases[suite_name] = self.find_cases_in_module(results_report, compatible_published_projects_test_cases, ids=ids)
+
+        # get cases for reporting status of the execution of modeling projects
+        suite_name = exec_status_report.__name__.replace('biosimulators_test_suite.test_case.', '')
+        cases[suite_name] = self.find_cases_in_module(exec_status_report, compatible_published_projects_test_cases, ids=ids)
 
         # add cases involving published COMBINE/OMEX archives
         suite_name = published_project.__name__.replace('biosimulators_test_suite.test_case.', '')
