@@ -7,7 +7,7 @@
 """
 
 from ..warnings import TestCaseWarning
-from .published_project import SyntheticCombineArchiveTestCase
+from .published_project import SingleMasterSedDocumentCombineArchiveTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
 from biosimulators_utils.config import get_config
 from biosimulators_utils.exec_status.data_model import ExecutionStatus
@@ -21,9 +21,16 @@ __all__ = [
 ]
 
 
-class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SyntheticCombineArchiveTestCase):
+class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SingleMasterSedDocumentCombineArchiveTestCase):
     """ Test that when a COMBINE/OMEX archive defines a (single) master file, the simulator only
     executes this file.
+
+    Attributes:
+        _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
+        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
+        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
+            the values of the parameters of algorithms
+        _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
     """
 
     def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):

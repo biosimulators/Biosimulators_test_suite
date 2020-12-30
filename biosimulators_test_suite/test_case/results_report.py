@@ -24,6 +24,13 @@ __all__ = [
 class SimulatorGeneratesReportsOfSimultionResults(SingleMasterSedDocumentCombineArchiveTestCase):
     """ Test that when a COMBINE/OMEX archive defines a (single) master file, the simulator only
     executes this file.
+
+    Attributes:
+        _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
+        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
+        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
+            the values of the parameters of algorithms
+        _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
     """
 
     def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
@@ -46,9 +53,6 @@ class SimulatorGeneratesReportsOfSimultionResults(SingleMasterSedDocumentCombine
 
         has_warning = False
         for doc_location, sed_doc in synthetic_sed_docs.items():
-            if '__copy__' in doc_location:
-                continue
-
             doc_id = os.path.relpath(doc_location, '.')
             for output in sed_doc.outputs:
                 if isinstance(output, Report):

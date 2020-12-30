@@ -1,6 +1,7 @@
 from biosimulators_test_suite import data_model
 from biosimulators_test_suite.exceptions import InvalidOuputsException, SkippedTestCaseException
-from biosimulators_test_suite.test_case.published_project import (SimulatorCanExecutePublishedProject, find_cases, SyntheticCombineArchiveTestCase)
+from biosimulators_test_suite.test_case.published_project import (
+    SimulatorCanExecutePublishedProject, find_cases, SyntheticCombineArchiveTestCase, ConfigurableMasterCombineArchiveTestCase)
 from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOuputsWarning
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
@@ -67,7 +68,8 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         with open(os.path.join(base_path, filename), 'r') as file:
             data = json.load(file)
         data['expectedReports'][0]['values']['T'] = [0, 1, 2, 3, 4, 5]
-        id = 'published_project.SimulatorCanExecutePublishedProject:sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json'
+        id = ('published_project.SimulatorCanExecutePublishedProject:'
+              'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         case = SimulatorCanExecutePublishedProject(id=id).from_dict(data)
         numpy.testing.assert_allclose(case.expected_reports[0].values['T'], numpy.array([0, 1, 2, 3, 4, 5]))
 
@@ -76,7 +78,8 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         with open(os.path.join(base_path, filename), 'r') as file:
             data = json.load(file)
-        id = 'published_project.SimulatorCanExecutePublishedProject:sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json'
+        id = ('published_project.SimulatorCanExecutePublishedProject:'
+              'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
 
         data['expectedReports'][0]['values'] = {'t': [0, 1, 2, 3, 4, 5]}
         with self.assertRaisesRegex(ValueError, "keys were not in the 'dataSets' property"):
@@ -335,3 +338,9 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         with self.assertWarnsRegex(IgnoredTestCaseWarning, 'No curated COMBINE/OMEX archives are available'):
             with mock.patch.object(CombineArchiveReader, 'run', return_value=CombineArchive()):
                 case.eval(None)
+
+    def test_SyntheticCombineArchiveTestCase_build_synthetic_archive(self):
+        class ConcreteSyntheticCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
+            def eval_outputs():
+                pass
+        self.assertEqual(ConcreteSyntheticCombineArchiveTestCase().build_synthetic_archive('a', 'b', 'c'), ('a', 'c'))

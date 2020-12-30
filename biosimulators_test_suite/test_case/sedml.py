@@ -5,23 +5,116 @@
 :Copyright: 2020, Center for Reproducible Biomedical Modeling
 :License: MIT
 """
-from .published_project import SyntheticCombineArchiveTestCase
+from ..exceptions import InvalidOuputsException
+from ..warnings import InvalidOuputsWarning
+from .published_project import SingleMasterSedDocumentCombineArchiveTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import (SedDocument, Report, DataSet,  # noqa: F401
                                                   DataGenerator, DataGeneratorVariable)
 import copy
 import os
+import warnings
 
 __all__ = [
+    'SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports',
     'SimulatorSupportsMultipleTasksPerSedDocument',
 ]
 
 
-class SimulatorSupportsMultipleTasksPerSedDocument(SyntheticCombineArchiveTestCase):
+class SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports(SingleMasterSedDocumentCombineArchiveTestCase):
+    """ Test that a simulator supports the core elements of SED: models, simulations, tasks, data generators for
+    individual variables, and reports
+
+    Attributes:
+        _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
+        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
+        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
+            the values of the parameters of algorithms
+        _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
+    """
+
+    def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
+        """ Test that the expected outputs were created for the synthetic archive
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            synthetic_archive (:obj:`CombineArchive`): synthetic COMBINE/OMEX archive for testing the simulator
+            synthetic_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from the location of each SED
+                document in the synthetic archive to the document
+            outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
+
+        Returns:
+            :obj:`bool`: :obj:`True`, if succeeded without warnings
+        """
+        has_warnings = False
+
+        # reports
+        try:
+            report_ids = ReportReader().get_ids(outputs_dir)
+        except Exception:
+            report_ids = []
+
+        expected_report_ids = set()
+        for doc_location, doc in synthetic_sed_docs.items():
+            doc_id = os.path.relpath(doc_location, './')
+            for output in doc.outputs:
+                if isinstance(output, Report):
+                    expected_report_ids.add(os.path.join(doc_id, output.id))
+
+        missing_report_ids = expected_report_ids.difference(set(report_ids))
+        extra_report_ids = set(report_ids).difference(expected_report_ids)
+
+        if missing_report_ids:
+            raise InvalidOuputsException('Simulator did not produce the following reports:\n  - {}'.format(
+                '\n  - '.join(sorted('`' + id + '`' for id in missing_report_ids))
+            ))
+
+        if extra_report_ids:
+            msg = 'Simulator produced extra reports:\n  - {}'.format(
+                '\n  - '.join(sorted('`' + id + '`' for id in extra_report_ids)))
+            warnings.warn(msg, InvalidOuputsWarning)
+            has_warnings = True
+
+        # data sets
+        expected_data_set_labels = set()
+        data_set_labels = set()
+        for doc_location, doc in synthetic_sed_docs.items():
+            doc_id = os.path.relpath(doc_location, './')
+            for output in doc.outputs:
+                if isinstance(output, Report):
+                    for data_set in output.data_sets:
+                        expected_data_set_labels.add(os.path.join(doc_id, output.id, data_set.label))
+
+                    results = ReportReader().run(outputs_dir, os.path.join(doc_id, output.id))
+                    data_set_labels.update(set(os.path.join(doc_id, output.id, label) for label in results.index))
+
+        missing_data_set_labels = expected_data_set_labels.difference(set(data_set_labels))
+        extra_data_set_labels = set(data_set_labels).difference(expected_data_set_labels)
+
+        if missing_data_set_labels:
+            raise InvalidOuputsException('Simulator did not produce the following data sets:\n  - {}'.format(
+                '\n  - '.join(sorted('`' + label + '`' for label in missing_data_set_labels))
+            ))
+
+        if extra_data_set_labels:
+            msg = 'Simulator produced extra data sets:\n  - {}'.format(
+                '\n  - '.join(sorted('`' + label + '`' for label in extra_data_set_labels)))
+            warnings.warn(msg, InvalidOuputsWarning)
+            has_warnings = True
+
+        return not has_warnings
+
+
+class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombineArchiveTestCase):
     """ Test that a simulator supports multiple tasks per SED document
 
     Attributes:
+        _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
+        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
+        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
+            the values of the parameters of algorithms
+        _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
         _expected_reports (:obj:`list` of :obj:`tuple` of :obj:`str`): list of pairs of
             original reports and their expected duplicates
     """
@@ -42,6 +135,9 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SyntheticCombineArchiveTestCa
                 * :obj:`dict` of :obj:`str` to :obj:`SedDocument`: map from locations to
                   SED documents in synthetic archive
         """
+        curated_archive, curated_sed_docs = super(SimulatorSupportsMultipleTasksPerSedDocument, self).build_synthetic_archive(
+            curated_archive, curated_archive_dir, curated_sed_docs)
+
         # get a suitable SED document to modify
         location = self.get_suitable_sed_doc(curated_sed_docs)
         doc_id = os.path.relpath(location, './')

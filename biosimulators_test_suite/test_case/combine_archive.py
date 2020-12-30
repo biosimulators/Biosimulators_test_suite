@@ -24,8 +24,15 @@ class CombineArchiveTestCase(ConfigurableMasterCombineArchiveTestCase):
 
     Attributes:
         _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
+        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
+        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
+            the values of the parameters of algorithms
         _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
     """
+
+    @property
+    def _include_non_master(self):
+        return True
 
     def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
         """ Test that the expected outputs were created for the synthetic archive
@@ -60,6 +67,9 @@ class WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile(CombineArch
 
     Attributes:
         _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
+        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
+        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
+            the values of the parameters of algorithms
         _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
     """
 
@@ -74,6 +84,9 @@ class WhenACombineArchiveHasNoMasterFileSimulatorExecutesAllSedDocuments(Combine
 
     Attributes:
         _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
+        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
+        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
+            the values of the parameters of algorithms
         _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
     """
 

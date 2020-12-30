@@ -16,6 +16,9 @@ from biosimulators_utils.config import get_config
 from biosimulators_utils.report.data_model import ReportFormat
 from biosimulators_utils.sedml.data_model import Report
 from biosimulators_utils.sedml.io import SedmlSimulationReader, SedmlSimulationWriter
+from biosimulators_utils.sedml.utils import (remove_model_changes, remove_algorithm_parameter_changes,
+                                             replace_complex_data_generators_with_generators_for_individual_variables,
+                                             remove_plots)
 import biosimulators_utils.archive.io
 import biosimulators_utils.simulator.exec
 import biosimulators_utils.report.io
@@ -482,7 +485,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
             succeeded = self.eval_outputs(specifications, synthetic_archive, synthetic_sed_docs, outputs_dir)
         finally:
             shutil.rmtree(temp_dir)
-            return succeeded
+        return succeeded
 
     def is_curated_archive_suitable_for_building_synthetic_archive(self, archive, sed_docs):
         """ Find an archive with at least one report
@@ -582,7 +585,15 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
     copies of the same file
 
     Attributes:
-        _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
+        _archive_has_master (:obj:`bool`): whether the synthetic archive should have a master file
+        _include_non_master (:obj:`bool`): whether the synthetic archive should also have a non-master file
+        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
+        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
+            the values of the parameters of algorithms
+        _use_single_variable_data_generators (:obj:`bool`): if :obj:`True`, replace data generators that
+            involve multiple variables or parameters (and data sets, curves, and surfaces) with multiple
+            data generators for each variable
+        _remove_plots (:obj:`bool`): if :obj:`True`, remove plots
         _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
     """
 
@@ -590,6 +601,18 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
     @abc.abstractmethod
     def _archive_has_master(self):
         pass  # pragma: no cover
+
+    @property
+    @abc.abstractmethod
+    def _include_non_master(self):
+        pass  # pragma: no cover
+
+    def __init__(self, *args, **kwargs):
+        super(ConfigurableMasterCombineArchiveTestCase, self).__init__(*args, **kwargs)
+        self._remove_model_changes = True
+        self._remove_algorithm_parameter_changes = True
+        self._use_single_variable_data_generators = True
+        self._remove_plots = True
 
     def build_synthetic_archive(self, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with master and non-master SED documents
@@ -626,24 +649,42 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
         # make document master
         doc_content.master = self._archive_has_master
 
-        # duplicate document
-        doc_content_copy = copy.deepcopy(doc_content)
-        doc_content_copy.master = False
-        doc_content_copy.location = os.path.join(
-            os.path.dirname(doc_content_copy.location),
-            '__copy__' + os.path.basename(doc_content_copy.location))
-        curated_archive.contents.append(doc_content_copy)
+        # remove model changes
+        if self._remove_model_changes:
+            remove_model_changes(doc)
+
+        # remove algorithm parameter changes
+        if self._remove_algorithm_parameter_changes:
+            remove_algorithm_parameter_changes(doc)
+
+        # replace data generator that involve mathematical expressions with multiple data generators for each individual variable
+        if self._use_single_variable_data_generators:
+            replace_complex_data_generators_with_generators_for_individual_variables(doc)
+
+        # remove plots
+        if self._remove_plots:
+            remove_plots(doc)
 
         curated_sed_docs = {
             doc_content.location: doc,
-            doc_content_copy.location: copy.deepcopy(doc),
         }
+
+        # duplicate document
+        if self._include_non_master:
+            doc_content_copy = copy.deepcopy(doc_content)
+            doc_content_copy.master = False
+            doc_content_copy.location = os.path.join(
+                os.path.dirname(doc_content_copy.location),
+                '__copy__' + os.path.basename(doc_content_copy.location))
+            curated_archive.contents.append(doc_content_copy)
+
+            curated_sed_docs[doc_content_copy.location] = copy.deepcopy(doc)
 
         self._expected_report_ids = []
         for output in doc.outputs:
             if isinstance(output, Report):
                 self._expected_report_ids.append(os.path.join(os.path.relpath(doc_content.location, './'), output.id))
-                if not self._archive_has_master:
+                if not self._archive_has_master and self._include_non_master:
                     self._expected_report_ids.append(os.path.join(os.path.relpath(doc_content_copy.location, './'), output.id))
 
         # return modified SED document
@@ -655,9 +696,16 @@ class SingleMasterSedDocumentCombineArchiveTestCase(ConfigurableMasterCombineArc
 
     Attributes:
         _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
+        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
+        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
+            the values of the parameters of algorithms
         _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
     """
 
     @property
     def _archive_has_master(self):
         return True
+
+    @property
+    def _include_non_master(self):
+        return False
