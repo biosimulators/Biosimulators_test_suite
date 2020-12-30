@@ -180,8 +180,8 @@ class SimulatorCanExecutePublishedProject(TestCase):
                             numpy.ravel_multi_index([multi_index], points)[0]
                         except ValueError:
                             raise ValueError((
-                                "Key '{}' of the expected values of report '{}' of published project test case '{}' is invalid. "
-                                "Key must be less than or equal to '{}'."
+                                "Key `{}` of the expected values of report `{}` of published project test case `{}` is invalid. "
+                                "Key must be less than or equal to `{}`."
                             ).format(
                                 multi_index,
                                 self.id,
@@ -193,7 +193,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
             invalid_dataset_ids = set(values.keys()).difference(set(data_set_labels))
             if invalid_dataset_ids:
                 raise ValueError((
-                    "The keys of the expected values of report '{}' of published project test case '{}' "
+                    "The keys of the expected values of report `{}` of published project test case `{}` "
                     "should be defined in the 'dataSets' property. "
                     "The following keys were not in the 'dataSets' property:\n  - {}").format(
                     id, self.id.replace('published_project.SimulatorCanExecutePublishedProject:', ''),
