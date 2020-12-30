@@ -10,10 +10,10 @@ from ..data_model import TestCase
 from ..warnings import TestCaseWarning
 import warnings
 
-__all__ = ['OciLabelsTestCase', 'BioContainersLabelsTestCase']
+__all__ = ['HasOciLabels', 'HasBioContainersLabels']
 
 
-class OciLabelsTestCase(TestCase):
+class HasOciLabels(TestCase):
     """ Test that a Docker image has Open Container Initiative (OCI) labels
     with metadata about the image
     """
@@ -47,7 +47,7 @@ class OciLabelsTestCase(TestCase):
                 '\n  '.join(sorted(missing_labels))), TestCaseWarning)
 
 
-class BioContainersLabelsTestCase(TestCase):
+class HasBioContainersLabels(TestCase):
     """ Test that a Docker image has BioContainers labels with metadata
     about the image
     """

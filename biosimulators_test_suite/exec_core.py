@@ -119,7 +119,7 @@ class SimulatorValidator(object):
             module (:obj:`types.ModuleType`): module
             ids (:obj:`list` of :obj:`str`, optional): List of ids of test cases to verify. If :obj:`ids`
                 is none, all test cases are verified.
-            published_projects_test_cases (:obj:`list` of :obj:`published_project.PublishedProjectTestCase`): test cases involving
+            published_projects_test_cases (:obj:`list` of :obj:`published_project.SimulatorCanExecutePublishedProject`): test cases involving
                 executing curated COMBINE/OMEX archives
 
         Returns:

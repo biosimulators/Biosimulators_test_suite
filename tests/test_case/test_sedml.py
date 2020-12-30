@@ -1,5 +1,5 @@
 from biosimulators_test_suite.test_case import sedml
-from biosimulators_test_suite.test_case.published_project import PublishedProjectTestCase
+from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
 from biosimulators_test_suite.warnings import IgnoredTestCaseWarning
 from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml.data_model import SedDocument, Task, Report
@@ -23,28 +23,28 @@ class SedmlTestCaseTest(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.dirname)
 
-    def test_MultipleTasksPerSedDocumentTestCase_get_suitable_sed_doc(self):
-        self.assertEqual(sedml.MultipleTasksPerSedDocumentTestCase.get_suitable_sed_doc({
+    def test_SimulatorSupportsMultipleTasksPerSedDocument_get_suitable_sed_doc(self):
+        self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
             'loc': SedDocument(),
         }), None)
 
-        self.assertEqual(sedml.MultipleTasksPerSedDocumentTestCase.get_suitable_sed_doc({
+        self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
             'loc-1': SedDocument(),
             'loc-2': SedDocument(tasks=[Task()], outputs=[Report()]),
         }), 'loc-2')
 
-        self.assertEqual(sedml.MultipleTasksPerSedDocumentTestCase.get_suitable_sed_doc({
+        self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
             'loc-1': SedDocument(tasks=[Task()]),
             'loc-2': SedDocument(tasks=[Task()], outputs=[Report()]),
         }), 'loc-2')
 
-        self.assertEqual(sedml.MultipleTasksPerSedDocumentTestCase.get_suitable_sed_doc({
+        self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
             'loc-1': SedDocument(outputs=[Report()]),
             'loc-2': SedDocument(tasks=[Task()], outputs=[Report()]),
         }), 'loc-2')
 
-    def test_MultipleTasksPerSedDocumentTestCase_eval_outputs(self):
-        case = sedml.MultipleTasksPerSedDocumentTestCase()
+    def test_SimulatorSupportsMultipleTasksPerSedDocument_eval_outputs(self):
+        case = sedml.SimulatorSupportsMultipleTasksPerSedDocument()
         case._expected_reports = [
             ('a.sedml/b', 'a.sedml/b'),
         ]
@@ -56,17 +56,17 @@ class SedmlTestCaseTest(unittest.TestCase):
         ReportWriter().run(data_frame, self.dirname, 'a.sedml/b')
         case.eval_outputs(None, None, self.dirname)
 
-    def test_MultipleTasksPerSedDocumentTestCase(self):
+    def test_SimulatorSupportsMultipleTasksPerSedDocument(self):
         specs = {'image': {'url': self.IMAGE}}
-        curated_case = PublishedProjectTestCase(filename=self.CURATED_ARCHIVE_FILENAME)
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
 
         # test synthetic case generated and used to test simulator
-        case = sedml.MultipleTasksPerSedDocumentTestCase(
+        case = sedml.SimulatorSupportsMultipleTasksPerSedDocument(
             published_projects_test_cases=[curated_case])
         case.eval(specs)
 
         # no curated cases to use
-        case = sedml.MultipleTasksPerSedDocumentTestCase(
+        case = sedml.SimulatorSupportsMultipleTasksPerSedDocument(
             published_projects_test_cases=[])
         with self.assertWarnsRegex(IgnoredTestCaseWarning, 'No curated COMBINE/OMEX archives are available'):
             case.eval(specs)

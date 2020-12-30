@@ -14,11 +14,11 @@ import copy
 import os
 
 __all__ = [
-    'MultipleTasksPerSedDocumentTestCase',
+    'SimulatorSupportsMultipleTasksPerSedDocument',
 ]
 
 
-class MultipleTasksPerSedDocumentTestCase(SyntheticCombineArchiveTestCase):
+class SimulatorSupportsMultipleTasksPerSedDocument(SyntheticCombineArchiveTestCase):
     """ Test that a simulator supports multiple tasks per SED document
 
     Attributes:

@@ -1,6 +1,6 @@
 from biosimulators_test_suite import data_model
 from biosimulators_test_suite.exceptions import InvalidOuputsException, SkippedTestCaseException
-from biosimulators_test_suite.test_case.published_project import (PublishedProjectTestCase, find_cases, SyntheticCombineArchiveTestCase)
+from biosimulators_test_suite.test_case.published_project import (SimulatorCanExecutePublishedProject, find_cases, SyntheticCombineArchiveTestCase)
 from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOuputsWarning
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
@@ -47,7 +47,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         self.assertEqual(len(compatible_cases), 0)
 
     def test_CuratedCombineArchiveTestCase_description(self):
-        case = PublishedProjectTestCase(task_requirements=[
+        case = SimulatorCanExecutePublishedProject(task_requirements=[
             data_model.SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000027'),
             data_model.SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000019'),
         ])
@@ -67,8 +67,8 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         with open(os.path.join(base_path, filename), 'r') as file:
             data = json.load(file)
         data['expectedReports'][0]['values']['T'] = [0, 1, 2, 3, 4, 5]
-        id = 'published_project.PublishedProjectTestCase:sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json'
-        case = PublishedProjectTestCase(id=id).from_dict(data)
+        id = 'published_project.SimulatorCanExecutePublishedProject:sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json'
+        case = SimulatorCanExecutePublishedProject(id=id).from_dict(data)
         numpy.testing.assert_allclose(case.expected_reports[0].values['T'], numpy.array([0, 1, 2, 3, 4, 5]))
 
     def test_CuratedCombineArchiveTestCase_from_dict_error_handling(self):
@@ -76,24 +76,24 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         with open(os.path.join(base_path, filename), 'r') as file:
             data = json.load(file)
-        id = 'published_project.PublishedProjectTestCase:sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json'
+        id = 'published_project.SimulatorCanExecutePublishedProject:sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json'
 
         data['expectedReports'][0]['values'] = {'t': [0, 1, 2, 3, 4, 5]}
         with self.assertRaisesRegex(ValueError, "keys were not in the 'dataSets' property"):
-            PublishedProjectTestCase(id=id).from_dict(data)
+            SimulatorCanExecutePublishedProject(id=id).from_dict(data)
 
         data['expectedReports'][0]['values'] = {'T': {'5001': 1000.2}}
         with self.assertRaisesRegex(ValueError, "Key must be less than or equal to"):
-            PublishedProjectTestCase(id=id).from_dict(data)
+            SimulatorCanExecutePublishedProject(id=id).from_dict(data)
 
         data['expectedReports'][0]['values'] = {'T': {'5000': 1000.}}
-        PublishedProjectTestCase(id=id).from_dict(data)
+        SimulatorCanExecutePublishedProject(id=id).from_dict(data)
 
     def test_CuratedCombineArchiveTestCase_from_json(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
-        case = PublishedProjectTestCase().from_json(base_path, filename)
-        self.assertEqual(case.id, ('published_project.PublishedProjectTestCase:'
+        case = SimulatorCanExecutePublishedProject().from_json(base_path, filename)
+        self.assertEqual(case.id, ('published_project.SimulatorCanExecutePublishedProject:'
                                    'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'))
         self.assertEqual(case.name, "Caravagna et al. Journal of Theoretical Biology 2010: Tumor-suppressive oscillations")
         self.assertTrue(case.filename.endswith('sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex'))
@@ -126,7 +126,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
     def test_CuratedCombineArchiveTestCase_eval(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
-        case = PublishedProjectTestCase().from_json(base_path, filename)
+        case = SimulatorCanExecutePublishedProject().from_json(base_path, filename)
         case.expected_reports[0].values['T'] = numpy.zeros((5001,))
 
         # skips
@@ -309,7 +309,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         case.assert_no_extra_plots = False
 
     def test_TestCaseResult(self):
-        case = PublishedProjectTestCase(id='case')
+        case = SimulatorCanExecutePublishedProject(id='case')
         exception = Exception('message')
         result = data_model.TestCaseResult(case=case, type=data_model.TestCaseResultType.skipped, duration=10., exception=exception)
         self.assertEqual(result.case, case)
@@ -329,7 +329,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
                 pass
 
         case = TestCase(published_projects_test_cases=[
-            PublishedProjectTestCase()
+            SimulatorCanExecutePublishedProject()
         ])
 
         with self.assertWarnsRegex(IgnoredTestCaseWarning, 'No curated COMBINE/OMEX archives are available'):

@@ -30,12 +30,12 @@ import shutil
 import tempfile
 import warnings
 
-__all__ = ['PublishedProjectTestCase']
+__all__ = ['SimulatorCanExecutePublishedProject']
 
 EXAMPLES_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
 
 
-class PublishedProjectTestCase(TestCase):
+class SimulatorCanExecutePublishedProject(TestCase):
     """ A test case for validating a simulator that involves executing a COMBINE/OMEX archive
 
     Attributes:
@@ -78,7 +78,7 @@ class PublishedProjectTestCase(TestCase):
             a_tol (:obj:`float`, optional): absolute tolerence
             output_medium (:obj:`OutputMedium`, optional): medium the description should be formatted for
         """
-        super(PublishedProjectTestCase, self).__init__(id, name, output_medium=output_medium)
+        super(SimulatorCanExecutePublishedProject, self).__init__(id, name, output_medium=output_medium)
         self.filename = filename
         self.task_requirements = task_requirements or []
         self.expected_reports = expected_reports or []
@@ -134,12 +134,12 @@ class PublishedProjectTestCase(TestCase):
             filename (:obj:`str`): JSON file relative to :obj:`base_path`
 
         Returns:
-            :obj:`PublishedProjectTestCase`: this object
+            :obj:`SimulatorCanExecutePublishedProject`: this object
         """
         with open(os.path.join(base_path, filename), 'r') as file:
             data = json.load(file)
 
-        self.id = 'published_project.PublishedProjectTestCase' + ':' + os.path.splitext(filename)[0]
+        self.id = 'published_project.SimulatorCanExecutePublishedProject' + ':' + os.path.splitext(filename)[0]
         self.name = data['name']
         self.filename = os.path.join(os.path.dirname(os.path.join(base_path, filename)), data['filename'])
 
@@ -152,7 +152,7 @@ class PublishedProjectTestCase(TestCase):
             data (:obj:`dict`): dictionary with test case data
 
         Returns:
-            :obj:`PublishedProjectTestCase`: this object
+            :obj:`SimulatorCanExecutePublishedProject`: this object
         """
         self.task_requirements = []
         for task_req_def in data['taskRequirements']:
@@ -185,7 +185,7 @@ class PublishedProjectTestCase(TestCase):
                             ).format(
                                 multi_index,
                                 self.id,
-                                self.id.replace('published_project.PublishedProjectTestCase:', ''),
+                                self.id.replace('published_project.SimulatorCanExecutePublishedProject:', ''),
                                 tuple(p - 1 for p in points),
                             ))
                         values[key][multi_index] = v
@@ -196,7 +196,7 @@ class PublishedProjectTestCase(TestCase):
                     "The keys of the expected values of report '{}' of published project test case '{}' "
                     "should be defined in the 'dataSets' property. "
                     "The following keys were not in the 'dataSets' property:\n  - {}").format(
-                    id, self.id.replace('published_project.PublishedProjectTestCase:', ''),
+                    id, self.id.replace('published_project.SimulatorCanExecutePublishedProject:', ''),
                     '\n  - '.join(sorted(invalid_dataset_ids))))
 
             self.expected_reports.append(ExpectedSedReport(
@@ -398,7 +398,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
         name (:obj:`str`): name
         description (:obj:`str`): description
         output_medium (:obj:`OutputMedium`): medium the description should be formatted for
-        published_projects_test_cases (:obj:`list` of :obj:`PublishedProjectTestCase`):
+        published_projects_test_cases (:obj:`list` of :obj:`SimulatorCanExecutePublishedProject`):
             curated COMBINE/OMEX archives that can be used to generate example archives for testing
     """
 
@@ -409,7 +409,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
             name (:obj:`str`, optional): name
             description (:obj:`str`): description
             output_medium (:obj:`OutputMedium`, optional): medium the description should be formatted for
-            published_projects_test_cases (:obj:`list` of :obj:`PublishedProjectTestCase`, optional):
+            published_projects_test_cases (:obj:`list` of :obj:`SimulatorCanExecutePublishedProject`, optional):
                 curated COMBINE/OMEX archives that can be used to generate example archives for testing
         """
         super(SyntheticCombineArchiveTestCase, self).__init__(id=id, name=name, description=description, output_medium=output_medium)
@@ -544,7 +544,7 @@ def find_cases(specifications, dir_name=None, output_medium=OutputMedium.console
         output_medium (:obj:`OutputMedium`, optional): medium the description should be formatted for
 
     Returns:
-        :obj:`list` of :obj:`PublishedProjectTestCase`: test cases
+        :obj:`list` of :obj:`SimulatorCanExecutePublishedProject`: test cases
     """
     if dir_name is None:
         dir_name = EXAMPLES_DIR
@@ -555,7 +555,7 @@ def find_cases(specifications, dir_name=None, output_medium=OutputMedium.console
     compatible_cases = []
     for md_filename in glob.glob(os.path.join(dir_name, '**/*.json'), recursive=True):
         rel_filename = os.path.relpath(md_filename, dir_name)
-        case = PublishedProjectTestCase(output_medium=output_medium).from_json(dir_name, rel_filename)
+        case = SimulatorCanExecutePublishedProject(output_medium=output_medium).from_json(dir_name, rel_filename)
         all_cases.append(case)
         if case.compatible_with_specifications(specifications):
             compatible_cases.append(case)

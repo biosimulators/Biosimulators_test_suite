@@ -12,10 +12,10 @@ import re
 import subprocess
 import warnings
 
-__all__ = ['InlineHelpTestCase', 'InlineVersionInformationTestCase']
+__all__ = ['CliDisplaysHelpInline', 'CliDisplaysVersionInformationInline']
 
 
-class InlineHelpTestCase(TestCase):
+class CliDisplaysHelpInline(TestCase):
     """ Test that a command-line interface provides inline help
     """
 
@@ -77,7 +77,7 @@ class InlineHelpTestCase(TestCase):
                           TestCaseWarning)
 
 
-class InlineVersionInformationTestCase(TestCase):
+class CliDisplaysVersionInformationInline(TestCase):
     """ Test that a command-line interface provides version information inline
     """
 

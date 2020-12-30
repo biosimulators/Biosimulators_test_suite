@@ -1,7 +1,7 @@
 from biosimulators_test_suite import exec_gh_action
 from biosimulators_test_suite import exec_core
 from biosimulators_test_suite.data_model import TestCaseResult, TestCaseResultType
-from biosimulators_test_suite.test_case.published_project import PublishedProjectTestCase
+from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
 from biosimulators_test_suite.warnings import TestCaseWarning
 from biosimulators_utils.gh_action.data_model import GitHubActionCaughtError
 from biosimulators_utils.simulator_registry.data_model import SimulatorSubmission, IssueLabel
@@ -83,7 +83,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             ],
         }
         run_results = [
-            TestCaseResult(case=PublishedProjectTestCase(id='sedml.case-1'), type=TestCaseResultType.passed, log='', duration=1.)
+            TestCaseResult(case=SimulatorCanExecutePublishedProject(id='sedml.case-1'), type=TestCaseResultType.passed, log='', duration=1.)
         ]
 
         def requests_post(url, json=None, auth=None, headers=None):
@@ -98,7 +98,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                             action.validate_image(specs)
 
         run_results = [
-            TestCaseResult(case=PublishedProjectTestCase(id='sedml.x'), type=TestCaseResultType.failed,
+            TestCaseResult(case=SimulatorCanExecutePublishedProject(id='sedml.x'), type=TestCaseResultType.failed,
                            exception=Exception('y'), log='', duration=2.),
         ]
 
@@ -766,7 +766,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         if validation_state == 'passes':
             validation_run_results = [
                 TestCaseResult(
-                    case=PublishedProjectTestCase(id='sedml.case-passed'),
+                    case=SimulatorCanExecutePublishedProject(id='sedml.case-passed'),
                     type=TestCaseResultType.passed,
                     duration=1.,
                     warnings=[
@@ -778,7 +778,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         elif validation_state == 'fails':
             validation_run_results = [
                 TestCaseResult(
-                    case=PublishedProjectTestCase(id='sedml.case-failed'),
+                    case=SimulatorCanExecutePublishedProject(id='sedml.case-failed'),
                     type=TestCaseResultType.failed,
                     exception=Exception('Big error'),
                     log='Long log',

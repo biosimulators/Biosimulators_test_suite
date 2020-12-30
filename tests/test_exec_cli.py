@@ -18,7 +18,7 @@ class MainTestCase(unittest.TestCase):
 
         results = [
             biosimulators_test_suite.data_model.TestCaseResult(
-                case=biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase(
+                case=biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject(
                     id='case-id',
                     task_requirements=[
                         biosimulators_test_suite.data_model.SedTaskRequirements(
@@ -47,7 +47,7 @@ class MainTestCase(unittest.TestCase):
 
         results = [
             biosimulators_test_suite.data_model.TestCaseResult(
-                case=biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase(
+                case=biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject(
                     id='case-id',
                     task_requirements=[
                         biosimulators_test_suite.data_model.SedTaskRequirements(
@@ -80,7 +80,7 @@ class MainTestCase(unittest.TestCase):
 
         results = [
             biosimulators_test_suite.data_model.TestCaseResult(
-                case=biosimulators_test_suite.test_case.published_project.PublishedProjectTestCase(
+                case=biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject(
                     id='case-id',
                     task_requirements=[
                         biosimulators_test_suite.data_model.SedTaskRequirements(

@@ -6,8 +6,8 @@ import unittest
 class DockerImageTestCaseTest(unittest.TestCase):
     IMAGE = 'ghcr.io/biosimulators/biosimulators_copasi/copasi:latest'
 
-    def test_InlineHelpTestCase(self):
-        case = cli.InlineHelpTestCase()
+    def test_CliDisplaysHelpInline(self):
+        case = cli.CliDisplaysHelpInline()
 
         case.eval({'image': {'url': self.IMAGE}})
 
@@ -20,8 +20,8 @@ class DockerImageTestCaseTest(unittest.TestCase):
         with self.assertWarnsRegex(TestCaseWarning, 'should support the `--help` option'):
             case.eval({'image': {'url': 'hello-world'}})
 
-    def test_InlineVersionInformationTestCase(self):
-        case = cli.InlineVersionInformationTestCase()
+    def test_CliDisplaysVersionInformationInline(self):
+        case = cli.CliDisplaysVersionInformationInline()
 
         case.eval({'image': {'url': self.IMAGE}})
 

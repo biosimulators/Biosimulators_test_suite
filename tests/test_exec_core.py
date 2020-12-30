@@ -3,7 +3,7 @@ from biosimulators_test_suite.data_model import (TestCase, TestCaseResult, TestC
                                                  SedTaskRequirements)
 from biosimulators_test_suite.exceptions import SkippedTestCaseException
 from biosimulators_test_suite.test_case import published_project
-from biosimulators_test_suite.test_case.docker_image import BioContainersLabelsTestCase
+from biosimulators_test_suite.test_case.docker_image import HasBioContainersLabels
 from biosimulators_test_suite.warnings import TestCaseWarning, IgnoredTestCaseWarning
 from unittest import mock
 import sys
@@ -23,22 +23,22 @@ class ValidateSimulatorTestCase(unittest.TestCase):
             SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000019'),
         ]
         results = [
-            TestCaseResult(case=published_project.PublishedProjectTestCase(
+            TestCaseResult(case=published_project.SimulatorCanExecutePublishedProject(
                 id='A', task_requirements=reqs), type=TestCaseResultType.passed, duration=1.),
-            TestCaseResult(case=published_project.PublishedProjectTestCase(
+            TestCaseResult(case=published_project.SimulatorCanExecutePublishedProject(
                 id='B', task_requirements=reqs), type=TestCaseResultType.passed, duration=2.),
-            TestCaseResult(case=published_project.PublishedProjectTestCase(
+            TestCaseResult(case=published_project.SimulatorCanExecutePublishedProject(
                 id='C', task_requirements=reqs), type=TestCaseResultType.failed, duration=3.,
                 exception=Exception('Summary of error'), log="Detail of error"),
-            TestCaseResult(case=published_project.PublishedProjectTestCase(
+            TestCaseResult(case=published_project.SimulatorCanExecutePublishedProject(
                 id='D', task_requirements=reqs), type=TestCaseResultType.skipped),
-            TestCaseResult(case=published_project.PublishedProjectTestCase(
+            TestCaseResult(case=published_project.SimulatorCanExecutePublishedProject(
                 id='E', task_requirements=reqs), type=TestCaseResultType.skipped),
-            TestCaseResult(case=published_project.PublishedProjectTestCase(
+            TestCaseResult(case=published_project.SimulatorCanExecutePublishedProject(
                 id='F', task_requirements=reqs), type=TestCaseResultType.skipped),
             TestCaseResult(
-                case=BioContainersLabelsTestCase(
-                    id='docker_image.BioContainersLabelsTestCase',
+                case=HasBioContainersLabels(
+                    id='docker_image.HasBioContainersLabels',
                 ),
                 type=TestCaseResultType.passed,
                 warnings=[
@@ -48,8 +48,8 @@ class ValidateSimulatorTestCase(unittest.TestCase):
                 duration=3.,
             ),
             TestCaseResult(
-                case=BioContainersLabelsTestCase(
-                    id='docker_image.BioContainersLabelsTestCase',
+                case=HasBioContainersLabels(
+                    id='docker_image.HasBioContainersLabels',
                     description='Description of test case'
                 ),
                 type=TestCaseResultType.failed,
@@ -72,10 +72,10 @@ class ValidateSimulatorTestCase(unittest.TestCase):
     def test_find_cases(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
         case_ids = [
-            'published_project.PublishedProjectTestCase:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
-            'published_project.PublishedProjectTestCase:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
-            'published_project.PublishedProjectTestCase:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
-            'published_project.PublishedProjectTestCase:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
         ]
         validator = SimulatorValidator(specifications, case_ids=case_ids)
         self.assertGreaterEqual(len(validator.cases), 5)
@@ -94,8 +94,8 @@ class ValidateSimulatorTestCase(unittest.TestCase):
             n_cases += len(suite_cases)
         self.assertEqual(n_cases, 4)
 
-        case_ids.append('docker_image.OciLabelsTestCase')
-        case_ids.append('sedml.MultipleTasksPerSedDocumentTestCase')
+        case_ids.append('docker_image.HasOciLabels')
+        case_ids.append('sedml.SimulatorSupportsMultipleTasksPerSedDocument')
         with self.assertWarnsRegex(IgnoredTestCaseWarning, 'were not found'):
             validator = SimulatorValidator(specifications, case_ids=case_ids)
         n_cases = 0
@@ -216,10 +216,10 @@ class ValidateSimulatorTestCase(unittest.TestCase):
     def test_run(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
         case_ids = [
-            'published_project.PublishedProjectTestCase:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
-            'published_project.PublishedProjectTestCase:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
-            'published_project.PublishedProjectTestCase:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
-            'published_project.PublishedProjectTestCase:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
         ]
         validator = SimulatorValidator(specifications, case_ids=case_ids)
         self.assertGreaterEqual(len(validator.cases), 4)
@@ -242,17 +242,17 @@ class ValidateSimulatorTestCase(unittest.TestCase):
     def test_run_with_passed(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
         case_ids = [
-            'published_project.PublishedProjectTestCase:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
-            'published_project.PublishedProjectTestCase:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
-            'published_project.PublishedProjectTestCase:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
-            'published_project.PublishedProjectTestCase:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
         ]
         validator = SimulatorValidator(specifications, case_ids=case_ids)
 
         def eval(*args, **kwargs):
             warnings.warn('Important warning', TestCaseWarning)
 
-        with mock.patch.object(published_project.PublishedProjectTestCase, 'eval', side_effect=eval):
+        with mock.patch.object(published_project.SimulatorCanExecutePublishedProject, 'eval', side_effect=eval):
             results = validator.run()
         self.assertEqual(len(results), 4)
         for result in results:
@@ -261,17 +261,17 @@ class ValidateSimulatorTestCase(unittest.TestCase):
     def test_run_with_failures(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
         case_ids = [
-            'published_project.PublishedProjectTestCase:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
-            'published_project.PublishedProjectTestCase:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
-            'published_project.PublishedProjectTestCase:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
-            'published_project.PublishedProjectTestCase:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
         ]
         validator = SimulatorValidator(specifications, case_ids=case_ids)
 
         def eval(*args, **kwargs):
             raise RuntimeError("Bad")
 
-        with mock.patch.object(published_project.PublishedProjectTestCase, 'eval', side_effect=eval):
+        with mock.patch.object(published_project.SimulatorCanExecutePublishedProject, 'eval', side_effect=eval):
             results = validator.run()
         self.assertEqual(len(results), 4)
         for result in results:
@@ -280,17 +280,17 @@ class ValidateSimulatorTestCase(unittest.TestCase):
     def test_run_with_skips(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
         case_ids = [
-            'published_project.PublishedProjectTestCase:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
-            'published_project.PublishedProjectTestCase:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
-            'published_project.PublishedProjectTestCase:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
-            'published_project.PublishedProjectTestCase:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
         ]
         validator = SimulatorValidator(specifications, case_ids=case_ids)
 
         def eval(*args, **kwargs):
             raise SkippedTestCaseException("Not applicable")
 
-        with mock.patch.object(published_project.PublishedProjectTestCase, 'eval', side_effect=eval):
+        with mock.patch.object(published_project.SimulatorCanExecutePublishedProject, 'eval', side_effect=eval):
             results = validator.run()
         self.assertEqual(len(results), 4)
         for result in results:
