@@ -68,7 +68,7 @@ class DeclaresSupportedEnvironmentVariables(TestCase):
                    'variables recognized by BioSimulators:\n  - {}\n\n'
                    'If the simulation tool implements these variables, they should be declared in the Dockerfile for '
                    'the Docker image for the simulator.\n\n'
-                   'Note, support for these environment variables is optional. Simulation tools are not requireed to support '
+                   'Note, support for these environment variables is optional. Simulation tools are not required to support '
                    'these variables.'
                    ).format('\n  - '.join("'" + var + "'" for var in potentially_missing_env_vars))
             warnings.warn(msg, TestCaseWarning)

@@ -20,6 +20,12 @@ class DockerImageTestCaseTest(unittest.TestCase):
         with self.assertWarnsRegex(TestCaseWarning, 'should support the `--help` option'):
             case.eval({'image': {'url': 'hello-world'}})
 
+    def test_CliDescribesSupportedEnvironmentVariablesInline(self):
+        case = cli.CliDescribesSupportedEnvironmentVariablesInline()
+
+        with self.assertWarnsRegex(TestCaseWarning, 'should describe the environment variables'):
+            case.eval({'image': {'url': 'hello-world'}})
+
     def test_CliDisplaysVersionInformationInline(self):
         case = cli.CliDisplaysVersionInformationInline()
 
