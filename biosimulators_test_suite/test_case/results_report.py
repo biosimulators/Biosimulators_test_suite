@@ -7,7 +7,7 @@
 """
 
 from ..warnings import TestCaseWarning
-from .combine_archive import SingleMasterSedDocumentCombineArchiveTestCase
+from .published_project import SingleMasterSedDocumentCombineArchiveTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
 from biosimulators_utils.report.data_model import ReportFormat
 from biosimulators_utils.report.io import ReportReader
