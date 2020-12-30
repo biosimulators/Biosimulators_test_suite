@@ -26,11 +26,12 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SyntheticCombineArchiveTestCa
             original reports and their expected duplicates
     """
 
-    def build_synthetic_archive(self, curated_archive, curated_sed_docs):
+    def build_synthetic_archive(self, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
 
         Args:
             curated_archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            curated_archive_dir (:obj:`str`): directory with the contents of the curated COMBINE/OMEX archive
             curated_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
                 SED documents in curated archive
 

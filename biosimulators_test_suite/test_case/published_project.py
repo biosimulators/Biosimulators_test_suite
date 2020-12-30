@@ -457,7 +457,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
             return
 
         synthetic_archive_filename = os.path.join(temp_dir, 'archive.omex')
-        synthetic_archive, synthetic_sed_docs = self.build_synthetic_archive(curated_archive, curated_sed_docs)
+        synthetic_archive, synthetic_sed_docs = self.build_synthetic_archive(curated_archive, shared_archive_dir, curated_sed_docs)
         sedml_writer = SedmlSimulationWriter()
         for location, sed_doc in synthetic_sed_docs.items():
             sedml_writer.run(sed_doc, os.path.join(shared_archive_dir, location))
@@ -506,11 +506,12 @@ class SyntheticCombineArchiveTestCase(TestCase):
         return None
 
     @abc.abstractmethod
-    def build_synthetic_archive(self, curated_archive, curated_sed_docs):
+    def build_synthetic_archive(self, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive for testing
 
         Args:
             curated_archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            curated_archive_dir (:obj:`str`): directory with the contents of the curated COMBINE/OMEX archive
             curated_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
                 SED documents in curated archive
 
