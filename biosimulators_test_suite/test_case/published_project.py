@@ -468,7 +468,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
 
         # use synthetic archive to test simulator
         outputs_dir = os.path.join(temp_dir, 'outputs')
-        succeeded = None
+        succeeded = False
         try:
             biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
                 synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=True)

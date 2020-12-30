@@ -28,20 +28,20 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         case = exec_status_report.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives()
 
         with self.assertWarnsRegex(TestCaseWarning, 'did not export information about the status'):
-            self.assertEqual(case.eval_outputs(None, None, None, self.dirname), None)
+            self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
         exec_status_path = os.path.join(self.dirname, get_config().EXEC_STATUS_PATH)
         with open(exec_status_path, 'w') as file:
             file.write('{"a": 2')
         with self.assertWarnsRegex(TestCaseWarning, 'is not valid'):
-            self.assertEqual(case.eval_outputs(None, None, None, self.dirname), None)
+            self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
         with open(exec_status_path, 'w') as file:
             file.write('status: RUNNING\n')
             file.write('sedDocuments:\n')
             file.write('  doc_1:\n')
         with self.assertWarnsRegex(TestCaseWarning, 'is not valid'):
-            self.assertEqual(case.eval_outputs(None, None, None, self.dirname), None)
+            self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
         with open(exec_status_path, 'w') as file:
             file.write('status: RUNNING\n')
@@ -63,7 +63,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
             file.write('      output_3:\n')
             file.write('        status: RUNNING\n')
         with self.assertWarnsRegex(TestCaseWarning, 'is not valid'):
-            self.assertEqual(case.eval_outputs(None, None, None, self.dirname), None)
+            self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
         with open(exec_status_path, 'w') as file:
             file.write('status: RUNNING\n')
@@ -87,7 +87,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
             file.write('        surfaces:\n')
             file.write('          surface_1: RUNNING\n')
         with self.assertWarnsRegex(TestCaseWarning, 'is not valid. By the end of the execution'):
-            self.assertEqual(case.eval_outputs(None, None, None, self.dirname), None)
+            self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
     def test_SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(self):
         specs = {'image': {'url': self.IMAGE}}

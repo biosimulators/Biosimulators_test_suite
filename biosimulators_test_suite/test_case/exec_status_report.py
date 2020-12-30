@@ -41,6 +41,8 @@ class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SyntheticCombineA
         """
         exec_status_path = os.path.join(outputs_dir, get_config().EXEC_STATUS_PATH)
 
+        has_warning = False
+
         if not os.path.isfile(exec_status_path):
             msg = (
                 'The simulator did not export information about the status of its execution. '
@@ -48,7 +50,7 @@ class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SyntheticCombineA
                 'More information: https://biosimulators.org/standards/status'
             )
             warnings.warn(msg, TestCaseWarning)
-            return
+            has_warning = True
 
         try:
             with open(exec_status_path, 'r') as file:
@@ -56,7 +58,7 @@ class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SyntheticCombineA
         except Exception as exception:
             warnings.warn('The execution status report produced by the simulator is not valid:\n\n  {}'.format(
                 str(exception).replace('\n', '\n  ')), TestCaseWarning)
-            return
+            has_warning = True
 
         self._status_valid = True
 
@@ -89,7 +91,7 @@ class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SyntheticCombineA
         except Exception as exception:
             warnings.warn('The execution status report produced by the simulator is not valid:\n\n  {}'.format(
                 str(exception).replace('\n', '\n  ')), TestCaseWarning)
-            return
+            has_warning = True
 
         if not self._status_valid:
             msg = (
@@ -99,6 +101,6 @@ class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SyntheticCombineA
                 '`SUCCEEDED`, `SKIPPED`, or `FAILED`.'
             )
             warnings.warn(msg, TestCaseWarning)
-            return
+            has_warning = True
 
-        return True
+        return not has_warning

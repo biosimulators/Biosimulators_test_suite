@@ -17,14 +17,16 @@ import os
 import warnings
 
 __all__ = [
+    'ConfigurableMasterCombineArchiveTestCase',
+    'SingleMasterSedDocumentCombineArchiveTestCase',
     'WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile',
     'WhenACombineArchiveHasNoMasterFileSimulatorExecutesAllSedDocuments',
 ]
 
 
-class CombineArchiveTestCase(SyntheticCombineArchiveTestCase):
-    """ Test that when a COMBINE/OMEX archive defines a (single) master file, the simulator only
-    executes this file.
+class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
+    """ Class for generating synthetic archives with a single master SED-ML file or two non-master
+    copies of the same file
 
     Attributes:
         _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
@@ -93,6 +95,28 @@ class CombineArchiveTestCase(SyntheticCombineArchiveTestCase):
 
         # return modified SED document
         return (curated_archive, curated_sed_docs)
+
+
+class SingleMasterSedDocumentCombineArchiveTestCase(ConfigurableMasterCombineArchiveTestCase):
+    """ Class for generating synthetic COMBINE/OMEX archives with a single master SED-ML file
+
+    Attributes:
+        _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
+        _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
+    """
+
+    @property
+    def _archive_has_master(self):
+        return True
+
+
+class CombineArchiveTestCase(ConfigurableMasterCombineArchiveTestCase):
+    """ Base class for testing for the execution of master and non-master files in COMBINE/OMEX archives
+
+    Attributes:
+        _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
+        _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
+    """
 
     def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
         """ Test that the expected outputs were created for the synthetic archive
