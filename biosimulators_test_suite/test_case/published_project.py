@@ -421,6 +421,9 @@ class SyntheticCombineArchiveTestCase(TestCase):
         Args:
             specifications (:obj:`dict`): specifications of the simulator to validate
 
+        Returns:
+            :obj:`object`: data returned by :obj:`eval_outputs`
+
         Raises:
             :obj:`Exception`: if the simulator did not pass the test case
         """
@@ -465,13 +468,15 @@ class SyntheticCombineArchiveTestCase(TestCase):
 
         # use synthetic archive to test simulator
         outputs_dir = os.path.join(temp_dir, 'outputs')
+        succeeded = None
         try:
             biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
                 synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=True)
 
-            self.eval_outputs(specifications, synthetic_archive, outputs_dir)
+            succeeded = self.eval_outputs(specifications, synthetic_archive, synthetic_sed_docs, outputs_dir)
         finally:
             shutil.rmtree(temp_dir)
+            return succeeded
 
     def is_curated_archive_suitable_for_building_synthetic_archive(self, archive, sed_docs):
         """ Find an archive with at least one report
@@ -505,7 +510,6 @@ class SyntheticCombineArchiveTestCase(TestCase):
                         return location
         return None
 
-    @abc.abstractmethod
     def build_synthetic_archive(self, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive for testing
 
@@ -522,15 +526,17 @@ class SyntheticCombineArchiveTestCase(TestCase):
                 * :obj:`dict` of :obj:`str` to :obj:`SedDocument`: map from locations to
                   SED documents in synthetic archive
         """
-        pass  # pragma: no cover
+        return (curated_archive, curated_sed_docs)
 
     @abc.abstractmethod
-    def eval_outputs(self, specifications, synthetic_archive, outputs_dir):
+    def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
         """ Test that the expected outputs were created for the synthetic archive
 
         Args:
             specifications (:obj:`dict`): specifications of the simulator to validate
             synthetic_archive (:obj:`CombineArchive`): synthetic COMBINE/OMEX archive for testing the simulator
+            synthetic_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from the location of each SED
+                document in the synthetic archive to the document
             outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
         """
         pass  # pragma: no cover

@@ -3,4 +3,5 @@ capturer
 cement
 docker
 natsort
+pyyaml
 termcolor

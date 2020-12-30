@@ -94,12 +94,14 @@ class CombineArchiveTestCase(SyntheticCombineArchiveTestCase):
         # return modified SED document
         return (curated_archive, curated_sed_docs)
 
-    def eval_outputs(self, specifications, synthetic_archive, outputs_dir):
+    def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
         """ Test that the expected outputs were created for the synthetic archive
 
         Args:
             specifications (:obj:`dict`): specifications of the simulator to validate
             synthetic_archive (:obj:`CombineArchive`): synthetic COMBINE/OMEX archive for testing the simulator
+            synthetic_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from the location of each SED
+                document in the synthetic archive to the document
             outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
         """
         try:

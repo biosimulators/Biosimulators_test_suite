@@ -50,11 +50,11 @@ class SedmlTestCaseTest(unittest.TestCase):
         ]
 
         with self.assertRaisesRegex(ValueError, 'were not generated'):
-            case.eval_outputs(None, None, self.dirname)
+            case.eval_outputs(None, None, None, self.dirname)
 
         data_frame = pandas.DataFrame(numpy.array([[1, 2, 3], [4, 5, 6]]), index=['A', 'B'])
         ReportWriter().run(data_frame, self.dirname, 'a.sedml/b')
-        case.eval_outputs(None, None, self.dirname)
+        case.eval_outputs(None, None, None, self.dirname)
 
     def test_SimulatorSupportsMultipleTasksPerSedDocument(self):
         specs = {'image': {'url': self.IMAGE}}

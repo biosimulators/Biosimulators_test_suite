@@ -1,4 +1,4 @@
-""" Methods for test cases involving checking support for reports of simulation results
+""" Methods for checking support for reports of simulation results
 
 :Author: Jonathan Karr <karr@mssm.edu>
 :Date: 2020-12-29

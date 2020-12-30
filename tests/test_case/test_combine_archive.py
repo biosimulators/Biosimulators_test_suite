@@ -30,15 +30,15 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         ]
 
         with self.assertRaisesRegex(ValueError, 'did not generate'):
-            case.eval_outputs(None, None, self.dirname)
+            case.eval_outputs(None, None, None, self.dirname)
 
         data_frame = pandas.DataFrame(numpy.array([[1, 2, 3], [4, 5, 6]]), index=['A', 'B'])
         ReportWriter().run(data_frame, self.dirname, 'a.sedml/b')
-        case.eval_outputs(None, None, self.dirname)
+        case.eval_outputs(None, None, None, self.dirname)
 
         ReportWriter().run(data_frame, self.dirname, 'b.sedml/b')
         with self.assertWarnsRegex(TestCaseWarning, ''):
-            case.eval_outputs(None, None, self.dirname)
+            case.eval_outputs(None, None, None, self.dirname)
 
     def test_WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -57,16 +57,16 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         ]
 
         with self.assertRaisesRegex(ValueError, 'did not generate'):
-            case.eval_outputs(None, None, self.dirname)
+            case.eval_outputs(None, None, None, self.dirname)
 
         data_frame = pandas.DataFrame(numpy.array([[1, 2, 3], [4, 5, 6]]), index=['A', 'B'])
         ReportWriter().run(data_frame, self.dirname, 'a.sedml/b')
         ReportWriter().run(data_frame, self.dirname, 'b.sedml/b')
-        case.eval_outputs(None, None, self.dirname)
+        case.eval_outputs(None, None, None, self.dirname)
 
         ReportWriter().run(data_frame, self.dirname, 'c.sedml/b')
         with self.assertWarnsRegex(TestCaseWarning, ''):
-            case.eval_outputs(None, None, self.dirname)
+            case.eval_outputs(None, None, None, self.dirname)
 
     def test_WhenACombineArchiveHasNoMasterFileSimulatorExecutesAllSedDocuments(self):
         specs = {'image': {'url': self.IMAGE}}
