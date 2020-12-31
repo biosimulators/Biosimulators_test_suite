@@ -3,5 +3,6 @@ capturer
 cement
 docker
 natsort
+PyPDF2
 pyyaml
 termcolor

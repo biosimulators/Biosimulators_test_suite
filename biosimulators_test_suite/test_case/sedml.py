@@ -9,13 +9,19 @@ from ..exceptions import InvalidOuputsException
 from ..warnings import InvalidOuputsWarning
 from .published_project import SingleMasterSedDocumentCombineArchiveTestCase, UniformTimeCourseTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
+from biosimulators_utils.archive.io import ArchiveReader
+from biosimulators_utils.config import get_config
 from biosimulators_utils.report.io import ReportReader
-from biosimulators_utils.sedml.data_model import (SedDocument, Report, DataSet,  # noqa: F401
-                                                  DataGenerator, DataGeneratorVariable,
+from biosimulators_utils.sedml.data_model import (SedDocument, Output, Report, Plot2D, Plot3D,  DataGenerator,  # noqa: F401
+                                                  DataGeneratorVariable,
                                                   UniformTimeCourseSimulation,
-                                                  DataGeneratorVariableSymbol)
+                                                  DataSet, Curve, Surface, AxisScale)
+import abc
 import copy
 import os
+import PyPDF2
+import shutil
+import tempfile
 import warnings
 
 __all__ = [
@@ -24,6 +30,11 @@ __all__ = [
     'SimulatorSupportsMultipleReportsPerSedDocument',
     'SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes',
     'SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes',
+    'SimulatorProducesLinear2DPlots',
+    'SimulatorProducesLogarithmic2DPlots',
+    'SimulatorProducesLinear3DPlots',
+    'SimulatorProducesLogarithmic3DPlots',
+    'SimulatorProducesMultiplePlots',
 ]
 
 
@@ -301,3 +312,215 @@ class SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes(UniformTimeCour
         simulation.initial_time = simulation.output_end_time / 2
         simulation.output_start_time = simulation.output_end_time / 2
         simulation.number_of_points = int(simulation.number_of_points / 2)
+
+
+class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
+    """ Test that a simulator produces plots """
+
+    @property
+    def _num_plots(self):
+        return 1
+
+    @property
+    @abc.abstractmethod
+    def _axis_scale(self):
+        pass  # pragma: no cover
+
+    def build_synthetic_archive(self, curated_archive, curated_archive_dir, curated_sed_docs):
+        """ Generate a synthetic archive with a copy of each task and each report
+
+        Args:
+            curated_archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            curated_archive_dir (:obj:`str`): directory with the contents of the curated COMBINE/OMEX archive
+            curated_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
+                SED documents in curated archive
+
+        Returns:
+            :obj:`tuple`:
+
+                * :obj:`CombineArchive`: synthetic COMBINE/OMEX archive for testing the simulator
+                * :obj:`dict` of :obj:`str` to :obj:`SedDocument`: map from locations to
+                  SED documents in synthetic archive
+        """
+        curated_archive, curated_sed_docs = super(SimulatorProducesPlotsTestCase, self).build_synthetic_archive(
+            curated_archive, curated_archive_dir, curated_sed_docs)
+
+        # get a suitable SED document to modify
+        doc = list(curated_sed_docs.values())[0]
+
+        # replace report with plot(s)
+        doc.outputs = self.build_plots(doc.data_generators)
+
+        # return modified SED document
+        return (curated_archive, curated_sed_docs)
+
+    @abc.abstractmethod
+    def build_plots(self, data_generators):
+        """ Build plots from the defined data generators
+
+        Args:
+            data_generators (:obj:`list` of :obj:`DataGenerator`): data generators
+
+        Returns:
+            :obj:`list` of :obj:`Output`: plots
+        """
+        pass  # pragma: no cover
+
+    def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
+        """ Test that the expected outputs were created for the synthetic archive
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            synthetic_archive (:obj:`CombineArchive`): synthetic COMBINE/OMEX archive for testing the simulator
+            synthetic_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from the location of each SED
+                document in the synthetic archive to the document
+            outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
+        """
+        plots_path = os.path.join(outputs_dir, get_config().PLOTS_PATH)
+        if not os.path.isfile(plots_path):
+            warnings.warn('Simulator did not produce plots', InvalidOuputsWarning)
+            return
+
+        tempdir = tempfile.mkdtemp()
+        try:
+            archive = ArchiveReader().run(plots_path, tempdir)
+        except Exception:
+            shutil.rmtree(tempdir)
+            raise InvalidOuputsException('Simulator produced an invalid zip archive of plots')
+
+        for file in archive.files:
+            with open(file.local_path, 'rb') as file:
+                try:
+                    PyPDF2.PdfFileReader(file)
+                except Exception:
+                    shutil.rmtree(tempdir)
+                    raise InvalidOuputsException('Simulator produced an invalid PDF plot')
+
+        doc = list(synthetic_sed_docs.values())[0]
+        doc_location = list(synthetic_sed_docs.keys())[0]
+        doc_id = os.path.relpath(doc_location, './')
+
+        expected_plot_ids = set(os.path.join(doc_id, output.id + '.pdf') for output in doc.outputs)
+        plot_ids = set(os.path.relpath(file.archive_path, './') for file in archive.files)
+
+        missing_plot_ids = expected_plot_ids.difference(plot_ids)
+        extra_plot_ids = plot_ids.difference(expected_plot_ids)
+
+        if missing_plot_ids:
+            shutil.rmtree(tempdir)
+            raise InvalidOuputsException('Simulator did not produce the following plots:\n  - {}'.format(
+                '\n  - '.join(sorted('`' + id + '`' for id in missing_plot_ids))
+            ))
+
+        if extra_plot_ids:
+            msg = 'Simulator produced extra plots:\n  - {}'.format(
+                '\n  - '.join(sorted('`' + id + '`' for id in extra_plot_ids)))
+            warnings.warn(msg, InvalidOuputsWarning)
+
+        shutil.rmtree(tempdir)
+
+
+class SimulatorProduces2DPlotsTestCase(SimulatorProducesPlotsTestCase):
+    """ Test that a simulator produces 2D plots """
+
+    def build_plots(self, data_generators):
+        """ Build plots from the defined data generators
+
+        Args:
+            data_generators (:obj:`list` of :obj:`DataGenerator`): data generators
+
+        Returns:
+            :obj:`list` of :obj:`Output`: plots
+        """
+        plots = []
+        for i in range(self._num_plots):
+            plots.append(Plot2D(id='plot_' + str(i)))
+
+        for i_data_generator, data_generator in enumerate(data_generators):
+            plots[i_data_generator % self._num_plots].curves.append(
+                Curve(
+                    id='curve_' + str(i_data_generator),
+                    x_data_generator=data_generator,
+                    y_data_generator=data_generator,
+                    x_scale=self._axis_scale,
+                    y_scale=self._axis_scale,
+                ),
+            )
+
+        return plots
+
+
+class SimulatorProduces3DPlotsTestCase(SimulatorProducesPlotsTestCase):
+    """ Test that a simulator produces 2D plots """
+
+    def build_plots(self, data_generators):
+        """ Build plots from the defined data generators
+
+        Args:
+            data_generators (:obj:`list` of :obj:`DataGenerator`): data generators
+
+        Returns:
+            :obj:`list` of :obj:`Output`: plots
+        """
+        plots = []
+        for i in range(self._num_plots):
+            plots.append(Plot3D(id='plot_' + str(i)))
+
+        for i_data_generator, data_generator in enumerate(data_generators):
+            plots[i_data_generator % self._num_plots].surfaces.append(
+                Surface(
+                    id='surface_' + str(i_data_generator),
+                    x_data_generator=data_generator,
+                    y_data_generator=data_generator,
+                    z_data_generator=data_generator,
+                    x_scale=self._axis_scale,
+                    y_scale=self._axis_scale,
+                    z_scale=self._axis_scale,
+                ),
+            )
+
+        return plots
+
+
+class SimulatorProducesLinear2DPlots(SimulatorProduces2DPlotsTestCase):
+    """ Test that a simulator produces linear 2D plots """
+
+    @property
+    def _axis_scale(self):
+        return AxisScale.linear
+
+
+class SimulatorProducesLogarithmic2DPlots(SimulatorProduces2DPlotsTestCase):
+    """ Test that a simulator produces logarithmic 2D plots """
+
+    @property
+    def _axis_scale(self):
+        return AxisScale.log
+
+
+class SimulatorProducesLinear3DPlots(SimulatorProduces3DPlotsTestCase):
+    """ Test that a simulator produces linear 3D plots """
+
+    @property
+    def _axis_scale(self):
+        return AxisScale.linear
+
+
+class SimulatorProducesLogarithmic3DPlots(SimulatorProduces3DPlotsTestCase):
+    """ Test that a simulator produces logarithmic 3D plots """
+
+    @property
+    def _axis_scale(self):
+        return AxisScale.log
+
+
+class SimulatorProducesMultiplePlots(SimulatorProduces2DPlotsTestCase):
+    """ Test that a simulator produces logarithmic 3D plots """
+
+    @property
+    def _num_plots(self):
+        return 2
+
+    @property
+    def _axis_scale(self):
+        return AxisScale.linear

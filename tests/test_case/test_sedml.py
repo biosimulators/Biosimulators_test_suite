@@ -2,14 +2,19 @@ from biosimulators_test_suite.exceptions import InvalidOuputsException
 from biosimulators_test_suite.test_case import sedml
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
 from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, InvalidOuputsWarning
+from biosimulators_utils.archive.data_model import Archive, ArchiveFile
+from biosimulators_utils.archive.io import ArchiveWriter
+from biosimulators_utils.config import get_config
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContent, CombineArchiveContentFormat
 from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml.data_model import (SedDocument, Task, Report, DataSet,
                                                   DataGenerator, DataGeneratorVariable, UniformTimeCourseSimulation,
-                                                  Algorithm, DataGeneratorVariableSymbol, Model)
+                                                  Algorithm, DataGeneratorVariableSymbol, Model,
+                                                  Plot2D, Curve)
 import numpy
 import os
 import pandas
+import PyPDF2
 import shutil
 import tempfile
 import unittest
@@ -261,7 +266,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         self.assertFalse(case.is_curated_sed_task_suitable_for_building_synthetic_archive(Task(
             simulation=UniformTimeCourseSimulation(initial_time=10.),
         )))
-        self.assertFalse(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(doc))        
+        self.assertFalse(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(doc))
         self.assertFalse(case.is_curated_archive_suitable_for_building_synthetic_archive(archive, {'./a.sedml': doc}))
 
         doc.tasks.append(Task(model=doc.models[0], simulation=doc.simulations[0]))
@@ -346,3 +351,89 @@ class SedmlTestCaseTest(unittest.TestCase):
             published_projects_test_cases=[curated_case])
         self.assertTrue(case.eval(specs))
 
+    def test_SimulatorProducesLinear2DPlots_eval_outputs(self):
+        case = sedml.SimulatorProducesLinear2DPlots()
+
+        doc = SedDocument(
+            outputs=[
+                Plot2D(
+                    id='plot_1',
+                ),
+                Plot2D(
+                    id='plot_2',
+                ),
+            ],
+        )
+
+        with self.assertWarnsRegex(InvalidOuputsWarning, 'did not produce plots'):
+            case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
+
+        plots_path = os.path.join(self.dirname, get_config().PLOTS_PATH)
+
+        with open(plots_path, 'w') as file:
+            file.write('not a zip')
+        with self.assertRaisesRegex(InvalidOuputsException, 'invalid zip archive'):
+            case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
+
+        plot_1_path = os.path.join(self.dirname, 'plot_1.pdf')
+        with open(plot_1_path, 'w') as file:
+            file.write('not a PDF')
+        archive = Archive(
+            files=[
+                ArchiveFile(archive_path='a.sedml/plot_1.pdf', local_path=plot_1_path)
+            ],
+        )
+        ArchiveWriter().run(archive, plots_path)
+        with self.assertRaisesRegex(InvalidOuputsException, 'invalid PDF'):
+            case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
+
+        with open(plot_1_path, 'wb') as file:
+            writer = PyPDF2.PdfFileWriter()
+            writer.addBlankPage(width=20, height=20)
+            writer.write(file)
+        ArchiveWriter().run(archive, plots_path)
+        with self.assertRaisesRegex(InvalidOuputsException, 'did not produce'):
+            case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
+
+        plot_2_path = os.path.join(self.dirname, 'plot_2.pdf')
+        with open(plot_2_path, 'wb') as file:
+            writer = PyPDF2.PdfFileWriter()
+            writer.addBlankPage(width=20, height=20)
+            writer.write(file)
+        archive.files.append(ArchiveFile(archive_path='a.sedml/plot_2.pdf', local_path=plot_2_path))
+        ArchiveWriter().run(archive, plots_path)
+        case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
+
+        plot_3_path = os.path.join(self.dirname, 'plot_3.pdf')
+        with open(plot_3_path, 'wb') as file:
+            writer = PyPDF2.PdfFileWriter()
+            writer.addBlankPage(width=20, height=20)
+            writer.write(file)
+        archive.files.append(ArchiveFile(archive_path='a.sedml/plot_3.pdf', local_path=plot_3_path))
+        ArchiveWriter().run(archive, plots_path)
+        case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
+
+    def test_SimulatorProducesPlots(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        # test synthetic case generated and used to test simulator
+        case = sedml.SimulatorProducesLinear2DPlots(
+            published_projects_test_cases=[curated_case])
+        case.eval(specs)
+
+        case = sedml.SimulatorProducesLogarithmic2DPlots(
+            published_projects_test_cases=[curated_case])
+        case.eval(specs)
+
+        case = sedml.SimulatorProducesLinear3DPlots(
+            published_projects_test_cases=[curated_case])
+        case.eval(specs)
+
+        case = sedml.SimulatorProducesLogarithmic3DPlots(
+            published_projects_test_cases=[curated_case])
+        case.eval(specs)
+
+        case = sedml.SimulatorProducesMultiplePlots(
+            published_projects_test_cases=[curated_case])
+        case.eval(specs)
