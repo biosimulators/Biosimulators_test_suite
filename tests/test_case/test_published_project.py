@@ -8,6 +8,7 @@ from biosimulators_utils.archive.io import ArchiveWriter
 from biosimulators_utils.combine.data_model import CombineArchive
 from biosimulators_utils.combine.io import CombineArchiveReader
 from biosimulators_utils.report.io import ReportWriter, ReportFormat
+from biosimulators_utils.sedml.data_model import Task
 from unittest import mock
 import biosimulators_utils.simulator.exec
 import functools
@@ -322,7 +323,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
 
     def test_SyntheticCombineArchiveTestCase_no_suitable_archives(self):
         class TestCase(SyntheticCombineArchiveTestCase):
-            def is_curated_archive_suitable_for_building_synthetic_archive(self, archive, sed_docs):
+            def is_curated_archive_suitable_for_building_synthetic_archive(self, specifications, archive, sed_docs):
                 return False
 
             def build_synthetic_archive(self):
@@ -343,4 +344,15 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         class ConcreteSyntheticCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
             def eval_outputs():
                 pass
-        self.assertEqual(ConcreteSyntheticCombineArchiveTestCase().build_synthetic_archive('a', 'b', 'c'), ('a', 'c'))
+        self.assertEqual(ConcreteSyntheticCombineArchiveTestCase().build_synthetic_archive(None, 'a', 'b', 'c'), ('a', 'c'))
+
+    def test_SyntheticCombineArchiveTestCase_is_curated_sed_task_suitable_for_building_synthetic_archive(self):
+        class Concrete(SyntheticCombineArchiveTestCase):
+            def is_curated_sed_model_suitable_for_building_synthetic_archive(self, specs, model):
+                return False
+
+            def eval_outputs():
+                pass
+
+        self.assertFalse(Concrete().is_curated_sed_task_suitable_for_building_synthetic_archive(None, None))
+        self.assertFalse(Concrete().is_curated_sed_task_suitable_for_building_synthetic_archive(None, Task()))

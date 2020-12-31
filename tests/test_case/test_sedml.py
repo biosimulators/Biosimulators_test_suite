@@ -11,6 +11,7 @@ from biosimulators_utils.sedml.data_model import (SedDocument, Task, Report, Dat
                                                   DataGenerator, DataGeneratorVariable, UniformTimeCourseSimulation,
                                                   Algorithm, DataGeneratorVariableSymbol, Model,
                                                   Plot2D, Curve)
+from biosimulators_utils.simulator.io import read_simulator_specs
 import numpy
 import os
 import pandas
@@ -80,13 +81,23 @@ class SedmlTestCaseTest(unittest.TestCase):
         case = sedml.SimulatorSupportsMultipleTasksPerSedDocument()
 
         def get_suitable_sed_doc(sed_docs, case=case):
+            specs = {
+                'algorithms': [
+                    {'kisaoId': {'id': 'KISAO_0000001'}}
+                ]
+            }
             for location, doc in sed_docs.items():
-                if case.is_curated_sed_doc_suitable_for_building_synthetic_archive(doc):
+                if case.is_curated_sed_doc_suitable_for_building_synthetic_archive(specs, doc):
                     return location
             return None
 
         good_doc = SedDocument()
-        good_doc.tasks.append(Task())
+        good_doc.tasks.append(Task(simulation=UniformTimeCourseSimulation(
+            algorithm=Algorithm(kisao_id='KISAO_0000001'),
+            initial_time=0.,
+            output_start_time=0.,
+            output_end_time=10.,
+            number_of_points=10)))
         good_doc.data_generators.append(
             DataGenerator(
                 variables=[
@@ -121,7 +132,12 @@ class SedmlTestCaseTest(unittest.TestCase):
         }), 'loc-2')
 
         good_doc = SedDocument()
-        good_doc.tasks.append(Task())
+        good_doc.tasks.append(Task(simulation=UniformTimeCourseSimulation(
+            algorithm=Algorithm(kisao_id='KISAO_0000001'),
+            initial_time=0.,
+            output_start_time=0.,
+            output_end_time=10.,
+            number_of_points=10)))
         good_doc.data_generators.append(
             DataGenerator(
                 variables=[
@@ -262,12 +278,12 @@ class SedmlTestCaseTest(unittest.TestCase):
             )
         )
 
-        self.assertFalse(case.is_curated_sed_task_suitable_for_building_synthetic_archive(None))
-        self.assertFalse(case.is_curated_sed_task_suitable_for_building_synthetic_archive(Task(
+        self.assertFalse(case.is_curated_sed_task_suitable_for_building_synthetic_archive(None, None))
+        self.assertFalse(case.is_curated_sed_task_suitable_for_building_synthetic_archive(None, Task(
             simulation=UniformTimeCourseSimulation(initial_time=10.),
         )))
-        self.assertFalse(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(doc))
-        self.assertFalse(case.is_curated_archive_suitable_for_building_synthetic_archive(archive, {'./a.sedml': doc}))
+        self.assertFalse(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc))
+        self.assertFalse(case.is_curated_archive_suitable_for_building_synthetic_archive(None, archive, {'./a.sedml': doc}))
 
         doc.tasks.append(Task(model=doc.models[0], simulation=doc.simulations[0]))
         doc.data_generators.append(DataGenerator(
@@ -287,12 +303,12 @@ class SedmlTestCaseTest(unittest.TestCase):
         ))
         sed_docs = {'./a.sedml': doc}
 
-        self.assertTrue(case.is_curated_sed_task_suitable_for_building_synthetic_archive(doc.tasks[0]))
-        self.assertTrue(case.is_curated_sed_report_suitable_for_building_synthetic_archive(doc.outputs[0]))
-        self.assertTrue(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(doc))
-        self.assertTrue(case.is_curated_archive_suitable_for_building_synthetic_archive(archive, sed_docs))
+        self.assertTrue(case.is_curated_sed_task_suitable_for_building_synthetic_archive(None, doc.tasks[0]))
+        self.assertTrue(case.is_curated_sed_report_suitable_for_building_synthetic_archive(None, doc.outputs[0]))
+        self.assertTrue(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc))
+        self.assertTrue(case.is_curated_archive_suitable_for_building_synthetic_archive(None, archive, sed_docs))
 
-        case.build_synthetic_archive(archive, None, sed_docs)
+        case.build_synthetic_archive(None, archive, None, sed_docs)
         self.assertEqual(len(doc.data_generators), 3)
         self.assertEqual(doc.data_generators[-1].variables[0].symbol, DataGeneratorVariableSymbol.time)
         self.assertEqual(len(doc.outputs[0].data_sets), 3)
@@ -303,7 +319,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         doc.simulations[0].output_start_time = 0.
         doc.simulations[0].number_of_points = 100
         doc.outputs[0].data_sets[-1].label = 'time'
-        case.build_synthetic_archive(archive, None, sed_docs)
+        case.build_synthetic_archive(None, archive, None, sed_docs)
         self.assertEqual(doc.outputs[0].data_sets[-1].label, '__data_set_time__')
 
     def test_SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes_eval_outputs(self):
@@ -437,3 +453,57 @@ class SedmlTestCaseTest(unittest.TestCase):
         case = sedml.SimulatorProducesMultiplePlots(
             published_projects_test_cases=[curated_case])
         case.eval(specs)
+
+    def test_SimulatorSupportsModelAttributeChanges(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        # test synthetic case generated and used to test simulator
+        case = sedml.SimulatorSupportsModelAttributeChanges(
+            published_projects_test_cases=[curated_case])
+        case.eval(specs)
+
+    def test_SimulatorSupportsAlgorithmParameters(self):
+        specs_path = os.path.join(
+            os.path.dirname(__file__), '..', 'fixtures', 'COPASI.specs.json')
+        specs = read_simulator_specs(specs_path)
+        curated_case = SimulatorCanExecutePublishedProject(
+            filename=os.path.join(
+                os.path.dirname(__file__), '..', '..',
+                'examples', 'sbml-core', 'Tomida-EMBO-J-2003-NFAT-translocation.omex'))
+
+        # test synthetic case generated and used to test simulator
+        case = sedml.SimulatorSupportsAlgorithmParameters(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))
+
+        specs = {'algorithms': []}
+        self.assertFalse(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, Algorithm(kisao_id='KISAO_0000001')))
+
+        specs = {'algorithms': [
+            {
+                'kisaoId': {'id': 'KISAO_0000001'},
+                'parameters': [],
+            },
+        ]}
+        self.assertFalse(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, Algorithm(kisao_id='KISAO_0000001')))
+
+        specs = {'algorithms': [
+            {
+                'kisaoId': {'id': 'KISAO_0000001'},
+                'parameters': [{
+                    'value': None,
+                }],
+            },
+        ]}
+        self.assertFalse(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, Algorithm(kisao_id='KISAO_0000001')))
+
+        specs = {'algorithms': [
+            {
+                'kisaoId': {'id': 'KISAO_0000001'},
+                'parameters': [{
+                    'value': '2.0',
+                }],
+            },
+        ]}
+        self.assertTrue(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, Algorithm(kisao_id='KISAO_0000001')))

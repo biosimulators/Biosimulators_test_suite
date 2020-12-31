@@ -1,0 +1,1388 @@
+{
+  "id": "copasi",
+  "name": "COmplex PAthway SImulator",
+  "version": "4.30.233",
+  "description": "COPASI is a C++-based software application for the simulation and analysis of biochemical networks and their dynamics.",
+  "urls": [{"type": "Home page", "url": "http://copasi.org/"}],
+  "image": {
+    "url": "ghcr.io/biosimulators/biosimulators_copasi/copasi:4.30.233",
+    "format": {
+      "namespace": "EDAM",
+      "id": "format_3973", "version": null, "supportedFeatures": []
+    },
+    "operatingSystemType": "Linux"
+  },
+  "authors": [{
+      "firstName": "Frank",
+      "middleName": "T.",
+      "lastName": "Bergmann",
+            "identifiers": []
+    },
+    {
+      "firstName": "Stefan",
+      "lastName": "Hoops",
+            "identifiers": []
+    },
+    {
+      "firstName": "Brian",
+      "lastName": "Klahn",
+            "identifiers": []
+    },
+    {
+      "firstName": "Ursula",
+      "lastName": "Kummer",
+            "identifiers": []
+    },
+    {
+      "firstName": "Pedro",
+      "lastName": "Mendes",
+            "identifiers": []
+    },
+    {
+      "firstName": "Jürgen",
+      "lastName": "Pahle",
+            "identifiers": []
+    },
+    {
+      "firstName": "Sven",
+      "lastName": "Sahle",
+            "identifiers": []
+    },
+    {
+      "firstName": "Hasan",
+      "lastName": "Baig",
+            "identifiers": []
+    },
+    {
+      "firstName": "Lauren",
+      "lastName": "Marazzi",
+            "identifiers": []
+    },
+    {
+      "firstName": "Diogo",
+      "lastName": "Camacho",
+            "identifiers": []
+    },
+    {
+      "firstName": "Joseph",
+      "lastName": "Dada",
+            "identifiers": []
+    },
+    {
+      "firstName": "Ralph",
+      "lastName": "Gauges",
+            "identifiers": []
+    },
+    {
+      "firstName": "Abhishekh",
+      "lastName": "Gupta",
+            "identifiers": []
+    },
+    {
+      "firstName": "Ankur",
+      "lastName": "Gupta",
+            "identifiers": []
+    },
+    {
+      "firstName": "Yongqun",
+      "lastName": "He",
+            "identifiers": []
+    },
+    {
+      "firstName": "David",
+      "lastName": "Heilman",
+            "identifiers": []
+    },
+    {
+      "firstName": "Wenjun",
+      "lastName": "Hu",
+            "identifiers": []
+    },
+    {
+      "firstName": "Tim",
+      "lastName": "Johann",
+            "identifiers": []
+    },
+    {
+      "firstName": "Aejaaz",
+      "lastName": "Kamal",
+            "identifiers": []
+    },
+    {
+      "firstName": "Michalina",
+      "lastName": "Kaszuba",
+            "identifiers": []
+    },
+    {
+      "firstName": "Ed",
+      "lastName": "Kent",
+            "identifiers": []
+    },
+    {
+      "firstName": "Artjom",
+      "lastName": "König",
+            "identifiers": []
+    },
+    {
+      "firstName": "Mrinmyee",
+      "lastName": "Kulkarni",
+            "identifiers": []
+    },
+    {
+      "firstName": "Christine",
+      "lastName": "Lee",
+            "identifiers": []
+    },
+    {
+      "firstName": "Sarah",
+      "lastName": "Lilienthal",
+            "identifiers": []
+    },
+    {
+      "firstName": "Rohan",
+      "lastName": "Luktuke",
+            "identifiers": []
+    },
+    {
+      "firstName": "Ettore",
+      "lastName": "Murabito",
+            "identifiers": []
+    },
+    {
+      "firstName": "Olusegun",
+      "lastName": "Oshota",
+            "identifiers": []
+    },
+    {
+      "firstName": "Norman",
+      "lastName": "Paton",
+            "identifiers": []
+    },
+    {
+      "firstName": "Jignesh",
+      "lastName": "Parmar",
+            "identifiers": []
+    },
+    {
+      "firstName": "Robert",
+      "lastName": "Platt",
+            "identifiers": []
+    },
+    {
+      "firstName": "Ursula",
+      "lastName": "Rost",
+            "identifiers": []
+    },
+    {
+      "firstName": "Anton",
+      "lastName": "Ruff",
+            "identifiers": []
+    },
+    {
+      "firstName": "Natalia",
+      "lastName": "Simus",
+            "identifiers": []
+    },
+    {
+      "firstName": "Gaurav",
+      "lastName": "Singh",
+            "identifiers": []
+    },
+    {
+      "firstName": "Mudita",
+      "lastName": "Singhal",
+            "identifiers": []
+    },
+    {
+      "firstName": "Kieran",
+      "lastName": "Smallbone",
+            "identifiers": []
+    },
+    {
+      "firstName": "Anurag",
+      "lastName": "Srivastava",
+            "identifiers": []
+    },
+    {
+      "firstName": "Natalie",
+      "lastName": "Stanford",
+            "identifiers": []
+    },
+    {
+      "firstName": "Irina",
+      "lastName": "Surovtsova",
+            "identifiers": []
+    },
+    {
+      "firstName": "Wei",
+      "lastName": "Sun",
+            "identifiers": []
+    },
+    {
+      "firstName": "Sameer",
+      "lastName": "Tupe",
+            "identifiers": []
+    },
+    {
+      "firstName": "Carel",
+      "lastName": "van Gend",
+            "identifiers": []
+    },
+    {
+      "firstName": "Katja",
+      "lastName": "Wegner",
+            "identifiers": []
+    },
+    {
+      "firstName": "Paul",
+      "lastName": "Willy",
+            "identifiers": []
+    },
+    {
+      "firstName": "Liang",
+      "lastName": "Xu",
+            "identifiers": []
+    },
+    {
+      "firstName": "Jürgen",
+      "lastName": "Zobeley",
+            "identifiers": []
+    }
+  ],
+  "references": {
+    "identifiers": [{
+      "namespace": "pypi",
+      "id": "python-copasi",
+      "url": "https://pypi.org/project/python-copasi/"
+    },
+    {
+      "namespace": "pypi",
+      "id": "biosimulators-copasi",
+      "url": "https://pypi.org/project/biosimulators-copasi/"
+    },
+    {
+      "namespace": "biotools",
+      "id": "copasi",
+      "url": "https://bio.tools/copasi"
+    }],
+    "citations": [{
+        "title": "COPASI and its applications in biotechnology",
+        "authors": "Frank T. Bergmann, Stefan Hoops, Brian Klahn, Ursula Kummer, Pedro Mendes Jürgen Pahle & Sven Sahle",
+        "journal": "Journal of Biotechnology",
+        "volume": 261,
+        "pages": "215-220",
+        "year": 2017,
+        "identifiers": [{
+          "namespace": "doi",
+          "id": "10.1016/j.jbiotec.2017.06.1200",
+          "url": "https://doi.org/10.1016/j.jbiotec.2017.06.1200"
+        }]
+      },
+      {
+        "title": "Computational modeling of biochemical networks using COPASI",
+        "authors": "Pedro Mendes, Stefan Hoops, Sven Sahle, Ralph Gauges, Joseph Dada & Ursula Kummer",
+        "journal": "Methods in Molecular Biology",
+        "volume": 500,
+        "pages": "17-59",
+        "year": 2009,
+        "identifiers": [{
+          "namespace": "doi",
+          "id": "10.1007/978-1-59745-525-1_2",
+          "url": "https://doi.org/10.1007/978-1-59745-525-1_2"
+        }]
+      },
+      {
+        "title": "COPASI—a complex pathway simulator",
+        "authors": "Stefan Hoops, Sven Sahle, Ralph Gauges, Christine Lee, Jürgen Pahle, Natalia Simus, Mudita Singhal, Liang Xu, Pedro Mendes & Ursula Kummer",
+        "journal": "Bioinformatics",
+        "volume": 22,
+        "issue": 24,
+        "pages": "3067-3074",
+        "year": 2006,
+        "identifiers": [{
+          "namespace": "doi",
+          "id": "10.1093/bioinformatics/btl485",
+          "url": "https://doi.org/10.1093/bioinformatics/btl485"
+        }]
+      },
+      {
+        "title": "Simulation of biochemical networks using COPASI—a complex pathway simulator",
+        "authors": "Sven Sahle, Ralph Gauges, Jürgen Pahle, Natalia Simus, Ursula Kummer, Stefan Hoops, Christine Lee, Mudita Singhal, Liang Xu & Pedro Mendes",
+        "journal": "Proceedings of the 2006 Winter Simulation Conference, Monterey, CA, USA",
+        "pages": "1698-1706",
+        "year": 2006,
+        "identifiers": [{
+          "namespace": "doi",
+          "id": "10.5555/1218112.1218421",
+          "url": "https://doi.org/10.5555/1218112.1218421"
+        }]
+      }
+    ]
+  },
+  "license": {
+    "namespace": "SPDX",
+    "id": "Artistic-2.0"
+  },
+  "algorithms": [{
+      "id": "lsoda_or_lsodar",
+      "name": "Automatically use LSODA or LSODAR as apropriate for the given problem. Use LSODA if the problem has no roots. Use LSODAR if the problem has roots.",
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000560"
+      },
+
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000293"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585", "version": null, "supportedFeatures": []
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685", "version": "L1V3", "supportedFeatures": []
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686", "version": null, "supportedFeatures": []
+      }],
+      "citations": [{
+          "title": "LSODA, ordinary differential equation solver for stiff or non-stiff system",
+          "authors": "Alan C. Hindmarsh & Linda R. Petzold",
+          "year": 2005,
+          "identifiers": [{
+            "namespace": "inis",
+            "id": "RN:41086668",
+            "url": "https://inis.iaea.org/search/search.aspx?orig_q=RN:41086668"
+          }]
+        },
+        {
+          "title": "LSODAR, ordinary differential equation solver for stiff or non-stiff system with root-finding",
+          "authors": "Alan C. Hindmarsh & Linda R. Petzold",
+          "year": 2005,
+          "identifiers": [{
+            "namespace": "inis",
+            "id": "RN:41086669",
+            "url": "https://inis.iaea.org/search/search.aspx?orig_q=RN:41086669"
+          }]
+        }
+      ],
+      "parameters": [{
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000216"
+          },
+          "name": "integrate reduced model",
+          "type": "boolean",
+          "value": "true",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000209"
+          },
+          "name": "Relative tolerance",
+          "type": "float",
+          "value": "1e-6",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000211"
+          },
+          "name": "Absolute tolerance",
+          "type": "float",
+          "value": "1e-12",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000415"
+          },
+          "name": "Maximum number of steps",
+          "type": "integer",
+          "value": "10000",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000467"
+          },
+          "name": "Maximum time step",
+          "type": "float",
+          "value": null,
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        }
+      ],
+      "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
+      "dependencies": null
+    },
+    {
+      "id": "radau5",
+      "name": "Implicit Runge-Kutta method based on Radau quadrature.",
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000304"
+      },
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000293"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585", "version": null, "supportedFeatures": []
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685", "version": "L1V3", "supportedFeatures": []
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686", "version": null, "supportedFeatures": []
+      }],
+      "citations": [{
+        "title": "Implicit Runge--Kutta methods based on Radau quadrature formula",
+        "authors": "Xiaohua Ding & Jiabo Tan",
+        "journal": "International Journal of Computer Mathematics",
+        "volume": 86,
+        "issue": 8,
+        "pages": "1394-1404",
+        "year": 2009,
+        "identifiers": [{
+          "namespace": "doi",
+          "id": "10.1080/00207160701870878",
+          "url": "https://doi.org/10.1080/00207160701870878"
+        }]
+      }],
+      "parameters": [{
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000216"
+          },
+          "name": "integrate reduced model",
+          "type": "boolean",
+          "value": "true",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000209"
+          },
+          "name": "Relative tolerance",
+          "type": "float",
+          "value": "0.0001",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000211"
+          },
+          "name": "Absolute tolerance",
+          "type": "float",
+          "value": "1e-6",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000415"
+          },
+          "name": "Maximum number of steps",
+          "type": "integer",
+          "value": "1000000000",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000559"
+          },
+          "name": "Initial time step",
+          "type": "float",
+          "value": "0.001",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        }
+      ],
+      "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
+      "dependencies": null
+    },
+    {
+      "id": "gibson_bruck",
+      "name": "Gibson-Bruck next reaction method",
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000027"
+      },
+
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000295"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585", "version": null, "supportedFeatures": []
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685", "version": "L1V3", "supportedFeatures": []
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686", "version": null, "supportedFeatures": []
+      }],
+      "citations": [{
+        "title": "Efficient exact stochastic simulation of chemical systems with many species and many channels",
+        "authors": "Michael A. Gibson & Jehoshua Bruck",
+        "journal": "Journal of Physical Chemistry A",
+        "volume": 104,
+        "issue": 9,
+        "pages": "1876-1889",
+        "year": 2000,
+        "identifiers": [{
+          "namespace": "doi",
+          "id": "10.1021/jp993732q",
+          "url": "https://doi.org/10.1021/jp993732q"
+        }]
+      }],
+      "parameters": [{
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000415"
+          },
+          "name": "Maximum number of steps",
+          "type": "integer",
+          "value": "1000000",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000488"
+          },
+          "name": "Random number generator seed",
+          "type": "integer",
+          "value": "1",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        }
+      ],
+      "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
+      "dependencies": null
+    },
+    {
+      "id": "ssa",
+      "name": "Gillespie's direct method",
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000029"
+      },
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000295"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585", "version": null, "supportedFeatures": []
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685", "version": "L1V3", "supportedFeatures": []
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686", "version": null, "supportedFeatures": []
+      }],
+      "citations": [{
+        "title": "Exact stochastic simulation of coupled chemical reactions",
+        "authors": "Daniel T. Gillespie",
+        "journal": "Journal of Physical Chemistry",
+        "volume": 81,
+        "issue": 25,
+        "pages": "2340-2361",
+        "year": 1977,
+        "identifiers": [{
+          "namespace": "doi",
+          "id": "10.1021/j100540a008",
+          "url": "https://doi.org/10.1021/j100540a008"
+        }]
+      }],
+      "parameters": [{
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000415"
+          },
+          "name": "Maximum number of steps",
+          "type": "integer",
+          "value": "1000000",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000488"
+          },
+          "name": "Random number generator seed",
+          "type": "integer",
+          "value": "1",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        }
+      ],
+      "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
+      "dependencies": null
+    },
+    {
+      "id": "tau_leap",
+      "name": "tau-leaping method",
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000039"
+      },
+
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000295"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585", "version": null, "supportedFeatures": []
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685", "version": "L1V3", "supportedFeatures": []
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686", "version": null, "supportedFeatures": []
+      }],
+      "citations": [{
+        "title": "Approximate accelerated stochastic simulation of chemically reacting systems",
+        "authors": "Daniel T. Gillespie",
+        "journal": "Journal of Chemical Physics",
+        "volume": 115,
+        "issue": 4,
+        "pages": "1716–1733",
+        "year": 2001,
+        "identifiers": [{
+          "namespace": "doi",
+          "id": "10.1063/1.1378322",
+          "url": "https://doi.org/10.1063/1.1378322"
+        }]
+      }],
+      "parameters": [{
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000228"
+          },
+          "name": "epsilon",
+          "type": "float",
+          "value": "0.001",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000415"
+          },
+          "name": "Maximum number of steps",
+          "type": "integer",
+          "value": "10000",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000488"
+          },
+          "name": "Random number generator seed",
+          "type": "integer",
+          "value": "1",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        }
+      ],
+      "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
+      "dependencies": null
+    },
+    {
+      "id": "adaptive_ssa_tau_leap",
+      "name": "adaptive explicit-implicit tau-leaping method",
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000048"
+      },
+
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000295"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585", "version": null, "supportedFeatures": []
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685", "version": "L1V3", "supportedFeatures": []
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686", "version": null, "supportedFeatures": []
+      }],
+      "citations": [{
+        "title": "Adaptive explicit-implicit tau-leaping method with automatic tau selection",
+        "authors": "Yang Cao, Daniel T. Gillespie & Linda R. Petzold",
+        "journal": "Journal of Chemical Physics",
+        "volume": 126,
+        "issue": 22,
+        "pages": "224101",
+        "year": 2007,
+        "identifiers": [{
+          "namespace": "doi",
+          "id": "10.1063/1.2745299",
+          "url": "https://doi.org/10.1063/1.2745299"
+        }]
+      }],
+      "parameters": [{
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000228"
+          },
+          "name": "epsilon",
+          "type": "float",
+          "value": "0.03",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000415"
+          },
+          "name": "Maximum number of steps",
+          "type": "integer",
+          "value": "1000000",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000488"
+          },
+          "name": "Random number generator seed",
+          "type": "integer",
+          "value": "1",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        }
+      ],
+      "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
+      "dependencies": null
+    },
+    {
+      "id": "hybrid-runge-kutta",
+      "name": "Hybrid discrete/continuous Runge-Kutta",
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000561"
+      },
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000295"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585", "version": null, "supportedFeatures": []
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685", "version": "L1V3", "supportedFeatures": []
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686", "version": null, "supportedFeatures": []
+      }],
+      "citations": [{
+          "title": "COPASI and its applications in biotechnology",
+          "authors": "Frank T. Bergmann, Stefan Hoops, Brian Klahn, Ursula Kummer, Pedro Mendes Jürgen Pahle & Sven Sahle",
+          "journal": "Journal of Biotechnology",
+          "volume": 261,
+          "pages": "215-220",
+          "year": 2017,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.1016/j.jbiotec.2017.06.1200",
+            "url": "https://doi.org/10.1016/j.jbiotec.2017.06.1200"
+          }]
+        },
+        {
+          "title": "Computational modeling of biochemical networks using COPASI",
+          "authors": "Pedro Mendes, Stefan Hoops, Sven Sahle, Ralph Gauges, Joseph Dada & Ursula Kummer",
+          "journal": "Methods in Molecular Biology",
+          "volume": 500,
+          "pages": "17-59",
+          "year": 2009,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.1007/978-1-59745-525-1_2",
+            "url": "https://doi.org/10.1007/978-1-59745-525-1_2"
+          }]
+        },
+        {
+          "title": "COPASI—a complex pathway simulator",
+          "authors": "Stefan Hoops, Sven Sahle, Ralph Gauges, Christine Lee, Jürgen Pahle, Natalia Simus, Mudita Singhal, Liang Xu, Pedro Mendes & Ursula Kummer",
+          "journal": "Bioinformatics",
+          "volume": 22,
+          "issue": 24,
+          "pages": "3067-3074",
+          "year": 2006,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.1093/bioinformatics/btl485",
+            "url": "https://doi.org/10.1093/bioinformatics/btl485"
+          }]
+        },
+        {
+          "title": "Simulation of biochemical networks using COPASI—a complex pathway simulator",
+          "authors": "Sven Sahle, Ralph Gauges, Jürgen Pahle, Natalia Simus, Ursula Kummer, Stefan Hoops, Christine Lee, Mudita Singhal, Liang Xu & Pedro Mendes",
+          "journal": "Proceedings of the 2006 Winter Simulation Conference, Monterey, CA, USA",
+          "pages": "1698-1706",
+          "year": 2006,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.5555/1218112.1218421",
+            "url": "https://doi.org/10.5555/1218112.1218421"
+          }]
+        }
+      ],
+      "parameters": [{
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000415"
+          },
+          "name": "Maximum number of steps",
+          "type": "integer",
+          "value": "1000000",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000203"
+          },
+          "name": "Low-particle number upper limit",
+          "type": "float",
+          "value": "800",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000204"
+          },
+          "name": "High-particle number lower limit",
+          "type": "float",
+          "value": "1000",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000205"
+          },
+          "name": "Partitioning interval",
+          "type": "integer",
+          "value": "1",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000488"
+          },
+          "name": "Random number generator seed",
+          "type": "integer",
+          "value": "1",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000483"
+          },
+          "name": "Runge-Kutta step size",
+          "type": "float",
+          "value": "0.001",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        }
+      ],
+      "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
+      "dependencies": null
+    },
+    {
+      "id": "hybrid-lsoda",
+      "name": "Hybrid discrete/continuous LSODA",
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000562"
+      },
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000295"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585", "version": null, "supportedFeatures": []
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685", "version": "L1V3", "supportedFeatures": []
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686", "version": null, "supportedFeatures": []
+      }],
+      "citations": [{
+          "title": "COPASI and its applications in biotechnology",
+          "authors": "Frank T. Bergmann, Stefan Hoops, Brian Klahn, Ursula Kummer, Pedro Mendes Jürgen Pahle & Sven Sahle",
+          "journal": "Journal of Biotechnology",
+          "volume": 261,
+          "pages": "215-220",
+          "year": 2017,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.1016/j.jbiotec.2017.06.1200",
+            "url": "https://doi.org/10.1016/j.jbiotec.2017.06.1200"
+          }]
+        },
+        {
+          "title": "Computational modeling of biochemical networks using COPASI",
+          "authors": "Pedro Mendes, Stefan Hoops, Sven Sahle, Ralph Gauges, Joseph Dada & Ursula Kummer",
+          "journal": "Methods in Molecular Biology",
+          "volume": 500,
+          "pages": "17-59",
+          "year": 2009,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.1007/978-1-59745-525-1_2",
+            "url": "https://doi.org/10.1007/978-1-59745-525-1_2"
+          }]
+        },
+        {
+          "title": "COPASI—a complex pathway simulator",
+          "authors": "Stefan Hoops, Sven Sahle, Ralph Gauges, Christine Lee, Jürgen Pahle, Natalia Simus, Mudita Singhal, Liang Xu, Pedro Mendes & Ursula Kummer",
+          "journal": "Bioinformatics",
+          "volume": 22,
+          "issue": 24,
+          "pages": "3067-3074",
+          "year": 2006,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.1093/bioinformatics/btl485",
+            "url": "https://doi.org/10.1093/bioinformatics/btl485"
+          }]
+        },
+        {
+          "title": "Simulation of biochemical networks using COPASI—a complex pathway simulator",
+          "authors": "Sven Sahle, Ralph Gauges, Jürgen Pahle, Natalia Simus, Ursula Kummer, Stefan Hoops, Christine Lee, Mudita Singhal, Liang Xu & Pedro Mendes",
+          "journal": "Proceedings of the 2006 Winter Simulation Conference, Monterey, CA, USA",
+          "pages": "1698-1706",
+          "year": 2006,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.5555/1218112.1218421",
+            "url": "https://doi.org/10.5555/1218112.1218421"
+          }]
+        }
+      ],
+      "parameters": [{
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000415"
+          },
+          "name": "Maximum number of steps",
+          "type": "integer",
+          "value": "1000000",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000203"
+          },
+          "name": "Low-particle number upper limit",
+          "type": "float",
+          "value": "800",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000204"
+          },
+          "name": "High-particle number lower limit",
+          "type": "float",
+          "value": "1000",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000205"
+          },
+          "name": "Partitioning interval",
+          "type": "integer",
+          "value": "1",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000488"
+          },
+          "name": "Random number generator seed",
+          "type": "integer",
+          "value": "1",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000216"
+          },
+          "name": "integrate reduced model",
+          "type": "boolean",
+          "value": "true",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000209"
+          },
+          "name": "Relative tolerance",
+          "type": "float",
+          "value": "1e-6",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000211"
+          },
+          "name": "Absolute tolerance",
+          "type": "float",
+          "value": "1e-12",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000467"
+          },
+          "name": "Maximum time step",
+          "type": "float",
+          "value": null,
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        }
+      ],
+      "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
+      "dependencies": null
+    },
+    {
+      "id": "hybrid-rk45",
+      "name": "Hybrid discrete/continuous Fehlberg method",
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000563"
+      },
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000295"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585", "version": null, "supportedFeatures": []
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685", "version": "L1V3", "supportedFeatures": []
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686", "version": null, "supportedFeatures": []
+      }],
+      "citations": [{
+          "title": "COPASI and its applications in biotechnology",
+          "authors": "Frank T. Bergmann, Stefan Hoops, Brian Klahn, Ursula Kummer, Pedro Mendes Jürgen Pahle & Sven Sahle",
+          "journal": "Journal of Biotechnology",
+          "volume": 261,
+          "pages": "215-220",
+          "year": 2017,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.1016/j.jbiotec.2017.06.1200",
+            "url": "https://doi.org/10.1016/j.jbiotec.2017.06.1200"
+          }]
+        },
+        {
+          "title": "Computational modeling of biochemical networks using COPASI",
+          "authors": "Pedro Mendes, Stefan Hoops, Sven Sahle, Ralph Gauges, Joseph Dada & Ursula Kummer",
+          "journal": "Methods in Molecular Biology",
+          "volume": 500,
+          "pages": "17-59",
+          "year": 2009,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.1007/978-1-59745-525-1_2",
+            "url": "https://doi.org/10.1007/978-1-59745-525-1_2"
+          }]
+        },
+        {
+          "title": "COPASI—a complex pathway simulator",
+          "authors": "Stefan Hoops, Sven Sahle, Ralph Gauges, Christine Lee, Jürgen Pahle, Natalia Simus, Mudita Singhal, Liang Xu, Pedro Mendes & Ursula Kummer",
+          "journal": "Bioinformatics",
+          "volume": 22,
+          "issue": 24,
+          "pages": "3067-3074",
+          "year": 2006,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.1093/bioinformatics/btl485",
+            "url": "https://doi.org/10.1093/bioinformatics/btl485"
+          }]
+        },
+        {
+          "title": "Simulation of biochemical networks using COPASI—a complex pathway simulator",
+          "authors": "Sven Sahle, Ralph Gauges, Jürgen Pahle, Natalia Simus, Ursula Kummer, Stefan Hoops, Christine Lee, Mudita Singhal, Liang Xu & Pedro Mendes",
+          "journal": "Proceedings of the 2006 Winter Simulation Conference, Monterey, CA, USA",
+          "pages": "1698-1706",
+          "year": 2006,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.5555/1218112.1218421",
+            "url": "https://doi.org/10.5555/1218112.1218421"
+          }]
+        }
+      ],
+      "parameters": [{
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000415"
+          },
+          "name": "Maximum number of steps",
+          "type": "integer",
+          "value": "100000",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000209"
+          },
+          "name": "Relative tolerance",
+          "type": "float",
+          "value": "1e-6",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000211"
+          },
+          "name": "Absolute tolerance",
+          "type": "float",
+          "value": "1e-9",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000534"
+          },
+          "name": "List of ids of deterministic reactions",
+          "type": "list",
+          "value": null,
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000488"
+          },
+          "name": "Random number generator seed",
+          "type": "integer",
+          "value": "1",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        }
+      ],
+      "availableSoftwareInterfaceTypes": ["web service", "desktop application", "web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
+      "dependencies": null
+    },
+    {
+      "id": "ri5",
+      "name": "Stochastic second order Runge-Kutta method",
+      "kisaoId": {
+        "namespace": "KISAO",
+        "id": "KISAO_0000566"
+      },
+
+      "modelingFrameworks": [{
+        "namespace": "SBO",
+        "id": "SBO_0000293"
+      }],
+      "modelFormats": [{
+        "namespace": "EDAM",
+        "id": "format_2585", "version": null, "supportedFeatures": []
+      }],
+      "simulationFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3685", "version": "L1V3", "supportedFeatures": []
+      }],
+      "archiveFormats": [{
+        "namespace": "EDAM",
+        "id": "format_3686", "version": null, "supportedFeatures": []
+      }],
+      "citations": [{
+          "title": "Second order Runge-Kutta methods for Itô stochastic differential equations",
+          "authors": "Andreas Rößler",
+          "journal": "SIAM Journal Numerical Analysis",
+          "volume": 47,
+          "issue": 3,
+          "pages": "1713-1738",
+          "year": 2009,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.1137/060673308",
+            "url": "https://doi.org/10.1137/060673308"
+          }]
+        },
+        {
+          "title": "The chemical Langevin equation",
+          "authors": "Daniel T. Gillespie",
+          "journal": "Journal Chemical Physics",
+          "volume": 113,
+          "pages": "297",
+          "year": 2000,
+          "identifiers": [{
+            "namespace": "doi",
+            "id": "10.1063/1.481811",
+            "url": "https://doi.org/10.1063/1.481811"
+          }]
+        }
+      ],
+      "parameters": [{
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000483"
+          },
+          "name": "Step size",
+          "type": "float",
+          "value": "0.0001",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000415"
+          },
+          "name": "Maximum number of steps",
+          "type": "integer",
+          "value": "10000",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000567"
+          },
+          "name": "force physical correctness",
+          "type": "boolean",
+          "value": "true",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000211"
+          },
+          "name": "Absolute tolerance",
+          "type": "float",
+          "value": "1e-6",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        },
+        {
+          "kisaoId": {
+            "namespace": "KISAO",
+            "id": "KISAO_0000565"
+          },
+          "name": "Absolute tolerance for root finding",
+          "type": "float",
+          "value": "1e-6",
+          "recommendedRange": null,
+                    "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        }
+      ],
+      "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
+      "dependencies": null
+    }
+  ],
+  "interfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
+  "supportedOperatingSystemTypes": ["Linux", "Mac OS", "Windows"],
+  "supportedProgrammingLanguages": [
+    {"namespace": "Linguist", "id": "Python"}, 
+    {"namespace": "Linguist", "id": "C#"}, 
+    {"namespace": "Linguist", "id": "Java"}
+  ],
+  "funding": [],
+  "biosimulators": {
+    "specificationVersion": "1.0.0",
+    "imageVersion": "1.0.0",
+    "validated": false
+  }
+}
