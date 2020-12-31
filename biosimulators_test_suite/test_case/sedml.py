@@ -7,11 +7,13 @@
 """
 from ..exceptions import InvalidOuputsException
 from ..warnings import InvalidOuputsWarning
-from .published_project import SingleMasterSedDocumentCombineArchiveTestCase
+from .published_project import SingleMasterSedDocumentCombineArchiveTestCase, UniformTimeCourseTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import (SedDocument, Report, DataSet,  # noqa: F401
-                                                  DataGenerator, DataGeneratorVariable)
+                                                  DataGenerator, DataGeneratorVariable,
+                                                  UniformTimeCourseSimulation,
+                                                  DataGeneratorVariableSymbol)
 import copy
 import os
 import warnings
@@ -20,19 +22,14 @@ __all__ = [
     'SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports',
     'SimulatorSupportsMultipleTasksPerSedDocument',
     'SimulatorSupportsMultipleReportsPerSedDocument',
+    'SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes',
+    'SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes',
 ]
 
 
 class SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports(SingleMasterSedDocumentCombineArchiveTestCase):
     """ Test that a simulator supports the core elements of SED: models, simulations, tasks, data generators for
     individual variables, and reports
-
-    Attributes:
-        _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
-        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
-        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
-            the values of the parameters of algorithms
-        _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
     """
 
     def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
@@ -111,11 +108,6 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombin
     """ Test that a simulator supports multiple tasks per SED document
 
     Attributes:
-        _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
-        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
-        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
-            the values of the parameters of algorithms
-        _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
         _expected_reports (:obj:`list` of :obj:`tuple` of :obj:`str`): list of pairs of
             original reports and their expected duplicates
     """
@@ -140,7 +132,7 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombin
             curated_archive, curated_archive_dir, curated_sed_docs)
 
         # get a suitable SED document to modify
-        location = self.get_suitable_sed_doc(curated_sed_docs)
+        location = list(curated_sed_docs.keys())[0]
         doc_id = os.path.relpath(location, './')
         sed_doc = curated_sed_docs[location]
 
@@ -211,15 +203,7 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombin
 
 
 class SimulatorSupportsMultipleReportsPerSedDocument(SingleMasterSedDocumentCombineArchiveTestCase):
-    """ Test that a simulator supports multiple reports per SED document
-
-    Attributes:
-        _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
-        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
-        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
-            the values of the parameters of algorithms
-        _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
-    """
+    """ Test that a simulator supports multiple reports per SED document """
 
     def build_synthetic_archive(self, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
@@ -290,3 +274,30 @@ class SimulatorSupportsMultipleReportsPerSedDocument(SingleMasterSedDocumentComb
             has_warnings = True
 
         return not has_warnings
+
+
+class SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes(UniformTimeCourseTestCase):
+    """ Test that a simulator supports multiple reports per SED document """
+
+    def modify_simulation(self, simulation):
+        """ Modify a simulation
+
+        Args:
+            simulation (:obj:`UniformTimeCourseSimulation`): simulation
+        """
+        simulation.output_start_time = simulation.output_end_time / 2
+        simulation.number_of_points = int(simulation.number_of_points / 2)
+
+
+class SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes(UniformTimeCourseTestCase):
+    """ Test that a simulator supports multiple reports per SED document """
+
+    def modify_simulation(self, simulation):
+        """ Modify a simulation
+
+        Args:
+            simulation (:obj:`UniformTimeCourseSimulation`): simulation
+        """
+        simulation.initial_time = simulation.output_end_time / 2
+        simulation.output_start_time = simulation.output_end_time / 2
+        simulation.number_of_points = int(simulation.number_of_points / 2)

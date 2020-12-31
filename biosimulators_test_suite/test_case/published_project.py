@@ -14,7 +14,10 @@ from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiv
 from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
 from biosimulators_utils.config import get_config
 from biosimulators_utils.report.data_model import ReportFormat
-from biosimulators_utils.sedml.data_model import Report
+from biosimulators_utils.report.io import ReportReader
+from biosimulators_utils.sedml.data_model import (
+    Report, Task, UniformTimeCourseSimulation,
+    DataGenerator, DataGeneratorVariable, DataGeneratorVariableSymbol, DataSet)
 from biosimulators_utils.sedml.io import SedmlSimulationReader, SedmlSimulationWriter
 from biosimulators_utils.sedml.utils import (remove_model_changes, remove_algorithm_parameter_changes,
                                              replace_complex_data_generators_with_generators_for_individual_variables,
@@ -39,6 +42,7 @@ __all__ = [
     'SyntheticCombineArchiveTestCase',
     'ConfigurableMasterCombineArchiveTestCase',
     'SingleMasterSedDocumentCombineArchiveTestCase',
+    'UniformTimeCourseTestCase',
 ]
 
 EXAMPLES_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
@@ -499,34 +503,70 @@ class SyntheticCombineArchiveTestCase(TestCase):
             :obj:`bool`: :obj:`True`, if the curated archive is suitable for generating a synthetic
                 archive for testing
         """
-        return self.get_suitable_sed_doc(sed_docs) is not None
+        for location, sed_doc in sed_docs.items():
+            if self.is_curated_sed_doc_suitable_for_building_synthetic_archive(sed_doc):
+                return True
+        return False
 
-    @staticmethod
-    def get_suitable_sed_doc(sed_docs):
-        """ Get the location of a suitable SED document for testing
+    def is_curated_sed_doc_suitable_for_building_synthetic_archive(self, sed_doc):
+        """ Determine if a SED document is suitable for testing
 
         Args:
-            sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
-                SED documents in curated archive
+            sed_doc (:obj:`SedDocument`): SED document in curated archive
 
         Returns:
-            :obj:`str`: location of a suitable SED document
+            :obj:`bool`: whether the SED document is suitable for testing
         """
-        for location, sed_doc in sed_docs.items():
-            if sed_doc.tasks:
-                for output in sed_doc.outputs:
-                    if isinstance(output, Report):
-                        task_variables = {}
-                        for data_set in output.data_sets:
-                            for variable in data_set.data_generator.variables:
-                                if variable.task not in task_variables:
-                                    task_variables[variable.task] = set()
-                                task_variables[variable.task].add(variable.id)
+        for output in sed_doc.outputs:
+            if isinstance(output, Report) and self.is_curated_sed_report_suitable_for_building_synthetic_archive(output):
+                return True
 
-                        for task, variables in task_variables.items():
-                            if len(variables) > 1:
-                                return location
-        return None
+        return False
+
+    def is_curated_sed_report_suitable_for_building_synthetic_archive(self, report):
+        """ Determine if a SED report is suitable for testing
+
+        Args:
+            report (:obj:`Report`): SED report in curated archive
+
+        Returns:
+            :obj:`bool`: whether the report is suitable for testing
+        """
+        task_variables = {}
+        for data_set in report.data_sets:
+            for variable in data_set.data_generator.variables:
+                if variable.task not in task_variables:
+                    task_variables[variable.task] = set()
+                task_variables[variable.task].add(variable.id)
+
+        for task, variables in task_variables.items():
+            if len(variables) > 1 and self.is_curated_sed_task_suitable_for_building_synthetic_archive(task):
+                return True
+
+        return False
+
+    def is_curated_sed_task_suitable_for_building_synthetic_archive(self, task):
+        """ Determine if a SED task is suitable for testing
+
+        Args:
+            task (:obj:`Task`): SED task in curated archive
+
+        Returns:
+            :obj:`bool`: whether the task is suitable for testing
+        """
+        if not isinstance(task, Task):
+            return False
+
+        sim = task.simulation
+        if isinstance(sim, UniformTimeCourseSimulation):
+            if (
+                sim.initial_time != 0
+                or sim.output_start_time != 0
+                or int(sim.number_of_points / 2) != sim.number_of_points / 2
+            ):
+                return False
+
+        return True
 
     def build_synthetic_archive(self, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive for testing
@@ -642,8 +682,9 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
                   SED documents in synthetic archive
         """
         # get a suitable SED document to modify
-        doc_location = self.get_suitable_sed_doc(curated_sed_docs)
-        doc = curated_sed_docs[doc_location]
+        for doc_location, doc in curated_sed_docs.items():
+            if self.is_curated_sed_doc_suitable_for_building_synthetic_archive(doc):
+                break
         doc_content = next(content for content in curated_archive.contents if content.location == doc_location)
 
         # remove all other SED documents from archive
@@ -678,17 +719,21 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
 
         # keep only single task and single report
         if self._keep_one_task_one_report and self._use_single_variable_data_generators and self._remove_plots:
-            for output in list(doc.outputs):
-                task_data_sets = {}
-                for data_set in output.data_sets:
-                    task = data_set.data_generator.variables[0].task
-                    if task in task_data_sets:
-                        key_report = output
-                        key_task = task
+            key_report = None
+            key_task = None
+            for report in doc.outputs:
+                if self.is_curated_sed_report_suitable_for_building_synthetic_archive(report):
+                    for data_set in report.data_sets:
+                        task = data_set.data_generator.variables[0].task
+                        if self.is_curated_sed_task_suitable_for_building_synthetic_archive(task):
+                            key_report = report
+                            key_task = task
+                            break
+                    if key_report:
                         break
-                    else:
-                        task_data_sets[task] = True
 
+            doc.models = [key_task.model]
+            doc.simulations = [key_task.simulation]
             doc.tasks = [key_task]
             doc.data_generators = [data_gen for data_gen in doc.data_generators if data_gen.variables[0].task == key_task]
             doc.outputs = [key_report]
@@ -725,10 +770,7 @@ class SingleMasterSedDocumentCombineArchiveTestCase(ConfigurableMasterCombineArc
 
     Attributes:
         _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
-        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
-        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
-            the values of the parameters of algorithms
-        _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
+        _include_non_master (:obj:`bool`): whether the synthetic archive should also have a non-master file
     """
 
     @property
@@ -738,3 +780,137 @@ class SingleMasterSedDocumentCombineArchiveTestCase(ConfigurableMasterCombineArc
     @property
     def _include_non_master(self):
         return False
+
+
+class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
+    """ Test that a simulator supports multiple reports per SED document """
+
+    def is_curated_sed_task_suitable_for_building_synthetic_archive(self, task):
+        """ Determine if a SED task is suitable for testing
+
+        Args:
+            task (:obj:`Task`): SED task in curated archive
+
+        Returns:
+            :obj:`bool`: whether the task is suitable for testing
+        """
+        if not super(UniformTimeCourseTestCase, self) \
+                .is_curated_sed_task_suitable_for_building_synthetic_archive(task):
+            return False
+
+        sim = task.simulation
+        return (
+            isinstance(sim, UniformTimeCourseSimulation)
+            and sim.initial_time == 0
+            and sim.output_start_time == 0
+            and int(sim.number_of_points / 2) == sim.number_of_points / 2
+        )
+
+    def build_synthetic_archive(self, curated_archive, curated_archive_dir, curated_sed_docs):
+        """ Generate a synthetic archive with a copy of each task and each report
+
+        Args:
+            curated_archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            curated_archive_dir (:obj:`str`): directory with the contents of the curated COMBINE/OMEX archive
+            curated_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
+                SED documents in curated archive
+
+        Returns:
+            :obj:`tuple`:
+
+                * :obj:`CombineArchive`: synthetic COMBINE/OMEX archive for testing the simulator
+                * :obj:`dict` of :obj:`str` to :obj:`SedDocument`: map from locations to
+                  SED documents in synthetic archive
+        """
+        curated_archive, curated_sed_docs = super(UniformTimeCourseTestCase, self).build_synthetic_archive(
+            curated_archive, curated_archive_dir, curated_sed_docs)
+
+        # get a suitable SED document to modify
+        doc = list(curated_sed_docs.values())[0]
+        task = doc.tasks[0]
+        sim = task.simulation
+        self.modify_simulation(sim)
+        report = doc.outputs[0]
+
+        time_data_set = False
+        for data_gen in doc.data_generators:
+            var = data_gen.variables[0]
+            if var.symbol == DataGeneratorVariableSymbol.time:
+                for data_set in report.data_sets:
+                    if data_set.data_generator == data_gen:
+                        time_data_set = True
+                        data_set.label = '__data_set_time__'
+                        break
+            if time_data_set:
+                break
+
+        if not time_data_set:
+            doc.data_generators.append(
+                DataGenerator(
+                    id='__data_generator_time__',
+                    variables=[
+                        DataGeneratorVariable(
+                            id='__variable_time__',
+                            task=task,
+                            symbol=DataGeneratorVariableSymbol.time,
+                        ),
+                    ],
+                    math='__variable_time__',
+                ),
+            )
+            report.data_sets.append(
+                DataSet(
+                    id='__data_set_time__',
+                    label='__data_set_time__',
+                    data_generator=doc.data_generators[-1],
+                )
+            )
+
+        # return modified SED document
+        return (curated_archive, curated_sed_docs)
+
+    @abc.abstractmethod
+    def modify_simulation(self, simulation):
+        """ Modify a simulation
+
+        Args:
+            simulation (:obj:`UniformTimeCourseSimulation`): simulation
+        """
+        pass  # pragma: no cover
+
+    def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
+        """ Test that the expected outputs were created for the synthetic archive
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            synthetic_archive (:obj:`CombineArchive`): synthetic COMBINE/OMEX archive for testing the simulator
+            synthetic_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from the location of each SED
+                document in the synthetic archive to the document
+            outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
+        """
+        has_warnings = False
+
+        doc_location = list(synthetic_sed_docs.keys())[0]
+        doc_id = os.path.relpath(doc_location, './')
+        doc = list(synthetic_sed_docs.values())[0]
+        sim = doc.simulations[0]
+        report = doc.outputs[0]
+
+        data = ReportReader().run(outputs_dir, os.path.join(doc_id, report.id))
+        print(data.index)
+
+        if numpy.any(numpy.isnan(data)):
+            warnings.warn('The results produced by the simulator include `NaN`.', InvalidOuputsWarning)
+            has_warnings = True
+
+        try:
+            numpy.testing.assert_allclose(
+                data.loc['__data_set_time__', :],
+                numpy.linspace(sim.output_start_time, sim.output_end_time, sim.number_of_points + 1),
+                rtol=1e-4,
+            )
+        except Exception as exception:
+            raise ValueError('Simulator did not produce the expected time course:\n\n  {}'.format(
+                str(exception).replace('\n', '\n  ')))
+
+        return not has_warnings

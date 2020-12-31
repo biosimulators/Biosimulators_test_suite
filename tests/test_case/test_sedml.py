@@ -2,8 +2,11 @@ from biosimulators_test_suite.exceptions import InvalidOuputsException
 from biosimulators_test_suite.test_case import sedml
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
 from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, InvalidOuputsWarning
+from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContent, CombineArchiveContentFormat
 from biosimulators_utils.report.io import ReportWriter
-from biosimulators_utils.sedml.data_model import SedDocument, Task, Report, DataSet, DataGenerator, DataGeneratorVariable
+from biosimulators_utils.sedml.data_model import (SedDocument, Task, Report, DataSet,
+                                                  DataGenerator, DataGeneratorVariable, UniformTimeCourseSimulation,
+                                                  Algorithm, DataGeneratorVariableSymbol, Model)
 import numpy
 import os
 import pandas
@@ -68,7 +71,15 @@ class SedmlTestCaseTest(unittest.TestCase):
             published_projects_test_cases=[curated_case])
         self.assertTrue(case.eval(specs))
 
-    def test_SimulatorSupportsMultipleTasksPerSedDocument_get_suitable_sed_doc(self):
+    def test_SimulatorSupportsMultipleTasksPerSedDocument_is_curated_sed_doc_suitable_for_building_synthetic_archive(self):
+        case = sedml.SimulatorSupportsMultipleTasksPerSedDocument()
+
+        def get_suitable_sed_doc(sed_docs, case=case):
+            for location, doc in sed_docs.items():
+                if case.is_curated_sed_doc_suitable_for_building_synthetic_archive(doc):
+                    return location
+            return None
+
         good_doc = SedDocument()
         good_doc.tasks.append(Task())
         good_doc.data_generators.append(
@@ -88,7 +99,7 @@ class SedmlTestCaseTest(unittest.TestCase):
                 ],
             ),
         )
-        self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
+        self.assertEqual(get_suitable_sed_doc({
             'loc-1': SedDocument(),
             'loc-2': good_doc,
         }), None)
@@ -99,7 +110,7 @@ class SedmlTestCaseTest(unittest.TestCase):
                 task=good_doc.tasks[0]
             ),
         )
-        self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
+        self.assertEqual(get_suitable_sed_doc({
             'loc-1': SedDocument(),
             'loc-2': good_doc,
         }), 'loc-2')
@@ -133,7 +144,7 @@ class SedmlTestCaseTest(unittest.TestCase):
                 ],
             ),
         )
-        self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
+        self.assertEqual(get_suitable_sed_doc({
             'loc-1': SedDocument(tasks=[Task()]),
             'loc-2': good_doc,
         }), None)
@@ -141,12 +152,12 @@ class SedmlTestCaseTest(unittest.TestCase):
         good_doc.outputs[0].data_sets.append(
             DataSet(data_generator=good_doc.data_generators[1]),
         )
-        self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
+        self.assertEqual(get_suitable_sed_doc({
             'loc-1': SedDocument(tasks=[Task()]),
             'loc-2': good_doc,
         }), 'loc-2')
 
-        self.assertEqual(sedml.SimulatorSupportsMultipleTasksPerSedDocument.get_suitable_sed_doc({
+        self.assertEqual(get_suitable_sed_doc({
             'loc-1': SedDocument(outputs=[Report()]),
             'loc-2': good_doc,
         }), 'loc-2')
@@ -221,3 +232,117 @@ class SedmlTestCaseTest(unittest.TestCase):
         case = sedml.SimulatorSupportsMultipleReportsPerSedDocument(
             published_projects_test_cases=[curated_case])
         self.assertTrue(case.eval(specs))
+
+    def test_SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes_build_synthetic_archive(self):
+        case = sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes()
+
+        archive = CombineArchive(
+            contents=[
+                CombineArchiveContent(
+                    location='./a.sedml',
+                    format=CombineArchiveContentFormat.SED_ML,
+                ),
+            ],
+        )
+
+        doc = SedDocument()
+        doc.models.append(Model())
+        doc.simulations.append(
+            UniformTimeCourseSimulation(
+                algorithm=Algorithm(),
+                initial_time=0.,
+                output_start_time=0.,
+                output_end_time=10.,
+                number_of_points=100,
+            )
+        )
+
+        self.assertFalse(case.is_curated_sed_task_suitable_for_building_synthetic_archive(None))
+        self.assertFalse(case.is_curated_sed_task_suitable_for_building_synthetic_archive(Task(
+            simulation=UniformTimeCourseSimulation(initial_time=10.),
+        )))
+        self.assertFalse(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(doc))        
+        self.assertFalse(case.is_curated_archive_suitable_for_building_synthetic_archive(archive, {'./a.sedml': doc}))
+
+        doc.tasks.append(Task(model=doc.models[0], simulation=doc.simulations[0]))
+        doc.data_generators.append(DataGenerator(
+            id='data_gen_x',
+            variables=[DataGeneratorVariable(id='var_x', task=doc.tasks[0])],
+            math='var_x'))
+        doc.data_generators.append(DataGenerator(
+            id='data_gen_y',
+            variables=[DataGeneratorVariable(id='var_y', task=doc.tasks[0])],
+            math='var_y'))
+        doc.outputs.append(Report(
+            id='report_1',
+            data_sets=[
+                DataSet(id='data_set_x', label='x', data_generator=doc.data_generators[0]),
+                DataSet(id='data_set_y', label='y', data_generator=doc.data_generators[1]),
+            ],
+        ))
+        sed_docs = {'./a.sedml': doc}
+
+        self.assertTrue(case.is_curated_sed_task_suitable_for_building_synthetic_archive(doc.tasks[0]))
+        self.assertTrue(case.is_curated_sed_report_suitable_for_building_synthetic_archive(doc.outputs[0]))
+        self.assertTrue(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(doc))
+        self.assertTrue(case.is_curated_archive_suitable_for_building_synthetic_archive(archive, sed_docs))
+
+        case.build_synthetic_archive(archive, None, sed_docs)
+        self.assertEqual(len(doc.data_generators), 3)
+        self.assertEqual(doc.data_generators[-1].variables[0].symbol, DataGeneratorVariableSymbol.time)
+        self.assertEqual(len(doc.outputs[0].data_sets), 3)
+        self.assertEqual(doc.outputs[0].data_sets[-1].data_generator, doc.data_generators[-1])
+        self.assertEqual(doc.outputs[0].data_sets[-1].label, '__data_set_time__')
+
+        doc.simulations[0].initial_time = 0.
+        doc.simulations[0].output_start_time = 0.
+        doc.simulations[0].number_of_points = 100
+        doc.outputs[0].data_sets[-1].label = 'time'
+        case.build_synthetic_archive(archive, None, sed_docs)
+        self.assertEqual(doc.outputs[0].data_sets[-1].label, '__data_set_time__')
+
+    def test_SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes_eval_outputs(self):
+        case = sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes()
+
+        doc = SedDocument(
+            simulations=[
+                UniformTimeCourseSimulation(output_start_time=10., output_end_time=20., number_of_points=2),
+            ],
+            outputs=[
+                Report(
+                    id='report_1',
+                    data_sets=[
+                        DataSet(label='__data_set_time__'),
+                    ],
+                ),
+            ],
+        )
+
+        data_frame = pandas.DataFrame(numpy.array([[10., 15., numpy.nan]]), index=['__data_set_time__'])
+        ReportWriter().run(data_frame, self.dirname, 'a.sedml/report_1')
+        with self.assertRaisesRegex(ValueError, 'did not produce the expected time course'):
+            with self.assertWarnsRegex(InvalidOuputsWarning, 'include `NaN`'):
+                case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
+
+        data_frame = pandas.DataFrame(numpy.array([[10., 15., 20.]]), index=['__data_set_time__'])
+        ReportWriter().run(data_frame, self.dirname, 'a.sedml/report_1')
+        self.assertTrue(case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname))
+
+    def test_SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        # test synthetic case generated and used to test simulator
+        case = sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))
+
+    def test_SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        # test synthetic case generated and used to test simulator
+        case = sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))
+

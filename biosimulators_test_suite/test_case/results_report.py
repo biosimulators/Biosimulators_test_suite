@@ -24,13 +24,6 @@ __all__ = [
 class SimulatorGeneratesReportsOfSimultionResults(SingleMasterSedDocumentCombineArchiveTestCase):
     """ Test that when a COMBINE/OMEX archive defines a (single) master file, the simulator only
     executes this file.
-
-    Attributes:
-        _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
-        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
-        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
-            the values of the parameters of algorithms
-        _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
     """
 
     def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):

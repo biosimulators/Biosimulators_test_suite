@@ -23,10 +23,6 @@ class CombineArchiveTestCase(ConfigurableMasterCombineArchiveTestCase):
     """ Base class for testing for the execution of master and non-master files in COMBINE/OMEX archives
 
     Attributes:
-        _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
-        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
-        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
-            the values of the parameters of algorithms
         _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
     """
 
@@ -67,10 +63,6 @@ class WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile(CombineArch
 
     Attributes:
         _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
-        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
-        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
-            the values of the parameters of algorithms
-        _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
     """
 
     @property
@@ -84,10 +76,6 @@ class WhenACombineArchiveHasNoMasterFileSimulatorExecutesAllSedDocuments(Combine
 
     Attributes:
         _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
-        _remove_model_changes (:obj:`bool`): if :obj:`True`, remove instructions to change models
-        _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
-            the values of the parameters of algorithms
-        _expected_report_ids (:obj:`list` of :obj:`str`): ids of expected reports
     """
 
     @property
