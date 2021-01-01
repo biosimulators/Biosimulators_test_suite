@@ -1,3 +1,4 @@
+from biosimulators_test_suite import __version__
 from biosimulators_test_suite.data_model import TestCase
 from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType
 from biosimulators_test_suite.results.io import write_test_results
@@ -37,23 +38,26 @@ class ResultsIoTestCase(unittest.TestCase):
         )
         self.results = [result]
 
-        self.expected_dict_results = [{
-            'case': {
-                'id': 'sedml.SimulatorSupportsReports',
-                'description': 'Test if simulator supports reports',
-            },
-            'type': 'failed',
-            'duration': 1.5,
-            'exception': {
-                'type': 'NotImplementedError',
-                'message': 'Not implemented',
-            },
-            'warnings': [
-                {'type': 'TestCaseWarning', 'message': 'A first important warning'},
-                {'type': 'TestCaseWarning', 'message': 'A second important warning'},
-            ],
-            'log': 'Long log',
-        }]
+        self.expected_results_report = {
+            'testSuiteVersion': __version__,
+            'results': [{
+                'case': {
+                    'id': 'sedml.SimulatorSupportsReports',
+                    'description': 'Test if simulator supports reports',
+                },
+                'type': 'failed',
+                'duration': 1.5,
+                'exception': {
+                    'type': 'NotImplementedError',
+                    'message': 'Not implemented',
+                },
+                'warnings': [
+                    {'type': 'TestCaseWarning', 'message': 'A first important warning'},
+                    {'type': 'TestCaseWarning', 'message': 'A second important warning'},
+                ],
+                'log': 'Long log',
+            }]
+        }
 
         self.dirname = tempfile.mkdtemp()
 
@@ -61,7 +65,7 @@ class ResultsIoTestCase(unittest.TestCase):
         shutil.rmtree(self.dirname)
 
     def test_to_dict(self):
-        self.assertEqual(self.results[0].to_dict(), self.expected_dict_results[0])
+        self.assertEqual(self.results[0].to_dict(), self.expected_results_report['results'][0])
 
     def test_write_test_results(self):
         filename = os.path.join(self.dirname, 'results.json')
@@ -70,4 +74,4 @@ class ResultsIoTestCase(unittest.TestCase):
         with open(filename, 'r') as file:
             results = json.load(file)
 
-        self.assertEqual(results, self.expected_dict_results)
+        self.assertEqual(results, self.expected_results_report)

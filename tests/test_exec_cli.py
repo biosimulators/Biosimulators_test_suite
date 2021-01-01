@@ -1,4 +1,4 @@
-from biosimulators_test_suite import exec_cli
+from biosimulators_test_suite import __version__, exec_cli
 from unittest import mock
 import biosimulators_test_suite.data_model
 import biosimulators_test_suite.exec_core
@@ -58,18 +58,23 @@ class MainTestCase(unittest.TestCase):
         with open(report_filename, 'rb') as file:
             results = json.load(file)
 
-        self.assertEqual(results, [{
-            'case': {
-                'id': 'case-id',
-                'description': ('Required model formats and simulation algorithms for SED tasks:\n\n'
-                                '* Format: `format_2585`\n  Algorithm: `KISAO_000019`'),
-            },
-            'type': 'passed',
-            'duration': 1.,
-            'exception': None,
-            'warnings': [],
-            'log': None,
-        }])
+        self.assertEqual(results, {
+            'testSuiteVersion': __version__,
+            'results': [
+                {
+                    'case': {
+                        'id': 'case-id',
+                        'description': ('Required model formats and simulation algorithms for SED tasks:\n\n'
+                                        '* Format: `format_2585`\n  Algorithm: `KISAO_000019`'),
+                    },
+                    'type': 'passed',
+                    'duration': 1.,
+                    'exception': None,
+                    'warnings': [],
+                    'log': None,
+                },
+            ],
+        })
 
     def test_warnings(self):
         specs = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
