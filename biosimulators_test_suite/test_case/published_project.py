@@ -545,7 +545,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
                 task_variables[variable.task].add(variable.id)
 
         for task, variables in task_variables.items():
-            if len(variables) > 1 and self.is_curated_sed_task_suitable_for_building_synthetic_archive(specifications, task):
+            if len(variables) >= 1 and self.is_curated_sed_task_suitable_for_building_synthetic_archive(specifications, task):
                 return True
 
         return False
