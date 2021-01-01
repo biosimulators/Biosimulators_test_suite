@@ -118,7 +118,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         self.assertEqual(get_suitable_sed_doc({
             'loc-1': SedDocument(),
             'loc-2': good_doc,
-        }), None)
+        }), 'loc-2')
 
         good_doc.data_generators[0].variables.append(
             DataGeneratorVariable(
@@ -168,7 +168,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         self.assertEqual(get_suitable_sed_doc({
             'loc-1': SedDocument(tasks=[Task()]),
             'loc-2': good_doc,
-        }), None)
+        }), 'loc-2')
 
         good_doc.outputs[0].data_sets.append(
             DataSet(data_generator=good_doc.data_generators[1]),
@@ -257,13 +257,16 @@ class SedmlTestCaseTest(unittest.TestCase):
     def test_SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes_build_synthetic_archive(self):
         case = sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes()
 
+        now = case.get_current_time_utc()
         archive = CombineArchive(
             contents=[
                 CombineArchiveContent(
                     location='./a.sedml',
                     format=CombineArchiveContentFormat.SED_ML,
+                    updated=now,
                 ),
             ],
+            updated=now,
         )
 
         doc = SedDocument()
@@ -321,6 +324,9 @@ class SedmlTestCaseTest(unittest.TestCase):
         doc.outputs[0].data_sets[-1].label = 'time'
         case.build_synthetic_archive(None, archive, None, sed_docs)
         self.assertEqual(doc.outputs[0].data_sets[-1].label, '__data_set_time__')
+
+        doc.outputs[0].data_sets = []
+        self.assertFalse(case.is_curated_sed_report_suitable_for_building_synthetic_archive(None, doc.outputs[0]))
 
     def test_SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes_eval_outputs(self):
         case = sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes()

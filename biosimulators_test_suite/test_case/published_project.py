@@ -28,6 +28,8 @@ import biosimulators_utils.simulator.exec
 import biosimulators_utils.report.io
 import abc
 import copy
+import datetime
+import dateutil.tz
 import glob
 import json
 import numpy
@@ -631,7 +633,23 @@ class SyntheticCombineArchiveTestCase(TestCase):
                 * :obj:`dict` of :obj:`str` to :obj:`SedDocument`: map from locations to
                   SED documents in synthetic archive
         """
+
+        # set updated times because libCOMBINE requires this
+        now = self.get_current_time_utc()
+        curated_archive.updated = now
+        for content in curated_archive.contents:
+            content.updated = now
+
         return (curated_archive, curated_sed_docs)
+
+    def get_current_time_utc(self):
+        """ Get the current time in UTC
+
+        Returns:
+            :obj:`datetime.datetime`: current time in UTC
+        """
+        now = datetime.datetime.now()
+        return datetime.datetime(now.year, now.month, now.day, now.hour, now.minute, now.second, tzinfo=dateutil.tz.tzutc())
 
     @abc.abstractmethod
     def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
@@ -729,6 +747,9 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
                 * :obj:`dict` of :obj:`str` to :obj:`SedDocument`: map from locations to
                   SED documents in synthetic archive
         """
+        super(ConfigurableMasterCombineArchiveTestCase, self).build_synthetic_archive(
+            specifications, curated_archive, curated_archive_dir, curated_sed_docs)
+
         # get a suitable SED document to modify
         for doc_location, doc in curated_sed_docs.items():
             if self.is_curated_sed_doc_suitable_for_building_synthetic_archive(specifications, doc):

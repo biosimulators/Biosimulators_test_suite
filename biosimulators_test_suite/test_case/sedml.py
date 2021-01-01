@@ -337,8 +337,8 @@ class SimulatorSupportsMultipleReportsPerSedDocument(SingleMasterSedDocumentComb
         for i_dataset, data_set in enumerate(original_data_sets):
             sed_doc.outputs[i_dataset % 2].data_sets.append(data_set)
 
-        if len(original_data_sets) == 1:
-            sed_doc.outputs[1].data_sets.append(original_data_sets[0])            
+        # to ensure that each report has at least one data set, including when there's only 1 data set total
+        sed_doc.outputs[1].data_sets.append(original_data_sets[0])
 
         # return modified SED document
         return (curated_archive, curated_sed_docs)

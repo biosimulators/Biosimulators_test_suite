@@ -4,5 +4,6 @@ cement
 docker
 natsort
 PyPDF2
+python_dateutil
 pyyaml
 termcolor

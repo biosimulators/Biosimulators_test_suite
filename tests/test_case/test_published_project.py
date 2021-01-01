@@ -344,7 +344,9 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         class ConcreteSyntheticCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
             def eval_outputs():
                 pass
-        self.assertEqual(ConcreteSyntheticCombineArchiveTestCase().build_synthetic_archive(None, 'a', 'b', 'c'), ('a', 'c'))
+
+        archive = CombineArchive()
+        self.assertEqual(ConcreteSyntheticCombineArchiveTestCase().build_synthetic_archive(None, archive, 'b', 'c'), (archive, 'c'))
 
     def test_SyntheticCombineArchiveTestCase_is_curated_sed_task_suitable_for_building_synthetic_archive(self):
         class Concrete(SyntheticCombineArchiveTestCase):
