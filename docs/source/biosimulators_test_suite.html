@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3. biosimulators_test_suite package &#8212; BioSimulators test suite 0.1.7 documentation</title>
+    <title>3. biosimulators_test_suite package &#8212; BioSimulators test suite 0.1.8 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -127,8 +127,10 @@
 <li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.cli">3.1.1.2. biosimulators_test_suite.test_case.cli module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.combine_archive">3.1.1.3. biosimulators_test_suite.test_case.combine_archive module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.docker_image">3.1.1.4. biosimulators_test_suite.test_case.docker_image module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.published_project">3.1.1.5. biosimulators_test_suite.test_case.published_project module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.sedml">3.1.1.6. biosimulators_test_suite.test_case.sedml module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.exec_status_report">3.1.1.5. biosimulators_test_suite.test_case.exec_status_report module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.published_project">3.1.1.6. biosimulators_test_suite.test_case.published_project module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.results_report">3.1.1.7. biosimulators_test_suite.test_case.results_report module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.sedml">3.1.1.8. biosimulators_test_suite.test_case.sedml module</a></li>
 </ul>
 </li>
 </ul>
@@ -326,6 +328,23 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt id="biosimulators_test_suite.data_model.TestCase.get_simulator_docker_image">
+<code class="sig-name descname">get_simulator_docker_image</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">pull</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCase.get_simulator_docker_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the Docker image for a simulator, pulling if necessary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Docker image</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">docker.models.images.Image</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -519,7 +538,7 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt id="biosimulators_test_suite.exec_cli.BaseController.Meta.arguments">
-<code class="sig-name descname">arguments</code><em class="property"> = [(['specifications'], {'type': &lt;class 'str'&gt;, 'help': 'Path or URL to the specifications of the simulator'}), (['-c', '--combine-case'], {'type': &lt;class 'str'&gt;, 'nargs': '+', 'default': None, 'dest': 'case_ids', 'help': &quot;Ids of test cases of evaluate (e.g., 'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'). Default: evaluate all test cases&quot;}), (['--verbose'], {'action': 'store_true', 'help': 'If set, print the stdout and stderr of the execution of the tests in real time.'}), (['-v', '--version'], {'action': 'version', 'version': '0.1.7'})]</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_cli.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_cli.BaseController.Meta.arguments" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">arguments</code><em class="property"> = [(['specifications'], {'type': &lt;class 'str'&gt;, 'help': 'Path or URL to the specifications of the simulator'}), (['-c', '--combine-case'], {'type': &lt;class 'str'&gt;, 'nargs': '+', 'default': None, 'dest': 'case_ids', 'help': &quot;Ids of test cases of evaluate (e.g., 'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'). Default: evaluate all test cases&quot;}), (['--verbose'], {'action': 'store_true', 'help': 'If set, print the stdout and stderr of the execution of the tests in real time.'}), (['-v', '--version'], {'action': 'version', 'version': '0.1.8'})]</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_cli.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_cli.BaseController.Meta.arguments" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -659,7 +678,7 @@ is none, all test cases are verified.</p>
 <li><p><strong>module</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">types.ModuleType</span></code>) – module</p></li>
 <li><p><strong>ids</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – List of ids of test cases to verify. If <code class="xref py py-obj docutils literal notranslate"><span class="pre">ids</span></code>
 is none, all test cases are verified.</p></li>
-<li><p><strong>published_projects_test_cases</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">published_project.PublishedProjectTestCase</span></code>) – test cases involving
+<li><p><strong>published_projects_test_cases</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">published_project.SimulatorCanExecutePublishedProject</span></code>) – test cases involving
 executing curated COMBINE/OMEX archives</p></li>
 </ul>
 </dd>
@@ -1014,7 +1033,7 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
     <div class="clearer"></div>
   </div>
     <div class="footer">
-      &copy;2020, BioSimulators Team.
+      &copy;2021, BioSimulators Team.
       
       |
       <a href="../_sources/source/biosimulators_test_suite.rst.txt"
