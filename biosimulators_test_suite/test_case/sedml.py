@@ -118,8 +118,7 @@ class SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports(SingleMast
 
 
 class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
-    """ Test that a simulator supports the core elements of SED: models, simulations, tasks, data generators for
-    individual variables, and reports
+    """ Test that a simulator supports changes to the attributes of model elements
     """
 
     def __init__(self, *args, **kwargs):
@@ -140,9 +139,7 @@ class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsT
 
 
 class SimulatorSupportsAlgorithmParameters(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
-    """ Test that a simulator supports the core elements of SED: models, simulations, tasks, data generators for
-    individual variables, and reports
-    """
+    """ Test that a simulator supports setting the values of parameters of algorithms """
 
     def is_curated_sed_algorithm_suitable_for_building_synthetic_archive(self, specifications, algorithm):
         """ Determine if a SED algorithm is suitable for testing
@@ -336,8 +333,12 @@ class SimulatorSupportsMultipleReportsPerSedDocument(SingleMasterSedDocumentComb
             Report(id='report_1'),
             Report(id='report_2'),
         ]
+
         for i_dataset, data_set in enumerate(original_data_sets):
             sed_doc.outputs[i_dataset % 2].data_sets.append(data_set)
+
+        if len(original_data_sets) == 1:
+            sed_doc.outputs[1].data_sets.append(original_data_sets[0])            
 
         # return modified SED document
         return (curated_archive, curated_sed_docs)
@@ -380,7 +381,7 @@ class SimulatorSupportsMultipleReportsPerSedDocument(SingleMasterSedDocumentComb
 
 
 class SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes(UniformTimeCourseTestCase):
-    """ Test that a simulator supports multiple reports per SED document """
+    """ Test that a simulator supports time courses with non-zero output start times """
 
     def modify_simulation(self, simulation):
         """ Modify a simulation
@@ -393,7 +394,7 @@ class SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes(UniformTime
 
 
 class SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes(UniformTimeCourseTestCase):
-    """ Test that a simulator supports multiple reports per SED document """
+    """ Test that a simulator supports multiple time courses with non-zero initial times """
 
     def modify_simulation(self, simulation):
         """ Modify a simulation
@@ -544,7 +545,7 @@ class SimulatorProduces2DPlotsTestCase(SimulatorProducesPlotsTestCase):
 
 
 class SimulatorProduces3DPlotsTestCase(SimulatorProducesPlotsTestCase):
-    """ Test that a simulator produces 2D plots """
+    """ Test that a simulator produces 3D plots """
 
     def build_plots(self, data_generators):
         """ Build plots from the defined data generators
@@ -608,7 +609,7 @@ class SimulatorProducesLogarithmic3DPlots(SimulatorProduces3DPlotsTestCase):
 
 
 class SimulatorProducesMultiplePlots(SimulatorProduces2DPlotsTestCase):
-    """ Test that a simulator produces logarithmic 3D plots """
+    """ Test that a simulator produces multiple plots """
 
     @property
     def _num_plots(self):
