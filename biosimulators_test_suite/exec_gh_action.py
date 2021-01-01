@@ -7,8 +7,9 @@
 :License: MIT
 """
 
-from .data_model import TestCaseResultType, OutputMedium
+from .data_model import OutputMedium
 from .exec_core import SimulatorValidator
+from .results.data_model import TestCaseResult, TestCaseResultType  # noqa: F401
 from biosimulators_utils.gh_action.data_model import Comment, GitHubActionCaughtError  # noqa: F401
 from biosimulators_utils.gh_action.core import GitHubAction, GitHubActionErrorHandling
 from biosimulators_utils.image import get_docker_image
@@ -88,7 +89,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         self.reset_issue_labels(self.issue_number, [IssueLabel.validated.value, IssueLabel.invalid.value, IssueLabel.action_error.value])
 
         # get specifications of simulator and validate simulator
-        specifications = self.exec_core(submission)
+        specifications, test_results = self.exec_core(submission)
 
         # label issue as validated
         self.add_labels_to_issue(self.issue_number, [IssueLabel.validated.value])
@@ -107,7 +108,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         # commit simulator or indicate that further review is required
         if submission.commit_simulator:
             if approved:
-                self.commit_simulator(submission, specifications, existing_version_specifications)
+                self.commit_simulator(submission, specifications, existing_version_specifications, test_results)
 
                 # post success message
                 self.add_comment_to_issue(
@@ -176,7 +177,10 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             submission (:obj:`SimulatorSubmission`): simulator submission
 
         Returns:
-            :obj:`dict`: specifications of a simulation tool
+            :obj:`tuple`:
+
+                * :obj:`dict`: specifications of a simulation tool
+                * :obj:`list` of :obj:`TestCaseResults`: results of test cases
         """
         # validate specifications
         specifications = biosimulators_utils.simulator.io.read_simulator_specs(
@@ -185,17 +189,22 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
 
         # validate image
         if submission.validate_image:
-            self.validate_image(specifications)
+            test_results = self.validate_image(specifications)
             self.add_comment_to_issue(self.issue_number, 'The image for your simulator is valid!')
+        else:
+            test_results = None
 
         # return specifications
-        return specifications
+        return specifications, test_results
 
     def validate_image(self, specifications):
         """ Validate a Docker image for simulation tool
 
         Args:
             specifications (:obj:`dict`): specifications of a simulation tool
+
+        Returns:
+            :obj:`list` of :obj:`TestCaseResults`: results of test cases
         """
         docker_client = biosimulators_utils.image.login_to_docker_registry(
             'docker.io',
@@ -234,6 +243,8 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                 'The BioSimulators Team will add these files to this validation program and then re-review your simulator.'
             ))])
 
+        return case_results
+
     def is_simulator_approved(self, specifications, existing_version_specifications):
         """ Determine whether a simulation tool has already been approved
 
@@ -271,13 +282,14 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                 return True
         return False
 
-    def commit_simulator(self, submission, specifications, existing_version_specifications):
+    def commit_simulator(self, submission, specifications, existing_version_specifications, test_results):
         """ Commit simulator to the BioSimulators registry
 
         Args:
             submission (:obj:`SimulatorSubmission`): simulator submission
             specifications (:obj:`dict`): specifications of a simulation tool
             existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
+            test_results (:obj:`list` of :obj:`TestCaseResults`): results of test cases
         """
         # copy image to BioSimulators namespace of Docker registry (GitHub Container Registry)
         if submission.validate_image:
@@ -288,6 +300,9 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             if 'biosimulators' not in specifications:
                 specifications['biosimulators'] = {}
             specifications['biosimulators']['validated'] = True
+            # specifications['biosimulators']['testResults'] = [
+            #     test_result.to_dict() for test_result in test_results
+            # ]
         self.post_entry_to_biosimulators_api(specifications, existing_version_specifications)
 
     def push_image(self, specifications, existing_version_specifications):

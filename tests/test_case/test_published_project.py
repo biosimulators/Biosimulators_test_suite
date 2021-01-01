@@ -1,5 +1,6 @@
 from biosimulators_test_suite import data_model
 from biosimulators_test_suite.exceptions import InvalidOuputsException, SkippedTestCaseException
+from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType
 from biosimulators_test_suite.test_case.published_project import (
     SimulatorCanExecutePublishedProject, find_cases, SyntheticCombineArchiveTestCase, ConfigurableMasterCombineArchiveTestCase)
 from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOuputsWarning
@@ -315,9 +316,9 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
     def test_TestCaseResult(self):
         case = SimulatorCanExecutePublishedProject(id='case')
         exception = Exception('message')
-        result = data_model.TestCaseResult(case=case, type=data_model.TestCaseResultType.skipped, duration=10., exception=exception)
+        result = TestCaseResult(case=case, type=TestCaseResultType.skipped, duration=10., exception=exception)
         self.assertEqual(result.case, case)
-        self.assertEqual(result.type, data_model.TestCaseResultType.skipped)
+        self.assertEqual(result.type, TestCaseResultType.skipped)
         self.assertEqual(result.duration, 10.)
         self.assertEqual(result.exception, exception)
 

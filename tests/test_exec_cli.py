@@ -2,11 +2,23 @@ from biosimulators_test_suite import exec_cli
 from unittest import mock
 import biosimulators_test_suite.data_model
 import biosimulators_test_suite.exec_core
+import biosimulators_test_suite.results.data_model
 import biosimulators_test_suite.test_case.published_project
+import biosimulators_test_suite.warnings
+import json
+import os
+import shutil
+import tempfile
 import unittest
 
 
 class MainTestCase(unittest.TestCase):
+    def setUp(self):
+        self.dirname = tempfile.mkdtemp()
+
+    def tearDown(self):
+        shutil.rmtree(self.dirname)
+
     def test_raw(self):
         with mock.patch('sys.argv', ['', '--help']):
             with self.assertRaises(SystemExit) as context:
@@ -17,7 +29,7 @@ class MainTestCase(unittest.TestCase):
         specs = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
 
         results = [
-            biosimulators_test_suite.data_model.TestCaseResult(
+            biosimulators_test_suite.results.data_model.TestCaseResult(
                 case=biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject(
                     id='case-id',
                     task_requirements=[
@@ -27,7 +39,7 @@ class MainTestCase(unittest.TestCase):
                         )
                     ],
                 ),
-                type=biosimulators_test_suite.data_model.TestCaseResultType.passed,
+                type=biosimulators_test_suite.results.data_model.TestCaseResultType.passed,
                 duration=1.,
             ),
         ]
@@ -35,18 +47,35 @@ class MainTestCase(unittest.TestCase):
         def find_cases(ids=None, results=results):
             return {'published_project': [result.case for result in results]}
 
+        report_filename = os.path.join(self.dirname, 'results.json')
         with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
                                'find_cases', side_effect=find_cases):
             with mock.patch.object(biosimulators_test_suite.exec_core.SimulatorValidator,
                                    'eval_case', side_effect=results):
-                with exec_cli.App(argv=[specs]) as app:
+                with exec_cli.App(argv=[specs, '--report', report_filename]) as app:
                     app.run()
+
+        with open(report_filename, 'rb') as file:
+            results = json.load(file)
+
+        self.assertEqual(results, [{
+            'case': {
+                'id': 'case-id',
+                'description': ('Required model formats and simulation algorithms for SED tasks:\n\n'
+                                '* Format: `format_2585`\n  Algorithm: `KISAO_000019`'),
+            },
+            'type': 'passed',
+            'duration': 1.,
+            'exception': None,
+            'warnings': [],
+            'log': None,
+        }])
 
     def test_warnings(self):
         specs = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
 
         results = [
-            biosimulators_test_suite.data_model.TestCaseResult(
+            biosimulators_test_suite.results.data_model.TestCaseResult(
                 case=biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject(
                     id='case-id',
                     task_requirements=[
@@ -56,11 +85,11 @@ class MainTestCase(unittest.TestCase):
                         )
                     ],
                 ),
-                type=biosimulators_test_suite.data_model.TestCaseResultType.passed,
+                type=biosimulators_test_suite.results.data_model.TestCaseResultType.passed,
                 duration=1.,
                 warnings=[
-                    mock.Mock(message=biosimulators_test_suite.data_model.TestCaseWarning('Warning-1')),
-                    mock.Mock(message=biosimulators_test_suite.data_model.TestCaseWarning('Warning-2')),
+                    mock.Mock(message=biosimulators_test_suite.warnings.TestCaseWarning('Warning-1')),
+                    mock.Mock(message=biosimulators_test_suite.warnings.TestCaseWarning('Warning-2')),
                 ],
             ),
         ]
@@ -79,7 +108,7 @@ class MainTestCase(unittest.TestCase):
         specs = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
 
         results = [
-            biosimulators_test_suite.data_model.TestCaseResult(
+            biosimulators_test_suite.results.data_model.TestCaseResult(
                 case=biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject(
                     id='case-id',
                     task_requirements=[
@@ -89,7 +118,7 @@ class MainTestCase(unittest.TestCase):
                         )
                     ],
                 ),
-                type=biosimulators_test_suite.data_model.TestCaseResultType.failed,
+                type=biosimulators_test_suite.results.data_model.TestCaseResultType.failed,
                 exception=Exception('Error'),
                 log='Error',
                 duration=1.,

@@ -7,7 +7,9 @@
 """
 
 from .config import TERMINAL_COLORS
-from .data_model import TestCaseResultType, OutputMedium
+from .data_model import OutputMedium
+from .results.data_model import TestCaseResultType
+from .results.io import write_test_results
 import biosimulators_test_suite
 import biosimulators_test_suite.exec_core
 import cement
@@ -37,6 +39,10 @@ class BaseController(cement.Controller):
                       "Default: evaluate all test cases"
                 ),
             )),
+            (['-o', '--report'], dict(
+                default=None,
+                help="Path to save a report of the results in JSON format",
+            )),
             (['--verbose'], dict(
                 action='store_true',
                 help="If set, print the stdout and stderr of the execution of the tests in real time.",
@@ -51,12 +57,15 @@ class BaseController(cement.Controller):
     def _default(self):
         args = self.app.pargs
         try:
+            # execute tests
             validator = biosimulators_test_suite.exec_core.SimulatorValidator(
                 args.specifications,
                 case_ids=args.case_ids,
                 verbose=args.verbose,
                 output_medium=OutputMedium.console)
             results = validator.run()
+
+            # print summary
             summary, failure_details, warning_details = validator.summarize_results(results)
             print('')
             print('=============== SUMMARY ===============')
@@ -74,6 +83,10 @@ class BaseController(cement.Controller):
                 print(termcolor.colored('', color))
                 print(termcolor.colored('* ' + '\n\n* '.join(warning_details), color))
                 print('')
+
+            # optionally, save report of results to a JSON file
+            if args.report:
+                write_test_results(results, args.report)
         except Exception as exception:
             raise SystemExit(str(exception))
 

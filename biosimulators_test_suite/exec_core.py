@@ -7,10 +7,9 @@
 """
 
 from .config import TERMINAL_COLORS
-from .data_model import (TestCase, TestCaseResult,  # noqa: F401
-                         TestCaseResultType,
-                         OutputMedium)
+from .data_model import TestCase, OutputMedium
 from .exceptions import SkippedTestCaseException
+from .results.data_model import TestCaseResult, TestCaseResultType
 from .test_case import cli
 from .test_case import combine_archive
 from .test_case import docker_image
