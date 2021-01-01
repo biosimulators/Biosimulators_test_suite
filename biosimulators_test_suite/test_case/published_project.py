@@ -184,9 +184,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
 
             values = {}
             for key, val in exp_report_def.get('values', {}).items():
-                if isinstance(val, list):
-                    values[key] = numpy.array(val)
-                else:
+                if isinstance(val, dict):
                     values[key] = {}
                     for k, v in val.items():
                         multi_index = tuple(int(index) for index in k.split(","))
@@ -203,6 +201,8 @@ class SimulatorCanExecutePublishedProject(TestCase):
                                 tuple(p - 1 for p in points),
                             ))
                         values[key][multi_index] = v
+                else:
+                    values[key] = numpy.array(val)
 
             invalid_dataset_ids = set(values.keys()).difference(set(data_set_labels))
             if invalid_dataset_ids:
