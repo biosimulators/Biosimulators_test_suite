@@ -59,8 +59,8 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         issue_number (:obj:`str`): number of GitHub issue which triggered the action
     """
     BIOSIMULATORS_AUTH_ENDPOINT = 'https://auth.biosimulations.org/oauth/token'
-    BIOSIMULATORS_AUDIENCE = 'api.biosimulators.org'
-    BIOSIMULATORS_API_ENDPOINT = 'https://api.biosimulators.org/'
+    BIOSIMULATORS_AUDIENCE = os.getenv('BIOSIMULATORS_AUDIENCE', 'api.biosimulators.org')
+    BIOSIMULATORS_API_ENDPOINT = os.getenv('BIOSIMULATORS_API_ENDPOINT', 'https://api.biosimulators.org/')
     DOCKER_REGISTRY_URL = 'ghcr.io'
     DOCKER_REGISTRY_IMAGE_URL_PATTERN = 'ghcr.io/biosimulators/{}:{}'
     DEFAULT_SPECIFICATIONS_VERSION = '1.0.0'

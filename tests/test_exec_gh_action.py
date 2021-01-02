@@ -287,14 +287,14 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                     self.parent.assertIn('grant_type', json)
                     return mock.Mock(raise_for_status=lambda: None, json=lambda: {'token_type': 'Bearer', 'access_token': '******'})
                 else:
-                    self.parent.assertEqual(url, 'https://api.biosimulators.org/simulators')
+                    self.parent.assertEqual(url, action.BIOSIMULATORS_API_ENDPOINT + 'simulators')
                     self.parent.assertEqual(headers, {'Authorization': 'Bearer ******'})
                     self.parent.assertEqual(json, {'id': 'tellurium', 'version': '2.1.6'})
                     return mock.Mock(raise_for_status=lambda: None)
 
             def put(self, url, json=None, headers=None):
                 self.n_put = self.n_put + 1
-                self.parent.assertEqual(url, 'https://api.biosimulators.org/simulators/tellurium/2.1.6')
+                self.parent.assertEqual(url, action.BIOSIMULATORS_API_ENDPOINT + 'simulators/tellurium/2.1.6')
                 self.parent.assertEqual(json, {'id': 'tellurium', 'version': '2.1.6'})
                 return mock.Mock(raise_for_status=lambda: None)
 
