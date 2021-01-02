@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3. biosimulators_test_suite package &#8212; BioSimulators test suite 0.1.8 documentation</title>
+    <title>3. biosimulators_test_suite package &#8212; BioSimulators test suite 0.1.9 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -16,7 +16,7 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3.1.1. biosimulators_test_suite.test_case package" href="biosimulators_test_suite.test_case.html" />
+    <link rel="next" title="3.1.1. biosimulators_test_suite.results package" href="biosimulators_test_suite.results.html" />
     <link rel="prev" title="2. Tutorial" href="../tutorial.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -53,7 +53,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">2. Tutorial</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. API documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#subpackages">3.1. Subpackages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="biosimulators_test_suite.test_case.html">3.1.1. biosimulators_test_suite.test_case package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="biosimulators_test_suite.results.html">3.1.1. biosimulators_test_suite.results package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="biosimulators_test_suite.test_case.html">3.1.2. biosimulators_test_suite.test_case package</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">3.2. Submodules</a></li>
@@ -86,7 +87,7 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
       <li>Previous: <a href="../tutorial.html" title="previous chapter"><span class="section-number">2. </span>Tutorial</a></li>
-      <li>Next: <a href="biosimulators_test_suite.test_case.html" title="next chapter"><span class="section-number">3.1.1. </span>biosimulators_test_suite.test_case package</a></li>
+      <li>Next: <a href="biosimulators_test_suite.results.html" title="next chapter"><span class="section-number">3.1.1. </span>biosimulators_test_suite.results package</a></li>
   </ul></li>
 </ul>
 </div>
@@ -122,15 +123,22 @@
 <h2><span class="section-number">3.1. </span>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="biosimulators_test_suite.test_case.html">3.1.1. biosimulators_test_suite.test_case package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#submodules">3.1.1.1. Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.cli">3.1.1.2. biosimulators_test_suite.test_case.cli module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.combine_archive">3.1.1.3. biosimulators_test_suite.test_case.combine_archive module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.docker_image">3.1.1.4. biosimulators_test_suite.test_case.docker_image module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.exec_status_report">3.1.1.5. biosimulators_test_suite.test_case.exec_status_report module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.published_project">3.1.1.6. biosimulators_test_suite.test_case.published_project module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.results_report">3.1.1.7. biosimulators_test_suite.test_case.results_report module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.sedml">3.1.1.8. biosimulators_test_suite.test_case.sedml module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biosimulators_test_suite.results.html">3.1.1. biosimulators_test_suite.results package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.results.html#submodules">3.1.1.1. Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.results.html#module-biosimulators_test_suite.results.data_model">3.1.1.2. biosimulators_test_suite.results.data_model module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.results.html#module-biosimulators_test_suite.results.io">3.1.1.3. biosimulators_test_suite.results.io module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="biosimulators_test_suite.test_case.html">3.1.2. biosimulators_test_suite.test_case package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#submodules">3.1.2.1. Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.cli">3.1.2.2. biosimulators_test_suite.test_case.cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.combine_archive">3.1.2.3. biosimulators_test_suite.test_case.combine_archive module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.docker_image">3.1.2.4. biosimulators_test_suite.test_case.docker_image module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.exec_status_report">3.1.2.5. biosimulators_test_suite.test_case.exec_status_report module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.published_project">3.1.2.6. biosimulators_test_suite.test_case.published_project module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.results_report">3.1.2.7. biosimulators_test_suite.test_case.results_report module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.sedml">3.1.2.8. biosimulators_test_suite.test_case.sedml module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.test_case.html#module-biosimulators_test_suite.test_case.utils">3.1.2.9. biosimulators_test_suite.test_case.utils module</a></li>
 </ul>
 </li>
 </ul>
@@ -347,101 +355,6 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 
 </dd></dl>
 
-<dl class="py class">
-<dt id="biosimulators_test_suite.data_model.TestCaseResult">
-<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.data_model.</code><code class="sig-name descname">TestCaseResult</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">case</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">duration</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">exception</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">warnings</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">log</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCaseResult" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>A result of executing a test case</p>
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.data_model.TestCaseResult.case">
-<code class="sig-name descname">case</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCaseResult.case" title="Permalink to this definition">¶</a></dt>
-<dd><p>test case</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="#biosimulators_test_suite.data_model.TestCase" title="biosimulators_test_suite.data_model.TestCase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TestCase</span></code></a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.data_model.TestCaseResult.type">
-<code class="sig-name descname">type</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCaseResult.type" title="Permalink to this definition">¶</a></dt>
-<dd><p>type</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">obj:`TestCaseResultType</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.data_model.TestCaseResult.duration">
-<code class="sig-name descname">duration</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCaseResult.duration" title="Permalink to this definition">¶</a></dt>
-<dd><p>execution duration in seconds</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.data_model.TestCaseResult.exception">
-<code class="sig-name descname">exception</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCaseResult.exception" title="Permalink to this definition">¶</a></dt>
-<dd><p>exception</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.data_model.TestCaseResult.warnings">
-<code class="sig-name descname">warnings</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCaseResult.warnings" title="Permalink to this definition">¶</a></dt>
-<dd><p>warnings</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">TestCaseWarning</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.data_model.TestCaseResult.log">
-<code class="sig-name descname">log</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCaseResult.log" title="Permalink to this definition">¶</a></dt>
-<dd><p>log of execution</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="biosimulators_test_suite.data_model.TestCaseResultType">
-<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.data_model.</code><code class="sig-name descname">TestCaseResultType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCaseResultType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
-<p>Type of test case result</p>
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.data_model.TestCaseResultType.failed">
-<code class="sig-name descname">failed</code><em class="property"> = 'failed'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCaseResultType.failed" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.data_model.TestCaseResultType.passed">
-<code class="sig-name descname">passed</code><em class="property"> = 'passed'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCaseResultType.passed" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.data_model.TestCaseResultType.skipped">
-<code class="sig-name descname">skipped</code><em class="property"> = 'skipped'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCaseResultType.skipped" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-biosimulators_test_suite.exceptions">
 <span id="biosimulators-test-suite-exceptions-module"></span><h2><span class="section-number">3.5. </span>biosimulators_test_suite.exceptions module<a class="headerlink" href="#module-biosimulators_test_suite.exceptions" title="Permalink to this headline">¶</a></h2>
@@ -538,7 +451,7 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt id="biosimulators_test_suite.exec_cli.BaseController.Meta.arguments">
-<code class="sig-name descname">arguments</code><em class="property"> = [(['specifications'], {'type': &lt;class 'str'&gt;, 'help': 'Path or URL to the specifications of the simulator'}), (['-c', '--combine-case'], {'type': &lt;class 'str'&gt;, 'nargs': '+', 'default': None, 'dest': 'case_ids', 'help': &quot;Ids of test cases of evaluate (e.g., 'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'). Default: evaluate all test cases&quot;}), (['--verbose'], {'action': 'store_true', 'help': 'If set, print the stdout and stderr of the execution of the tests in real time.'}), (['-v', '--version'], {'action': 'version', 'version': '0.1.8'})]</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_cli.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_cli.BaseController.Meta.arguments" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">arguments</code><em class="property"> = [(['specifications'], {'type': &lt;class 'str'&gt;, 'help': 'Path or URL to the specifications of the simulator'}), (['-c', '--combine-case'], {'type': &lt;class 'str'&gt;, 'nargs': '+', 'default': None, 'dest': 'case_ids', 'help': &quot;Ids of test cases of evaluate (e.g., 'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'). Default: evaluate all test cases&quot;}), (['-o', '--report'], {'default': None, 'help': 'Path to save a report of the results in JSON format'}), (['--verbose'], {'action': 'store_true', 'help': 'If set, print the stdout and stderr of the execution of the tests in real time.'}), (['-v', '--version'], {'action': 'version', 'version': '0.1.9'})]</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_cli.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_cli.BaseController.Meta.arguments" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -807,7 +720,7 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
 
 <dl class="py method">
 <dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.commit_simulator">
-<code class="sig-name descname">commit_simulator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">submission</span></em>, <em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">existing_version_specifications</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.commit_simulator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">commit_simulator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">submission</span></em>, <em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">existing_version_specifications</span></em>, <em class="sig-param"><span class="n">test_results</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.commit_simulator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Commit simulator to the BioSimulators registry</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -815,6 +728,7 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
 <li><p><strong>submission</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">SimulatorSubmission</span></code>) – simulator submission</p></li>
 <li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of a simulation tool</p></li>
 <li><p><strong>existing_version_specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of other versions of simulation tool</p></li>
+<li><p><strong>test_results</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">TestCaseResults</span></code>) – results of test cases</p></li>
 </ul>
 </dd>
 </dl>
@@ -847,10 +761,14 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
 <dd class="field-odd"><p><strong>submission</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">SimulatorSubmission</span></code>) – simulator submission</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>specifications of a simulation tool</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>: specifications of a simulation tool</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">TestCaseResults</span></code>: results of test cases</p></li>
+</ul>
+</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -970,6 +888,12 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of a simulation tool</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>results of test cases</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">TestCaseResults</span></code></p>
 </dd>
 </dl>
 </dd></dl>
