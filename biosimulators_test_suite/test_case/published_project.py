@@ -10,6 +10,7 @@ from ..data_model import (TestCase, SedTaskRequirements, ExpectedSedReport, Expe
                           AlertType, OutputMedium)
 from ..exceptions import InvalidOuputsException, SkippedTestCaseException
 from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOuputsWarning
+from .utils import are_array_shapes_equivalent
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContentFormatPattern  # noqa: F401
 from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
 from biosimulators_utils.config import get_config
@@ -326,7 +327,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
                         warnings.warn('Report {} contains unexpected data sets:\n  {}'.format(
                             expected_report.id, '\n  '.join(sorted(extra_data_sets))), InvalidOuputsWarning)
 
-                if report.shape[1:] != expected_report.points:
+                if not are_array_shapes_equivalent(report.shape[1:], expected_report.points):
                     errors.append('Report {} contains incorrect number of points: {} != {}'.format(
                                   expected_report.id, report.shape[1:], expected_report.points))
                     continue
