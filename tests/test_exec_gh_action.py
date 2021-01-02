@@ -1,6 +1,6 @@
 from biosimulators_test_suite import exec_gh_action
 from biosimulators_test_suite import exec_core
-from biosimulators_test_suite.data_model import TestCaseResult, TestCaseResultType
+from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
 from biosimulators_test_suite.warnings import TestCaseWarning
 from biosimulators_utils.gh_action.data_model import GitHubActionCaughtError
@@ -149,8 +149,9 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         with mock.patch('biosimulators_utils.simulator.io.read_simulator_specs', return_value=specs):
             with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'validate_image', return_value=None):
                 with mock.patch('requests.post', side_effect=requests_mock.post):
-                    specs2 = action.exec_core(self.submission)
+                    specs2, results = action.exec_core(self.submission)
         self.assertEqual(specs2, specs)
+        self.assertEqual(results, None)
         self.assertEqual(requests_mock.n_post, 2)
 
     def test_is_simulator_approved(self):
@@ -286,14 +287,14 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                     self.parent.assertIn('grant_type', json)
                     return mock.Mock(raise_for_status=lambda: None, json=lambda: {'token_type': 'Bearer', 'access_token': '******'})
                 else:
-                    self.parent.assertEqual(url, 'https://api.biosimulators.org/simulators')
+                    self.parent.assertEqual(url, action.BIOSIMULATORS_API_ENDPOINT + 'simulators')
                     self.parent.assertEqual(headers, {'Authorization': 'Bearer ******'})
                     self.parent.assertEqual(json, {'id': 'tellurium', 'version': '2.1.6'})
                     return mock.Mock(raise_for_status=lambda: None)
 
             def put(self, url, json=None, headers=None):
                 self.n_put = self.n_put + 1
-                self.parent.assertEqual(url, 'https://api.biosimulators.org/simulators/tellurium/2.1.6')
+                self.parent.assertEqual(url, action.BIOSIMULATORS_API_ENDPOINT + 'simulators/tellurium/2.1.6')
                 self.parent.assertEqual(json, {'id': 'tellurium', 'version': '2.1.6'})
                 return mock.Mock(raise_for_status=lambda: None)
 
@@ -335,19 +336,21 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
 
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.5'}]
         with mock.patch('requests.post', side_effect=requests_mock.post):
-            action.commit_simulator(SimulatorSubmission(validate_image=False), specs, existing_version_specs)
+            action.commit_simulator(SimulatorSubmission(validate_image=False), specs, existing_version_specs, [])
         self.assertEqual(requests_mock.n_post, 2)
 
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.5'}]
-        with mock.patch('requests.post', side_effect=requests_mock.post):
-            with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'push_image', return_value=None):
-                action.commit_simulator(SimulatorSubmission(validate_image=True), specs, existing_version_specs)
+        with mock.patch.dict(os.environ, self.env):
+            with mock.patch('requests.post', side_effect=requests_mock.post):
+                with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'push_image', return_value=None):
+                    action.commit_simulator(SimulatorSubmission(validate_image=True), specs, existing_version_specs, [])
         self.assertEqual(requests_mock.n_post, 4)
 
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.6'}]
-        with mock.patch('requests.post', side_effect=requests_mock.post):
-            with mock.patch('requests.put', side_effect=requests_mock.put):
-                action.commit_simulator(SimulatorSubmission(validate_image=False), specs, existing_version_specs)
+        with mock.patch.dict(os.environ, self.env):
+            with mock.patch('requests.post', side_effect=requests_mock.post):
+                with mock.patch('requests.put', side_effect=requests_mock.put):
+                    action.commit_simulator(SimulatorSubmission(validate_image=False), specs, existing_version_specs, [])
         self.assertEqual(requests_mock.n_post, 5)
         self.assertEqual(requests_mock.n_put, 1)
 
@@ -574,6 +577,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'closed')
         self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.5']))
+        self.assertEqual(len(requests_mock.simulator_versions[-1]['biosimulators']['validationTests']['results']), 1)
+        self.assertEqual(requests_mock.simulator_versions[-1]['biosimulators']['validationTests']['results'][0]['case']['id'], 'sedml.case-passed')
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
         self.assertEqual(len(requests_mock.issue_messages), 5)
         self.assertRegex(requests_mock.issue_messages[-1], 'Your submission was committed to the BioSimulators registry.')
@@ -770,8 +775,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                     type=TestCaseResultType.passed,
                     duration=1.,
                     warnings=[
-                        mock.Mock(message=TestCaseWarning('Warning-1')),
-                        mock.Mock(message=TestCaseWarning('Warning-2')),
+                        mock.Mock(category=TestCaseWarning, message=TestCaseWarning('Warning-1')),
+                        mock.Mock(category=TestCaseWarning, message=TestCaseWarning('Warning-2')),
                     ],
                 ),
             ]

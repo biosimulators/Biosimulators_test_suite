@@ -1,7 +1,7 @@
 from biosimulators_test_suite.exec_core import SimulatorValidator
-from biosimulators_test_suite.data_model import (TestCase, TestCaseResult, TestCaseResultType,
-                                                 SedTaskRequirements)
+from biosimulators_test_suite.data_model import TestCase, SedTaskRequirements
 from biosimulators_test_suite.exceptions import SkippedTestCaseException
+from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType
 from biosimulators_test_suite.test_case import published_project
 from biosimulators_test_suite.test_case.docker_image import HasBioContainersLabels
 from biosimulators_test_suite.warnings import TestCaseWarning, IgnoredTestCaseWarning
@@ -209,7 +209,8 @@ class ValidateSimulatorTestCase(unittest.TestCase):
         self.assertEqual(result.type, TestCaseResultType.skipped)
         self.assertGreater(result.duration, 0.)
         self.assertLess(result.duration, 1.)
-        self.assertEqual(str(result.exception), 'Reason for skipping')
+        self.assertEqual(result.exception, None)
+        self.assertEqual(str(result.skip_reason), 'Reason for skipping')
         self.assertEqual(result.warnings, [])
         self.assertEqual(result.log, '')
 

@@ -18,6 +18,7 @@ from biosimulators_utils.sedml.data_model import (SedDocument, Output, Report, P
                                                   Model, ModelAttributeChange, AlgorithmParameterChange)
 import abc
 import copy
+import numpy
 import os
 import PyPDF2
 import shutil
@@ -28,6 +29,7 @@ __all__ = [
     'SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports',
     'SimulatorSupportsModelAttributeChanges',
     'SimulatorSupportsAlgorithmParameters',
+    'SimulatorProducesReportsWithCuratedNumberOfDimensions',
     'SimulatorSupportsMultipleTasksPerSedDocument',
     'SimulatorSupportsMultipleReportsPerSedDocument',
     'SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes',
@@ -200,6 +202,64 @@ class SimulatorSupportsAlgorithmParameters(SimulatorSupportsModelsSimulationsTas
                 )
 
         return (curated_archive, curated_sed_docs)
+
+
+class SimulatorProducesReportsWithCuratedNumberOfDimensions(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
+    """ Test that that the curated number of output dimensions matches the actual number of output dimensions
+    """
+
+    def is_curated_sed_algorithm_suitable_for_building_synthetic_archive(self, specifications, algorithm):
+        """ Determine if a SED algorithm is suitable for testing
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            algorithm (:obj:`Algorithm`): SED algorithm in curated archive
+
+        Returns:
+            :obj:`bool`: whether the algorithm is suitable for testing
+        """
+        if not (super(SimulatorProducesReportsWithCuratedNumberOfDimensions, self).
+                is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specifications, algorithm)):
+            return False
+
+        for alg_specs in specifications['algorithms']:
+            if alg_specs['kisaoId']['id'] == algorithm.kisao_id:
+                if alg_specs.get('dependentDimensions', None) is not None:
+                    return True
+
+        return False
+
+    def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
+        """ Test that the expected outputs were created for the synthetic archive
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            synthetic_archive (:obj:`CombineArchive`): synthetic COMBINE/OMEX archive for testing the simulator
+            synthetic_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from the location of each SED
+                document in the synthetic archive to the document
+            outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
+        """
+        doc = list(synthetic_sed_docs.values())[0]
+        doc_location = list(synthetic_sed_docs.keys())[0]
+        doc_id = os.path.relpath(doc_location, './')
+
+        report = doc.outputs[0]
+        data = ReportReader().run(outputs_dir, os.path.join(doc_id, report.id))
+
+        for alg_specs in specifications['algorithms']:
+            if alg_specs['kisaoId']['id'] == doc.simulations[0].algorithm.kisao_id:
+                break
+
+        expected_dims = alg_specs['dependentDimensions']
+
+        if numpy.squeeze(data).ndim != 1 + len(expected_dims):
+            msg = ('The specifications for the number of dimensions of each data set of algorithm `{}` differs '
+                   'from the actual number of dimensions, {} != {}.').format(
+                doc.simulations[0].algorithm.kisao_id, data.ndim - 1, len(expected_dims))
+            warnings.warn(msg, InvalidOuputsWarning)
+            return False
+        else:
+            return True
 
 
 class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombineArchiveTestCase):

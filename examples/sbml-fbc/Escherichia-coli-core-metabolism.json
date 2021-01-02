@@ -8,7 +8,7 @@
   "expectedReports": [{
     "id": "simulation.sedml/report",
     "dataSets": ["objective_value"],
-    "points": [1],
+    "points": [],
     "values": {
       "objective_value": 0.8739215069684301
     }
