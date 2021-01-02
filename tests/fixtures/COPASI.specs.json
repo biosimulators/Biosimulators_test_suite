@@ -424,6 +424,20 @@
                     "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
         }
       ],
+      "dependentDimensions": [{
+        "namespace": "SIO",
+        "id": "SIO_000418"
+      }],
+      "dependentVariableTargetPatterns": [
+        {
+          "variables": "species concentrations",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
+        },
+        {
+          "variables": "parameter values",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
+        }
+      ],
       "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
       "dependencies": null
     },
@@ -520,6 +534,20 @@
                     "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
         }
       ],
+      "dependentDimensions": [{
+        "namespace": "SIO",
+        "id": "SIO_000418"
+      }],
+      "dependentVariableTargetPatterns": [
+        {
+          "variables": "species concentrations",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
+        },
+        {
+          "variables": "parameter values",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
+        }
+      ],
       "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
       "dependencies": null
     },
@@ -584,6 +612,20 @@
                     "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
         }
       ],
+      "dependentDimensions": [{
+        "namespace": "SIO",
+        "id": "SIO_000418"
+      }],
+      "dependentVariableTargetPatterns": [
+        {
+          "variables": "species counts",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
+        },
+        {
+          "variables": "parameter values",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
+        }
+      ],
       "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
       "dependencies": null
     },
@@ -645,6 +687,20 @@
           "value": "1",
           "recommendedRange": null,
                     "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        }
+      ],
+      "dependentDimensions": [{
+        "namespace": "SIO",
+        "id": "SIO_000418"
+      }],
+      "dependentVariableTargetPatterns": [
+        {
+          "variables": "species counts",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
+        },
+        {
+          "variables": "parameter values",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
         }
       ],
       "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
@@ -722,6 +778,20 @@
                     "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
         }
       ],
+      "dependentDimensions": [{
+        "namespace": "SIO",
+        "id": "SIO_000418"
+      }],
+      "dependentVariableTargetPatterns": [
+        {
+          "variables": "species counts",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
+        },
+        {
+          "variables": "parameter values",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
+        }
+      ],
       "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
       "dependencies": null
     },
@@ -795,6 +865,20 @@
           "value": "1",
           "recommendedRange": null,
                     "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        }
+      ],
+      "dependentDimensions": [{
+        "namespace": "SIO",
+        "id": "SIO_000418"
+      }],
+      "dependentVariableTargetPatterns": [
+        {
+          "variables": "species counts",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
+        },
+        {
+          "variables": "parameter values",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
         }
       ],
       "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
@@ -941,6 +1025,20 @@
           "value": "0.001",
           "recommendedRange": null,
                     "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
+        }
+      ],
+      "dependentDimensions": [{
+        "namespace": "SIO",
+        "id": "SIO_000418"
+      }],
+      "dependentVariableTargetPatterns": [
+        {
+          "variables": "species counts",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
+        },
+        {
+          "variables": "parameter values",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
         }
       ],
       "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
@@ -1122,6 +1220,20 @@
                     "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
         }
       ],
+      "dependentDimensions": [{
+        "namespace": "SIO",
+        "id": "SIO_000418"
+      }],
+      "dependentVariableTargetPatterns": [
+        {
+          "variables": "species counts",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
+        },
+        {
+          "variables": "parameter values",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
+        }
+      ],
       "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
       "dependencies": null
     },
@@ -1257,6 +1369,20 @@
                     "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
         }
       ],
+      "dependentDimensions": [{
+        "namespace": "SIO",
+        "id": "SIO_000418"
+      }],
+      "dependentVariableTargetPatterns": [
+        {
+          "variables": "species counts",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
+        },
+        {
+          "variables": "parameter values",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
+        }
+      ],
       "availableSoftwareInterfaceTypes": ["web service", "desktop application", "web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
       "dependencies": null
     },
@@ -1368,6 +1494,20 @@
                     "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"]
         }
       ],
+      "dependentDimensions": [{
+        "namespace": "SIO",
+        "id": "SIO_000418"
+      }],
+      "dependentVariableTargetPatterns": [
+        {
+          "variables": "species concentrations",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species"
+        },
+        {
+          "variables": "parameter values",
+          "targetPattern": "/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter/@value"
+        }
+      ],
       "availableSoftwareInterfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
       "dependencies": null
     }
@@ -1383,6 +1523,7 @@
   "biosimulators": {
     "specificationVersion": "1.0.0",
     "imageVersion": "1.0.0",
-    "validated": false
+    "validated": false,
+    "validationTests": null
   }
 }
