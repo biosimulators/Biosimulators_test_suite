@@ -296,13 +296,19 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             self.push_image(specifications, existing_version_specifications)
 
         # commit submission to BioSimulators database
+        if 'biosimulators' not in specifications:
+            specifications['biosimulators'] = {}
+
         if submission.validate_image:
-            if 'biosimulators' not in specifications:
-                specifications['biosimulators'] = {}
             specifications['biosimulators']['validated'] = True
-            specifications['biosimulators']['testResults'] = TestResultsReport(
+            specifications['biosimulators']['validationTests'] = TestResultsReport(
                 results=test_results, gh_issue=int(self.issue_number), gh_action_run=int(self.get_gh_action_run_id()),
             ).to_dict()
+
+        else:
+            specifications['biosimulators']['validated'] = False
+            specifications['biosimulators']['validationTests'] = None
+
         self.post_entry_to_biosimulators_api(specifications, existing_version_specifications)
 
     def push_image(self, specifications, existing_version_specifications):
