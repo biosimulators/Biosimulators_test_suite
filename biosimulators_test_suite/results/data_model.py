@@ -64,13 +64,13 @@ class TestCaseResult(object):
                 'id': self.case.id,
                 'description': self.case.description,
             },
-            'type': self.type.value,
+            'resultType': self.type.value,
             'duration': self.duration,
             'exception': {
-                'type': self.exception.__class__.__name__,
+                'category': self.exception.__class__.__name__,
                 'message': str(self.exception),
             } if self.exception else None,
-            'warnings': [{'type': warning.category.__name__, 'message': str(warning.message)}
+            'warnings': [{'category': warning.category.__name__, 'message': str(warning.message)}
                          for warning in self.warnings],
             'log': self.log,
         }

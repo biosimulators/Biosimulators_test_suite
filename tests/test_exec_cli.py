@@ -67,7 +67,7 @@ class MainTestCase(unittest.TestCase):
                         'description': ('Required model formats and simulation algorithms for SED tasks:\n\n'
                                         '* Format: `format_2585`\n  Algorithm: `KISAO_000019`'),
                     },
-                    'type': 'passed',
+                    'resultType': 'passed',
                     'duration': 1.,
                     'exception': None,
                     'warnings': [],
