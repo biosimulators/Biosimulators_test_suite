@@ -74,6 +74,8 @@ class MainTestCase(unittest.TestCase):
                     'log': None,
                 },
             ],
+            'ghIssue': None,
+            'ghActionRun': None,
         })
 
     def test_warnings(self):

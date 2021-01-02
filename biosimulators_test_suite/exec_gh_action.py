@@ -9,8 +9,7 @@
 
 from .data_model import OutputMedium
 from .exec_core import SimulatorValidator
-from .results.data_model import TestCaseResult, TestCaseResultType  # noqa: F401
-# from .results.io import build_test_results_report
+from .results.data_model import TestCaseResult, TestCaseResultType, TestResultsReport  # noqa: F401
 from biosimulators_utils.gh_action.data_model import Comment, GitHubActionCaughtError  # noqa: F401
 from biosimulators_utils.gh_action.core import GitHubAction, GitHubActionErrorHandling
 from biosimulators_utils.image import get_docker_image
@@ -301,7 +300,9 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             if 'biosimulators' not in specifications:
                 specifications['biosimulators'] = {}
             specifications['biosimulators']['validated'] = True
-            # specifications['biosimulators']['testResults'] = build_test_results_report(test_results)
+            specifications['biosimulators']['testResults'] = TestResultsReport(
+                results=test_results, gh_issue=int(self.issue_number), gh_action_run=int(self.get_gh_action_run_id()),
+            ).to_dict()
         self.post_entry_to_biosimulators_api(specifications, existing_version_specifications)
 
     def push_image(self, specifications, existing_version_specifications):

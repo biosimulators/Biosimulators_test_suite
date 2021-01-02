@@ -6,12 +6,14 @@
 :License: MIT
 """
 
+from .._version import __version__
 from ..warnings import TestCaseWarning  # noqa: F401
 import enum
 
 __all__ = [
     'TestCaseResultType',
     'TestCaseResult',
+    'TestResultsReport',
 ]
 
 
@@ -71,4 +73,41 @@ class TestCaseResult(object):
             'warnings': [{'type': warning.category.__name__, 'message': str(warning.message)}
                          for warning in self.warnings],
             'log': self.log,
+        }
+
+
+class TestResultsReport(object):
+    """ A report of the results of executing the test suite with a simulation tool
+
+    Attributes:
+        test_suite_version (:obj:`str`): version of the test suite which was executed
+        results (:obj:`list` of :obj:`TestCaseResult`): results of the test cases of the test suite
+        gh_issue (:obj:`int`): GitHub issue for which the test suite was executed
+        gh_action_run (:obj:`int`): GitHub action run in which the test suite was executed
+    """
+
+    def __init__(self, test_suite_version=__version__, results=None, gh_issue=None, gh_action_run=None):
+        """
+        Args:
+            test_suite_version (:obj:`str`, optional): version of the test suite which was executed
+            results (:obj:`list` of :obj:`TestCaseResult`, optional): results of the test cases of the test suite
+            gh_issue (:obj:`int`, optional): GitHub issue for which the test suite was executed
+            gh_action_run (:obj:`int`, optional): GitHub action run in which the test suite was executed
+        """
+        self.test_suite_version = test_suite_version
+        self.results = results or []
+        self.gh_issue = gh_issue
+        self.gh_action_run = gh_action_run
+
+    def to_dict(self):
+        """ Generate a dictionary representation e.g., for export to JSON
+
+        Returns:
+            :obj:`dict`: dictionary representation
+        """
+        return {
+            'testSuiteVersion': self.test_suite_version,
+            'results': [result.to_dict() for result in self.results],
+            'ghIssue': self.gh_issue,
+            'ghActionRun': self.gh_action_run,
         }

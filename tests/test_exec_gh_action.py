@@ -340,15 +340,17 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(requests_mock.n_post, 2)
 
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.5'}]
-        with mock.patch('requests.post', side_effect=requests_mock.post):
-            with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'push_image', return_value=None):
-                action.commit_simulator(SimulatorSubmission(validate_image=True), specs, existing_version_specs, [])
+        with mock.patch.dict(os.environ, self.env):
+            with mock.patch('requests.post', side_effect=requests_mock.post):
+                with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'push_image', return_value=None):
+                    action.commit_simulator(SimulatorSubmission(validate_image=True), specs, existing_version_specs, [])
         self.assertEqual(requests_mock.n_post, 4)
 
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.6'}]
-        with mock.patch('requests.post', side_effect=requests_mock.post):
-            with mock.patch('requests.put', side_effect=requests_mock.put):
-                action.commit_simulator(SimulatorSubmission(validate_image=False), specs, existing_version_specs, [])
+        with mock.patch.dict(os.environ, self.env):
+            with mock.patch('requests.post', side_effect=requests_mock.post):
+                with mock.patch('requests.put', side_effect=requests_mock.put):
+                    action.commit_simulator(SimulatorSubmission(validate_image=False), specs, existing_version_specs, [])
         self.assertEqual(requests_mock.n_post, 5)
         self.assertEqual(requests_mock.n_put, 1)
 
@@ -575,8 +577,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'closed')
         self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.5']))
-        # self.assertEqual(len(requests_mock.simulator_versions[-1]['biosimulators']['testResults']['results']), 1)
-        # self.assertEqual(requests_mock.simulator_versions[-1]['biosimulators']['testResults']['results'][0]['case']['id'], 'sedml.case-passed')
+        self.assertEqual(len(requests_mock.simulator_versions[-1]['biosimulators']['testResults']['results']), 1)
+        self.assertEqual(requests_mock.simulator_versions[-1]['biosimulators']['testResults']['results'][0]['case']['id'], 'sedml.case-passed')
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
         self.assertEqual(len(requests_mock.issue_messages), 5)
         self.assertRegex(requests_mock.issue_messages[-1], 'Your submission was committed to the BioSimulators registry.')

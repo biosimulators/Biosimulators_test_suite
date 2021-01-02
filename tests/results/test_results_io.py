@@ -56,7 +56,9 @@ class ResultsIoTestCase(unittest.TestCase):
                     {'type': 'TestCaseWarning', 'message': 'A second important warning'},
                 ],
                 'log': 'Long log',
-            }]
+            }],
+            'ghIssue': None,
+            'ghActionRun': None,
         }
 
         self.dirname = tempfile.mkdtemp()

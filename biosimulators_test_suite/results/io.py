@@ -6,26 +6,10 @@
 :License: MIT
 """
 
-from .data_model import TestCaseResult  # noqa: F401
-from .._version import __version__
+from .data_model import TestCaseResult, TestResultsReport  # noqa: F401
 import json
 
-__all__ = ['build_test_results_report', 'write_test_results']
-
-
-def build_test_results_report(results):
-    """ Buid a report of the results of test cases
-
-    Args:
-        results (:obj:`list` of :obj:`TestCaseResult`): results of test cases
-
-    Returns:
-        :obj:`dict`: report of the results of test cases
-    """
-    return {
-        'testSuiteVersion': __version__,
-        'results': [result.to_dict() for result in results],
-    }
+__all__ = ['write_test_results']
 
 
 def write_test_results(results, filename):
@@ -35,6 +19,6 @@ def write_test_results(results, filename):
         results (:obj:`list` of :obj:`TestCaseResult`): results of test cases
         filename (:obj:`str`): path to save results
     """
-    report = build_test_results_report(results)
+    report = TestResultsReport(results=results)
     with open(filename, 'w') as file:
-        json.dump(report, file)
+        json.dump(report.to_dict(), file)
