@@ -1,6 +1,6 @@
 from biosimulators_test_suite.exceptions import InvalidOuputsException
 from biosimulators_test_suite.test_case import sedml
-from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
+from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject, SyntheticCombineArchiveTestCase
 from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, InvalidOuputsWarning
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
@@ -12,6 +12,7 @@ from biosimulators_utils.sedml.data_model import (SedDocument, Task, Report, Dat
                                                   Algorithm, DataGeneratorVariableSymbol, Model,
                                                   Plot2D, Curve)
 from biosimulators_utils.simulator.io import read_simulator_specs
+from unittest import mock
 import numpy
 import os
 import pandas
@@ -513,3 +514,72 @@ class SedmlTestCaseTest(unittest.TestCase):
             },
         ]}
         self.assertTrue(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, Algorithm(kisao_id='KISAO_0000001')))
+
+    def test_SimulatorProducesReportsWithCuratedNumberOfDimensions(self):
+        # is_curated_sed_algorithm_suitable_for_building_synthetic_archive
+        case = sedml.SimulatorProducesReportsWithCuratedNumberOfDimensions()
+        specs = {
+            'algorithms': []
+        }
+        alg = Algorithm(kisao_id='KISAO_0000001')
+        self.assertFalse(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, alg))
+
+        specs['algorithms'].append({
+            'kisaoId': {'id': 'KISAO_0000002'}
+        })
+        self.assertFalse(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, alg))
+
+        specs['algorithms'].append({
+            'kisaoId': {'id': 'KISAO_0000001'},
+            'dependentDimensions': None,
+        })
+        self.assertFalse(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, alg))
+
+        specs['algorithms'].append({
+            'kisaoId': {'id': 'KISAO_0000001'},
+            'dependentDimensions': [],
+        })
+        self.assertTrue(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, alg))
+
+        with mock.patch.object(SyntheticCombineArchiveTestCase, 'is_curated_sed_algorithm_suitable_for_building_synthetic_archive', return_value=False):
+            self.assertFalse(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, alg))
+
+        # eval_outputs
+        specs['algorithms'] = [specs['algorithms'][-1]]
+        doc = SedDocument(
+            simulations=[mock.Mock(algorithm=alg)],
+            outputs=[
+                Report(
+                    id='report_1',
+                ),
+            ],
+        )
+
+        data = numpy.array([numpy.array(1.), numpy.array(2.), numpy.array(3.), ])
+        index = ['A', 'B', 'C']
+        data_frame = pandas.DataFrame(data, index=index)
+        ReportWriter().run(data_frame, self.dirname, 'a.sedml/report_1')
+        self.assertTrue(case.eval_outputs(specs, None, {'./a.sedml': doc}, self.dirname))
+
+        data = numpy.array([numpy.array([1., 2.]), numpy.array([2., 3.]), numpy.array([3., 4.]), ])
+        index = ['A', 'B', 'C']
+        data_frame = pandas.DataFrame(data, index=index)
+        ReportWriter().run(data_frame, self.dirname, 'a.sedml/report_1')
+        self.assertFalse(case.eval_outputs(specs, None, {'./a.sedml': doc}, self.dirname))
+
+        # everything
+        specs = {
+            'image': {'url': self.IMAGE},
+            'algorithms': [
+                {
+                    'kisaoId': {'id': 'KISAO_0000560'},
+                    'dependentDimensions': [
+                        {'namespace': 'SIO', 'id': 'SIO_time'},
+                    ]
+                }
+            ],
+        }
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+        case = sedml.SimulatorProducesReportsWithCuratedNumberOfDimensions(
+            published_projects_test_cases=[curated_case])
+        case.eval(specs)
