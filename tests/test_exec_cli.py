@@ -71,6 +71,7 @@ class MainTestCase(unittest.TestCase):
                     'duration': 1.,
                     'exception': None,
                     'warnings': [],
+                    'skipReason': None,
                     'log': None,
                 },
             ],

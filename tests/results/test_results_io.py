@@ -55,6 +55,7 @@ class ResultsIoTestCase(unittest.TestCase):
                     {'category': 'TestCaseWarning', 'message': 'A first important warning'},
                     {'category': 'TestCaseWarning', 'message': 'A second important warning'},
                 ],
+                'skipReason': None,
                 'log': 'Long log',
             }],
             'ghIssue': None,

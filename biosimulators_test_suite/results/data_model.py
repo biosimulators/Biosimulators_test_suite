@@ -33,17 +33,19 @@ class TestCaseResult(object):
         duration (:obj:`float`): execution duration in seconds
         exception (:obj:`Exception`): exception
         warnings (:obj:`list` of :obj:`TestCaseWarning`): warnings
+        skip_reason (:obj:`Exception`): Exception which explains reason for skip
         log (:obj:`str`): log of execution
     """
 
-    def __init__(self, case=None, type=None, duration=None, exception=None, warnings=None, log=None):
+    def __init__(self, case=None, type=None, duration=None, exception=None, warnings=None, skip_reason=None, log=None):
         """
         Args:
             case (:obj:`TestCase`, optional): test case
             type (:obj:`obj:`TestCaseResultType`, optional): type
             duration (:obj:`float`, optional): execution duration in seconds
             exception (:obj:`Exception`, optional): exception
-            warnings (:obj:`list` of :obj:`TestCaseWarning`): warnings
+            warnings (:obj:`list` of :obj:`TestCaseWarning`, optional): warnings
+            skip_reason (:obj:`Exception`, optional): Exception which explains reason for skip
             log (:obj:`str`, optional): log of execution
         """
         self.case = case
@@ -51,6 +53,7 @@ class TestCaseResult(object):
         self.duration = duration
         self.exception = exception
         self.warnings = warnings or []
+        self.skip_reason = skip_reason
         self.log = log
 
     def to_dict(self):
@@ -72,6 +75,10 @@ class TestCaseResult(object):
             } if self.exception else None,
             'warnings': [{'category': warning.category.__name__, 'message': str(warning.message)}
                          for warning in self.warnings],
+            'skipReason': {
+                'category': self.skip_reason.__class__.__name__,
+                'message': str(self.skip_reason),
+            } if self.skip_reason else None,
             'log': self.log,
         }
 

@@ -209,7 +209,8 @@ class ValidateSimulatorTestCase(unittest.TestCase):
         self.assertEqual(result.type, TestCaseResultType.skipped)
         self.assertGreater(result.duration, 0.)
         self.assertLess(result.duration, 1.)
-        self.assertEqual(str(result.exception), 'Reason for skipping')
+        self.assertEqual(result.exception, None)
+        self.assertEqual(str(result.skip_reason), 'Reason for skipping')
         self.assertEqual(result.warnings, [])
         self.assertEqual(result.log, '')
 

@@ -228,14 +228,17 @@ class SimulatorValidator(object):
                     case.eval(self.specifications)
                     type = TestCaseResultType.passed
                     exception = None
+                    skip_reason = None
 
                 except SkippedTestCaseException as caught_exception:
                     type = TestCaseResultType.skipped
-                    exception = caught_exception
+                    exception = None
+                    skip_reason = caught_exception
 
                 except Exception as caught_exception:
                     type = TestCaseResultType.failed
                     exception = caught_exception
+                    skip_reason = None
 
                 duration = (datetime.datetime.now() - start_time).total_seconds()
 
@@ -245,6 +248,7 @@ class SimulatorValidator(object):
                     duration=duration,
                     exception=exception,
                     warnings=caught_warnings,
+                    skip_reason=skip_reason,
                     log=captured.get_text())
 
     @staticmethod
