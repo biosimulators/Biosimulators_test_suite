@@ -655,6 +655,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                                 'Biosimulators_tellurium/d08f33/biosimulators.json'),
                             'specificationsPatch:',
                             '  version: ' + self.submitted_version,
+                            '  image:',
+                            '    url: ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:' + self.submitted_version,
                             'validateImage: {}'.format('true' if self.validate_image else 'false'),
                             'commitSimulator: {}'.format('true' if self.commit_simulator else 'false'),
                             '',

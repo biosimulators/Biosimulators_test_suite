@@ -23,6 +23,8 @@ The body of the issue should contain a YAML-encoded description of your simulato
     specificationsUrl: https://raw.githubusercontent.com/biosimulators/Biosimulators_tellurium/2.1.6/biosimulators.json
     specificationsPatch:
       version: 2.1.6
+      image:
+        url: ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6
     validateImage: true
     commitSimulator: true
     ---
@@ -49,7 +51,7 @@ Please follow these steps to use the GitHub API to programmatically submit issue
       -u ${GH_USERNAME}:${GH_TOKEN} \
       -H "Accept: application/vnd.github.v3+json" \
       https://api.github.com/repos/biosimulators/Biosimulators/issues \
-      -d '{"labels": ["Validate/submit simulator"], "title": "Submit tellurium 2.1.6", "body": "---\nname: tellurium\nversion: 2.1.6\nspecificationsUrl: https://raw.githubusercontent.com/biosimulators/Biosimulators_tellurium/2.1.6/biosimulators.json\nspecificationsPatch:\n  version: 2.1.6\nvalidateImage: true\ncommitSimulator: true\n\n---"}'
+      -d '{"labels": ["Validate/submit simulator"], "title": "Submit tellurium 2.1.6", "body": "---\nname: tellurium\nversion: 2.1.6\nspecificationsUrl: https://raw.githubusercontent.com/biosimulators/Biosimulators_tellurium/2.1.6/biosimulators.json\nspecificationsPatch:\n  version: 2.1.6\n  image:\n    url: ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.1.6\nvalidateImage: true\ncommitSimulator: true\n\n---"}'
 
 
 Running the test suite locally
