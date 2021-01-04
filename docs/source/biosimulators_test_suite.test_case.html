@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3.1.2. biosimulators_test_suite.test_case package &#8212; BioSimulators test suite 0.1.9 documentation</title>
+    <title>3.1.2. biosimulators_test_suite.test_case package &#8212; BioSimulators test suite 0.1.10 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -1146,6 +1146,26 @@ SED documents in synthetic archive</p></li>
 </dd></dl>
 
 <dl class="py method">
+<dt id="biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.eval">
+<code class="sig-name descname">eval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.eval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate a simulator’s performance on a test case</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data returned by <a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.eval_outputs" title="biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.eval_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_outputs</span></code></a></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>Exception</strong> – if the simulator did not pass the test case</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.eval_outputs">
 <code class="sig-name descname">eval_outputs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">synthetic_archive</span></em>, <em class="sig-param"><span class="n">synthetic_sed_docs</span></em>, <em class="sig-param"><span class="n">outputs_dir</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.eval_outputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test that the expected outputs were created for the synthetic archive</p>
@@ -1192,6 +1212,11 @@ document in the synthetic archive to the document</p></li>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.report_error_as_warning">
+<em class="property">property </em><code class="sig-name descname">report_error_as_warning</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.report_error_as_warning" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -1585,6 +1610,11 @@ document in the synthetic archive to the document</p></li>
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes.report_error_as_warning">
+<em class="property">property </em><code class="sig-name descname">report_error_as_warning</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes.report_error_as_warning" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
