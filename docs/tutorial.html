@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Tutorial &#8212; BioSimulators test suite 0.1.10 documentation</title>
+    <title>2. Tutorial &#8212; BioSimulators test suite 0.1.11 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -126,6 +126,8 @@ version: 2.1.6
 specificationsUrl: https://raw.githubusercontent.com/biosimulators/Biosimulators_tellurium/2.1.6/biosimulators.json
 specificationsPatch:
   version: 2.1.6
+  image:
+    url: ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6
 validateImage: true
 commitSimulator: true
 ---
@@ -154,7 +156,7 @@ curl \
   -u ${GH_USERNAME}:${GH_TOKEN} \
   -H &quot;Accept: application/vnd.github.v3+json&quot; \
   https://api.github.com/repos/biosimulators/Biosimulators/issues \
-  -d &#39;{&quot;labels&quot;: [&quot;Validate/submit simulator&quot;], &quot;title&quot;: &quot;Submit tellurium 2.1.6&quot;, &quot;body&quot;: &quot;---\nname: tellurium\nversion: 2.1.6\nspecificationsUrl: https://raw.githubusercontent.com/biosimulators/Biosimulators_tellurium/2.1.6/biosimulators.json\nspecificationsPatch:\n  version: 2.1.6\nvalidateImage: true\ncommitSimulator: true\n\n---&quot;}&#39;
+  -d &#39;{&quot;labels&quot;: [&quot;Validate/submit simulator&quot;], &quot;title&quot;: &quot;Submit tellurium 2.1.6&quot;, &quot;body&quot;: &quot;---\nname: tellurium\nversion: 2.1.6\nspecificationsUrl: https://raw.githubusercontent.com/biosimulators/Biosimulators_tellurium/2.1.6/biosimulators.json\nspecificationsPatch:\n  version: 2.1.6\n  image:\n    url: ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.1.6\nvalidateImage: true\ncommitSimulator: true\n\n---&quot;}&#39;
 </pre></div>
 </div>
 </div>
