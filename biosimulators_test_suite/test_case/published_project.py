@@ -9,7 +9,7 @@
 from ..data_model import (TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedPlot,
                           AlertType, OutputMedium)
 from ..exceptions import InvalidOuputsException, SkippedTestCaseException
-from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOuputsWarning
+from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOuputsWarning, TestCaseWarning
 from .utils import are_array_shapes_equivalent
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContentFormatPattern  # noqa: F401
 from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
@@ -950,6 +950,33 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
             simulation (:obj:`UniformTimeCourseSimulation`): simulation
         """
         pass  # pragma: no cover
+
+    @property
+    def report_error_as_warning(self):
+        return False
+
+    def eval(self, specifications):
+        """ Evaluate a simulator's performance on a test case
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+
+        Returns:
+            :obj:`object`: data returned by :obj:`eval_outputs`
+
+        Raises:
+            :obj:`Exception`: if the simulator did not pass the test case
+        """
+        try:
+            return_value = super(UniformTimeCourseTestCase, self).eval(specifications)
+        except Exception as exception:
+            if self.report_error_as_warning:
+                warnings.warn(str(exception), TestCaseWarning)
+                return_value = False
+            else:
+                raise
+
+        return return_value
 
     def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
         """ Test that the expected outputs were created for the synthetic archive
