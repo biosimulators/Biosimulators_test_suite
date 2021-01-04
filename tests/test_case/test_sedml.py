@@ -1,7 +1,7 @@
 from biosimulators_test_suite.exceptions import InvalidOuputsException
 from biosimulators_test_suite.test_case import sedml
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject, SyntheticCombineArchiveTestCase
-from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, InvalidOuputsWarning
+from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, InvalidOuputsWarning, TestCaseWarning
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
 from biosimulators_utils.config import get_config
@@ -374,6 +374,11 @@ class SedmlTestCaseTest(unittest.TestCase):
             published_projects_test_cases=[curated_case])
         self.assertTrue(case.eval(specs))
 
+        with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator',
+                        side_effect=Exception('Simulation failed')):
+            with self.assertWarns(TestCaseWarning):
+                self.assertFalse(case.eval(specs))
+
     def test_SimulatorProducesLinear2DPlots_eval_outputs(self):
         case = sedml.SimulatorProducesLinear2DPlots()
 
@@ -541,7 +546,8 @@ class SedmlTestCaseTest(unittest.TestCase):
         })
         self.assertTrue(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, alg))
 
-        with mock.patch.object(SyntheticCombineArchiveTestCase, 'is_curated_sed_algorithm_suitable_for_building_synthetic_archive', return_value=False):
+        with mock.patch.object(SyntheticCombineArchiveTestCase,
+                               'is_curated_sed_algorithm_suitable_for_building_synthetic_archive', return_value=False):
             self.assertFalse(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, alg))
 
         # eval_outputs

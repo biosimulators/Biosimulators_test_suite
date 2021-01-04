@@ -456,6 +456,10 @@ class SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes(UniformTime
 class SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes(UniformTimeCourseTestCase):
     """ Test that a simulator supports multiple time courses with non-zero initial times """
 
+    @property
+    def report_error_as_warning(self):
+        return True
+
     def modify_simulation(self, simulation):
         """ Modify a simulation
 
