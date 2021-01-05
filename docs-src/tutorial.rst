@@ -37,7 +37,7 @@ Please follow these steps to use the GitHub API to programmatically submit issue
 #. Create a GitHub account
 #. Create a token for your GitHub account with the scope ``public_repo``
 #. Execute HTTP POST requests to create issues. The body of the issue should be a JSON-encoded dictionary as illustrated below. The dictionary should have the following keys:
-  
+
   * ``labels``: Its value should be equal to ``["Validate/submit simulator"]``.
   * ``title``: A descriptive title for your issue such as ``Submit tellurium 2.1.6``.
   * ``body``: A YAML-encoded description of your simulator as outlined above.

@@ -5,7 +5,7 @@
 
 # BioSimulators test suite
 
-The BioSimulators test suite is a tool for validating that biosimulation software tools implement the [BioSimulators standards for biosimulation tools](https://biosimulators.org/standards). 
+The BioSimulators test suite is a tool for validating that biosimulation software tools implement the [BioSimulators standards for biosimulation tools](https://biosimulators.org/standards).
 
 The test suite is composed of two parts:
 

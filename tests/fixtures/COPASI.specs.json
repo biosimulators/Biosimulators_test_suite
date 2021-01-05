@@ -1515,8 +1515,8 @@
   "interfaceTypes": ["web service", "desktop application", "library", "command-line application", "BioSimulators Docker image"],
   "supportedOperatingSystemTypes": ["Linux", "Mac OS", "Windows"],
   "supportedProgrammingLanguages": [
-    {"namespace": "Linguist", "id": "Python"}, 
-    {"namespace": "Linguist", "id": "C#"}, 
+    {"namespace": "Linguist", "id": "Python"},
+    {"namespace": "Linguist", "id": "C#"},
     {"namespace": "Linguist", "id": "Java"}
   ],
   "funding": [],
