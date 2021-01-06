@@ -210,7 +210,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
 
         specs = {
-            'id': 'Tellurium',
+            'id': 'tellurium',
             'version': '2.1.6',
             'image': {
                 'url': 'ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.1.6',

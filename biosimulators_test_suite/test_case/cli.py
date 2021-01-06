@@ -138,7 +138,7 @@ class CliDisplaysVersionInformationInline(TestCase):
         result = subprocess.run(['docker', 'run', '--tty', '--rm', image_url, '-v'],
                                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         log = result.stdout.decode() if result.stdout else ''
-        supported = re.match(r'\d+\.\d+', log)
+        supported = re.search(r'\d+\.\d+', log)
         if not supported:
             warnings.warn(('Command-line interface should support the `-v` option for displaying version information inline.\n\n'
                            'The command-line interface displayed the following when executed with `-v`:\n\n  {}'
@@ -148,7 +148,7 @@ class CliDisplaysVersionInformationInline(TestCase):
         result = subprocess.run(['docker', 'run', '--tty', '--rm', image_url, '--version'],
                                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         log = result.stdout.decode() if result.stdout else ''
-        supported = re.match(r'\d+\.\d+', log)
+        supported = re.search(r'\d+\.\d+', log)
         if not supported:
             warnings.warn(('Command-line interface should support the `--version` option for displaying version information inline.\n\n'
                            'The command-line interface displayed the following when executed with `--version`:\n\n  {}'
