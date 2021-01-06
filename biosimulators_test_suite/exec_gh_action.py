@@ -10,6 +10,7 @@
 from .data_model import OutputMedium
 from .exec_core import SimulatorValidator
 from .results.data_model import TestCaseResult, TestCaseResultType, TestResultsReport  # noqa: F401
+from .results.io import write_test_results
 from biosimulators_utils.gh_action.data_model import Comment, GitHubActionCaughtError  # noqa: F401
 from biosimulators_utils.gh_action.core import GitHubAction, GitHubActionErrorHandling
 from biosimulators_utils.image import get_docker_image
@@ -221,6 +222,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         # validate that image is consistent with the BioSimulators standards
         validator = SimulatorValidator(specifications, output_medium=OutputMedium.gh_issue)
         case_results = validator.run()
+        write_test_results(case_results, '.biosimulators-test-suite-results.json')
         summary, failure_details, warning_details = validator.summarize_results(case_results)
         msg = '## Summary of tests\n\n{}\n\n'.format(summary)
         if failure_details:

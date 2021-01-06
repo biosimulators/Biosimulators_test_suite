@@ -5,6 +5,9 @@ __pycache__/
 dist/
 build/
 
+# test results
+.biosimulators-test-suite-results.json
+
 # coverage files
 htmlcov/
 .coverage
