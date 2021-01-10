@@ -1,0 +1,31 @@
+{
+  "name": "Chaouiya et al. BMC Systems Biology 2013: EGF and TNFα signaling",
+  "filename": "Chaouiya-BMC-Syst-Biol-2013-EGF-TNFa-signaling.omex",
+  "taskRequirements": [{
+    "modelFormat": "format_2585",
+    "simulationAlgorithm": "KISAO_0000449"
+  }],
+  "expectedReports": [{
+    "id": "simulation.sedml/report",
+    "dataSets": ["time", "egf", "erk", "nfkb", "tnfa"],
+    "points": [21],
+    "values": {
+      "time": {
+        "0": 0,
+        "1": 1,
+        "2": 2,
+        "19": 19,
+        "20": 20
+      }
+    }
+  }],
+  "expectedPlots": [],
+  "runtimeFailureAlertType": "exception",
+  "identifiers": [{
+    "namespace": "biomodels.db",
+    "id": "BIOMD0000000562"
+  }, {
+    "namespace": "doi",
+    "id": "10.1186/1752-0509-7-135"
+  }]
+}
