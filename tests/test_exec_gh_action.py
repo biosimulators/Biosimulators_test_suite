@@ -344,14 +344,14 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             with mock.patch('requests.post', side_effect=requests_mock.post):
                 with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'push_image', return_value=None):
                     action.commit_simulator(SimulatorSubmission(validate_image=True), specs, existing_version_specs, [])
-        self.assertEqual(requests_mock.n_post, 4)
+        self.assertEqual(requests_mock.n_post, 6)
 
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.6'}]
         with mock.patch.dict(os.environ, self.env):
             with mock.patch('requests.post', side_effect=requests_mock.post):
                 with mock.patch('requests.put', side_effect=requests_mock.put):
                     action.commit_simulator(SimulatorSubmission(validate_image=False), specs, existing_version_specs, [])
-        self.assertEqual(requests_mock.n_post, 5)
+        self.assertEqual(requests_mock.n_post, 7)
         self.assertEqual(requests_mock.n_put, 1)
 
     def test_run(self):
@@ -365,6 +365,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'open')
         self.assertEqual(requests_mock.simulator_versions, [])
+        self.assertEqual(requests_mock.refreshed_images, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Invalid']))
         self.assertEqual(len(requests_mock.issue_messages), 2)
         self.assertRegex(requests_mock.issue_messages[-1], 'Specifications must be adhere to the BioSimulators schema')
@@ -381,6 +382,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'open')
         self.assertEqual(requests_mock.simulator_versions, [])
+        self.assertEqual(requests_mock.refreshed_images, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated']))
         self.assertEqual(len(requests_mock.issue_messages), 2)
         self.assertEqual(requests_mock.issue_messages[-1], 'The specifications of your simulator is valid!')
@@ -398,6 +400,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'open')
         self.assertEqual(requests_mock.simulator_versions, [])
+        self.assertEqual(requests_mock.refreshed_images, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Invalid']))
         self.assertEqual(len(requests_mock.issue_messages), 3)
         self.assertRegex(requests_mock.issue_messages[-1], 'Singularity error')
@@ -415,6 +418,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'open')
         self.assertEqual(requests_mock.simulator_versions, [])
+        self.assertEqual(requests_mock.refreshed_images, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Invalid']))
         self.assertEqual(len(requests_mock.issue_messages), 4)
         self.assertRegex(requests_mock.issue_messages[-2], 'Passed 0 test cases')
@@ -432,6 +436,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'open')
         self.assertEqual(requests_mock.simulator_versions, [])
+        self.assertEqual(requests_mock.refreshed_images, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Invalid']))
         self.assertEqual(len(requests_mock.issue_messages), 4)
         self.assertRegex(requests_mock.issue_messages[-1], 'No test cases are applicable')
@@ -448,6 +453,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'open')
         self.assertEqual(requests_mock.simulator_versions, [])
+        self.assertEqual(requests_mock.refreshed_images, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated']))
         self.assertEqual(len(requests_mock.issue_messages), 4)
         self.assertRegex(requests_mock.issue_messages[-2], 'Passed 1 test cases:')
@@ -465,6 +471,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'closed')
         self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.6']))
+        self.assertEqual(requests_mock.refreshed_images, [{'simulator': 'tellurium', 'version': '2.1.6'}])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
         self.assertEqual(len(requests_mock.issue_messages), 5)
         self.assertRegex(requests_mock.issue_messages[-1], 'Your submission was committed to the BioSimulators registry.')
@@ -489,6 +496,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'open')
         self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set([]))
+        self.assertEqual(requests_mock.refreshed_images, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated']))
         self.assertEqual(len(requests_mock.issue_messages), 5)
         self.assertRegex(requests_mock.issue_messages[-1], 'A member of the BioSimulators team will review your submission')
@@ -509,6 +517,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'open')
         self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.5']))
+        self.assertEqual(requests_mock.refreshed_images, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated']))
         self.assertEqual(len(requests_mock.issue_messages), 5)
         self.assertRegex(requests_mock.issue_messages[-1], 'A member of the BioSimulators team will review your submission')
@@ -529,6 +538,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'closed')
         self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.5', '2.1.6']))
+        self.assertEqual(requests_mock.refreshed_images, [{'simulator': 'tellurium', 'version': '2.1.6'}])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
         self.assertEqual(len(requests_mock.issue_messages), 5)
         self.assertRegex(requests_mock.issue_messages[-1], 'Your submission was committed to the BioSimulators registry.')
@@ -554,6 +564,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'closed')
         self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.5', '2.1.4']))
+        self.assertEqual(requests_mock.refreshed_images, [{'simulator': 'tellurium', 'version': '2.1.4'}])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
         self.assertEqual(len(requests_mock.issue_messages), 5)
         self.assertRegex(requests_mock.issue_messages[-1], 'Your submission was committed to the BioSimulators registry.')
@@ -577,6 +588,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'closed')
         self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.5']))
+        self.assertEqual(requests_mock.refreshed_images, [{'simulator': 'tellurium', 'version': '2.1.5'}])
         self.assertEqual(len(requests_mock.simulator_versions[-1]['biosimulators']['validationTests']['results']), 1)
         self.assertEqual(requests_mock.simulator_versions[-1]['biosimulators']['validationTests']['results'][0]['case']['id'], 'sedml.case-passed')
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
@@ -617,6 +629,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                             'biosimulators': {'validated': previous_version_validated},
                         },
                     ]
+
+                self.refreshed_images = []
 
                 self.issue_labels = set(['Validate/commit simulator'])
                 if previous_run_valid == True:
@@ -686,6 +700,10 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                         error = None
                     else:
                         error = 'Specs are invalid'
+                    response = None
+                elif url == exec_gh_action.ValidateCommitSimulatorGitHubAction.RUNBIOSIMULATIONS_API_ENDPOINT + 'images/refresh':
+                    self.refreshed_images.append(json)
+                    error = None
                     response = None
                 elif url == 'https://api.github.com/repos/biosimulators/Biosimulators/issues/11/labels':
                     for label in json['labels']:

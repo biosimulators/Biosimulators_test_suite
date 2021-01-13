@@ -60,8 +60,18 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         issue_number (:obj:`str`): number of GitHub issue which triggered the action
     """
     BIOSIMULATORS_AUTH_ENDPOINT = 'https://auth.biosimulations.org/oauth/token'
-    BIOSIMULATORS_AUDIENCE = os.getenv('BIOSIMULATORS_AUDIENCE', 'api.biosimulators.org')
-    BIOSIMULATORS_API_ENDPOINT = os.getenv('BIOSIMULATORS_API_ENDPOINT', 'https://api.biosimulators.org/')
+    BIOSIMULATORS_AUDIENCE = os.getenv(
+        'BIOSIMULATORS_AUDIENCE',
+        'api.biosimulators.org')
+    RUNBIOSIMULATIONS_AUDIENCE = os.getenv(
+        'RUNBIOSIMULATIONS_AUDIENCE',
+        'dispatch.biosimulations.org')
+    BIOSIMULATORS_API_ENDPOINT = os.getenv(
+        'BIOSIMULATORS_API_ENDPOINT',
+        'https://api.biosimulators.org/')
+    RUNBIOSIMULATIONS_API_ENDPOINT = os.getenv(
+        'RUNBIOSIMULATIONS_API_ENDPOINT',
+        'https://run.api.biosimulations.dev/')
     DOCKER_REGISTRY_URL = 'ghcr.io'
     DOCKER_REGISTRY_IMAGE_URL_PATTERN = 'ghcr.io/biosimulators/{}:{}'
     DEFAULT_SPECIFICATIONS_VERSION = '1.0.0'
@@ -293,9 +303,13 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
             test_results (:obj:`list` of :obj:`TestCaseResults`): results of test cases
         """
-        # copy image to BioSimulators namespace of Docker registry (GitHub Container Registry)
+        # commit image
         if submission.validate_image:
+            # copy image to BioSimulators namespace of Docker registry (GitHub Container Registry)
             self.push_image(specifications, existing_version_specifications)
+
+            # instruct runBioSimulations to generate a Singularity image for the Docker image
+            self.trigger_conversion_of_docker_image_to_singularity(specifications)
 
         # commit submission to BioSimulators database
         if 'biosimulators' not in specifications:
@@ -370,6 +384,22 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                 return False
         return True
 
+    def trigger_conversion_of_docker_image_to_singularity(self, specifications):
+        """ Post the simulation to the BioSimulators database
+
+        Args:
+            specifications (:obj:`dict`): specifications of a simulation tool
+        """
+        auth_headers = self.get_auth_headers_for_biosimulations_api(self.RUNBIOSIMULATIONS_AUDIENCE)
+
+        response = requests.post(self.RUNBIOSIMULATIONS_API_ENDPOINT + 'images/refresh',
+                                 headers=auth_headers,
+                                 json={
+                                     'simulator': specifications['id'],
+                                     'version': specifications['version'],
+                                 })
+        response.raise_for_status()
+
     def post_entry_to_biosimulators_api(self, specifications, existing_version_specifications):
         """ Post the simulation to the BioSimulators database
 
@@ -377,18 +407,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             specifications (:obj:`dict`): specifications of a simulation tool
             existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
         """
-        api_id = os.getenv('BIOSIMULATORS_API_CLIENT_ID')
-        api_secret = os.getenv('BIOSIMULATORS_API_CLIENT_SECRET')
-
-        response = requests.post(self.BIOSIMULATORS_AUTH_ENDPOINT, json={
-            'client_id': api_id,
-            'client_secret': api_secret,
-            'audience': self.BIOSIMULATORS_AUDIENCE,
-            "grant_type": "client_credentials",
-        })
-        response.raise_for_status()
-        response_data = response.json()
-        auth_headers = {'Authorization': response_data['token_type'] + ' ' + response_data['access_token']}
+        auth_headers = self.get_auth_headers_for_biosimulations_api(self.BIOSIMULATORS_AUDIENCE)
 
         existing_versions = [existing_version_spec['version'] for existing_version_spec in existing_version_specifications]
         update_simulator = specifications['version'] in existing_versions
@@ -400,3 +419,26 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             requests_method = requests.post
         response = requests_method(endpoint, headers=auth_headers, json=specifications)
         response.raise_for_status()
+
+    def get_auth_headers_for_biosimulations_api(self, audience):
+        """ Get authorization headers for using one of the BioSimulations REST APIs
+        (BioSimulators, runBioSimulations, etc.).
+
+        Args:
+            audience (:obj:`str`): API audience
+
+        Returns:
+            :obj:`dict`: authorization headers
+        """
+        api_id = os.getenv('BIOSIMULATORS_API_CLIENT_ID')
+        api_secret = os.getenv('BIOSIMULATORS_API_CLIENT_SECRET')
+
+        response = requests.post(self.BIOSIMULATORS_AUTH_ENDPOINT, json={
+            'client_id': api_id,
+            'client_secret': api_secret,
+            'audience': audience,
+            "grant_type": "client_credentials",
+        })
+        response.raise_for_status()
+        response_data = response.json()
+        return {'Authorization': response_data['token_type'] + ' ' + response_data['access_token']}
