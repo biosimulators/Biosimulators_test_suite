@@ -6,18 +6,18 @@
 :License: MIT
 """
 
-from .config import TERMINAL_COLORS
 from .data_model import TestCase, OutputMedium
 from .exceptions import SkippedTestCaseException
 from .results.data_model import TestCaseResult, TestCaseResultType
 from .test_case import cli
 from .test_case import combine_archive
 from .test_case import docker_image
-from .test_case import exec_status_report
+from .test_case import log
 from .test_case import published_project
 from .test_case import results_report
 from .test_case import sedml
 from .warnings import TestCaseWarning, IgnoredTestCaseWarning
+from biosimulators_utils.config import Colors
 import biosimulators_utils.simulator.io
 import capturer
 import collections
@@ -97,8 +97,8 @@ class SimulatorValidator(object):
         cases[suite_name] = self.find_cases_in_module(results_report, compatible_published_projects_test_cases, ids=ids)
 
         # get cases for reporting status of the execution of modeling projects
-        suite_name = exec_status_report.__name__.replace('biosimulators_test_suite.test_case.', '')
-        cases[suite_name] = self.find_cases_in_module(exec_status_report, compatible_published_projects_test_cases, ids=ids)
+        suite_name = log.__name__.replace('biosimulators_test_suite.test_case.', '')
+        cases[suite_name] = self.find_cases_in_module(log, compatible_published_projects_test_cases, ids=ids)
 
         # add cases involving published COMBINE/OMEX archives
         suite_name = published_project.__name__.replace('biosimulators_test_suite.test_case.', '')
@@ -192,10 +192,10 @@ class SimulatorValidator(object):
                 result = self.eval_case(case)
                 results.append(result)
 
-                print(termcolor.colored(result.type.value, TERMINAL_COLORS[result.type.value]), end='')
+                print(termcolor.colored(result.type.value, Colors[result.type.value].value), end='')
                 print(' (', end='')
                 if result.warnings:
-                    print(termcolor.colored(str(len(result.warnings)) + ' warnings, ', TERMINAL_COLORS['warned']), end='')
+                    print(termcolor.colored(str(len(result.warnings)) + ' warnings, ', Colors.warned.value), end='')
                 print('{:.1f} s'.format(result.duration), end='')
                 print(').')
 
