@@ -6,10 +6,10 @@
 :License: MIT
 """
 
-from .config import TERMINAL_COLORS
 from .data_model import OutputMedium
 from .results.data_model import TestCaseResultType
 from .results.io import write_test_results
+from biosimulators_utils.config import Colors
 import biosimulators_test_suite
 import biosimulators_test_suite.exec_core
 import cement
@@ -72,13 +72,13 @@ class BaseController(cement.Controller):
             print('')
             print(summary + '\n\n')
             if failure_details:
-                color = TERMINAL_COLORS['failure']
+                color = Colors.failure.value
                 print(termcolor.colored('=============== FAILURES ===============', color))
                 print(termcolor.colored('', color))
                 print(termcolor.colored('* ' + '\n\n* '.join(failure_details), color))
                 print('')
             if warning_details:
-                color = TERMINAL_COLORS['warning']
+                color = Colors.warning.value
                 print(termcolor.colored('=============== WARNINGS ===============', color))
                 print(termcolor.colored('', color))
                 print(termcolor.colored('* ' + '\n\n* '.join(warning_details), color))

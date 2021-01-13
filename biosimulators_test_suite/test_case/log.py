@@ -10,7 +10,7 @@ from ..warnings import TestCaseWarning
 from .published_project import SingleMasterSedDocumentCombineArchiveTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
 from biosimulators_utils.config import get_config
-from biosimulators_utils.exec_status.data_model import ExecutionStatus
+from biosimulators_utils.log.data_model import Status
 from biosimulators_utils.sedml.data_model import SedDocument, Report  # noqa: F401
 import os
 import warnings
@@ -39,34 +39,32 @@ class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SingleMasterSedDo
         Returns:
             :obj:`bool`: :obj:`True`, if simulator passes the test
         """
-        exec_status_path = os.path.join(outputs_dir, get_config().EXEC_STATUS_PATH)
+        log_path = os.path.join(outputs_dir, get_config().LOG_PATH)
 
-        has_warning = False
-
-        if not os.path.isfile(exec_status_path):
+        if not os.path.isfile(log_path):
             msg = (
                 'The simulator did not export information about the status of its execution. '
                 'Simulators are encouraged to stream information about their execution status.\n\n'
                 'More information: https://biosimulators.org/standards/status'
             )
             warnings.warn(msg, TestCaseWarning)
-            has_warning = True
+            return False
 
         try:
-            with open(exec_status_path, 'r') as file:
+            with open(log_path, 'r') as file:
                 status = yaml.load(file)
         except Exception as exception:
             warnings.warn('The execution status report produced by the simulator is not valid:\n\n  {}'.format(
                 str(exception).replace('\n', '\n  ')), TestCaseWarning)
-            has_warning = True
+            return False
 
         self._status_valid = True
 
         def is_status_valid(status, self=self):
             if status not in [
-                ExecutionStatus.SUCCEEDED.value,
-                ExecutionStatus.SKIPPED.value,
-                ExecutionStatus.FAILED.value,
+                Status.SUCCEEDED.value,
+                Status.SKIPPED.value,
+                Status.FAILED.value,
             ]:
                 self._status_valid = False
 
@@ -91,7 +89,7 @@ class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SingleMasterSedDo
         except Exception as exception:
             warnings.warn('The execution status report produced by the simulator is not valid:\n\n  {}'.format(
                 str(exception).replace('\n', '\n  ')), TestCaseWarning)
-            has_warning = True
+            return False
 
         if not self._status_valid:
             msg = (
@@ -101,6 +99,6 @@ class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SingleMasterSedDo
                 '`SUCCEEDED`, `SKIPPED`, or `FAILED`.'
             )
             warnings.warn(msg, TestCaseWarning)
-            has_warning = True
+            return False
 
-        return not has_warning
+        return True

@@ -2,4 +2,4 @@
 max-line-length = 150
 exclude =
     tests/*
-    docs/*
+    docs-src/*

@@ -1,4 +1,4 @@
-from biosimulators_test_suite.test_case import exec_status_report
+from biosimulators_test_suite.test_case import log
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
 from biosimulators_test_suite.warnings import TestCaseWarning
 from biosimulators_utils.config import get_config
@@ -25,25 +25,25 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         shutil.rmtree(self.dirname)
 
     def test_SimulatorReportsTheStatusOfTheExecutionOfCombineArchives_eval_outputs(self):
-        case = exec_status_report.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives()
+        case = log.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives()
 
         with self.assertWarnsRegex(TestCaseWarning, 'did not export information about the status'):
             self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
-        exec_status_path = os.path.join(self.dirname, get_config().EXEC_STATUS_PATH)
-        with open(exec_status_path, 'w') as file:
+        log_path = os.path.join(self.dirname, get_config().LOG_PATH)
+        with open(log_path, 'w') as file:
             file.write('{"a": 2')
         with self.assertWarnsRegex(TestCaseWarning, 'is not valid'):
             self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
-        with open(exec_status_path, 'w') as file:
+        with open(log_path, 'w') as file:
             file.write('status: RUNNING\n')
             file.write('sedDocuments:\n')
             file.write('  doc_1:\n')
         with self.assertWarnsRegex(TestCaseWarning, 'is not valid'):
             self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
-        with open(exec_status_path, 'w') as file:
+        with open(log_path, 'w') as file:
             file.write('status: RUNNING\n')
             file.write('sedDocuments:\n')
             file.write('  doc_1:\n')
@@ -65,7 +65,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         with self.assertWarnsRegex(TestCaseWarning, 'is not valid'):
             self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
-        with open(exec_status_path, 'w') as file:
+        with open(log_path, 'w') as file:
             file.write('status: RUNNING\n')
             file.write('sedDocuments:\n')
             file.write('  doc_1:\n')
@@ -94,6 +94,6 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
 
         # test synthetic case generated and used to test simulator
-        case = exec_status_report.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(
+        case = log.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(
             published_projects_test_cases=[curated_case])
         self.assertTrue(case.eval(specs))
