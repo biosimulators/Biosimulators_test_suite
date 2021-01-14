@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3. biosimulators_test_suite package &#8212; BioSimulators test suite 0.1.15 documentation</title>
+    <title>3. biosimulators_test_suite package &#8212; BioSimulators test suite 0.1.16 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -432,7 +432,7 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt id="biosimulators_test_suite.exec_cli.BaseController.Meta.arguments">
-<code class="sig-name descname">arguments</code><em class="property"> = [(['specifications'], {'type': &lt;class 'str'&gt;, 'help': 'Path or URL to the specifications of the simulator'}), (['-c', '--combine-case'], {'type': &lt;class 'str'&gt;, 'nargs': '+', 'default': None, 'dest': 'case_ids', 'help': &quot;Ids of test cases of evaluate (e.g., 'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'). Default: evaluate all test cases&quot;}), (['-o', '--report'], {'default': None, 'help': 'Path to save a report of the results in JSON format'}), (['--verbose'], {'action': 'store_true', 'help': 'If set, print the stdout and stderr of the execution of the tests in real time.'}), (['-v', '--version'], {'action': 'version', 'version': '0.1.15'})]</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_cli.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_cli.BaseController.Meta.arguments" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">arguments</code><em class="property"> = [(['specifications'], {'type': &lt;class 'str'&gt;, 'help': 'Path or URL to the specifications of the simulator'}), (['-c', '--combine-case'], {'type': &lt;class 'str'&gt;, 'nargs': '+', 'default': None, 'dest': 'case_ids', 'help': &quot;Ids of test cases of evaluate (e.g., 'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'). Default: evaluate all test cases&quot;}), (['-o', '--report'], {'default': None, 'help': 'Path to save a report of the results in JSON format'}), (['--verbose'], {'action': 'store_true', 'help': 'If set, print the stdout and stderr of the execution of the tests in real time.'}), (['-v', '--version'], {'action': 'version', 'version': '0.1.16'})]</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_cli.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_cli.BaseController.Meta.arguments" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -699,6 +699,16 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
 <code class="sig-name descname">DOCKER_REGISTRY_URL</code><em class="property"> = 'ghcr.io'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.DOCKER_REGISTRY_URL" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.RUNBIOSIMULATIONS_API_ENDPOINT">
+<code class="sig-name descname">RUNBIOSIMULATIONS_API_ENDPOINT</code><em class="property"> = 'https://run.api.biosimulations.dev/'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.RUNBIOSIMULATIONS_API_ENDPOINT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.RUNBIOSIMULATIONS_AUDIENCE">
+<code class="sig-name descname">RUNBIOSIMULATIONS_AUDIENCE</code><em class="property"> = 'dispatch.biosimulations.org'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.RUNBIOSIMULATIONS_AUDIENCE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.commit_simulator">
 <code class="sig-name descname">commit_simulator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">submission</span></em>, <em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">existing_version_specifications</span></em>, <em class="sig-param"><span class="n">test_results</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.commit_simulator" title="Permalink to this definition">¶</a></dt>
@@ -750,6 +760,24 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.get_auth_headers_for_biosimulations_api">
+<code class="sig-name descname">get_auth_headers_for_biosimulations_api</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">audience</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.get_auth_headers_for_biosimulations_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get authorization headers for using one of the BioSimulations REST APIs
+(BioSimulators, runBioSimulations, etc.).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>audience</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – API audience</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>authorization headers</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -860,6 +888,17 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
 <dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.run">
 <code class="sig-name descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validate and commit a simulator.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.trigger_conversion_of_docker_image_to_singularity">
+<code class="sig-name descname">trigger_conversion_of_docker_image_to_singularity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.trigger_conversion_of_docker_image_to_singularity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Post the simulation to the BioSimulators database</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of a simulation tool</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
