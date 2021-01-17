@@ -9,15 +9,16 @@
     "id": "simulation.sedml/report",
     "dataSets": ["time", "egf", "erk", "nfkb", "tnfa"],
     "points": [21],
-    "values": {
-      "time": {
+    "values": [{
+      "label": "time",
+      "value": {
         "0": 0,
         "1": 1,
         "2": 2,
         "19": 19,
         "20": 20
       }
-    }
+    }]
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",

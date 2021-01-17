@@ -9,12 +9,13 @@
     "id": "LSODA.sedml/report_1_task1",
     "dataSets": ["Time", "pmTORC1"],
     "points": [1001],
-    "values": {
-      "Time": {
+    "values": [{
+      "label": "Time",
+      "value": {
         "0": 0.0,
         "1000": 3600
       }
-    }
+    }]
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",

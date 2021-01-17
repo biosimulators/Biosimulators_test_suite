@@ -9,12 +9,13 @@
     "id": "BIOMD0000000896_sim.sedml/BIOMD0000000896_sim",
     "dataSets": ["time", "Hsp70", "HSF", "S", "Hsp70_HSF", "Hsp70_S", "HSF_3", "HSE", "HSF_3_HSE", "mRNA"],
     "points": [4001],
-    "values": {
-      "time": {
+    "values": [{
+      "label": "time",
+      "value": {
         "0": 0.0,
         "4000": 1000
       }
-    }
+    }]
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",

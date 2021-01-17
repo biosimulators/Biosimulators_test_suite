@@ -9,12 +9,13 @@
     "id": "test.sedml/report",
     "dataSets": ["time", "Atot", "Btot", "GA00tot", "GA01tot", "GA10tot", "GB00tot", "GB01tot", "GB10tot"],
     "points": [101],
-    "values": {
-      "time": {
+    "values": [{
+      "label": "time",
+      "value": {
         "0": 0.0,
         "100": 10
       }
-    }
+    }]
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",

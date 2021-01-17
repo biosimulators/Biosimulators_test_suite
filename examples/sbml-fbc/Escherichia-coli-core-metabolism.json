@@ -9,9 +9,10 @@
     "id": "simulation.sedml/report",
     "dataSets": ["objective_value"],
     "points": [],
-    "values": {
-      "objective_value": 0.8739215069684301
-    }
+    "values": [{
+      "label": "objective_value",
+      "value": 0.8739215069684301
+    }]
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",

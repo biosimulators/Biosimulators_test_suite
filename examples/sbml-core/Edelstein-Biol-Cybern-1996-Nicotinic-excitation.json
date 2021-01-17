@@ -9,15 +9,16 @@
     "id": "BIOMD0000000002_sim.sedml/BIOMD0000000002_sim",
     "dataSets": ["time", "BLL", "IL", "AL"],
     "points": [1001],
-    "values": {
-      "time": {
+    "values": [{
+      "label": "time",
+      "value": {
         "0": 0.0,
         "1": 0.0005,
         "2": 0.0010,
         "999": 0.4995,
         "1000": 0.5000
       }
-    }
+    }]
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",

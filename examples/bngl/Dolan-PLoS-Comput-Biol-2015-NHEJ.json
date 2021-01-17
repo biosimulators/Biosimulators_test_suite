@@ -9,12 +9,13 @@
     "id": "Dolan2015.sedml/report",
     "dataSets": ["time", "MDM2_mRNA", "MDM2"],
     "points": [101],
-    "values": {
-      "time": {
+    "values": [{
+      "label": "time",
+      "value": {
         "0": 0.0,
         "100": 100
       }
-    }
+    }]
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",

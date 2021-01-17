@@ -186,9 +186,11 @@ class SimulatorCanExecutePublishedProject(TestCase):
             points = tuple(exp_report_def['points'])
 
             values = {}
-            for key, val in exp_report_def.get('values', {}).items():
+            for labelVal in exp_report_def.get('values', []):
+                label = labelVal['label']
+                val = labelVal['value']
                 if isinstance(val, dict):
-                    values[key] = {}
+                    values[label] = {}
                     for k, v in val.items():
                         multi_index = tuple(int(index) for index in k.split(","))
                         try:
@@ -203,14 +205,14 @@ class SimulatorCanExecutePublishedProject(TestCase):
                                 self.id.replace('published_project.SimulatorCanExecutePublishedProject:', ''),
                                 tuple(p - 1 for p in points),
                             ))
-                        values[key][multi_index] = v
+                        values[label][multi_index] = v
                 else:
-                    values[key] = numpy.array(val)
+                    values[label] = numpy.array(val)
 
             invalid_dataset_ids = set(values.keys()).difference(set(data_set_labels))
             if invalid_dataset_ids:
                 raise ValueError((
-                    "The keys of the expected values of report `{}` of published project test case `{}` "
+                    "The `label` fields of the expected values of report `{}` of published project test case `{}` "
                     "should be defined in the 'dataSets' property. "
                     "The following keys were not in the 'dataSets' property:\n  - {}").format(
                     id, self.id.replace('published_project.SimulatorCanExecutePublishedProject:', ''),

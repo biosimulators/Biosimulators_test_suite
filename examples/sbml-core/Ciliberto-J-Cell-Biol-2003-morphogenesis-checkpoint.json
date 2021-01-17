@@ -9,15 +9,16 @@
     "id": "simulation_1.sedml/simulation_1",
     "dataSets": ["time", "Cdh1", "Trim", "Clb", "Sic", "PTrim", "PClb", "SBF", "IE", "Cdc20a", "Cdc20", "Swe1", "Swe1M", "PSwe1", "PSwe1M", "Mih1a", "Mcm", "BE", "Cln", "mass"],
     "points": [101],
-    "values": {
-      "time": {
+    "values": [{
+      "label": "time",
+      "value": {
         "0": 0.0,
         "1": 1.0,
         "2": 2.0,
         "99": 99.0,
         "100": 100.0
       }
-    }
+    }]
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",

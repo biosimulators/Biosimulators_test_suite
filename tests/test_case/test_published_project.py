@@ -69,11 +69,11 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         with open(os.path.join(base_path, filename), 'r') as file:
             data = json.load(file)
-        data['expectedReports'][0]['values']['T'] = [0, 1, 2, 3, 4, 5]
+        data['expectedReports'][0]['values'][0]['value'] = [0, 1, 2, 3, 4, 5]
         id = ('published_project.SimulatorCanExecutePublishedProject:'
               'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         case = SimulatorCanExecutePublishedProject(id=id).from_dict(data)
-        numpy.testing.assert_allclose(case.expected_reports[0].values['T'], numpy.array([0, 1, 2, 3, 4, 5]))
+        numpy.testing.assert_allclose(case.expected_reports[0].values['time'], numpy.array([0, 1, 2, 3, 4, 5]))
 
     def test_CuratedCombineArchiveTestCase_from_dict_error_handling(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
@@ -83,15 +83,15 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         id = ('published_project.SimulatorCanExecutePublishedProject:'
               'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
 
-        data['expectedReports'][0]['values'] = {'t': [0, 1, 2, 3, 4, 5]}
+        data['expectedReports'][0]['values'] = [{'label': 't', 'value': [0, 1, 2, 3, 4, 5]}]
         with self.assertRaisesRegex(ValueError, "keys were not in the 'dataSets' property"):
             SimulatorCanExecutePublishedProject(id=id).from_dict(data)
 
-        data['expectedReports'][0]['values'] = {'T': {'5001': 1000.2}}
+        data['expectedReports'][0]['values'] = [{'label': 'T', 'value': {'5001': 1000.2}}]
         with self.assertRaisesRegex(ValueError, "Key must be less than or equal to"):
             SimulatorCanExecutePublishedProject(id=id).from_dict(data)
 
-        data['expectedReports'][0]['values'] = {'T': {'5000': 1000.}}
+        data['expectedReports'][0]['values'] = [{'label': 'T', 'value': {'5000': 1000.}}]
         SimulatorCanExecutePublishedProject(id=id).from_dict(data)
 
     def test_CuratedCombineArchiveTestCase_from_json(self):

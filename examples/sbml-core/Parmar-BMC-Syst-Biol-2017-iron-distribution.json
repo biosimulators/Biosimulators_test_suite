@@ -9,12 +9,13 @@
     "id": "Parmar2017_Deficient_Rich_tracer.sedml/simulation_1",
     "dataSets": ["time", "FeDuo"],
     "points": [301],
-    "values": {
-      "time": {
+    "values": [{
+      "label": "time",
+      "value": {
         "0": 0.0,
         "300": 5100.0
       }
-    }
+    }]
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",

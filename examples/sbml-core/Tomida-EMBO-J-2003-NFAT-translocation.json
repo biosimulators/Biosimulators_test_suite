@@ -9,12 +9,13 @@
     "id": "BIOMD0000000678_sim.sedml/BIOMD0000000678_sim",
     "dataSets": ["time", "NFAT_phosphorylated", "NFAT_dephosphorylated", "NFAT_transported", "stimulus"],
     "points": [801],
-    "values": {
-      "time": {
+    "values": [{
+      "label": "time",
+      "value": {
         "0": 0.0,
         "800": 80
       }
-    }
+    }]
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",

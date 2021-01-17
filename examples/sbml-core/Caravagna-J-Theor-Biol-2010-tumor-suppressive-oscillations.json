@@ -9,15 +9,16 @@
     "id": "BIOMD0000000912_sim.sedml/BIOMD0000000912_sim",
     "dataSets": ["time", "T", "E", "I"],
     "points": [5001],
-    "values": {
-      "time": {
+    "values": [{
+      "label": "time",
+      "value": {
         "0": 0.0,
         "1": 0.2,
         "2": 0.4,
         "999": 199.8,
         "1000": 200
       }
-    }
+    }]
   }],
   "expectedPlots": [{
     "id": "BIOMD0000000912_sim.sedml/plot_1"
