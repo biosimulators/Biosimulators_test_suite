@@ -8,8 +8,8 @@ from biosimulators_utils.config import get_config
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContent, CombineArchiveContentFormat
 from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml.data_model import (SedDocument, Task, Report, DataSet,
-                                                  DataGenerator, DataGeneratorVariable, UniformTimeCourseSimulation,
-                                                  Algorithm, DataGeneratorVariableSymbol, Model,
+                                                  DataGenerator, Variable, UniformTimeCourseSimulation,
+                                                  Algorithm, Symbol, Model,
                                                   Plot2D, Curve)
 from biosimulators_utils.simulator.io import read_simulator_specs
 from unittest import mock
@@ -102,7 +102,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         good_doc.data_generators.append(
             DataGenerator(
                 variables=[
-                    DataGeneratorVariable(
+                    Variable(
                         id='var_1',
                         task=good_doc.tasks[0]
                     ),
@@ -122,7 +122,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         }), 'loc-2')
 
         good_doc.data_generators[0].variables.append(
-            DataGeneratorVariable(
+            Variable(
                 id='var_2',
                 task=good_doc.tasks[0]
             ),
@@ -142,7 +142,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         good_doc.data_generators.append(
             DataGenerator(
                 variables=[
-                    DataGeneratorVariable(
+                    Variable(
                         id='var_1',
                         task=good_doc.tasks[0]
                     ),
@@ -152,7 +152,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         good_doc.data_generators.append(
             DataGenerator(
                 variables=[
-                    DataGeneratorVariable(
+                    Variable(
                         id='var_2',
                         task=good_doc.tasks[0]
                     ),
@@ -292,11 +292,11 @@ class SedmlTestCaseTest(unittest.TestCase):
         doc.tasks.append(Task(model=doc.models[0], simulation=doc.simulations[0]))
         doc.data_generators.append(DataGenerator(
             id='data_gen_x',
-            variables=[DataGeneratorVariable(id='var_x', task=doc.tasks[0])],
+            variables=[Variable(id='var_x', task=doc.tasks[0])],
             math='var_x'))
         doc.data_generators.append(DataGenerator(
             id='data_gen_y',
-            variables=[DataGeneratorVariable(id='var_y', task=doc.tasks[0])],
+            variables=[Variable(id='var_y', task=doc.tasks[0])],
             math='var_y'))
         doc.outputs.append(Report(
             id='report_1',
@@ -314,7 +314,7 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         case.build_synthetic_archive(None, archive, None, sed_docs)
         self.assertEqual(len(doc.data_generators), 3)
-        self.assertEqual(doc.data_generators[-1].variables[0].symbol, DataGeneratorVariableSymbol.time)
+        self.assertEqual(doc.data_generators[-1].variables[0].symbol, Symbol.time)
         self.assertEqual(len(doc.outputs[0].data_sets), 3)
         self.assertEqual(doc.outputs[0].data_sets[-1].data_generator, doc.data_generators[-1])
         self.assertEqual(doc.outputs[0].data_sets[-1].label, '__data_set_time__')

@@ -18,7 +18,7 @@ from biosimulators_utils.report.data_model import ReportFormat
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import (  # noqa: F401
     Report, Task, UniformTimeCourseSimulation,
-    DataGenerator, DataGeneratorVariable, DataGeneratorVariableSymbol, DataSet,
+    DataGenerator, Variable, Symbol, DataSet,
     Model, Simulation, Algorithm)
 from biosimulators_utils.sedml.io import SedmlSimulationReader, SedmlSimulationWriter
 from biosimulators_utils.sedml.utils import (remove_algorithm_parameter_changes,
@@ -910,7 +910,7 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
         time_data_set = False
         for data_gen in doc.data_generators:
             var = data_gen.variables[0]
-            if var.symbol == DataGeneratorVariableSymbol.time:
+            if var.symbol == Symbol.time:
                 for data_set in report.data_sets:
                     if data_set.data_generator == data_gen:
                         time_data_set = True
@@ -924,10 +924,10 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
                 DataGenerator(
                     id='__data_generator_time__',
                     variables=[
-                        DataGeneratorVariable(
+                        Variable(
                             id='__variable_time__',
                             task=task,
-                            symbol=DataGeneratorVariableSymbol.time,
+                            symbol=Symbol.time,
                         ),
                     ],
                     math='__variable_time__',

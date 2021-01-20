@@ -13,7 +13,7 @@ from biosimulators_utils.archive.io import ArchiveReader
 from biosimulators_utils.config import get_config
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import (SedDocument, Output, Report, Plot2D, Plot3D,  DataGenerator,  # noqa: F401
-                                                  DataGeneratorVariable, UniformTimeCourseSimulation,
+                                                  Variable, UniformTimeCourseSimulation,
                                                   DataSet, Curve, Surface, AxisScale,
                                                   Model, ModelAttributeChange, AlgorithmParameterChange)
 import abc
@@ -326,7 +326,7 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombin
                         sed_doc.data_generators.append(copy_data_gen)
 
                         for var in data_set.data_generator.variables:
-                            copy_var = DataGeneratorVariable(id=var.id, target=var.target, symbol=var.symbol, model=var.model)
+                            copy_var = Variable(id=var.id, target=var.target, symbol=var.symbol, model=var.model)
                             copy_var.task = copy_tasks[var.task.id]
                             copy_data_gen.variables.append(copy_var)
                     copy_data_set.data_generator = copy_data_gen
