@@ -98,18 +98,18 @@ class ExpectedSedReport(object):
 
     Attributes
         id (:obj:`str`): id
-        data_sets (:obj:`list` of :obj:`str`): ids of expected datasets
+        data_sets (:obj:`list` of :obj:`str`): labels of expected data sets
         points (:obj:`tuple` of :obj:`int`): number of expected points of
-        values (:obj:`dict` of :obj:`str` to :obj:`dict` of :obj:`list`): expected values of datasets or elements of datasets
+        values (:obj:`dict` of :obj:`str` to :obj:`dict` of :obj:`list`): expected values of data sets or elements of data sets
     """
 
     def __init__(self, id=None, data_sets=None, points=None, values=None):
         """
         Args:
             id (:obj:`str`, optional): id
-            data_sets (:obj:`set` of :obj:`str`, optional): ids of expected datasets
+            data_sets (:obj:`set` of :obj:`str`, optional): labels of expected data sets
             points (:obj:`tuple` of :obj:`int`, optional): number of expected points of
-            values (:obj:`dict` of :obj:`str` to :obj:`dict` of :obj:`list`, optional): expected values of datasets or elements of datasets
+            values (:obj:`dict` of :obj:`str` to :obj:`dict` of :obj:`list`, optional): expected values of data sets or elements of data sets
         """
         self.id = id
         self.data_sets = data_sets or set()

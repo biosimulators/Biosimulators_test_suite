@@ -6,10 +6,11 @@
 :License: MIT
 """
 
+from ..config import Config
 from ..data_model import (TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedPlot,
                           AlertType, OutputMedium)
-from ..exceptions import InvalidOuputsException, SkippedTestCaseException
-from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOuputsWarning, TestCaseWarning
+from ..exceptions import InvalidOutputsException, SkippedTestCaseException
+from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning, TestCaseWarning
 from .utils import are_array_shapes_equivalent
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContentFormatPattern  # noqa: F401
 from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
@@ -281,9 +282,10 @@ class SimulatorCanExecutePublishedProject(TestCase):
         out_dir = tempfile.mkdtemp()
 
         # pull image and execute COMBINE/OMEX archive for case
+        pull_docker_image = Config().pull_docker_image
         try:
             biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
-                self.filename, out_dir, specifications['image']['url'], pull_docker_image=True)
+                self.filename, out_dir, specifications['image']['url'], pull_docker_image=pull_docker_image)
 
         except Exception as exception:
             shutil.rmtree(out_dir)
@@ -303,40 +305,34 @@ class SimulatorCanExecutePublishedProject(TestCase):
         else:
             report_reader = biosimulators_utils.report.io.ReportReader()
             for expected_report in self.expected_reports:
+                report = Report()
+                for data_set_label in expected_report.data_sets:
+                    report.data_sets.append(DataSet(id=data_set_label, label=data_set_label))
                 try:
-                    report = report_reader.run(out_dir, expected_report.id, format=ReportFormat.h5)
+                    report_results = report_reader.run(report, out_dir, expected_report.id, format=ReportFormat.h5)
                 except Exception:
                     errors.append('Report {} could not be read'.format(expected_report.id))
                     continue
 
-                missing_data_sets = set(expected_report.data_sets).difference(set(report.index))
+                missing_data_sets = set(expected_report.data_sets).difference(set(report_results.keys()))
                 if missing_data_sets:
                     errors.append(('Report {} does not contain expected data sets:\n  {}\n\n'
                                    'Report contained these data sets:\n  {}').format(
                         expected_report.id,
                         '\n  '.join(sorted(missing_data_sets)),
-                        '\n  '.join(sorted(report.index)),
+                        '\n  '.join(sorted(report_results.keys())),
                     ))
                     continue
 
-                extra_data_sets = set(report.index).difference(set(expected_report.data_sets))
-                if extra_data_sets:
-                    if self.assert_no_extra_datasets:
-                        errors.append('Report {} contains unexpected data sets:\n  {}'.format(
-                            expected_report.id, '\n  '.join(sorted(extra_data_sets))))
-                        continue
-                    else:
-                        warnings.warn('Report {} contains unexpected data sets:\n  {}'.format(
-                            expected_report.id, '\n  '.join(sorted(extra_data_sets))), InvalidOuputsWarning)
-
-                if not are_array_shapes_equivalent(report.shape[1:], expected_report.points):
+                points = report_results[report.data_sets[0].id].shape
+                if not are_array_shapes_equivalent(points, expected_report.points):
                     errors.append('Report {} contains incorrect number of points: {} != {}'.format(
-                                  expected_report.id, report.shape[1:], expected_report.points))
+                                  expected_report.id, points, expected_report.points))
                     continue
 
                 for data_set_label, expected_value in expected_report.values.items():
                     if isinstance(expected_value, dict):
-                        value = report.loc[data_set_label, :]
+                        value = report_results[data_set_label]
                         for el_id, expected_el_value in expected_value.items():
                             el_index = numpy.ravel_multi_index([el_id], value.shape)[0]
                             actual_el_value = value[el_index]
@@ -353,7 +349,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
                     else:
                         try:
                             numpy.testing.assert_allclose(
-                                report.loc[data_set_label, :],
+                                report_results[data_set_label],
                                 expected_value,
                                 rtol=self.r_tol,
                                 atol=self.a_tol,
@@ -371,7 +367,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
                         '\n  '.join(sorted(extra_report_ids))))
                 else:
                     warnings.warn('Unexpected reports were produced:\n  {}'.format(
-                        '\n  '.join(sorted(extra_report_ids))), InvalidOuputsWarning)
+                        '\n  '.join(sorted(extra_report_ids))), InvalidOutputsWarning)
 
         # check expected outputs created: plots
         if os.path.isfile(os.path.join(out_dir, get_config().PLOTS_PATH)):
@@ -391,7 +387,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
                     '\n  '.join(sorted(missing_plot_ids))))
             else:
                 warnings.warn('Plots were not produced:\n  {}'.format(
-                    '\n  '.join(sorted(missing_plot_ids))), InvalidOuputsWarning)
+                    '\n  '.join(sorted(missing_plot_ids))), InvalidOutputsWarning)
 
         if extra_plot_ids:
             if self.assert_no_extra_plots:
@@ -399,14 +395,14 @@ class SimulatorCanExecutePublishedProject(TestCase):
                     '\n  '.join(sorted(extra_plot_ids))))
             else:
                 warnings.warn('Extra plots were not produced:\n  {}'.format(
-                    '\n  '.join(sorted(extra_plot_ids))), InvalidOuputsWarning)
+                    '\n  '.join(sorted(extra_plot_ids))), InvalidOutputsWarning)
 
         # cleanup outputs
         shutil.rmtree(out_dir)
 
         # raise errors
         if errors:
-            raise InvalidOuputsException('\n\n'.join(errors))
+            raise InvalidOutputsException('\n\n'.join(errors))
 
 
 class SyntheticCombineArchiveTestCase(TestCase):
@@ -489,9 +485,10 @@ class SyntheticCombineArchiveTestCase(TestCase):
         # use synthetic archive to test simulator
         outputs_dir = os.path.join(temp_dir, 'outputs')
         succeeded = False
+        pull_docker_image = Config().pull_docker_image
         try:
             biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
-                synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=True)
+                synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=pull_docker_image)
 
             succeeded = self.eval_outputs(specifications, synthetic_archive, synthetic_sed_docs, outputs_dir)
         finally:
@@ -914,7 +911,7 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
                 for data_set in report.data_sets:
                     if data_set.data_generator == data_gen:
                         time_data_set = True
-                        data_set.label = '__data_set_time__'
+                        data_set.id = '__data_set_time__'
                         break
             if time_data_set:
                 break
@@ -998,15 +995,17 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
         sim = doc.simulations[0]
         report = doc.outputs[0]
 
-        data = ReportReader().run(outputs_dir, os.path.join(doc_id, report.id))
+        data = ReportReader().run(report, outputs_dir, os.path.join(doc_id, report.id))
 
-        if numpy.any(numpy.isnan(data)):
-            warnings.warn('The results produced by the simulator include `NaN`.', InvalidOuputsWarning)
-            has_warnings = True
+        for data_set_data in data.values():
+            if numpy.any(numpy.isnan(data_set_data)):
+                warnings.warn('The results produced by the simulator include `NaN`.', InvalidOutputsWarning)
+                has_warnings = True
+                break
 
         try:
             numpy.testing.assert_allclose(
-                data.loc['__data_set_time__', :],
+                data['__data_set_time__'],
                 numpy.linspace(sim.output_start_time, sim.output_end_time, sim.number_of_points + 1),
                 rtol=1e-4,
             )

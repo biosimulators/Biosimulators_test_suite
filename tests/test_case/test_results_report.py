@@ -1,6 +1,7 @@
 from biosimulators_test_suite.test_case import results_report
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
 from biosimulators_test_suite.warnings import TestCaseWarning
+from biosimulators_utils.report.data_model import DataSetResults
 from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml.data_model import SedDocument, Report, DataSet
 import numpy
@@ -34,32 +35,39 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
                 Report(
                     id='report_1',
                     data_sets=[
-                        DataSet(label='A'),
-                        DataSet(label='B'),
+                        DataSet(id='A', label='A'),
+                        DataSet(id='B', label='B'),
                     ],
                 )
             ],
         )
         synthetic_sed_docs = {'test.sedml': doc}
 
-        data = numpy.array([[1., 2., 3.], [4., 5., 6.]])
-        data_frame = pandas.DataFrame(data, index=['A', 'C'])
-
-        ReportWriter().run(data_frame, self.dirname, os.path.join('test.sedml', 'report_1'))
+        report = Report(data_sets=[DataSet(id='A', label='A'), DataSet(id='C', label='C')])
+        data_set_results = DataSetResults({
+            'A': numpy.array([1., 2., 3.]),
+            'C': numpy.array([4., 5., 6.]),
+        })
+        ReportWriter().run(report, data_set_results, self.dirname, os.path.join('test.sedml', 'report_1'))
         with self.assertRaisesRegex(ValueError, 'did not produce'):
             case.eval_outputs(None, None, synthetic_sed_docs, self.dirname)
 
-        data = numpy.array([[1., 2., 3.], [4., 5., 6.], [7., 8., numpy.nan]])
-        data_frame = pandas.DataFrame(data, index=['A', 'B', 'C'])
-        ReportWriter().run(data_frame, self.dirname, os.path.join('test.sedml', 'report_1'))
-        with self.assertWarnsRegex(TestCaseWarning, 'produced the following extra'):
-            self.assertEqual(case.eval_outputs(None, None, synthetic_sed_docs, self.dirname), False)
+        report = Report(data_sets=[DataSet(id='A', label='A'), DataSet(id='B', label='B'), DataSet(id='C', label='C')])
+        data_set_results = DataSetResults({
+            'A': numpy.array([1., 2., 3.]),
+            'B': numpy.array([4., 5., numpy.nan]),
+            'C': numpy.array([7., 8., numpy.nan]),
+        })
+        ReportWriter().run(report, data_set_results, self.dirname, os.path.join('test.sedml', 'report_1'))
         with self.assertWarnsRegex(TestCaseWarning, 'include `NaN`'):
             self.assertEqual(case.eval_outputs(None, None, synthetic_sed_docs, self.dirname), False)
 
-        data = numpy.array([[1., 2., 3.], [4., 5., 6.]])
-        data_frame = pandas.DataFrame(data, index=['A', 'B'])
-        ReportWriter().run(data_frame, self.dirname, os.path.join('test.sedml', 'report_1'))
+        report = Report(data_sets=[DataSet(id='A', label='A'), DataSet(id='B', label='B')])
+        data_set_results = DataSetResults({
+            'A': numpy.array([1., 2., 3.]),
+            'B': numpy.array([4., 5., 6.]),
+        })
+        ReportWriter().run(report, data_set_results, self.dirname, os.path.join('test.sedml', 'report_1'))
         self.assertEqual(case.eval_outputs(None, None, synthetic_sed_docs, self.dirname), True)
 
     def test_SimulatorGeneratesReportsOfSimultionResults(self):
