@@ -24,8 +24,8 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.dirname)
 
-    def test_SimulatorGeneratesReportsOfSimultionResults_eval_outputs(self):
-        case = results_report.SimulatorGeneratesReportsOfSimultionResults()
+    def test_SimulatorGeneratesReportsOfSimulationResults_eval_outputs(self):
+        case = results_report.SimulatorGeneratesReportsOfSimulationResults()
 
         with self.assertRaisesRegex(ValueError, 'Simulator must generate reports'):
             case.eval_outputs(None, None, None, self.dirname)
@@ -70,11 +70,11 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         ReportWriter().run(report, data_set_results, self.dirname, os.path.join('test.sedml', 'report_1'))
         self.assertEqual(case.eval_outputs(None, None, synthetic_sed_docs, self.dirname), True)
 
-    def test_SimulatorGeneratesReportsOfSimultionResults(self):
+    def test_SimulatorGeneratesReportsOfSimulationResults(self):
         specs = {'image': {'url': self.IMAGE}}
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
 
         # test synthetic case generated and used to test simulator
-        case = results_report.SimulatorGeneratesReportsOfSimultionResults(
+        case = results_report.SimulatorGeneratesReportsOfSimulationResults(
             published_projects_test_cases=[curated_case])
         self.assertTrue(case.eval(specs))

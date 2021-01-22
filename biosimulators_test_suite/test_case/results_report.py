@@ -17,11 +17,11 @@ import numpy
 import warnings
 
 __all__ = [
-    'SimulatorGeneratesReportsOfSimultionResults',
+    'SimulatorGeneratesReportsOfSimulationResults',
 ]
 
 
-class SimulatorGeneratesReportsOfSimultionResults(SingleMasterSedDocumentCombineArchiveTestCase):
+class SimulatorGeneratesReportsOfSimulationResults(SingleMasterSedDocumentCombineArchiveTestCase):
     """ Test that when a COMBINE/OMEX archive defines a (single) master file, the simulator only
     executes this file.
     """
