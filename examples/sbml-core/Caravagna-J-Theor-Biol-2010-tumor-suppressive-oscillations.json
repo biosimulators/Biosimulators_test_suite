@@ -7,17 +7,24 @@
   }],
   "expectedReports": [{
     "id": "BIOMD0000000912_sim.sedml/BIOMD0000000912_sim",
-    "dataSets": ["time", "T", "E", "I"],
+    "dataSets": [
+      {"id": "data_set_time", "label": "time"}, 
+      {"id": "data_set_T", "label": "T"},
+      {"id": "data_set_E", "label": "E"},
+      {"id": "data_set_I", "label": "I"}
+    ],
     "points": [5001],
-    "values": {
-      "time": {
+    "values": [{
+      "id": "data_set_time",
+      "label": "time",
+      "value": {
         "0": 0.0,
         "1": 0.2,
         "2": 0.4,
         "999": 199.8,
         "1000": 200
       }
-    }
+    }]
   }],
   "expectedPlots": [{
     "id": "BIOMD0000000912_sim.sedml/plot_1"

@@ -7,17 +7,40 @@
   }],
   "expectedReports": [{
     "id": "simulation_1.sedml/simulation_1",
-    "dataSets": ["time", "Cdh1", "Trim", "Clb", "Sic", "PTrim", "PClb", "SBF", "IE", "Cdc20a", "Cdc20", "Swe1", "Swe1M", "PSwe1", "PSwe1M", "Mih1a", "Mcm", "BE", "Cln", "mass"],
+    "dataSets": [
+      {"id": "data_set_time", "label": "time"},
+      {"id": "data_set_Cdh1", "label": "Cdh1"},
+      {"id": "data_set_Trim", "label": "Trim"},
+      {"id": "data_set_Clb", "label": "Clb"},
+      {"id": "data_set_Sic", "label": "Sic"},
+      {"id": "data_set_PTrim", "label": "PTrim"},
+      {"id": "data_set_PClb", "label": "PClb"},
+      {"id": "data_set_SBF", "label": "SBF"},
+      {"id": "data_set_IE", "label": "IE"},
+      {"id": "data_set_Cdc20a", "label": "Cdc20a"},
+      {"id": "data_set_Cdc20", "label": "Cdc20"},
+      {"id": "data_set_Swe1", "label": "Swe1"},
+      {"id": "data_set_Swe1M", "label": "Swe1M"},
+      {"id": "data_set_PSwe1", "label": "PSwe1"},
+      {"id": "data_set_PSwe1M", "label": "PSwe1M"},
+      {"id": "data_set_Mih1a", "label": "Mih1a"},
+      {"id": "data_set_Mcm", "label": "Mcm"},
+      {"id": "data_set_BE", "label": "BE"},
+      {"id": "data_set_Cln", "label": "Cln"},
+      {"id": "data_set_mass", "label": "mass"}
+    ],
     "points": [101],
-    "values": {
-      "time": {
+    "values": [{
+      "id": "data_set_time",
+      "label": "time",
+      "value": {
         "0": 0.0,
         "1": 1.0,
         "2": 2.0,
         "99": 99.0,
         "100": 100.0
       }
-    }
+    }]
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",

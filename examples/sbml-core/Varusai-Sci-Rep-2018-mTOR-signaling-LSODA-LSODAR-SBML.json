@@ -7,14 +7,19 @@
   }],
   "expectedReports": [{
     "id": "LSODA.sedml/report_1_task1",
-    "dataSets": ["Time", "pmTORC1"],
+    "dataSets": [
+      {"id": "data_set_time", "label": "Time"}, 
+      {"id": "data_set_pmTORC1", "label": "pmTORC1"}
+    ],
     "points": [1001],
-    "values": {
-      "Time": {
+    "values": [{
+      "id": "data_set_time",
+      "label": "Time",
+      "value": {
         "0": 0.0,
         "1000": 3600
       }
-    }
+    }]
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",

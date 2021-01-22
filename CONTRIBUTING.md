@@ -13,7 +13,7 @@ This repository follows standard Python conventions:
 * `README.md`: Overview of this repository
 * `biosimulators_test_suite/`: Source code for this package
 * `examples`: Example modeling projects that the source code uses to test biosimulation software tools
-* `examples-ouputs`: Example outputs (reports and plots) of executing the example modeling projects
+* `examples-outputs`: Example outputs (reports and plots) of executing the example modeling projects
 * `tests/`: Unit tests for the code for this package
 * `setup.py`: pip installation script for this package
 * `setup.cfg`: Configuration for the pip installation script

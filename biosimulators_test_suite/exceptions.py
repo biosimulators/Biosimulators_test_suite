@@ -8,7 +8,7 @@
 
 __all__ = [
     'TestCaseException',
-    'InvalidOuputsException',
+    'InvalidOutputsException',
     'SkippedTestCaseException',
 ]
 
@@ -18,7 +18,7 @@ class TestCaseException(Exception):
     pass  # pragma: no cover
 
 
-class InvalidOuputsException(TestCaseException):
+class InvalidOutputsException(TestCaseException):
     """ Exception raised when outputs of execution of COMBINE/OMEX archive are not as expected """
     pass  # pragma: no cover
 

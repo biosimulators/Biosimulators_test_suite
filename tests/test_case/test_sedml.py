@@ -1,15 +1,16 @@
-from biosimulators_test_suite.exceptions import InvalidOuputsException
+from biosimulators_test_suite.exceptions import InvalidOutputsException
 from biosimulators_test_suite.test_case import sedml
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject, SyntheticCombineArchiveTestCase
-from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, InvalidOuputsWarning, TestCaseWarning
+from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, InvalidOutputsWarning, TestCaseWarning
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
 from biosimulators_utils.config import get_config
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContent, CombineArchiveContentFormat
+from biosimulators_utils.report.data_model import DataSetResults
 from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml.data_model import (SedDocument, Task, Report, DataSet,
-                                                  DataGenerator, DataGeneratorVariable, UniformTimeCourseSimulation,
-                                                  Algorithm, DataGeneratorVariableSymbol, Model,
+                                                  DataGenerator, Variable, UniformTimeCourseSimulation,
+                                                  Algorithm, Symbol, Model,
                                                   Plot2D, Curve)
 from biosimulators_utils.simulator.io import read_simulator_specs
 from unittest import mock
@@ -42,31 +43,31 @@ class SedmlTestCaseTest(unittest.TestCase):
                 Report(
                     id='b',
                     data_sets=[
-                        DataSet(label='x'),
-                        DataSet(label='y'),
+                        DataSet(id='x', label='x'),
+                        DataSet(id='y', label='y'),
                     ],
                 ),
             ],
         )
 
-        with self.assertRaisesRegex(InvalidOuputsException, 'did not produce the following reports'):
+        report = doc.outputs[0]
+
+        with self.assertRaisesRegex(InvalidOutputsException, 'did not produce the following reports'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
-        data_frame = pandas.DataFrame(numpy.array([[1, 2, 3]]), index=['x'])
-        ReportWriter().run(data_frame, self.dirname, 'a.sedml/b')
-        with self.assertRaisesRegex(InvalidOuputsException, 'did not produce the following data sets'):
+        data_set_results = DataSetResults({'x': numpy.array([1, 2, 3])})
+        ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/b')
+        with self.assertRaisesRegex(InvalidOutputsException, 'did not produce the following data sets'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
-        data_frame = pandas.DataFrame(numpy.array([[1, 2, 3], [4, 5, 6]]), index=['x', 'y'])
-        ReportWriter().run(data_frame, self.dirname, 'a.sedml/b')
+        data_set_results = DataSetResults({'x': numpy.array([1, 2, 3]), 'y': numpy.array([4, 5, 6])})
+        ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/b')
         self.assertTrue(case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname))
 
-        data_frame = pandas.DataFrame(numpy.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]), index=['x', 'y', 'z'])
-        ReportWriter().run(data_frame, self.dirname, 'a.sedml/b')
-        ReportWriter().run(data_frame, self.dirname, 'a.sedml/c')
-        with self.assertWarnsRegex(InvalidOuputsWarning, 'extra reports'):
-            self.assertFalse(case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname))
-        with self.assertWarnsRegex(InvalidOuputsWarning, 'extra data sets'):
+        data_set_results = DataSetResults({'x': numpy.array([1, 2, 3]), 'y': numpy.array([4, 5, 6]), 'z': numpy.array([7, 8, 9])})
+        ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/b')
+        ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/c')
+        with self.assertWarnsRegex(InvalidOutputsWarning, 'extra reports'):
             self.assertFalse(case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname))
 
     def test_SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports(self):
@@ -102,7 +103,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         good_doc.data_generators.append(
             DataGenerator(
                 variables=[
-                    DataGeneratorVariable(
+                    Variable(
                         id='var_1',
                         task=good_doc.tasks[0]
                     ),
@@ -122,7 +123,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         }), 'loc-2')
 
         good_doc.data_generators[0].variables.append(
-            DataGeneratorVariable(
+            Variable(
                 id='var_2',
                 task=good_doc.tasks[0]
             ),
@@ -142,7 +143,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         good_doc.data_generators.append(
             DataGenerator(
                 variables=[
-                    DataGeneratorVariable(
+                    Variable(
                         id='var_1',
                         task=good_doc.tasks[0]
                     ),
@@ -152,7 +153,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         good_doc.data_generators.append(
             DataGenerator(
                 variables=[
-                    DataGeneratorVariable(
+                    Variable(
                         id='var_2',
                         task=good_doc.tasks[0]
                     ),
@@ -193,8 +194,9 @@ class SedmlTestCaseTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'were not generated'):
             case.eval_outputs(None, None, None, self.dirname)
 
-        data_frame = pandas.DataFrame(numpy.array([[1, 2, 3], [4, 5, 6]]), index=['A', 'B'])
-        ReportWriter().run(data_frame, self.dirname, 'a.sedml/b')
+        report = Report(data_sets=[DataSet(id='A', label='A'), DataSet(id='B', label='B')])
+        data_set_results = DataSetResults({'A': numpy.array([1, 2, 3]), 'B': numpy.array([4, 5, 6])})
+        ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/b')
         case.eval_outputs(None, None, None, self.dirname)
 
     def test_SimulatorSupportsMultipleTasksPerSedDocument(self):
@@ -220,30 +222,33 @@ class SedmlTestCaseTest(unittest.TestCase):
                 Report(
                     id='report_1',
                     data_sets=[
-                        DataSet(label='x'),
+                        DataSet(id='x', label='x'),
                     ],
                 ),
                 Report(
                     id='report_2',
                     data_sets=[
-                        DataSet(label='y'),
+                        DataSet(id='y', label='y'),
                     ],
                 ),
             ],
         )
 
-        with self.assertRaisesRegex(InvalidOuputsException, 'did not produce the following reports'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'did not produce the following reports'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
-        data_frame = pandas.DataFrame(numpy.array([[1, 2, 3]]), index=['x'])
-        ReportWriter().run(data_frame, self.dirname, 'a.sedml/report_1')
-        data_frame = pandas.DataFrame(numpy.array([[4, 5, 6]]), index=['y'])
-        ReportWriter().run(data_frame, self.dirname, 'a.sedml/report_2')
+        report = doc.outputs[0]
+        data_set_results = DataSetResults({'x': numpy.array([1, 2, 3])})
+        ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/report_1')
+        report = doc.outputs[1]
+        data_set_results = DataSetResults({'y': numpy.array([4, 5, 6])})
+        ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/report_2')
         self.assertTrue(case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname))
 
-        data_frame = pandas.DataFrame(numpy.array([[7, 8, 9]]), index=['z'])
-        ReportWriter().run(data_frame, self.dirname, 'a.sedml/report_3')
-        with self.assertWarnsRegex(InvalidOuputsWarning, 'extra reports'):
+        report = Report(data_sets=[DataSet(id='z', label='z')])
+        data_set_results = DataSetResults({'z': numpy.array([7, 8, 9])})
+        ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/report_3')
+        with self.assertWarnsRegex(InvalidOutputsWarning, 'extra reports'):
             self.assertFalse(case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname))
 
     def test_SimulatorSupportsMultipleReportsPerSedDocument(self):
@@ -292,11 +297,11 @@ class SedmlTestCaseTest(unittest.TestCase):
         doc.tasks.append(Task(model=doc.models[0], simulation=doc.simulations[0]))
         doc.data_generators.append(DataGenerator(
             id='data_gen_x',
-            variables=[DataGeneratorVariable(id='var_x', task=doc.tasks[0])],
+            variables=[Variable(id='var_x', task=doc.tasks[0])],
             math='var_x'))
         doc.data_generators.append(DataGenerator(
             id='data_gen_y',
-            variables=[DataGeneratorVariable(id='var_y', task=doc.tasks[0])],
+            variables=[Variable(id='var_y', task=doc.tasks[0])],
             math='var_y'))
         doc.outputs.append(Report(
             id='report_1',
@@ -314,7 +319,7 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         case.build_synthetic_archive(None, archive, None, sed_docs)
         self.assertEqual(len(doc.data_generators), 3)
-        self.assertEqual(doc.data_generators[-1].variables[0].symbol, DataGeneratorVariableSymbol.time)
+        self.assertEqual(doc.data_generators[-1].variables[0].symbol, Symbol.time)
         self.assertEqual(len(doc.outputs[0].data_sets), 3)
         self.assertEqual(doc.outputs[0].data_sets[-1].data_generator, doc.data_generators[-1])
         self.assertEqual(doc.outputs[0].data_sets[-1].label, '__data_set_time__')
@@ -324,7 +329,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         doc.simulations[0].number_of_points = 100
         doc.outputs[0].data_sets[-1].label = 'time'
         case.build_synthetic_archive(None, archive, None, sed_docs)
-        self.assertEqual(doc.outputs[0].data_sets[-1].label, '__data_set_time__')
+        self.assertEqual(doc.outputs[0].data_sets[-1].id, '__data_set_time__')
 
         doc.outputs[0].data_sets = []
         self.assertFalse(case.is_curated_sed_report_suitable_for_building_synthetic_archive(None, doc.outputs[0]))
@@ -340,20 +345,22 @@ class SedmlTestCaseTest(unittest.TestCase):
                 Report(
                     id='report_1',
                     data_sets=[
-                        DataSet(label='__data_set_time__'),
+                        DataSet(id='__data_set_time__', label='__data_set_time__'),
                     ],
                 ),
             ],
         )
 
-        data_frame = pandas.DataFrame(numpy.array([[10., 15., numpy.nan]]), index=['__data_set_time__'])
-        ReportWriter().run(data_frame, self.dirname, 'a.sedml/report_1')
+        report = doc.outputs[0]
+
+        data_set_results = DataSetResults({'__data_set_time__': numpy.array([10., 15., numpy.nan])})
+        ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/report_1')
         with self.assertRaisesRegex(ValueError, 'did not produce the expected time course'):
-            with self.assertWarnsRegex(InvalidOuputsWarning, 'include `NaN`'):
+            with self.assertWarnsRegex(InvalidOutputsWarning, 'include `NaN`'):
                 case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
-        data_frame = pandas.DataFrame(numpy.array([[10., 15., 20.]]), index=['__data_set_time__'])
-        ReportWriter().run(data_frame, self.dirname, 'a.sedml/report_1')
+        data_set_results = DataSetResults({'__data_set_time__': numpy.array([10., 15., 20.])})
+        ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/report_1')
         self.assertTrue(case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname))
 
     def test_SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes(self):
@@ -393,14 +400,14 @@ class SedmlTestCaseTest(unittest.TestCase):
             ],
         )
 
-        with self.assertWarnsRegex(InvalidOuputsWarning, 'did not produce plots'):
+        with self.assertWarnsRegex(InvalidOutputsWarning, 'did not produce plots'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         plots_path = os.path.join(self.dirname, get_config().PLOTS_PATH)
 
         with open(plots_path, 'w') as file:
             file.write('not a zip')
-        with self.assertRaisesRegex(InvalidOuputsException, 'invalid zip archive'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'invalid zip archive'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         plot_1_path = os.path.join(self.dirname, 'plot_1.pdf')
@@ -412,7 +419,7 @@ class SedmlTestCaseTest(unittest.TestCase):
             ],
         )
         ArchiveWriter().run(archive, plots_path)
-        with self.assertRaisesRegex(InvalidOuputsException, 'invalid PDF'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'invalid PDF'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         with open(plot_1_path, 'wb') as file:
@@ -420,7 +427,7 @@ class SedmlTestCaseTest(unittest.TestCase):
             writer.addBlankPage(width=20, height=20)
             writer.write(file)
         ArchiveWriter().run(archive, plots_path)
-        with self.assertRaisesRegex(InvalidOuputsException, 'did not produce'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'did not produce'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         plot_2_path = os.path.join(self.dirname, 'plot_2.pdf')
@@ -557,20 +564,19 @@ class SedmlTestCaseTest(unittest.TestCase):
             outputs=[
                 Report(
                     id='report_1',
+                    data_sets=[DataSet(id='A', label='A'), DataSet(id='B', label='B'), DataSet(id='C', label='C')],
                 ),
             ],
         )
 
-        data = numpy.array([numpy.array(1.), numpy.array(2.), numpy.array(3.), ])
-        index = ['A', 'B', 'C']
-        data_frame = pandas.DataFrame(data, index=index)
-        ReportWriter().run(data_frame, self.dirname, 'a.sedml/report_1')
+        report = doc.outputs[0]
+
+        data_set_results = DataSetResults({'A': numpy.array(1.), 'B': numpy.array(2.), 'C': numpy.array(3.)})
+        ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/report_1')
         self.assertTrue(case.eval_outputs(specs, None, {'./a.sedml': doc}, self.dirname))
 
-        data = numpy.array([numpy.array([1., 2.]), numpy.array([2., 3.]), numpy.array([3., 4.]), ])
-        index = ['A', 'B', 'C']
-        data_frame = pandas.DataFrame(data, index=index)
-        ReportWriter().run(data_frame, self.dirname, 'a.sedml/report_1')
+        data_set_results = DataSetResults({'A': numpy.array([1., 2.]), 'B': numpy.array([2., 3.]), 'C': numpy.array([3., 4.])})
+        ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/report_1')
         self.assertFalse(case.eval_outputs(specs, None, {'./a.sedml': doc}, self.dirname))
 
         # everything

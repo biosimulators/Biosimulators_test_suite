@@ -10,7 +10,7 @@ __all__ = [
     'TestCaseWarning',
     'IgnoredTestCaseWarning',
     'SimulatorRuntimeErrorWarning',
-    'InvalidOuputsWarning',
+    'InvalidOutputsWarning',
 ]
 
 
@@ -29,6 +29,6 @@ class IgnoredTestCaseWarning(TestCaseWarning):
     pass  # pragma: no cover
 
 
-class InvalidOuputsWarning(TestCaseWarning):
+class InvalidOutputsWarning(TestCaseWarning):
     """ Warning that the outputs of the execution of a COMBINE/OMEX archive were not as expected """
     pass  # pragma: no cover

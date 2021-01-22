@@ -6,6 +6,7 @@
 :License: MIT
 """
 
+from .config import Config
 from .exceptions import SkippedTestCaseException  # noqa: F401
 from biosimulators_utils.image import get_docker_image
 import abc
@@ -14,7 +15,7 @@ import enum
 
 __all__ = [
     'OutputMedium',
-    'TestCase', 'SedTaskRequirements', 'ExpectedSedReport', 'ExpectedSedPlot',
+    'TestCase', 'SedTaskRequirements', 'ExpectedSedReport', 'ExpectedSedDataSet', 'ExpectedSedPlot',
     'AlertType',
 ]
 
@@ -61,7 +62,7 @@ class TestCase(abc.ABC):
         """
         pass  # pragma: no cover
 
-    def get_simulator_docker_image(self, specifications, pull=True):
+    def get_simulator_docker_image(self, specifications, pull=None):
         """ Get the Docker image for a simulator, pulling if necessary
 
         Args:
@@ -72,6 +73,8 @@ class TestCase(abc.ABC):
         """
         docker_client = docker.from_env()
         image_url = specifications['image']['url']
+        if pull is None:
+            pull = Config().pull_docker_image
         return get_docker_image(docker_client, image_url, pull=pull)
 
 
@@ -98,23 +101,41 @@ class ExpectedSedReport(object):
 
     Attributes
         id (:obj:`str`): id
-        data_sets (:obj:`list` of :obj:`str`): ids of expected datasets
+        data_sets (:obj:`list` of :obj:`ExpectedSedDataSet`): labels of expected data sets
         points (:obj:`tuple` of :obj:`int`): number of expected points of
-        values (:obj:`dict` of :obj:`str` to :obj:`dict` of :obj:`list`): expected values of datasets or elements of datasets
+        values (:obj:`dict` of :obj:`str` to :obj:`dict` of :obj:`list`): expected values of data sets or elements of data sets
     """
 
     def __init__(self, id=None, data_sets=None, points=None, values=None):
         """
         Args:
             id (:obj:`str`, optional): id
-            data_sets (:obj:`set` of :obj:`str`, optional): ids of expected datasets
+            data_sets (:obj:`set` of :obj:`ExpectedSedDataSet`, optional): labels of expected data sets
             points (:obj:`tuple` of :obj:`int`, optional): number of expected points of
-            values (:obj:`dict` of :obj:`str` to :obj:`dict` of :obj:`list`, optional): expected values of datasets or elements of datasets
+            values (:obj:`dict` of :obj:`str` to :obj:`dict` of :obj:`list`, optional): expected values of data sets or elements of data sets
         """
         self.id = id
         self.data_sets = data_sets or set()
         self.points = points
         self.values = values
+
+
+class ExpectedSedDataSet(object):
+    """ An expected SED report
+
+    Attributes
+        id (:obj:`str`): id
+        label (:obj:`str`): label
+    """
+
+    def __init__(self, id=None, label=None):
+        """
+        Args:
+            id (:obj:`str`): id
+            label (:obj:`str`): label
+        """
+        self.id = id
+        self.label = label
 
 
 class ExpectedSedPlot(object):

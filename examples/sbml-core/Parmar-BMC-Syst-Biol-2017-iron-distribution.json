@@ -7,14 +7,19 @@
   }],
   "expectedReports": [{
     "id": "Parmar2017_Deficient_Rich_tracer.sedml/simulation_1",
-    "dataSets": ["time", "FeDuo"],
+    "dataSets": [
+      {"id": "data_set_time", "label": "time"}, 
+      {"id": "data_set_FeDuo", "label": "FeDuo"}
+    ],
     "points": [301],
-    "values": {
-      "time": {
+    "values": [{
+      "id": "data_set_time",
+      "label": "time",
+      "value": {
         "0": 0.0,
         "300": 5100.0
       }
-    }
+    }]
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",

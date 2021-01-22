@@ -7,17 +7,25 @@
   }],
   "expectedReports": [{
     "id": "simulation.sedml/report",
-    "dataSets": ["time", "egf", "erk", "nfkb", "tnfa"],
+    "dataSets": [
+      {"id": "data_set_time", "label": "time"},
+      {"id": "data_set_egf", "label": "egf"},
+      {"id": "data_set_erk", "label": "erk"},
+      {"id": "data_set_nfkb", "label": "nfkb"},
+      {"id": "data_set_tnfa", "label": "tnfa"}
+    ],
     "points": [21],
-    "values": {
-      "time": {
+    "values": [{
+      "id": "data_set_time",
+      "label": "time",
+      "value": {
         "0": 0,
         "1": 1,
         "2": 2,
         "19": 19,
         "20": 20
       }
-    }
+    }]
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",

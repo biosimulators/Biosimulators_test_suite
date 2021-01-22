@@ -6,10 +6,11 @@
 :License: MIT
 """
 
-from ..data_model import (TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedPlot,
+from ..config import Config
+from ..data_model import (TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedDataSet, ExpectedSedPlot,
                           AlertType, OutputMedium)
-from ..exceptions import InvalidOuputsException, SkippedTestCaseException
-from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOuputsWarning, TestCaseWarning
+from ..exceptions import InvalidOutputsException, SkippedTestCaseException
+from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning, TestCaseWarning
 from .utils import are_array_shapes_equivalent
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContentFormatPattern  # noqa: F401
 from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
@@ -18,7 +19,7 @@ from biosimulators_utils.report.data_model import ReportFormat
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import (  # noqa: F401
     Report, Task, UniformTimeCourseSimulation,
-    DataGenerator, DataGeneratorVariable, DataGeneratorVariableSymbol, DataSet,
+    DataGenerator, Variable, Symbol, DataSet,
     Model, Simulation, Algorithm)
 from biosimulators_utils.sedml.io import SedmlSimulationReader, SedmlSimulationWriter
 from biosimulators_utils.sedml.utils import (remove_algorithm_parameter_changes,
@@ -182,13 +183,17 @@ class SimulatorCanExecutePublishedProject(TestCase):
         for exp_report_def in data.get('expectedReports', []):
             id = exp_report_def['id']
 
-            data_set_labels = set(exp_report_def.get('dataSets', []))
+            data_sets = [ExpectedSedDataSet(id=data_set.get('id', None), label=data_set.get('label', None))
+                         for data_set in exp_report_def.get('dataSets', [])]
+            data_set_ids = [data_set.id for data_set in data_sets]
             points = tuple(exp_report_def['points'])
 
             values = {}
-            for key, val in exp_report_def.get('values', {}).items():
+            for labelVal in exp_report_def.get('values', []):
+                data_set_id = labelVal['id']
+                val = labelVal['value']
                 if isinstance(val, dict):
-                    values[key] = {}
+                    values[data_set_id] = {}
                     for k, v in val.items():
                         multi_index = tuple(int(index) for index in k.split(","))
                         try:
@@ -203,14 +208,14 @@ class SimulatorCanExecutePublishedProject(TestCase):
                                 self.id.replace('published_project.SimulatorCanExecutePublishedProject:', ''),
                                 tuple(p - 1 for p in points),
                             ))
-                        values[key][multi_index] = v
+                        values[data_set_id][multi_index] = v
                 else:
-                    values[key] = numpy.array(val)
+                    values[data_set_id] = numpy.array(val)
 
-            invalid_dataset_ids = set(values.keys()).difference(set(data_set_labels))
+            invalid_dataset_ids = set(values.keys()).difference(set(data_set_ids))
             if invalid_dataset_ids:
                 raise ValueError((
-                    "The keys of the expected values of report `{}` of published project test case `{}` "
+                    "The `id` fields of the expected values of report `{}` of published project test case `{}` "
                     "should be defined in the 'dataSets' property. "
                     "The following keys were not in the 'dataSets' property:\n  - {}").format(
                     id, self.id.replace('published_project.SimulatorCanExecutePublishedProject:', ''),
@@ -218,7 +223,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
 
             self.expected_reports.append(ExpectedSedReport(
                 id=id,
-                data_sets=data_set_labels,
+                data_sets=data_sets,
                 points=points,
                 values=values,
             ))
@@ -279,9 +284,10 @@ class SimulatorCanExecutePublishedProject(TestCase):
         out_dir = tempfile.mkdtemp()
 
         # pull image and execute COMBINE/OMEX archive for case
+        pull_docker_image = Config().pull_docker_image
         try:
             biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
-                self.filename, out_dir, specifications['image']['url'], pull_docker_image=True)
+                self.filename, out_dir, specifications['image']['url'], pull_docker_image=pull_docker_image)
 
         except Exception as exception:
             shutil.rmtree(out_dir)
@@ -301,40 +307,34 @@ class SimulatorCanExecutePublishedProject(TestCase):
         else:
             report_reader = biosimulators_utils.report.io.ReportReader()
             for expected_report in self.expected_reports:
+                report = Report()
+                for data_set in expected_report.data_sets:
+                    report.data_sets.append(DataSet(id=data_set.id, label=data_set.label))
                 try:
-                    report = report_reader.run(out_dir, expected_report.id, format=ReportFormat.h5)
+                    report_results = report_reader.run(report, out_dir, expected_report.id, format=ReportFormat.h5)
                 except Exception:
                     errors.append('Report {} could not be read'.format(expected_report.id))
                     continue
 
-                missing_data_sets = set(expected_report.data_sets).difference(set(report.index))
+                missing_data_sets = set([data_set.id for data_set in expected_report.data_sets]).difference(set(report_results.keys()))
                 if missing_data_sets:
                     errors.append(('Report {} does not contain expected data sets:\n  {}\n\n'
                                    'Report contained these data sets:\n  {}').format(
                         expected_report.id,
                         '\n  '.join(sorted(missing_data_sets)),
-                        '\n  '.join(sorted(report.index)),
+                        '\n  '.join(sorted(report_results.keys())),
                     ))
                     continue
 
-                extra_data_sets = set(report.index).difference(set(expected_report.data_sets))
-                if extra_data_sets:
-                    if self.assert_no_extra_datasets:
-                        errors.append('Report {} contains unexpected data sets:\n  {}'.format(
-                            expected_report.id, '\n  '.join(sorted(extra_data_sets))))
-                        continue
-                    else:
-                        warnings.warn('Report {} contains unexpected data sets:\n  {}'.format(
-                            expected_report.id, '\n  '.join(sorted(extra_data_sets))), InvalidOuputsWarning)
-
-                if not are_array_shapes_equivalent(report.shape[1:], expected_report.points):
+                points = report_results[report.data_sets[0].id].shape
+                if not are_array_shapes_equivalent(points, expected_report.points):
                     errors.append('Report {} contains incorrect number of points: {} != {}'.format(
-                                  expected_report.id, report.shape[1:], expected_report.points))
+                                  expected_report.id, points, expected_report.points))
                     continue
 
-                for data_set_label, expected_value in expected_report.values.items():
+                for data_set_id, expected_value in expected_report.values.items():
                     if isinstance(expected_value, dict):
-                        value = report.loc[data_set_label, :]
+                        value = report_results[data_set_id]
                         for el_id, expected_el_value in expected_value.items():
                             el_index = numpy.ravel_multi_index([el_id], value.shape)[0]
                             actual_el_value = value[el_index]
@@ -347,20 +347,20 @@ class SimulatorCanExecutePublishedProject(TestCase):
                                 )
                             except AssertionError:
                                 errors.append('Data set {} of report {} does not have expected value at {}: {} != {}'.format(
-                                    data_set_label, expected_report.id, el_id, actual_el_value, expected_el_value))
+                                    data_set_id, expected_report.id, el_id, actual_el_value, expected_el_value))
                     else:
                         try:
                             numpy.testing.assert_allclose(
-                                report.loc[data_set_label, :],
+                                report_results[data_set_id],
                                 expected_value,
                                 rtol=self.r_tol,
                                 atol=self.a_tol,
                             )
                         except AssertionError:
                             errors.append('Data set {} of report {} does not have expected values'.format(
-                                data_set_label, expected_report.id))
+                                data_set_id, expected_report.id))
 
-            report_ids = report_reader.get_ids(out_dir)
+            report_ids = set(report_reader.get_ids(out_dir))
             expected_report_ids = set(report.id for report in self.expected_reports)
             extra_report_ids = report_ids.difference(expected_report_ids)
             if extra_report_ids:
@@ -369,7 +369,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
                         '\n  '.join(sorted(extra_report_ids))))
                 else:
                     warnings.warn('Unexpected reports were produced:\n  {}'.format(
-                        '\n  '.join(sorted(extra_report_ids))), InvalidOuputsWarning)
+                        '\n  '.join(sorted(extra_report_ids))), InvalidOutputsWarning)
 
         # check expected outputs created: plots
         if os.path.isfile(os.path.join(out_dir, get_config().PLOTS_PATH)):
@@ -389,7 +389,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
                     '\n  '.join(sorted(missing_plot_ids))))
             else:
                 warnings.warn('Plots were not produced:\n  {}'.format(
-                    '\n  '.join(sorted(missing_plot_ids))), InvalidOuputsWarning)
+                    '\n  '.join(sorted(missing_plot_ids))), InvalidOutputsWarning)
 
         if extra_plot_ids:
             if self.assert_no_extra_plots:
@@ -397,14 +397,14 @@ class SimulatorCanExecutePublishedProject(TestCase):
                     '\n  '.join(sorted(extra_plot_ids))))
             else:
                 warnings.warn('Extra plots were not produced:\n  {}'.format(
-                    '\n  '.join(sorted(extra_plot_ids))), InvalidOuputsWarning)
+                    '\n  '.join(sorted(extra_plot_ids))), InvalidOutputsWarning)
 
         # cleanup outputs
         shutil.rmtree(out_dir)
 
         # raise errors
         if errors:
-            raise InvalidOuputsException('\n\n'.join(errors))
+            raise InvalidOutputsException('\n\n'.join(errors))
 
 
 class SyntheticCombineArchiveTestCase(TestCase):
@@ -448,9 +448,11 @@ class SyntheticCombineArchiveTestCase(TestCase):
 
         # read curated archives and find one that is suitable for testing
         suitable_curated_archive = False
-        for curated_combine_archive_test_case in self.published_projects_test_cases:
+        for published_projects_test_case in self.published_projects_test_cases:
+            self.published_projects_test_case = published_projects_test_case
+
             # read archive
-            curated_archive_filename = curated_combine_archive_test_case.filename
+            curated_archive_filename = published_projects_test_case.filename
             shared_archive_dir = os.path.join(temp_dir, 'archive')
             os.mkdir(shared_archive_dir)
 
@@ -487,9 +489,10 @@ class SyntheticCombineArchiveTestCase(TestCase):
         # use synthetic archive to test simulator
         outputs_dir = os.path.join(temp_dir, 'outputs')
         succeeded = False
+        pull_docker_image = Config().pull_docker_image
         try:
             biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
-                synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=True)
+                synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=pull_docker_image)
 
             succeeded = self.eval_outputs(specifications, synthetic_archive, synthetic_sed_docs, outputs_dir)
         finally:
@@ -908,11 +911,11 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
         time_data_set = False
         for data_gen in doc.data_generators:
             var = data_gen.variables[0]
-            if var.symbol == DataGeneratorVariableSymbol.time:
+            if var.symbol == Symbol.time:
                 for data_set in report.data_sets:
                     if data_set.data_generator == data_gen:
                         time_data_set = True
-                        data_set.label = '__data_set_time__'
+                        data_set.id = '__data_set_time__'
                         break
             if time_data_set:
                 break
@@ -922,10 +925,10 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
                 DataGenerator(
                     id='__data_generator_time__',
                     variables=[
-                        DataGeneratorVariable(
+                        Variable(
                             id='__variable_time__',
                             task=task,
-                            symbol=DataGeneratorVariableSymbol.time,
+                            symbol=Symbol.time,
                         ),
                     ],
                     math='__variable_time__',
@@ -996,15 +999,17 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
         sim = doc.simulations[0]
         report = doc.outputs[0]
 
-        data = ReportReader().run(outputs_dir, os.path.join(doc_id, report.id))
+        data = ReportReader().run(report, outputs_dir, os.path.join(doc_id, report.id))
 
-        if numpy.any(numpy.isnan(data)):
-            warnings.warn('The results produced by the simulator include `NaN`.', InvalidOuputsWarning)
-            has_warnings = True
+        for data_set_data in data.values():
+            if numpy.any(numpy.isnan(data_set_data)):
+                warnings.warn('The results produced by the simulator include `NaN`.', InvalidOutputsWarning)
+                has_warnings = True
+                break
 
         try:
             numpy.testing.assert_allclose(
-                data.loc['__data_set_time__', :],
+                data['__data_set_time__'],
                 numpy.linspace(sim.output_start_time, sim.output_end_time, sim.number_of_points + 1),
                 rtol=1e-4,
             )

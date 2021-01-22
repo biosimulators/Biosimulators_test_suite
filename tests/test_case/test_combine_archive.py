@@ -1,8 +1,9 @@
 from biosimulators_test_suite.test_case import combine_archive
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
 from biosimulators_test_suite.warnings import TestCaseWarning
+from biosimulators_utils.report.data_model import DataSetResults
 from biosimulators_utils.report.io import ReportWriter
-from biosimulators_utils.sedml.data_model import SedDocument, Task, Report
+from biosimulators_utils.sedml.data_model import SedDocument, Task, Report, DataSet
 import numpy
 import os
 import pandas
@@ -32,11 +33,15 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'did not generate'):
             case.eval_outputs(None, None, None, self.dirname)
 
-        data_frame = pandas.DataFrame(numpy.array([[1, 2, 3], [4, 5, 6]]), index=['A', 'B'])
-        ReportWriter().run(data_frame, self.dirname, 'a.sedml/b')
+        report = Report(data_sets=[DataSet(id='A', label='A'), DataSet(id='B', label='B')])
+        data = DataSetResults({
+            'A': numpy.array([1, 2, 3]),
+            'B': numpy.array([4, 5, 6]),
+        })
+        ReportWriter().run(report, data, self.dirname, 'a.sedml/b')
         case.eval_outputs(None, None, None, self.dirname)
 
-        ReportWriter().run(data_frame, self.dirname, 'b.sedml/b')
+        ReportWriter().run(report, data, self.dirname, 'b.sedml/b')
         with self.assertWarnsRegex(TestCaseWarning, ''):
             case.eval_outputs(None, None, None, self.dirname)
 
@@ -59,12 +64,16 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'did not generate'):
             case.eval_outputs(None, None, None, self.dirname)
 
-        data_frame = pandas.DataFrame(numpy.array([[1, 2, 3], [4, 5, 6]]), index=['A', 'B'])
-        ReportWriter().run(data_frame, self.dirname, 'a.sedml/b')
-        ReportWriter().run(data_frame, self.dirname, 'b.sedml/b')
+        report = Report(data_sets=[DataSet(id='A', label='A'), DataSet(id='B', label='B')])
+        data = DataSetResults({
+            'A': numpy.array([1, 2, 3]),
+            'B': numpy.array([4, 5, 6]),
+        })
+        ReportWriter().run(report, data, self.dirname, 'a.sedml/b')
+        ReportWriter().run(report, data, self.dirname, 'b.sedml/b')
         case.eval_outputs(None, None, None, self.dirname)
 
-        ReportWriter().run(data_frame, self.dirname, 'c.sedml/b')
+        ReportWriter().run(report, data, self.dirname, 'c.sedml/b')
         with self.assertWarnsRegex(TestCaseWarning, ''):
             case.eval_outputs(None, None, None, self.dirname)
 

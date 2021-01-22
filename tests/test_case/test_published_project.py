@@ -1,15 +1,16 @@
 from biosimulators_test_suite import data_model
-from biosimulators_test_suite.exceptions import InvalidOuputsException, SkippedTestCaseException
+from biosimulators_test_suite.exceptions import InvalidOutputsException, SkippedTestCaseException
 from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType
 from biosimulators_test_suite.test_case.published_project import (
     SimulatorCanExecutePublishedProject, find_cases, SyntheticCombineArchiveTestCase, ConfigurableMasterCombineArchiveTestCase)
-from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOuputsWarning
+from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
 from biosimulators_utils.combine.data_model import CombineArchive
 from biosimulators_utils.combine.io import CombineArchiveReader
+from biosimulators_utils.report.data_model import DataSetResults
 from biosimulators_utils.report.io import ReportWriter, ReportFormat
-from biosimulators_utils.sedml.data_model import Task
+from biosimulators_utils.sedml.data_model import Task, Report, DataSet
 from unittest import mock
 import biosimulators_utils.simulator.exec
 import functools
@@ -69,11 +70,11 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         with open(os.path.join(base_path, filename), 'r') as file:
             data = json.load(file)
-        data['expectedReports'][0]['values']['T'] = [0, 1, 2, 3, 4, 5]
+        data['expectedReports'][0]['values'][0]['value'] = [0, 1, 2, 3, 4, 5]
         id = ('published_project.SimulatorCanExecutePublishedProject:'
               'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         case = SimulatorCanExecutePublishedProject(id=id).from_dict(data)
-        numpy.testing.assert_allclose(case.expected_reports[0].values['T'], numpy.array([0, 1, 2, 3, 4, 5]))
+        numpy.testing.assert_allclose(case.expected_reports[0].values['data_set_time'], numpy.array([0, 1, 2, 3, 4, 5]))
 
     def test_CuratedCombineArchiveTestCase_from_dict_error_handling(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
@@ -83,15 +84,15 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         id = ('published_project.SimulatorCanExecutePublishedProject:'
               'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
 
-        data['expectedReports'][0]['values'] = {'t': [0, 1, 2, 3, 4, 5]}
+        data['expectedReports'][0]['values'] = [{'id': 't', 'label': 't', 'value': [0, 1, 2, 3, 4, 5]}]
         with self.assertRaisesRegex(ValueError, "keys were not in the 'dataSets' property"):
             SimulatorCanExecutePublishedProject(id=id).from_dict(data)
 
-        data['expectedReports'][0]['values'] = {'T': {'5001': 1000.2}}
+        data['expectedReports'][0]['values'] = [{'id': 'T', 'label': 'T', 'value': {'5001': 1000.2}}]
         with self.assertRaisesRegex(ValueError, "Key must be less than or equal to"):
             SimulatorCanExecutePublishedProject(id=id).from_dict(data)
 
-        data['expectedReports'][0]['values'] = {'T': {'5000': 1000.}}
+        data['expectedReports'][0]['values'] = [{'id': 'data_set_time', 'label': 'T', 'value': {'5000': 1000.}}]
         SimulatorCanExecutePublishedProject(id=id).from_dict(data)
 
     def test_CuratedCombineArchiveTestCase_from_json(self):
@@ -107,10 +108,10 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         self.assertEqual(case.task_requirements[0].simulation_algorithm, 'KISAO_0000019')
         self.assertEqual(len(case.expected_reports), 1)
         self.assertEqual(case.expected_reports[0].id, 'BIOMD0000000912_sim.sedml/BIOMD0000000912_sim')
-        self.assertEqual(case.expected_reports[0].data_sets, set(["time", "T", "E", "I"]))
+        self.assertEqual(set(data_set.label for data_set in case.expected_reports[0].data_sets), set(["time", "T", "E", "I"]))
         self.assertEqual(case.expected_reports[0].points, (5001,))
         self.assertEqual(case.expected_reports[0].values, {
-            "time": {
+            "data_set_time": {
                 (0,): 0.0,
                 (1,): 0.2,
                 (2,): 0.4,
@@ -132,7 +133,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         case = SimulatorCanExecutePublishedProject().from_json(base_path, filename)
-        case.expected_reports[0].values['T'] = numpy.zeros((5001,))
+        case.expected_reports[0].values['data_set_time'] = numpy.linspace(0., 1000., 5001,)
 
         # skips
         specs = {
@@ -188,24 +189,29 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
                 numpy.zeros((points, )),
                 numpy.zeros((points, )),
             ]
-            index = ['time', 'T', 'E', 'I']
+            ids = ['data_set_time', 'data_set_T', 'data_set_E', 'data_set_I']
+            labels = ['time', 'T', 'E', 'I']
             if missing_data_set:
                 data.pop()
-                index.pop()
+                ids.pop()
+                labels.pop()
             if extra_data_set:
                 data.append(numpy.zeros((5001, )))
-                index.append('extra')
+                ids.append('extra')
+                labels.append('extra')
             if incorrect_values:
                 data[0][0] = -1
                 data[1][0] = -1
 
             if extra_report:
-                df = pandas.DataFrame(numpy.array(data), index=index)
-                ReportWriter().run(df, out_dir, 'BIOMD0000000912_sim.sedml/extra', ReportFormat.h5)
+                report = Report(data_sets=[DataSet(id=i, label=l) for i, l in zip(ids, labels)])
+                data_set_results = DataSetResults({i: d for i, d in zip(ids, data)})
+                ReportWriter().run(report, data_set_results, out_dir, 'BIOMD0000000912_sim.sedml/extra', ReportFormat.h5)
 
             if not missing_report:
-                df = pandas.DataFrame(numpy.array(data), index=index)
-                ReportWriter().run(df, out_dir, 'BIOMD0000000912_sim.sedml/BIOMD0000000912_sim', ReportFormat.h5)
+                report = Report(data_sets=[DataSet(id=i, label=l) for i, l in zip(ids, labels)])
+                data_set_results = DataSetResults({i: d for i, d in zip(ids, data)})
+                ReportWriter().run(report, data_set_results, out_dir, 'BIOMD0000000912_sim.sedml/BIOMD0000000912_sim', ReportFormat.h5)
 
             plot_file = os.path.join(out_dir, 'plot.pdf')
             with open(plot_file, 'w') as file:
@@ -235,79 +241,67 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
                 case.eval(specs)
         case.runtime_failure_alert_type = data_model.AlertType.exception
 
-        with self.assertRaisesRegex(InvalidOuputsException, 'No reports were generated'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'No reports were generated'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, True, False, False, False, False, False, False, False, False)):
                 case.eval(specs)
 
-        with self.assertRaisesRegex(InvalidOuputsException, 'could not be read'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'could not be read'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, True, True, False, False, False, False, False, False, False)):
                 case.eval(specs)
 
-        with self.assertWarnsRegex(InvalidOuputsWarning, 'Unexpected reports were produced'):
+        with self.assertWarnsRegex(InvalidOutputsWarning, 'Unexpected reports were produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, True, False, False, False, False, False, False, False)):
                 case.eval(specs)
 
-        with self.assertRaisesRegex(InvalidOuputsException, 'does not contain expected data sets'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'does not contain expected data sets'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, True, False, False, False, False, False, False)):
                 case.eval(specs)
 
-        with self.assertWarnsRegex(InvalidOuputsWarning, 'contains unexpected data sets'):
-            with mock.patch(exec_archive_method, functools.partial(
-                    exec_archive, False, False, False, False, True, False, False, False, False, False)):
-                case.eval(specs)
-
-        with self.assertRaisesRegex(InvalidOuputsException, 'incorrect number of points'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'incorrect number of points'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, True, False, False, False, False)):
                 case.eval(specs)
 
-        with self.assertRaisesRegex(InvalidOuputsException, 'does not have expected value'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'does not have expected value'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, True, False, False, False)):
                 case.eval(specs)
 
-        with self.assertWarnsRegex(InvalidOuputsWarning, 'Plots were not produced'):
+        with self.assertWarnsRegex(InvalidOutputsWarning, 'Plots were not produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, True, False, False)):
                 case.eval(specs)
 
-        with self.assertWarnsRegex(InvalidOuputsWarning, 'Plots were not produced'):
+        with self.assertWarnsRegex(InvalidOutputsWarning, 'Plots were not produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, False, True, False)):
                 case.eval(specs)
 
-        with self.assertWarnsRegex(InvalidOuputsWarning, 'Extra plots were not produced'):
+        with self.assertWarnsRegex(InvalidOutputsWarning, 'Extra plots were not produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, False, False, True)):
                 case.eval(specs)
 
         case.assert_no_extra_reports = True
-        with self.assertRaisesRegex(InvalidOuputsException, 'Unexpected reports were produced'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'Unexpected reports were produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, True, False, False, False, False, False, False, False)):
                 case.eval(specs)
         case.assert_no_extra_reports = False
 
-        case.assert_no_extra_datasets = True
-        with self.assertRaisesRegex(InvalidOuputsException, 'contains unexpected data sets'):
-            with mock.patch(exec_archive_method, functools.partial(
-                    exec_archive, False, False, False, False, True, False, False, False, False, False)):
-                case.eval(specs)
-        case.assert_no_extra_datasets = False
-
         case.assert_no_missing_plots = True
-        with self.assertRaisesRegex(InvalidOuputsException, 'Plots were not produced'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'Plots were not produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, True, False, False)):
                 case.eval(specs)
         case.assert_no_missing_plots = False
 
         case.assert_no_extra_plots = True
-        with self.assertRaisesRegex(InvalidOuputsException, 'Extra plots were not produced'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'Extra plots were not produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, False, False, True)):
                 case.eval(specs)

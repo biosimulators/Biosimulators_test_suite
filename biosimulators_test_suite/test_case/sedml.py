@@ -5,15 +5,15 @@
 :Copyright: 2020, Center for Reproducible Biomedical Modeling
 :License: MIT
 """
-from ..exceptions import InvalidOuputsException
-from ..warnings import InvalidOuputsWarning
+from ..exceptions import InvalidOutputsException
+from ..warnings import InvalidOutputsWarning
 from .published_project import SingleMasterSedDocumentCombineArchiveTestCase, UniformTimeCourseTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
 from biosimulators_utils.archive.io import ArchiveReader
 from biosimulators_utils.config import get_config
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import (SedDocument, Output, Report, Plot2D, Plot3D,  DataGenerator,  # noqa: F401
-                                                  DataGeneratorVariable, UniformTimeCourseSimulation,
+                                                  Variable, UniformTimeCourseSimulation,
                                                   DataSet, Curve, Surface, AxisScale,
                                                   Model, ModelAttributeChange, AlgorithmParameterChange)
 import abc
@@ -79,41 +79,41 @@ class SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports(SingleMast
         extra_report_ids = set(report_ids).difference(expected_report_ids)
 
         if missing_report_ids:
-            raise InvalidOuputsException('Simulator did not produce the following reports:\n  - {}'.format(
+            raise InvalidOutputsException('Simulator did not produce the following reports:\n  - {}'.format(
                 '\n  - '.join(sorted('`' + id + '`' for id in missing_report_ids))
             ))
 
         if extra_report_ids:
             msg = 'Simulator produced extra reports:\n  - {}'.format(
                 '\n  - '.join(sorted('`' + id + '`' for id in extra_report_ids)))
-            warnings.warn(msg, InvalidOuputsWarning)
+            warnings.warn(msg, InvalidOutputsWarning)
             has_warnings = True
 
         # data sets
-        expected_data_set_labels = set()
-        data_set_labels = set()
+        expected_data_set_ids = set()
+        data_set_ids = set()
         for doc_location, doc in synthetic_sed_docs.items():
             doc_id = os.path.relpath(doc_location, './')
             for output in doc.outputs:
                 if isinstance(output, Report):
                     for data_set in output.data_sets:
-                        expected_data_set_labels.add(os.path.join(doc_id, output.id, data_set.label))
+                        expected_data_set_ids.add(os.path.join(doc_id, output.id, data_set.id))
 
-                    results = ReportReader().run(outputs_dir, os.path.join(doc_id, output.id))
-                    data_set_labels.update(set(os.path.join(doc_id, output.id, label) for label in results.index))
+                    results = ReportReader().run(output, outputs_dir, os.path.join(doc_id, output.id))
+                    data_set_ids.update(set(os.path.join(doc_id, output.id, id) for id in results.keys()))
 
-        missing_data_set_labels = expected_data_set_labels.difference(set(data_set_labels))
-        extra_data_set_labels = set(data_set_labels).difference(expected_data_set_labels)
+        missing_data_set_ids = expected_data_set_ids.difference(set(data_set_ids))
+        extra_data_set_ids = set(data_set_ids).difference(expected_data_set_ids)
 
-        if missing_data_set_labels:
-            raise InvalidOuputsException('Simulator did not produce the following data sets:\n  - {}'.format(
-                '\n  - '.join(sorted('`' + label + '`' for label in missing_data_set_labels))
+        if missing_data_set_ids:
+            raise InvalidOutputsException('Simulator did not produce the following data sets:\n  - {}'.format(
+                '\n  - '.join(sorted('`' + id + '`' for id in missing_data_set_ids))
             ))
 
-        if extra_data_set_labels:
+        if extra_data_set_ids:
             msg = 'Simulator produced extra data sets:\n  - {}'.format(
-                '\n  - '.join(sorted('`' + label + '`' for label in extra_data_set_labels)))
-            warnings.warn(msg, InvalidOuputsWarning)
+                '\n  - '.join(sorted('`' + id + '`' for id in extra_data_set_ids)))
+            warnings.warn(msg, InvalidOutputsWarning)
             has_warnings = True
 
         return not has_warnings
@@ -244,7 +244,7 @@ class SimulatorProducesReportsWithCuratedNumberOfDimensions(SimulatorSupportsMod
         doc_id = os.path.relpath(doc_location, './')
 
         report = doc.outputs[0]
-        data = ReportReader().run(outputs_dir, os.path.join(doc_id, report.id))
+        data = ReportReader().run(report, outputs_dir, os.path.join(doc_id, report.id))
 
         for alg_specs in specifications['algorithms']:
             if alg_specs['kisaoId']['id'] == doc.simulations[0].algorithm.kisao_id:
@@ -252,11 +252,12 @@ class SimulatorProducesReportsWithCuratedNumberOfDimensions(SimulatorSupportsMod
 
         expected_dims = alg_specs['dependentDimensions']
 
-        if numpy.squeeze(data).ndim != 1 + len(expected_dims):
+        data_set_data = data[report.data_sets[0].id]
+        if numpy.squeeze(data_set_data).ndim != len(expected_dims):
             msg = ('The specifications for the number of dimensions of each data set of algorithm `{}` differs '
                    'from the actual number of dimensions, {} != {}.').format(
-                doc.simulations[0].algorithm.kisao_id, data.ndim - 1, len(expected_dims))
-            warnings.warn(msg, InvalidOuputsWarning)
+                doc.simulations[0].algorithm.kisao_id, numpy.squeeze(data_set_data).ndim, len(expected_dims))
+            warnings.warn(msg, InvalidOutputsWarning)
             return False
         else:
             return True
@@ -326,7 +327,7 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombin
                         sed_doc.data_generators.append(copy_data_gen)
 
                         for var in data_set.data_generator.variables:
-                            copy_var = DataGeneratorVariable(id=var.id, target=var.target, symbol=var.symbol, model=var.model)
+                            copy_var = Variable(id=var.id, target=var.target, symbol=var.symbol, model=var.model)
                             copy_var.task = copy_tasks[var.task.id]
                             copy_data_gen.variables.append(copy_var)
                     copy_data_set.data_generator = copy_data_gen
@@ -427,14 +428,14 @@ class SimulatorSupportsMultipleReportsPerSedDocument(SingleMasterSedDocumentComb
         extra_report_ids = set(report_ids).difference(expected_report_ids)
 
         if missing_report_ids:
-            raise InvalidOuputsException('Simulator did not produce the following reports:\n  - {}'.format(
+            raise InvalidOutputsException('Simulator did not produce the following reports:\n  - {}'.format(
                 '\n  - '.join(sorted('`' + id + '`' for id in missing_report_ids))
             ))
 
         if extra_report_ids:
             msg = 'Simulator produced extra reports:\n  - {}'.format(
                 '\n  - '.join(sorted('`' + id + '`' for id in extra_report_ids)))
-            warnings.warn(msg, InvalidOuputsWarning)
+            warnings.warn(msg, InvalidOutputsWarning)
             has_warnings = True
 
         return not has_warnings
@@ -536,7 +537,7 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
         """
         plots_path = os.path.join(outputs_dir, get_config().PLOTS_PATH)
         if not os.path.isfile(plots_path):
-            warnings.warn('Simulator did not produce plots', InvalidOuputsWarning)
+            warnings.warn('Simulator did not produce plots', InvalidOutputsWarning)
             return
 
         tempdir = tempfile.mkdtemp()
@@ -544,7 +545,7 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
             archive = ArchiveReader().run(plots_path, tempdir)
         except Exception:
             shutil.rmtree(tempdir)
-            raise InvalidOuputsException('Simulator produced an invalid zip archive of plots')
+            raise InvalidOutputsException('Simulator produced an invalid zip archive of plots')
 
         for file in archive.files:
             with open(file.local_path, 'rb') as file:
@@ -552,7 +553,7 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
                     PyPDF2.PdfFileReader(file)
                 except Exception:
                     shutil.rmtree(tempdir)
-                    raise InvalidOuputsException('Simulator produced an invalid PDF plot')
+                    raise InvalidOutputsException('Simulator produced an invalid PDF plot')
 
         doc = list(synthetic_sed_docs.values())[0]
         doc_location = list(synthetic_sed_docs.keys())[0]
@@ -566,20 +567,41 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
 
         if missing_plot_ids:
             shutil.rmtree(tempdir)
-            raise InvalidOuputsException('Simulator did not produce the following plots:\n  - {}'.format(
+            raise InvalidOutputsException('Simulator did not produce the following plots:\n  - {}'.format(
                 '\n  - '.join(sorted('`' + id + '`' for id in missing_plot_ids))
             ))
 
         if extra_plot_ids:
             msg = 'Simulator produced extra plots:\n  - {}'.format(
                 '\n  - '.join(sorted('`' + id + '`' for id in extra_plot_ids)))
-            warnings.warn(msg, InvalidOuputsWarning)
+            warnings.warn(msg, InvalidOutputsWarning)
 
         shutil.rmtree(tempdir)
 
 
 class SimulatorProduces2DPlotsTestCase(SimulatorProducesPlotsTestCase):
     """ Test that a simulator produces 2D plots """
+
+    def is_curated_sed_report_suitable_for_building_synthetic_archive(self, specifications, report):
+        """ Determine if a SED report is suitable for testing
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            report (:obj:`Report`): SED report in curated archive
+
+        Returns:
+            :obj:`bool`: whether the report is suitable for testing
+        """
+        if not super(SimulatorProduces2DPlotsTestCase, self).is_curated_sed_report_suitable_for_building_synthetic_archive(
+                specifications, report):
+            return False
+
+        expected_report = next((expected_report for expected_report in self.published_projects_test_case.expected_reports
+                                if expected_report.id == report.id), None)
+        if expected_report is None:
+            return False
+
+        return len(expected_report.points) == 1
 
     def build_plots(self, data_generators):
         """ Build plots from the defined data generators
@@ -610,6 +632,27 @@ class SimulatorProduces2DPlotsTestCase(SimulatorProducesPlotsTestCase):
 
 class SimulatorProduces3DPlotsTestCase(SimulatorProducesPlotsTestCase):
     """ Test that a simulator produces 3D plots """
+
+    def is_curated_sed_report_suitable_for_building_synthetic_archive(self, specifications, report):
+        """ Determine if a SED report is suitable for testing
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            report (:obj:`Report`): SED report in curated archive
+
+        Returns:
+            :obj:`bool`: whether the report is suitable for testing
+        """
+        if not super(SimulatorProduces3DPlotsTestCase, self).is_curated_sed_report_suitable_for_building_synthetic_archive(
+                specifications, report):
+            return False
+
+        expected_report = next((expected_report for expected_report in self.published_projects_test_case.expected_reports
+                                if expected_report.id == report.id), None)
+        if expected_report is None:
+            return False
+
+        return len(expected_report.points) == 2
 
     def build_plots(self, data_generators):
         """ Build plots from the defined data generators
