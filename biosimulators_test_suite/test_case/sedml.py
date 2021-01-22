@@ -582,6 +582,27 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
 class SimulatorProduces2DPlotsTestCase(SimulatorProducesPlotsTestCase):
     """ Test that a simulator produces 2D plots """
 
+    def is_curated_sed_report_suitable_for_building_synthetic_archive(self, specifications, report):
+        """ Determine if a SED report is suitable for testing
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            report (:obj:`Report`): SED report in curated archive
+
+        Returns:
+            :obj:`bool`: whether the report is suitable for testing
+        """
+        if not super(SimulatorProduces2DPlotsTestCase, self).is_curated_sed_report_suitable_for_building_synthetic_archive(
+                specifications, report):
+            return False
+
+        expected_report = next((expected_report for expected_report in self.published_projects_test_case.expected_reports
+                                if expected_report.id == report.id), None)
+        if expected_report is None:
+            return False
+
+        return len(expected_report.points) == 1
+
     def build_plots(self, data_generators):
         """ Build plots from the defined data generators
 
@@ -611,6 +632,27 @@ class SimulatorProduces2DPlotsTestCase(SimulatorProducesPlotsTestCase):
 
 class SimulatorProduces3DPlotsTestCase(SimulatorProducesPlotsTestCase):
     """ Test that a simulator produces 3D plots """
+
+    def is_curated_sed_report_suitable_for_building_synthetic_archive(self, specifications, report):
+        """ Determine if a SED report is suitable for testing
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            report (:obj:`Report`): SED report in curated archive
+
+        Returns:
+            :obj:`bool`: whether the report is suitable for testing
+        """
+        if not super(SimulatorProduces3DPlotsTestCase, self).is_curated_sed_report_suitable_for_building_synthetic_archive(
+                specifications, report):
+            return False
+
+        expected_report = next((expected_report for expected_report in self.published_projects_test_case.expected_reports
+                                if expected_report.id == report.id), None)
+        if expected_report is None:
+            return False
+
+        return len(expected_report.points) == 2
 
     def build_plots(self, data_generators):
         """ Build plots from the defined data generators

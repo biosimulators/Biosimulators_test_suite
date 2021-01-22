@@ -52,10 +52,11 @@ class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SingleMasterSedDo
 
         try:
             with open(log_path, 'r') as file:
-                status = yaml.load(file)
+                log = yaml.load(file)
         except Exception as exception:
-            warnings.warn('The execution status report produced by the simulator is not valid:\n\n  {}'.format(
-                str(exception).replace('\n', '\n  ')), TestCaseWarning)
+            msg = 'The execution status report produced by the simulator is not valid:\n\n  {}'.format(
+                str(exception).replace('\n', '\n  '))
+            warnings.warn(msg, TestCaseWarning)
             return False
 
         self._status_valid = True
@@ -69,26 +70,27 @@ class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SingleMasterSedDo
                 self._status_valid = False
 
         try:
-            is_status_valid(status['status'])
+            is_status_valid(log['status'])
 
-            for doc in status['sedDocuments'].values():
-                is_status_valid(doc['status'])
+            for doc_log in log['sedDocuments']:
+                is_status_valid(doc_log['status'])
 
-                for task in doc['tasks'].values():
-                    is_status_valid(task['status'])
+                for task_log in doc_log['tasks']:
+                    is_status_valid(task_log['status'])
 
-                for output in doc['outputs'].values():
-                    is_status_valid(output['status'])
+                for output_log in doc_log['outputs']:
+                    is_status_valid(output_log['status'])
 
-                    els = output.get('dataSets', output.get('curves', output.get('surfaces', None)))
+                    els = output_log.get('dataSets', output_log.get('curves', output_log.get('surfaces', None)))
                     if els is None:
                         raise KeyError('Outputs must have one of the keys `dataSets`, `curves` or `surfaces`')
-                    for status in els.values():
-                        is_status_valid(status)
+                    for el in els:
+                        is_status_valid(el['status'])
 
         except Exception as exception:
-            warnings.warn('The execution status report produced by the simulator is not valid:\n\n  {}'.format(
-                str(exception).replace('\n', '\n  ')), TestCaseWarning)
+            msg = 'The execution status report produced by the simulator is not valid:\n\n  {}'.format(
+                str(exception).replace('\n', '\n  '))
+            warnings.warn(msg, TestCaseWarning)
             return False
 
         if not self._status_valid:

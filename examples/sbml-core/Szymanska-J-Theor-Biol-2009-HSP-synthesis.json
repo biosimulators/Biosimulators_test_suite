@@ -7,9 +7,21 @@
   }],
   "expectedReports": [{
     "id": "BIOMD0000000896_sim.sedml/BIOMD0000000896_sim",
-    "dataSets": ["time", "Hsp70", "HSF", "S", "Hsp70_HSF", "Hsp70_S", "HSF_3", "HSE", "HSF_3_HSE", "mRNA"],
+    "dataSets": [
+      {"id": "data_set_time", "label": "time"}, 
+      {"id": "data_set_Hsp70", "label": "Hsp70"},
+      {"id": "data_set_HSF", "label": "HSF"},
+      {"id": "data_set_S", "label": "S"},
+      {"id": "data_set_Hsp70_HSF", "label": "Hsp70_HSF"},
+      {"id": "data_set_Hsp70_S", "label": "Hsp70_S"},
+      {"id": "data_set_HSF_3", "label": "HSF_3"},
+      {"id": "data_set_HSE", "label": "HSE"},
+      {"id": "data_set_HSF_3_HSE", "label": "HSF_3_HSE"},
+      {"id": "data_set_mRNA", "label": "mRNA"}
+    ],
     "points": [4001],
     "values": [{
+      "id": "data_set_time",
       "label": "time",
       "value": {
         "0": 0.0,

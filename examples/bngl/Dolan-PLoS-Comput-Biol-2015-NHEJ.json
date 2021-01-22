@@ -7,9 +7,14 @@
   }],
   "expectedReports": [{
     "id": "Dolan2015.sedml/report",
-    "dataSets": ["time", "MDM2_mRNA", "MDM2"],
+    "dataSets": [
+      {"id": "time", "label": "time"},
+      {"id": "MDM2_mRNA", "label": "MDM2_mRNA"},
+      {"id": "MDM2", "label": "MDM2"}
+    ],
     "points": [101],
     "values": [{
+      "id": "time",
       "label": "time",
       "value": {
         "0": 0.0,

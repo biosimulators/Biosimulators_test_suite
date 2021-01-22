@@ -74,7 +74,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         id = ('published_project.SimulatorCanExecutePublishedProject:'
               'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         case = SimulatorCanExecutePublishedProject(id=id).from_dict(data)
-        numpy.testing.assert_allclose(case.expected_reports[0].values['time'], numpy.array([0, 1, 2, 3, 4, 5]))
+        numpy.testing.assert_allclose(case.expected_reports[0].values['data_set_time'], numpy.array([0, 1, 2, 3, 4, 5]))
 
     def test_CuratedCombineArchiveTestCase_from_dict_error_handling(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
@@ -84,15 +84,15 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         id = ('published_project.SimulatorCanExecutePublishedProject:'
               'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
 
-        data['expectedReports'][0]['values'] = [{'label': 't', 'value': [0, 1, 2, 3, 4, 5]}]
+        data['expectedReports'][0]['values'] = [{'id': 't', 'label': 't', 'value': [0, 1, 2, 3, 4, 5]}]
         with self.assertRaisesRegex(ValueError, "keys were not in the 'dataSets' property"):
             SimulatorCanExecutePublishedProject(id=id).from_dict(data)
 
-        data['expectedReports'][0]['values'] = [{'label': 'T', 'value': {'5001': 1000.2}}]
+        data['expectedReports'][0]['values'] = [{'id': 'T', 'label': 'T', 'value': {'5001': 1000.2}}]
         with self.assertRaisesRegex(ValueError, "Key must be less than or equal to"):
             SimulatorCanExecutePublishedProject(id=id).from_dict(data)
 
-        data['expectedReports'][0]['values'] = [{'label': 'T', 'value': {'5000': 1000.}}]
+        data['expectedReports'][0]['values'] = [{'id': 'data_set_time', 'label': 'T', 'value': {'5000': 1000.}}]
         SimulatorCanExecutePublishedProject(id=id).from_dict(data)
 
     def test_CuratedCombineArchiveTestCase_from_json(self):
@@ -108,10 +108,10 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         self.assertEqual(case.task_requirements[0].simulation_algorithm, 'KISAO_0000019')
         self.assertEqual(len(case.expected_reports), 1)
         self.assertEqual(case.expected_reports[0].id, 'BIOMD0000000912_sim.sedml/BIOMD0000000912_sim')
-        self.assertEqual(case.expected_reports[0].data_sets, set(["time", "T", "E", "I"]))
+        self.assertEqual(set(data_set.label for data_set in case.expected_reports[0].data_sets), set(["time", "T", "E", "I"]))
         self.assertEqual(case.expected_reports[0].points, (5001,))
         self.assertEqual(case.expected_reports[0].values, {
-            "time": {
+            "data_set_time": {
                 (0,): 0.0,
                 (1,): 0.2,
                 (2,): 0.4,
@@ -133,7 +133,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         case = SimulatorCanExecutePublishedProject().from_json(base_path, filename)
-        case.expected_reports[0].values['T'] = numpy.zeros((5001,))
+        case.expected_reports[0].values['data_set_time'] = numpy.linspace(0., 1000., 5001,)
 
         # skips
         specs = {

@@ -7,7 +7,7 @@
 """
 
 from ..config import Config
-from ..data_model import (TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedPlot,
+from ..data_model import (TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedDataSet, ExpectedSedPlot,
                           AlertType, OutputMedium)
 from ..exceptions import InvalidOutputsException, SkippedTestCaseException
 from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning, TestCaseWarning
@@ -183,15 +183,17 @@ class SimulatorCanExecutePublishedProject(TestCase):
         for exp_report_def in data.get('expectedReports', []):
             id = exp_report_def['id']
 
-            data_set_labels = set(exp_report_def.get('dataSets', []))
+            data_sets = [ExpectedSedDataSet(id=data_set.get('id', None), label=data_set.get('label', None))
+                         for data_set in exp_report_def.get('dataSets', [])]
+            data_set_ids = [data_set.id for data_set in data_sets]
             points = tuple(exp_report_def['points'])
 
             values = {}
             for labelVal in exp_report_def.get('values', []):
-                label = labelVal['label']
+                data_set_id = labelVal['id']
                 val = labelVal['value']
                 if isinstance(val, dict):
-                    values[label] = {}
+                    values[data_set_id] = {}
                     for k, v in val.items():
                         multi_index = tuple(int(index) for index in k.split(","))
                         try:
@@ -206,14 +208,14 @@ class SimulatorCanExecutePublishedProject(TestCase):
                                 self.id.replace('published_project.SimulatorCanExecutePublishedProject:', ''),
                                 tuple(p - 1 for p in points),
                             ))
-                        values[label][multi_index] = v
+                        values[data_set_id][multi_index] = v
                 else:
-                    values[label] = numpy.array(val)
+                    values[data_set_id] = numpy.array(val)
 
-            invalid_dataset_ids = set(values.keys()).difference(set(data_set_labels))
+            invalid_dataset_ids = set(values.keys()).difference(set(data_set_ids))
             if invalid_dataset_ids:
                 raise ValueError((
-                    "The `label` fields of the expected values of report `{}` of published project test case `{}` "
+                    "The `id` fields of the expected values of report `{}` of published project test case `{}` "
                     "should be defined in the 'dataSets' property. "
                     "The following keys were not in the 'dataSets' property:\n  - {}").format(
                     id, self.id.replace('published_project.SimulatorCanExecutePublishedProject:', ''),
@@ -221,7 +223,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
 
             self.expected_reports.append(ExpectedSedReport(
                 id=id,
-                data_sets=data_set_labels,
+                data_sets=data_sets,
                 points=points,
                 values=values,
             ))
@@ -306,15 +308,15 @@ class SimulatorCanExecutePublishedProject(TestCase):
             report_reader = biosimulators_utils.report.io.ReportReader()
             for expected_report in self.expected_reports:
                 report = Report()
-                for data_set_label in expected_report.data_sets:
-                    report.data_sets.append(DataSet(id=data_set_label, label=data_set_label))
+                for data_set in expected_report.data_sets:
+                    report.data_sets.append(DataSet(id=data_set.id, label=data_set.label))
                 try:
                     report_results = report_reader.run(report, out_dir, expected_report.id, format=ReportFormat.h5)
                 except Exception:
                     errors.append('Report {} could not be read'.format(expected_report.id))
                     continue
 
-                missing_data_sets = set(expected_report.data_sets).difference(set(report_results.keys()))
+                missing_data_sets = set([data_set.id for data_set in expected_report.data_sets]).difference(set(report_results.keys()))
                 if missing_data_sets:
                     errors.append(('Report {} does not contain expected data sets:\n  {}\n\n'
                                    'Report contained these data sets:\n  {}').format(
@@ -330,9 +332,9 @@ class SimulatorCanExecutePublishedProject(TestCase):
                                   expected_report.id, points, expected_report.points))
                     continue
 
-                for data_set_label, expected_value in expected_report.values.items():
+                for data_set_id, expected_value in expected_report.values.items():
                     if isinstance(expected_value, dict):
-                        value = report_results[data_set_label]
+                        value = report_results[data_set_id]
                         for el_id, expected_el_value in expected_value.items():
                             el_index = numpy.ravel_multi_index([el_id], value.shape)[0]
                             actual_el_value = value[el_index]
@@ -345,20 +347,20 @@ class SimulatorCanExecutePublishedProject(TestCase):
                                 )
                             except AssertionError:
                                 errors.append('Data set {} of report {} does not have expected value at {}: {} != {}'.format(
-                                    data_set_label, expected_report.id, el_id, actual_el_value, expected_el_value))
+                                    data_set_id, expected_report.id, el_id, actual_el_value, expected_el_value))
                     else:
                         try:
                             numpy.testing.assert_allclose(
-                                report_results[data_set_label],
+                                report_results[data_set_id],
                                 expected_value,
                                 rtol=self.r_tol,
                                 atol=self.a_tol,
                             )
                         except AssertionError:
                             errors.append('Data set {} of report {} does not have expected values'.format(
-                                data_set_label, expected_report.id))
+                                data_set_id, expected_report.id))
 
-            report_ids = report_reader.get_ids(out_dir)
+            report_ids = set(report_reader.get_ids(out_dir))
             expected_report_ids = set(report.id for report in self.expected_reports)
             extra_report_ids = report_ids.difference(expected_report_ids)
             if extra_report_ids:
@@ -446,9 +448,11 @@ class SyntheticCombineArchiveTestCase(TestCase):
 
         # read curated archives and find one that is suitable for testing
         suitable_curated_archive = False
-        for curated_combine_archive_test_case in self.published_projects_test_cases:
+        for published_projects_test_case in self.published_projects_test_cases:
+            self.published_projects_test_case = published_projects_test_case
+
             # read archive
-            curated_archive_filename = curated_combine_archive_test_case.filename
+            curated_archive_filename = published_projects_test_case.filename
             shared_archive_dir = os.path.join(temp_dir, 'archive')
             os.mkdir(shared_archive_dir)
 
@@ -486,7 +490,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
         outputs_dir = os.path.join(temp_dir, 'outputs')
         succeeded = False
         pull_docker_image = Config().pull_docker_image
-        try:
+        try:            
             biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
                 synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=pull_docker_image)
 

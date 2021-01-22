@@ -7,9 +7,15 @@
   }],
   "expectedReports": [{
     "id": "BIOMD0000000002_sim.sedml/BIOMD0000000002_sim",
-    "dataSets": ["time", "BLL", "IL", "AL"],
+    "dataSets": [
+      {"id": "data_set_time", "label": "time"},
+      {"id": "data_set_BLL", "label": "BLL"},
+      {"id": "data_set_IL", "label": "IL"},
+      {"id": "data_set_AL", "label": "AL"}
+    ],
     "points": [1001],
     "values": [{
+      "id": "data_set_time",
       "label": "time",
       "value": {
         "0": 0.0,

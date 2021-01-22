@@ -7,9 +7,16 @@
   }],
   "expectedReports": [{
     "id": "BIOMD0000000678_sim.sedml/BIOMD0000000678_sim",
-    "dataSets": ["time", "NFAT_phosphorylated", "NFAT_dephosphorylated", "NFAT_transported", "stimulus"],
+    "dataSets": [
+      {"id": "data_set_time", "label": "time"},
+      {"id": "data_set_NFAT_phosphorylated", "label": "NFAT_phosphorylated"},
+      {"id": "data_set_NFAT_dephosphorylated", "label": "NFAT_dephosphorylated"},
+      {"id": "data_set_NFAT_transported", "label": "NFAT_transported"},
+      {"id": "data_set_stimulus", "label": "stimulus"}
+    ],
     "points": [801],
     "values": [{
+      "id": "data_set_time",
       "label": "time",
       "value": {
         "0": 0.0,

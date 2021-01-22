@@ -11,7 +11,7 @@ import tempfile
 import unittest
 
 
-class CombineArchiveTestCaseTest(unittest.TestCase):
+class LogTestCaseTest(unittest.TestCase):
     IMAGE = 'ghcr.io/biosimulators/biosimulators_copasi/copasi:latest'
     CURATED_ARCHIVE_FILENAME = os.path.join(
         os.path.dirname(__file__), '..', '..',
@@ -45,21 +45,23 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         with open(log_path, 'w') as file:
             file.write('status: RUNNING\n')
             file.write('sedDocuments:\n')
-            file.write('  doc_1:\n')
+            file.write('  - id: doc_1\n')
             file.write('    status: RUNNING\n')
             file.write('    tasks:\n')
-            file.write('      task_1:\n')
+            file.write('      - id: task_1\n')
             file.write('        status: RUNNING\n')
             file.write('    outputs:\n')
-            file.write('      output_1:\n')
+            file.write('      - id: output_1\n')
             file.write('        status: RUNNING\n')
             file.write('        dataSets:\n')
-            file.write('          data_set_1: RUNNING\n')
-            file.write('      output_2:\n')
+            file.write('          - id: data_set_1\n')
+            file.write('            status: RUNNING\n')
+            file.write('      - id: output_2\n')
             file.write('        status: RUNNING\n')
             file.write('        curves:\n')
-            file.write('          curve_1: RUNNING\n')
-            file.write('      output_3:\n')
+            file.write('          - id curve_1\n')
+            file.write('            status: RUNNING\n')
+            file.write('      - id: output_3\n')
             file.write('        status: RUNNING\n')
         with self.assertWarnsRegex(TestCaseWarning, 'is not valid'):
             self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
@@ -67,24 +69,27 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         with open(log_path, 'w') as file:
             file.write('status: RUNNING\n')
             file.write('sedDocuments:\n')
-            file.write('  doc_1:\n')
+            file.write('  - id: doc_1\n')
             file.write('    status: RUNNING\n')
             file.write('    tasks:\n')
-            file.write('      task_1:\n')
+            file.write('      - id: task_1\n')
             file.write('        status: RUNNING\n')
             file.write('    outputs:\n')
-            file.write('      output_1:\n')
+            file.write('      - id: output_1\n')
             file.write('        status: RUNNING\n')
             file.write('        dataSets:\n')
-            file.write('          data_set_1: RUNNING\n')
-            file.write('      output_2:\n')
+            file.write('          - id: data_set_1\n')
+            file.write('            status: RUNNING\n')
+            file.write('      - id: output_2\n')
             file.write('        status: RUNNING\n')
             file.write('        curves:\n')
-            file.write('          curve_1: RUNNING\n')
-            file.write('      output_3:\n')
+            file.write('          - id: curve_1\n')
+            file.write('            status: RUNNING\n')
+            file.write('      - id: output_3\n')
             file.write('        status: RUNNING\n')
             file.write('        surfaces:\n')
-            file.write('          surface_1: RUNNING\n')
+            file.write('          - id: surface_1\n')
+            file.write('            status: RUNNING\n')
         with self.assertWarnsRegex(TestCaseWarning, 'is not valid. By the end of the execution'):
             self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 

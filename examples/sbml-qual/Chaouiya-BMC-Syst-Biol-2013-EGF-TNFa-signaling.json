@@ -7,9 +7,16 @@
   }],
   "expectedReports": [{
     "id": "simulation.sedml/report",
-    "dataSets": ["time", "egf", "erk", "nfkb", "tnfa"],
+    "dataSets": [
+      {"id": "data_set_time", "label": "time"},
+      {"id": "data_set_egf", "label": "egf"},
+      {"id": "data_set_erk", "label": "erk"},
+      {"id": "data_set_nfkb", "label": "nfkb"},
+      {"id": "data_set_tnfa", "label": "tnfa"}
+    ],
     "points": [21],
     "values": [{
+      "id": "data_set_time",
       "label": "time",
       "value": {
         "0": 0,

@@ -7,9 +7,20 @@
   }],
   "expectedReports": [{
     "id": "test.sedml/report",
-    "dataSets": ["time", "Atot", "Btot", "GA00tot", "GA01tot", "GA10tot", "GB00tot", "GB01tot", "GB10tot"],
+    "dataSets": [
+      {"id": "data_set_time", "label": "time"},
+      {"id": "data_set_Atot", "label": "Atot"},
+      {"id": "data_set_Btot", "label": "Btot"},
+      {"id": "data_set_GA00tot", "label": "GA00tot"},
+      {"id": "data_set_GA01tot", "label": "GA01tot"},
+      {"id": "data_set_GA10tot", "label": "GA10tot"},
+      {"id": "data_set_GB00tot", "label": "GB00tot"},
+      {"id": "data_set_GB01tot", "label": "GB01tot"},
+      {"id": "data_set_GB10tot", "label": "GB10tot"}
+    ],
     "points": [101],
     "values": [{
+      "id": "data_set_time",
       "label": "time",
       "value": {
         "0": 0.0,
