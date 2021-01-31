@@ -1,5 +1,6 @@
 from biosimulators_test_suite import exec_gh_action
 from biosimulators_test_suite import exec_core
+from biosimulators_test_suite.config import Config
 from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
 from biosimulators_test_suite.warnings import TestCaseWarning
@@ -282,19 +283,19 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             def post(self, url, json=None, headers=None):
                 self.n_post = self.n_post + 1
                 if self.n_post < 3:
-                    self.parent.assertEqual(url, self.action.BIOSIMULATORS_AUTH_ENDPOINT)
+                    self.parent.assertEqual(url, Config().biosimulators_auth_endpoint)
                     self.parent.assertEqual(headers, None)
                     self.parent.assertIn('grant_type', json)
                     return mock.Mock(raise_for_status=lambda: None, json=lambda: {'token_type': 'Bearer', 'access_token': '******'})
                 else:
-                    self.parent.assertEqual(url, action.BIOSIMULATORS_API_ENDPOINT + 'simulators')
+                    self.parent.assertEqual(url, Config().biosimulators_api_endpoint + 'simulators')
                     self.parent.assertEqual(headers, {'Authorization': 'Bearer ******'})
                     self.parent.assertEqual(json, {'id': 'tellurium', 'version': '2.1.6'})
                     return mock.Mock(raise_for_status=lambda: None)
 
             def put(self, url, json=None, headers=None):
                 self.n_put = self.n_put + 1
-                self.parent.assertEqual(url, action.BIOSIMULATORS_API_ENDPOINT + 'simulators/tellurium/2.1.6')
+                self.parent.assertEqual(url, Config().biosimulators_api_endpoint + 'simulators/tellurium/2.1.6')
                 self.parent.assertEqual(json, {'id': 'tellurium', 'version': '2.1.6'})
                 return mock.Mock(raise_for_status=lambda: None)
 
@@ -506,7 +507,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(docker_mock.local_images, set([
             'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
         ]))
-        self.assertEqual(requests_mock.issue_assignees, set(exec_gh_action.ValidateCommitSimulatorGitHubAction.CURATOR_GH_IDS))
+        self.assertEqual(requests_mock.issue_assignees, set(Config().biosimulators_curator_gh_ids))
 
         # validate specs and image of valid new simulator, previous run failed and was not approved
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -527,7 +528,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(docker_mock.local_images, set([
             'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
         ]))
-        self.assertEqual(requests_mock.issue_assignees, set(exec_gh_action.ValidateCommitSimulatorGitHubAction.CURATOR_GH_IDS))
+        self.assertEqual(requests_mock.issue_assignees, set(Config().biosimulators_curator_gh_ids))
 
         # validate specs and image of valid new simulator, previous run passed and was approved
         requests_mock, docker_mock, validation_run_results = self._build_run_mock_objs(
@@ -681,28 +682,28 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                     }
                 elif url == 'https://api.github.com/repos/biosimulators/Biosimulators/issues/11/labels':
                     response = [{'name': label} for label in self.issue_labels]
-                elif url == exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators/tellurium':
+                elif url == Config().biosimulators_api_endpoint + 'simulators/tellurium':
                     response = self.simulator_versions
                 else:
                     raise ValueError('Invalid url: {}'.format(url))
                 return mock.Mock(raise_for_status=lambda: None, json=lambda: response)
 
             def post(self, url, json=None, auth=None, headers=None):
-                if url == exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_AUTH_ENDPOINT:
+                if url == Config().biosimulators_auth_endpoint:
                     error = None
                     response = {'token_type': 'Bearer', 'access_token': '******'}
-                elif url == exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators':
+                elif url == Config().biosimulators_api_endpoint + 'simulators':
                     self.simulator_versions.append(json)
                     error = None
                     response = None
-                elif url == exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators/validate':
+                elif url == Config().biosimulators_api_endpoint + 'simulators/validate':
                     if self.specs_valid:
                         error = None
                         response = None
                     else:
                         error = 'Specs are invalid'
                         response = {'error': [{'title': 'ValidationError', 'status': 400, 'detail': 'Specs are invalid'}]}
-                elif url == exec_gh_action.ValidateCommitSimulatorGitHubAction.RUNBIOSIMULATIONS_API_ENDPOINT + 'images/refresh':
+                elif url == Config().runbiosimulations_api_endpoint + 'images/refresh':
                     self.refreshed_images.append(json)
                     error = None
                     response = None
@@ -740,7 +741,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                 return mock.Mock(raise_for_status=lambda: None, json=lambda: response)
 
             def put(self, url, json=None, auth=None, headers=None):
-                if url.startswith(exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators/tellurium/'):
+                if url.startswith(Config().biosimulators_api_endpoint + 'simulators/tellurium/'):
                     for i_version, version in enumerate(self.simulator_versions):
                         if version['version'] == json['version']:
                             self.simulator_versions[i_version] = json
