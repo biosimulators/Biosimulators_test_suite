@@ -72,7 +72,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         'https://api.biosimulators.org/')
     RUNBIOSIMULATIONS_API_ENDPOINT = os.getenv(
         'RUNBIOSIMULATIONS_API_ENDPOINT',
-        'https://run.api.biosimulations.dev/')
+        'https://run.api.biosimulations.org/')
     DOCKER_REGISTRY_URL = 'ghcr.io'
     DOCKER_REGISTRY_IMAGE_URL_PATTERN = 'ghcr.io/biosimulators/{}:{}'
     DEFAULT_SPECIFICATIONS_VERSION = '1.0.0'
