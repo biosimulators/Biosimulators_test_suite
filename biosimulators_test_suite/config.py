@@ -116,7 +116,7 @@ class Config(object):
         if biosimulators_curator_gh_ids is None:
             ids = os.getenv('BIOSIMULATORS_CURATOR_GH_IDS', 'jonrkarr').strip()
             if ids:
-                self.biosimulators_curator_gh_ids = [id.strip() for id in ids]
+                self.biosimulators_curator_gh_ids = [id.strip() for id in ids.split(',')]
             else:
                 self.biosimulators_curator_gh_ids = []
         else:
