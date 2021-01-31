@@ -1,4 +1,4 @@
-from biosimulators_test_suite.exceptions import InvalidOutputsException
+from biosimulators_test_suite.exceptions import InvalidOutputsException, SkippedTestCaseException
 from biosimulators_test_suite.test_case import sedml
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject, SyntheticCombineArchiveTestCase
 from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, InvalidOutputsWarning, TestCaseWarning
@@ -89,7 +89,7 @@ class SedmlTestCaseTest(unittest.TestCase):
                 ]
             }
             for location, doc in sed_docs.items():
-                if case.is_curated_sed_doc_suitable_for_building_synthetic_archive(specs, doc):
+                if case.is_curated_sed_doc_suitable_for_building_synthetic_archive(specs, doc, location):
                     return location
             return None
 
@@ -211,7 +211,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         # no curated cases to use
         case = sedml.SimulatorSupportsMultipleTasksPerSedDocument(
             published_projects_test_cases=[])
-        with self.assertWarnsRegex(IgnoredTestCaseWarning, 'No curated COMBINE/OMEX archives are available'):
+        with self.assertRaisesRegex(SkippedTestCaseException, 'No curated COMBINE/OMEX archives are available'):
             case.eval(specs)
 
     def test_SimulatorSupportsMultipleReportsPerSedDocument_eval_outputs(self):
@@ -291,7 +291,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         self.assertFalse(case.is_curated_sed_task_suitable_for_building_synthetic_archive(None, Task(
             simulation=UniformTimeCourseSimulation(initial_time=10.),
         )))
-        self.assertFalse(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc))
+        self.assertFalse(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc, None))
         self.assertFalse(case.is_curated_archive_suitable_for_building_synthetic_archive(None, archive, {'./a.sedml': doc}))
 
         doc.tasks.append(Task(model=doc.models[0], simulation=doc.simulations[0]))
@@ -313,8 +313,8 @@ class SedmlTestCaseTest(unittest.TestCase):
         sed_docs = {'./a.sedml': doc}
 
         self.assertTrue(case.is_curated_sed_task_suitable_for_building_synthetic_archive(None, doc.tasks[0]))
-        self.assertTrue(case.is_curated_sed_report_suitable_for_building_synthetic_archive(None, doc.outputs[0]))
-        self.assertTrue(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc))
+        self.assertTrue(case.is_curated_sed_report_suitable_for_building_synthetic_archive(None, doc.outputs[0], None))
+        self.assertTrue(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc, None))
         self.assertTrue(case.is_curated_archive_suitable_for_building_synthetic_archive(None, archive, sed_docs))
 
         case.build_synthetic_archive(None, archive, None, sed_docs)
@@ -332,7 +332,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         self.assertEqual(doc.outputs[0].data_sets[-1].id, '__data_set_time__')
 
         doc.outputs[0].data_sets = []
-        self.assertFalse(case.is_curated_sed_report_suitable_for_building_synthetic_archive(None, doc.outputs[0]))
+        self.assertFalse(case.is_curated_sed_report_suitable_for_building_synthetic_archive(None, doc.outputs[0], None))
 
     def test_SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes_eval_outputs(self):
         case = sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes()
@@ -383,7 +383,7 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator',
                         side_effect=Exception('Simulation failed')):
-            with self.assertWarns(TestCaseWarning):
+            with self.assertRaises(SkippedTestCaseException):
                 self.assertFalse(case.eval(specs))
 
     def test_SimulatorProducesLinear2DPlots_eval_outputs(self):
@@ -400,7 +400,7 @@ class SedmlTestCaseTest(unittest.TestCase):
             ],
         )
 
-        with self.assertWarnsRegex(InvalidOutputsWarning, 'did not produce plots'):
+        with self.assertRaisesRegex(SkippedTestCaseException, 'did not produce plots'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         plots_path = os.path.join(self.dirname, get_config().PLOTS_PATH)
@@ -451,6 +451,9 @@ class SedmlTestCaseTest(unittest.TestCase):
     def test_SimulatorProducesPlots(self):
         specs = {'image': {'url': self.IMAGE}}
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+        curated_case.from_json(os.path.dirname(
+            self.CURATED_ARCHIVE_FILENAME),
+            os.path.basename(self.CURATED_ARCHIVE_FILENAME).replace('.omex', '.json'))
 
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorProducesLinear2DPlots(
@@ -461,13 +464,15 @@ class SedmlTestCaseTest(unittest.TestCase):
             published_projects_test_cases=[curated_case])
         case.eval(specs)
 
-        case = sedml.SimulatorProducesLinear3DPlots(
-            published_projects_test_cases=[curated_case])
-        case.eval(specs)
+        with self.assertRaises(SkippedTestCaseException):
+            case = sedml.SimulatorProducesLinear3DPlots(
+                published_projects_test_cases=[curated_case])
+            case.eval(specs)
 
-        case = sedml.SimulatorProducesLogarithmic3DPlots(
-            published_projects_test_cases=[curated_case])
-        case.eval(specs)
+        with self.assertRaises(SkippedTestCaseException):
+            case = sedml.SimulatorProducesLogarithmic3DPlots(
+                published_projects_test_cases=[curated_case])
+            case.eval(specs)
 
         case = sedml.SimulatorProducesMultiplePlots(
             published_projects_test_cases=[curated_case])
@@ -584,7 +589,7 @@ class SedmlTestCaseTest(unittest.TestCase):
             'image': {'url': self.IMAGE},
             'algorithms': [
                 {
-                    'kisaoId': {'id': 'KISAO_0000560'},
+                    'kisaoId': {'id': 'KISAO_0000029'},
                     'dependentDimensions': [
                         {'namespace': 'SIO', 'id': 'SIO_time'},
                     ]
@@ -592,6 +597,9 @@ class SedmlTestCaseTest(unittest.TestCase):
             ],
         }
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+        curated_case.from_json(os.path.dirname(
+            self.CURATED_ARCHIVE_FILENAME),
+            os.path.basename(self.CURATED_ARCHIVE_FILENAME).replace('.omex', '.json'))
         case = sedml.SimulatorProducesReportsWithCuratedNumberOfDimensions(
             published_projects_test_cases=[curated_case])
         case.eval(specs)

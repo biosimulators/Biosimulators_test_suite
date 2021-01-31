@@ -6,14 +6,13 @@
 :License: MIT
 """
 
-from ..warnings import TestCaseWarning
+from ..exceptions import InvalidOutputsException, SkippedTestCaseException
 from .published_project import SingleMasterSedDocumentCombineArchiveTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
 from biosimulators_utils.config import get_config
 from biosimulators_utils.log.data_model import Status
 from biosimulators_utils.sedml.data_model import SedDocument, Report  # noqa: F401
 import os
-import warnings
 import yaml
 
 __all__ = [
@@ -47,8 +46,7 @@ class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SingleMasterSedDo
                 'Simulators are encouraged to stream information about their execution status.\n\n'
                 'More information: https://biosimulators.org/standards/status'
             )
-            warnings.warn(msg, TestCaseWarning)
-            return False
+            raise SkippedTestCaseException(msg)
 
         try:
             with open(log_path, 'r') as file:
@@ -56,8 +54,7 @@ class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SingleMasterSedDo
         except Exception as exception:
             msg = 'The execution status report produced by the simulator is not valid:\n\n  {}'.format(
                 str(exception).replace('\n', '\n  '))
-            warnings.warn(msg, TestCaseWarning)
-            return False
+            raise InvalidOutputsException(msg)
 
         self._status_valid = True
 
@@ -90,8 +87,7 @@ class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SingleMasterSedDo
         except Exception as exception:
             msg = 'The execution status report produced by the simulator is not valid:\n\n  {}'.format(
                 str(exception).replace('\n', '\n  '))
-            warnings.warn(msg, TestCaseWarning)
-            return False
+            raise InvalidOutputsException(msg)
 
         if not self._status_valid:
             msg = (
@@ -100,7 +96,6 @@ class SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(SingleMasterSedDo
                 'the archive, each SED document, and each SED element should be '
                 '`SUCCEEDED`, `SKIPPED`, or `FAILED`.'
             )
-            warnings.warn(msg, TestCaseWarning)
-            return False
+            raise InvalidOutputsException(msg)
 
         return True

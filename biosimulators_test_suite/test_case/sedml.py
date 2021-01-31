@@ -5,7 +5,7 @@
 :Copyright: 2020, Center for Reproducible Biomedical Modeling
 :License: MIT
 """
-from ..exceptions import InvalidOutputsException
+from ..exceptions import InvalidOutputsException, SkippedTestCaseException
 from ..warnings import InvalidOutputsWarning
 from .published_project import SingleMasterSedDocumentCombineArchiveTestCase, UniformTimeCourseTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
@@ -458,7 +458,7 @@ class SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes(UniformTimeCour
     """ Test that a simulator supports multiple time courses with non-zero initial times """
 
     @property
-    def report_error_as_warning(self):
+    def report_error_as_skip(self):
         return True
 
     def modify_simulation(self, simulation):
@@ -537,8 +537,7 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
         """
         plots_path = os.path.join(outputs_dir, get_config().PLOTS_PATH)
         if not os.path.isfile(plots_path):
-            warnings.warn('Simulator did not produce plots', InvalidOutputsWarning)
-            return
+            raise SkippedTestCaseException('Simulator did not produce plots')
 
         tempdir = tempfile.mkdtemp()
         try:
@@ -582,22 +581,25 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
 class SimulatorProduces2DPlotsTestCase(SimulatorProducesPlotsTestCase):
     """ Test that a simulator produces 2D plots """
 
-    def is_curated_sed_report_suitable_for_building_synthetic_archive(self, specifications, report):
+    def is_curated_sed_report_suitable_for_building_synthetic_archive(self, specifications, report, sed_doc_location):
         """ Determine if a SED report is suitable for testing
 
         Args:
             specifications (:obj:`dict`): specifications of the simulator to validate
             report (:obj:`Report`): SED report in curated archive
+            sed_doc_location (:obj:`str`): location of the SED document within its parent COMBINE/OMEX archive
 
         Returns:
             :obj:`bool`: whether the report is suitable for testing
         """
         if not super(SimulatorProduces2DPlotsTestCase, self).is_curated_sed_report_suitable_for_building_synthetic_archive(
-                specifications, report):
+                specifications, report, sed_doc_location):
             return False
 
+        sed_doc_id = os.path.relpath(sed_doc_location, '.')
         expected_report = next((expected_report for expected_report in self.published_projects_test_case.expected_reports
-                                if expected_report.id == report.id), None)
+                                if expected_report.id == os.path.join(sed_doc_id, report.id)), None)
+
         if expected_report is None:
             return False
 
@@ -633,22 +635,24 @@ class SimulatorProduces2DPlotsTestCase(SimulatorProducesPlotsTestCase):
 class SimulatorProduces3DPlotsTestCase(SimulatorProducesPlotsTestCase):
     """ Test that a simulator produces 3D plots """
 
-    def is_curated_sed_report_suitable_for_building_synthetic_archive(self, specifications, report):
+    def is_curated_sed_report_suitable_for_building_synthetic_archive(self, specifications, report, sed_doc_location):
         """ Determine if a SED report is suitable for testing
 
         Args:
             specifications (:obj:`dict`): specifications of the simulator to validate
             report (:obj:`Report`): SED report in curated archive
+            sed_doc_location (:obj:`str`): location of the SED document within its parent COMBINE/OMEX archive
 
         Returns:
             :obj:`bool`: whether the report is suitable for testing
         """
         if not super(SimulatorProduces3DPlotsTestCase, self).is_curated_sed_report_suitable_for_building_synthetic_archive(
-                specifications, report):
+                specifications, report, sed_doc_location):
             return False
 
+        sed_doc_id = os.path.relpath(sed_doc_location, '.')
         expected_report = next((expected_report for expected_report in self.published_projects_test_case.expected_reports
-                                if expected_report.id == report.id), None)
+                                if expected_report.id == os.path.join(sed_doc_id, report.id)), None)
         if expected_report is None:
             return False
 

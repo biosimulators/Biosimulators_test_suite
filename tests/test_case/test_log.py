@@ -1,3 +1,4 @@
+from biosimulators_test_suite.exceptions import InvalidOutputsException, SkippedTestCaseException
 from biosimulators_test_suite.test_case import log
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
 from biosimulators_test_suite.warnings import TestCaseWarning
@@ -26,20 +27,20 @@ class LogTestCaseTest(unittest.TestCase):
     def test_SimulatorReportsTheStatusOfTheExecutionOfCombineArchives_eval_outputs(self):
         case = log.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives()
 
-        with self.assertWarnsRegex(TestCaseWarning, 'did not export information about the status'):
+        with self.assertRaisesRegex(SkippedTestCaseException, 'did not export information about the status'):
             self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
         log_path = os.path.join(self.dirname, get_config().LOG_PATH)
         with open(log_path, 'w') as file:
             file.write('{"a": 2')
-        with self.assertWarnsRegex(TestCaseWarning, 'is not valid'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'is not valid'):
             self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
         with open(log_path, 'w') as file:
             file.write('status: RUNNING\n')
             file.write('sedDocuments:\n')
             file.write('  doc_1:\n')
-        with self.assertWarnsRegex(TestCaseWarning, 'is not valid'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'is not valid'):
             self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
         with open(log_path, 'w') as file:
@@ -63,7 +64,7 @@ class LogTestCaseTest(unittest.TestCase):
             file.write('            status: RUNNING\n')
             file.write('      - id: output_3\n')
             file.write('        status: RUNNING\n')
-        with self.assertWarnsRegex(TestCaseWarning, 'is not valid'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'is not valid'):
             self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
         with open(log_path, 'w') as file:
@@ -90,7 +91,7 @@ class LogTestCaseTest(unittest.TestCase):
             file.write('        surfaces:\n')
             file.write('          - id: surface_1\n')
             file.write('            status: RUNNING\n')
-        with self.assertWarnsRegex(TestCaseWarning, 'is not valid. By the end of the execution'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'is not valid. By the end of the execution'):
             self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
     def test_SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(self):

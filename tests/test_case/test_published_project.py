@@ -331,7 +331,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
             SimulatorCanExecutePublishedProject()
         ])
 
-        with self.assertWarnsRegex(IgnoredTestCaseWarning, 'No curated COMBINE/OMEX archives are available'):
+        with self.assertRaisesRegex(SkippedTestCaseException, 'No curated COMBINE/OMEX archives are available'):
             with mock.patch.object(CombineArchiveReader, 'run', return_value=CombineArchive()):
                 case.eval(None)
 

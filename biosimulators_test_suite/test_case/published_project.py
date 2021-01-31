@@ -10,7 +10,7 @@ from ..config import Config
 from ..data_model import (TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedDataSet, ExpectedSedPlot,
                           AlertType, OutputMedium)
 from ..exceptions import InvalidOutputsException, SkippedTestCaseException
-from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning, TestCaseWarning
+from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning
 from .utils import are_array_shapes_equivalent
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContentFormatPattern  # noqa: F401
 from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
@@ -473,10 +473,8 @@ class SyntheticCombineArchiveTestCase(TestCase):
             shutil.rmtree(shared_archive_dir)
 
         if not suitable_curated_archive:
-            warnings.warn('No curated COMBINE/OMEX archives are available to generate archives for testing',
-                          IgnoredTestCaseWarning)
             shutil.rmtree(temp_dir)
-            return False
+            raise SkippedTestCaseException('No curated COMBINE/OMEX archives are available to generate archives for testing')
 
         synthetic_archive_filename = os.path.join(temp_dir, 'archive.omex')
         synthetic_archive, synthetic_sed_docs = self.build_synthetic_archive(
@@ -513,32 +511,35 @@ class SyntheticCombineArchiveTestCase(TestCase):
                 archive for testing
         """
         for location, sed_doc in sed_docs.items():
-            if self.is_curated_sed_doc_suitable_for_building_synthetic_archive(specifications, sed_doc):
+            if self.is_curated_sed_doc_suitable_for_building_synthetic_archive(specifications, sed_doc, location):
                 return True
         return False
 
-    def is_curated_sed_doc_suitable_for_building_synthetic_archive(self, specifications, sed_doc):
+    def is_curated_sed_doc_suitable_for_building_synthetic_archive(self, specifications, sed_doc, sed_doc_location):
         """ Determine if a SED document is suitable for testing
 
         Args:
             specifications (:obj:`dict`): specifications of the simulator to validate
             sed_doc (:obj:`SedDocument`): SED document in curated archive
+            sed_doc_location (:obj:`str`): location of the SED document within its parent COMBINE/OMEX archive
 
         Returns:
             :obj:`bool`: whether the SED document is suitable for testing
         """
         for output in sed_doc.outputs:
-            if isinstance(output, Report) and self.is_curated_sed_report_suitable_for_building_synthetic_archive(specifications, output):
+            if isinstance(output, Report) and self.is_curated_sed_report_suitable_for_building_synthetic_archive(
+                    specifications, output, sed_doc_location):
                 return True
 
         return False
 
-    def is_curated_sed_report_suitable_for_building_synthetic_archive(self, specifications, report):
+    def is_curated_sed_report_suitable_for_building_synthetic_archive(self, specifications, report, sed_doc_location):
         """ Determine if a SED report is suitable for testing
 
         Args:
             specifications (:obj:`dict`): specifications of the simulator to validate
             report (:obj:`Report`): SED report in curated archive
+            sed_doc_location (:obj:`str`): location of the SED document within its parent COMBINE/OMEX archive
 
         Returns:
             :obj:`bool`: whether the report is suitable for testing
@@ -757,7 +758,7 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
 
         # get a suitable SED document to modify
         for doc_location, doc in curated_sed_docs.items():
-            if self.is_curated_sed_doc_suitable_for_building_synthetic_archive(specifications, doc):
+            if self.is_curated_sed_doc_suitable_for_building_synthetic_archive(specifications, doc, doc_location):
                 break
         doc_content = next(content for content in curated_archive.contents if content.location == doc_location)
 
@@ -796,7 +797,7 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
             key_report = None
             key_task = None
             for report in doc.outputs:
-                if self.is_curated_sed_report_suitable_for_building_synthetic_archive(specifications, report):
+                if self.is_curated_sed_report_suitable_for_building_synthetic_archive(specifications, report, doc_location):
                     for data_set in report.data_sets:
                         task = data_set.data_generator.variables[0].task
                         if self.is_curated_sed_task_suitable_for_building_synthetic_archive(specifications, task):
@@ -955,7 +956,7 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
         pass  # pragma: no cover
 
     @property
-    def report_error_as_warning(self):
+    def report_error_as_skip(self):
         return False
 
     def eval(self, specifications):
@@ -973,9 +974,8 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
         try:
             return_value = super(UniformTimeCourseTestCase, self).eval(specifications)
         except Exception as exception:
-            if self.report_error_as_warning:
-                warnings.warn(str(exception), TestCaseWarning)
-                return_value = False
+            if self.report_error_as_skip:
+                raise SkippedTestCaseException(str(exception))
             else:
                 raise
 
