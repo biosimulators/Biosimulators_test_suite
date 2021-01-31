@@ -11,6 +11,7 @@ from .data_model import OutputMedium
 from .exec_core import SimulatorValidator
 from .results.data_model import TestCaseResult, TestCaseResultType, TestResultsReport  # noqa: F401
 from .results.io import write_test_results
+from biosimulators_utils.biosimulations.utils import validate_biosimulations_api_response
 from biosimulators_utils.gh_action.data_model import Comment, GitHubActionCaughtError  # noqa: F401
 from biosimulators_utils.gh_action.core import GitHubAction, GitHubActionErrorHandling
 from biosimulators_utils.image import get_docker_image
@@ -398,7 +399,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                                      'simulator': specifications['id'],
                                      'version': specifications['version'],
                                  })
-        response.raise_for_status()
+        validate_biosimulations_api_response(response, 'A Singularity image could not be generated for the Docker image')
 
     def post_entry_to_biosimulators_api(self, specifications, existing_version_specifications):
         """ Post the simulation to the BioSimulators database
@@ -414,11 +415,14 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         if update_simulator:
             endpoint = '{}simulators/{}/{}'.format(self.BIOSIMULATORS_API_ENDPOINT, specifications['id'], specifications['version'])
             requests_method = requests.put
+            method = 'updated'
         else:
             endpoint = '{}simulators'.format(self.BIOSIMULATORS_API_ENDPOINT)
             requests_method = requests.post
+            method = 'added'
         response = requests_method(endpoint, headers=auth_headers, json=specifications)
-        response.raise_for_status()
+        validate_biosimulations_api_response(response, 'Simulation tool `{}` could not be {} to the BioSimulators registry.'.format(
+            specifications['id'], method))
 
     def get_auth_headers_for_biosimulations_api(self, audience):
         """ Get authorization headers for using one of the BioSimulations REST APIs

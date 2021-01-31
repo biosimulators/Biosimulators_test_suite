@@ -361,14 +361,14 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             validate_image=False, commit_simulator=False,
             previous_run_valid=None, manually_approved=False,
             specs_valid=False, singularity_error=False, validation_state='passes')
-        with self.assertRaisesRegex(ValueError, 'Specifications must be adhere to the BioSimulators schema'):
+        with self.assertRaisesRegex(requests.RequestException, "specifications of simulation tools must adhere to BioSimulators' schema"):
             self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'open')
         self.assertEqual(requests_mock.simulator_versions, [])
         self.assertEqual(requests_mock.refreshed_images, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Invalid']))
         self.assertEqual(len(requests_mock.issue_messages), 2)
-        self.assertRegex(requests_mock.issue_messages[-1], 'Specifications must be adhere to the BioSimulators schema')
+        self.assertRegex(requests_mock.issue_messages[-1], "specifications of simulation tools must adhere to BioSimulators' schema")
         self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
         self.assertEqual(docker_mock.local_images, set([]))
         self.assertEqual(requests_mock.issue_assignees, set())
@@ -698,9 +698,10 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                 elif url == exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT + 'simulators/validate':
                     if self.specs_valid:
                         error = None
+                        response = None
                     else:
                         error = 'Specs are invalid'
-                    response = None
+                        response = {'error': [{'title': 'ValidationError', 'status': 400, 'detail': 'Specs are invalid'}]}
                 elif url == exec_gh_action.ValidateCommitSimulatorGitHubAction.RUNBIOSIMULATIONS_API_ENDPOINT + 'images/refresh':
                     self.refreshed_images.append(json)
                     error = None
