@@ -119,6 +119,47 @@ class SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports(SingleMast
         return not has_warnings
 
 
+class SimulatorCanResolveModelSourcesDefinedByUriFragments(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
+    """ Test that a simulator supports changes to the attributes of model elements
+    """
+
+    REPORT_ERROR_AS_SKIP = True
+
+    def __init__(self, *args, **kwargs):
+        super(SimulatorCanResolveModelSourcesDefinedByUriFragments, self).__init__(*args, **kwargs)
+        self._types_of_model_changes_to_keep = ()
+
+    def build_synthetic_archive(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
+        """ Generate a synthetic archive with a copy of each task and each report
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            curated_archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            curated_archive_dir (:obj:`str`): directory with the contents of the curated COMBINE/OMEX archive
+            curated_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
+                SED documents in curated archive
+
+        Returns:
+            :obj:`tuple`:
+
+                * :obj:`CombineArchive`: synthetic COMBINE/OMEX archive for testing the simulator
+                * :obj:`dict` of :obj:`str` to :obj:`SedDocument`: map from locations to
+                  SED documents in synthetic archive
+        """
+        curated_archive, curated_sed_docs = super(SimulatorCanResolveModelSourcesDefinedByUriFragments, self).build_synthetic_archive(
+            specifications, curated_archive, curated_archive_dir, curated_sed_docs)
+
+        # change model source to URI fragment
+        doc = list(curated_sed_docs.values())[0]
+
+        model = doc.models[0]
+        source_model = Model(id='__source__', source=model.source, language=model.language)
+        doc.models.append(source_model)
+        model.source = '#' + source_model.id
+
+        return (curated_archive, curated_sed_docs)
+
+
 class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
     """ Test that a simulator supports changes to the attributes of model elements
     """
@@ -457,9 +498,7 @@ class SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes(UniformTime
 class SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes(UniformTimeCourseTestCase):
     """ Test that a simulator supports multiple time courses with non-zero initial times """
 
-    @property
-    def report_error_as_skip(self):
-        return True
+    REPORT_ERROR_AS_SKIP = True
 
     def modify_simulation(self, simulation):
         """ Modify a simulation

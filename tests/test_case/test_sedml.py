@@ -478,6 +478,15 @@ class SedmlTestCaseTest(unittest.TestCase):
             published_projects_test_cases=[curated_case])
         case.eval(specs)
 
+    def test_SimulatorCanResolveModelSourcesDefinedByUriFragments(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        # test synthetic case generated and used to test simulator
+        case = sedml.SimulatorCanResolveModelSourcesDefinedByUriFragments(
+            published_projects_test_cases=[curated_case])
+        case.eval(specs)
+
     def test_SimulatorSupportsModelAttributeChanges(self):
         specs = {'image': {'url': self.IMAGE}}
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)

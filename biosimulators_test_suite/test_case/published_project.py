@@ -419,6 +419,8 @@ class SyntheticCombineArchiveTestCase(TestCase):
             curated COMBINE/OMEX archives that can be used to generate example archives for testing
     """
 
+    REPORT_ERROR_AS_SKIP = False
+
     def __init__(self, id=None, name=None, description=None, output_medium=OutputMedium.console, published_projects_test_cases=None):
         """
         Args:
@@ -433,6 +435,28 @@ class SyntheticCombineArchiveTestCase(TestCase):
         self.published_projects_test_cases = published_projects_test_cases or []
 
     def eval(self, specifications):
+        """ Evaluate a simulator's performance on a test case
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+
+        Returns:
+            :obj:`object`: data returned by :obj:`eval_outputs`
+
+        Raises:
+            :obj:`Exception`: if the simulator did not pass the test case
+        """
+        try:
+            return_value = self._eval(specifications)
+        except Exception as exception:
+            if self.REPORT_ERROR_AS_SKIP:
+                raise SkippedTestCaseException(str(exception))
+            else:
+                raise
+
+        return return_value
+
+    def _eval(self, specifications):
         """ Evaluate a simulator's performance on a test case
 
         Args:
@@ -954,32 +978,6 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
             simulation (:obj:`UniformTimeCourseSimulation`): simulation
         """
         pass  # pragma: no cover
-
-    @property
-    def report_error_as_skip(self):
-        return False
-
-    def eval(self, specifications):
-        """ Evaluate a simulator's performance on a test case
-
-        Args:
-            specifications (:obj:`dict`): specifications of the simulator to validate
-
-        Returns:
-            :obj:`object`: data returned by :obj:`eval_outputs`
-
-        Raises:
-            :obj:`Exception`: if the simulator did not pass the test case
-        """
-        try:
-            return_value = super(UniformTimeCourseTestCase, self).eval(specifications)
-        except Exception as exception:
-            if self.report_error_as_skip:
-                raise SkippedTestCaseException(str(exception))
-            else:
-                raise
-
-        return return_value
 
     def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
         """ Test that the expected outputs were created for the synthetic archive
