@@ -636,7 +636,7 @@ class SimulatorProduces2DPlotsTestCase(SimulatorProducesPlotsTestCase):
             return False
 
         sed_doc_id = os.path.relpath(sed_doc_location, '.')
-        expected_report = next((expected_report for expected_report in self.published_projects_test_case.expected_reports
+        expected_report = next((expected_report for expected_report in self._published_projects_test_case.expected_reports
                                 if expected_report.id == os.path.join(sed_doc_id, report.id)), None)
 
         if expected_report is None:
@@ -690,7 +690,7 @@ class SimulatorProduces3DPlotsTestCase(SimulatorProducesPlotsTestCase):
             return False
 
         sed_doc_id = os.path.relpath(sed_doc_location, '.')
-        expected_report = next((expected_report for expected_report in self.published_projects_test_case.expected_reports
+        expected_report = next((expected_report for expected_report in self._published_projects_test_case.expected_reports
                                 if expected_report.id == os.path.join(sed_doc_id, report.id)), None)
         if expected_report is None:
             return False

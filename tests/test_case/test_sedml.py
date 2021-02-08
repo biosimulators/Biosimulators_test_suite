@@ -7,11 +7,11 @@ from biosimulators_utils.archive.io import ArchiveWriter
 from biosimulators_utils.config import get_config
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContent, CombineArchiveContentFormat
 from biosimulators_utils.report.data_model import DataSetResults
-from biosimulators_utils.report.io import ReportWriter
+from biosimulators_utils.report.io import ReportWriter, ReportReader
 from biosimulators_utils.sedml.data_model import (SedDocument, Task, Report, DataSet,
                                                   DataGenerator, Variable, UniformTimeCourseSimulation,
                                                   Algorithm, Symbol, Model,
-                                                  Plot2D, Curve)
+                                                  Plot2D, Curve, Plot3D, Surface, AxisScale)
 from biosimulators_utils.simulator.io import read_simulator_specs
 from unittest import mock
 import numpy
@@ -70,6 +70,17 @@ class SedmlTestCaseTest(unittest.TestCase):
         with self.assertWarnsRegex(InvalidOutputsWarning, 'extra reports'):
             self.assertFalse(case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname))
 
+        with self.assertWarnsRegex(InvalidOutputsWarning, 'extra data sets'):
+            _report_reader_run = ReportReader().run
+
+            def report_reader_run(output, outputs_dir, report_id):
+                report = _report_reader_run(output, outputs_dir, report_id)
+                report['z'] = numpy.array([7, 8, 9])
+                return report
+
+            with mock.patch.object(ReportReader, 'run', side_effect=report_reader_run):
+                self.assertFalse(case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname))
+
     def test_SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports(self):
         specs = {'image': {'url': self.IMAGE}}
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
@@ -94,12 +105,22 @@ class SedmlTestCaseTest(unittest.TestCase):
             return None
 
         good_doc = SedDocument()
-        good_doc.tasks.append(Task(simulation=UniformTimeCourseSimulation(
-            algorithm=Algorithm(kisao_id='KISAO_0000001'),
-            initial_time=0.,
-            output_start_time=0.,
-            output_end_time=10.,
-            number_of_points=10)))
+        good_doc.tasks.append(
+            Task(
+                model=Model(
+                    id='model',
+                    source='model.xml',
+                    language='urn:sedml:language:sbml'
+                ),
+                simulation=UniformTimeCourseSimulation(
+                    algorithm=Algorithm(kisao_id='KISAO_0000001'),
+                    initial_time=0.,
+                    output_start_time=0.,
+                    output_end_time=10.,
+                    number_of_points=10,
+                ),
+            ),
+        )
         good_doc.data_generators.append(
             DataGenerator(
                 variables=[
@@ -134,12 +155,22 @@ class SedmlTestCaseTest(unittest.TestCase):
         }), 'loc-2')
 
         good_doc = SedDocument()
-        good_doc.tasks.append(Task(simulation=UniformTimeCourseSimulation(
-            algorithm=Algorithm(kisao_id='KISAO_0000001'),
-            initial_time=0.,
-            output_start_time=0.,
-            output_end_time=10.,
-            number_of_points=10)))
+        good_doc.tasks.append(
+            Task(
+                model=Model(
+                    id='model',
+                    source='model.xml',
+                    language='urn:sedml:language:sbml'
+                ),
+                simulation=UniformTimeCourseSimulation(
+                    algorithm=Algorithm(kisao_id='KISAO_0000001'),
+                    initial_time=0.,
+                    output_start_time=0.,
+                    output_end_time=10.,
+                    number_of_points=10,
+                ),
+            ),
+        )
         good_doc.data_generators.append(
             DataGenerator(
                 variables=[
@@ -184,6 +215,24 @@ class SedmlTestCaseTest(unittest.TestCase):
             'loc-1': SedDocument(outputs=[Report()]),
             'loc-2': good_doc,
         }), 'loc-2')
+
+        good_doc.tasks[0].model.source = '#'
+        self.assertEqual(get_suitable_sed_doc({
+            'loc-1': SedDocument(outputs=[Report()]),
+            'loc-2': good_doc,
+        }), None)
+
+        good_doc.tasks[0].model.source = None
+        self.assertEqual(get_suitable_sed_doc({
+            'loc-1': SedDocument(outputs=[Report()]),
+            'loc-2': good_doc,
+        }), None)
+
+        good_doc.tasks[0].model = None
+        self.assertEqual(get_suitable_sed_doc({
+            'loc-1': SedDocument(outputs=[Report()]),
+            'loc-2': good_doc,
+        }), None)
 
     def test_SimulatorSupportsMultipleTasksPerSedDocument_eval_outputs(self):
         case = sedml.SimulatorSupportsMultipleTasksPerSedDocument()
@@ -276,7 +325,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         )
 
         doc = SedDocument()
-        doc.models.append(Model())
+        doc.models.append(Model(source='model.xml'))
         doc.simulations.append(
             UniformTimeCourseSimulation(
                 algorithm=Algorithm(),
@@ -290,6 +339,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         self.assertFalse(case.is_curated_sed_task_suitable_for_building_synthetic_archive(None, None))
         self.assertFalse(case.is_curated_sed_task_suitable_for_building_synthetic_archive(None, Task(
             simulation=UniformTimeCourseSimulation(initial_time=10.),
+            model=doc.models[0],
         )))
         self.assertFalse(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc, None))
         self.assertFalse(case.is_curated_archive_suitable_for_building_synthetic_archive(None, archive, {'./a.sedml': doc}))
@@ -386,6 +436,46 @@ class SedmlTestCaseTest(unittest.TestCase):
             with self.assertRaises(SkippedTestCaseException):
                 self.assertFalse(case.eval(specs))
 
+    def test_SimulatorProducesLinear2DPlots_is_curated_sed_report_suitable_for_building_synthetic_archive(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+        curated_case.from_json(os.path.dirname(
+            self.CURATED_ARCHIVE_FILENAME),
+            os.path.basename(self.CURATED_ARCHIVE_FILENAME).replace('.omex', '.json'))
+        case = sedml.SimulatorProducesLinear2DPlots()
+        case._published_projects_test_case = curated_case
+
+        specs = None
+        report = Report(id='__report__')
+        sed_doc_location = 'sim.sedml'
+
+        self.assertFalse(case.is_curated_sed_report_suitable_for_building_synthetic_archive(specs, report, sed_doc_location))
+
+        report.data_sets.append(
+            DataSet(
+                data_generator=DataGenerator(
+                    variables=[
+                        Variable(
+                            task=Task(
+                                model=Model(
+                                    source='model.xml'),
+                                simulation=UniformTimeCourseSimulation(
+                                    initial_time=0.,
+                                    output_start_time=0.,
+                                    output_end_time=10.,
+                                    number_of_points=10,
+                                ),
+                            ),
+                        ),
+                    ],
+                ),
+            ),
+        )
+        self.assertFalse(case.is_curated_sed_report_suitable_for_building_synthetic_archive(specs, report, sed_doc_location))
+
+        sed_doc_location, _, report.id = curated_case.expected_reports[0].id.rpartition('/')
+        self.assertTrue(case.is_curated_sed_report_suitable_for_building_synthetic_archive(specs, report, sed_doc_location))
+
     def test_SimulatorProducesLinear2DPlots_eval_outputs(self):
         case = sedml.SimulatorProducesLinear2DPlots()
 
@@ -447,6 +537,79 @@ class SedmlTestCaseTest(unittest.TestCase):
         archive.files.append(ArchiveFile(archive_path='a.sedml/plot_3.pdf', local_path=plot_3_path))
         ArchiveWriter().run(archive, plots_path)
         case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
+
+    def test_SimulatorProduces3DPlots__axis_scale(self):
+        case = sedml.SimulatorProducesLinear3DPlots()
+        self.assertEqual(case._axis_scale, AxisScale.linear)
+
+        case = sedml.SimulatorProducesLogarithmic3DPlots()
+        self.assertEqual(case._axis_scale, AxisScale.log)
+
+    def test_SimulatorProducesLinear3DPlots_is_curated_sed_report_suitable_for_building_synthetic_archive(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+        curated_case.from_json(os.path.dirname(
+            self.CURATED_ARCHIVE_FILENAME),
+            os.path.basename(self.CURATED_ARCHIVE_FILENAME).replace('.omex', '.json'))
+        case = sedml.SimulatorProducesLinear3DPlots()
+        case._published_projects_test_case = curated_case
+
+        specs = None
+        report = Report(id='__report__')
+        sed_doc_location = 'sim.sedml'
+
+        self.assertFalse(case.is_curated_sed_report_suitable_for_building_synthetic_archive(specs, report, sed_doc_location))
+
+        report.data_sets.append(
+            DataSet(
+                data_generator=DataGenerator(
+                    variables=[
+                        Variable(
+                            task=Task(
+                                model=Model(
+                                    source='model.xml'),
+                                simulation=UniformTimeCourseSimulation(
+                                    initial_time=0.,
+                                    output_start_time=0.,
+                                    output_end_time=10.,
+                                    number_of_points=10,
+                                ),
+                            ),
+                        ),
+                    ],
+                ),
+            ),
+        )
+        self.assertFalse(case.is_curated_sed_report_suitable_for_building_synthetic_archive(specs, report, sed_doc_location))
+
+        sed_doc_location, _, report.id = curated_case.expected_reports[0].id.rpartition('/')
+        self.assertFalse(case.is_curated_sed_report_suitable_for_building_synthetic_archive(specs, report, sed_doc_location))
+
+        curated_case.expected_reports[0].points = (10, 2)
+        self.assertTrue(case.is_curated_sed_report_suitable_for_building_synthetic_archive(specs, report, sed_doc_location))
+
+    def test_SimulatorProducesLinear3DPlots_build_plots(self):
+        case = sedml.SimulatorProducesLinear3DPlots()
+
+        data_generators = [
+            DataGenerator()
+        ]
+        plots = case.build_plots(data_generators)
+        self.assertEqual(len(plots), 1)
+        self.assertTrue(plots[0].is_equal(Plot3D(
+            id='plot_0',
+            surfaces=[
+                Surface(
+                    id='surface_0',
+                    x_data_generator=data_generators[0],
+                    y_data_generator=data_generators[0],
+                    z_data_generator=data_generators[0],
+                    x_scale=AxisScale.linear,
+                    y_scale=AxisScale.linear,
+                    z_scale=AxisScale.linear,
+                ),
+            ]
+        )))
 
     def test_SimulatorProducesPlots(self):
         specs = {'image': {'url': self.IMAGE}}

@@ -417,6 +417,8 @@ class SyntheticCombineArchiveTestCase(TestCase):
         output_medium (:obj:`OutputMedium`): medium the description should be formatted for
         published_projects_test_cases (:obj:`list` of :obj:`SimulatorCanExecutePublishedProject`):
             curated COMBINE/OMEX archives that can be used to generate example archives for testing
+        _published_projects_test_case (:obj:`SimulatorCanExecutePublishedProject`): COMBINE/OMEX archive
+            that is used to generate example archives for testing
     """
 
     REPORT_ERROR_AS_SKIP = False
@@ -433,6 +435,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
         """
         super(SyntheticCombineArchiveTestCase, self).__init__(id=id, name=name, description=description, output_medium=output_medium)
         self.published_projects_test_cases = published_projects_test_cases or []
+        self._published_projects_test_case = None
 
     def eval(self, specifications):
         """ Evaluate a simulator's performance on a test case
@@ -473,7 +476,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
         # read curated archives and find one that is suitable for testing
         suitable_curated_archive = False
         for published_projects_test_case in self.published_projects_test_cases:
-            self.published_projects_test_case = published_projects_test_case
+            self._published_projects_test_case = published_projects_test_case
 
             # read archive
             curated_archive_filename = published_projects_test_case.filename
@@ -612,7 +615,15 @@ class SyntheticCombineArchiveTestCase(TestCase):
         Returns:
             :obj:`bool`: whether the model is suitable for testing
         """
-        return True
+        if not model or not model.source:
+            return False
+        source = model.source.lower()
+        return not (
+            source.startswith('#')
+            or source.startswith('http://')
+            or source.startswith('https://')
+            or source.startswith('urn:')
+        )
 
     def is_curated_sed_simulation_suitable_for_building_synthetic_archive(self, specifications, simulation):
         """ Determine if a SED simulation is suitable for testing

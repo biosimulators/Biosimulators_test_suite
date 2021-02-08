@@ -22,7 +22,7 @@ import pandas
 import unittest
 
 
-class TestCuratedCombineArchiveTestCase(unittest.TestCase):
+class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
     def test_find_cases(self):
         all_cases, _ = find_cases({
             'algorithms': [
@@ -50,7 +50,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         self.assertEqual(len(all_cases), 0)
         self.assertEqual(len(compatible_cases), 0)
 
-    def test_CuratedCombineArchiveTestCase_description(self):
+    def test_SimulatorCanExecutePublishedProject_description(self):
         case = SimulatorCanExecutePublishedProject(task_requirements=[
             data_model.SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000027'),
             data_model.SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000019'),
@@ -65,7 +65,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         ])
         self.assertEqual(case.description, expected_description)
 
-    def test_CuratedCombineArchiveTestCase_from_dict(self):
+    def test_SimulatorCanExecutePublishedProject_from_dict(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         with open(os.path.join(base_path, filename), 'r') as file:
@@ -76,7 +76,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         case = SimulatorCanExecutePublishedProject(id=id).from_dict(data)
         numpy.testing.assert_allclose(case.expected_reports[0].values['data_set_time'], numpy.array([0, 1, 2, 3, 4, 5]))
 
-    def test_CuratedCombineArchiveTestCase_from_dict_error_handling(self):
+    def test_SimulatorCanExecutePublishedProject_from_dict_error_handling(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         with open(os.path.join(base_path, filename), 'r') as file:
@@ -95,7 +95,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         data['expectedReports'][0]['values'] = [{'id': 'data_set_time', 'label': 'T', 'value': {'5000': 1000.}}]
         SimulatorCanExecutePublishedProject(id=id).from_dict(data)
 
-    def test_CuratedCombineArchiveTestCase_from_json(self):
+    def test_SimulatorCanExecutePublishedProject_from_json(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         case = SimulatorCanExecutePublishedProject().from_json(base_path, filename)
@@ -129,7 +129,7 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
         self.assertEqual(case.r_tol, 1e-4)
         self.assertEqual(case.a_tol, 0.)
 
-    def test_CuratedCombineArchiveTestCase_eval(self):
+    def test_SimulatorCanExecutePublishedProject_eval(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
         filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
         case = SimulatorCanExecutePublishedProject().from_json(base_path, filename)
@@ -306,6 +306,55 @@ class TestCuratedCombineArchiveTestCase(unittest.TestCase):
                     exec_archive, False, False, False, False, False, False, False, False, False, True)):
                 case.eval(specs)
         case.assert_no_extra_plots = False
+
+        case.expected_reports[0].values = {
+            'data_set_T': {
+                (0,): 0.,
+                (5000,): 1000.,
+            }
+        }
+
+        def exec_archive(error, missing_report, extra_report, missing_data_set, extra_data_set,
+                         incorrect_points, incorrect_values,
+                         no_plots, missing_plot, extra_plot,
+                         filename, out_dir, image, pull_docker_image=True):
+            points = 5001
+            data = [
+                numpy.linspace(0., 1000., points),
+                numpy.linspace(0., 1000., points),
+                numpy.zeros((points, )),
+                numpy.zeros((points, )),
+            ]
+            ids = ['data_set_time', 'data_set_T', 'data_set_E', 'data_set_I']
+            labels = ['time', 'T', 'E', 'I']
+            if incorrect_values:
+                data[1][0] = -1
+
+            if not missing_report:
+                report = Report(data_sets=[DataSet(id=i, label=l) for i, l in zip(ids, labels)])
+                data_set_results = DataSetResults({i: d for i, d in zip(ids, data)})
+                ReportWriter().run(report, data_set_results, out_dir, 'BIOMD0000000912_sim.sedml/BIOMD0000000912_sim', ReportFormat.h5)
+
+            plot_file = os.path.join(out_dir, 'plot.pdf')
+            with open(plot_file, 'w') as file:
+                pass
+
+            if not no_plots:
+                archive = Archive(files=[ArchiveFile(local_path=plot_file, archive_path='BIOMD0000000912_sim.sedml/plot_1.pdf')])
+                if missing_plot:
+                    archive.files = []
+                if extra_plot:
+                    archive.files[0].archive_path = archive.files[0].archive_path.replace('plot_1', 'plot_2')
+                ArchiveWriter().run(archive, os.path.join(out_dir, 'plots.zip'))
+
+        with mock.patch(exec_archive_method, functools.partial(
+                exec_archive, False, False, False, False, False, False, False, False, False, False)):
+            case.eval(specs)
+
+        with self.assertRaisesRegex(InvalidOutputsException, 'does not have expected value'):
+            with mock.patch(exec_archive_method, functools.partial(
+                    exec_archive, False, False, False, False, False, False, True, False, False, False)):
+                case.eval(specs)
 
     def test_TestCaseResult(self):
         case = SimulatorCanExecutePublishedProject(id='case')

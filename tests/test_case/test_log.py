@@ -94,6 +94,23 @@ class LogTestCaseTest(unittest.TestCase):
         with self.assertRaisesRegex(InvalidOutputsException, 'is not valid. By the end of the execution'):
             self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
 
+        with open(log_path, 'w') as file:
+            file.write('status: RUNNING\n')
+            file.write('sedDocuments:\n')
+            file.write('  - id: doc_1\n')
+            file.write('    status: RUNNING\n')
+            file.write('    tasks:\n')
+            file.write('      - id: task_1\n')
+            file.write('        status: RUNNING\n')
+            file.write('    outputs:\n')
+            file.write('      - id: output_1\n')
+            file.write('        status: RUNNING\n')
+            file.write('        notDataSets:\n')
+            file.write('          - id: data_set_1\n')
+            file.write('            status: RUNNING\n')
+        with self.assertRaisesRegex(InvalidOutputsException, 'must have one of the keys'):
+            self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
+
     def test_SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(self):
         specs = {'image': {'url': self.IMAGE}}
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
