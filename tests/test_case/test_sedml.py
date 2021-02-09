@@ -825,3 +825,12 @@ class SedmlTestCaseTest(unittest.TestCase):
         case = sedml.SimulatorProducesReportsWithCuratedNumberOfDimensions(
             published_projects_test_cases=[curated_case])
         case.eval(specs)
+
+    def test_SimulatorSupportsDataGeneratorsWithDifferentShapes(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        # test synthetic case generated and used to test simulator
+        case = sedml.SimulatorSupportsDataGeneratorsWithDifferentShapes(
+            published_projects_test_cases=[curated_case])
+        case.eval(specs)

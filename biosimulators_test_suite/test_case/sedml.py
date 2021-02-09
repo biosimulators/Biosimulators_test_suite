@@ -12,12 +12,12 @@ from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
 from biosimulators_utils.archive.io import ArchiveReader
 from biosimulators_utils.config import get_config
 from biosimulators_utils.report.io import ReportReader
-from biosimulators_utils.sedml.data_model import (SedDocument, Output, Report, Plot2D, Plot3D,  DataGenerator,  # noqa: F401
+from biosimulators_utils.sedml.data_model import (SedDocument, Task, Output, Report, Plot2D, Plot3D,  DataGenerator,  # noqa: F401
                                                   Variable, UniformTimeCourseSimulation,
                                                   DataSet, Curve, Surface, AxisScale,
                                                   Model, ModelAttributeChange, AlgorithmParameterChange,
                                                   AddElementModelChange, RemoveElementModelChange, ReplaceElementModelChange,
-                                                  ComputeModelChange, Parameter, Variable)
+                                                  ComputeModelChange, Parameter)
 from biosimulators_utils.xml.utils import get_namespaces_for_xml_doc
 from lxml import etree
 import abc
@@ -304,7 +304,7 @@ class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsT
 
 
 class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
-    """ Test that a simulator supports changes to the attributes of model elements
+    """ Test that a simulator supports compute model changes
     """
     REPORT_ERROR_AS_SKIP = True
 
@@ -369,13 +369,13 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
 
             for key, value in node.attrib.items():
                 try:
-                    float_value = float(value)
+                    float(value)
                 except ValueError:
                     continue
 
                 i_change += 1
-                param_id = '__p_'.format(i_change)
-                var_id = '__var_'.format(i_change)
+                param_id = '__p_{}'.format(i_change)
+                var_id = '__var_{}'.format(i_change)
                 model_1.changes.append(
                     ComputeModelChange(
                         target=node_target + '/@' + key,
@@ -1101,3 +1101,118 @@ class SimulatorProducesMultiplePlots(SimulatorProduces2DPlotsTestCase):
     @property
     def _axis_scale(self):
         return AxisScale.linear
+
+
+class SimulatorSupportsDataGeneratorsWithDifferentShapes(UniformTimeCourseTestCase):
+    """ Test that a simulator supports data generators with different shapes """
+    REPORT_ERROR_AS_SKIP = True
+
+    def modify_simulation(self, simulation):
+        """ Modify a simulation
+
+        Args:
+            simulation (:obj:`UniformTimeCourseSimulation`): simulation
+        """
+        pass  # pragma: no cover
+
+    def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
+        """ Generate a synthetic archive with a copy of each task and each report
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            curated_archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            curated_archive_dir (:obj:`str`): directory with the contents of the curated COMBINE/OMEX archive
+            curated_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
+                SED documents in curated archive
+
+        Returns:
+            :obj:`list` of :obj:`ExpectedResultOfSyntheticArchive`
+        """
+        expected_results_of_synthetic_archives = super(SimulatorSupportsDataGeneratorsWithDifferentShapes, self).build_synthetic_archives(
+            specifications, curated_archive, curated_archive_dir, curated_sed_docs)
+        curated_sed_docs = expected_results_of_synthetic_archives[0].sed_documents
+        doc = list(curated_sed_docs.values())[0]
+
+        sim = doc.simulations[0]
+        sim2 = UniformTimeCourseSimulation(
+            id=sim.id + '__copy_2',
+            initial_time=sim.initial_time,
+            output_start_time=sim.output_start_time,
+            output_end_time=sim.output_end_time,
+            number_of_points=sim.number_of_points * 2,
+            algorithm=copy.deepcopy(sim.algorithm),
+        )
+        doc.simulations.append(sim2)
+
+        task = doc.tasks[0]
+        task2 = Task(
+            id=task.id + '__copy_2',
+            model=task.model,
+            simulation=sim2,
+        )
+        doc.tasks.append(task2)
+
+        report = doc.outputs.pop()
+        report2 = Report(id=report.id + '__copy_2')
+        doc.outputs.append(report2)
+
+        for data_gen in list(doc.data_generators):
+            data_gen2 = DataGenerator(
+                id=data_gen.id + '__copy_2',
+                variables=[
+                    Variable(
+                        id=data_gen.variables[0].id + '__copy_1',
+                        task=task,
+                        symbol=data_gen.variables[0].symbol,
+                        target=data_gen.variables[0].target,
+                    ),
+                    Variable(
+                        id=data_gen.variables[0].id + '__copy_2',
+                        task=task2,
+                        symbol=data_gen.variables[0].symbol,
+                        target=data_gen.variables[0].target,
+                    ),
+                ],
+                math='{} + {}'.format(data_gen.variables[0].id + '__copy_1', data_gen.variables[0].id + '__copy_2'),
+            )
+            doc.data_generators.append(data_gen2)
+
+            report2.data_sets.append(DataSet(id=data_gen2.id + '_data_set', label=data_gen2.id + '_data_set', data_generator=data_gen2))
+
+        return expected_results_of_synthetic_archives
+
+    def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
+        """ Test that the expected outputs were created for the synthetic archive
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            synthetic_archive (:obj:`CombineArchive`): synthetic COMBINE/OMEX archive for testing the simulator
+            synthetic_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from the location of each SED
+                document in the synthetic archive to the document
+            outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
+
+        Returns:
+            :obj:`bool`: whether there were no warnings about the outputs
+        """
+        doc_location = list(synthetic_sed_docs.keys())[0]
+        doc_id = os.path.relpath(doc_location, './')
+        doc = synthetic_sed_docs[doc_location]
+        sim1 = doc.simulations[0]
+        sim2 = doc.simulations[-1]
+        report2 = doc.outputs[-1]
+
+        results2 = ReportReader().run(report2, outputs_dir, os.path.join(doc_id, report2.id))
+        for value in results2.values():
+            if value.shape[-1] != sim2.number_of_points + 1:
+                raise InvalidOutputsException('Data set does not have the expected shape')
+
+            data_set_slice = [slice(0, dim_len) for dim_len in value.shape[0:-1]] + [slice(0, sim1.number_of_points + 1)]
+            if numpy.any(numpy.isnan(value[data_set_slice])):
+                raise InvalidOutputsException('Data set has unexpected NaN values')
+
+            data_set_slice = (
+                [slice(0, dim_len) for dim_len in value.shape[0:-1]]
+                + [slice(sim1.number_of_points + 1, sim2.number_of_points + 1)]
+            )
+            if not numpy.all(numpy.isnan(value[data_set_slice])):
+                raise InvalidOutputsException('Data set has unexpected non-NaN values')
