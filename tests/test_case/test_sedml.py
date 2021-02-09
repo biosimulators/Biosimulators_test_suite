@@ -835,6 +835,17 @@ class SedmlTestCaseTest(unittest.TestCase):
             published_projects_test_cases=[curated_case])
         case.eval(specs)
 
+        case._eval_data_set(numpy.array([1, 3, 4, numpy.nan]), 4, 3)
+
+        with self.assertRaises(InvalidOutputsException):
+            case._eval_data_set(numpy.array([1, 3, 4, numpy.nan]), 5, 3)
+
+        with self.assertRaises(InvalidOutputsException):
+            case._eval_data_set(numpy.array([1, 3, numpy.nan, numpy.nan]), 4, 3)
+
+        with self.assertRaises(InvalidOutputsException):
+            case._eval_data_set(numpy.array([1, 3, 4, 6]), 4, 3)
+
     def test_SimulatorSupportsDataSetsWithDifferentShapes(self):
         specs = {'image': {'url': self.IMAGE}}
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
@@ -843,3 +854,16 @@ class SedmlTestCaseTest(unittest.TestCase):
         case = sedml.SimulatorSupportsDataSetsWithDifferentShapes(
             published_projects_test_cases=[curated_case])
         case.eval(specs)
+
+        case._eval_data_set('', numpy.array([1, 3, 4, 6]), 4)
+
+        with self.assertRaises(InvalidOutputsException):
+            case._eval_data_set('', numpy.array([1, 3, 4, 6]), 5)
+
+        with self.assertRaises(InvalidOutputsException):
+            case._eval_data_set('', numpy.array([1, 3, 4, numpy.nan]), 4)
+
+        case._eval_time_data_sets(numpy.array([1, 2, 3]), numpy.array([1, 2, 3]))
+
+        with self.assertRaises(InvalidOutputsException):
+            case._eval_time_data_sets(numpy.array([1, 2, 3]), numpy.array([3, 2, 1]))

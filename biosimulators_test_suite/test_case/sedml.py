@@ -1204,19 +1204,22 @@ class SimulatorSupportsDataGeneratorsWithDifferentShapes(UniformTimeCourseTestCa
 
         results2 = ReportReader().run(report2, outputs_dir, os.path.join(doc_id, report2.id))
         for value in results2.values():
-            if value.shape[-1] != sim2.number_of_points + 1:
-                raise InvalidOutputsException('Data set does not have the expected shape')
+            self._eval_data_set(value, sim2.number_of_points + 1, sim1.number_of_points + 1)
 
-            data_set_slice = [slice(0, dim_len) for dim_len in value.shape[0:-1]] + [slice(0, sim1.number_of_points + 1)]
-            if numpy.any(numpy.isnan(value[data_set_slice])):
-                raise InvalidOutputsException('Data set has unexpected NaN values')
+    def _eval_data_set(self, value, length, non_nan_points):
+        if value.shape[-1] != length:
+            raise InvalidOutputsException('Data set does not have the expected shape')
 
-            data_set_slice = (
-                [slice(0, dim_len) for dim_len in value.shape[0:-1]]
-                + [slice(sim1.number_of_points + 1, sim2.number_of_points + 1)]
-            )
-            if not numpy.all(numpy.isnan(value[data_set_slice])):
-                raise InvalidOutputsException('Data set has unexpected non-NaN values')
+        data_set_slice = [slice(0, dim_len) for dim_len in value.shape[0:-1]] + [slice(0, non_nan_points)]
+        if numpy.any(numpy.isnan(value[data_set_slice])):
+            raise InvalidOutputsException('Data set has unexpected NaN values')
+
+        data_set_slice = (
+            [slice(0, dim_len) for dim_len in value.shape[0:-1]]
+            + [slice(non_nan_points, length)]
+        )
+        if not numpy.all(numpy.isnan(value[data_set_slice])):
+            raise InvalidOutputsException('Data set has unexpected non-NaN values')
 
 
 class SimulatorSupportsDataSetsWithDifferentShapes(UniformTimeCourseTestCase):
@@ -1319,21 +1322,13 @@ class SimulatorSupportsDataSetsWithDifferentShapes(UniformTimeCourseTestCase):
             value = results[data_set.id]
 
             if data_set.data_generator.variables[0].task == task1:
-                if value.shape[-1] != sim1.number_of_points + 1:
-                    raise InvalidOutputsException('Data set `{}` does not have the expected shape'.format(data_set.id))
-
-                if numpy.any(numpy.isnan(value)):
-                    raise InvalidOutputsException('Data set `{}` has unexpected NaN values'.format(data_set.id))
+                expected_length = sim1.number_of_points + 1
 
                 if data_set.data_generator.variables[0].symbol:
                     values1[data_set.data_generator.id] = value
 
             else:
-                if value.shape[-1] != sim2.number_of_points + 1:
-                    raise InvalidOutputsException('Data set `{}` does not have the expected shape'.format(data_set.id))
-
-                if numpy.any(numpy.isnan(value)):
-                    raise InvalidOutputsException('Data set `{}` has unexpected NaN values'.format(data_set.id))
+                expected_length = sim2.number_of_points + 1
 
                 if data_set.data_generator.variables[0].symbol:
                     data_set_slice = (
@@ -1342,11 +1337,21 @@ class SimulatorSupportsDataSetsWithDifferentShapes(UniformTimeCourseTestCase):
                     )
                     values2[data_set.data_generator.id.replace('__copy_2', '')] = value[data_set_slice]
 
+            self._eval_data_set(data_set.id, value, expected_length)
+
         for key in values1.keys():
-            value1 = values1[key]
-            value2 = values2[key]
-            try:
-                numpy.testing.assert_allclose(value1, value2)
-            except Exception as exception:
-                raise ValueError('Simulations with the same time courses should produce equivalent time data sets:\n\n  {}'.format(
-                    str(exception).replace('\n', '\n  ')))
+            self._eval_time_data_sets(values1[key], values2[key])
+
+    def _eval_data_set(self, id, value, expected_length):
+        if value.shape[-1] != expected_length:
+            raise InvalidOutputsException('Data set `{}` does not have the expected shape'.format(id))
+
+        if numpy.any(numpy.isnan(value)):
+            raise InvalidOutputsException('Data set `{}` has unexpected NaN values'.format(id))
+
+    def _eval_time_data_sets(self, value1, value2):
+        try:
+            numpy.testing.assert_allclose(value1, value2)
+        except Exception as exception:
+            raise InvalidOutputsException('Simulations with the same time courses should produce equivalent time data sets:\n\n  {}'.format(
+                str(exception).replace('\n', '\n  ')))
