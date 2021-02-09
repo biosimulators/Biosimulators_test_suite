@@ -6,7 +6,6 @@ from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml.data_model import SedDocument, Report, DataSet
 import numpy
 import os
-import pandas
 import shutil
 import tempfile
 import unittest

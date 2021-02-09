@@ -1,7 +1,6 @@
 from biosimulators_utils.combine.io import CombineArchiveReader
 from biosimulators_utils.report.data_model import ReportFormat
 from biosimulators_utils.report.io import ReportReader
-from biosimulators_utils.sedml.data_model import Report, DataSet
 from biosimulators_utils.sedml.io import SedmlSimulationReader
 from unittest import mock
 import glob

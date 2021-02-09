@@ -12,12 +12,6 @@ import warnings
 
 
 class ValidateSimulatorTestCase(unittest.TestCase):
-    def test_find_cases(self):
-        with self.assertWarnsRegex(IgnoredTestCaseWarning, r'Some test case\(s\) were not found'):
-            SimulatorValidator().find_cases(ids=[
-                'non-existent-case',
-            ])
-
     def test_summarize_results(self):
         reqs = [
             SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000019'),

@@ -6,7 +6,7 @@ import unittest
 
 class ConfigTestCase(unittest.TestCase):
     def test_defaults(self):
-        config = Config()
+        Config()
 
     def test_env_vars(self):
         with mock.patch.dict(os.environ, {

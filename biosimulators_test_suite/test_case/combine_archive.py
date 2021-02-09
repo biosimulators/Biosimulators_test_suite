@@ -39,6 +39,9 @@ class CombineArchiveTestCase(ConfigurableMasterCombineArchiveTestCase):
             synthetic_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from the location of each SED
                 document in the synthetic archive to the document
             outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
+
+        Returns:
+            :obj:`bool`: whether there were no warnings about the outputs
         """
         try:
             report_ids = ReportReader().get_ids(outputs_dir)
@@ -55,6 +58,9 @@ class CombineArchiveTestCase(ConfigurableMasterCombineArchiveTestCase):
         if unexpected_reports:
             warnings.warn('Simulator generated the following extra unexpected reports:\n  - {}'.format(
                 '\n  - '.join(sorted('`' + id + '`' for id in unexpected_reports))), TestCaseWarning)
+            return False
+
+        return True
 
 
 class WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile(CombineArchiveTestCase):

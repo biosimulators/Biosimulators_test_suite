@@ -165,8 +165,6 @@ class MainTestCase(unittest.TestCase):
     def test_specs_invalid(self):
         specs = 'invalid-url'
 
-        results = []
-
         with self.assertRaises(SystemExit) as exception_cm:
             with exec_cli.App(argv=[specs]) as app:
                 app.run()
@@ -174,8 +172,6 @@ class MainTestCase(unittest.TestCase):
 
     def test_cases_dont_exist(self):
         specs = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
-
-        results = []
 
         with self.assertRaises(SystemExit) as exception_cm:
             with exec_cli.App(argv=[specs, '-c', 'adf']) as app:

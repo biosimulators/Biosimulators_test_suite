@@ -3,10 +3,9 @@ from biosimulators_test_suite.test_case.published_project import SimulatorCanExe
 from biosimulators_test_suite.warnings import TestCaseWarning
 from biosimulators_utils.report.data_model import DataSetResults
 from biosimulators_utils.report.io import ReportWriter
-from biosimulators_utils.sedml.data_model import SedDocument, Task, Report, DataSet
+from biosimulators_utils.sedml.data_model import Report, DataSet
 import numpy
 import os
-import pandas
 import shutil
 import tempfile
 import unittest

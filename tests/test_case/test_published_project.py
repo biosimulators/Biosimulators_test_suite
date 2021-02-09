@@ -2,27 +2,34 @@ from biosimulators_test_suite import data_model
 from biosimulators_test_suite.exceptions import InvalidOutputsException, SkippedTestCaseException
 from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType
 from biosimulators_test_suite.test_case.published_project import (
-    SimulatorCanExecutePublishedProject, find_cases, SyntheticCombineArchiveTestCase, ConfigurableMasterCombineArchiveTestCase)
+    SimulatorCanExecutePublishedProject, find_cases, SyntheticCombineArchiveTestCase,
+    ExpectedResultOfSyntheticArchive)
 from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
 from biosimulators_utils.combine.data_model import CombineArchive
-from biosimulators_utils.combine.io import CombineArchiveReader
+from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
 from biosimulators_utils.report.data_model import DataSetResults
 from biosimulators_utils.report.io import ReportWriter, ReportFormat
 from biosimulators_utils.sedml.data_model import Task, Report, DataSet
 from unittest import mock
-import biosimulators_utils.simulator.exec
 import functools
 import json
 import os
 import numpy
 import numpy.testing
-import pandas
+import shutil
+import tempfile
 import unittest
 
 
 class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
+    def setUp(self):
+        self.tmp_dirname = tempfile.mkdtemp()
+
+    def tearDown(self):
+        shutil.rmtree(self.tmp_dirname)
+
     def test_find_cases(self):
         all_cases, _ = find_cases({
             'algorithms': [
@@ -214,7 +221,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
                 ReportWriter().run(report, data_set_results, out_dir, 'BIOMD0000000912_sim.sedml/BIOMD0000000912_sim', ReportFormat.h5)
 
             plot_file = os.path.join(out_dir, 'plot.pdf')
-            with open(plot_file, 'w') as file:
+            with open(plot_file, 'w'):
                 pass
 
             if not no_plots:
@@ -336,7 +343,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
                 ReportWriter().run(report, data_set_results, out_dir, 'BIOMD0000000912_sim.sedml/BIOMD0000000912_sim', ReportFormat.h5)
 
             plot_file = os.path.join(out_dir, 'plot.pdf')
-            with open(plot_file, 'w') as file:
+            with open(plot_file, 'w'):
                 pass
 
             if not no_plots:
@@ -370,7 +377,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             def is_curated_archive_suitable_for_building_synthetic_archive(self, specifications, archive, sed_docs):
                 return False
 
-            def build_synthetic_archive(self):
+            def build_synthetic_archives(self):
                 pass
 
             def eval_outputs(self):
@@ -384,21 +391,72 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             with mock.patch.object(CombineArchiveReader, 'run', return_value=CombineArchive()):
                 case.eval(None)
 
-    def test_SyntheticCombineArchiveTestCase_build_synthetic_archive(self):
+    def test_SyntheticCombineArchiveTestCase_build_synthetic_archives(self):
         class ConcreteSyntheticCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
             def eval_outputs():
                 pass
 
         archive = CombineArchive()
-        self.assertEqual(ConcreteSyntheticCombineArchiveTestCase().build_synthetic_archive(None, archive, 'b', 'c'), (archive, 'c'))
+        expected_results_of_synthetic_archives = ConcreteSyntheticCombineArchiveTestCase().build_synthetic_archives(None, archive, 'b', 'c')
+        self.assertEqual(len(expected_results_of_synthetic_archives), 1)
+        self.assertEqual(expected_results_of_synthetic_archives[0].archive, archive,)
+        self.assertEqual(expected_results_of_synthetic_archives[0].sed_documents, 'c',)
 
     def test_SyntheticCombineArchiveTestCase_is_curated_sed_task_suitable_for_building_synthetic_archive(self):
         class Concrete(SyntheticCombineArchiveTestCase):
             def is_curated_sed_model_suitable_for_building_synthetic_archive(self, specs, model):
                 return False
 
-            def eval_outputs():
+            def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
                 pass
 
         self.assertFalse(Concrete().is_curated_sed_task_suitable_for_building_synthetic_archive(None, None))
         self.assertFalse(Concrete().is_curated_sed_task_suitable_for_building_synthetic_archive(None, Task()))
+
+    def test_SyntheticCombineArchiveTestCase__eval_synthetic_archive(self):
+        class Concrete(SyntheticCombineArchiveTestCase):
+            def is_curated_sed_model_suitable_for_building_synthetic_archive(self, specs, model):
+                return False
+
+            def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
+                pass
+
+        specifications = {'image': {'url': None}}
+        expected_results_of_synthetic_archive = ExpectedResultOfSyntheticArchive(
+            None, {}, True)
+        shared_archive_dir = self.tmp_dirname
+
+        with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator', return_value=None):
+            with mock.patch.object(CombineArchiveWriter, 'run', return_value=None):
+                with mock.patch.object(Concrete, 'eval_outputs', return_value=True):
+                    self.assertFalse(Concrete()._eval_synthetic_archive(
+                        specifications, expected_results_of_synthetic_archive, shared_archive_dir))
+
+        with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator', return_value=None):
+            with mock.patch.object(CombineArchiveWriter, 'run', return_value=None):
+                with mock.patch.object(Concrete, 'eval_outputs', return_value=False):
+                    self.assertTrue(Concrete()._eval_synthetic_archive(
+                        specifications, expected_results_of_synthetic_archive, shared_archive_dir))
+
+        with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator',
+                        side_effect=RuntimeError):
+            with mock.patch.object(CombineArchiveWriter, 'run', return_value=None):
+                with mock.patch.object(Concrete, 'eval_outputs', return_value=False):
+                    with self.assertRaises(RuntimeError):
+                        Concrete()._eval_synthetic_archive(
+                            specifications, expected_results_of_synthetic_archive, shared_archive_dir)
+
+        expected_results_of_synthetic_archive.is_success_expected = False
+        with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator',
+                        side_effect=RuntimeError):
+            with mock.patch.object(CombineArchiveWriter, 'run', return_value=None):
+                with mock.patch.object(Concrete, 'eval_outputs', return_value=False):
+                    self.assertFalse(Concrete()._eval_synthetic_archive(
+                        specifications, expected_results_of_synthetic_archive, shared_archive_dir))
+
+        with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator', return_value=None):
+            with mock.patch.object(CombineArchiveWriter, 'run', return_value=None):
+                with mock.patch.object(Concrete, 'eval_outputs', return_value=False):
+                    with self.assertRaisesRegex(ValueError, 'did not fail as expected'):
+                        Concrete()._eval_synthetic_archive(
+                            specifications, expected_results_of_synthetic_archive, shared_archive_dir)

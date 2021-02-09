@@ -1,7 +1,7 @@
 from biosimulators_test_suite.exceptions import InvalidOutputsException, SkippedTestCaseException
 from biosimulators_test_suite.test_case import sedml
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject, SyntheticCombineArchiveTestCase
-from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, InvalidOutputsWarning, TestCaseWarning
+from biosimulators_test_suite.warnings import InvalidOutputsWarning
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
 from biosimulators_utils.config import get_config
@@ -11,12 +11,11 @@ from biosimulators_utils.report.io import ReportWriter, ReportReader
 from biosimulators_utils.sedml.data_model import (SedDocument, Task, Report, DataSet,
                                                   DataGenerator, Variable, UniformTimeCourseSimulation,
                                                   Algorithm, Symbol, Model,
-                                                  Plot2D, Curve, Plot3D, Surface, AxisScale)
+                                                  Plot2D, Plot3D, Surface, AxisScale)
 from biosimulators_utils.simulator.io import read_simulator_specs
 from unittest import mock
 import numpy
 import os
-import pandas
 import PyPDF2
 import shutil
 import tempfile
@@ -28,6 +27,9 @@ class SedmlTestCaseTest(unittest.TestCase):
     CURATED_ARCHIVE_FILENAME = os.path.join(
         os.path.dirname(__file__), '..', '..',
         'examples', 'sbml-core', 'Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint.omex')
+    CURATED_NON_XML_ARCHIVE_FILENAME = os.path.join(
+        os.path.dirname(__file__), '..', '..',
+        'examples', 'bngl', 'test-bngl.omex')
 
     def setUp(self):
         self.dirname = tempfile.mkdtemp()
@@ -309,7 +311,7 @@ class SedmlTestCaseTest(unittest.TestCase):
             published_projects_test_cases=[curated_case])
         self.assertTrue(case.eval(specs))
 
-    def test_SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes_build_synthetic_archive(self):
+    def test_SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes_build_synthetic_archives(self):
         case = sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes()
 
         now = case.get_current_time_utc()
@@ -367,7 +369,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         self.assertTrue(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc, None))
         self.assertTrue(case.is_curated_archive_suitable_for_building_synthetic_archive(None, archive, sed_docs))
 
-        case.build_synthetic_archive(None, archive, None, sed_docs)
+        case.build_synthetic_archives(None, archive, None, sed_docs)
         self.assertEqual(len(doc.data_generators), 3)
         self.assertEqual(doc.data_generators[-1].variables[0].symbol, Symbol.time)
         self.assertEqual(len(doc.outputs[0].data_sets), 3)
@@ -378,7 +380,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         doc.simulations[0].output_start_time = 0.
         doc.simulations[0].number_of_points = 100
         doc.outputs[0].data_sets[-1].label = 'time'
-        case.build_synthetic_archive(None, archive, None, sed_docs)
+        case.build_synthetic_archives(None, archive, None, sed_docs)
         self.assertEqual(doc.outputs[0].data_sets[-1].id, '__data_set_time__')
 
         doc.outputs[0].data_sets = []
@@ -650,6 +652,15 @@ class SedmlTestCaseTest(unittest.TestCase):
             published_projects_test_cases=[curated_case])
         case.eval(specs)
 
+    def test_SimulatorCanResolveModelSourcesDefinedByUriFragmentsAndInheritChanges(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        # test synthetic case generated and used to test simulator
+        case = sedml.SimulatorCanResolveModelSourcesDefinedByUriFragmentsAndInheritChanges(
+            published_projects_test_cases=[curated_case])
+        case.eval(specs)
+
     def test_SimulatorSupportsModelAttributeChanges(self):
         specs = {'image': {'url': self.IMAGE}}
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
@@ -658,6 +669,22 @@ class SedmlTestCaseTest(unittest.TestCase):
         case = sedml.SimulatorSupportsModelAttributeChanges(
             published_projects_test_cases=[curated_case])
         case.eval(specs)
+
+    def test_SimulatorSupportsAddReplaceRemoveModelElementChanges(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        # test synthetic case generated and used to test simulator
+        case = sedml.SimulatorSupportsAddReplaceRemoveModelElementChanges(
+            published_projects_test_cases=[curated_case])
+        case.eval(specs)
+
+        # test test ignored for non-XML models
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_NON_XML_ARCHIVE_FILENAME)
+        case = sedml.SimulatorSupportsAddReplaceRemoveModelElementChanges(
+            published_projects_test_cases=[curated_case])
+        with self.assertRaisesRegex(SkippedTestCaseException, 'only implemented for XML-based model'):
+            case.eval(specs)
 
     def test_SimulatorSupportsAlgorithmParameters(self):
         specs_path = os.path.join(

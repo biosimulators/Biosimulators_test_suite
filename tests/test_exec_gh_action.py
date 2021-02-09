@@ -7,11 +7,8 @@ from biosimulators_test_suite.warnings import TestCaseWarning
 from biosimulators_utils.gh_action.data_model import GitHubActionCaughtError
 from biosimulators_utils.simulator_registry.data_model import SimulatorSubmission, IssueLabel
 from unittest import mock
-import biosimulators_utils.image
-import biosimulators_utils.simulator.io
 import docker
 import os
-import re
 import requests
 import unittest
 
@@ -591,7 +588,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.5']))
         self.assertEqual(requests_mock.refreshed_images, [{'simulator': 'tellurium', 'version': '2.1.5'}])
         self.assertEqual(len(requests_mock.simulator_versions[-1]['biosimulators']['validationTests']['results']), 1)
-        self.assertEqual(requests_mock.simulator_versions[-1]['biosimulators']['validationTests']['results'][0]['case']['id'], 'sedml.case-passed')
+        self.assertEqual(requests_mock.simulator_versions[-1]['biosimulators']
+                         ['validationTests']['results'][0]['case']['id'], 'sedml.case-passed')
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
         self.assertEqual(len(requests_mock.issue_messages), 5)
         self.assertRegex(requests_mock.issue_messages[-1], 'Your submission was committed to the BioSimulators registry.')
@@ -634,9 +632,9 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                 self.refreshed_images = []
 
                 self.issue_labels = set(['Validate/commit simulator'])
-                if previous_run_valid == True:
+                if previous_run_valid is True:
                     self.issue_labels.add('Validated')
-                elif previous_run_valid == False:
+                elif previous_run_valid is False:
                     self.issue_labels.add('Invalid')
                 if manually_approved:
                     self.issue_labels.add('Approved')
@@ -833,13 +831,16 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                             with mock.patch('requests.delete', side_effect=requests_mock.delete):
                                 with mock.patch.object(docker.client.DockerClient, 'login', side_effect=docker_mock.login):
                                     with mock.patch.object(docker.models.images.ImageCollection, 'pull', side_effect=docker_mock.pull):
-                                        with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', side_effect=docker_mock.convert_docker_image_to_singularity):
+                                        with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity',
+                                                        side_effect=docker_mock.convert_docker_image_to_singularity):
                                             with mock.patch.object(docker.models.images.Image, 'tag', side_effect=docker_mock.tag):
-                                                with mock.patch.object(docker.models.images.ImageCollection, 'push', side_effect=docker_mock.push):
+                                                with mock.patch.object(docker.models.images.ImageCollection, 'push',
+                                                                       side_effect=docker_mock.push):
                                                     cases = {
                                                         'suite': [result.case for result in validation_run_results]
                                                     }
                                                     with mock.patch.object(exec_core.SimulatorValidator, 'find_cases', return_value=cases):
-                                                        with mock.patch.object(exec_core.SimulatorValidator, 'eval_case', side_effect=validation_run_results):
+                                                        with mock.patch.object(exec_core.SimulatorValidator, 'eval_case',
+                                                                               side_effect=validation_run_results):
                                                             action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
                                                             action.run()

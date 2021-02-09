@@ -7,7 +7,7 @@
 """
 from ..exceptions import InvalidOutputsException, SkippedTestCaseException
 from ..warnings import InvalidOutputsWarning
-from .published_project import SingleMasterSedDocumentCombineArchiveTestCase, UniformTimeCourseTestCase
+from .published_project import SingleMasterSedDocumentCombineArchiveTestCase, UniformTimeCourseTestCase, ExpectedResultOfSyntheticArchive
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
 from biosimulators_utils.archive.io import ArchiveReader
 from biosimulators_utils.config import get_config
@@ -15,7 +15,10 @@ from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import (SedDocument, Output, Report, Plot2D, Plot3D,  DataGenerator,  # noqa: F401
                                                   Variable, UniformTimeCourseSimulation,
                                                   DataSet, Curve, Surface, AxisScale,
-                                                  Model, ModelAttributeChange, AlgorithmParameterChange)
+                                                  Model, ModelAttributeChange, AlgorithmParameterChange,
+                                                  AddElementModelChange, RemoveElementModelChange, ReplaceElementModelChange)
+from biosimulators_utils.xml.utils import get_namespaces_for_xml_doc
+from lxml import etree
 import abc
 import copy
 import numpy
@@ -58,7 +61,7 @@ class SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports(SingleMast
             outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
 
         Returns:
-            :obj:`bool`: :obj:`True`, if succeeded without warnings
+            :obj:`bool`: whether there were no warnings about the outputs
         """
         has_warnings = False
 
@@ -120,8 +123,7 @@ class SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports(SingleMast
 
 
 class SimulatorCanResolveModelSourcesDefinedByUriFragments(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
-    """ Test that a simulator supports changes to the attributes of model elements
-    """
+    """ Test that a simulator can resolve model sources defined by URI fragments (e.g., ``#model1``). """
 
     REPORT_ERROR_AS_SKIP = True
 
@@ -129,7 +131,7 @@ class SimulatorCanResolveModelSourcesDefinedByUriFragments(SimulatorSupportsMode
         super(SimulatorCanResolveModelSourcesDefinedByUriFragments, self).__init__(*args, **kwargs)
         self._types_of_model_changes_to_keep = ()
 
-    def build_synthetic_archive(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
+    def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
 
         Args:
@@ -140,14 +142,11 @@ class SimulatorCanResolveModelSourcesDefinedByUriFragments(SimulatorSupportsMode
                 SED documents in curated archive
 
         Returns:
-            :obj:`tuple`:
-
-                * :obj:`CombineArchive`: synthetic COMBINE/OMEX archive for testing the simulator
-                * :obj:`dict` of :obj:`str` to :obj:`SedDocument`: map from locations to
-                  SED documents in synthetic archive
+            :obj:`list` of :obj:`ExpectedResultOfSyntheticArchive`
         """
-        curated_archive, curated_sed_docs = super(SimulatorCanResolveModelSourcesDefinedByUriFragments, self).build_synthetic_archive(
+        expected_results_of_synthetic_archives = super(SimulatorCanResolveModelSourcesDefinedByUriFragments, self).build_synthetic_archives(
             specifications, curated_archive, curated_archive_dir, curated_sed_docs)
+        curated_sed_docs = expected_results_of_synthetic_archives[0].sed_documents
 
         # change model source to URI fragment
         doc = list(curated_sed_docs.values())[0]
@@ -157,7 +156,48 @@ class SimulatorCanResolveModelSourcesDefinedByUriFragments(SimulatorSupportsMode
         doc.models.append(source_model)
         model.source = '#' + source_model.id
 
-        return (curated_archive, curated_sed_docs)
+        return expected_results_of_synthetic_archives
+
+
+class SimulatorCanResolveModelSourcesDefinedByUriFragmentsAndInheritChanges(
+        SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
+    """ Test that a simulator can resolve model sources defined by URI fragments (e.g., ``#model1``) and inherit the
+    changes of the model."""
+
+    REPORT_ERROR_AS_SKIP = True
+
+    def __init__(self, *args, **kwargs):
+        super(SimulatorCanResolveModelSourcesDefinedByUriFragmentsAndInheritChanges, self).__init__(*args, **kwargs)
+        self._types_of_model_changes_to_keep = (ModelAttributeChange,)
+
+    def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
+        """ Generate a synthetic archive with a copy of each task and each report
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            curated_archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            curated_archive_dir (:obj:`str`): directory with the contents of the curated COMBINE/OMEX archive
+            curated_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
+                SED documents in curated archive
+
+        Returns:
+            :obj:`list` of :obj:`ExpectedResultOfSyntheticArchive`
+        """
+        expected_results_of_synthetic_archives = super(SimulatorCanResolveModelSourcesDefinedByUriFragmentsAndInheritChanges,
+                                                       self).build_synthetic_archives(
+            specifications, curated_archive, curated_archive_dir, curated_sed_docs)
+        curated_sed_docs = expected_results_of_synthetic_archives[0].sed_documents
+
+        # change model source to URI fragment
+        doc = list(curated_sed_docs.values())[0]
+
+        model = doc.models[0]
+        source_model = Model(id='__source__', source=model.source, language=model.language, changes=model.changes)
+        doc.models.append(source_model)
+        model.source = '#' + source_model.id
+        model.changes = []
+
+        return expected_results_of_synthetic_archives
 
 
 class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
@@ -181,6 +221,95 @@ class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsT
         return next((True for change in model.changes if isinstance(change, ModelAttributeChange)), False)
 
 
+class SimulatorSupportsAddReplaceRemoveModelElementChanges(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
+    """ Test that a simulator supports model changes that involve adding, replacing, and removing model elements. """
+    REPORT_ERROR_AS_SKIP = True
+
+    def __init__(self, *args, **kwargs):
+        super(SimulatorSupportsAddReplaceRemoveModelElementChanges, self).__init__(*args, **kwargs)
+        self._types_of_model_changes_to_keep = ()
+
+    def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
+        """ Generate a synthetic archive with a copy of each task and each report
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            curated_archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            curated_archive_dir (:obj:`str`): directory with the contents of the curated COMBINE/OMEX archive
+            curated_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
+                SED documents in curated archive
+
+        Returns:
+            :obj:`list` of :obj:`ExpectedResultOfSyntheticArchive`
+        """
+        expected_results_of_synthetic_archives = super(SimulatorSupportsAddReplaceRemoveModelElementChanges, self).build_synthetic_archives(
+            specifications, curated_archive, curated_archive_dir, curated_sed_docs)
+        curated_archive = expected_results_of_synthetic_archives[0].archive
+        curated_sed_docs = expected_results_of_synthetic_archives[0].sed_documents
+
+        # get model
+        doc = list(curated_sed_docs.values())[0]
+        model = doc.models[0]
+
+        try:
+            model_etree = etree.parse(os.path.join(curated_archive_dir, model.source))
+        except etree.XMLSyntaxError:
+            msg = ('This test is only implemented for XML-based model languages. '
+                   'Please contact the BioSimulators Team to discuss implementing tests for additional languages.')
+            raise SkippedTestCaseException(msg)
+
+        # add model changes
+        namespaces = get_namespaces_for_xml_doc(model_etree)
+        namespaces_rev = {uri: prefix for prefix, uri in namespaces.items()}
+
+        model_root = model_etree.getroot()
+        model_root_tag_ns, _, model_root_tag = model_root.tag.partition('}')
+
+        root_target = '/{}:{}'.format(namespaces_rev[model_root_tag_ns[1:]], model_root_tag) if model_root_tag_ns else '/' + model_root_tag
+
+        sed_docs_1 = copy.deepcopy(curated_sed_docs)
+        doc_1 = list(sed_docs_1.values())[0]
+        model_1 = doc_1.models[0]
+        for child in model_root.getchildren():
+            child_tag_ns, _, child_tag = child.tag.partition('}')
+            child_target = '{}:{}'.format(namespaces_rev[child_tag_ns[1:]], child_tag) if child_tag_ns else '/' + child_tag
+            model_1.changes.append(
+                RemoveElementModelChange(
+                    target=root_target + '/' + child_target,
+                )
+            )
+
+        sed_docs_2 = copy.deepcopy(sed_docs_1)
+        doc_2 = list(sed_docs_2.values())[0]
+        model_2 = doc_2.models[0]
+        for child in model_root.getchildren():
+            model_2.changes.append(
+                AddElementModelChange(
+                    target=root_target,
+                    new_elements=etree.tostring(child).decode(),
+                )
+            )
+
+        sed_docs_3 = copy.deepcopy(curated_sed_docs)
+        doc_3 = list(sed_docs_3.values())[0]
+        model_3 = doc_3.models[0]
+        for child in model_root.getchildren():
+            child_tag_ns, _, child_tag = child.tag.partition('}')
+            child_target = '{}:{}'.format(namespaces_rev[child_tag_ns[1:]], child_tag) if child_tag_ns else '/' + child_tag
+            model_3.changes.append(
+                ReplaceElementModelChange(
+                    target=root_target + '/' + child_target,
+                    new_elements='<biosimulatorsTestSuite:node xmlns:biosimulatorsTestSuite="https://biosimulatos.org" />',
+                )
+            )
+
+        return [
+            ExpectedResultOfSyntheticArchive(curated_archive, sed_docs_1, False),
+            ExpectedResultOfSyntheticArchive(curated_archive, sed_docs_2, True),
+            ExpectedResultOfSyntheticArchive(curated_archive, sed_docs_3, False),
+        ]
+
+
 class SimulatorSupportsAlgorithmParameters(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
     """ Test that a simulator supports setting the values of parameters of algorithms """
 
@@ -202,7 +331,7 @@ class SimulatorSupportsAlgorithmParameters(SimulatorSupportsModelsSimulationsTas
 
         return False
 
-    def build_synthetic_archive(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
+    def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
 
         Args:
@@ -213,14 +342,11 @@ class SimulatorSupportsAlgorithmParameters(SimulatorSupportsModelsSimulationsTas
                 SED documents in curated archive
 
         Returns:
-            :obj:`tuple`:
-
-                * :obj:`CombineArchive`: synthetic COMBINE/OMEX archive for testing the simulator
-                * :obj:`dict` of :obj:`str` to :obj:`SedDocument`: map from locations to
-                  SED documents in synthetic archive
+            :obj:`list` of :obj:`ExpectedResultOfSyntheticArchive`
         """
-        curated_archive, curated_sed_docs = super(SimulatorSupportsAlgorithmParameters, self).build_synthetic_archive(
+        expected_results_of_synthetic_archives = super(SimulatorSupportsAlgorithmParameters, self).build_synthetic_archives(
             specifications, curated_archive, curated_archive_dir, curated_sed_docs)
+        curated_sed_docs = expected_results_of_synthetic_archives[0].sed_documents
 
         # set algorithm parameters
         doc = list(curated_sed_docs.values())[0]
@@ -242,7 +368,7 @@ class SimulatorSupportsAlgorithmParameters(SimulatorSupportsModelsSimulationsTas
                     )
                 )
 
-        return (curated_archive, curated_sed_docs)
+        return expected_results_of_synthetic_archives
 
 
 class SimulatorProducesReportsWithCuratedNumberOfDimensions(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
@@ -279,6 +405,9 @@ class SimulatorProducesReportsWithCuratedNumberOfDimensions(SimulatorSupportsMod
             synthetic_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from the location of each SED
                 document in the synthetic archive to the document
             outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
+
+        Returns:
+            :obj:`bool`: whether there were no warnings about the outputs
         """
         doc = list(synthetic_sed_docs.values())[0]
         doc_location = list(synthetic_sed_docs.keys())[0]
@@ -312,7 +441,7 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombin
             original reports and their expected duplicates
     """
 
-    def build_synthetic_archive(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
+    def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
 
         Args:
@@ -323,14 +452,11 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombin
                 SED documents in curated archive
 
         Returns:
-            :obj:`tuple`:
-
-                * :obj:`CombineArchive`: synthetic COMBINE/OMEX archive for testing the simulator
-                * :obj:`dict` of :obj:`str` to :obj:`SedDocument`: map from locations to
-                  SED documents in synthetic archive
+            :obj:`list` of :obj:`ExpectedResultOfSyntheticArchive`
         """
-        curated_archive, curated_sed_docs = super(SimulatorSupportsMultipleTasksPerSedDocument, self).build_synthetic_archive(
+        expected_results_of_synthetic_archives = super(SimulatorSupportsMultipleTasksPerSedDocument, self).build_synthetic_archives(
             specifications, curated_archive, curated_archive_dir, curated_sed_docs)
+        curated_sed_docs = expected_results_of_synthetic_archives[0].sed_documents
 
         # get a suitable SED document to modify
         location = list(curated_sed_docs.keys())[0]
@@ -374,7 +500,7 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombin
                     copy_data_set.data_generator = copy_data_gen
 
         # return modified SED document
-        return (curated_archive, curated_sed_docs)
+        return expected_results_of_synthetic_archives
 
     def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
         """ Test that the expected outputs were created for the synthetic archive
@@ -385,6 +511,9 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombin
             synthetic_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from the location of each SED
                 document in the synthetic archive to the document
             outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
+
+        Returns:
+            :obj:`bool`: whether there were no warnings about the outputs
         """
         try:
             report_ids = ReportReader().get_ids(outputs_dir)
@@ -402,11 +531,13 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombin
             raise ValueError('Reports for duplicate tasks were not generated:\n  {}'.format(
                 '\n  '.join(sorted(missing_reports))))
 
+        return True
+
 
 class SimulatorSupportsMultipleReportsPerSedDocument(SingleMasterSedDocumentCombineArchiveTestCase):
     """ Test that a simulator supports multiple reports per SED document """
 
-    def build_synthetic_archive(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
+    def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
 
         Args:
@@ -417,14 +548,11 @@ class SimulatorSupportsMultipleReportsPerSedDocument(SingleMasterSedDocumentComb
                 SED documents in curated archive
 
         Returns:
-            :obj:`tuple`:
-
-                * :obj:`CombineArchive`: synthetic COMBINE/OMEX archive for testing the simulator
-                * :obj:`dict` of :obj:`str` to :obj:`SedDocument`: map from locations to
-                  SED documents in synthetic archive
+            :obj:`list` of :obj:`ExpectedResultOfSyntheticArchive`
         """
-        curated_archive, curated_sed_docs = super(SimulatorSupportsMultipleReportsPerSedDocument, self).build_synthetic_archive(
+        expected_results_of_synthetic_archives = super(SimulatorSupportsMultipleReportsPerSedDocument, self).build_synthetic_archives(
             specifications, curated_archive, curated_archive_dir, curated_sed_docs)
+        curated_sed_docs = expected_results_of_synthetic_archives[0].sed_documents
 
         # get a suitable SED document to modify
         sed_doc = list(curated_sed_docs.values())[0]
@@ -443,7 +571,7 @@ class SimulatorSupportsMultipleReportsPerSedDocument(SingleMasterSedDocumentComb
         sed_doc.outputs[1].data_sets.append(original_data_sets[0])
 
         # return modified SED document
-        return (curated_archive, curated_sed_docs)
+        return expected_results_of_synthetic_archives
 
     def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
         """ Test that the expected outputs were created for the synthetic archive
@@ -454,6 +582,9 @@ class SimulatorSupportsMultipleReportsPerSedDocument(SingleMasterSedDocumentComb
             synthetic_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from the location of each SED
                 document in the synthetic archive to the document
             outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
+
+        Returns:
+            :obj:`bool`: whether there were no warnings about the outputs
         """
         has_warnings = False
 
@@ -523,7 +654,7 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
     def _axis_scale(self):
         pass  # pragma: no cover
 
-    def build_synthetic_archive(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
+    def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
 
         Args:
@@ -534,14 +665,11 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
                 SED documents in curated archive
 
         Returns:
-            :obj:`tuple`:
-
-                * :obj:`CombineArchive`: synthetic COMBINE/OMEX archive for testing the simulator
-                * :obj:`dict` of :obj:`str` to :obj:`SedDocument`: map from locations to
-                  SED documents in synthetic archive
+            :obj:`list` of :obj:`ExpectedResultOfSyntheticArchive`
         """
-        curated_archive, curated_sed_docs = super(SimulatorProducesPlotsTestCase, self).build_synthetic_archive(
+        expected_results_of_synthetic_archives = super(SimulatorProducesPlotsTestCase, self).build_synthetic_archives(
             specifications, curated_archive, curated_archive_dir, curated_sed_docs)
+        curated_sed_docs = expected_results_of_synthetic_archives[0].sed_documents
 
         # get a suitable SED document to modify
         doc = list(curated_sed_docs.values())[0]
@@ -550,7 +678,7 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
         doc.outputs = self.build_plots(doc.data_generators)
 
         # return modified SED document
-        return (curated_archive, curated_sed_docs)
+        return expected_results_of_synthetic_archives
 
     @abc.abstractmethod
     def build_plots(self, data_generators):
