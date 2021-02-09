@@ -23,6 +23,7 @@ from lxml import etree
 import abc
 import copy
 import numpy
+import numpy.testing
 import os
 import PyPDF2
 import shutil
@@ -1216,3 +1217,136 @@ class SimulatorSupportsDataGeneratorsWithDifferentShapes(UniformTimeCourseTestCa
             )
             if not numpy.all(numpy.isnan(value[data_set_slice])):
                 raise InvalidOutputsException('Data set has unexpected non-NaN values')
+
+
+class SimulatorSupportsDataSetsWithDifferentShapes(UniformTimeCourseTestCase):
+    """ Test that a simulator supports data generators with different shapes """
+    REPORT_ERROR_AS_SKIP = True
+
+    def modify_simulation(self, simulation):
+        """ Modify a simulation
+
+        Args:
+            simulation (:obj:`UniformTimeCourseSimulation`): simulation
+        """
+        pass  # pragma: no cover
+
+    def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
+        """ Generate a synthetic archive with a copy of each task and each report
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            curated_archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            curated_archive_dir (:obj:`str`): directory with the contents of the curated COMBINE/OMEX archive
+            curated_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
+                SED documents in curated archive
+
+        Returns:
+            :obj:`list` of :obj:`ExpectedResultOfSyntheticArchive`
+        """
+        expected_results_of_synthetic_archives = super(SimulatorSupportsDataSetsWithDifferentShapes, self).build_synthetic_archives(
+            specifications, curated_archive, curated_archive_dir, curated_sed_docs)
+        curated_sed_docs = expected_results_of_synthetic_archives[0].sed_documents
+        doc = list(curated_sed_docs.values())[0]
+
+        sim = doc.simulations[0]
+        sim2 = UniformTimeCourseSimulation(
+            id=sim.id + '__copy_2',
+            initial_time=sim.initial_time,
+            output_start_time=sim.output_start_time,
+            output_end_time=sim.output_end_time,
+            number_of_points=sim.number_of_points * 2,
+            algorithm=copy.deepcopy(sim.algorithm),
+        )
+        doc.simulations.append(sim2)
+
+        task = doc.tasks[0]
+        task2 = Task(
+            id=task.id + '__copy_2',
+            model=task.model,
+            simulation=sim2,
+        )
+        doc.tasks.append(task2)
+
+        report = doc.outputs[0]
+
+        for data_gen in list(doc.data_generators):
+            data_gen2 = DataGenerator(
+                id=data_gen.id + '__copy_2',
+                variables=[
+                    Variable(
+                        id=data_gen.variables[0].id + '__copy_2',
+                        task=task2,
+                        symbol=data_gen.variables[0].symbol,
+                        target=data_gen.variables[0].target,
+                    ),
+                ],
+                math='{}'.format(data_gen.variables[0].id + '__copy_2'),
+            )
+            doc.data_generators.append(data_gen2)
+
+            report.data_sets.append(DataSet(id=data_gen2.id + '_data_set', label=data_gen2.id + '_data_set', data_generator=data_gen2))
+
+        return expected_results_of_synthetic_archives
+
+    def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
+        """ Test that the expected outputs were created for the synthetic archive
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            synthetic_archive (:obj:`CombineArchive`): synthetic COMBINE/OMEX archive for testing the simulator
+            synthetic_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from the location of each SED
+                document in the synthetic archive to the document
+            outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
+
+        Returns:
+            :obj:`bool`: whether there were no warnings about the outputs
+        """
+        doc_location = list(synthetic_sed_docs.keys())[0]
+        doc_id = os.path.relpath(doc_location, './')
+        doc = synthetic_sed_docs[doc_location]
+        sim1 = doc.simulations[0]
+        sim2 = doc.simulations[-1]
+        task1 = doc.tasks[0]
+        report = doc.outputs[0]
+
+        results = ReportReader().run(report, outputs_dir, os.path.join(doc_id, report.id))
+
+        values1 = {}
+        values2 = {}
+
+        for data_set in report.data_sets:
+            value = results[data_set.id]
+
+            if data_set.data_generator.variables[0].task == task1:
+                if value.shape[-1] != sim1.number_of_points + 1:
+                    raise InvalidOutputsException('Data set `{}` does not have the expected shape'.format(data_set.id))
+
+                if numpy.any(numpy.isnan(value)):
+                    raise InvalidOutputsException('Data set `{}` has unexpected NaN values'.format(data_set.id))
+
+                if data_set.data_generator.variables[0].symbol:
+                    values1[data_set.data_generator.id] = value
+
+            else:
+                if value.shape[-1] != sim2.number_of_points + 1:
+                    raise InvalidOutputsException('Data set `{}` does not have the expected shape'.format(data_set.id))
+
+                if numpy.any(numpy.isnan(value)):
+                    raise InvalidOutputsException('Data set `{}` has unexpected NaN values'.format(data_set.id))
+
+                if data_set.data_generator.variables[0].symbol:
+                    data_set_slice = (
+                        [slice(0, dim_len) for dim_len in value.shape[0:-1]]
+                        + [slice(0, sim2.number_of_points + 1, 2)]
+                    )
+                    values2[data_set.data_generator.id.replace('__copy_2', '')] = value[data_set_slice]
+
+        for key in values1.keys():
+            value1 = values1[key]
+            value2 = values2[key]
+            try:
+                numpy.testing.assert_allclose(value1, value2)
+            except Exception as exception:
+                raise ValueError('Simulations with the same time courses should produce equivalent time data sets:\n\n  {}'.format(
+                    str(exception).replace('\n', '\n  ')))
