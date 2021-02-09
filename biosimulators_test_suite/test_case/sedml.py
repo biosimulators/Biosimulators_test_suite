@@ -16,7 +16,8 @@ from biosimulators_utils.sedml.data_model import (SedDocument, Output, Report, P
                                                   Variable, UniformTimeCourseSimulation,
                                                   DataSet, Curve, Surface, AxisScale,
                                                   Model, ModelAttributeChange, AlgorithmParameterChange,
-                                                  AddElementModelChange, RemoveElementModelChange, ReplaceElementModelChange)
+                                                  AddElementModelChange, RemoveElementModelChange, ReplaceElementModelChange,
+                                                  ComputeModelChange, Parameter, Variable)
 from biosimulators_utils.xml.utils import get_namespaces_for_xml_doc
 from lxml import etree
 import abc
@@ -263,8 +264,6 @@ class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsT
                 + '[{}]'.format(i_node + 1)
             )
 
-            print(node_target)
-
             for key, value in node.attrib.items():
                 model_1.changes.append(
                     ModelAttributeChange(
@@ -277,6 +276,129 @@ class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsT
                     ModelAttributeChange(
                         target=node_target + '/@' + key,
                         new_value='x',
+                    )
+                )
+                model_2.changes.append(
+                    ModelAttributeChange(
+                        target=node_target + '/@' + key,
+                        new_value=value,
+                    )
+                )
+
+            n_children = {}
+            for child in node.getchildren():
+                child_ns, _, child_tag = child.tag.partition('}')
+
+                child_tag_ns = (namespaces_rev[child_ns[1:]] + ':' if child_ns else '') + child_tag
+                if child_tag_ns not in n_children:
+                    n_children[child_tag_ns] = 0
+
+                nodes.append((child, n_children[child_tag_ns], node_target, depth + 1))
+
+                n_children[child_tag_ns] += 1
+
+        return [
+            ExpectedResultOfSyntheticArchive(curated_archive, sed_docs_1, False),
+            ExpectedResultOfSyntheticArchive(curated_archive, sed_docs_2, True),
+        ]
+
+
+class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
+    """ Test that a simulator supports changes to the attributes of model elements
+    """
+    REPORT_ERROR_AS_SKIP = True
+
+    def __init__(self, *args, **kwargs):
+        super(SimulatorSupportsComputeModelChanges, self).__init__(*args, **kwargs)
+        self._types_of_model_changes_to_keep = ()
+
+    def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
+        """ Generate a synthetic archive with a copy of each task and each report
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            curated_archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            curated_archive_dir (:obj:`str`): directory with the contents of the curated COMBINE/OMEX archive
+            curated_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
+                SED documents in curated archive
+
+        Returns:
+            :obj:`list` of :obj:`ExpectedResultOfSyntheticArchive`
+        """
+        expected_results_of_synthetic_archives = super(SimulatorSupportsComputeModelChanges, self).build_synthetic_archives(
+            specifications, curated_archive, curated_archive_dir, curated_sed_docs)
+        curated_archive = expected_results_of_synthetic_archives[0].archive
+        curated_sed_docs = expected_results_of_synthetic_archives[0].sed_documents
+
+        # get model
+        doc = list(curated_sed_docs.values())[0]
+        model = doc.models[0]
+
+        try:
+            model_etree = etree.parse(os.path.join(curated_archive_dir, model.source))
+        except etree.XMLSyntaxError:
+            msg = ('This test is only implemented for XML-based model languages. '
+                   'Please contact the BioSimulators Team to discuss implementing tests for additional languages.')
+            raise SkippedTestCaseException(msg)
+
+        # add model changes
+        namespaces = get_namespaces_for_xml_doc(model_etree)
+        namespaces_rev = {uri: prefix for prefix, uri in namespaces.items()}
+
+        model_root = model_etree.getroot()
+
+        sed_docs_1 = copy.deepcopy(curated_sed_docs)
+        sed_docs_2 = copy.deepcopy(sed_docs_1)
+        doc_1 = list(sed_docs_1.values())[0]
+        doc_2 = list(sed_docs_2.values())[0]
+        model_1 = doc_1.models[0]
+        model_2 = doc_2.models[0]
+        nodes = [(model_root, 0, '', 0)]
+        i_change = 0
+        while nodes:
+            node, i_node, parent_target, depth = nodes.pop()
+
+            node_ns, _, node_tag = node.tag.partition('}')
+            node_target = (
+                parent_target
+                + '/'
+                + (namespaces_rev[node_ns[1:]] + ':' if node_ns else '')
+                + node_tag
+                + '[{}]'.format(i_node + 1)
+            )
+
+            for key, value in node.attrib.items():
+                try:
+                    float_value = float(value)
+                except ValueError:
+                    continue
+
+                i_change += 1
+                param_id = '__p_'.format(i_change)
+                var_id = '__var_'.format(i_change)
+                model_1.changes.append(
+                    ComputeModelChange(
+                        target=node_target + '/@' + key,
+                        parameters=[
+                            Parameter(id=param_id, value=1.)
+                        ],
+                        variables=[
+                            Variable(id=var_id, target=node_target + '/@' + key, model=model_1)
+                        ],
+                        math='{} * {}'.format(param_id, var_id),
+                    )
+                )
+
+                model_2.changes.append(
+                    ComputeModelChange(
+                        target=node_target + '/@' + key,
+                        parameters=[
+                            Parameter(id=param_id, value=1.)
+                        ],
+                        variables=[
+                            Variable(id=var_id, target=node_target + '/@' + key, model=model_2)
+                        ],
+                        math='{} * {}'.format(param_id, var_id),
                     )
                 )
                 model_2.changes.append(

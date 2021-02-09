@@ -672,7 +672,23 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         # test test ignored for non-XML models
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_NON_XML_ARCHIVE_FILENAME)
-        case = sedml.SimulatorSupportsAddReplaceRemoveModelElementChanges(
+        case = sedml.SimulatorSupportsModelAttributeChanges(
+            published_projects_test_cases=[curated_case])
+        with self.assertRaisesRegex(SkippedTestCaseException, 'only implemented for XML-based model'):
+            case.eval(specs)
+
+    def test_SimulatorSupportsComputeModelChanges(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        # test synthetic case generated and used to test simulator
+        case = sedml.SimulatorSupportsComputeModelChanges(
+            published_projects_test_cases=[curated_case])
+        case.eval(specs)
+
+        # test test ignored for non-XML models
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_NON_XML_ARCHIVE_FILENAME)
+        case = sedml.SimulatorSupportsComputeModelChanges(
             published_projects_test_cases=[curated_case])
         with self.assertRaisesRegex(SkippedTestCaseException, 'only implemented for XML-based model'):
             case.eval(specs)
