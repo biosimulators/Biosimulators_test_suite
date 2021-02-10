@@ -29,7 +29,6 @@ import biosimulators_utils.archive.io
 import biosimulators_utils.simulator.exec
 import biosimulators_utils.report.io
 import abc
-import copy
 import datetime
 import dateutil.tz
 import glob
@@ -583,6 +582,10 @@ class SyntheticCombineArchiveTestCase(TestCase):
         Returns:
             :obj:`bool`: whether the SED document is suitable for testing
         """
+        split_sed_doc_location = os.path.split(os.path.relpath(sed_doc_location, '.'))
+        if split_sed_doc_location[0] or len(split_sed_doc_location) > 2:
+            return False
+
         for output in sed_doc.outputs:
             if isinstance(output, Report) and self.is_curated_sed_report_suitable_for_building_synthetic_archive(
                     specifications, output, sed_doc_location):
@@ -786,7 +789,6 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
 
     Attributes:
         _archive_has_master (:obj:`bool`): whether the synthetic archive should have a master file
-        _include_non_master (:obj:`bool`): whether the synthetic archive should also have a non-master file
         _types_of_model_changes_to_keep (:obj:`list` of :obj:`type`): types of model changes to keep
         _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
             the values of the parameters of algorithms
@@ -801,11 +803,6 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
     @property
     @abc.abstractmethod
     def _archive_has_master(self):
-        pass  # pragma: no cover
-
-    @property
-    @abc.abstractmethod
-    def _include_non_master(self):
         pass  # pragma: no cover
 
     def __init__(self, *args, **kwargs):
@@ -894,23 +891,10 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
             doc_content.location: doc,
         }
 
-        # duplicate document
-        if self._include_non_master:
-            doc_content_copy = copy.deepcopy(doc_content)
-            doc_content_copy.master = False
-            doc_content_copy.location = os.path.join(
-                os.path.dirname(doc_content_copy.location),
-                '__copy__' + os.path.basename(doc_content_copy.location))
-            curated_archive.contents.append(doc_content_copy)
-
-            curated_sed_docs[doc_content_copy.location] = copy.deepcopy(doc)
-
         self._expected_report_ids = []
         for output in doc.outputs:
             if isinstance(output, Report):
                 self._expected_report_ids.append(os.path.join(os.path.relpath(doc_content.location, './'), output.id))
-                if not self._archive_has_master and self._include_non_master:
-                    self._expected_report_ids.append(os.path.join(os.path.relpath(doc_content_copy.location, './'), output.id))
 
         # return modified SED document
         return [ExpectedResultOfSyntheticArchive(curated_archive, curated_sed_docs, True)]
@@ -921,16 +905,11 @@ class SingleMasterSedDocumentCombineArchiveTestCase(ConfigurableMasterCombineArc
 
     Attributes:
         _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
-        _include_non_master (:obj:`bool`): whether the synthetic archive should also have a non-master file
     """
 
     @property
     def _archive_has_master(self):
         return True
-
-    @property
-    def _include_non_master(self):
-        return False
 
 
 class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
@@ -985,45 +964,58 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
             self.modify_simulation(sim)
             report = doc.outputs[0]
 
-            time_data_set = False
-            for data_gen in doc.data_generators:
-                var = data_gen.variables[0]
-                if var.symbol == Symbol.time:
-                    for data_set in report.data_sets:
-                        if data_set.data_generator == data_gen:
-                            time_data_set = True
-                            data_set.id = '__data_set_time__'
-                            break
-                if time_data_set:
-                    break
-
-            if not time_data_set:
-                doc.data_generators.append(
-                    DataGenerator(
-                        id='__data_generator_time__',
-                        variables=[
-                            Variable(
-                                id='__variable_time__',
-                                task=task,
-                                symbol=Symbol.time,
-                            ),
-                        ],
-                        math='__variable_time__',
-                    ),
-                )
-                report.data_sets.append(
-                    DataSet(
-                        id='__data_set_time__',
-                        label='__data_set_time__',
-                        data_generator=doc.data_generators[-1],
-                    )
-                )
+            self.add_time_data_set(doc, task, report)
 
             expected_results_of_synthetic_archive.archive = curated_archive
             expected_results_of_synthetic_archive.sed_documents = curated_sed_docs
 
         # return modified SED document
         return expected_results_of_synthetic_archives
+
+    def add_time_data_set(self, doc, task, report):
+        """ Rename or add a time data set to a SED report
+
+        Args:
+            doc (:obj:`SedDocument`): SED document
+            task (:obj:`task`): SED task
+            report (:obj:`Report`): SED report
+        """
+        time_data_gen = None
+        for data_gen in doc.data_generators:
+            var = data_gen.variables[0]
+            if var.task == task and var.symbol == Symbol.time:
+                time_data_gen = data_gen
+                break
+
+        if not time_data_gen:
+            time_data_gen = DataGenerator(
+                id='__data_generator_time__',
+                variables=[
+                    Variable(
+                        id='__variable_time__',
+                        task=task,
+                        symbol=Symbol.time,
+                    ),
+                ],
+                math='__variable_time__',
+            )
+            doc.data_generators.append(time_data_gen)
+
+        time_data_set = None
+        for data_set in report.data_sets:
+            if data_set.data_generator == time_data_gen:
+                time_data_set = data_set
+                data_set.id = '__data_set_time__'
+                break
+
+        if not time_data_set:
+            report.data_sets.append(
+                DataSet(
+                    id='__data_set_time__',
+                    label='__data_set_time__',
+                    data_generator=time_data_gen,
+                )
+            )
 
     @abc.abstractmethod
     def modify_simulation(self, simulation):

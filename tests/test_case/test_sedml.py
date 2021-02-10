@@ -343,7 +343,7 @@ class SedmlTestCaseTest(unittest.TestCase):
             simulation=UniformTimeCourseSimulation(initial_time=10.),
             model=doc.models[0],
         )))
-        self.assertFalse(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc, None))
+        self.assertFalse(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc, './a.sedml'))
         self.assertFalse(case.is_curated_archive_suitable_for_building_synthetic_archive(None, archive, {'./a.sedml': doc}))
 
         doc.tasks.append(Task(model=doc.models[0], simulation=doc.simulations[0]))
@@ -366,7 +366,7 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         self.assertTrue(case.is_curated_sed_task_suitable_for_building_synthetic_archive(None, doc.tasks[0]))
         self.assertTrue(case.is_curated_sed_report_suitable_for_building_synthetic_archive(None, doc.outputs[0], None))
-        self.assertTrue(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc, None))
+        self.assertTrue(case.is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc, './a.sedml'))
         self.assertTrue(case.is_curated_archive_suitable_for_building_synthetic_archive(None, archive, sed_docs))
 
         case.build_synthetic_archives(None, archive, None, sed_docs)

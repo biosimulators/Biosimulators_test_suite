@@ -3,7 +3,7 @@ from biosimulators_test_suite.exceptions import InvalidOutputsException, Skipped
 from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType
 from biosimulators_test_suite.test_case.published_project import (
     SimulatorCanExecutePublishedProject, find_cases, SyntheticCombineArchiveTestCase,
-    ExpectedResultOfSyntheticArchive)
+    ExpectedResultOfSyntheticArchive, UniformTimeCourseTestCase)
 from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
@@ -11,7 +11,7 @@ from biosimulators_utils.combine.data_model import CombineArchive
 from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
 from biosimulators_utils.report.data_model import DataSetResults
 from biosimulators_utils.report.io import ReportWriter, ReportFormat
-from biosimulators_utils.sedml.data_model import Task, Report, DataSet
+from biosimulators_utils.sedml.data_model import SedDocument, Task, DataGenerator, Report, DataSet, Plot2D, Symbol, Variable
 from unittest import mock
 import functools
 import json
@@ -402,6 +402,27 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
         self.assertEqual(expected_results_of_synthetic_archives[0].archive, archive,)
         self.assertEqual(expected_results_of_synthetic_archives[0].sed_documents, 'c',)
 
+    def test_SyntheticCombineArchiveTestCase_is_curated_sed_doc_suitable_for_building_synthetic_archive(self):
+        class Concrete(SyntheticCombineArchiveTestCase):
+            def is_curated_sed_model_suitable_for_building_synthetic_archive(self, specs, model):
+                return False
+
+            def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
+                pass
+
+        with mock.patch.object(Concrete, 'is_curated_sed_report_suitable_for_building_synthetic_archive', return_value=True):
+            doc = SedDocument(outputs=[Report()])
+            self.assertTrue(Concrete().is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc, './doc.sedml'))
+            self.assertTrue(Concrete().is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc, 'doc.sedml'))
+
+            self.assertFalse(Concrete().is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc, './subdir/doc.sedml'))
+
+            doc.outputs = [Plot2D()]
+            self.assertFalse(Concrete().is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc, './doc.sedml'))
+
+            doc.outputs = []
+            self.assertFalse(Concrete().is_curated_sed_doc_suitable_for_building_synthetic_archive(None, doc, './doc.sedml'))
+
     def test_SyntheticCombineArchiveTestCase_is_curated_sed_task_suitable_for_building_synthetic_archive(self):
         class Concrete(SyntheticCombineArchiveTestCase):
             def is_curated_sed_model_suitable_for_building_synthetic_archive(self, specs, model):
@@ -460,3 +481,71 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
                     with self.assertRaisesRegex(ValueError, 'did not fail as expected'):
                         Concrete()._eval_synthetic_archive(
                             specifications, expected_results_of_synthetic_archive, shared_archive_dir)
+
+    def test_UniformTimeCourseTestCase_add_time_data_set(self):
+        class Concrete(UniformTimeCourseTestCase):
+            def modify_simulation(self, simulation):
+                pass
+
+            def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
+                pass
+
+        doc = SedDocument()
+        task = Task()
+        doc.tasks.append(task)
+        report = Report()
+        doc.outputs.append(report)
+        self.assertFalse(Concrete().add_time_data_set(doc, task, report))
+        self.assertEqual(len(doc.data_generators), 1)
+        self.assertEqual(len(report.data_sets), 1)
+        self.assertEqual(report.data_sets[0].id, '__data_set_time__')
+        self.assertFalse(Concrete().add_time_data_set(doc, task, report))
+        self.assertEqual(len(doc.data_generators), 1)
+        self.assertEqual(len(report.data_sets), 1)
+        self.assertEqual(report.data_sets[0].id, '__data_set_time__')
+
+        doc = SedDocument()
+        task = Task()
+        doc.tasks.append(task)
+        doc.data_generators.append(DataGenerator(variables=[Variable(task=task, symbol=Symbol.time)]))
+        report = Report()
+        doc.outputs.append(report)
+        self.assertFalse(Concrete().add_time_data_set(doc, task, report))
+        self.assertEqual(len(doc.data_generators), 1)
+        self.assertEqual(len(report.data_sets), 1)
+        self.assertEqual(report.data_sets[0].id, '__data_set_time__')
+
+        doc = SedDocument()
+        task = Task()
+        doc.tasks.append(task)
+        doc.data_generators.append(DataGenerator(variables=[Variable(task=task, symbol=None)]))
+        report = Report()
+        doc.outputs.append(report)
+        self.assertFalse(Concrete().add_time_data_set(doc, task, report))
+        self.assertEqual(len(doc.data_generators), 2)
+        self.assertEqual(len(report.data_sets), 1)
+        self.assertEqual(report.data_sets[0].id, '__data_set_time__')
+
+        doc = SedDocument()
+        task = Task()
+        doc.tasks.append(task)
+        doc.data_generators.append(DataGenerator(variables=[Variable(task=task, symbol=Symbol.time)]))
+        report = Report()
+        doc.outputs.append(report)
+        report.data_sets.append(DataSet(data_generator=doc.data_generators[0]))
+        self.assertFalse(Concrete().add_time_data_set(doc, task, report))
+        self.assertEqual(len(doc.data_generators), 1)
+        self.assertEqual(len(report.data_sets), 1)
+        self.assertEqual(report.data_sets[0].id, '__data_set_time__')
+
+        doc = SedDocument()
+        task = Task()
+        doc.tasks.append(task)
+        doc.data_generators.append(DataGenerator(variables=[Variable(task=task, symbol=Symbol.time)]))
+        report = Report()
+        doc.outputs.append(report)
+        report.data_sets.append(DataSet(data_generator=None))
+        self.assertFalse(Concrete().add_time_data_set(doc, task, report))
+        self.assertEqual(len(doc.data_generators), 1)
+        self.assertEqual(len(report.data_sets), 2)
+        self.assertEqual(report.data_sets[1].id, '__data_set_time__')
