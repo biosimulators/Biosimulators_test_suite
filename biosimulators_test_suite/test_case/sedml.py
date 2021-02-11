@@ -18,7 +18,7 @@ from biosimulators_utils.sedml.data_model import (SedDocument, Task, Output, Rep
                                                   Model, ModelAttributeChange, AlgorithmParameterChange,
                                                   AddElementModelChange, RemoveElementModelChange, ReplaceElementModelChange,
                                                   ComputeModelChange, Parameter)
-from biosimulators_utils.xml.utils import get_namespaces_for_xml_doc
+from biosimulators_utils.sedml.utils import get_xml_node_namespace_tag_target
 from lxml import etree
 import abc
 import copy
@@ -241,9 +241,6 @@ class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsT
             raise SkippedTestCaseException(msg)
 
         # add model changes
-        namespaces = get_namespaces_for_xml_doc(model_etree)
-        namespaces_rev = {uri: prefix for prefix, uri in namespaces.items()}
-
         model_root = model_etree.getroot()
 
         sed_docs_1 = copy.deepcopy(curated_sed_docs)
@@ -252,16 +249,17 @@ class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsT
         doc_2 = list(sed_docs_2.values())[0]
         model_1 = doc_1.models[0]
         model_2 = doc_2.models[0]
-        nodes = [(model_root, 0, '', 0)]
+        nodes = [(model_root, 0, '', {})]
         while nodes:
-            node, i_node, parent_target, depth = nodes.pop()
+            node, i_node, parent_target, parent_namespaces = nodes.pop()
 
-            node_ns, _, node_tag = node.tag.partition('}')
+            _, _, _, node_target, target_namespaces = get_xml_node_namespace_tag_target(
+                node, target_namespaces=parent_namespaces)
+
             node_target = (
                 parent_target
                 + '/'
-                + (namespaces_rev[node_ns[1:]] + ':' if node_ns else '')
-                + node_tag
+                + node_target
                 + '[{}]'.format(i_node + 1)
             )
 
@@ -269,6 +267,7 @@ class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsT
                 model_1.changes.append(
                     ModelAttributeChange(
                         target=node_target + '/@' + key,
+                        target_namespaces=target_namespaces,
                         new_value='x',
                     )
                 )
@@ -276,27 +275,29 @@ class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsT
                 model_2.changes.append(
                     ModelAttributeChange(
                         target=node_target + '/@' + key,
+                        target_namespaces=target_namespaces,
                         new_value='x',
                     )
                 )
                 model_2.changes.append(
                     ModelAttributeChange(
                         target=node_target + '/@' + key,
+                        target_namespaces=target_namespaces,
                         new_value=value,
                     )
                 )
 
             n_children = {}
             for child in node.getchildren():
-                child_ns, _, child_tag = child.tag.partition('}')
+                _, _, _, child_target, _ = get_xml_node_namespace_tag_target(
+                    child, target_namespaces=target_namespaces)
 
-                child_tag_ns = (namespaces_rev[child_ns[1:]] + ':' if child_ns else '') + child_tag
-                if child_tag_ns not in n_children:
-                    n_children[child_tag_ns] = 0
+                if child_target not in n_children:
+                    n_children[child_target] = 0
 
-                nodes.append((child, n_children[child_tag_ns], node_target, depth + 1))
+                nodes.append((child, n_children[child_target], node_target, target_namespaces))
 
-                n_children[child_tag_ns] += 1
+                n_children[child_target] += 1
 
         return [
             ExpectedResultOfSyntheticArchive(curated_archive, sed_docs_1, False),
@@ -343,9 +344,6 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
             raise SkippedTestCaseException(msg)
 
         # add model changes
-        namespaces = get_namespaces_for_xml_doc(model_etree)
-        namespaces_rev = {uri: prefix for prefix, uri in namespaces.items()}
-
         model_root = model_etree.getroot()
 
         sed_docs_1 = copy.deepcopy(curated_sed_docs)
@@ -354,17 +352,18 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
         doc_2 = list(sed_docs_2.values())[0]
         model_1 = doc_1.models[0]
         model_2 = doc_2.models[0]
-        nodes = [(model_root, 0, '', 0)]
+        nodes = [(model_root, 0, '', {})]
         i_change = 0
         while nodes:
-            node, i_node, parent_target, depth = nodes.pop()
+            node, i_node, parent_target, parent_namespaces = nodes.pop()
 
-            node_ns, _, node_tag = node.tag.partition('}')
+            _, _, _, node_target, target_namespaces = get_xml_node_namespace_tag_target(
+                node, target_namespaces=parent_namespaces)
+
             node_target = (
                 parent_target
                 + '/'
-                + (namespaces_rev[node_ns[1:]] + ':' if node_ns else '')
-                + node_tag
+                + node_target
                 + '[{}]'.format(i_node + 1)
             )
 
@@ -380,11 +379,17 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
                 model_1.changes.append(
                     ComputeModelChange(
                         target=node_target + '/@' + key,
+                        target_namespaces=target_namespaces,
                         parameters=[
                             Parameter(id=param_id, value=1.)
                         ],
                         variables=[
-                            Variable(id=var_id, target=node_target + '/@' + key, model=model_1)
+                            Variable(
+                                id=var_id,
+                                target=node_target + '/@' + key,
+                                target_namespaces=target_namespaces,
+                                model=model_1,
+                            )
                         ],
                         math='{} * {}'.format(param_id, var_id),
                     )
@@ -393,11 +398,17 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
                 model_2.changes.append(
                     ComputeModelChange(
                         target=node_target + '/@' + key,
+                        target_namespaces=target_namespaces,
                         parameters=[
                             Parameter(id=param_id, value=1.)
                         ],
                         variables=[
-                            Variable(id=var_id, target=node_target + '/@' + key, model=model_2)
+                            Variable(
+                                id=var_id,
+                                target=node_target + '/@' + key,
+                                target_namespaces=target_namespaces,
+                                model=model_2,
+                            )
                         ],
                         math='{} * {}'.format(param_id, var_id),
                     )
@@ -405,21 +416,22 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
                 model_2.changes.append(
                     ModelAttributeChange(
                         target=node_target + '/@' + key,
+                        target_namespaces=target_namespaces,
                         new_value=value,
                     )
                 )
 
             n_children = {}
             for child in node.getchildren():
-                child_ns, _, child_tag = child.tag.partition('}')
+                _, _, _, child_target, _ = get_xml_node_namespace_tag_target(
+                    child, target_namespaces=target_namespaces)
 
-                child_tag_ns = (namespaces_rev[child_ns[1:]] + ':' if child_ns else '') + child_tag
-                if child_tag_ns not in n_children:
-                    n_children[child_tag_ns] = 0
+                if child_target not in n_children:
+                    n_children[child_target] = 0
 
-                nodes.append((child, n_children[child_tag_ns], node_target, depth + 1))
+                nodes.append((child, n_children[child_target], node_target, target_namespaces))
 
-                n_children[child_tag_ns] += 1
+                n_children[child_target] += 1
 
         return [
             ExpectedResultOfSyntheticArchive(curated_archive, sed_docs_1, False),
@@ -465,23 +477,19 @@ class SimulatorSupportsAddReplaceRemoveModelElementChanges(SimulatorSupportsMode
             raise SkippedTestCaseException(msg)
 
         # add model changes
-        namespaces = get_namespaces_for_xml_doc(model_etree)
-        namespaces_rev = {uri: prefix for prefix, uri in namespaces.items()}
-
         model_root = model_etree.getroot()
-        model_root_tag_ns, _, model_root_tag = model_root.tag.partition('}')
-
-        root_target = '/{}:{}'.format(namespaces_rev[model_root_tag_ns[1:]], model_root_tag) if model_root_tag_ns else '/' + model_root_tag
+        _, _, _, root_target, root_namespaces = get_xml_node_namespace_tag_target(model_root)
 
         sed_docs_1 = copy.deepcopy(curated_sed_docs)
         doc_1 = list(sed_docs_1.values())[0]
         model_1 = doc_1.models[0]
         for child in model_root.getchildren():
-            child_tag_ns, _, child_tag = child.tag.partition('}')
-            child_target = '{}:{}'.format(namespaces_rev[child_tag_ns[1:]], child_tag) if child_tag_ns else '/' + child_tag
+            _, _, _, child_target, target_namespaces = get_xml_node_namespace_tag_target(
+                child, target_namespaces=root_namespaces)
             model_1.changes.append(
                 RemoveElementModelChange(
-                    target=root_target + '/' + child_target,
+                    target='/' + root_target + '/' + child_target,
+                    target_namespaces=target_namespaces,
                 )
             )
 
@@ -491,7 +499,8 @@ class SimulatorSupportsAddReplaceRemoveModelElementChanges(SimulatorSupportsMode
         for child in model_root.getchildren():
             model_2.changes.append(
                 AddElementModelChange(
-                    target=root_target,
+                    target='/' + root_target,
+                    target_namespaces=root_namespaces,
                     new_elements=etree.tostring(child).decode(),
                 )
             )
@@ -500,11 +509,12 @@ class SimulatorSupportsAddReplaceRemoveModelElementChanges(SimulatorSupportsMode
         doc_3 = list(sed_docs_3.values())[0]
         model_3 = doc_3.models[0]
         for child in model_root.getchildren():
-            child_tag_ns, _, child_tag = child.tag.partition('}')
-            child_target = '{}:{}'.format(namespaces_rev[child_tag_ns[1:]], child_tag) if child_tag_ns else '/' + child_tag
+            child_uri, child_prefix, _, child_target, target_namespaces = get_xml_node_namespace_tag_target(
+                child, target_namespaces=root_namespaces)
             model_3.changes.append(
                 ReplaceElementModelChange(
-                    target=root_target + '/' + child_target,
+                    target='/' + root_target + '/' + child_target,
+                    target_namespaces=target_namespaces,
                     new_elements='<biosimulatorsTestSuite:node xmlns:biosimulatorsTestSuite="https://biosimulatos.org" />',
                 )
             )
@@ -700,7 +710,13 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombin
                         sed_doc.data_generators.append(copy_data_gen)
 
                         for var in data_set.data_generator.variables:
-                            copy_var = Variable(id=var.id, target=var.target, symbol=var.symbol, model=var.model)
+                            copy_var = Variable(
+                                id=var.id,
+                                target=var.target,
+                                target_namespaces=var.target_namespaces,
+                                symbol=var.symbol,
+                                model=var.model,
+                            )
                             copy_var.task = copy_tasks[var.task.id]
                             copy_data_gen.variables.append(copy_var)
                     copy_data_set.data_generator = copy_data_gen
@@ -1166,12 +1182,14 @@ class SimulatorSupportsDataGeneratorsWithDifferentShapes(UniformTimeCourseTestCa
                         task=task,
                         symbol=data_gen.variables[0].symbol,
                         target=data_gen.variables[0].target,
+                        target_namespaces=data_gen.variables[0].target_namespaces,
                     ),
                     Variable(
                         id=data_gen.variables[0].id + '__copy_2',
                         task=task2,
                         symbol=data_gen.variables[0].symbol,
                         target=data_gen.variables[0].target,
+                        target_namespaces=data_gen.variables[0].target_namespaces,
                     ),
                 ],
                 math='{} + {}'.format(data_gen.variables[0].id + '__copy_1', data_gen.variables[0].id + '__copy_2'),
@@ -1282,6 +1300,7 @@ class SimulatorSupportsDataSetsWithDifferentShapes(UniformTimeCourseTestCase):
                         task=task2,
                         symbol=data_gen.variables[0].symbol,
                         target=data_gen.variables[0].target,
+                        target_namespaces=data_gen.variables[0].target_namespaces,
                     ),
                 ],
                 math='{}'.format(data_gen.variables[0].id + '__copy_2'),
