@@ -46,6 +46,7 @@ __all__ = [
     'SimulatorSupportsRepeatedTasksWithVectorRanges',
     'SimulatorSupportsRepeatedTasksWithFunctionalRanges',
     'SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges',
+    'SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables',
     'SimulatorSupportsRepeatedTasksWithMultipleSubTasks',
     'SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks',
     'SimulatorProducesLinear2DPlots',
@@ -883,17 +884,71 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
 
     RANGE_TYPE = VectorRange
     UNIFORM_RANGE_TYPE = UniformRangeType.linear
+    FUNCTONAL_RANGE_USES_VARIABLES = False
     NUM_NESTED_RANGES = 0
 
-    def get_ranges(self, i_repeated_task):
+    def get_ranges(self, i_repeated_task, curated_archive_dir, model, breaking_range):
         """ Get ranges
 
         Args:
             i_repeated_task (:obj:`int`): index of repeated task
+            curated_archive_dir (:obj:`str`): directory where COMBINE/OMEX archive was unpacked
+            model (:obj:`Model`): model
+            breaking_range (:obj:`bool`): whether the functional range should break the simulation
 
         Returns:
             :obj:`list` of :obj:`Range`: ranges
         """
+
+        if self.FUNCTONAL_RANGE_USES_VARIABLES:
+            try:
+                model_etree = etree.parse(os.path.join(curated_archive_dir, model.source))
+            except etree.XMLSyntaxError:
+                msg = ('This test is only implemented for XML-based model languages. '
+                       'Please contact the BioSimulators Team to discuss implementing tests for additional languages.')
+                raise SkippedTestCaseException(msg)
+
+            model_root = model_etree.getroot()
+            nodes = [(model_root, 0, '', {})]
+            variables = []
+            while nodes:
+                node, i_node, parent_target, parent_namespaces = nodes.pop()
+
+                _, _, _, node_target, target_namespaces = get_xml_node_namespace_tag_target(
+                    node, target_namespaces=parent_namespaces)
+
+                node_target = (
+                    parent_target
+                    + '/'
+                    + node_target
+                    + '[{}]'.format(i_node + 1)
+                )
+
+                for key, value in node.attrib.items():
+                    try:
+                        float(value)
+                    except ValueError:
+                        continue
+
+                    variables.append(
+                        Variable(
+                            target=node_target + '/@' + key,
+                            target_namespaces=target_namespaces,
+                        ),
+                    )
+
+                n_children = {}
+                for child in node.getchildren():
+                    _, _, _, child_target, _ = get_xml_node_namespace_tag_target(
+                        child, target_namespaces=target_namespaces)
+
+                    if child_target not in n_children:
+                        n_children[child_target] = 0
+
+                    nodes.append((child, n_children[child_target], node_target, target_namespaces))
+
+                    n_children[child_target] += 1
+
         if self.RANGE_TYPE is UniformRange:
             if self.UNIFORM_RANGE_TYPE == UniformRangeType.linear:
                 return [UniformRange(
@@ -918,14 +973,34 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
 
         else:
             ranges = [VectorRange(id='__repeated_task_range_' + str(i_repeated_task), values=[0., 1., 2.])]
-            for i_range in range(self.NUM_NESTED_RANGES):
+            for i_range in range(self.NUM_NESTED_RANGES + 1):
                 ranges.append(
                     FunctionalRange(
                         id='__repeated_task_range_' + str(i_repeated_task) + '_' + str(i_range + 1),
                         range=ranges[0],
-                        math=ranges[0].id,
+                        parameters=[
+                            Parameter(id='__repeated_task_range_p_' + str(i_repeated_task) + '_' + str(i_range + 1) + '_1', value=0.),
+                        ],
                     )
                 )
+                ranges[-1].math = '{} * {}'.format(ranges[-1].range.id, ranges[-1].parameters[0].id)
+
+                if self.FUNCTONAL_RANGE_USES_VARIABLES:
+                    ranges[-1].parameters.append(
+                        Parameter(
+                            id='__repeated_task_range_p_' + str(i_repeated_task) + '_' + str(i_range + 1) + '_2',
+                            value=1e100 if breaking_range else 0.,
+                        ),
+                    )
+                    ranges[-1].variables.append(
+                        Variable(
+                            id='__repeated_task_range_var_' + str(i_repeated_task) + '_' + str(i_range + 1),
+                            target=variables[0].target,
+                            target_namespaces=variables[0].target_namespaces,
+                            model=model,
+                        ),
+                    )
+                    ranges[-1].math += ' + {} * {}'.format(ranges[-1].variables[0].id, ranges[-1].parameters[1].id)
             return ranges
 
     HAS_CHANGES = False
@@ -982,8 +1057,14 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
                         model=model,
                         range=range,
                         parameters=[
-                            Parameter(id='p_0_' + str(len(changes)) + '_' + str(i_repeated_task), value=0.),
-                            Parameter(id='p_1_' + str(len(changes)) + '_' + str(i_repeated_task), value=1e100),
+                            Parameter(
+                                id='p_0_' + str(len(changes)) + '_' + str(i_repeated_task),
+                                value=1. if self.FUNCTONAL_RANGE_USES_VARIABLES else 0.,
+                            ),
+                            Parameter(
+                                id='p_1_' + str(len(changes)) + '_' + str(i_repeated_task),
+                                value=1. if self.FUNCTONAL_RANGE_USES_VARIABLES else 1e100,
+                            ),
                         ],
                         variables=[
                             Variable(
@@ -1083,7 +1164,7 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
                     repeated_task.sub_tasks.append(SubTask(order=self.NUM_SUB_TASKS + 1 - i_sub_task, task=sed_doc.tasks[-1]))
                 sed_doc.tasks.append(repeated_task)
 
-                repeated_task.ranges = self.get_ranges(i_repeated_task)
+                repeated_task.ranges = self.get_ranges(i_repeated_task, curated_archive_dir, model, only_breaking_change)
                 repeated_task.range = repeated_task.ranges[-1]
                 repeated_task.changes = self.get_changes(curated_archive_dir, model,
                                                          i_repeated_task, repeated_task.ranges[-1], only_breaking_change)
@@ -1182,6 +1263,7 @@ class SimulatorSupportsRepeatedTasksWithFunctionalRanges(RepeatedTasksTestCase):
     """ Test that a simulator supports repeated tasks over functional ranges """
     RANGE_TYPE = FunctionalRange
     NUM_NESTED_RANGES = 0
+    FUNCTONAL_RANGE_USES_VARIABLES = False
     NUM_SUB_TASKS = 1
     NUM_NESTED_REPEATED_TASKS = 0
 
@@ -1189,11 +1271,24 @@ class SimulatorSupportsRepeatedTasksWithFunctionalRanges(RepeatedTasksTestCase):
 
 
 class SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges(RepeatedTasksTestCase):
-    """ Test that a simulator supports repeated tasks over nested functional ranges """
+    """ Test that a simulator supports repeated tasks over nested functional ranges based on model (specification) variables """
     RANGE_TYPE = FunctionalRange
     NUM_NESTED_RANGES = 1
+    FUNCTONAL_RANGE_USES_VARIABLES = False
     NUM_SUB_TASKS = 1
     NUM_NESTED_REPEATED_TASKS = 0
+
+    def is_concrete(self): return True
+
+
+class SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables(RepeatedTasksTestCase):
+    """ Test that a simulator supports repeated tasks over nested functional ranges based on model (specification) variables """
+    RANGE_TYPE = FunctionalRange
+    NUM_NESTED_RANGES = 0
+    FUNCTONAL_RANGE_USES_VARIABLES = True
+    NUM_SUB_TASKS = 1
+    NUM_NESTED_REPEATED_TASKS = 0
+    HAS_CHANGES = True
 
     def is_concrete(self): return True
 
