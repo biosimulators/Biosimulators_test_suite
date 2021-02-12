@@ -438,6 +438,139 @@ class SedmlTestCaseTest(unittest.TestCase):
             with self.assertRaises(SkippedTestCaseException):
                 self.assertFalse(case.eval(specs))
 
+    # TODO: Unskip when libSED-ML fixed
+    @unittest.skip('libSED-ML 2.0.14 cannot output uniform ranges with L1V3')
+    def test_SimulatorSupportsRepeatedTasksWithLinearUniformRanges(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        case = sedml.SimulatorSupportsRepeatedTasksWithLinearUniformRanges(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))
+
+    # TODO: Unskip when libSED-ML fixed
+    @unittest.skip('libSED-ML 2.0.14 cannot output uniform ranges with L1V3')
+    def test_SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        case = sedml.SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))
+
+    def test_SimulatorSupportsRepeatedTasksWithVectorRanges(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        case = sedml.SimulatorSupportsRepeatedTasksWithVectorRanges(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))
+
+        # error handling
+        doc = SedDocument()
+        doc.outputs.append(
+            Report(
+                id='task_report',
+                data_sets=[
+                    DataSet(id='A', label='A'),
+                    DataSet(id='B', label='B'),
+                    DataSet(id='C', label='C'),
+                ]
+            )
+        )
+        doc.outputs.append(
+            Report(
+                id='__repeated_task_report',
+                data_sets=[
+                    DataSet(id='A', label='A'),
+                    DataSet(id='B', label='B'),
+                    DataSet(id='C', label='C'),
+                ]
+            )
+        )
+        data_set_results = DataSetResults({
+            'A': numpy.array(range(0, 50)),
+            'B': numpy.array(range(10, 60)),
+            'C': numpy.array(range(20, 70)),
+        })
+        ReportWriter().run(doc.outputs[0], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[0].id)
+        ReportWriter().run(doc.outputs[1], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[1].id)
+        with self.assertRaisesRegex(InvalidOutputsException, 'two additional dimensions to reports'):
+            case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
+
+        data_set_results = DataSetResults({
+            'A': numpy.array([[range(0, 50)] * 2]),
+            'B': numpy.array([[range(10, 60)] * 2]),
+            'C': numpy.array([[range(20, 70)] * 2]),
+        })
+        ReportWriter().run(doc.outputs[1], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[1].id)
+        with self.assertRaisesRegex(InvalidOutputsException, 'slice for each iteration'):
+            case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
+
+        data_set_results = DataSetResults({
+            'A': numpy.array([[range(0, 50)] * 2] * 3),
+            'B': numpy.array([[range(10, 60)] * 2] * 3),
+            'C': numpy.array([[range(20, 70)] * 2] * 3),
+        })
+        ReportWriter().run(doc.outputs[1], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[1].id)
+        with self.assertRaisesRegex(InvalidOutputsException, 'slice for each sub-task'):
+            case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
+
+        data_set_results = DataSetResults({
+            'A': numpy.array([[range(0, 50)]] * 3),
+            'B': numpy.array([[range(10, 60)]] * 3),
+            'C': numpy.array([[range(20, 70)]] * 3),
+        })
+        ReportWriter().run(doc.outputs[1], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[1].id)
+        case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
+
+    def test_SimulatorSupportsRepeatedTasksWithFunctionalRanges(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        case = sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))
+
+    def test_SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        case = sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))
+
+    def test_SimulatorSupportsRepeatedTasksWithMultipleSubTasks(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        case = sedml.SimulatorSupportsRepeatedTasksWithMultipleSubTasks(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))
+
+    def test_SimulatorSupportsRepeatedTasksWithChanges(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        case = sedml.SimulatorSupportsRepeatedTasksWithChanges(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))
+
+        # test test ignored for non-XML models
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_NON_XML_ARCHIVE_FILENAME)
+        case = sedml.SimulatorSupportsRepeatedTasksWithChanges(
+            published_projects_test_cases=[curated_case])
+        with self.assertRaisesRegex(SkippedTestCaseException, 'only implemented for XML-based model'):
+            case.eval(specs)
+
+    def test_SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        case = sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))
+
     def test_SimulatorProducesLinear2DPlots_is_curated_sed_report_suitable_for_building_synthetic_archive(self):
         specs = {'image': {'url': self.IMAGE}}
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)

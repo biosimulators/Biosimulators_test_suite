@@ -17,7 +17,9 @@ from biosimulators_utils.sedml.data_model import (SedDocument, Task, Output, Rep
                                                   DataSet, Curve, Surface, AxisScale,
                                                   Model, ModelAttributeChange, AlgorithmParameterChange,
                                                   AddElementModelChange, RemoveElementModelChange, ReplaceElementModelChange,
-                                                  ComputeModelChange, Parameter)
+                                                  ComputeModelChange, Parameter,
+                                                  RepeatedTask, Range, UniformRange, UniformRangeType, VectorRange, FunctionalRange,
+                                                  SetValueComputeModelChange, SubTask)
 from biosimulators_utils.sedml.utils import get_xml_node_namespace_tag_target
 from lxml import etree
 import abc
@@ -39,6 +41,13 @@ __all__ = [
     'SimulatorSupportsMultipleReportsPerSedDocument',
     'SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes',
     'SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes',
+    'SimulatorSupportsRepeatedTasksWithLinearUniformRanges',
+    'SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges',
+    'SimulatorSupportsRepeatedTasksWithVectorRanges',
+    'SimulatorSupportsRepeatedTasksWithFunctionalRanges',
+    'SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges',
+    'SimulatorSupportsRepeatedTasksWithMultipleSubTasks',
+    'SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks',
     'SimulatorProducesLinear2DPlots',
     'SimulatorProducesLogarithmic2DPlots',
     'SimulatorProducesLinear3DPlots',
@@ -131,7 +140,7 @@ class SimulatorCanResolveModelSourcesDefinedByUriFragments(SimulatorSupportsMode
 
     def __init__(self, *args, **kwargs):
         super(SimulatorCanResolveModelSourcesDefinedByUriFragments, self).__init__(*args, **kwargs)
-        self._types_of_model_changes_to_keep = ()
+        self._model_change_filter = lambda change: False
 
     def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
@@ -170,7 +179,7 @@ class SimulatorCanResolveModelSourcesDefinedByUriFragmentsAndInheritChanges(
 
     def __init__(self, *args, **kwargs):
         super(SimulatorCanResolveModelSourcesDefinedByUriFragmentsAndInheritChanges, self).__init__(*args, **kwargs)
-        self._types_of_model_changes_to_keep = (ModelAttributeChange,)
+        self._model_change_filter = lambda change: isinstance(change, ModelAttributeChange)
 
     def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
@@ -209,7 +218,7 @@ class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsT
 
     def __init__(self, *args, **kwargs):
         super(SimulatorSupportsModelAttributeChanges, self).__init__(*args, **kwargs)
-        self._types_of_model_changes_to_keep = ()
+        self._model_change_filter = lambda change: False
 
     def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
@@ -312,7 +321,7 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
 
     def __init__(self, *args, **kwargs):
         super(SimulatorSupportsComputeModelChanges, self).__init__(*args, **kwargs)
-        self._types_of_model_changes_to_keep = ()
+        self._model_change_filter = lambda change: False
 
     def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
@@ -381,7 +390,7 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
                         target=node_target + '/@' + key,
                         target_namespaces=target_namespaces,
                         parameters=[
-                            Parameter(id=param_id, value=1.)
+                            Parameter(id=param_id, value=1e100)
                         ],
                         variables=[
                             Variable(
@@ -400,7 +409,7 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
                         target=node_target + '/@' + key,
                         target_namespaces=target_namespaces,
                         parameters=[
-                            Parameter(id=param_id, value=1.)
+                            Parameter(id=param_id, value=1e100)
                         ],
                         variables=[
                             Variable(
@@ -445,7 +454,7 @@ class SimulatorSupportsAddReplaceRemoveModelElementChanges(SimulatorSupportsMode
 
     def __init__(self, *args, **kwargs):
         super(SimulatorSupportsAddReplaceRemoveModelElementChanges, self).__init__(*args, **kwargs)
-        self._types_of_model_changes_to_keep = ()
+        self._model_change_filter = lambda change: False
 
     def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
@@ -862,6 +871,359 @@ class SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes(UniformTimeCour
         simulation.initial_time = simulation.output_end_time / 2
         simulation.output_start_time = simulation.output_end_time / 2
         simulation.number_of_points = int(simulation.number_of_points / 2)
+
+
+class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
+    """ Test that a simulator supports repeated tasks """
+    REPORT_ERROR_AS_SKIP = True
+
+    def __init__(self, *args, **kwargs):
+        super(RepeatedTasksTestCase, self).__init__(*args, **kwargs)
+        self._model_change_filter = lambda change: False
+
+    RANGE_TYPE = VectorRange
+    UNIFORM_RANGE_TYPE = UniformRangeType.linear
+    NUM_NESTED_RANGES = 0
+
+    def get_ranges(self, i_repeated_task):
+        """ Get ranges
+
+        Args:
+            i_repeated_task (:obj:`int`): index of repeated task
+
+        Returns:
+            :obj:`list` of :obj:`Range`: ranges
+        """
+        if self.RANGE_TYPE is UniformRange:
+            if self.UNIFORM_RANGE_TYPE == UniformRangeType.linear:
+                return [UniformRange(
+                    id='__repeated_task_range_' + str(i_repeated_task),
+                    start=0.,
+                    end=2.,
+                    number_of_points=2,
+                    type=self.UNIFORM_RANGE_TYPE
+                )]
+
+            elif self.UNIFORM_RANGE_TYPE == UniformRangeType.log:
+                return [UniformRange(
+                    id='__repeated_task_range_' + str(i_repeated_task),
+                    start=10. ** 0.,
+                    end=10. ** 2.,
+                    number_of_points=2,
+                    type=self.UNIFORM_RANGE_TYPE
+                )]
+
+        elif self.RANGE_TYPE is VectorRange:
+            return [VectorRange(id='__repeated_task_range_' + str(i_repeated_task), values=[0., 1., 2.])]
+
+        else:
+            ranges = [VectorRange(id='__repeated_task_range_' + str(i_repeated_task), values=[0., 1., 2.])]
+            for i_range in range(self.NUM_NESTED_RANGES):
+                ranges.append(
+                    FunctionalRange(
+                        id='__repeated_task_range_' + str(i_repeated_task) + '_' + str(i_range + 1),
+                        range=ranges[0],
+                        math=ranges[0].id,
+                    )
+                )
+            return ranges
+
+    HAS_CHANGES = False
+
+    def get_changes(self, curated_archive_dir, model, i_repeated_task, range, only_breaking_changes):
+        """ Get changes
+
+        Args:
+            curated_archive_dir (:obj:`str`): directory where COMBINE/OMEX archive was unpacked
+            model (:obj:`Model`): model
+            i_repeated_task (:obj:`int`): index of repeated task
+            range (:obj:`range`): range
+            only_breaking_changes (:obj:`bool`): whether to include breaking or breaking and changes
+
+        Returns:
+            :obj:`list` of :obj:`SetValueComputeModelChange`: changes
+        """
+        if not self.HAS_CHANGES:
+            return []
+
+        try:
+            model_etree = etree.parse(os.path.join(curated_archive_dir, model.source))
+        except etree.XMLSyntaxError:
+            msg = ('This test is only implemented for XML-based model languages. '
+                   'Please contact the BioSimulators Team to discuss implementing tests for additional languages.')
+            raise SkippedTestCaseException(msg)
+
+        model_root = model_etree.getroot()
+        nodes = [(model_root, 0, '', {})]
+        changes = []
+        while nodes:
+            node, i_node, parent_target, parent_namespaces = nodes.pop()
+
+            _, _, _, node_target, target_namespaces = get_xml_node_namespace_tag_target(
+                node, target_namespaces=parent_namespaces)
+
+            node_target = (
+                parent_target
+                + '/'
+                + node_target
+                + '[{}]'.format(i_node + 1)
+            )
+
+            for key, value in node.attrib.items():
+                try:
+                    original_value = float(value)
+                except ValueError:
+                    continue
+
+                changes.append(
+                    SetValueComputeModelChange(
+                        target=node_target + '/@' + key,
+                        target_namespaces=target_namespaces,
+                        model=model,
+                        range=range,
+                        parameters=[
+                            Parameter(id='p_0_' + str(len(changes)) + '_' + str(i_repeated_task), value=0.),
+                            Parameter(id='p_1_' + str(len(changes)) + '_' + str(i_repeated_task), value=1e100),
+                        ],
+                        variables=[
+                            Variable(
+                                id='var_' + str(len(changes)) + '_' + str(i_repeated_task),
+                                model=model,
+                                target=node_target + '/@' + key,
+                                target_namespaces=target_namespaces,
+                            )
+                        ],
+                        math='{} * {} + {} * {}'.format(
+                            'p_0_' + str(len(changes)) + '_' + str(i_repeated_task), range.id,
+                            'p_1_' + str(len(changes)) + '_' + str(i_repeated_task), 'var_' +
+                            str(len(changes)) + '_' + str(i_repeated_task),
+                        )
+                    )
+                )
+                if not only_breaking_changes:
+                    changes.append(
+                        SetValueComputeModelChange(
+                            target=node_target + '/@' + key,
+                            target_namespaces=target_namespaces,
+                            model=model,
+                            range=range,
+                            parameters=[
+                                Parameter(id='p_2_' + str(len(changes)) + '_' + str(i_repeated_task), value=original_value),
+                            ],
+                            math='p_2_' + str(len(changes)) + '_' + str(i_repeated_task),
+                        )
+                    )
+
+            n_children = {}
+            for child in node.getchildren():
+                _, _, _, child_target, _ = get_xml_node_namespace_tag_target(
+                    child, target_namespaces=target_namespaces)
+
+                if child_target not in n_children:
+                    n_children[child_target] = 0
+
+                nodes.append((child, n_children[child_target], node_target, target_namespaces))
+
+                n_children[child_target] += 1
+
+        return changes
+
+    NUM_NESTED_REPEATED_TASKS = 0
+    NUM_SUB_TASKS = 1
+
+    @abc.abstractmethod
+    def is_concrete(self):
+        """ Whether the class is abstract
+
+        Returns:
+            :obj:`bool`: whether the class is abstract
+        """
+        pass  # pragma: no cover
+
+    def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
+        """ Generate a synthetic archive with a copy of each task and each report
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            curated_archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            curated_archive_dir (:obj:`str`): directory with the contents of the curated COMBINE/OMEX archive
+            curated_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
+                SED documents in curated archive
+
+        Returns:
+            :obj:`list` of :obj:`ExpectedResultOfSyntheticArchive`
+        """
+        expected_results_of_synthetic_archives = super(RepeatedTasksTestCase, self).build_synthetic_archives(
+            specifications, curated_archive, curated_archive_dir, curated_sed_docs)
+
+        if self.HAS_CHANGES:
+            expected_results_of_synthetic_archive_1 = expected_results_of_synthetic_archives[0]
+            expected_results_of_synthetic_archive_2 = copy.deepcopy(expected_results_of_synthetic_archive_1)
+            expected_results_of_synthetic_archives.append(expected_results_of_synthetic_archive_2)
+
+            expected_results_of_synthetic_archive_1.is_success_expected = False
+            expected_results_of_synthetic_archive_2.is_success_expected = True
+
+            only_breaking_changes = [True, False]
+        else:
+            only_breaking_changes = [True]
+
+        for expected_results_of_synthetic_archive, only_breaking_change in zip(
+                expected_results_of_synthetic_archives, only_breaking_changes):
+            curated_sed_docs = expected_results_of_synthetic_archive.sed_documents
+
+            # get a suitable SED document to modify
+            sed_doc = list(curated_sed_docs.values())[0]
+            model = sed_doc.models[0]
+
+            # add repeated task
+            for i_repeated_task in range(self.NUM_NESTED_REPEATED_TASKS + 1):
+                repeated_task = RepeatedTask(id='__repeated_task_' + str(i_repeated_task))
+                for i_sub_task in range(self.NUM_SUB_TASKS):
+                    repeated_task.sub_tasks.append(SubTask(order=self.NUM_SUB_TASKS + 1 - i_sub_task, task=sed_doc.tasks[-1]))
+                sed_doc.tasks.append(repeated_task)
+
+                repeated_task.ranges = self.get_ranges(i_repeated_task)
+                repeated_task.range = repeated_task.ranges[-1]
+                repeated_task.changes = self.get_changes(curated_archive_dir, model,
+                                                         i_repeated_task, repeated_task.ranges[-1], only_breaking_change)
+
+            report = sed_doc.outputs[0]
+            report.id = 'task_report'
+            report_2 = Report(id='__repeated_task_report')
+            sed_doc.outputs.append(report_2)
+            for i_data_set, data_set in enumerate(report.data_sets):
+                data_set_2 = DataSet(id='__repeated_task_data_set_' + str(i_data_set), label=data_set.label)
+                report_2.data_sets.append(data_set_2)
+
+                data_gen = data_set.data_generator
+                data_gen_2 = DataGenerator(
+                    id='__repeated_task_data_generator_' + str(i_data_set),
+                    math='__repeated_task_variable_' + str(i_data_set),
+                )
+                data_set_2.data_generator = data_gen_2
+                sed_doc.data_generators.append(data_gen_2)
+
+                variable = data_gen.variables[0]
+                variable_2 = Variable(id=data_gen_2.math, symbol=variable.symbol, target=variable.target, task=repeated_task)
+                data_gen_2.variables.append(variable_2)
+
+        # return modified SED document
+        return expected_results_of_synthetic_archives
+
+    def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
+        """ Test that the expected outputs were created for the synthetic archive
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            synthetic_archive (:obj:`CombineArchive`): synthetic COMBINE/OMEX archive for testing the simulator
+            synthetic_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from the location of each SED
+                document in the synthetic archive to the document
+            outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
+
+        Returns:
+            :obj:`bool`: whether there were no warnings about the outputs
+        """
+        doc_location = list(synthetic_sed_docs.keys())[0]
+        doc_id = os.path.relpath(doc_location, './')
+        doc = synthetic_sed_docs[doc_location]
+        report = doc.outputs[0]
+        repeated_report = doc.outputs[1]
+        results = ReportReader().run(report, outputs_dir, os.path.join(doc_id, report.id))
+        repeated_results = ReportReader().run(repeated_report, outputs_dir, os.path.join(doc_id, repeated_report.id))
+
+        for data_set, repeated_data_set in zip(report.data_sets, repeated_report.data_sets):
+            results_data_set = results[data_set.id]
+            repeated_results_data_set = repeated_results[repeated_data_set.id]
+            if repeated_results_data_set.ndim - results_data_set.ndim != 2 * (self.NUM_NESTED_REPEATED_TASKS + 1):
+                raise InvalidOutputsException('Each level of repeated task should contribute two additional dimensions to reports')
+
+            if not set(repeated_results_data_set.shape[0:2 * (self.NUM_NESTED_REPEATED_TASKS + 1):2]) == set([3]):
+                raise InvalidOutputsException('The results of the repeated tasks should have a slice for each iteration')
+
+            if not set(repeated_results_data_set.shape[1:2 * (self.NUM_NESTED_REPEATED_TASKS + 1):2]) == set([self.NUM_SUB_TASKS]):
+                raise InvalidOutputsException('The results of the repeated tasks should have a slice for each sub-task')
+
+        return True
+
+
+class SimulatorSupportsRepeatedTasksWithLinearUniformRanges(RepeatedTasksTestCase):
+    """ Test that a simulator supports repeated tasks over uniform ranges """
+    RANGE_TYPE = UniformRange
+    UNIFORM_RANGE_TYPE = UniformRangeType.linear
+    NUM_SUB_TASKS = 1
+    NUM_NESTED_REPEATED_TASKS = 0
+
+    # TODO: Uncomment to enable test case when libSED-ML fixed; libSED-ML 2.0.14 cannot output uniform ranges with L1V3
+    # def is_concrete(self): return True
+
+
+class SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges(RepeatedTasksTestCase):
+    """ Test that a simulator supports repeated tasks over uniform ranges """
+    RANGE_TYPE = UniformRange
+    UNIFORM_RANGE_TYPE = UniformRangeType.log
+    NUM_SUB_TASKS = 1
+    NUM_NESTED_REPEATED_TASKS = 0
+
+    # TODO: Uncomment to enable test case when libSED-ML fixed; libSED-ML 2.0.14 cannot output uniform ranges with L1V3
+    # def is_concrete(self): return True
+
+
+class SimulatorSupportsRepeatedTasksWithVectorRanges(RepeatedTasksTestCase):
+    """ Test that a simulator supports repeated tasks over vector ranges """
+    RANGE_TYPE = VectorRange
+    NUM_SUB_TASKS = 1
+    NUM_NESTED_REPEATED_TASKS = 0
+
+    def is_concrete(self): return True
+
+
+class SimulatorSupportsRepeatedTasksWithFunctionalRanges(RepeatedTasksTestCase):
+    """ Test that a simulator supports repeated tasks over functional ranges """
+    RANGE_TYPE = FunctionalRange
+    NUM_NESTED_RANGES = 0
+    NUM_SUB_TASKS = 1
+    NUM_NESTED_REPEATED_TASKS = 0
+
+    def is_concrete(self): return True
+
+
+class SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges(RepeatedTasksTestCase):
+    """ Test that a simulator supports repeated tasks over nested functional ranges """
+    RANGE_TYPE = FunctionalRange
+    NUM_NESTED_RANGES = 1
+    NUM_SUB_TASKS = 1
+    NUM_NESTED_REPEATED_TASKS = 0
+
+    def is_concrete(self): return True
+
+
+class SimulatorSupportsRepeatedTasksWithMultipleSubTasks(RepeatedTasksTestCase):
+    """ Test that a simulator supports repeated tasks with multiple subtasks """
+    RANGE_TYPE = VectorRange
+    NUM_SUB_TASKS = 2
+    NUM_NESTED_REPEATED_TASKS = 0
+
+    def is_concrete(self): return True
+
+
+class SimulatorSupportsRepeatedTasksWithChanges(RepeatedTasksTestCase):
+    """ Test that a simulator supports repeated tasks with multiple subtasks """
+    RANGE_TYPE = VectorRange
+    NUM_SUB_TASKS = 1
+    NUM_NESTED_REPEATED_TASKS = 0
+    HAS_CHANGES = True
+
+    def is_concrete(self): return True
+
+
+class SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks(RepeatedTasksTestCase):
+    """ Test that a simulator supports nested repeated tasks"""
+    RANGE_TYPE = VectorRange
+    NUM_SUB_TASKS = 1
+    NUM_NESTED_REPEATED_TASKS = 1
+
+    def is_concrete(self): return True
 
 
 class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCase):

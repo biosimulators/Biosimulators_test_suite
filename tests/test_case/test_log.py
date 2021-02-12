@@ -20,8 +20,8 @@ class LogTestCaseTest(unittest.TestCase):
     def tearDown(self):
         shutil.rmtree(self.dirname)
 
-    def test_SimulatorReportsTheStatusOfTheExecutionOfCombineArchives_eval_outputs(self):
-        case = log.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives()
+    def test_LoggingTestCase_eval_outputs(self):
+        case = log.SimulatorReportsTheStatusOfTheExecutionOfSedOutputs()
 
         with self.assertRaisesRegex(SkippedTestCaseException, 'did not export information about the status'):
             self.assertEqual(case.eval_outputs(None, None, None, self.dirname), False)
@@ -115,3 +115,34 @@ class LogTestCaseTest(unittest.TestCase):
         case = log.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(
             published_projects_test_cases=[curated_case])
         self.assertTrue(case.eval(specs))
+        self.assertTrue(case.is_concrete())
+
+    def test_SimulatorReportsTheStatusOfTheExecutionOfSedDocuments(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        # test synthetic case generated and used to test simulator
+        case = log.SimulatorReportsTheStatusOfTheExecutionOfSedDocuments(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.is_concrete())
+
+    def test_SimulatorReportsTheStatusOfTheExecutionOfSedTasks(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        # test synthetic case generated and used to test simulator
+        case = log.SimulatorReportsTheStatusOfTheExecutionOfSedTasks(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.is_concrete())
+
+    def test_SimulatorReportsTheStatusOfTheExecutionOfSedOutputs(self):
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        # test synthetic case generated and used to test simulator
+        case = log.SimulatorReportsTheStatusOfTheExecutionOfSedOutputs(
+            published_projects_test_cases=[curated_case])
+        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.is_concrete())

@@ -39,6 +39,7 @@ import os
 import re
 import shutil
 import tempfile
+import types  # noqa: F401
 import warnings
 
 __all__ = [
@@ -789,7 +790,7 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
 
     Attributes:
         _archive_has_master (:obj:`bool`): whether the synthetic archive should have a master file
-        _types_of_model_changes_to_keep (:obj:`list` of :obj:`type`): types of model changes to keep
+        _model_change_filter (:obj:`types.FunctionType`): filter for model changes to keep
         _remove_algorithm_parameter_changes (:obj:`bool`): if :obj:`True`, remove instructions to change
             the values of the parameters of algorithms
         _use_single_variable_data_generators (:obj:`bool`): if :obj:`True`, replace data generators that
@@ -807,7 +808,7 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
 
     def __init__(self, *args, **kwargs):
         super(ConfigurableMasterCombineArchiveTestCase, self).__init__(*args, **kwargs)
-        self._types_of_model_changes_to_keep = ()
+        self._model_change_filter = lambda change: False
         self._remove_algorithm_parameter_changes = True
         self._use_single_variable_data_generators = True
         self._remove_plots = True
@@ -851,7 +852,7 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
 
         # retain some model changes
         for model in doc.models:
-            model.changes = [change for change in model.changes if isinstance(change, self._types_of_model_changes_to_keep)]
+            model.changes = list(filter(self._model_change_filter, model.changes))
 
         # remove algorithm parameter changes
         if self._remove_algorithm_parameter_changes:
