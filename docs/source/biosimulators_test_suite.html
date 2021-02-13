@@ -5,14 +5,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3. biosimulators_test_suite package &#8212; BioSimulators test suite 0.1.16 documentation</title>
+    <title>3. biosimulators_test_suite package &#8212; BioSimulators test suite 0.1.18 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -58,12 +57,13 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">3.2. Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.data_model">3.3. biosimulators_test_suite.data_model module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exceptions">3.4. biosimulators_test_suite.exceptions module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exec_cli">3.5. biosimulators_test_suite.exec_cli module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exec_core">3.6. biosimulators_test_suite.exec_core module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exec_gh_action">3.7. biosimulators_test_suite.exec_gh_action module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.warnings">3.8. biosimulators_test_suite.warnings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.config">3.3. biosimulators_test_suite.config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.data_model">3.4. biosimulators_test_suite.data_model module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exceptions">3.5. biosimulators_test_suite.exceptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exec_cli">3.6. biosimulators_test_suite.exec_cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exec_core">3.7. biosimulators_test_suite.exec_core module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.exec_gh_action">3.8. biosimulators_test_suite.exec_gh_action module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-biosimulators_test_suite.warnings">3.9. biosimulators_test_suite.warnings module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">4. About the BioSimulators test suite</a></li>
@@ -146,8 +146,253 @@
 <div class="section" id="submodules">
 <h2><span class="section-number">3.2. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
+<div class="section" id="module-biosimulators_test_suite.config">
+<span id="biosimulators-test-suite-config-module"></span><h2><span class="section-number">3.3. </span>biosimulators_test_suite.config module<a class="headerlink" href="#module-biosimulators_test_suite.config" title="Permalink to this headline">¶</a></h2>
+<p>Configuration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Author</dt>
+<dd class="field-odd"><p>Jonathan Karr &lt;<a class="reference external" href="mailto:karr&#37;&#52;&#48;mssm&#46;edu">karr<span>&#64;</span>mssm<span>&#46;</span>edu</a>&gt;</p>
+</dd>
+<dt class="field-even">Date</dt>
+<dd class="field-even"><p>2021-01-30</p>
+</dd>
+<dt class="field-odd">Copyright</dt>
+<dd class="field-odd"><p>2021, Center for Reproducible Biomedical Modeling</p>
+</dd>
+<dt class="field-even">License</dt>
+<dd class="field-even"><p>MIT</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt id="biosimulators_test_suite.config.Config">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.config.</code><code class="sig-name descname">Config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pull_docker_image</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">docker_hub_username</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">docker_hub_token</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">biosimulators_auth_endpoint</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">biosimulators_audience</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">biosimulators_api_client_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">biosimulators_api_client_secret</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">biosimulators_api_endpoint</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">biosimulators_curator_gh_ids</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">biosimulators_default_specifications_version</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">biosimulators_default_image_version</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">biosimulators_docker_registry_url</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">biosimulators_docker_registry_username</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">biosimulators_docker_registry_token</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">biosimulators_docker_image_url_pattern</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">runbiosimulations_auth_endpoint</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">runbiosimulations_audience</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">runbiosimulations_api_client_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">runbiosimulations_api_client_secret</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">runbiosimulations_api_endpoint</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Configuration</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.pull_docker_image">
+<code class="sig-name descname">pull_docker_image</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.pull_docker_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>whether to pull the Docker image for the simulator (default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.docker_hub_username">
+<code class="sig-name descname">docker_hub_username</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.docker_hub_username" title="Permalink to this definition">¶</a></dt>
+<dd><p>username for Docker Hub</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.docker_hub_token">
+<code class="sig-name descname">docker_hub_token</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.docker_hub_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Token for Docker Hub</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.biosimulators_auth_endpoint">
+<code class="sig-name descname">biosimulators_auth_endpoint</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.biosimulators_auth_endpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Authentification endpoint for the BioSimulators API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.biosimulators_audience">
+<code class="sig-name descname">biosimulators_audience</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.biosimulators_audience" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open API audience for the BioSimulators API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.biosimulators_api_client_id">
+<code class="sig-name descname">biosimulators_api_client_id</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.biosimulators_api_client_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Client id of the BioSimulators API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.biosimulators_api_client_secret">
+<code class="sig-name descname">biosimulators_api_client_secret</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.biosimulators_api_client_secret" title="Permalink to this definition">¶</a></dt>
+<dd><p>Client secret of the BioSimulators API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.biosimulators_api_endpoint">
+<code class="sig-name descname">biosimulators_api_endpoint</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.biosimulators_api_endpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base URL for the BioSimulators API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.biosimulators_curator_gh_ids">
+<code class="sig-name descname">biosimulators_curator_gh_ids</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.biosimulators_curator_gh_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>GitHub user ids of the BioSimulators curators</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.biosimulators_default_specifications_version">
+<code class="sig-name descname">biosimulators_default_specifications_version</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.biosimulators_default_specifications_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default version of the BioSimulators simulation specifications</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.biosimulators_default_image_version">
+<code class="sig-name descname">biosimulators_default_image_version</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.biosimulators_default_image_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default version of the BioSimulators Docker image format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.biosimulators_docker_registry_url">
+<code class="sig-name descname">biosimulators_docker_registry_url</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.biosimulators_docker_registry_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>URL of the Docker registry for simulators</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.biosimulators_docker_registry_username">
+<code class="sig-name descname">biosimulators_docker_registry_username</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.biosimulators_docker_registry_username" title="Permalink to this definition">¶</a></dt>
+<dd><p>username for Docker registry for simulators</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.biosimulators_docker_registry_token">
+<code class="sig-name descname">biosimulators_docker_registry_token</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.biosimulators_docker_registry_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>token for Docker registry for simulators</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.biosimulators_docker_image_url_pattern">
+<code class="sig-name descname">biosimulators_docker_image_url_pattern</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.biosimulators_docker_image_url_pattern" title="Permalink to this definition">¶</a></dt>
+<dd><p>URL pattern for Docker images for simulators</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.runbiosimulations_auth_endpoint">
+<code class="sig-name descname">runbiosimulations_auth_endpoint</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.runbiosimulations_auth_endpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Authentification endpoint for the runBioSimulations API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.runbiosimulations_audience">
+<code class="sig-name descname">runbiosimulations_audience</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.runbiosimulations_audience" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open API audience for the runBioSimulations API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.runbiosimulations_api_client_id">
+<code class="sig-name descname">runbiosimulations_api_client_id</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.runbiosimulations_api_client_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Client id of the runBioSimulations API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.runbiosimulations_api_client_secret">
+<code class="sig-name descname">runbiosimulations_api_client_secret</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.runbiosimulations_api_client_secret" title="Permalink to this definition">¶</a></dt>
+<dd><p>Client secret of the runBioSimulations API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.config.Config.runbiosimulations_api_endpoint">
+<code class="sig-name descname">runbiosimulations_api_endpoint</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/config.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.config.Config.runbiosimulations_api_endpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base URL for the runBioSimulations API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="module-biosimulators_test_suite.data_model">
-<span id="biosimulators-test-suite-data-model-module"></span><h2><span class="section-number">3.3. </span>biosimulators_test_suite.data_model module<a class="headerlink" href="#module-biosimulators_test_suite.data_model" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-data-model-module"></span><h2><span class="section-number">3.4. </span>biosimulators_test_suite.data_model module<a class="headerlink" href="#module-biosimulators_test_suite.data_model" title="Permalink to this headline">¶</a></h2>
 <p>Data model for test cases for validating simulators</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -181,6 +426,18 @@
 </dd></dl>
 
 <dl class="py class">
+<dt id="biosimulators_test_suite.data_model.ExpectedSedDataSet">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.data_model.</code><code class="sig-name descname">ExpectedSedDataSet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">label</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.ExpectedSedDataSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An expected SED report</p>
+<dl class="simple">
+<dt>Attributes</dt><dd><p>id (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>): id
+label (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>): label</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
 <dt id="biosimulators_test_suite.data_model.ExpectedSedPlot">
 <em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.data_model.</code><code class="sig-name descname">ExpectedSedPlot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.ExpectedSedPlot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -198,9 +455,9 @@
 <p>An expected SED report</p>
 <dl class="simple">
 <dt>Attributes</dt><dd><p>id (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>): id
-data_sets (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>): ids of expected datasets
+data_sets (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#biosimulators_test_suite.data_model.ExpectedSedDataSet" title="biosimulators_test_suite.data_model.ExpectedSedDataSet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpectedSedDataSet</span></code></a>): labels of expected data sets
 points (<code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code>): number of expected points of
-values (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code>): expected values of datasets or elements of datasets</p>
+values (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code>): expected values of data sets or elements of data sets</p>
 </dd>
 </dl>
 </dd></dl>
@@ -319,7 +576,7 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 
 <dl class="py method">
 <dt id="biosimulators_test_suite.data_model.TestCase.get_simulator_docker_image">
-<code class="sig-name descname">get_simulator_docker_image</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">pull</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCase.get_simulator_docker_image" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_simulator_docker_image</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">pull</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/data_model.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.data_model.TestCase.get_simulator_docker_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the Docker image for a simulator, pulling if necessary</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -338,7 +595,7 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.exceptions">
-<span id="biosimulators-test-suite-exceptions-module"></span><h2><span class="section-number">3.4. </span>biosimulators_test_suite.exceptions module<a class="headerlink" href="#module-biosimulators_test_suite.exceptions" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-exceptions-module"></span><h2><span class="section-number">3.5. </span>biosimulators_test_suite.exceptions module<a class="headerlink" href="#module-biosimulators_test_suite.exceptions" title="Permalink to this headline">¶</a></h2>
 <p>Common exceptions for test cases</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -355,8 +612,8 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 </dd>
 </dl>
 <dl class="py exception">
-<dt id="biosimulators_test_suite.exceptions.InvalidOuputsException">
-<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.exceptions.</code><code class="sig-name descname">InvalidOuputsException</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exceptions.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exceptions.InvalidOuputsException" title="Permalink to this definition">¶</a></dt>
+<dt id="biosimulators_test_suite.exceptions.InvalidOutputsException">
+<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.exceptions.</code><code class="sig-name descname">InvalidOutputsException</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exceptions.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exceptions.InvalidOutputsException" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.exceptions.TestCaseException" title="biosimulators_test_suite.exceptions.TestCaseException"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.exceptions.TestCaseException</span></code></a></p>
 <p>Exception raised when outputs of execution of COMBINE/OMEX archive are not as expected</p>
 </dd></dl>
@@ -377,7 +634,7 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.exec_cli">
-<span id="biosimulators-test-suite-exec-cli-module"></span><h2><span class="section-number">3.5. </span>biosimulators_test_suite.exec_cli module<a class="headerlink" href="#module-biosimulators_test_suite.exec_cli" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-exec-cli-module"></span><h2><span class="section-number">3.6. </span>biosimulators_test_suite.exec_cli module<a class="headerlink" href="#module-biosimulators_test_suite.exec_cli" title="Permalink to this headline">¶</a></h2>
 <p>Program for validating that simulation tools are consistent with the BioSimulators standards</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -432,7 +689,7 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt id="biosimulators_test_suite.exec_cli.BaseController.Meta.arguments">
-<code class="sig-name descname">arguments</code><em class="property"> = [(['specifications'], {'type': &lt;class 'str'&gt;, 'help': 'Path or URL to the specifications of the simulator'}), (['-c', '--combine-case'], {'type': &lt;class 'str'&gt;, 'nargs': '+', 'default': None, 'dest': 'case_ids', 'help': &quot;Ids of test cases of evaluate (e.g., 'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'). Default: evaluate all test cases&quot;}), (['-o', '--report'], {'default': None, 'help': 'Path to save a report of the results in JSON format'}), (['--verbose'], {'action': 'store_true', 'help': 'If set, print the stdout and stderr of the execution of the tests in real time.'}), (['-v', '--version'], {'action': 'version', 'version': '0.1.16'})]</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_cli.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_cli.BaseController.Meta.arguments" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">arguments</code><em class="property"> = [(['specifications'], {'type': &lt;class 'str'&gt;, 'help': 'Path or URL to the specifications of the simulator'}), (['-c', '--combine-case'], {'type': &lt;class 'str'&gt;, 'nargs': '+', 'default': None, 'dest': 'case_ids', 'help': &quot;Ids of test cases of evaluate (e.g., 'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'). Default: evaluate all test cases&quot;}), (['-o', '--report'], {'default': None, 'help': 'Path to save a report of the results in JSON format'}), (['--verbose'], {'action': 'store_true', 'help': 'If set, print the stdout and stderr of the execution of the tests in real time.'}), (['-v', '--version'], {'action': 'version', 'version': '0.1.18'})]</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_cli.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_cli.BaseController.Meta.arguments" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -461,7 +718,7 @@ values (<code class="xref py py-obj docutils literal notranslate"><span class="p
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.exec_core">
-<span id="biosimulators-test-suite-exec-core-module"></span><h2><span class="section-number">3.6. </span>biosimulators_test_suite.exec_core module<a class="headerlink" href="#module-biosimulators_test_suite.exec_core" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-exec-core-module"></span><h2><span class="section-number">3.7. </span>biosimulators_test_suite.exec_core module<a class="headerlink" href="#module-biosimulators_test_suite.exec_core" title="Permalink to this headline">¶</a></h2>
 <p>Utilities for validate containerized simulators</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -626,7 +883,7 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.exec_gh_action">
-<span id="biosimulators-test-suite-exec-gh-action-module"></span><h2><span class="section-number">3.7. </span>biosimulators_test_suite.exec_gh_action module<a class="headerlink" href="#module-biosimulators_test_suite.exec_gh_action" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-exec-gh-action-module"></span><h2><span class="section-number">3.8. </span>biosimulators_test_suite.exec_gh_action module<a class="headerlink" href="#module-biosimulators_test_suite.exec_gh_action" title="Permalink to this headline">¶</a></h2>
 <p>Methods for processing submissions to the BioSimulators registry
 (CI workflows for reviewing and committing simulators to the registry)</p>
 <dl class="field-list simple">
@@ -658,56 +915,6 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
 </dd>
 </dl>
 </dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT">
-<code class="sig-name descname">BIOSIMULATORS_API_ENDPOINT</code><em class="property"> = 'https://api.biosimulators.org/'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_API_ENDPOINT" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_AUDIENCE">
-<code class="sig-name descname">BIOSIMULATORS_AUDIENCE</code><em class="property"> = 'api.biosimulators.org'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_AUDIENCE" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_AUTH_ENDPOINT">
-<code class="sig-name descname">BIOSIMULATORS_AUTH_ENDPOINT</code><em class="property"> = 'https://auth.biosimulations.org/oauth/token'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.BIOSIMULATORS_AUTH_ENDPOINT" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.CURATOR_GH_IDS">
-<code class="sig-name descname">CURATOR_GH_IDS</code><em class="property"> = ['jonrkarr']</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.CURATOR_GH_IDS" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.DEFAULT_IMAGE_VERSION">
-<code class="sig-name descname">DEFAULT_IMAGE_VERSION</code><em class="property"> = '1.0.0'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.DEFAULT_IMAGE_VERSION" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.DEFAULT_SPECIFICATIONS_VERSION">
-<code class="sig-name descname">DEFAULT_SPECIFICATIONS_VERSION</code><em class="property"> = '1.0.0'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.DEFAULT_SPECIFICATIONS_VERSION" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.DOCKER_REGISTRY_IMAGE_URL_PATTERN">
-<code class="sig-name descname">DOCKER_REGISTRY_IMAGE_URL_PATTERN</code><em class="property"> = 'ghcr.io/biosimulators/{}:{}'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.DOCKER_REGISTRY_IMAGE_URL_PATTERN" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.DOCKER_REGISTRY_URL">
-<code class="sig-name descname">DOCKER_REGISTRY_URL</code><em class="property"> = 'ghcr.io'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.DOCKER_REGISTRY_URL" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.RUNBIOSIMULATIONS_API_ENDPOINT">
-<code class="sig-name descname">RUNBIOSIMULATIONS_API_ENDPOINT</code><em class="property"> = 'https://run.api.biosimulations.dev/'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.RUNBIOSIMULATIONS_API_ENDPOINT" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.RUNBIOSIMULATIONS_AUDIENCE">
-<code class="sig-name descname">RUNBIOSIMULATIONS_AUDIENCE</code><em class="property"> = 'dispatch.biosimulations.org'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.RUNBIOSIMULATIONS_AUDIENCE" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
 <dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.commit_simulator">
@@ -766,12 +973,17 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
 
 <dl class="py method">
 <dt id="biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.get_auth_headers_for_biosimulations_api">
-<code class="sig-name descname">get_auth_headers_for_biosimulations_api</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">audience</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.get_auth_headers_for_biosimulations_api" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_auth_headers_for_biosimulations_api</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">endpoint</span></em>, <em class="sig-param"><span class="n">audience</span></em>, <em class="sig-param"><span class="n">client_id</span></em>, <em class="sig-param"><span class="n">client_secret</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/exec_gh_action.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.exec_gh_action.ValidateCommitSimulatorGitHubAction.get_auth_headers_for_biosimulations_api" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get authorization headers for using one of the BioSimulations REST APIs
 (BioSimulators, runBioSimulations, etc.).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>audience</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – API audience</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>endpoint</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – URL for getting an authentication token</p></li>
+<li><p><strong>audience</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – API audience</p></li>
+<li><p><strong>client_id</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – id for this client</p></li>
+<li><p><strong>client_secret</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – secret for this client</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>authorization headers</p>
@@ -922,7 +1134,7 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.warnings">
-<span id="biosimulators-test-suite-warnings-module"></span><h2><span class="section-number">3.8. </span>biosimulators_test_suite.warnings module<a class="headerlink" href="#module-biosimulators_test_suite.warnings" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-warnings-module"></span><h2><span class="section-number">3.9. </span>biosimulators_test_suite.warnings module<a class="headerlink" href="#module-biosimulators_test_suite.warnings" title="Permalink to this headline">¶</a></h2>
 <p>Common warnings for test cases</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -946,8 +1158,8 @@ checking that the image produces the correct outputs for test cases (e.g., COMBI
 </dd></dl>
 
 <dl class="py exception">
-<dt id="biosimulators_test_suite.warnings.InvalidOuputsWarning">
-<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.warnings.</code><code class="sig-name descname">InvalidOuputsWarning</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/warnings.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.warnings.InvalidOuputsWarning" title="Permalink to this definition">¶</a></dt>
+<dt id="biosimulators_test_suite.warnings.InvalidOutputsWarning">
+<em class="property">exception </em><code class="sig-prename descclassname">biosimulators_test_suite.warnings.</code><code class="sig-name descname">InvalidOutputsWarning</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/warnings.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.warnings.InvalidOutputsWarning" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.warnings.TestCaseWarning" title="biosimulators_test_suite.warnings.TestCaseWarning"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.warnings.TestCaseWarning</span></code></a></p>
 <p>Warning that the outputs of the execution of a COMBINE/OMEX archive were not as expected</p>
 </dd></dl>

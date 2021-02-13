@@ -5,14 +5,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3.1.2. biosimulators_test_suite.test_case package &#8212; BioSimulators test suite 0.1.16 documentation</title>
+    <title>3.1.2. biosimulators_test_suite.test_case package &#8212; BioSimulators test suite 0.1.18 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -58,12 +57,13 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#submodules">3.2. Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.data_model">3.3. biosimulators_test_suite.data_model module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exceptions">3.4. biosimulators_test_suite.exceptions module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_cli">3.5. biosimulators_test_suite.exec_cli module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_core">3.6. biosimulators_test_suite.exec_core module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_gh_action">3.7. biosimulators_test_suite.exec_gh_action module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.warnings">3.8. biosimulators_test_suite.warnings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.config">3.3. biosimulators_test_suite.config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.data_model">3.4. biosimulators_test_suite.data_model module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exceptions">3.5. biosimulators_test_suite.exceptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_cli">3.6. biosimulators_test_suite.exec_cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_core">3.7. biosimulators_test_suite.exec_core module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_gh_action">3.8. biosimulators_test_suite.exec_gh_action module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.warnings">3.9. biosimulators_test_suite.warnings module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../about.html">4. About the BioSimulators test suite</a></li>
@@ -223,9 +223,157 @@ simulator supports.</p>
 </dd>
 </dl>
 <dl class="py class">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsInNestedDirectories">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.combine_archive.</code><code class="sig-name descname">CombineArchiveHasSedDocumentsInNestedDirectories</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsInNestedDirectories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.combine_archive.WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile" title="biosimulators_test_suite.test_case.combine_archive.WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.combine_archive.WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile</span></code></a></p>
+<p>Test that SED documents in nested directories can be executed</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsInNestedDirectories._archive_has_master">
+<code class="sig-name descname">_archive_has_master</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsInNestedDirectories._archive_has_master" title="Permalink to this definition">¶</a></dt>
+<dd><p>whether the synthetic archive should  have a master file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsInNestedDirectories.SED_DOCUMENTS_HAVE_SAME_NAMES">
+<code class="sig-name descname">SED_DOCUMENTS_HAVE_SAME_NAMES</code><em class="property"> = False</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsInNestedDirectories.SED_DOCUMENTS_HAVE_SAME_NAMES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsInNestedDirectories.SED_DOCUMENT_LOCATIONS_ARE_NESTED">
+<code class="sig-name descname">SED_DOCUMENT_LOCATIONS_ARE_NESTED</code><em class="property"> = True</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsInNestedDirectories.SED_DOCUMENT_LOCATIONS_ARE_NESTED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsWithSameNamesInDifferentInNestedDirectories">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.combine_archive.</code><code class="sig-name descname">CombineArchiveHasSedDocumentsWithSameNamesInDifferentInNestedDirectories</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsWithSameNamesInDifferentInNestedDirectories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.combine_archive.WhenACombineArchiveHasNoMasterFileSimulatorExecutesAllSedDocuments" title="biosimulators_test_suite.test_case.combine_archive.WhenACombineArchiveHasNoMasterFileSimulatorExecutesAllSedDocuments"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.combine_archive.WhenACombineArchiveHasNoMasterFileSimulatorExecutesAllSedDocuments</span></code></a></p>
+<p>Test that SED documents with the same names in nested directories can be executed and their outputs are saved to distinct paths</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsWithSameNamesInDifferentInNestedDirectories._archive_has_master">
+<code class="sig-name descname">_archive_has_master</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsWithSameNamesInDifferentInNestedDirectories._archive_has_master" title="Permalink to this definition">¶</a></dt>
+<dd><p>whether the synthetic archive should  have a master file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsWithSameNamesInDifferentInNestedDirectories.SED_DOCUMENTS_HAVE_SAME_NAMES">
+<code class="sig-name descname">SED_DOCUMENTS_HAVE_SAME_NAMES</code><em class="property"> = True</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsWithSameNamesInDifferentInNestedDirectories.SED_DOCUMENTS_HAVE_SAME_NAMES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsWithSameNamesInDifferentInNestedDirectories.SED_DOCUMENT_LOCATIONS_ARE_NESTED">
+<code class="sig-name descname">SED_DOCUMENT_LOCATIONS_ARE_NESTED</code><em class="property"> = True</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveHasSedDocumentsWithSameNamesInDifferentInNestedDirectories.SED_DOCUMENT_LOCATIONS_ARE_NESTED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.combine_archive.</code><code class="sig-name descname">CombineArchiveTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase" title="biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase</span></code></a></p>
+<p>Base class for testing for the execution of master and non-master files in COMBINE/OMEX archives</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase._expected_report_ids">
+<code class="sig-name descname">_expected_report_ids</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase._expected_report_ids" title="Permalink to this definition">¶</a></dt>
+<dd><p>ids of expected reports</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase.SED_DOCUMENTS_HAVE_SAME_NAMES">
+<code class="sig-name descname">SED_DOCUMENTS_HAVE_SAME_NAMES</code><em class="property"> = False</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase.SED_DOCUMENTS_HAVE_SAME_NAMES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase.SED_DOCUMENT_LOCATIONS_ARE_NESTED">
+<code class="sig-name descname">SED_DOCUMENT_LOCATIONS_ARE_NESTED</code><em class="property"> = False</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase.SED_DOCUMENT_LOCATIONS_ARE_NESTED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase.build_synthetic_archives">
+<code class="sig-name descname">build_synthetic_archives</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">curated_archive</span></em>, <em class="sig-param"><span class="n">curated_archive_dir</span></em>, <em class="sig-param"><span class="n">curated_sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase.build_synthetic_archives" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a synthetic archive with a copy of each task and each report</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
+<li><p><strong>curated_archive</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code>) – curated COMBINE/OMEX archive</p></li>
+<li><p><strong>curated_archive_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory with the contents of the curated COMBINE/OMEX archive</p></li>
+<li><p><strong>curated_sed_docs</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>) – map from locations to
+SED documents in curated archive</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpectedResultOfSyntheticArchive</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase.eval_outputs">
+<code class="sig-name descname">eval_outputs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">synthetic_archive</span></em>, <em class="sig-param"><span class="n">synthetic_sed_docs</span></em>, <em class="sig-param"><span class="n">outputs_dir</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase.eval_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test that the expected outputs were created for the synthetic archive</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
+<li><p><strong>synthetic_archive</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code>) – synthetic COMBINE/OMEX archive for testing the simulator</p></li>
+<li><p><strong>synthetic_sed_docs</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>) – map from the location of each SED
+document in the synthetic archive to the document</p></li>
+<li><p><strong>outputs_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory that contains the outputs produced from the execution of the synthetic archive</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether there were no warnings about the outputs</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase.get_expected_reports">
+<code class="sig-name descname">get_expected_reports</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">archive</span></em>, <em class="sig-param"><span class="n">sed_documents</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase.get_expected_reports" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the ids of the reports expected to be produced from a COMBINE/OMEX archive</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>archive</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code>) – COMBINE/OMEX archive</p></li>
+<li><p><strong>sed_documents</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>) – dictionary that maps the
+location of each SED document to the document</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>ids of the reports expected to be produced from a COMBINE/OMEX archive</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="biosimulators_test_suite.test_case.combine_archive.WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile">
 <em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.combine_archive.</code><code class="sig-name descname">WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase" title="biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase</span></code></a></p>
 <p>Test that when a COMBINE/OMEX archive defines a (single) master file, the simulator only
 executes this file.</p>
 <dl class="py attribute">
@@ -244,7 +392,7 @@ executes this file.</p>
 <dl class="py class">
 <dt id="biosimulators_test_suite.test_case.combine_archive.WhenACombineArchiveHasNoMasterFileSimulatorExecutesAllSedDocuments">
 <em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.combine_archive.</code><code class="sig-name descname">WhenACombineArchiveHasNoMasterFileSimulatorExecutesAllSedDocuments</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/combine_archive.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.combine_archive.WhenACombineArchiveHasNoMasterFileSimulatorExecutesAllSedDocuments" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase" title="biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.combine_archive.CombineArchiveTestCase</span></code></a></p>
 <p>Test that when a COMBINE/OMEX archive does not have a defined master file, the simulator
 executes all SED-ML files.</p>
 <dl class="py attribute">
@@ -396,14 +544,33 @@ with metadata about the image</p>
 </dd>
 </dl>
 <dl class="py class">
-<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives">
-<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.log.</code><code class="sig-name descname">SimulatorReportsTheStatusOfTheExecutionOfCombineArchives</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives" title="Permalink to this definition">¶</a></dt>
+<dt id="biosimulators_test_suite.test_case.log.LoggingTestCase">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.log.</code><code class="sig-name descname">LoggingTestCase</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.LoggingTestCase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase" title="biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase</span></code></a></p>
-<p>Test that when a COMBINE/OMEX archive defines a (single) master file, the simulator only
-executes this file.</p>
+<p>Test that simulation tool can log its execution</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.log.LoggingTestCase.REPORT_ERROR_AS_SKIP">
+<code class="sig-name descname">REPORT_ERROR_AS_SKIP</code><em class="property"> = True</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.LoggingTestCase.REPORT_ERROR_AS_SKIP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.log.LoggingTestCase.VALIDATE_OUTPUT_LOGS">
+<code class="sig-name descname">VALIDATE_OUTPUT_LOGS</code><em class="property"> = False</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.LoggingTestCase.VALIDATE_OUTPUT_LOGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.log.LoggingTestCase.VALIDATE_SED_DOCUMENT_LOGS">
+<code class="sig-name descname">VALIDATE_SED_DOCUMENT_LOGS</code><em class="property"> = False</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.LoggingTestCase.VALIDATE_SED_DOCUMENT_LOGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.log.LoggingTestCase.VALIDATE_TASK_LOGS">
+<code class="sig-name descname">VALIDATE_TASK_LOGS</code><em class="property"> = False</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.LoggingTestCase.VALIDATE_TASK_LOGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives.eval_outputs">
-<code class="sig-name descname">eval_outputs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">synthetic_archive</span></em>, <em class="sig-param"><span class="n">synthetic_sed_docs</span></em>, <em class="sig-param"><span class="n">outputs_dir</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives.eval_outputs" title="Permalink to this definition">¶</a></dt>
+<dt id="biosimulators_test_suite.test_case.log.LoggingTestCase.eval_outputs">
+<code class="sig-name descname">eval_outputs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">synthetic_archive</span></em>, <em class="sig-param"><span class="n">synthetic_sed_docs</span></em>, <em class="sig-param"><span class="n">outputs_dir</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.LoggingTestCase.eval_outputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test that the expected outputs were created for the synthetic archive</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -416,10 +583,133 @@ document in the synthetic archive to the document</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, if simulator passes the test</p>
+<dd class="field-even"><p>whether there were no warnings about the outputs</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.log.LoggingTestCase.is_concrete">
+<em class="property">abstract </em><code class="sig-name descname">is_concrete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.LoggingTestCase.is_concrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the class is abstract</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>whether the class is abstract</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.log.</code><code class="sig-name descname">SimulatorReportsTheStatusOfTheExecutionOfCombineArchives</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.log.LoggingTestCase" title="biosimulators_test_suite.test_case.log.LoggingTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.log.LoggingTestCase</span></code></a></p>
+<p>Test that simulator logs the execution of COMBINE/OMEX archives</p>
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives.is_concrete">
+<code class="sig-name descname">is_concrete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives.is_concrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the class is concrete</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>whether the class is concrete</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedDocuments">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.log.</code><code class="sig-name descname">SimulatorReportsTheStatusOfTheExecutionOfSedDocuments</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedDocuments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.log.LoggingTestCase" title="biosimulators_test_suite.test_case.log.LoggingTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.log.LoggingTestCase</span></code></a></p>
+<p>Test that simulator logs the execution of individual SED document in COMBINE/OMEX archives</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedDocuments.VALIDATE_SED_DOCUMENT_LOGS">
+<code class="sig-name descname">VALIDATE_SED_DOCUMENT_LOGS</code><em class="property"> = True</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedDocuments.VALIDATE_SED_DOCUMENT_LOGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedDocuments.is_concrete">
+<code class="sig-name descname">is_concrete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedDocuments.is_concrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the class is concrete</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>whether the class is concrete</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedOutputs">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.log.</code><code class="sig-name descname">SimulatorReportsTheStatusOfTheExecutionOfSedOutputs</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedOutputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.log.LoggingTestCase" title="biosimulators_test_suite.test_case.log.LoggingTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.log.LoggingTestCase</span></code></a></p>
+<p>Test that simulator logs the execution of individual SED outputs in COMBINE/OMEX archives</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedOutputs.VALIDATE_OUTPUT_LOGS">
+<code class="sig-name descname">VALIDATE_OUTPUT_LOGS</code><em class="property"> = True</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedOutputs.VALIDATE_OUTPUT_LOGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedOutputs.VALIDATE_SED_DOCUMENT_LOGS">
+<code class="sig-name descname">VALIDATE_SED_DOCUMENT_LOGS</code><em class="property"> = True</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedOutputs.VALIDATE_SED_DOCUMENT_LOGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedOutputs.is_concrete">
+<code class="sig-name descname">is_concrete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedOutputs.is_concrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the class is concrete</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>whether the class is concrete</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedTasks">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.log.</code><code class="sig-name descname">SimulatorReportsTheStatusOfTheExecutionOfSedTasks</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedTasks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.log.LoggingTestCase" title="biosimulators_test_suite.test_case.log.LoggingTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.log.LoggingTestCase</span></code></a></p>
+<p>Test that simulator logs the execution of individual SED tasks in COMBINE/OMEX archives</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedTasks.VALIDATE_SED_DOCUMENT_LOGS">
+<code class="sig-name descname">VALIDATE_SED_DOCUMENT_LOGS</code><em class="property"> = True</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedTasks.VALIDATE_SED_DOCUMENT_LOGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedTasks.VALIDATE_TASK_LOGS">
+<code class="sig-name descname">VALIDATE_TASK_LOGS</code><em class="property"> = True</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedTasks.VALIDATE_TASK_LOGS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedTasks.is_concrete">
+<code class="sig-name descname">is_concrete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/log.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.log.SimulatorReportsTheStatusOfTheExecutionOfSedTasks.is_concrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the class is concrete</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>whether the class is concrete</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -462,23 +752,12 @@ copies of the same file</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.published_project.ConfigurableMasterCombineArchiveTestCase._include_non_master">
-<code class="sig-name descname">_include_non_master</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.ConfigurableMasterCombineArchiveTestCase._include_non_master" title="Permalink to this definition">¶</a></dt>
-<dd><p>whether the synthetic archive should also have a non-master file</p>
+<dt id="biosimulators_test_suite.test_case.published_project.ConfigurableMasterCombineArchiveTestCase._model_change_filter">
+<code class="sig-name descname">_model_change_filter</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.ConfigurableMasterCombineArchiveTestCase._model_change_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>filter for model changes to keep</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.published_project.ConfigurableMasterCombineArchiveTestCase._types_of_model_changes_to_keep">
-<code class="sig-name descname">_types_of_model_changes_to_keep</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.ConfigurableMasterCombineArchiveTestCase._types_of_model_changes_to_keep" title="Permalink to this definition">¶</a></dt>
-<dd><p>types of model changes to keep</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></p>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">types.FunctionType</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -542,8 +821,8 @@ data generators for each variable</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="biosimulators_test_suite.test_case.published_project.ConfigurableMasterCombineArchiveTestCase.build_synthetic_archive">
-<code class="sig-name descname">build_synthetic_archive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">curated_archive</span></em>, <em class="sig-param"><span class="n">curated_archive_dir</span></em>, <em class="sig-param"><span class="n">curated_sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.ConfigurableMasterCombineArchiveTestCase.build_synthetic_archive" title="Permalink to this definition">¶</a></dt>
+<dt id="biosimulators_test_suite.test_case.published_project.ConfigurableMasterCombineArchiveTestCase.build_synthetic_archives">
+<code class="sig-name descname">build_synthetic_archives</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">curated_archive</span></em>, <em class="sig-param"><span class="n">curated_archive_dir</span></em>, <em class="sig-param"><span class="n">curated_sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.ConfigurableMasterCombineArchiveTestCase.build_synthetic_archives" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a synthetic archive with master and non-master SED documents</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -556,15 +835,48 @@ SED documents in curated archive</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code>: synthetic COMBINE/OMEX archive for testing the simulator</p></li>
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>: map from locations to
-SED documents in synthetic archive</p></li>
-</ul>
-</p>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive" title="biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpectedResultOfSyntheticArchive</span></code></a></p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.published_project.</code><code class="sig-name descname">ExpectedResultOfSyntheticArchive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">archive</span></em>, <em class="sig-param"><span class="n">sed_documents</span></em>, <em class="sig-param"><span class="n">is_success_expected</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An expected result of executing a synthetic COMBINE/OMEX archive</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive.archive">
+<code class="sig-name descname">archive</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive.archive" title="Permalink to this definition">¶</a></dt>
+<dd><p>synthetic COMBINE/OMEX archive for testing the simulator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive.sed_documents">
+<code class="sig-name descname">sed_documents</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive.sed_documents" title="Permalink to this definition">¶</a></dt>
+<dd><p>map from locations to
+SED documents in synthetic archive</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive.is_success_expected">
+<code class="sig-name descname">is_success_expected</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive.is_success_expected" title="Permalink to this definition">¶</a></dt>
+<dd><p>whether the execution of the archive is expected to succeed</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -811,17 +1123,6 @@ for each task in the COMBINE/OMEX archive</p>
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt id="biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase._include_non_master">
-<code class="sig-name descname">_include_non_master</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase._include_non_master" title="Permalink to this definition">¶</a></dt>
-<dd><p>whether the synthetic archive should also have a non-master file</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
@@ -884,9 +1185,26 @@ for each task in the COMBINE/OMEX archive</p>
 </dl>
 </dd></dl>
 
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase._published_projects_test_case">
+<code class="sig-name descname">_published_projects_test_case</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase._published_projects_test_case" title="Permalink to this definition">¶</a></dt>
+<dd><p>COMBINE/OMEX archive
+that is used to generate example archives for testing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject" title="biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SimulatorCanExecutePublishedProject</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.REPORT_ERROR_AS_SKIP">
+<code class="sig-name descname">REPORT_ERROR_AS_SKIP</code><em class="property"> = False</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.REPORT_ERROR_AS_SKIP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt id="biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.build_synthetic_archive">
-<code class="sig-name descname">build_synthetic_archive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">curated_archive</span></em>, <em class="sig-param"><span class="n">curated_archive_dir</span></em>, <em class="sig-param"><span class="n">curated_sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.build_synthetic_archive" title="Permalink to this definition">¶</a></dt>
+<dt id="biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.build_synthetic_archives">
+<code class="sig-name descname">build_synthetic_archives</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">curated_archive</span></em>, <em class="sig-param"><span class="n">curated_archive_dir</span></em>, <em class="sig-param"><span class="n">curated_sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.build_synthetic_archives" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a synthetic archive for testing</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -899,15 +1217,7 @@ SED documents in curated archive</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code>: synthetic COMBINE/OMEX archive for testing the simulator</p></li>
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>: map from locations to
-SED documents in synthetic archive</p></li>
-</ul>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive" title="biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpectedResultOfSyntheticArchive</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -921,10 +1231,10 @@ SED documents in synthetic archive</p></li>
 <dd class="field-odd"><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>data returned by <a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.eval_outputs" title="biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.eval_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_outputs</span></code></a></p>
+<dd class="field-even"><p>whether there were no warnings about the outputs</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></p>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><strong>Exception</strong> – if the simulator did not pass the test case</p>
@@ -945,6 +1255,12 @@ SED documents in synthetic archive</p></li>
 document in the synthetic archive to the document</p></li>
 <li><p><strong>outputs_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory that contains the outputs produced from the execution of the synthetic archive</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether there were no warnings about the outputs</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1011,13 +1327,14 @@ SED documents in curated archive</p></li>
 
 <dl class="py method">
 <dt id="biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.is_curated_sed_doc_suitable_for_building_synthetic_archive">
-<code class="sig-name descname">is_curated_sed_doc_suitable_for_building_synthetic_archive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">sed_doc</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.is_curated_sed_doc_suitable_for_building_synthetic_archive" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_curated_sed_doc_suitable_for_building_synthetic_archive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">sed_doc</span></em>, <em class="sig-param"><span class="n">sed_doc_location</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.is_curated_sed_doc_suitable_for_building_synthetic_archive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a SED document is suitable for testing</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
 <li><p><strong>sed_doc</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>) – SED document in curated archive</p></li>
+<li><p><strong>sed_doc_location</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – location of the SED document within its parent COMBINE/OMEX archive</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1051,13 +1368,14 @@ SED documents in curated archive</p></li>
 
 <dl class="py method">
 <dt id="biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.is_curated_sed_report_suitable_for_building_synthetic_archive">
-<code class="sig-name descname">is_curated_sed_report_suitable_for_building_synthetic_archive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">report</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.is_curated_sed_report_suitable_for_building_synthetic_archive" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_curated_sed_report_suitable_for_building_synthetic_archive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">report</span></em>, <em class="sig-param"><span class="n">sed_doc_location</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.is_curated_sed_report_suitable_for_building_synthetic_archive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Determine if a SED report is suitable for testing</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
 <li><p><strong>report</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Report</span></code>) – SED report in curated archive</p></li>
+<li><p><strong>sed_doc_location</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – location of the SED document within its parent COMBINE/OMEX archive</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1117,8 +1435,23 @@ SED documents in curated archive</p></li>
 <dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase" title="biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase</span></code></a></p>
 <p>Test that a simulator supports multiple reports per SED document</p>
 <dl class="py method">
-<dt id="biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.build_synthetic_archive">
-<code class="sig-name descname">build_synthetic_archive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">curated_archive</span></em>, <em class="sig-param"><span class="n">curated_archive_dir</span></em>, <em class="sig-param"><span class="n">curated_sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.build_synthetic_archive" title="Permalink to this definition">¶</a></dt>
+<dt id="biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.add_time_data_set">
+<code class="sig-name descname">add_time_data_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">doc</span></em>, <em class="sig-param"><span class="n">task</span></em>, <em class="sig-param"><span class="n">report</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.add_time_data_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename or add a time data set to a SED report</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>doc</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>) – SED document</p></li>
+<li><p><strong>task</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">task</span></code>) – SED task</p></li>
+<li><p><strong>report</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Report</span></code>) – SED report</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.build_synthetic_archives">
+<code class="sig-name descname">build_synthetic_archives</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">curated_archive</span></em>, <em class="sig-param"><span class="n">curated_archive_dir</span></em>, <em class="sig-param"><span class="n">curated_sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.build_synthetic_archives" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a synthetic archive with a copy of each task and each report</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1131,35 +1464,7 @@ SED documents in curated archive</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code>: synthetic COMBINE/OMEX archive for testing the simulator</p></li>
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>: map from locations to
-SED documents in synthetic archive</p></li>
-</ul>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.eval">
-<code class="sig-name descname">eval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.eval" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluate a simulator’s performance on a test case</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>data returned by <a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.eval_outputs" title="biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.eval_outputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_outputs</span></code></a></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">object</span></code></p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>Exception</strong> – if the simulator did not pass the test case</p>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive" title="biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpectedResultOfSyntheticArchive</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1177,6 +1482,12 @@ SED documents in synthetic archive</p></li>
 document in the synthetic archive to the document</p></li>
 <li><p><strong>outputs_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory that contains the outputs produced from the execution of the synthetic archive</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether there were no warnings about the outputs</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1212,11 +1523,27 @@ document in the synthetic archive to the document</p></li>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.report_error_as_warning">
-<em class="property">property </em><code class="sig-name descname">report_error_as_warning</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase.report_error_as_warning" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+</dd></dl>
 
+<dl class="py function">
+<dt id="biosimulators_test_suite.test_case.published_project.find_cases">
+<code class="sig-prename descclassname">biosimulators_test_suite.test_case.published_project.</code><code class="sig-name descname">find_cases</code><span class="sig-paren">(</span><em class="sig-param">specifications</em>, <em class="sig-param">dir_name=None</em>, <em class="sig-param">output_medium=&lt;OutputMedium.console: 'console'&gt;</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.find_cases" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collect test cases</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
+<li><p><strong>dir_name</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – path to find example COMBINE/OMEX archives</p></li>
+<li><p><strong>output_medium</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">OutputMedium</span></code>, optional) – medium the description should be formatted for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>test cases</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject" title="biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SimulatorCanExecutePublishedProject</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </div>
@@ -1238,14 +1565,14 @@ document in the synthetic archive to the document</p></li>
 </dd>
 </dl>
 <dl class="py class">
-<dt id="biosimulators_test_suite.test_case.results_report.SimulatorGeneratesReportsOfSimultionResults">
-<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.results_report.</code><code class="sig-name descname">SimulatorGeneratesReportsOfSimultionResults</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/results_report.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.results_report.SimulatorGeneratesReportsOfSimultionResults" title="Permalink to this definition">¶</a></dt>
+<dt id="biosimulators_test_suite.test_case.results_report.SimulatorGeneratesReportsOfSimulationResults">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.results_report.</code><code class="sig-name descname">SimulatorGeneratesReportsOfSimulationResults</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/results_report.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.results_report.SimulatorGeneratesReportsOfSimulationResults" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase" title="biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase</span></code></a></p>
 <p>Test that when a COMBINE/OMEX archive defines a (single) master file, the simulator only
 executes this file.</p>
 <dl class="py method">
-<dt id="biosimulators_test_suite.test_case.results_report.SimulatorGeneratesReportsOfSimultionResults.eval_outputs">
-<code class="sig-name descname">eval_outputs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">synthetic_archive</span></em>, <em class="sig-param"><span class="n">synthetic_sed_docs</span></em>, <em class="sig-param"><span class="n">outputs_dir</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/results_report.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.results_report.SimulatorGeneratesReportsOfSimultionResults.eval_outputs" title="Permalink to this definition">¶</a></dt>
+<dt id="biosimulators_test_suite.test_case.results_report.SimulatorGeneratesReportsOfSimulationResults.eval_outputs">
+<code class="sig-name descname">eval_outputs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">synthetic_archive</span></em>, <em class="sig-param"><span class="n">synthetic_sed_docs</span></em>, <em class="sig-param"><span class="n">outputs_dir</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/results_report.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.results_report.SimulatorGeneratesReportsOfSimulationResults.eval_outputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test that the expected outputs were created for the synthetic archive</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1258,7 +1585,7 @@ document in the synthetic archive to the document</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, if simulator passes the test</p>
+<dd class="field-even"><p>whether there were no warnings about the outputs</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
@@ -1340,6 +1667,12 @@ document in the synthetic archive to the document</p></li>
 <li><p><strong>outputs_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory that contains the outputs produced from the execution of the synthetic archive</p></li>
 </ul>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether there were no warnings about the outputs</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -1371,8 +1704,8 @@ document in the synthetic archive to the document</p></li>
 <dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports" title="biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports</span></code></a></p>
 <p>Test that a simulator supports setting the values of parameters of algorithms</p>
 <dl class="py method">
-<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsAlgorithmParameters.build_synthetic_archive">
-<code class="sig-name descname">build_synthetic_archive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">curated_archive</span></em>, <em class="sig-param"><span class="n">curated_archive_dir</span></em>, <em class="sig-param"><span class="n">curated_sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsAlgorithmParameters.build_synthetic_archive" title="Permalink to this definition">¶</a></dt>
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsAlgorithmParameters.build_synthetic_archives">
+<code class="sig-name descname">build_synthetic_archives</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">curated_archive</span></em>, <em class="sig-param"><span class="n">curated_archive_dir</span></em>, <em class="sig-param"><span class="n">curated_sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsAlgorithmParameters.build_synthetic_archives" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a synthetic archive with a copy of each task and each report</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1385,15 +1718,7 @@ SED documents in curated archive</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code>: synthetic COMBINE/OMEX archive for testing the simulator</p></li>
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>: map from locations to
-SED documents in synthetic archive</p></li>
-</ul>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpectedResultOfSyntheticArchive</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1425,22 +1750,27 @@ SED documents in synthetic archive</p></li>
 <em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.sedml.</code><code class="sig-name descname">SimulatorSupportsModelAttributeChanges</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelAttributeChanges" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports" title="biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports</span></code></a></p>
 <p>Test that a simulator supports changes to the attributes of model elements</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelAttributeChanges.REPORT_ERROR_AS_SKIP">
+<code class="sig-name descname">REPORT_ERROR_AS_SKIP</code><em class="property"> = True</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelAttributeChanges.REPORT_ERROR_AS_SKIP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelAttributeChanges.is_curated_sed_model_suitable_for_building_synthetic_archive">
-<code class="sig-name descname">is_curated_sed_model_suitable_for_building_synthetic_archive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">model</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelAttributeChanges.is_curated_sed_model_suitable_for_building_synthetic_archive" title="Permalink to this definition">¶</a></dt>
-<dd><p>Determine if a SED model is suitable for testing</p>
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelAttributeChanges.build_synthetic_archives">
+<code class="sig-name descname">build_synthetic_archives</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">curated_archive</span></em>, <em class="sig-param"><span class="n">curated_archive_dir</span></em>, <em class="sig-param"><span class="n">curated_sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelAttributeChanges.build_synthetic_archives" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a synthetic archive with a copy of each task and each report</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
-<li><p><strong>model</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Model</span></code>) – SED task in curated archive</p></li>
+<li><p><strong>curated_archive</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code>) – curated COMBINE/OMEX archive</p></li>
+<li><p><strong>curated_archive_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory with the contents of the curated COMBINE/OMEX archive</p></li>
+<li><p><strong>curated_sed_docs</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>) – map from locations to
+SED documents in curated archive</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>whether the model is suitable for testing</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpectedResultOfSyntheticArchive</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1468,7 +1798,7 @@ document in the synthetic archive to the document</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, if succeeded without warnings</p>
+<dd class="field-even"><p>whether there were no warnings about the outputs</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
@@ -1484,8 +1814,8 @@ document in the synthetic archive to the document</p></li>
 <dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase" title="biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.published_project.SingleMasterSedDocumentCombineArchiveTestCase</span></code></a></p>
 <p>Test that a simulator supports multiple reports per SED document</p>
 <dl class="py method">
-<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsMultipleReportsPerSedDocument.build_synthetic_archive">
-<code class="sig-name descname">build_synthetic_archive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">curated_archive</span></em>, <em class="sig-param"><span class="n">curated_archive_dir</span></em>, <em class="sig-param"><span class="n">curated_sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsMultipleReportsPerSedDocument.build_synthetic_archive" title="Permalink to this definition">¶</a></dt>
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsMultipleReportsPerSedDocument.build_synthetic_archives">
+<code class="sig-name descname">build_synthetic_archives</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">curated_archive</span></em>, <em class="sig-param"><span class="n">curated_archive_dir</span></em>, <em class="sig-param"><span class="n">curated_sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsMultipleReportsPerSedDocument.build_synthetic_archives" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a synthetic archive with a copy of each task and each report</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1498,15 +1828,7 @@ SED documents in curated archive</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code>: synthetic COMBINE/OMEX archive for testing the simulator</p></li>
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>: map from locations to
-SED documents in synthetic archive</p></li>
-</ul>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpectedResultOfSyntheticArchive</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1524,6 +1846,12 @@ SED documents in synthetic archive</p></li>
 document in the synthetic archive to the document</p></li>
 <li><p><strong>outputs_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory that contains the outputs produced from the execution of the synthetic archive</p></li>
 </ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether there were no warnings about the outputs</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1548,8 +1876,8 @@ original reports and their expected duplicates</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsMultipleTasksPerSedDocument.build_synthetic_archive">
-<code class="sig-name descname">build_synthetic_archive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">curated_archive</span></em>, <em class="sig-param"><span class="n">curated_archive_dir</span></em>, <em class="sig-param"><span class="n">curated_sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsMultipleTasksPerSedDocument.build_synthetic_archive" title="Permalink to this definition">¶</a></dt>
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsMultipleTasksPerSedDocument.build_synthetic_archives">
+<code class="sig-name descname">build_synthetic_archives</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">specifications</span></em>, <em class="sig-param"><span class="n">curated_archive</span></em>, <em class="sig-param"><span class="n">curated_archive_dir</span></em>, <em class="sig-param"><span class="n">curated_sed_docs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsMultipleTasksPerSedDocument.build_synthetic_archives" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a synthetic archive with a copy of each task and each report</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1562,15 +1890,7 @@ SED documents in curated archive</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code>: synthetic COMBINE/OMEX archive for testing the simulator</p></li>
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>: map from locations to
-SED documents in synthetic archive</p></li>
-</ul>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpectedResultOfSyntheticArchive</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1589,6 +1909,385 @@ document in the synthetic archive to the document</p></li>
 <li><p><strong>outputs_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory that contains the outputs produced from the execution of the synthetic archive</p></li>
 </ul>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether there were no warnings about the outputs</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.sedml.</code><code class="sig-name descname">SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.sedml.RepeatedTasksTestCase</span></code></p>
+<p>Test that a simulator supports repeated tasks over nested functional ranges based on model (specification) variables</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables.FUNCTONAL_RANGE_USES_VARIABLES">
+<code class="sig-name descname">FUNCTONAL_RANGE_USES_VARIABLES</code><em class="property"> = True</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables.FUNCTONAL_RANGE_USES_VARIABLES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables.HAS_CHANGES">
+<code class="sig-name descname">HAS_CHANGES</code><em class="property"> = True</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables.HAS_CHANGES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables.NUM_NESTED_RANGES">
+<code class="sig-name descname">NUM_NESTED_RANGES</code><em class="property"> = 0</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables.NUM_NESTED_RANGES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables.NUM_NESTED_REPEATED_TASKS">
+<code class="sig-name descname">NUM_NESTED_REPEATED_TASKS</code><em class="property"> = 0</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables.NUM_NESTED_REPEATED_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables.NUM_SUB_TASKS">
+<code class="sig-name descname">NUM_SUB_TASKS</code><em class="property"> = 1</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables.NUM_SUB_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables.RANGE_TYPE">
+<code class="sig-name descname">RANGE_TYPE</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables.RANGE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_utils.sedml.data_model.FunctionalRange</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables.is_concrete">
+<code class="sig-name descname">is_concrete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables.is_concrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the class is abstract</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>whether the class is abstract</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.sedml.</code><code class="sig-name descname">SimulatorSupportsRepeatedTasksWithFunctionalRanges</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.sedml.RepeatedTasksTestCase</span></code></p>
+<p>Test that a simulator supports repeated tasks over functional ranges</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges.FUNCTONAL_RANGE_USES_VARIABLES">
+<code class="sig-name descname">FUNCTONAL_RANGE_USES_VARIABLES</code><em class="property"> = False</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges.FUNCTONAL_RANGE_USES_VARIABLES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges.NUM_NESTED_RANGES">
+<code class="sig-name descname">NUM_NESTED_RANGES</code><em class="property"> = 0</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges.NUM_NESTED_RANGES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges.NUM_NESTED_REPEATED_TASKS">
+<code class="sig-name descname">NUM_NESTED_REPEATED_TASKS</code><em class="property"> = 0</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges.NUM_NESTED_REPEATED_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges.NUM_SUB_TASKS">
+<code class="sig-name descname">NUM_SUB_TASKS</code><em class="property"> = 1</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges.NUM_SUB_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges.RANGE_TYPE">
+<code class="sig-name descname">RANGE_TYPE</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges.RANGE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_utils.sedml.data_model.FunctionalRange</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges.is_concrete">
+<code class="sig-name descname">is_concrete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges.is_concrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the class is abstract</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>whether the class is abstract</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLinearUniformRanges">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.sedml.</code><code class="sig-name descname">SimulatorSupportsRepeatedTasksWithLinearUniformRanges</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLinearUniformRanges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.sedml.RepeatedTasksTestCase</span></code></p>
+<p>Test that a simulator supports repeated tasks over uniform ranges</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLinearUniformRanges.NUM_NESTED_REPEATED_TASKS">
+<code class="sig-name descname">NUM_NESTED_REPEATED_TASKS</code><em class="property"> = 0</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLinearUniformRanges.NUM_NESTED_REPEATED_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLinearUniformRanges.NUM_SUB_TASKS">
+<code class="sig-name descname">NUM_SUB_TASKS</code><em class="property"> = 1</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLinearUniformRanges.NUM_SUB_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLinearUniformRanges.RANGE_TYPE">
+<code class="sig-name descname">RANGE_TYPE</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLinearUniformRanges.RANGE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_utils.sedml.data_model.UniformRange</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLinearUniformRanges.UNIFORM_RANGE_TYPE">
+<code class="sig-name descname">UNIFORM_RANGE_TYPE</code><em class="property"> = 'linear'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLinearUniformRanges.UNIFORM_RANGE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.sedml.</code><code class="sig-name descname">SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.sedml.RepeatedTasksTestCase</span></code></p>
+<p>Test that a simulator supports repeated tasks over uniform ranges</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges.NUM_NESTED_REPEATED_TASKS">
+<code class="sig-name descname">NUM_NESTED_REPEATED_TASKS</code><em class="property"> = 0</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges.NUM_NESTED_REPEATED_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges.NUM_SUB_TASKS">
+<code class="sig-name descname">NUM_SUB_TASKS</code><em class="property"> = 1</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges.NUM_SUB_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges.RANGE_TYPE">
+<code class="sig-name descname">RANGE_TYPE</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges.RANGE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_utils.sedml.data_model.UniformRange</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges.UNIFORM_RANGE_TYPE">
+<code class="sig-name descname">UNIFORM_RANGE_TYPE</code><em class="property"> = 'log'</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges.UNIFORM_RANGE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithMultipleSubTasks">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.sedml.</code><code class="sig-name descname">SimulatorSupportsRepeatedTasksWithMultipleSubTasks</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithMultipleSubTasks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.sedml.RepeatedTasksTestCase</span></code></p>
+<p>Test that a simulator supports repeated tasks with multiple subtasks</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithMultipleSubTasks.NUM_NESTED_REPEATED_TASKS">
+<code class="sig-name descname">NUM_NESTED_REPEATED_TASKS</code><em class="property"> = 0</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithMultipleSubTasks.NUM_NESTED_REPEATED_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithMultipleSubTasks.NUM_SUB_TASKS">
+<code class="sig-name descname">NUM_SUB_TASKS</code><em class="property"> = 2</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithMultipleSubTasks.NUM_SUB_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithMultipleSubTasks.RANGE_TYPE">
+<code class="sig-name descname">RANGE_TYPE</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithMultipleSubTasks.RANGE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_utils.sedml.data_model.VectorRange</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithMultipleSubTasks.is_concrete">
+<code class="sig-name descname">is_concrete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithMultipleSubTasks.is_concrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the class is abstract</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>whether the class is abstract</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.sedml.</code><code class="sig-name descname">SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.sedml.RepeatedTasksTestCase</span></code></p>
+<p>Test that a simulator supports repeated tasks over nested functional ranges based on model (specification) variables</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges.FUNCTONAL_RANGE_USES_VARIABLES">
+<code class="sig-name descname">FUNCTONAL_RANGE_USES_VARIABLES</code><em class="property"> = False</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges.FUNCTONAL_RANGE_USES_VARIABLES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges.NUM_NESTED_RANGES">
+<code class="sig-name descname">NUM_NESTED_RANGES</code><em class="property"> = 1</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges.NUM_NESTED_RANGES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges.NUM_NESTED_REPEATED_TASKS">
+<code class="sig-name descname">NUM_NESTED_REPEATED_TASKS</code><em class="property"> = 0</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges.NUM_NESTED_REPEATED_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges.NUM_SUB_TASKS">
+<code class="sig-name descname">NUM_SUB_TASKS</code><em class="property"> = 1</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges.NUM_SUB_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges.RANGE_TYPE">
+<code class="sig-name descname">RANGE_TYPE</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges.RANGE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_utils.sedml.data_model.FunctionalRange</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges.is_concrete">
+<code class="sig-name descname">is_concrete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges.is_concrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the class is abstract</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>whether the class is abstract</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.sedml.</code><code class="sig-name descname">SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.sedml.RepeatedTasksTestCase</span></code></p>
+<p>Test that a simulator supports nested repeated tasks</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks.MIXED_SUB_TASK_TYPES">
+<code class="sig-name descname">MIXED_SUB_TASK_TYPES</code><em class="property"> = False</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks.MIXED_SUB_TASK_TYPES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks.NUM_NESTED_REPEATED_TASKS">
+<code class="sig-name descname">NUM_NESTED_REPEATED_TASKS</code><em class="property"> = 1</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks.NUM_NESTED_REPEATED_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks.NUM_SUB_TASKS">
+<code class="sig-name descname">NUM_SUB_TASKS</code><em class="property"> = 1</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks.NUM_SUB_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks.RANGE_LENS">
+<code class="sig-name descname">RANGE_LENS</code><em class="property"> = (3, 3)</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks.RANGE_LENS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks.RANGE_TYPE">
+<code class="sig-name descname">RANGE_TYPE</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks.RANGE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_utils.sedml.data_model.VectorRange</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks.is_concrete">
+<code class="sig-name descname">is_concrete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks.is_concrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the class is abstract</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>whether the class is abstract</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.sedml.</code><code class="sig-name descname">SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.sedml.RepeatedTasksTestCase</span></code></p>
+<p>Test that a simulator supports repeated tasks whose sub-tasks have mixed types.
+Also tests that sub-types executed in order of the values of their <code class="docutils literal notranslate"><span class="pre">order</span></code> attributes
+and that reports of the results of repeated tasks handle sub-tasks to produce results of
+different shapes.</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes.MIXED_SUB_TASK_TYPES">
+<code class="sig-name descname">MIXED_SUB_TASK_TYPES</code><em class="property"> = True</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes.MIXED_SUB_TASK_TYPES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes.NUM_NESTED_REPEATED_TASKS">
+<code class="sig-name descname">NUM_NESTED_REPEATED_TASKS</code><em class="property"> = 1</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes.NUM_NESTED_REPEATED_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes.NUM_SUB_TASKS">
+<code class="sig-name descname">NUM_SUB_TASKS</code><em class="property"> = 2</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes.NUM_SUB_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes.RANGE_LENS">
+<code class="sig-name descname">RANGE_LENS</code><em class="property"> = (1, 3)</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes.RANGE_LENS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes.RANGE_TYPE">
+<code class="sig-name descname">RANGE_TYPE</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes.RANGE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_utils.sedml.data_model.VectorRange</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes.is_concrete">
+<code class="sig-name descname">is_concrete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes.is_concrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the class is abstract</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>whether the class is abstract</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithVectorRanges">
+<em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.sedml.</code><code class="sig-name descname">SimulatorSupportsRepeatedTasksWithVectorRanges</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithVectorRanges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.sedml.RepeatedTasksTestCase</span></code></p>
+<p>Test that a simulator supports repeated tasks over vector ranges</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithVectorRanges.NUM_NESTED_REPEATED_TASKS">
+<code class="sig-name descname">NUM_NESTED_REPEATED_TASKS</code><em class="property"> = 0</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithVectorRanges.NUM_NESTED_REPEATED_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithVectorRanges.NUM_SUB_TASKS">
+<code class="sig-name descname">NUM_SUB_TASKS</code><em class="property"> = 1</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithVectorRanges.NUM_SUB_TASKS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithVectorRanges.RANGE_TYPE">
+<code class="sig-name descname">RANGE_TYPE</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithVectorRanges.RANGE_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_utils.sedml.data_model.VectorRange</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithVectorRanges.is_concrete">
+<code class="sig-name descname">is_concrete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsRepeatedTasksWithVectorRanges.is_concrete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the class is abstract</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>whether the class is abstract</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -1599,6 +2298,11 @@ document in the synthetic archive to the document</p></li>
 <em class="property">class </em><code class="sig-prename descclassname">biosimulators_test_suite.test_case.sedml.</code><code class="sig-name descname">SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase" title="biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.published_project.UniformTimeCourseTestCase</span></code></a></p>
 <p>Test that a simulator supports multiple time courses with non-zero initial times</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes.REPORT_ERROR_AS_SKIP">
+<code class="sig-name descname">REPORT_ERROR_AS_SKIP</code><em class="property"> = True</em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes.REPORT_ERROR_AS_SKIP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes.modify_simulation">
 <code class="sig-name descname">modify_simulation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">simulation</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes.modify_simulation" title="Permalink to this definition">¶</a></dt>
@@ -1609,11 +2313,6 @@ document in the synthetic archive to the document</p></li>
 </dd>
 </dl>
 </dd></dl>
-
-<dl class="py method">
-<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes.report_error_as_warning">
-<em class="property">property </em><code class="sig-name descname">report_error_as_warning</code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes.report_error_as_warning" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 
