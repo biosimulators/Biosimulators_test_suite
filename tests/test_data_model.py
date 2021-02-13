@@ -1,5 +1,4 @@
 from biosimulators_test_suite import data_model
-import numpy
 import unittest
 
 
@@ -12,7 +11,7 @@ class DataModelTestCase(unittest.TestCase):
     def test_ExpectedSedReport(self):
         report = data_model.ExpectedSedReport(
             id='report-1',
-            data_sets=set('time', 'A', 'B', 'C'),
+            data_sets=set(['time', 'A', 'B', 'C']),
             points=(1001,),
             values={
                 'time': [0, 1, 2, 4, 5],
@@ -23,7 +22,7 @@ class DataModelTestCase(unittest.TestCase):
             },
         )
         self.assertEqual(report.id, 'report-1')
-        self.assertEqual(report.data_sets, set('time', 'A', 'B', 'C'))
+        self.assertEqual(report.data_sets, set(['time', 'A', 'B', 'C']))
         self.assertEqual(report.points, (1001,))
         self.assertEqual(report.values, {
             'time': [0, 1, 2, 4, 5],
@@ -33,6 +32,6 @@ class DataModelTestCase(unittest.TestCase):
             },
         })
 
-    def test_ExpectedSedReport(self):
+    def test_ExpectedSedReport_2(self):
         plot = data_model.ExpectedSedPlot(id='plot-1')
         self.assertEqual(plot.id, 'plot-1')

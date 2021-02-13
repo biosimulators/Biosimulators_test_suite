@@ -37,7 +37,7 @@ class SimulatorGeneratesReportsOfSimulationResults(SingleMasterSedDocumentCombin
             outputs_dir (:obj:`str`): directory that contains the outputs produced from the execution of the synthetic archive
 
         Returns:
-            :obj:`bool`: :obj:`True`, if simulator passes the test
+            :obj:`bool`: whether there were no warnings about the outputs
         """
         try:
             ReportReader().get_ids(outputs_dir)
