@@ -11,6 +11,7 @@ from .published_project import SingleMasterSedDocumentCombineArchiveTestCase
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContent, CombineArchiveContentFormat  # noqa: F401
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import SedDocument, Report  # noqa: F401
+import abc
 import copy
 import datetime
 import os
@@ -18,8 +19,11 @@ import shutil
 import warnings
 
 __all__ = [
+    'CombineArchiveTestCase',
     'WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile',
     'WhenACombineArchiveHasNoMasterFileSimulatorExecutesAllSedDocuments',
+    'CombineArchiveHasSedDocumentsInNestedDirectories',
+    'CombineArchiveHasSedDocumentsWithSameNamesInDifferentInNestedDirectories',
 ]
 
 
@@ -32,6 +36,9 @@ class CombineArchiveTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
 
     SED_DOCUMENT_LOCATIONS_ARE_NESTED = False
     SED_DOCUMENTS_HAVE_SAME_NAMES = False
+
+    @abc.abstractmethod
+    def _is_concrete(): pass
 
     def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
@@ -162,6 +169,8 @@ class WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile(CombineArch
         _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
     """
 
+    def _is_concrete(): return True
+
     @property
     def _archive_has_master(self):
         return True
@@ -175,6 +184,8 @@ class WhenACombineArchiveHasNoMasterFileSimulatorExecutesAllSedDocuments(Combine
         _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
     """
 
+    def _is_concrete(): return True
+
     @property
     def _archive_has_master(self):
         return False
@@ -186,6 +197,9 @@ class CombineArchiveHasSedDocumentsInNestedDirectories(WhenACombineArchiveHasAMa
     Attributes:
         _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
     """
+
+    def _is_concrete(): return True
+
     SED_DOCUMENT_LOCATIONS_ARE_NESTED = True
     SED_DOCUMENTS_HAVE_SAME_NAMES = False
 
@@ -197,5 +211,8 @@ class CombineArchiveHasSedDocumentsWithSameNamesInDifferentInNestedDirectories(
     Attributes:
         _archive_has_master (:obj:`bool`): whether the synthetic archive should  have a master file
     """
+
+    def _is_concrete(): return True
+
     SED_DOCUMENT_LOCATIONS_ARE_NESTED = True
     SED_DOCUMENTS_HAVE_SAME_NAMES = True
