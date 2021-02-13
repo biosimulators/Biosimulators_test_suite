@@ -49,6 +49,7 @@ __all__ = [
     'SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables',
     'SimulatorSupportsRepeatedTasksWithMultipleSubTasks',
     'SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks',
+    'SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes',
     'SimulatorProducesLinear2DPlots',
     'SimulatorProducesLogarithmic2DPlots',
     'SimulatorProducesLinear3DPlots',
@@ -884,16 +885,18 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
 
     RANGE_TYPE = VectorRange
     UNIFORM_RANGE_TYPE = UniformRangeType.linear
+    RANGE_LENS = (3,)
     FUNCTONAL_RANGE_USES_VARIABLES = False
     NUM_NESTED_RANGES = 0
 
-    def get_ranges(self, i_repeated_task, curated_archive_dir, model, breaking_range):
+    def get_ranges(self, i_repeated_task, curated_archive_dir, model, range_len, breaking_range):
         """ Get ranges
 
         Args:
             i_repeated_task (:obj:`int`): index of repeated task
             curated_archive_dir (:obj:`str`): directory where COMBINE/OMEX archive was unpacked
             model (:obj:`Model`): model
+            range_len
             breaking_range (:obj:`bool`): whether the functional range should break the simulation
 
         Returns:
@@ -955,7 +958,7 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
                     id='__repeated_task_range_' + str(i_repeated_task),
                     start=0.,
                     end=2.,
-                    number_of_points=2,
+                    number_of_points=range_len - 1,
                     type=self.UNIFORM_RANGE_TYPE
                 )]
 
@@ -964,20 +967,20 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
                     id='__repeated_task_range_' + str(i_repeated_task),
                     start=10. ** 0.,
                     end=10. ** 2.,
-                    number_of_points=2,
+                    number_of_points=range_len - 1,
                     type=self.UNIFORM_RANGE_TYPE
                 )]
 
         elif self.RANGE_TYPE is VectorRange:
-            return [VectorRange(id='__repeated_task_range_' + str(i_repeated_task), values=[0., 1., 2.])]
+            return [VectorRange(id='__repeated_task_range_' + str(i_repeated_task), values=list(range(range_len)))]
 
         else:
-            ranges = [VectorRange(id='__repeated_task_range_' + str(i_repeated_task), values=[0., 1., 2.])]
+            ranges = [VectorRange(id='__repeated_task_range_' + str(i_repeated_task), values=list(range(range_len)))]
             for i_range in range(self.NUM_NESTED_RANGES + 1):
                 ranges.append(
                     FunctionalRange(
                         id='__repeated_task_range_' + str(i_repeated_task) + '_' + str(i_range + 1),
-                        range=ranges[0],
+                        range=ranges[-1],
                         parameters=[
                             Parameter(id='__repeated_task_range_p_' + str(i_repeated_task) + '_' + str(i_range + 1) + '_1', value=0.),
                         ],
@@ -1110,6 +1113,7 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
         return changes
 
     NUM_NESTED_REPEATED_TASKS = 0
+    MIXED_SUB_TASK_TYPES = False
     NUM_SUB_TASKS = 1
 
     @abc.abstractmethod
@@ -1147,10 +1151,20 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
 
             only_breaking_changes = [True, False]
         else:
-            only_breaking_changes = [True]
+            if self.MIXED_SUB_TASK_TYPES:
+                expected_results_of_synthetic_archive_1 = expected_results_of_synthetic_archives[0]
+                expected_results_of_synthetic_archive_2 = copy.deepcopy(expected_results_of_synthetic_archive_1)
+                expected_results_of_synthetic_archives.append(expected_results_of_synthetic_archive_2)
 
-        for expected_results_of_synthetic_archive, only_breaking_change in zip(
-                expected_results_of_synthetic_archives, only_breaking_changes):
+                expected_results_of_synthetic_archive_1.is_success_expected = True
+                expected_results_of_synthetic_archive_2.is_success_expected = True
+
+                only_breaking_changes = [None, None]
+            else:
+                only_breaking_changes = [None]
+
+        for i_archive, (expected_results_of_synthetic_archive, only_breaking_change) in enumerate(zip(
+                expected_results_of_synthetic_archives, only_breaking_changes)):
             curated_sed_docs = expected_results_of_synthetic_archive.sed_documents
 
             # get a suitable SED document to modify
@@ -1161,10 +1175,16 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
             for i_repeated_task in range(self.NUM_NESTED_REPEATED_TASKS + 1):
                 repeated_task = RepeatedTask(id='__repeated_task_' + str(i_repeated_task))
                 for i_sub_task in range(self.NUM_SUB_TASKS):
-                    repeated_task.sub_tasks.append(SubTask(order=self.NUM_SUB_TASKS + 1 - i_sub_task, task=sed_doc.tasks[-1]))
+                    if not self.HAS_CHANGES and self.MIXED_SUB_TASK_TYPES and i_sub_task == i_archive:
+                        task = sed_doc.tasks[0]
+                    else:
+                        task = sed_doc.tasks[-1]
+                    repeated_task.sub_tasks.append(SubTask(order=self.NUM_SUB_TASKS - i_sub_task, task=task))
                 sed_doc.tasks.append(repeated_task)
 
-                repeated_task.ranges = self.get_ranges(i_repeated_task, curated_archive_dir, model, only_breaking_change)
+                repeated_task.ranges = self.get_ranges(i_repeated_task, curated_archive_dir, model,
+                                                       self.RANGE_LENS[self.NUM_NESTED_REPEATED_TASKS - i_repeated_task],
+                                                       only_breaking_change)
                 repeated_task.range = repeated_task.ranges[-1]
                 repeated_task.changes = self.get_changes(curated_archive_dir, model,
                                                          i_repeated_task, repeated_task.ranges[-1], only_breaking_change)
@@ -1219,11 +1239,86 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
             if repeated_results_data_set.ndim - results_data_set.ndim != 2 * (self.NUM_NESTED_REPEATED_TASKS + 1):
                 raise InvalidOutputsException('Each level of repeated task should contribute two additional dimensions to reports')
 
-            if not set(repeated_results_data_set.shape[0:2 * (self.NUM_NESTED_REPEATED_TASKS + 1):2]) == set([3]):
-                raise InvalidOutputsException('The results of the repeated tasks should have a slice for each iteration')
+            if not self.MIXED_SUB_TASK_TYPES:
+                if repeated_results_data_set.shape[0:2 * (self.NUM_NESTED_REPEATED_TASKS + 1):2] != self.RANGE_LENS:
+                    raise InvalidOutputsException('The results of the repeated tasks should have a slice for each iteration')
 
-            if not set(repeated_results_data_set.shape[1:2 * (self.NUM_NESTED_REPEATED_TASKS + 1):2]) == set([self.NUM_SUB_TASKS]):
-                raise InvalidOutputsException('The results of the repeated tasks should have a slice for each sub-task')
+                if not set(repeated_results_data_set.shape[1:2 * (self.NUM_NESTED_REPEATED_TASKS + 1):2]) == set([self.NUM_SUB_TASKS]):
+                    raise InvalidOutputsException('The results of the repeated tasks should have a slice for each sub-task')
+
+                if not numpy.any(numpy.isnan(results_data_set)) and numpy.any(numpy.isnan(repeated_results_data_set)):
+                    raise InvalidOutputsException('The results of the repeated tasks have unexpected NaNs')
+            else:
+                shape = results_data_set.shape
+                repeated_shape = repeated_results_data_set.shape
+
+                if repeated_shape[0] != self.RANGE_LENS[0]:
+                    raise InvalidOutputsException('The results of the repeated tasks should have a slice for each iteration')
+
+                if repeated_shape[1] != self.NUM_SUB_TASKS:
+                    raise InvalidOutputsException('The results of the repeated tasks should have a slice for each sub-task')
+
+                if repeated_shape[2] != max(self.RANGE_LENS[1], shape[0]):
+                    raise InvalidOutputsException('The results of the repeated tasks should have a slice for each iteration')
+
+                if (
+                    (len(shape) == 1 and repeated_shape[3] != self.NUM_SUB_TASKS)
+                    or (len(shape) > 1 and repeated_shape[3] != max(self.NUM_SUB_TASKS, shape[1]))
+                ):
+                    raise InvalidOutputsException('The results of the repeated tasks should have a slice for each sub-task')
+
+                if repeated_shape[2 * (self.NUM_NESTED_REPEATED_TASKS + 1):] != shape:
+                    msg = 'The results of the repeated tasks should have a slice for each dimension of output of the basic task'
+                    raise InvalidOutputsException(msg)
+
+                sub_tasks = sorted(doc.tasks[-1].sub_tasks, key=lambda sub_task: sub_task.order)
+                for i_sub_task, sub_task in enumerate(sub_tasks):
+                    if isinstance(sub_task.task, RepeatedTask):
+                        slices = tuple([
+                            slice(0, repeated_shape[0]),
+                            slice(i_sub_task, i_sub_task + 1),
+                            slice(0, self.RANGE_LENS[1]),
+                            slice(0, self.NUM_SUB_TASKS),
+                        ] + [slice(0, dim_len) for dim_len in repeated_shape[4:]])
+                        if not numpy.any(numpy.isnan(results_data_set)) and numpy.any(numpy.isnan(repeated_results_data_set[slices])):
+                            raise InvalidOutputsException('The results of repeated tasks have unexpected NaNs')
+
+                        slices = tuple([
+                            slice(0, repeated_shape[0]),
+                            slice(i_sub_task, i_sub_task + 1),
+                            slice(self.RANGE_LENS[1], repeated_shape[2]),
+                            slice(0, repeated_shape[3]),
+                        ] + [slice(0, dim_len) for dim_len in repeated_shape[4:]])
+                        if not numpy.all(numpy.isnan(repeated_results_data_set[slices])):
+                            raise InvalidOutputsException('The results of repeated tasks have unexpected non-NaNs')
+
+                    else:
+                        slices = tuple([
+                            slice(0, repeated_shape[0]),
+                            slice(i_sub_task, i_sub_task + 1),
+                        ] + [
+                            slice(0, dim_len) for dim_len in shape
+                        ] + [
+                            slice(0, 1) for dim_len in repeated_shape[2 + len(shape):]
+                        ])
+                        if not numpy.any(numpy.isnan(results_data_set)) and numpy.any(numpy.isnan(repeated_results_data_set[slices])):
+                            raise InvalidOutputsException('The results of repeated tasks have unexpected NaNs')
+
+                        remaining_dims = repeated_shape[2 + len(shape):]
+                        for i_dim, dim_len in enumerate(remaining_dims):
+                            slices = [
+                                slice(0, repeated_shape[0]),
+                                slice(i_sub_task, i_sub_task + 1),
+                            ] + [
+                                slice(0, dim_len) for dim_len in shape
+                            ]
+                            slices.extend([slice(0, remaining_dims[ii_dim]) for ii_dim in range(i_dim)])
+                            slices.append(slice(1, remaining_dims[i_dim]))
+                            slices.extend([slice(0, remaining_dims[ii_dim]) for ii_dim in range(i_dim + 1, len(remaining_dims))])
+                            slices = tuple(slices)
+
+                            if not numpy.all(numpy.isnan(repeated_results_data_set[slices])):
+                                raise InvalidOutputsException('The results of repeated tasks have unexpected non-NaNs')
 
         return True
 
@@ -1315,8 +1410,25 @@ class SimulatorSupportsRepeatedTasksWithChanges(RepeatedTasksTestCase):
 class SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks(RepeatedTasksTestCase):
     """ Test that a simulator supports nested repeated tasks"""
     RANGE_TYPE = VectorRange
+    RANGE_LENS = (3, 3)
     NUM_SUB_TASKS = 1
     NUM_NESTED_REPEATED_TASKS = 1
+    MIXED_SUB_TASK_TYPES = False
+
+    def is_concrete(self): return True
+
+
+class SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes(RepeatedTasksTestCase):
+    """ Test that a simulator supports repeated tasks whose sub-tasks have mixed types.
+    Also tests that sub-types executed in order of the values of their ``order`` attributes
+    and that reports of the results of repeated tasks handle sub-tasks to produce results of
+    different shapes.
+    """
+    RANGE_TYPE = VectorRange
+    RANGE_LENS = (1, 3)
+    NUM_SUB_TASKS = 2
+    NUM_NESTED_REPEATED_TASKS = 1
+    MIXED_SUB_TASK_TYPES = True
 
     def is_concrete(self): return True
 
@@ -1685,11 +1797,11 @@ class SimulatorSupportsDataGeneratorsWithDifferentShapes(UniformTimeCourseTestCa
         if value.shape[-1] != length:
             raise InvalidOutputsException('Data set does not have the expected shape')
 
-        data_set_slice = [slice(0, dim_len) for dim_len in value.shape[0:-1]] + [slice(0, non_nan_points)]
+        data_set_slice = tuple([slice(0, dim_len) for dim_len in value.shape[0:-1]] + [slice(0, non_nan_points)])
         if numpy.any(numpy.isnan(value[data_set_slice])):
             raise InvalidOutputsException('Data set has unexpected NaN values')
 
-        data_set_slice = (
+        data_set_slice = tuple(
             [slice(0, dim_len) for dim_len in value.shape[0:-1]]
             + [slice(non_nan_points, length)]
         )
@@ -1807,7 +1919,7 @@ class SimulatorSupportsDataSetsWithDifferentShapes(UniformTimeCourseTestCase):
                 expected_length = sim2.number_of_points + 1
 
                 if data_set.data_generator.variables[0].symbol:
-                    data_set_slice = (
+                    data_set_slice = tuple(
                         [slice(0, dim_len) for dim_len in value.shape[0:-1]]
                         + [slice(0, sim2.number_of_points + 1, 2)]
                     )
