@@ -213,7 +213,8 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         # validate that image is consistent with the BioSimulators standards
         validator = SimulatorValidator(specifications, output_medium=OutputMedium.gh_issue)
         case_results = validator.run()
-        write_test_results(case_results, '.biosimulators-test-suite-results.json')
+        write_test_results(case_results, '.biosimulators-test-suite-results.json',
+                           gh_issue=int(self.issue_number), gh_action_run=int(self.get_gh_action_run_id()))
         summary, failure_details, warning_details = validator.summarize_results(case_results)
         msg = '## Summary of tests\n\n{}\n\n'.format(summary)
         if failure_details:
