@@ -93,7 +93,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                 with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', return_value=None):
                     with mock.patch.object(exec_core.SimulatorValidator, 'run', return_value=run_results):
                         with mock.patch('requests.post', side_effect=requests_post):
-                            action.validate_image(specs)
+                            with mock.patch.dict(os.environ, self.env):
+                                action.validate_image(specs)
 
         run_results = [
             TestCaseResult(case=SimulatorCanExecutePublishedProject(id='sedml.x'), type=TestCaseResultType.failed,
@@ -109,7 +110,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                     with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', return_value=None):
                         with mock.patch.object(exec_core.SimulatorValidator, 'run', return_value=run_results):
                             with mock.patch('requests.post', side_effect=requests_post):
-                                action.validate_image(specs)
+                                with mock.patch.dict(os.environ, self.env):
+                                    action.validate_image(specs)
 
         run_results = []
 
@@ -122,7 +124,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                     with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', return_value=None):
                         with mock.patch.object(exec_core.SimulatorValidator, 'run', return_value=run_results):
                             with mock.patch('requests.post', side_effect=requests_post):
-                                action.validate_image(specs)
+                                with mock.patch.dict(os.environ, self.env):
+                                    action.validate_image(specs)
 
     def test_exec_core(self):
         with mock.patch.dict(os.environ, self.env):

@@ -488,10 +488,18 @@ class SyntheticCombineArchiveTestCase(TestCase):
             curated_archive = CombineArchiveReader().run(curated_archive_filename, shared_archive_dir)
             curated_sed_docs = {}
             sedml_reader = SedmlSimulationReader()
-            for content in curated_archive.contents:
+            for content in list(curated_archive.contents):
                 if re.match(CombineArchiveContentFormatPattern.SED_ML, content.format):
                     sed_doc = sedml_reader.run(os.path.join(shared_archive_dir, content.location))
                     curated_sed_docs[content.location] = sed_doc
+
+                # remove manifest from contents because libSED-ML occassionally has trouble with this
+                elif (
+                    content.location == './manifest.xml'
+                    and content.format == 'http://identifiers.org/combine.specifications/omex-manifest'
+                ):
+                    curated_archive.contents.remove(content)
+                    os.remove(os.path.join(shared_archive_dir, content.location))
 
             # see if archive is suitable for testing
             if self.is_curated_archive_suitable_for_building_synthetic_archive(specifications, curated_archive, curated_sed_docs):
