@@ -493,6 +493,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
                     sed_doc = sedml_reader.run(os.path.join(shared_archive_dir, content.location))
                     curated_sed_docs[content.location] = sed_doc
 
+                # remove manifest from contents because libSED-ML occassionally has trouble with this
                 elif (
                     content.location == './manifest.xml'
                     and content.format == 'http://identifiers.org/combine.specifications/omex-manifest'
