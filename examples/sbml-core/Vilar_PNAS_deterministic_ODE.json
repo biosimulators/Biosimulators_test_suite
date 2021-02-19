@@ -1,0 +1,41 @@
+{
+  "name": "Vilar PNAS deterministic ODE",
+  "filename": "Vilar_PNAS_deterministic_ODE.omex",
+  "taskRequirements": [{
+      "modelFormat": "format_2585",
+      "simulationAlgorithm": "KISAO_0000019"
+    },
+    {
+      "modelFormat": "format_2585",
+      "simulationAlgorithm": "KISAO_0000030"
+    },
+    {
+      "modelFormat": "format_2585",
+      "simulationAlgorithm": "KISAO_0000027"
+    }
+  ],
+  "expectedReports": [],
+  "expectedPlots": [{
+      "id": "simulation.sedml.sedml/plot2d_Fig_1a"
+    },
+    {
+      "id": "simulation.sedml.sedml/plot2d_low_delta_R_det"
+    }, {
+      "id": "simulation.sedml.sedml/plot2d_Euler_default"
+    }, {
+      "id": "simulation.sedml.sedml/plot2d_Euler_small_step_size"
+    }, {
+      "id": "simulation.sedml.sedml/plot2d_Fig_1_c"
+    }, {
+      "id": "simulation.sedml.sedml/plot2d_low_delta_R_stoch"
+    }
+  ],
+  "runtimeFailureAlertType": "exception",
+  "identifiers": [{
+    "namespace": "biomodels.db",
+    "id": "BIOMD0000000035"
+  }, {
+    "namespace": "doi",
+    "id": "10.1073/pnas.092133899"
+  }]
+}
