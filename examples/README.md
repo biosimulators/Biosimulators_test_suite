@@ -45,7 +45,10 @@ The archives in this directory involve the following model formats:
 | Name                                               | Acronym | EDAM id                                                                                                        |
 | -------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------- |
 | [BioNetGen Language](https://bionetgen.org)        | BNGL    | [format_3972](https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http%3A%2F%2Fedamontology.org%2Fformat_3972) |
-| [Systems Biology Markup Language](http://sbml.org): core, fbc package, and qual package | SBML    | [format_2585](https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http%3A%2F%2Fedamontology.org%2Fformat_2585) |
+| [Systems Biology Markup Language](http://sbml.org) (core) | SBML    | [format_2585](https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http%3A%2F%2Fedamontology.org%2Fformat_2585) |
+| [SBML flux balance constraints package](http://sbml.org/Documents/Specifications/SBML_Level_3/Packages/fbc) | SBML-fbc    | [format_2585](https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http%3A%2F%2Fedamontology.org%2Fformat_2585) |
+| [SBML qualitative modeling package](http://sbml.org/Documents/Specifications/SBML_Level_3/Packages/qual) | SBML-qual    | [format_2585](https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http%3A%2F%2Fedamontology.org%2Fformat_2585) |
+| [SBML spatial modeling package](http://sbml.org/Documents/Specifications/SBML_Level_3/Packages/spatial) | SBML-spatial    | [format_2585](https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http%3A%2F%2Fedamontology.org%2Fformat_2585) |
 
 ## Compatibility of the example archives with simulation tools
 
