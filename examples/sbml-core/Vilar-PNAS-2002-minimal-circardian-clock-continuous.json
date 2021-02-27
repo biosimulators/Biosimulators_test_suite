@@ -1,6 +1,6 @@
 {
-  "name": "Vilar et al. PNAS 2002: Minimal circadian clock",
-  "filename": "Vilar-PNAS-2002-minimal-circardian-clock.omex",
+  "name": "Vilar et al. PNAS 2002: Minimal circadian clock (continuous)",
+  "filename": "Vilar-PNAS-2002-minimal-circardian-clock-continuous.omex",
   "taskRequirements": [{
       "modelFormat": "format_2585",
       "simulationAlgorithm": "KISAO_0000019"
@@ -8,10 +8,6 @@
     {
       "modelFormat": "format_2585",
       "simulationAlgorithm": "KISAO_0000030"
-    },
-    {
-      "modelFormat": "format_2585",
-      "simulationAlgorithm": "KISAO_0000027"
     }
   ],
   "expectedReports": [{
@@ -225,112 +221,6 @@
           "1000": 200.0
         }
       }]
-    },
-    {
-      "id": "simulation.sedml/report_Fig_1_c",
-      "dataSets": [{
-          "id": "dataSet_4_time",
-          "label": "dataSet_time"
-        },
-        {
-          "id": "dataSet_4_0",
-          "label": "dataSet_0"
-        },
-        {
-          "id": "dataSet_4_1",
-          "label": "dataSet_1"
-        },
-        {
-          "id": "dataSet_4_2",
-          "label": "dataSet_2"
-        },
-        {
-          "id": "dataSet_4_3",
-          "label": "dataSet_3"
-        },
-        {
-          "id": "dataSet_4_4",
-          "label": "dataSet_4"
-        },
-        {
-          "id": "dataSet_4_5",
-          "label": "dataSet_5"
-        },
-        {
-          "id": "dataSet_4_6",
-          "label": "dataSet_6"
-        },
-        {
-          "id": "dataSet_4_7",
-          "label": "dataSet_7"
-        },
-        {
-          "id": "dataSet_4_8",
-          "label": "dataSet_8"
-        }
-      ],
-      "points": [401],
-      "values": [{
-        "id": "dataSet_4_time",
-        "label": "dataSet_time",
-        "value": {
-          "0": 0.0,
-          "400": 200.0
-        }
-      }]
-    },
-    {
-      "id": "simulation.sedml/report_low_delta_R_stoch",
-      "dataSets": [{
-          "id": "dataSet_5_time",
-          "label": "dataSet_time"
-        },
-        {
-          "id": "dataSet_5_0",
-          "label": "dataSet_0"
-        },
-        {
-          "id": "dataSet_5_1",
-          "label": "dataSet_1"
-        },
-        {
-          "id": "dataSet_5_2",
-          "label": "dataSet_2"
-        },
-        {
-          "id": "dataSet_5_3",
-          "label": "dataSet_3"
-        },
-        {
-          "id": "dataSet_5_4",
-          "label": "dataSet_4"
-        },
-        {
-          "id": "dataSet_5_5",
-          "label": "dataSet_5"
-        },
-        {
-          "id": "dataSet_5_6",
-          "label": "dataSet_6"
-        },
-        {
-          "id": "dataSet_5_7",
-          "label": "dataSet_7"
-        },
-        {
-          "id": "dataSet_5_8",
-          "label": "dataSet_8"
-        }
-      ],
-      "points": [401],
-      "values": [{
-        "id": "dataSet_5_time",
-        "label": "dataSet_time",
-        "value": {
-          "0": 0.0,
-          "400": 200.0
-        }
-      }]
     }
   ],
   "expectedPlots": [{
@@ -342,10 +232,6 @@
       "id": "simulation.sedml.sedml/plot2d_Euler_default"
     }, {
       "id": "simulation.sedml.sedml/plot2d_Euler_small_step_size"
-    }, {
-      "id": "simulation.sedml.sedml/plot2d_Fig_1_c"
-    }, {
-      "id": "simulation.sedml.sedml/plot2d_low_delta_R_stoch"
     }
   ],
   "runtimeFailureAlertType": "exception",
