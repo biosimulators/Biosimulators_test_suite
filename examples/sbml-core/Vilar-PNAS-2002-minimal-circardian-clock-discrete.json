@@ -113,9 +113,9 @@
     }
   ],
   "expectedPlots": [{
-    "id": "simulation.sedml.sedml/plot2d_Fig_1_c"
+    "id": "simulation.sedml/plot2d_Fig_1_c"
   }, {
-    "id": "simulation.sedml.sedml/plot2d_low_delta_R_stoch"
+    "id": "simulation.sedml/plot2d_low_delta_R_stoch"
   }],
   "runtimeFailureAlertType": "exception",
   "identifiers": [{

@@ -334,18 +334,18 @@
     }
   ],
   "expectedPlots": [{
-      "id": "simulation.sedml.sedml/plot2d_Fig_1a"
+      "id": "simulation.sedml/plot2d_Fig_1a"
     },
     {
-      "id": "simulation.sedml.sedml/plot2d_low_delta_R_det"
+      "id": "simulation.sedml/plot2d_low_delta_R_det"
     }, {
-      "id": "simulation.sedml.sedml/plot2d_Euler_default"
+      "id": "simulation.sedml/plot2d_Euler_default"
     }, {
-      "id": "simulation.sedml.sedml/plot2d_Euler_small_step_size"
+      "id": "simulation.sedml/plot2d_Euler_small_step_size"
     }, {
-      "id": "simulation.sedml.sedml/plot2d_Fig_1_c"
+      "id": "simulation.sedml/plot2d_Fig_1_c"
     }, {
-      "id": "simulation.sedml.sedml/plot2d_low_delta_R_stoch"
+      "id": "simulation.sedml/plot2d_low_delta_R_stoch"
     }
   ],
   "runtimeFailureAlertType": "exception",
