@@ -495,7 +495,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
             curated_sed_docs = {}
             sedml_reader = SedmlSimulationReader()
             for content in list(curated_archive.contents):
-                if re.match(CombineArchiveContentFormatPattern.SED_ML, content.format):
+                if content.format and re.match(CombineArchiveContentFormatPattern.SED_ML, content.format):
                     sed_doc = sedml_reader.run(os.path.join(shared_archive_dir, content.location))
                     curated_sed_docs[content.location] = sed_doc
 
