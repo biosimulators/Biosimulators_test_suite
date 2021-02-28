@@ -177,3 +177,19 @@ class MainTestCase(unittest.TestCase):
             with exec_cli.App(argv=[specs, '-c', 'adf']) as app:
                 app.run()
             self.assertEqual(exception_cm.exception.code, 2)
+
+    def test_exports_synthetic_archives(self):
+        specs = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
+
+        synthetic_archives_dir = os.path.join(self.dirname, 'archives')
+        with exec_cli.App(argv=[specs,
+                                '-c', 'sedml.SimulatorSupportsMultipleReportsPerSedDocument',
+                                '--synthetic-archives-dir', synthetic_archives_dir]) as app:
+            app.run()
+
+        self.assertEqual(os.listdir(synthetic_archives_dir),
+                         ['sedml'])
+        self.assertEqual(os.listdir(os.path.join(synthetic_archives_dir, 'sedml')),
+                         ['SimulatorSupportsMultipleReportsPerSedDocument'])
+        self.assertEqual(os.listdir(os.path.join(synthetic_archives_dir, 'sedml', 'SimulatorSupportsMultipleReportsPerSedDocument')),
+                         ['1.execution-should-succeed.omex'])

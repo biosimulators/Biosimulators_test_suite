@@ -288,7 +288,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
                     exec_archive, False, False, False, False, False, False, False, False, True, False)):
                 case.eval(specs)
 
-        with self.assertWarnsRegex(InvalidOutputsWarning, 'Extra plots were not produced'):
+        with self.assertWarnsRegex(InvalidOutputsWarning, 'Extra plots were produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, False, False, True)):
                 case.eval(specs)
@@ -308,7 +308,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
         case.assert_no_missing_plots = False
 
         case.assert_no_extra_plots = True
-        with self.assertRaisesRegex(InvalidOutputsException, 'Extra plots were not produced'):
+        with self.assertRaisesRegex(InvalidOutputsException, 'Extra plots were produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, False, False, True)):
                 case.eval(specs)
@@ -451,13 +451,13 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             with mock.patch.object(CombineArchiveWriter, 'run', return_value=None):
                 with mock.patch.object(Concrete, 'eval_outputs', return_value=True):
                     self.assertFalse(Concrete()._eval_synthetic_archive(
-                        specifications, expected_results_of_synthetic_archive, shared_archive_dir))
+                        specifications, expected_results_of_synthetic_archive, shared_archive_dir, None))
 
         with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator', return_value=None):
             with mock.patch.object(CombineArchiveWriter, 'run', return_value=None):
                 with mock.patch.object(Concrete, 'eval_outputs', return_value=False):
                     self.assertTrue(Concrete()._eval_synthetic_archive(
-                        specifications, expected_results_of_synthetic_archive, shared_archive_dir))
+                        specifications, expected_results_of_synthetic_archive, shared_archive_dir, None))
 
         with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator',
                         side_effect=RuntimeError):
@@ -465,7 +465,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
                 with mock.patch.object(Concrete, 'eval_outputs', return_value=False):
                     with self.assertRaises(RuntimeError):
                         Concrete()._eval_synthetic_archive(
-                            specifications, expected_results_of_synthetic_archive, shared_archive_dir)
+                            specifications, expected_results_of_synthetic_archive, shared_archive_dir, None)
 
         expected_results_of_synthetic_archive.is_success_expected = False
         with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator',
@@ -473,14 +473,14 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             with mock.patch.object(CombineArchiveWriter, 'run', return_value=None):
                 with mock.patch.object(Concrete, 'eval_outputs', return_value=False):
                     self.assertFalse(Concrete()._eval_synthetic_archive(
-                        specifications, expected_results_of_synthetic_archive, shared_archive_dir))
+                        specifications, expected_results_of_synthetic_archive, shared_archive_dir, None))
 
         with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator', return_value=None):
             with mock.patch.object(CombineArchiveWriter, 'run', return_value=None):
                 with mock.patch.object(Concrete, 'eval_outputs', return_value=False):
                     with self.assertRaisesRegex(ValueError, 'did not fail as expected'):
                         Concrete()._eval_synthetic_archive(
-                            specifications, expected_results_of_synthetic_archive, shared_archive_dir)
+                            specifications, expected_results_of_synthetic_archive, shared_archive_dir, None)
 
     def test_UniformTimeCourseTestCase_add_time_data_set(self):
         class Concrete(UniformTimeCourseTestCase):

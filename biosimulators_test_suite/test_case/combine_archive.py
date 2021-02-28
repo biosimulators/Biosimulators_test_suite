@@ -38,7 +38,8 @@ class CombineArchiveTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
     SED_DOCUMENTS_HAVE_SAME_NAMES = False
 
     @abc.abstractmethod
-    def _is_concrete(): pass
+    def _is_concrete():
+        pass  # pragma: no cover
 
     def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
         """ Generate a synthetic archive with a copy of each task and each report
