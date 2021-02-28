@@ -93,6 +93,7 @@ class BaseController(cement.Controller):
             if args.report:
                 write_test_results(results, args.report)
         except Exception as exception:
+            raise
             raise SystemExit(str(exception))
 
         any_passed = False

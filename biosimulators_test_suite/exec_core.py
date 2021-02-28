@@ -245,6 +245,7 @@ class SimulatorValidator(object):
                     type = TestCaseResultType.failed
                     exception = caught_exception
                     skip_reason = None
+                    raise
 
                 duration = (datetime.datetime.now() - start_time).total_seconds()
 
