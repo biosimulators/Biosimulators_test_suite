@@ -1,4 +1,4 @@
-biosimulators_utils[containers] >= 0.1.39
+biosimulators_utils[containers] >= 0.1.40
 capturer
 cement
 docker
