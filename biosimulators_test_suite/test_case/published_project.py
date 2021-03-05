@@ -804,6 +804,9 @@ def find_cases(specifications, dir_name=None, output_medium=OutputMedium.console
     all_cases = []
     compatible_cases = []
     for md_filename in glob.glob(os.path.join(dir_name, '**/*.json'), recursive=True):
+        if md_filename.endswith('.vega.json'):
+            continue
+
         rel_filename = os.path.relpath(md_filename, dir_name)
         case = SimulatorCanExecutePublishedProject(output_medium=output_medium).from_json(dir_name, rel_filename)
         all_cases.append(case)
