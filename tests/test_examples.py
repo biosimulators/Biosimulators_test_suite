@@ -22,6 +22,9 @@ class ExamplesTestCase(unittest.TestCase):
     def test(self):
         examples_dir = os.path.join(os.path.dirname(__file__), '..', 'examples')
         for example_filename in glob.glob(os.path.join(examples_dir, '**', '*.json')):
+            if example_filename.endswith('.vega.json'):
+                continue
+
             example_base_dir = os.path.join(os.path.dirname(example_filename))
             reports_filename = example_filename.replace('.omex', '.h5')
             if not os.path.isfile(reports_filename):
