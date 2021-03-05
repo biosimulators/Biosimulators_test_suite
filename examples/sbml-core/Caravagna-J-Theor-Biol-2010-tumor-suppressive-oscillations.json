@@ -32,7 +32,7 @@
   "runtimeFailureAlertType": "exception",
   "identifiers": [{
     "namespace": "biomodels.db",
-    "id": "BIOMD0000000297"
+    "id": "BIOMD0000000912"
   }, {
     "namespace": "doi",
     "id": "10.1083/jcb.200306139"
