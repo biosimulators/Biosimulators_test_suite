@@ -12,8 +12,11 @@ mv examples/bngl/reports.h5 examples/bngl/test-bngl.h5
 tellurium -o examples/sbml-core/ -i examples/sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex
 mv examples/sbml-core/reports.h5 examples/sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.h5
 
-tellurium -o examples/sbml-core/ -i examples/sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint.omex
-mv examples/sbml-core/reports.h5 examples/sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint.h5
+tellurium -o examples/sbml-core/ -i examples/sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-discrete.omex
+mv examples/sbml-core/reports.h5 examples/sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-discrete.h5
+
+tellurium -o examples/sbml-core/ -i examples/sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex
+mv examples/sbml-core/reports.h5 examples/sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.h5
 
 pysces -o examples/sbml-core/ -i examples/sbml-core/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex
 mv examples/sbml-core/reports.h5 examples/sbml-core/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.h5
