@@ -66,7 +66,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
     def test_find_cases(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
         case_ids = [
-            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-discrete',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
@@ -211,7 +211,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
     def test_run(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
         case_ids = [
-            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-discrete',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
@@ -237,7 +237,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
     def test_run_with_passed(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
         case_ids = [
-            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-discrete',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
@@ -256,7 +256,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
     def test_run_with_failures(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
         case_ids = [
-            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-discrete',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
@@ -275,7 +275,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
     def test_run_with_skips(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
         case_ids = [
-            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-discrete',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
