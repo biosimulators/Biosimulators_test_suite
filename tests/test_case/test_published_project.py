@@ -42,7 +42,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
         self.assertGreater(len(all_cases), 2)
         self.assertEqual(set([
             "Caravagna et al. Journal of Theoretical Biology 2010: Tumor-suppressive oscillations",
-            "Ciliberto et al. Journal Cell Biology 2003: Morphogenesis checkpoint in budding yeast",
+            "Ciliberto et al. Journal Cell Biology 2003: Morphogenesis checkpoint in budding yeast (discrete)",
         ]).difference(set(case.name for case in all_cases)), set())
 
         with self.assertWarnsRegex(IgnoredTestCaseWarning, 'not available'):

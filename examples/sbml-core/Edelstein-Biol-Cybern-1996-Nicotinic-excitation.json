@@ -8,21 +8,29 @@
   "expectedReports": [{
     "id": "BIOMD0000000002_sim.sedml/BIOMD0000000002_sim",
     "dataSets": [
-      {"id": "data_set_time", "label": "time"},
-      {"id": "data_set_BLL", "label": "BLL"},
-      {"id": "data_set_IL", "label": "IL"},
-      {"id": "data_set_AL", "label": "AL"}
+      {"id": "data_set_time", "label": "Time (dimensionless)"},
+      {"id": "data_set_L", "label": "ACh"},
+      {"id": "data_set_A", "label": "Active"},
+      {"id": "data_set_AL", "label": "Active ACh"},
+      {"id": "data_set_ALL", "label": "Active ACh2"},
+      {"id": "data_set_B", "label": "Basal"},
+      {"id": "data_set_BL", "label": "Basal ACh"},
+      {"id": "data_set_BLL", "label": "Basal ACh2"},
+      {"id": "data_set_D", "label": "Desensitised"},
+      {"id": "data_set_DL", "label": "Desensitised ACh"},
+      {"id": "data_set_DLL", "label": "Desensitised ACh2"},
+      {"id": "data_set_I", "label": "Intermediate"},
+      {"id": "data_set_IL", "label": "Intermediate ACh"},
+      {"id": "data_set_ILL", "label": "Intermediate ACh2"}
     ],
     "points": [1001],
     "values": [{
       "id": "data_set_time",
-      "label": "time",
+      "label": "Time (dimensionless)",
       "value": {
         "0": 0.0,
-        "1": 0.0005,
-        "2": 0.0010,
-        "999": 0.4995,
-        "1000": 0.5000
+        "1": 0.1,
+        "1000": 100.0
       }
     }]
   }],
