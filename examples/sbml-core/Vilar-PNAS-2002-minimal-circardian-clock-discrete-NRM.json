@@ -1,6 +1,6 @@
 {
   "name": "Vilar et al. PNAS 2002: Minimal circadian clock (discrete)",
-  "filename": "Vilar-PNAS-2002-minimal-circardian-clock-discrete.omex",
+  "filename": "Vilar-PNAS-2002-minimal-circardian-clock-discrete-NRM.omex",
   "taskRequirements": [{
     "modelFormat": "format_2585",
     "simulationAlgorithm": "KISAO_0000027"
