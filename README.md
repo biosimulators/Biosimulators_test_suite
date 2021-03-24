@@ -9,7 +9,7 @@ The BioSimulators test suite is a tool for validating that biosimulation softwar
 
 The test suite is composed of two parts:
 
-* A collection of example modeling projects. Each project is represented by a single [COMBINE/OMEX archive](https://combinearchive.org/) that contains one or more simulation experiments described using the [Simulation Experiment Description Markup Language (SED-ML)](https://sed-ml.org) and one or more models described using a format such as the [BioNetGen Language (BNGL)](https://bionetgen.org) or the [Systems Biology Markup Language (SBML)](http://sbml.org).
+* [A collection of example modeling projects](examples). Each project is represented by a single [COMBINE/OMEX archive](https://combinearchive.org/) that contains one or more simulation experiments described using the [Simulation Experiment Description Markup Language (SED-ML)](https://sed-ml.org) and one or more models described using a format such as the [BioNetGen Language (BNGL)](https://bionetgen.org) or the [Systems Biology Markup Language (SBML)](http://sbml.org).
 
 * Software for checking that biosimulation tools execute these projects according to the BioSimulators standards.
 
