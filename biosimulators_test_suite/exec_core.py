@@ -6,8 +6,9 @@
 :License: MIT
 """
 
+from .config import Config
 from .data_model import TestCase, OutputMedium
-from .exceptions import SkippedTestCaseException
+from .exceptions import SkippedTestCaseException, TimeoutException
 from .results.data_model import TestCaseResult, TestCaseResultType
 from .test_case import cli
 from .test_case import combine_archive
@@ -21,9 +22,11 @@ from biosimulators_utils.config import Colors
 import biosimulators_utils.simulator.io
 import capturer
 import collections
+import contextlib
 import datetime
 import inspect
 import os
+import signal
 import sys
 import termcolor
 import warnings
@@ -65,6 +68,8 @@ class SimulatorValidator(object):
         self.output_medium = output_medium
 
         self.cases = self.find_cases(ids=case_ids)
+
+        self.test_case_timeout = Config().test_case_timeout
 
     def find_cases(self, ids=None):
         """ Find test cases
@@ -231,7 +236,9 @@ class SimulatorValidator(object):
                 warnings.simplefilter("always", TestCaseWarning)
 
                 try:
-                    case.eval(self.specifications, synthetic_archives_dir=self.synthetic_archives_dir)
+
+                    with time_limit(seconds=self.test_case_timeout):
+                        case.eval(self.specifications, synthetic_archives_dir=self.synthetic_archives_dir)
                     type = TestCaseResultType.passed
                     exception = None
                     skip_reason = None
@@ -339,3 +346,23 @@ class SimulatorValidator(object):
             failure_details,
             warning_details,
         )
+
+
+@contextlib.contextmanager
+def time_limit(seconds):
+    """ Context manager for timing out long operations
+
+    Args:
+        seconds (:obj:`int`): length in seconds before time out
+
+    Raises:
+        :obj:`TimeoutException`: if the operation timed out
+    """
+    def signal_handler(signum, frame):
+        raise TimeoutException("Operation did not complete within {} seconds".format(seconds))
+    signal.signal(signal.SIGALRM, signal_handler)
+    signal.alarm(int(seconds))
+    try:
+        yield
+    finally:
+        signal.alarm(0)

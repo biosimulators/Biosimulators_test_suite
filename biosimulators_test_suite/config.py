@@ -33,6 +33,7 @@ class Config(object):
         runbiosimulations_api_client_id (:obj:`str`): Client id of the runBioSimulations API
         runbiosimulations_api_client_secret (:obj:`str`): Client secret of the runBioSimulations API
         runbiosimulations_api_endpoint (:obj:`str`): Base URL for the runBioSimulations API
+        test_case_timeout (:obj:`int`): time out for test cases in seconds
     """
 
     def __init__(self,
@@ -46,7 +47,8 @@ class Config(object):
                  biosimulators_docker_image_url_pattern=None,
                  runbiosimulations_auth_endpoint=None, runbiosimulations_audience=None,
                  runbiosimulations_api_client_id=None, runbiosimulations_api_client_secret=None,
-                 runbiosimulations_api_endpoint=None):
+                 runbiosimulations_api_endpoint=None,
+                 test_case_timeout=None):
         """
         Args:
             pull_docker_image (:obj:`bool`, optional): whether to pull the Docker image for the simulator (default: :obj:`True`)
@@ -69,6 +71,7 @@ class Config(object):
             runbiosimulations_api_client_id (:obj:`str`, optional): Client id of the runBioSimulations API
             runbiosimulations_api_client_secret (:obj:`str`, optional): Client secret of the runBioSimulations API
             runbiosimulations_api_endpoint (:obj:`str`, optional): Base URL for the runBioSimulations API
+            test_case_timeout (:obj:`int`, optional): time out for test cases in seconds
         """
         # Docker registry
         if pull_docker_image is None:
@@ -182,3 +185,8 @@ class Config(object):
             self.runbiosimulations_api_endpoint = os.getenv('RUNBIOSIMULATIONS_API_ENDPOINT', 'https://run.api.biosimulations.org/')
         else:
             self.runbiosimulations_api_endpoint = runbiosimulations_api_endpoint
+
+        if test_case_timeout is None:
+            self.test_case_timeout = int(os.getenv('TEST_CASE_TIMEOUT', '300'))  # 300 seconds
+        else:
+            self.test_case_timeout = test_case_timeout
