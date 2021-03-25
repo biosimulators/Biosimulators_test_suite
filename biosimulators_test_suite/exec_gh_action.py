@@ -23,6 +23,7 @@ from natsort import natsort_keygen
 import biosimulators_utils.image
 import biosimulators_utils.simulator.io
 import requests
+import requests.exceptions
 
 
 __all__ = [
@@ -224,14 +225,28 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         write_test_results(case_results, '.biosimulators-test-suite-results.json',
                            gh_issue=int(self.issue_number), gh_action_run=int(self.get_gh_action_run_id()))
         summary, failure_details, warning_details, skipped_details = validator.summarize_results(case_results)
+
+        unable_to_post_results_msg = (
+            'The summary of the tests of your Docker image could not be posted to this GitHub issue. '
+            'The most likely reason is that the summary is too long to post to a comment on a GitHub issue. '
+            'Please use the [console log]({}) of the associated GitHub Action to see the summary of the tests of your '
+            'Docker image.'
+        ).format(self.get_gh_action_run_url())
+
         msg = '## Summary of tests\n\n{}\n\n'.format(summary)
+        self.add_comment_to_issue(self.issue_number, msg, alternative_comment=unable_to_post_results_msg)
+
         if failure_details:
-            msg += '\n## Failures\n\n{}\n\n'.format('### ' + '\n### '.join(failure_details))
+            msg = '\n## Failures\n\n{}\n\n'.format('### ' + '\n### '.join(failure_details))
+            self.add_comment_to_issue(self.issue_number, msg, alternative_comment=unable_to_post_results_msg)
+
         if warning_details:
-            msg += '\n## Warnings\n\n{}\n\n'.format('### ' + '\n### '.join(warning_details))
+            msg = '\n## Warnings\n\n{}\n\n'.format('### ' + '\n### '.join(warning_details))
+            self.add_comment_to_issue(self.issue_number, msg, alternative_comment=unable_to_post_results_msg)
+
         if skipped_details:
-            msg += '\n## Skips\n\n{}\n\n'.format('### ' + '\n### '.join(skipped_details))
-        self.add_comment_to_issue(self.issue_number, msg)
+            msg = '\n## Skips\n\n{}\n\n'.format('### ' + '\n### '.join(skipped_details))
+            self.add_comment_to_issue(self.issue_number, msg, alternative_comment=unable_to_post_results_msg)
 
         invalid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.failed]
         if invalid_cases:
@@ -439,3 +454,24 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         response.raise_for_status()
         response_data = response.json()
         return {'Authorization': response_data['token_type'] + ' ' + response_data['access_token']}
+
+    @classmethod
+    def add_comment_to_issue(cls, issue_number, comment, alternative_comment=None, max_len=65536):
+        """ Post a comment to the GitHub issue
+
+        Args:
+            issue_number (:obj:`str`): issue number
+            comment (:obj:`str`): comment
+            alternative_comment (:obj:`str`, optional): optional alternative comment to try posting to the GitHub issue
+            max_len (:obj:`int`, optional): maximum comment length accepted by GitHub
+        """
+        try:
+            if len(comment) > max_len:
+                comment = comment[0:max_len - 4] + ' ...'
+            super(ValidateCommitSimulatorGitHubAction, cls).add_comment_to_issue(issue_number, comment)
+
+        except (requests.exceptions.RequestException, requests.exceptions.ProxyError, requests.exceptions.SSLError):
+            if alternative_comment:
+                super(ValidateCommitSimulatorGitHubAction, cls).add_comment_to_issue(issue_number, alternative_comment)
+            else:
+                raise
