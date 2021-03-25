@@ -26,7 +26,7 @@ class SedmlTestCaseTest(unittest.TestCase):
     IMAGE = 'ghcr.io/biosimulators/biosimulators_copasi/copasi:latest'
     CURATED_ARCHIVE_FILENAME = os.path.join(
         os.path.dirname(__file__), '..', '..',
-        'examples', 'sbml-core', 'Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-discrete.omex')
+        'examples', 'sbml-core', 'Tomida-EMBO-J-2003-NFAT-translocation.omex')
     CURATED_NON_XML_ARCHIVE_FILENAME = os.path.join(
         os.path.dirname(__file__), '..', '..',
         'examples', 'bngl', 'test-bngl.omex')
@@ -573,8 +573,13 @@ class SedmlTestCaseTest(unittest.TestCase):
         self.assertTrue(case.eval(specs))
 
     def test_SimulatorSupportsRepeatedTasksWithChanges(self):
-        specs = {'image': {'url': self.IMAGE}}
-        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+        IMAGE = 'ghcr.io/biosimulators/biosimulators_gillespy2/gillespy2:latest'
+        CURATED_ARCHIVE_FILENAME = os.path.join(
+            os.path.dirname(__file__), '..', '..',
+            'examples', 'sbml-core', 'Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex')
+
+        specs = {'image': {'url': IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=CURATED_ARCHIVE_FILENAME)
 
         case = sedml.SimulatorSupportsRepeatedTasksWithChanges(
             published_projects_test_cases=[curated_case])
@@ -964,8 +969,13 @@ class SedmlTestCaseTest(unittest.TestCase):
             case.eval(specs)
 
     def test_SimulatorSupportsComputeModelChanges(self):
-        specs = {'image': {'url': self.IMAGE}}
-        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+        IMAGE = 'ghcr.io/biosimulators/biosimulators_gillespy2/gillespy2:latest'
+        CURATED_ARCHIVE_FILENAME = os.path.join(
+            os.path.dirname(__file__), '..', '..',
+            'examples', 'sbml-core', 'Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex')
+
+        specs = {'image': {'url': IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=CURATED_ARCHIVE_FILENAME)
 
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorSupportsComputeModelChanges(
@@ -1097,7 +1107,7 @@ class SedmlTestCaseTest(unittest.TestCase):
             'image': {'url': self.IMAGE},
             'algorithms': [
                 {
-                    'kisaoId': {'id': 'KISAO_0000029'},
+                    'kisaoId': {'id': 'KISAO_0000560'},
                     'dependentDimensions': [
                         {'namespace': 'SIO', 'id': 'SIO_time'},
                     ]

@@ -10,6 +10,7 @@ __all__ = [
     'TestCaseException',
     'InvalidOutputsException',
     'SkippedTestCaseException',
+    'TimeoutException',
 ]
 
 
@@ -25,4 +26,9 @@ class InvalidOutputsException(TestCaseException):
 
 class SkippedTestCaseException(TestCaseException):
     """ Exception raised that indicates that a test case should be skipped """
+    pass  # pragma: no cover
+
+
+class TimeoutException(TestCaseException):
+    """ Exception raised that indicates that a test case timed out """
     pass  # pragma: no cover

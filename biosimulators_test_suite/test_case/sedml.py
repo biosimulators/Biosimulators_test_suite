@@ -275,6 +275,11 @@ class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsT
             )
 
             for key, value in node.attrib.items():
+                if key[0] == '{':
+                    ns, _, key = key[1:].rpartition('}')
+                    rev_namespaces = {v: k for k, v in node.nsmap.items()}
+                    key = rev_namespaces[ns] + ':' + key
+
                 model_1.changes.append(
                     ModelAttributeChange(
                         target=node_target + '/@' + key,
@@ -379,6 +384,11 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
             )
 
             for key, value in node.attrib.items():
+                if key[0] == '{':
+                    ns, _, key = key[1:].rpartition('}')
+                    rev_namespaces = {v: k for k, v in node.nsmap.items()}
+                    key = rev_namespaces[ns] + ':' + key
+
                 try:
                     float(value)
                 except ValueError:
@@ -392,7 +402,7 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
                         target=node_target + '/@' + key,
                         target_namespaces=target_namespaces,
                         parameters=[
-                            Parameter(id=param_id, value=1e100)
+                            Parameter(id=param_id, value=-1)
                         ],
                         variables=[
                             Variable(
@@ -411,7 +421,7 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
                         target=node_target + '/@' + key,
                         target_namespaces=target_namespaces,
                         parameters=[
-                            Parameter(id=param_id, value=1e100)
+                            Parameter(id=param_id, value=-1)
                         ],
                         variables=[
                             Variable(
@@ -928,6 +938,11 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
                 )
 
                 for key, value in node.attrib.items():
+                    if key[0] == '{':
+                        ns, _, key = key[1:].rpartition('}')
+                        rev_namespaces = {v: k for k, v in node.nsmap.items()}
+                        key = rev_namespaces[ns] + ':' + key
+
                     try:
                         float(value)
                     except ValueError:
@@ -992,7 +1007,7 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
                     ranges[-1].parameters.append(
                         Parameter(
                             id='__repeated_task_range_p_' + str(i_repeated_task) + '_' + str(i_range + 1) + '_2',
-                            value=1e100 if breaking_range else 0.,
+                            value=-1 if breaking_range else 0.,
                         ),
                     )
                     ranges[-1].variables.append(
@@ -1048,6 +1063,11 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
             )
 
             for key, value in node.attrib.items():
+                if key[0] == '{':
+                    ns, _, key = key[1:].rpartition('}')
+                    rev_namespaces = {v: k for k, v in node.nsmap.items()}
+                    key = rev_namespaces[ns] + ':' + key
+
                 try:
                     original_value = float(value)
                 except ValueError:
@@ -1066,7 +1086,7 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
                             ),
                             Parameter(
                                 id='p_1_' + str(len(changes)) + '_' + str(i_repeated_task),
-                                value=1. if self.FUNCTONAL_RANGE_USES_VARIABLES else 1e100,
+                                value=1. if self.FUNCTONAL_RANGE_USES_VARIABLES else -1,
                             ),
                         ],
                         variables=[

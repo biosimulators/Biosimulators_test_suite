@@ -6,8 +6,9 @@
 :License: MIT
 """
 
+from .config import Config
 from .data_model import TestCase, OutputMedium
-from .exceptions import SkippedTestCaseException
+from .exceptions import SkippedTestCaseException, TimeoutException
 from .results.data_model import TestCaseResult, TestCaseResultType
 from .test_case import cli
 from .test_case import combine_archive
@@ -21,9 +22,11 @@ from biosimulators_utils.config import Colors
 import biosimulators_utils.simulator.io
 import capturer
 import collections
+import contextlib
 import datetime
 import inspect
 import os
+import signal
 import sys
 import termcolor
 import warnings
@@ -65,6 +68,8 @@ class SimulatorValidator(object):
         self.output_medium = output_medium
 
         self.cases = self.find_cases(ids=case_ids)
+
+        self.test_case_timeout = Config().test_case_timeout
 
     def find_cases(self, ids=None):
         """ Find test cases
@@ -231,7 +236,9 @@ class SimulatorValidator(object):
                 warnings.simplefilter("always", TestCaseWarning)
 
                 try:
-                    case.eval(self.specifications, synthetic_archives_dir=self.synthetic_archives_dir)
+
+                    with time_limit(seconds=self.test_case_timeout):
+                        case.eval(self.specifications, synthetic_archives_dir=self.synthetic_archives_dir)
                     type = TestCaseResultType.passed
                     exception = None
                     skip_reason = None
@@ -270,12 +277,14 @@ class SimulatorValidator(object):
                 * :obj:`str`: summary of results of test cases
                 * :obj:`list` of :obj:`str`: details of failures
                 * :obj:`list` of :obj:`str`: details of warnings
+                * :obj:`list` of :obj:`str`: details of skips
         """
         passed = []
         failed = []
         skipped = []
         warning_details = []
         failure_details = []
+        skipped_details = []
         for result in sorted(results, key=lambda result: result.case.id):
             if result.type == TestCaseResultType.passed:
                 result_str = '  * `{}`\n'.format(result.case.id)
@@ -291,22 +300,56 @@ class SimulatorValidator(object):
                 if result.case.description:
                     detail += '  {}\n'.format(result.case.description.replace('\n', '\n  '))
                     detail += '\n'
+
                 detail += '  Exception:\n'
                 detail += '\n'
                 detail += '  ```\n'
                 detail += '  {}\n'.format(str(result.exception).replace('\n', '\n  '))
                 detail += '  ```\n'
                 detail += '\n'
+
                 detail += '  Log:\n'
                 detail += '\n'
                 detail += '  ```\n'
                 detail += '  {}\n'.format(result.log.replace('\n', '\n  ') if result.log else '')
                 detail += '  ```'
+
                 failure_details.append(detail)
 
             elif result.type == TestCaseResultType.skipped:
                 result_str = '  * `{}`\n'.format(result.case.id)
                 skipped.append(result_str)
+
+                detail = ''
+                detail += '`{}` ({:.1f} s)\n'.format(result.case.id, result.duration)
+                detail += '\n'
+                if result.case.description:
+                    detail += '  {}\n'.format(result.case.description.replace('\n', '\n  '))
+                    detail += '\n'
+
+                detail += '  Reason for skip:\n'
+                detail += '\n'
+                detail += '  ```\n'
+                detail += '  {}\n'.format(str(result.skip_reason).replace('\n', '\n  '))
+                detail += '  ```\n'
+                detail += '\n'
+
+                if result.warnings:
+                    detail += '  Warnings:\n'
+                    for warning in result.warnings:
+                        detail += '\n'
+                        detail += '  ```\n'
+                        detail += '  {}\n'.format(str(warning.message).replace('\n', '\n  '))
+                        detail += '  ```\n'
+                    detail += '\n'
+
+                detail += '  Log:\n'
+                detail += '\n'
+                detail += '  ```\n'
+                detail += '  {}\n'.format(result.log.replace('\n', '\n  ') if result.log else '')
+                detail += '  ```'
+
+                skipped_details.append(detail)
 
             if result.warnings:
                 detail = ''
@@ -315,6 +358,7 @@ class SimulatorValidator(object):
                 if result.case.description:
                     detail += '  {}\n'.format(result.case.description.replace('\n', '\n  '))
                     detail += '\n'
+
                 detail += '  Warnings:\n'
                 for warning in result.warnings:
                     detail += '\n'
@@ -322,11 +366,13 @@ class SimulatorValidator(object):
                     detail += '  {}\n'.format(str(warning.message).replace('\n', '\n  '))
                     detail += '  ```\n'
                 detail += '\n'
+
                 detail += '  Log:\n'
                 detail += '\n'
                 detail += '  ```\n'
                 detail += '  {}\n'.format(result.log.replace('\n', '\n  ') if result.log else '')
                 detail += '  ```'
+
                 warning_details.append(detail)
 
         return (
@@ -338,4 +384,25 @@ class SimulatorValidator(object):
             ]).strip(),
             failure_details,
             warning_details,
+            skipped_details,
         )
+
+
+@contextlib.contextmanager
+def time_limit(seconds):
+    """ Context manager for timing out long operations
+
+    Args:
+        seconds (:obj:`int`): length in seconds before time out
+
+    Raises:
+        :obj:`TimeoutException`: if the operation timed out
+    """
+    def signal_handler(signum, frame):
+        raise TimeoutException("Operation did not complete within {} seconds".format(seconds))
+    signal.signal(signal.SIGALRM, signal_handler)
+    signal.alarm(int(seconds))
+    try:
+        yield
+    finally:
+        signal.alarm(0)

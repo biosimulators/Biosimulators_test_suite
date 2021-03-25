@@ -17,7 +17,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
     IMAGE = 'ghcr.io/biosimulators/biosimulators_copasi/copasi:latest'
     CURATED_ARCHIVE_FILENAME = os.path.join(
         os.path.dirname(__file__), '..', '..',
-        'examples', 'sbml-core', 'Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-discrete.omex')
+        'examples', 'sbml-core', 'Tomida-EMBO-J-2003-NFAT-translocation.omex')
 
     def setUp(self):
         self.dirname = tempfile.mkdtemp()
@@ -73,7 +73,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
 
         def get_expected_reports(archive, sed_documents):
             expected_reports = base_get_expected_reports(archive, sed_documents)
-            assert expected_reports == set(['simulation_1.sedml/simulation_1'])
+            assert expected_reports == set(['BIOMD0000000678_sim.sedml/BIOMD0000000678_sim'])
             return expected_reports
 
         with mock.patch.object(combine_archive.WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile,
@@ -93,8 +93,8 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         def get_expected_reports(archive, sed_documents):
             expected_reports = base_get_expected_reports(archive, sed_documents)
             assert expected_reports == set([
-                'simulation_1.sedml/simulation_1',
-                'simulation_1__copy.sedml/simulation_1',
+                'BIOMD0000000678_sim.sedml/BIOMD0000000678_sim',
+                'BIOMD0000000678_sim__copy.sedml/BIOMD0000000678_sim',
             ])
             return expected_reports
 
@@ -115,7 +115,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         def get_expected_reports(archive, sed_documents):
             expected_reports = base_get_expected_reports(archive, sed_documents)
             assert expected_reports == set([
-                'subdir/simulation_1.sedml/simulation_1',
+                'subdir/BIOMD0000000678_sim.sedml/BIOMD0000000678_sim',
             ])
             return expected_reports
 
@@ -136,8 +136,8 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         def get_expected_reports(archive, sed_documents):
             expected_reports = base_get_expected_reports(archive, sed_documents)
             assert expected_reports == set([
-                'subdir/simulation_1.sedml/simulation_1',
-                'subdir__copy/simulation_1.sedml/simulation_1',
+                'subdir/BIOMD0000000678_sim.sedml/BIOMD0000000678_sim',
+                'subdir__copy/BIOMD0000000678_sim.sedml/BIOMD0000000678_sim',
             ])
             return expected_reports
 

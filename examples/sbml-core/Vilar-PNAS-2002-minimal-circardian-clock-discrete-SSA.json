@@ -1,9 +1,9 @@
 {
   "name": "Vilar et al. PNAS 2002: Minimal circadian clock (discrete)",
-  "filename": "Vilar-PNAS-2002-minimal-circardian-clock-discrete.omex",
+  "filename": "Vilar-PNAS-2002-minimal-circardian-clock-discrete-SSA.omex",
   "taskRequirements": [{
     "modelFormat": "format_2585",
-    "simulationAlgorithm": "KISAO_0000027"
+    "simulationAlgorithm": "KISAO_0000029"
   }],
   "expectedReports": [{
       "id": "simulation.sedml/report_Fig_1_c",
@@ -54,7 +54,7 @@
         "label": "dataSet_time",
         "value": {
           "0": 0.0,
-          "400": 200.0
+          "400": 2.0
         }
       }]
     },
@@ -107,7 +107,7 @@
         "label": "dataSet_time",
         "value": {
           "0": 0.0,
-          "400": 200.0
+          "400": 2.0
         }
       }]
     }

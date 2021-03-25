@@ -15,7 +15,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
     IMAGE = 'ghcr.io/biosimulators/biosimulators_copasi/copasi:latest'
     CURATED_ARCHIVE_FILENAME = os.path.join(
         os.path.dirname(__file__), '..', '..',
-        'examples', 'sbml-core', 'Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-discrete.omex')
+        'examples', 'sbml-core', 'Tomida-EMBO-J-2003-NFAT-translocation.omex')
 
     def setUp(self):
         self.dirname = tempfile.mkdtemp()

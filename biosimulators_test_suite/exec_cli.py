@@ -71,7 +71,7 @@ class BaseController(cement.Controller):
             results = validator.run()
 
             # print summary
-            summary, failure_details, warning_details = validator.summarize_results(results)
+            summary, failure_details, warning_details, skipped_details = validator.summarize_results(results)
             print('')
             print('=============== SUMMARY ===============')
             print('')
@@ -87,6 +87,12 @@ class BaseController(cement.Controller):
                 print(termcolor.colored('=============== WARNINGS ===============', color))
                 print(termcolor.colored('', color))
                 print(termcolor.colored('* ' + '\n\n* '.join(warning_details), color))
+                print('')
+            if skipped_details:
+                color = Colors.skipped.value
+                print(termcolor.colored('================ SKIPS =================', color))
+                print(termcolor.colored('', color))
+                print(termcolor.colored('* ' + '\n\n* '.join(skipped_details), color))
                 print('')
 
             # optionally, save report of results to a JSON file
