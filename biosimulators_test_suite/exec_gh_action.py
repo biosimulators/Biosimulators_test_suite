@@ -277,7 +277,15 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
 
         invalid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.failed]
         if invalid_cases:
-            error_msg = 'After correcting your simulator, please edit the first block of this issue to re-initiate this validation.'
+            gh_action_run_url = self.get_gh_action_run_url()
+            error_msg = (
+                'After correcting your simulator, please edit the first block of this issue to re-initiate this validation.\n\n'
+                'The complete log of your validation/submission job, including further information about the failure, '
+                'is available [here]({}). The results of the validation of your image will also be '
+                'available shortly as a JSON file. A link to this file will be available from the "Artifacts" '
+                'section at the bottom of [this page]({}).'
+            ).format(gh_action_run_url, gh_action_run_url)
+
             self.add_error_comment_to_issue(self.issue_number, [Comment(text=error_msg, error=True)])
 
         valid_cases = [case_result for case_result in case_results
