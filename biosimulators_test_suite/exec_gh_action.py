@@ -46,6 +46,9 @@ def get_uncaught_exception_msg(exception):
         Comment(text=str(exception), error=True),
         Comment(text=('The complete log of your validation/submission job, including further information about the failure, '
                       + 'is available [here]({}).'.format(gh_action_run_url))),
+        Comment(text=('If you chose to validate your Docker image, the results of the validation of your image will be '
+                      'available shortly as a JSON file. A link to this file will be available from the "Artifacts" '
+                      'section at the bottom of [this page]({}).'.format(gh_action_run_url))),
         Comment(text='Once you have fixed the problem, edit the first block of this issue to re-initiate this validation.'),
         Comment(text=('The BioSimulators Team is happy to help. '
                       'Questions and feedback can be directed to the BioSimulators Team by posting comments to this issues that '
@@ -140,8 +143,13 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         actions.append('validating the specifications of your simulator')
         if submission.validate_image:
             actions.append('validating your Docker image')
+            test_results_msg = (
+                ' The results of the validation of your tool will also be saved as a JSON file.'
+                'A link to this file will be available from the "Artifacts" section at the bottom of this page.'
+            )
         else:
             not_actions.append('You have chosen not to have the Docker image for your simulator validated.')
+            test_results_msg = ''
         if submission.commit_simulator:
             job_type = 'submission'
             actions.append('committing your simulator to the BioSimulators registry')
@@ -158,8 +166,8 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         return ('Thank you @{} for your submission to the BioSimulators simulator validation/submission system!\n\n'
                 'The BioSimulators validator bot is {}. {}\n\n'
                 'We will discuss any concerns with your submission in this issue.\n\n'
-                'A complete log of your simulator {} job is available [here]({}).\n\n'
-                ).format(submitter, actions, not_actions, job_type, self.get_gh_action_run_url())
+                'A complete log of your simulator {} job will be available [here]({}).{}\n\n'
+                ).format(submitter, actions, not_actions, job_type, self.get_gh_action_run_url(), test_results_msg)
 
     def exec_core(self, submission):
         """ Validate simulator
