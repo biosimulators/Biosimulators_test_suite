@@ -25,11 +25,11 @@ class ValidateSimulatorTestCase(unittest.TestCase):
                 id='C', task_requirements=reqs), type=TestCaseResultType.failed, duration=3.,
                 exception=Exception('Summary of error'), log="Detail of error"),
             TestCaseResult(case=published_project.SimulatorCanExecutePublishedProject(
-                id='D', task_requirements=reqs), type=TestCaseResultType.skipped),
+                id='D', task_requirements=reqs), type=TestCaseResultType.skipped, duration=3.),
             TestCaseResult(case=published_project.SimulatorCanExecutePublishedProject(
-                id='E', task_requirements=reqs), type=TestCaseResultType.skipped),
+                id='E', task_requirements=reqs), type=TestCaseResultType.skipped, duration=3.),
             TestCaseResult(case=published_project.SimulatorCanExecutePublishedProject(
-                id='F', task_requirements=reqs), type=TestCaseResultType.skipped),
+                id='F', task_requirements=reqs), type=TestCaseResultType.skipped, duration=3.),
             TestCaseResult(
                 case=HasBioContainersLabels(
                     id='docker_image.HasBioContainersLabels',
@@ -56,12 +56,13 @@ class ValidateSimulatorTestCase(unittest.TestCase):
                 log="Detail of error",
             ),
         ]
-        summary, failure_details, warning_details = SimulatorValidator.summarize_results(results)
+        summary, failure_details, warning_details, skipped_details = SimulatorValidator.summarize_results(results)
         self.assertRegex(summary, 'Passed 3 test cases')
         self.assertRegex(summary, 'Failed 2 test cases')
         self.assertRegex(summary, 'Skipped 3 test cases')
         self.assertEqual(len(failure_details), 2)
         self.assertEqual(len(warning_details), 2)
+        self.assertEqual(len(skipped_details), 3)
 
     def test_find_cases(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'

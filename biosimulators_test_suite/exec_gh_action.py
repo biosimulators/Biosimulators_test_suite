@@ -215,12 +215,14 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         case_results = validator.run()
         write_test_results(case_results, '.biosimulators-test-suite-results.json',
                            gh_issue=int(self.issue_number), gh_action_run=int(self.get_gh_action_run_id()))
-        summary, failure_details, warning_details = validator.summarize_results(case_results)
+        summary, failure_details, warning_details, skipped_details = validator.summarize_results(case_results)
         msg = '## Summary of tests\n\n{}\n\n'.format(summary)
         if failure_details:
             msg += '\n## Failures\n\n{}\n\n'.format('### ' + '\n### '.join(failure_details))
         if warning_details:
             msg += '\n## Warnings\n\n{}\n\n'.format('### ' + '\n### '.join(warning_details))
+        if skipped_details:
+            msg += '\n## Skips\n\n{}\n\n'.format('### ' + '\n### '.join(skipped_details))
         self.add_comment_to_issue(self.issue_number, msg)
 
         invalid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.failed]

@@ -277,12 +277,14 @@ class SimulatorValidator(object):
                 * :obj:`str`: summary of results of test cases
                 * :obj:`list` of :obj:`str`: details of failures
                 * :obj:`list` of :obj:`str`: details of warnings
+                * :obj:`list` of :obj:`str`: details of skips
         """
         passed = []
         failed = []
         skipped = []
         warning_details = []
         failure_details = []
+        skipped_details = []
         for result in sorted(results, key=lambda result: result.case.id):
             if result.type == TestCaseResultType.passed:
                 result_str = '  * `{}`\n'.format(result.case.id)
@@ -298,22 +300,56 @@ class SimulatorValidator(object):
                 if result.case.description:
                     detail += '  {}\n'.format(result.case.description.replace('\n', '\n  '))
                     detail += '\n'
+
                 detail += '  Exception:\n'
                 detail += '\n'
                 detail += '  ```\n'
                 detail += '  {}\n'.format(str(result.exception).replace('\n', '\n  '))
                 detail += '  ```\n'
                 detail += '\n'
+
                 detail += '  Log:\n'
                 detail += '\n'
                 detail += '  ```\n'
                 detail += '  {}\n'.format(result.log.replace('\n', '\n  ') if result.log else '')
                 detail += '  ```'
+
                 failure_details.append(detail)
 
             elif result.type == TestCaseResultType.skipped:
                 result_str = '  * `{}`\n'.format(result.case.id)
                 skipped.append(result_str)
+
+                detail = ''
+                detail += '`{}` ({:.1f} s)\n'.format(result.case.id, result.duration)
+                detail += '\n'
+                if result.case.description:
+                    detail += '  {}\n'.format(result.case.description.replace('\n', '\n  '))
+                    detail += '\n'
+
+                detail += '  Reason for skip:\n'
+                detail += '\n'
+                detail += '  ```\n'
+                detail += '  {}\n'.format(str(result.skip_reason).replace('\n', '\n  '))
+                detail += '  ```\n'
+                detail += '\n'
+
+                if result.warnings:
+                    detail += '  Warnings:\n'
+                    for warning in result.warnings:
+                        detail += '\n'
+                        detail += '  ```\n'
+                        detail += '  {}\n'.format(str(warning.message).replace('\n', '\n  '))
+                        detail += '  ```\n'
+                    detail += '\n'
+
+                detail += '  Log:\n'
+                detail += '\n'
+                detail += '  ```\n'
+                detail += '  {}\n'.format(result.log.replace('\n', '\n  ') if result.log else '')
+                detail += '  ```'
+
+                skipped_details.append(detail)
 
             if result.warnings:
                 detail = ''
@@ -322,6 +358,7 @@ class SimulatorValidator(object):
                 if result.case.description:
                     detail += '  {}\n'.format(result.case.description.replace('\n', '\n  '))
                     detail += '\n'
+
                 detail += '  Warnings:\n'
                 for warning in result.warnings:
                     detail += '\n'
@@ -329,11 +366,13 @@ class SimulatorValidator(object):
                     detail += '  {}\n'.format(str(warning.message).replace('\n', '\n  '))
                     detail += '  ```\n'
                 detail += '\n'
+
                 detail += '  Log:\n'
                 detail += '\n'
                 detail += '  ```\n'
                 detail += '  {}\n'.format(result.log.replace('\n', '\n  ') if result.log else '')
                 detail += '  ```'
+
                 warning_details.append(detail)
 
         return (
@@ -345,6 +384,7 @@ class SimulatorValidator(object):
             ]).strip(),
             failure_details,
             warning_details,
+            skipped_details,
         )
 
 

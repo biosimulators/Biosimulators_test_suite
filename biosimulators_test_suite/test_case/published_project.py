@@ -9,7 +9,7 @@
 from ..config import Config
 from ..data_model import (TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedDataSet, ExpectedSedPlot,
                           AlertType, OutputMedium)
-from ..exceptions import InvalidOutputsException, SkippedTestCaseException
+from ..exceptions import InvalidOutputsException, SkippedTestCaseException, TimeoutException
 from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning
 from .utils import are_array_shapes_equivalent
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContentFormatPattern  # noqa: F401
@@ -458,7 +458,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
         try:
             return_value = self._eval(specifications, synthetic_archives_dir=synthetic_archives_dir)
         except Exception as exception:
-            if self.REPORT_ERROR_AS_SKIP:
+            if not isinstance(exception, TimeoutException) and self.REPORT_ERROR_AS_SKIP:
                 raise SkippedTestCaseException(str(exception))
             else:
                 raise
@@ -913,6 +913,9 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
                             break
                     if key_report:
                         break
+
+            if isinstance(key_task.simulation, UniformTimeCourseSimulation):
+                key_task.simulation.number_of_points = 10
 
             doc.models = [key_task.model]
             doc.simulations = [key_task.simulation]
