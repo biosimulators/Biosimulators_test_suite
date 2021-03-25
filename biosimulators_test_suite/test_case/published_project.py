@@ -288,10 +288,13 @@ class SimulatorCanExecutePublishedProject(TestCase):
         out_dir = tempfile.mkdtemp()
 
         # pull image and execute COMBINE/OMEX archive for case
-        pull_docker_image = Config().pull_docker_image
+        config = Config()
+        pull_docker_image = config.pull_docker_image
+        user_to_exec_within_container = config.user_to_exec_in_simulator_containers
         try:
             biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
-                self.filename, out_dir, specifications['image']['url'], pull_docker_image=pull_docker_image)
+                self.filename, out_dir, specifications['image']['url'], pull_docker_image=pull_docker_image,
+                user_to_exec_within_container=user_to_exec_within_container)
 
         except Exception as exception:
             shutil.rmtree(out_dir)
@@ -560,11 +563,14 @@ class SyntheticCombineArchiveTestCase(TestCase):
 
         # use synthetic archive to test simulator
         outputs_dir = os.path.join(temp_dir, 'outputs')
-        pull_docker_image = Config().pull_docker_image
+        config = Config()
+        pull_docker_image = config.pull_docker_image
+        user_to_exec_within_container = config.user_to_exec_in_simulator_containers
         has_warnings = False
         try:
             biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
-                synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=pull_docker_image)
+                synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=pull_docker_image,
+                user_to_exec_within_container=user_to_exec_within_container)
 
             if not self.eval_outputs(specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
                 has_warnings = True
