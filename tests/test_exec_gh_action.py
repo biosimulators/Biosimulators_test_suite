@@ -102,9 +102,31 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         ]
 
         def requests_post(url, json=None, auth=None, headers=None):
-            self.assertTrue('Failed 1 test cases:' in json['body'] or 'After correcting your simulator' in json['body'])
+            self.assertTrue('Failed 1 test cases:' in json['body']
+                            or '## Failures' in json['body']
+                            or 'After correcting your simulator' in json['body'])
             return mock.Mock(raise_for_status=lambda: None)
         with self.assertRaisesRegex(GitHubActionCaughtError, '^After correcting your simulator,'):
+            with mock.patch.object(docker.client.DockerClient, 'login', return_value=None):
+                with mock.patch.object(docker.models.images.ImageCollection, 'pull', return_value=None):
+                    with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', return_value=None):
+                        with mock.patch.object(exec_core.SimulatorValidator, 'run', return_value=run_results):
+                            with mock.patch('requests.post', side_effect=requests_post):
+                                with mock.patch.dict(os.environ, self.env):
+                                    action.validate_image(specs)
+
+        run_results = [
+            TestCaseResult(case=SimulatorCanExecutePublishedProject(id='sedml.x'), type=TestCaseResultType.skipped,
+                           skip_reason=Exception('y'), log='', duration=2.),
+        ]
+
+        def requests_post(url, json=None, auth=None, headers=None):
+            print(json['body'])
+            self.assertTrue('Skipped 1 test cases:' in json['body']
+                            or '## Skips' in json['body']
+                            or 'No test cases are applicable to your simulator' in json['body'])
+            return mock.Mock(raise_for_status=lambda: None)
+        with self.assertRaisesRegex(GitHubActionCaughtError, 'No test cases are applicable to your simulator.'):
             with mock.patch.object(docker.client.DockerClient, 'login', return_value=None):
                 with mock.patch.object(docker.models.images.ImageCollection, 'pull', return_value=None):
                     with mock.patch('biosimulators_utils.image.convert_docker_image_to_singularity', return_value=None):
@@ -421,8 +443,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(requests_mock.simulator_versions, [])
         self.assertEqual(requests_mock.refreshed_images, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Invalid']))
-        self.assertEqual(len(requests_mock.issue_messages), 4)
-        self.assertRegex(requests_mock.issue_messages[-2], 'Passed 0 test cases')
+        self.assertEqual(len(requests_mock.issue_messages), 5)
+        self.assertRegex(requests_mock.issue_messages[-3], 'Passed 0 test cases')
         self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
         self.assertEqual(docker_mock.local_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
         self.assertEqual(requests_mock.issue_assignees, set())
@@ -456,8 +478,8 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(requests_mock.simulator_versions, [])
         self.assertEqual(requests_mock.refreshed_images, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated']))
-        self.assertEqual(len(requests_mock.issue_messages), 4)
-        self.assertRegex(requests_mock.issue_messages[-2], 'Passed 1 test cases:')
+        self.assertEqual(len(requests_mock.issue_messages), 5)
+        self.assertRegex(requests_mock.issue_messages[-3], 'Passed 1 test cases:')
         self.assertEqual(requests_mock.issue_messages[-1], 'The image for your simulator is valid!')
         self.assertEqual(docker_mock.remote_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
         self.assertEqual(docker_mock.local_images, set(['ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6']))
@@ -474,7 +496,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.6']))
         self.assertEqual(requests_mock.refreshed_images, [{'simulator': 'tellurium', 'version': '2.1.6'}])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
-        self.assertEqual(len(requests_mock.issue_messages), 5)
+        self.assertEqual(len(requests_mock.issue_messages), 6)
         self.assertRegex(requests_mock.issue_messages[-1], 'Your submission was committed to the BioSimulators registry.')
         self.assertEqual(docker_mock.remote_images, set([
             'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
@@ -499,7 +521,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set([]))
         self.assertEqual(requests_mock.refreshed_images, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated']))
-        self.assertEqual(len(requests_mock.issue_messages), 5)
+        self.assertEqual(len(requests_mock.issue_messages), 6)
         self.assertRegex(requests_mock.issue_messages[-1], 'A member of the BioSimulators team will review your submission')
         self.assertEqual(docker_mock.remote_images, set([
             'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
@@ -520,7 +542,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.5']))
         self.assertEqual(requests_mock.refreshed_images, [])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated']))
-        self.assertEqual(len(requests_mock.issue_messages), 5)
+        self.assertEqual(len(requests_mock.issue_messages), 6)
         self.assertRegex(requests_mock.issue_messages[-1], 'A member of the BioSimulators team will review your submission')
         self.assertEqual(docker_mock.remote_images, set([
             'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
@@ -541,7 +563,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.5', '2.1.6']))
         self.assertEqual(requests_mock.refreshed_images, [{'simulator': 'tellurium', 'version': '2.1.6'}])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
-        self.assertEqual(len(requests_mock.issue_messages), 5)
+        self.assertEqual(len(requests_mock.issue_messages), 6)
         self.assertRegex(requests_mock.issue_messages[-1], 'Your submission was committed to the BioSimulators registry.')
         self.assertEqual(docker_mock.remote_images, set([
             'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.6',
@@ -567,7 +589,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(set(v['version'] for v in requests_mock.simulator_versions), set(['2.1.5', '2.1.4']))
         self.assertEqual(requests_mock.refreshed_images, [{'simulator': 'tellurium', 'version': '2.1.4'}])
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
-        self.assertEqual(len(requests_mock.issue_messages), 5)
+        self.assertEqual(len(requests_mock.issue_messages), 6)
         self.assertRegex(requests_mock.issue_messages[-1], 'Your submission was committed to the BioSimulators registry.')
         self.assertEqual(docker_mock.remote_images, set([
             'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.4',
@@ -594,7 +616,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         self.assertEqual(requests_mock.simulator_versions[-1]['biosimulators']
                          ['validationTests']['results'][0]['case']['id'], 'sedml.case-passed')
         self.assertEqual(requests_mock.issue_labels, set(['Validate/commit simulator', 'Validated', 'Approved']))
-        self.assertEqual(len(requests_mock.issue_messages), 5)
+        self.assertEqual(len(requests_mock.issue_messages), 6)
         self.assertRegex(requests_mock.issue_messages[-1], 'Your submission was committed to the BioSimulators registry.')
         self.assertEqual(docker_mock.remote_images, set([
             'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:2.1.5',
@@ -847,3 +869,62 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                                                                                side_effect=validation_run_results):
                                                             action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
                                                             action.run()
+
+    def test_add_comment_to_issue(self):
+        def requests_post(url, headers=None, auth=None, json=None):
+            assert json['body'] == 'message'
+            return mock.Mock(raise_for_status=lambda: None)
+        with mock.patch('requests.post', side_effect=requests_post):
+            exec_gh_action.ValidateCommitSimulatorGitHubAction.add_comment_to_issue(
+                None, 'message', alternative_comment=None, max_len=65536)
+
+        def requests_post(url, headers=None, auth=None, json=None):
+            assert json['body'] == 'm ...'
+            return mock.Mock(raise_for_status=lambda: None)
+        with mock.patch('requests.post', side_effect=requests_post):
+            exec_gh_action.ValidateCommitSimulatorGitHubAction.add_comment_to_issue(
+                None, 'message', alternative_comment=None, max_len=5)
+
+        def requests_post(url, headers=None, auth=None, json=None):
+            assert json['body'] == 'm ...'
+
+            def raise_for_status():
+                raise ValueError('uncaught')
+            return mock.Mock(raise_for_status=raise_for_status)
+        with self.assertRaisesRegex(ValueError, 'uncaught'):
+            with mock.patch('requests.post', side_effect=requests_post):
+                exec_gh_action.ValidateCommitSimulatorGitHubAction.add_comment_to_issue(
+                    None, 'message', alternative_comment=None, max_len=5)
+
+        def requests_post(url, headers=None, auth=None, json=None):
+            assert json['body'] == 'm ...'
+
+            def raise_for_status():
+                raise requests.exceptions.RequestException('uncaught')
+            return mock.Mock(raise_for_status=raise_for_status, attr='A')
+        with self.assertRaisesRegex(requests.exceptions.RequestException, 'uncaught'):
+            with mock.patch('requests.post', side_effect=requests_post):
+                exec_gh_action.ValidateCommitSimulatorGitHubAction.add_comment_to_issue(
+                    None, 'message', alternative_comment=None, max_len=5)
+
+        class RequestsPost(object):
+            def __init__(self):
+                self.count = 0
+
+            def requests_post(self, url, headers=None, auth=None, json=None):
+                self.count += 1
+
+                if self.count == 1:
+                    assert json['body'] == 'm ...'
+
+                    def raise_for_status():
+                        raise requests.exceptions.RequestException('caught')
+                    return mock.Mock(raise_for_status=raise_for_status)
+
+                else:
+                    assert json['body'] == 'alt'
+                    return mock.Mock(raise_for_status=lambda: None)
+
+        with mock.patch('requests.post', side_effect=RequestsPost().requests_post):
+            exec_gh_action.ValidateCommitSimulatorGitHubAction.add_comment_to_issue(
+                None, 'message', alternative_comment='alt', max_len=5)
