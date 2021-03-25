@@ -13,6 +13,7 @@ from .exec_core import SimulatorValidator
 from .results.data_model import TestCaseResult, TestCaseResultType, TestResultsReport  # noqa: F401
 from .results.io import write_test_results
 from biosimulators_utils.biosimulations.utils import validate_biosimulations_api_response
+from biosimulators_utils.config import Colors
 from biosimulators_utils.gh_action.data_model import Comment, GitHubActionCaughtError  # noqa: F401
 from biosimulators_utils.gh_action.core import GitHubAction, GitHubActionErrorHandling
 from biosimulators_utils.image import get_docker_image
@@ -24,6 +25,7 @@ import biosimulators_utils.image
 import biosimulators_utils.simulator.io
 import requests
 import requests.exceptions
+import termcolor
 
 
 __all__ = [
@@ -226,6 +228,31 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                            gh_issue=int(self.issue_number), gh_action_run=int(self.get_gh_action_run_id()))
         summary, failure_details, warning_details, skipped_details = validator.summarize_results(case_results)
 
+        # print summary to console
+        print('')
+        print('=============== SUMMARY ===============')
+        print('')
+        print(summary + '\n\n')
+        if failure_details:
+            color = Colors.failure.value
+            print(termcolor.colored('=============== FAILURES ===============', color))
+            print(termcolor.colored('', color))
+            print(termcolor.colored('* ' + '\n\n* '.join(failure_details), color))
+            print('')
+        if warning_details:
+            color = Colors.warning.value
+            print(termcolor.colored('=============== WARNINGS ===============', color))
+            print(termcolor.colored('', color))
+            print(termcolor.colored('* ' + '\n\n* '.join(warning_details), color))
+            print('')
+        if skipped_details:
+            color = Colors.skipped.value
+            print(termcolor.colored('================ SKIPS =================', color))
+            print(termcolor.colored('', color))
+            print(termcolor.colored('* ' + '\n\n* '.join(skipped_details), color))
+            print('')
+
+        # push summary to comments on GitHub issue
         unable_to_post_results_msg = (
             'The summary of the tests of your Docker image could not be posted to this GitHub issue. '
             'The most likely reason is that the summary is too long to post to a comment on a GitHub issue. '
