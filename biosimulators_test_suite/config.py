@@ -34,6 +34,11 @@ class Config(object):
         runbiosimulations_api_client_secret (:obj:`str`): Client secret of the runBioSimulations API
         runbiosimulations_api_endpoint (:obj:`str`): Base URL for the runBioSimulations API
         test_case_timeout (:obj:`int`): time out for test cases in seconds
+        user_to_exec_in_simulator_containers (:obj:`str` or :obj:`None`): user id or name to execute calls inside simulator containers
+
+            * Use ``_CURRENT_USER_`` to indicate that the Docker container should execute commands as the current user (``os.getuid()``)
+            * Use the format ``<name|uid>[:<group|gid>]`` to indicate any other user/group that the Docker container should use to
+              execute commands
     """
 
     def __init__(self,
@@ -48,7 +53,8 @@ class Config(object):
                  runbiosimulations_auth_endpoint=None, runbiosimulations_audience=None,
                  runbiosimulations_api_client_id=None, runbiosimulations_api_client_secret=None,
                  runbiosimulations_api_endpoint=None,
-                 test_case_timeout=None):
+                 test_case_timeout=None,
+                 user_to_exec_in_simulator_containers=None):
         """
         Args:
             pull_docker_image (:obj:`bool`, optional): whether to pull the Docker image for the simulator (default: :obj:`True`)
@@ -72,6 +78,11 @@ class Config(object):
             runbiosimulations_api_client_secret (:obj:`str`, optional): Client secret of the runBioSimulations API
             runbiosimulations_api_endpoint (:obj:`str`, optional): Base URL for the runBioSimulations API
             test_case_timeout (:obj:`int`, optional): time out for test cases in seconds
+            user_to_exec_in_simulator_containers (:obj:`str`, optional): user id or name to execute calls inside simulator containers
+
+                * Use ``_CURRENT_USER_`` to indicate that the Docker container should execute commands as the current user (``os.getuid()``)
+                * Use the format ``<name|uid>[:<group|gid>]`` to indicate any other user/group that the Docker container should use to
+                  execute commands
         """
         # Docker registry
         if pull_docker_image is None:
@@ -190,3 +201,11 @@ class Config(object):
             self.test_case_timeout = int(os.getenv('TEST_CASE_TIMEOUT', '300'))  # 300 seconds
         else:
             self.test_case_timeout = test_case_timeout
+
+        if user_to_exec_in_simulator_containers is None:
+            self.user_to_exec_in_simulator_containers = os.getenv('USER_TO_EXEC_IN_SIMULATOR_CONTAINERS', '_CURRENT_USER_')
+        else:
+            self.user_to_exec_in_simulator_containers = user_to_exec_in_simulator_containers
+
+        if os.getenv('CI', 'false').lower() in ['true', '1']:
+            self.user_to_exec_in_simulator_containers = None
