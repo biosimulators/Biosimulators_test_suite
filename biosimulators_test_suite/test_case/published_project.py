@@ -583,7 +583,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
                 user_to_exec_within_container=user_to_exec_within_container)
 
             if os.getenv('CI', 'false').lower() in ['1', 'true']:
-                subprocess.run(['sudo', 'chown', '{}:{}'.format(os.getuid(), os.getgid()), 'R', outputs_dir], check=True)
+                subprocess.run(['sudo', 'chown', '{}:{}'.format(os.getuid(), os.getgid()), '-R', outputs_dir], check=True)
 
             if not self.eval_outputs(specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
                 has_warnings = True
