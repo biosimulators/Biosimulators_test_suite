@@ -300,7 +300,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
                 self.filename, out_dir, specifications['image']['url'], pull_docker_image=pull_docker_image,
                 user_to_exec_within_container=user_to_exec_within_container)
 
-            if os.getenv('CI', 'false').lower() in ['1', 'true']:
+            if os.path.isdir(out_dir) and os.getenv('CI', 'false').lower() in ['1', 'true']:
                 subprocess.run(['sudo', 'chown', '{}:{}'.format(os.getuid(), os.getgid()), '-R', out_dir], check=True)
 
         except Exception as exception:
@@ -582,7 +582,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
                 synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=pull_docker_image,
                 user_to_exec_within_container=user_to_exec_within_container)
 
-            if os.getenv('CI', 'false').lower() in ['1', 'true']:
+            if os.path.isdir(outputs_dir) and os.getenv('CI', 'false').lower() in ['1', 'true']:
                 subprocess.run(['sudo', 'chown', '{}:{}'.format(os.getuid(), os.getgid()), '-R', outputs_dir], check=True)
 
             if not self.eval_outputs(specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
