@@ -299,9 +299,9 @@ class SimulatorCanExecutePublishedProject(TestCase):
             biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
                 self.filename, out_dir, specifications['image']['url'], pull_docker_image=pull_docker_image,
                 user_to_exec_within_container=user_to_exec_within_container)
-            
+
             if os.getenv('CI', 'false').lower() in ['1', 'true']:
-                subprocess.run(['sudo', 'chown', '{}:{}'.format(os.getuid(), os.getgid()), out_dir], check=True)
+                subprocess.run(['sudo', 'chown', '{}:{}'.format(os.getuid(), os.getgid()), '-R', out_dir], check=True)
 
         except Exception as exception:
             shutil.rmtree(out_dir)
@@ -577,13 +577,13 @@ class SyntheticCombineArchiveTestCase(TestCase):
         try:
             if os.getenv('CI', 'false').lower() in ['1', 'true']:
                 user_to_exec_within_container = None
-                
+
             biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
                 synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=pull_docker_image,
                 user_to_exec_within_container=user_to_exec_within_container)
 
             if os.getenv('CI', 'false').lower() in ['1', 'true']:
-                subprocess.run(['sudo', 'chown', '{}:{}'.format(os.getuid(), os.getgid()), outputs_dir], check=True)
+                subprocess.run(['sudo', 'chown', '{}:{}'.format(os.getuid(), os.getgid()), 'R', outputs_dir], check=True)
 
             if not self.eval_outputs(specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
                 has_warnings = True
