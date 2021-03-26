@@ -181,7 +181,8 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
         def exec_archive(error, missing_report, extra_report, missing_data_set, extra_data_set,
                          incorrect_points, incorrect_values,
                          no_plots, missing_plot, extra_plot,
-                         filename, out_dir, image, pull_docker_image=True):
+                         filename, out_dir, image, pull_docker_image=True,
+                         user_to_exec_within_container=None):
             if error:
                 raise RuntimeError('Could not execute task')
 
@@ -323,7 +324,8 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
         def exec_archive(error, missing_report, extra_report, missing_data_set, extra_data_set,
                          incorrect_points, incorrect_values,
                          no_plots, missing_plot, extra_plot,
-                         filename, out_dir, image, pull_docker_image=True):
+                         filename, out_dir, image, pull_docker_image=True,
+                         user_to_exec_within_container=None):
             points = 5001
             data = [
                 numpy.linspace(0., 1000., points),
