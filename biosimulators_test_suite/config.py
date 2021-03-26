@@ -203,9 +203,6 @@ class Config(object):
             self.test_case_timeout = test_case_timeout
 
         if user_to_exec_in_simulator_containers is None:
-            self.user_to_exec_in_simulator_containers = os.getenv('USER_TO_EXEC_IN_SIMULATOR_CONTAINERS', '_CURRENT_USER_')
+            self.user_to_exec_in_simulator_containers = os.getenv('USER_TO_EXEC_IN_SIMULATOR_CONTAINERS', '_CURRENT_USER_') or None
         else:
             self.user_to_exec_in_simulator_containers = user_to_exec_in_simulator_containers
-
-        if os.getenv('CI', 'false').lower() in ['true', '1']:
-            self.user_to_exec_in_simulator_containers = None
