@@ -438,8 +438,6 @@ class SedmlTestCaseTest(unittest.TestCase):
             with self.assertRaises(SkippedTestCaseException):
                 self.assertFalse(case.eval(specs))
 
-    # TODO: Unskip when libSED-ML fixed
-    @unittest.skip('libSED-ML 2.0.14 cannot output uniform ranges with L1V3')
     def test_SimulatorSupportsRepeatedTasksWithLinearUniformRanges(self):
         specs = {'image': {'url': self.IMAGE}}
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
@@ -448,8 +446,6 @@ class SedmlTestCaseTest(unittest.TestCase):
             published_projects_test_cases=[curated_case])
         self.assertTrue(case.eval(specs))
 
-    # TODO: Unskip when libSED-ML fixed
-    @unittest.skip('libSED-ML 2.0.14 cannot output uniform ranges with L1V3')
     def test_SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges(self):
         specs = {'image': {'url': self.IMAGE}}
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)

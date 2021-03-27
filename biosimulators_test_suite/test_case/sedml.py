@@ -1350,8 +1350,7 @@ class SimulatorSupportsRepeatedTasksWithLinearUniformRanges(RepeatedTasksTestCas
     NUM_SUB_TASKS = 1
     NUM_NESTED_REPEATED_TASKS = 0
 
-    # TODO: Uncomment to enable test case when libSED-ML fixed; libSED-ML 2.0.14 cannot output uniform ranges with L1V3
-    # def is_concrete(self): return True
+    def is_concrete(self): return True
 
 
 class SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges(RepeatedTasksTestCase):
@@ -1361,8 +1360,7 @@ class SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges(RepeatedTasksTe
     NUM_SUB_TASKS = 1
     NUM_NESTED_REPEATED_TASKS = 0
 
-    # TODO: Uncomment to enable test case when libSED-ML fixed; libSED-ML 2.0.14 cannot output uniform ranges with L1V3
-    # def is_concrete(self): return True
+    def is_concrete(self): return True
 
 
 class SimulatorSupportsRepeatedTasksWithVectorRanges(RepeatedTasksTestCase):
