@@ -89,7 +89,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         self.reset_issue_labels(self.issue_number, [IssueLabel.validated.value, IssueLabel.invalid.value, IssueLabel.action_error.value])
 
         # get specifications of simulator and validate simulator
-        specifications, test_results = self.exec_core(submission)
+        specifications, test_results = self.exec_core(submission, submitter)
 
         # label issue as validated
         self.add_labels_to_issue(self.issue_number, [IssueLabel.validated.value])
@@ -172,7 +172,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                 'A complete log of your simulator {} job will be available [here]({}).{}\n\n'
                 ).format(submitter, actions, not_actions, job_type, self.get_gh_action_run_url(), test_results_msg)
 
-    def exec_core(self, submission):
+    def exec_core(self, submission, submitter):
         """ Validate simulator
 
         * Validate specifications
@@ -180,6 +180,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
 
         Args:
             submission (:obj:`SimulatorSubmission`): simulator submission
+            submitter (:obj:`str`): GitHub id of the submitter
 
         Returns:
             :obj:`tuple`:
@@ -190,6 +191,11 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         # validate specifications
         specifications = biosimulators_utils.simulator.io.read_simulator_specs(
             submission.specifications_url, submission.specifications_patch)
+
+        # check permissions
+        self.validate_permissions(specifications['id'], specifications['name'], submitter)
+
+        # indicate that specifications are valid
         self.add_comment_to_issue(self.issue_number, 'The specifications of your simulator is valid!')
 
         # validate image
@@ -201,6 +207,76 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
 
         # return specifications
         return specifications, test_results
+
+    def validate_permissions(self, simulator_id, simulator_name, submitter):
+        """ Validate that the submitter has permissions to submit or update the simulator
+
+        Args:
+            simulator_id (:obj:`str`): simulator id
+            simulator_name (:obj:`str`): simulator name
+            submitter (:obj:`str`): GitHub id of the submitter
+        """
+        # check if team exists
+        response = requests.get(
+            'https://api.github.com/orgs/biosimulators/teams/' + simulator_id,
+            auth=self.get_gh_auth())
+        try:
+            response.raise_for_status()
+            has_team = True
+        except requests.exceptions.HTTPError:
+            if response.status_code == 404:
+                has_team = False
+            else:
+                raise
+
+        # create team if none exists and add submitter as a maintainer of the team
+        if not has_team:
+            # get parent team
+            response = requests.get(
+                'https://api.github.com/orgs/biosimulators/teams/simulator-developers',
+                auth=self.get_gh_auth())
+            response.raise_for_status()
+            base_team_id = response.json()['id']
+
+            # create team
+            response = requests.post(
+                'https://api.github.com/orgs/biosimulators/teams',
+                auth=self.get_gh_auth(), json={
+                    'name': simulator_id,
+                    'description': 'Developers of ' + simulator_name,
+                    'parent_team_id': base_team_id,
+                    'maintainers': [submitter],
+                })
+            response.raise_for_status()
+
+            # tell user a group was created
+            msg = (
+                'We created the GitHub group @biosimulators/{} to manage permissions to change the specifications of {} '
+                'and added you (@{}) to this group. You can manage permissions to change the specifications of {} at '
+                'https://github.com/orgs/biosimulators/teams/{}/members.'
+            ).format(simulator_id, simulator_name, submitter, simulator_name, simulator_id)
+            self.add_comment_to_issue(self.issue_number, msg)
+
+        # check submitter has permissions to team
+        else:
+            response = requests.get(
+                'https://api.github.com/orgs/biosimulators/teams/{}/memberships/{}'.format(simulator_id, submitter),
+                auth=self.get_gh_auth())
+            try:
+                response.raise_for_status()
+                has_permissions = True
+            except requests.exceptions.HTTPError:
+                if response.status_code == 404:
+                    has_permissions = False
+                else:
+                    raise
+
+            if not has_permissions:
+                msg = (
+                    'You (@{}) do not have permissions to update the specifications of {}. Only the members of @biosimulators/{} '
+                    'can update the specifications of {}. Please contact the members of this group to request permissions to update {}.'
+                ).format(submitter, simulator_name, simulator_id, simulator_name, simulator_name)
+                self.add_error_comment_to_issue(self.issue_number, [Comment(text=msg, error=True)])
 
     def validate_image(self, specifications):
         """ Validate a Docker image for simulation tool
