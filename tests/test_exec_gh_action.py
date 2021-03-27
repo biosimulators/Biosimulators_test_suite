@@ -74,6 +74,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
 
         specs = {
             'id': 'tellurium',
+            'name': 'tellurium',
             'image': {
                 'url': 'ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.1.6',
             },
@@ -168,11 +169,12 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
 
         requests_mock = RequestMock(parent=self)
 
-        specs = {'id': 'tellurium'}
+        specs = {'id': 'tellurium', 'name': 'tellurium'}
         with mock.patch('biosimulators_utils.simulator.io.read_simulator_specs', return_value=specs):
             with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'validate_image', return_value=None):
-                with mock.patch('requests.post', side_effect=requests_mock.post):
-                    specs2, results = action.exec_core(self.submission)
+                with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'validate_permissions', return_value=None):
+                    with mock.patch('requests.post', side_effect=requests_mock.post):
+                        specs2, results = action.exec_core(self.submission, 'submitter')
         self.assertEqual(specs2, specs)
         self.assertEqual(results, None)
         self.assertEqual(requests_mock.n_post, 2)
@@ -672,6 +674,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                 if url == 'https://raw.githubusercontent.com/biosimulators/Biosimulators_tellurium/d08f33/biosimulators.json':
                     response = {
                         'id': 'tellurium',
+                        'name': 'tellurium',
                         'version': self.submitted_version,
                         'image': {
                             'url': 'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:' + self.submitted_version
@@ -867,8 +870,9 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                                                     with mock.patch.object(exec_core.SimulatorValidator, 'find_cases', return_value=cases):
                                                         with mock.patch.object(exec_core.SimulatorValidator, 'eval_case',
                                                                                side_effect=validation_run_results):
-                                                            action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
-                                                            action.run()
+                                                            with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'validate_permissions', return_value=None):
+                                                                action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
+                                                                action.run()
 
     def test_add_comment_to_issue(self):
         def requests_post(url, headers=None, auth=None, json=None):
@@ -928,3 +932,93 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         with mock.patch('requests.post', side_effect=RequestsPost().requests_post):
             exec_gh_action.ValidateCommitSimulatorGitHubAction.add_comment_to_issue(
                 None, 'message', alternative_comment='alt', max_len=5)
+
+    def test_validate_permissions(self):
+        action = exec_gh_action.ValidateCommitSimulatorGitHubAction()
+
+        class RequestsMock(object):
+            def __init__(self, check_team_error=False, check_member_error=False):
+                self.check_team_error = check_team_error
+                self.check_member_error = check_member_error
+                self.new_team = False
+                self.comment = None
+                self.error = None
+
+            def get(self, url, auth=None):
+                if url == 'https://api.github.com/orgs/biosimulators/teams/simulator-developers':
+                    return mock.Mock(raise_for_status=lambda: None, json=lambda: {'id': 10})
+                elif url == 'https://api.github.com/orgs/biosimulators/teams/tellurium':
+                    return mock.Mock(raise_for_status=lambda: None, json=lambda: {'id': 20})
+                elif url == 'https://api.github.com/orgs/biosimulators/teams/tellurium2':
+                    def raise_for_status():
+                        raise requests.exceptions.HTTPError('404')
+                    return mock.Mock(status_code=500 if self.check_team_error else 404, raise_for_status=raise_for_status)
+
+                elif url == 'https://api.github.com/orgs/biosimulators/teams/tellurium/memberships/te-owner':
+                    return mock.Mock(raise_for_status=lambda: None, json=lambda: {})
+                elif url == 'https://api.github.com/orgs/biosimulators/teams/tellurium/memberships/te-owner2':
+                    def raise_for_status():
+                        raise requests.exceptions.HTTPError('404')
+                    return mock.Mock(status_code=500 if self.check_member_error else 404, raise_for_status=raise_for_status)
+
+            def post(self, url, auth=None, json=None):
+                self.new_team = True
+                return mock.Mock(raise_for_status=lambda: None)
+
+            def add_comment(self, isse_number, comment):
+                self.comment = comment
+
+            def add_error(self, isse_number, comment):
+                self.error = comment
+
+        requests_mock = RequestsMock(check_team_error=False, check_member_error=False)
+        with mock.patch('requests.get', requests_mock.get):
+            with mock.patch('requests.post', requests_mock.post):
+                with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'add_comment_to_issue', requests_mock.add_comment):
+                    with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'add_error_comment_to_issue', requests_mock.add_error):
+                        action.validate_permissions('tellurium', 'tellurium', 'te-owner')
+                        self.assertEqual(requests_mock.new_team, False)
+                        self.assertEqual(requests_mock.comment, None)
+                        self.assertEqual(requests_mock.error, None)
+
+        requests_mock = RequestsMock(check_team_error=False, check_member_error=False)
+        with mock.patch('requests.get', requests_mock.get):
+            with mock.patch('requests.post', requests_mock.post):
+                with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'add_comment_to_issue', requests_mock.add_comment):
+                    with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'add_error_comment_to_issue', requests_mock.add_error):
+                        action.validate_permissions('tellurium2', 'tellurium', 'te-owner')
+                        self.assertEqual(requests_mock.new_team, True)
+                        self.assertNotEqual(requests_mock.comment, None)
+                        self.assertEqual(requests_mock.error, None)
+
+        requests_mock = RequestsMock(check_team_error=True, check_member_error=False)
+        with mock.patch('requests.get', requests_mock.get):
+            with mock.patch('requests.post', requests_mock.post):
+                with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'add_comment_to_issue', requests_mock.add_comment):
+                    with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'add_error_comment_to_issue', requests_mock.add_error):
+                        with self.assertRaisesRegex(requests.exceptions.HTTPError, '404'):
+                            action.validate_permissions('tellurium2', 'tellurium', 'te-owner')
+                            self.assertEqual(requests_mock.new_team, False)
+                            self.assertEqual(requests_mock.comment, None)
+                            self.assertEqual(requests_mock.error, None)
+
+        requests_mock = RequestsMock(check_team_error=False, check_member_error=False)
+        with mock.patch('requests.get', requests_mock.get):
+            with mock.patch('requests.post', requests_mock.post):
+                with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'add_comment_to_issue', requests_mock.add_comment):
+                    with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'add_error_comment_to_issue', requests_mock.add_error):
+                        action.validate_permissions('tellurium', 'tellurium', 'te-owner2')
+                        self.assertEqual(requests_mock.new_team, False)
+                        self.assertEqual(requests_mock.comment, None)
+                        self.assertNotEqual(requests_mock.error, None)
+
+        requests_mock = RequestsMock(check_team_error=False, check_member_error=True)
+        with mock.patch('requests.get', requests_mock.get):
+            with mock.patch('requests.post', requests_mock.post):
+                with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'add_comment_to_issue', requests_mock.add_comment):
+                    with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'add_error_comment_to_issue', requests_mock.add_error):
+                        with self.assertRaisesRegex(requests.exceptions.HTTPError, '404'):
+                            action.validate_permissions('tellurium', 'tellurium', 'te-owner2')
+                            self.assertEqual(requests_mock.new_team, False)
+                            self.assertEqual(requests_mock.comment, None)
+                            self.assertEqual(requests_mock.error, None)
