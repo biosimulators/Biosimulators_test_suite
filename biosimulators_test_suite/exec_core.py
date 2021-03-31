@@ -174,6 +174,8 @@ class SimulatorValidator(object):
         if ignored_ids:
             warnings.warn('Some test case(s) were ignored:\n  {}'.format('\n  '.join(sorted(ignored_ids))), IgnoredTestCaseWarning)
 
+        cases.sort(key=lambda case: case.id)
+
         return cases
 
     def run(self):
