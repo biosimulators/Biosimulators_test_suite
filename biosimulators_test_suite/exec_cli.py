@@ -28,14 +28,16 @@ class BaseController(cement.Controller):
                 type=str,
                 help='Path or URL to the specifications of the simulator',
             )),
-            (['-c', '--combine-case'], dict(
+            (['-c', '--test-case'], dict(
                 type=str,
                 nargs='+',
                 default=None,
                 dest='case_ids',
                 help=(
                     "Ids of test cases of evaluate (e.g., "
-                      "'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'). "
+                      "'sedml.SimulatorSupportsModelAttributeChanges', "
+                      "'published_project.SimulatorCanExecutePublishedProject:"
+                      "sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'). "
                       "Default: evaluate all test cases"
                 ),
             )),
