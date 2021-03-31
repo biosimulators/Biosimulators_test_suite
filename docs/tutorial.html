@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2. Tutorial &#8212; BioSimulators test suite 0.1.27 documentation</title>
+    <title>2. Tutorial &#8212; BioSimulators test suite 0.1.28 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -170,11 +170,17 @@ curl \
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Run all tests
 biosimulators-test-suite /path/to/simulator/specifications.json
 
-# Run specific tests
+# Run a specific test
 biosimulators-test-suite /path/to/simulator/specifications.json \
-  --combine-case \
-    sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations
-    sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint
+  --test-case \
+    sedml.SimulatorSupportsModelAttributeChanges
+
+# Run multiple specific tests
+biosimulators-test-suite /path/to/simulator/specifications.json \
+  --test-case \
+    sedml.SimulatorSupportsModelAttributeChanges \
+    published_project.SimulatorCanExecutePublishedProject:sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations \
+    published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint
 </pre></div>
 </div>
 <div class="section" id="saving-the-synthetic-combine-archives-generated-by-the-test-cases">
