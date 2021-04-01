@@ -61,7 +61,7 @@ class LoggingTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
             msg = (
                 'The simulator did not export information about the status of its execution. '
                 'Simulators are encouraged to stream information about their execution status.\n\n'
-                'More information: https://biosimulators.org/standards/status'
+                'More information: https://biosimulators.org/conventions/status'
             )
             raise SkippedTestCaseException(msg)
 
