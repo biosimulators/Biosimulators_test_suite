@@ -18,15 +18,6 @@ The test suite is composed of two parts:
     * Simulation tools follow the [BioSimulators conventions for executing simulations described by SED-ML files in COMBINE/OMEX archives](https://biosimulators.org/standards/simulation-experiments).
     * Simulation tools support the [BioSimulators conventions for the outputs of SED-ML files in COMBINE/OMEX archives](https://biosimulators.org/standards/simulation-reports).
 
-
-## Contents
-* [Installation instructions, tutorial, and API documentation](#installation-instructions,-tutorial,-and-API-documentation)
-* [License](#license)
-* [Development team](#development-team)
-* [Contributing to the test suite](#contributing-to-the-test-suite)
-* [Acknowledgements](#acknowledgements)
-* [Questions and comments](#questions-and-comments)
-
 ## Installation instructions, tutorial, and API documentation
 Installation instructions, tutorial, and API documentation are available [here](https://biosimulators.github.io/Biosimulators_test_suite/).
 

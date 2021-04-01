@@ -12,13 +12,6 @@ The purpose of this directory is two-fold:
 * The directory serves as a test suite for the [BioSimulators](https://biosimulators.org) registry of biosimulation tools.
   Tools submitted to the registry are validated using the software in this repository and the examples in this directory.
 
-## Contents
-* [Modeling frameworks employed by the archives](#modeling-frameworks-employed-by-the-example-archives)
-* [Simulation algorithms employed by the archives](#simulation-algorithms-employed-by-the-example-archives)
-* [Model formats employed by the archives](#model-formats-employed-by-the-example-archives)
-* [Formats for the example data visualization](#formats-for-the-example-data-visualizations-for-the-results-of-the-example-archives)
-* [Compatibility of the archives with simulation tools](#compatibility-of-the-example-archives-with-simulation-tools)
-
 ## Modeling frameworks employed by the example archives
 
 The archives in this directory involve the following modeling frameworks:
