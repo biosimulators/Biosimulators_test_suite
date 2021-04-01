@@ -30,11 +30,14 @@
     "id": "BIOMD0000000912_sim.sedml/plot_1"
   }],
   "runtimeFailureAlertType": "exception",
+  "author": "Giulio Caravagna, Alberto d'Onofrio, Paolo Milazzo, Roberto Barbuti",
   "identifiers": [{
     "namespace": "biomodels.db",
-    "id": "BIOMD0000000912"
+    "id": "BIOMD0000000912",
+    "url": "https://identifiers.org/biomodels.db/BIOMD0000000912"
   }, {
     "namespace": "doi",
-    "id": "10.1083/jcb.200306139"
+    "id": "10.1016/j.jtbi.2010.05.013",
+    "url": "https://doi.org/10.1016/j.jtbi.2010.05.013"
   }]
 }

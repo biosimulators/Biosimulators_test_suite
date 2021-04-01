@@ -23,13 +23,16 @@
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",
+  "author": "Jignesh H. Parmar, Grey Davis, Hope Shevchuk & Pedro Mendes",
   "identifiers": [{
       "namespace": "biomodels.db",
-      "id": "BIOMD0000000734"
+      "id": "BIOMD0000000734",
+      "url": "https://identifiers.org/biomodels.db/BIOMD0000000734"
     },
     {
       "namespace": "doi",
-      "id": "10.1186/s12918-017-0431-3"
+      "id": "10.1186/s12918-017-0431-3",
+      "url": "https://doi.org/10.1186/s12918-017-0431-3"
     }
   ]
 }

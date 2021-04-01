@@ -26,13 +26,16 @@
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",
+  "author": "Taichiro Tomida, Kenzo Hirose, Azusa Takizawa, Futoshi Shibasaki & Masamitsu Iino",
   "identifiers": [{
       "namespace": "biomodels.db",
-      "id": "BIOMD0000000678"
+      "id": "BIOMD0000000678",
+      "url": "https://identifiers.org/biomodels.db/BIOMD0000000678"
     },
     {
       "namespace": "doi",
-      "id": "10.1093/emboj/cdg381"
+      "id": "10.1093/emboj/cdg381",
+      "url": "https://doi.org/10.1093/emboj/cdg381"
     }
   ]
 }

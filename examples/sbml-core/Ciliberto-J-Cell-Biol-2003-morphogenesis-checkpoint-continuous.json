@@ -45,13 +45,16 @@
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",
+  "author": "Andrea Ciliberto, Bela Novak & John J. Tyson",
   "identifiers": [{
       "namespace": "biomodels.db",
-      "id": "BIOMD0000000297"
+      "id": "BIOMD0000000297",
+      "url": "https://identifiers.org/biomodels.db/BIOMD0000000297"
     },
     {
       "namespace": "doi",
-      "id": "10.1083/jcb.200306139"
+      "id": "10.1083/jcb.200306139",
+      "url": "https://doi.org/10.1083/jcb.200306139"
     }
   ]
 }

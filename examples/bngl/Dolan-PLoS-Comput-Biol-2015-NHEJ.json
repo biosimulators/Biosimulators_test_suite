@@ -24,9 +24,11 @@
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",
+  "author": "David W. P. Dolan, Anze Zupanic, Glyn Nelson, Philip Hall, Satomi Miwa, Thomas B. L. Kirkwood & Daryl P. Shanley",
   "identifiers": [{
       "namespace": "doi",
-      "id": "10.1371/journal.pcbi.1004246"
+      "id": "10.1371/journal.pcbi.1004246",
+      "url": "https://doi.org/10.1371/journal.pcbi.1004246"
     },
     {
       "namespace": "RuleHub",

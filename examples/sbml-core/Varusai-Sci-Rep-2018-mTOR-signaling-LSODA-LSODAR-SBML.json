@@ -23,11 +23,14 @@
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",
+  "author": "Thawfeek M. Varusai & Lan K. Nguyen",
   "identifiers": [{
     "namespace": "biomodels.db",
-    "id": "BIOMD0000000823"
+    "id": "BIOMD0000000823",
+    "url": "https://identifiers.org/biomodels.db/BIOMD0000000823"
   }, {
     "namespace": "doi",
-    "id": "10.1038/s41598-017-18400-z"
+    "id": "10.1038/s41598-017-18400-z",
+    "url": "https://doi.org/10.1038/s41598-017-18400-z"
   }]
 }
