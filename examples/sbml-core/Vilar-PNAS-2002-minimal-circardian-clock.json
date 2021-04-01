@@ -349,11 +349,14 @@
     }
   ],
   "runtimeFailureAlertType": "exception",
+  "author": "José M. G. Vilar, Hao Yuan Kueh, Naama Barkai & Stanislas Leibler",
   "identifiers": [{
     "namespace": "biomodels.db",
-    "id": "BIOMD0000000035"
+    "id": "BIOMD0000000035",
+    "url": "https://identifiers.org/biomodels.db/BIOMD0000000035"
   }, {
     "namespace": "doi",
-    "id": "10.1073/pnas.092133899"
+    "id": "10.1073/pnas.092133899",
+    "url": "https://doi.org/10.1073/pnas.092133899"
   }]
 }

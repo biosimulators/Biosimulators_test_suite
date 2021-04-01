@@ -36,11 +36,14 @@
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",
+  "author": "Stuart J. Edelstein, Olivier Schaad, Eric Henry, Daniel Bertrand & Jean-Pierre Changeux",
   "identifiers": [{
     "namespace": "biomodels.db",
-    "id": "BIOMD0000000002"
+    "id": "BIOMD0000000002",
+    "url": "https://identifiers.org/biomodels.db/BIOMD0000000002"
   }, {
     "namespace": "doi",
-    "id": "10.1007/s004220050302"
+    "id": "10.1007/s004220050302",
+    "url": "https://doi.org/10.1007/s004220050302"
   }]
 }

@@ -29,11 +29,14 @@
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",
+  "author": "Claudine Chaouiya, Duncan Bérenguier, Sarah M Keating, Aurélien Naldi, Martijn P van Iersel, Nicolas Rodriguez, Andreas Dräger, Finja Büchel, Thomas Cokelaer, Bryan Kowal, Benjamin Wicks, Emanuel Gonçalves, Julien Dorier, Michel Page, Pedro T Monteiro, Axel von Kamp, Ioannis Xenarios, Hidde de Jong, Michael Hucka, Steffen Klamt, Denis Thieffry, Nicolas Le Novère, Julio Saez-Rodriguez & Tomáš Helikar",
   "identifiers": [{
     "namespace": "biomodels.db",
-    "id": "BIOMD0000000562"
+    "id": "BIOMD0000000562",
+    "url": "https://identifiers.org/biomodels.db/BIOMD0000000562"
   }, {
     "namespace": "doi",
-    "id": "10.1186/1752-0509-7-135"
+    "id": "10.1186/1752-0509-7-135",
+    "url": "https://doi.org/10.1186/1752-0509-7-135"
   }]
 }

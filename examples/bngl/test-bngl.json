@@ -1,5 +1,5 @@
 {
-  "name": "Example BioNetGen model",
+  "name": "Toy gene regulatory network",
   "filename": "test-bngl.omex",
   "taskRequirements": [{
     "modelFormat": "format_3972",
@@ -30,5 +30,10 @@
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",
-  "identifiers": []
+  "author": "Ali Sinan Saglam",
+  "identifiers": [{
+    "namespace": "github",
+    "id": "biosimulators/Biosimulators_BioNetGen/blob/dev/tests/fixtures/test.bngl",
+    "url": "https://github.com/biosimulators/Biosimulators_BioNetGen/blob/dev/tests/fixtures/test.bngl"
+  }]
 }

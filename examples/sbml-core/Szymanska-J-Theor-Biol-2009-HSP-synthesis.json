@@ -31,13 +31,16 @@
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",
+  "author": "Zuzanna Szymańskaa & Maciej Zylicz",
   "identifiers": [{
       "namespace": "biomodels.db",
-      "id": "BIOMD0000000896"
+      "id": "BIOMD0000000896",
+      "url": "https://identifiers.org/biomodels.db/BIOMD0000000896"
     },
     {
       "namespace": "doi",
-      "id": "10.1016/j.jtbi.2009.03.021"
+      "id": "10.1016/j.jtbi.2009.03.021",
+      "url": "https://doi.org/10.1016/j.jtbi.2009.03.021"
     }
   ]
 }

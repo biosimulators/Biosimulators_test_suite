@@ -1,5 +1,5 @@
 {
-  "name": "Escherichia coli core metabolism",
+  "name": "Textbook Escherichia coli core metabolism",
   "filename": "Escherichia-coli-core-metabolism.omex",
   "taskRequirements": [{
     "modelFormat": "format_2585",
@@ -307,5 +307,10 @@
   }],
   "expectedPlots": [],
   "runtimeFailureAlertType": "exception",
-  "identifiers": []
+  "author": "COBRAPy Team",
+  "identifiers": [{
+    "namespace": "github",
+    "id": "opencobra/cobrapy/blob/devel/src/cobra/test/data/textbook.xml.gz",
+    "url": "https://github.com/opencobra/cobrapy/blob/devel/src/cobra/test/data/textbook.xml.gz"
+  }]
 }

@@ -832,6 +832,9 @@ def find_cases(specifications, dir_name=None, output_medium=OutputMedium.console
         if case.compatible_with_specifications(specifications):
             compatible_cases.append(case)
 
+    all_cases.sort(key=lambda case: case.filename)
+    compatible_cases.sort(key=lambda case: case.filename)
+
     # return cases
     return (all_cases, compatible_cases)
 
