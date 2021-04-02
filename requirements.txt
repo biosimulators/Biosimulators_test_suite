@@ -1,5 +1,4 @@
-biosimulators_utils[containers] >= 0.1.43
-capturer
+biosimulators_utils[containers] >= 0.1.45
 cement
 docker
 natsort

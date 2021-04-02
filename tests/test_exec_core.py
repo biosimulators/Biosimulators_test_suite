@@ -140,7 +140,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
         self.assertLess(result.duration, 1.)
         self.assertEqual(result.exception, None)
         self.assertEqual(result.warnings, [])
-        self.assertEqual(result.log, 'Message')
+        self.assertEqual(result.log.replace('\r', '').strip(), 'Message')
 
         # passed, stdout and std errr
         class Case(TestCase):
@@ -156,7 +156,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
         self.assertLess(result.duration, 1.)
         self.assertEqual(result.exception, None)
         self.assertEqual(result.warnings, [])
-        self.assertEqual(result.log, 'Stdout\nStderr')
+        self.assertEqual(result.log.replace('\r', '').strip(), 'Stdout\nStderr')
 
         # passed, warnings
         class Case(TestCase):
@@ -175,7 +175,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
         self.assertEqual(len(result.warnings), 2)
         self.assertEqual(str(result.warnings[0].message), 'Warning-1')
         self.assertEqual(str(result.warnings[1].message), 'Warning-3')
-        self.assertEqual(result.log, '')
+        self.assertEqual(result.log.replace('\r', '').strip(), '')
 
         # error
         class Case(TestCase):
@@ -190,7 +190,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
         self.assertLess(result.duration, 1.)
         self.assertEqual(str(result.exception), 'Big error')
         self.assertEqual(result.warnings, [])
-        self.assertEqual(result.log, '')
+        self.assertEqual(result.log.replace('\r', '').strip(), '')
 
         # skipped
         class Case(TestCase):
@@ -206,7 +206,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
         self.assertEqual(result.exception, None)
         self.assertEqual(str(result.skip_reason), 'Reason for skipping')
         self.assertEqual(result.warnings, [])
-        self.assertEqual(result.log, '')
+        self.assertEqual(result.log.replace('\r', '').strip(), '')
 
     def test_run(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'

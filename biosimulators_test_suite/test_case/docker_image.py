@@ -42,7 +42,7 @@ class DefaultUserIsRoot(TestCase):
                    "Compatability with Singularity is important for using the image on HPC systems, including "
                    "the infrastructure used by runBioSimulations and BioSimulations.\n\n"
                    "More information:\n"
-                   "  https://biosimulators.org/standards/simulator-images\n"
+                   "  https://biosimulators.org/conventions/simulator-images\n"
                    "  https://sylabs.io/guides/3.7/user-guide/singularity_and_docker.html#best-practices"
                    ).format(user)
             warnings.warn(msg, TestCaseWarning)
