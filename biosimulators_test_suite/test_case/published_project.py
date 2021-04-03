@@ -294,7 +294,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
         user_to_exec_within_container = config.user_to_exec_in_simulator_containers
         try:
             if os.getenv('CI', 'false').lower() in ['1', 'true']:
-                user_to_exec_within_container = None
+                user_to_exec_within_container = '_SUDO_'
 
             biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
                 self.filename, out_dir, specifications['image']['url'], pull_docker_image=pull_docker_image,
@@ -576,7 +576,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
         has_warnings = False
         try:
             if os.getenv('CI', 'false').lower() in ['1', 'true']:
-                user_to_exec_within_container = None
+                user_to_exec_within_container = '_SUDO_'
 
             biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
                 synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=pull_docker_image,
