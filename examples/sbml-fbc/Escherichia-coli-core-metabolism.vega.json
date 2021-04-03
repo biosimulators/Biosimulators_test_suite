@@ -301,7 +301,7 @@
   "data": [{
       "name": "metabolitesData",
       "_mapToSedmlReport": false,
-      "url": "https://github.com/biosimulators/Biosimulators_test_suite/raw/dev/examples/sbml-fbc/Escherichia-coli-core-metabolism.map-coordinates.json",
+      "url": "https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
       "format": {
         "type": "json",
         "property": "metabolites"
@@ -310,7 +310,7 @@
     {
       "name": "reactionSegmentCoordinatesData",
       "_mapToSedmlReport": false,
-      "url": "https://github.com/biosimulators/Biosimulators_test_suite/raw/dev/examples/sbml-fbc/Escherichia-coli-core-metabolism.map-coordinates.json",
+      "url": "https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
       "format": {
         "type": "json",
         "property": "reactionSegmentCoordinates"
@@ -319,7 +319,7 @@
     {
       "name": "reactionArrowHeadCoordinatesData",
       "_mapToSedmlReport": false,
-      "url": "https://github.com/biosimulators/Biosimulators_test_suite/raw/dev/examples/sbml-fbc/Escherichia-coli-core-metabolism.map-coordinates.json",
+      "url": "https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
       "format": {
         "type": "json",
         "property": "reactionArrowHeadCoordinates"
@@ -328,7 +328,7 @@
     {
       "name": "reactionLabelsData",
       "_mapToSedmlReport": false,
-      "url": "https://github.com/biosimulators/Biosimulators_test_suite/raw/dev/examples/sbml-fbc/Escherichia-coli-core-metabolism.map-coordinates.json",
+      "url": "https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
       "format": {
         "type": "json",
         "property": "reactionLabelsData"
