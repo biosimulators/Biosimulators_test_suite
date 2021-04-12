@@ -304,6 +304,9 @@ class SimulatorCanExecutePublishedProject(TestCase):
                 subprocess.run(['sudo', 'chown', '{}:{}'.format(os.getuid(), os.getgid()), '-R', out_dir], check=True)
 
         except Exception as exception:
+            if os.path.isdir(out_dir) and os.getenv('CI', 'false').lower() in ['1', 'true']:
+                subprocess.run(['sudo', 'chown', '{}:{}'.format(os.getuid(), os.getgid()), '-R', out_dir], check=True)
+
             shutil.rmtree(out_dir)
             if self.runtime_failure_alert_type == AlertType.exception:
                 raise
@@ -591,6 +594,9 @@ class SyntheticCombineArchiveTestCase(TestCase):
             succeeded = True
 
         except Exception:
+            if os.path.isdir(outputs_dir) and os.getenv('CI', 'false').lower() in ['1', 'true']:
+                subprocess.run(['sudo', 'chown', '{}:{}'.format(os.getuid(), os.getgid()), '-R', outputs_dir], check=True)
+
             succeeded = False
             if is_success_expected:
                 shutil.rmtree(temp_dir)
