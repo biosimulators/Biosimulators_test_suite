@@ -244,7 +244,7 @@ class SimulatorValidator(object):
         """
         start_time = datetime.datetime.now()
 
-        with StandardOutputErrorCapturer(relay=True, disabled=not self.log_std_out_err) as captured:
+        with StandardOutputErrorCapturer(relay=self.verbose, disabled=not self.log_std_out_err) as captured:
             with warnings.catch_warnings(record=True) as caught_warnings:
                 warnings.simplefilter("ignore")
                 warnings.simplefilter("always", TestCaseWarning)
