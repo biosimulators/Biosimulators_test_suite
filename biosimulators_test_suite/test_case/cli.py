@@ -151,8 +151,6 @@ class CliDisplaysVersionInformationInline(TestCase):
 
         cli = [cli] if cli else ['docker', 'run', '--tty', '--rm', image_url]
 
-        print(cli + ['-v'])
-
         result = subprocess.run(cli + ['-v'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         log = result.stdout.decode() if result.stdout else ''
         supported = re.search(r'\d+\.\d+', log)

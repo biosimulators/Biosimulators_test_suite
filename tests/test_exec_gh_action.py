@@ -122,7 +122,6 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         ]
 
         def requests_post(url, json=None, auth=None, headers=None):
-            print(json['body'])
             self.assertTrue('Skipped 1 test cases:' in json['body']
                             or '## Skips' in json['body']
                             or 'No test cases are applicable to your simulator' in json['body'])
