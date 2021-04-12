@@ -967,8 +967,13 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
                     if key_report:
                         break
 
-            if isinstance(key_task.simulation, UniformTimeCourseSimulation):
-                key_task.simulation.number_of_points = 10
+            key_sim = key_task.simulation
+            if isinstance(key_sim, UniformTimeCourseSimulation):
+                key_sim.output_end_time = (
+                    key_sim.output_start_time
+                    + 10 / key_sim.number_of_points * (key_sim.output_end_time - key_sim.output_start_time)
+                )
+                key_sim.number_of_points = 10
 
             doc.models = [key_task.model]
             doc.simulations = [key_task.simulation]

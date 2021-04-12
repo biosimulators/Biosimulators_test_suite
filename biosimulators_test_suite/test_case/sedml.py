@@ -1742,7 +1742,7 @@ class SimulatorSupportsDataGeneratorsWithDifferentShapes(UniformTimeCourseTestCa
             id=sim.id + '__copy_2',
             initial_time=sim.initial_time,
             output_start_time=sim.output_start_time,
-            output_end_time=sim.output_end_time,
+            output_end_time=sim.output_end_time + (sim.output_end_time - sim.output_start_time),
             number_of_points=sim.number_of_points * 2,
             algorithm=copy.deepcopy(sim.algorithm),
         )
@@ -1862,7 +1862,7 @@ class SimulatorSupportsDataSetsWithDifferentShapes(UniformTimeCourseTestCase):
             id=sim.id + '__copy_2',
             initial_time=sim.initial_time,
             output_start_time=sim.output_start_time,
-            output_end_time=sim.output_end_time,
+            output_end_time=sim.output_end_time + (sim.output_end_time - sim.output_start_time),
             number_of_points=sim.number_of_points * 2,
             algorithm=copy.deepcopy(sim.algorithm),
         )
@@ -1937,11 +1937,7 @@ class SimulatorSupportsDataSetsWithDifferentShapes(UniformTimeCourseTestCase):
                 expected_length = sim2.number_of_points + 1
 
                 if data_set.data_generator.variables[0].symbol:
-                    data_set_slice = tuple(
-                        [slice(0, dim_len) for dim_len in value.shape[0:-1]]
-                        + [slice(0, sim2.number_of_points + 1, 2)]
-                    )
-                    values2[data_set.data_generator.id.replace('__copy_2', '')] = value[data_set_slice]
+                    values2[data_set.data_generator.id.replace('__copy_2', '')] = value[0:sim1.number_of_points + 1]
 
             self._eval_data_set(data_set.id, value, expected_length)
 

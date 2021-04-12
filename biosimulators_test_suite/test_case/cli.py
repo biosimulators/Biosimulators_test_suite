@@ -40,7 +40,7 @@ class CliDisplaysHelpInline(TestCase):
         self.get_simulator_docker_image(specifications)
         image_url = specifications['image']['url']
 
-        cli = cli or ' '.join(['docker', 'run', '--tty', '--rm', image_url])
+        cli = [cli] if cli else ['docker', 'run', '--tty', '--rm', image_url]
 
         result = subprocess.run(cli, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         log = result.stdout.decode() if result.stdout else ''
@@ -54,7 +54,7 @@ class CliDisplaysHelpInline(TestCase):
                            ).format(log.replace('\n', '\n  ')),
                           TestCaseWarning)
 
-        result = subprocess.run(cli + ' -h', stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        result = subprocess.run(cli + ['-h'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         log = result.stdout.decode() if result.stdout else ''
         supported = (
             'arguments' in log
@@ -69,7 +69,7 @@ class CliDisplaysHelpInline(TestCase):
                            ).format(log.replace('\n', '\n  ')),
                           TestCaseWarning)
 
-        result = subprocess.run(cli + ' --help', stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        result = subprocess.run(cli + ['--help'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         log = result.stdout.decode() if result.stdout else ''
         supported = (
             'arguments' in log
@@ -107,8 +107,8 @@ class CliDescribesSupportedEnvironmentVariablesInline(TestCase):
         self.get_simulator_docker_image(specifications)
         image_url = specifications['image']['url']
 
-        cli = cli or ' '.join(['docker', 'run', '--tty', '--rm', image_url])
-        result = subprocess.run(cli + ' -h', stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        cli = [cli] if cli else ['docker', 'run', '--tty', '--rm', image_url]
+        result = subprocess.run(cli + [' -h'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         log = result.stdout.decode() if result.stdout else ''
 
         potentially_missing_env_vars = []
@@ -149,9 +149,11 @@ class CliDisplaysVersionInformationInline(TestCase):
         self.get_simulator_docker_image(specifications)
         image_url = specifications['image']['url']
 
-        cli = cli or ['docker', 'run', '--tty', '--rm', image_url]
+        cli = [cli] if cli else ['docker', 'run', '--tty', '--rm', image_url]
 
-        result = subprocess.run(cli + ' -v', stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        print(cli + ['-v'])
+
+        result = subprocess.run(cli + ['-v'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         log = result.stdout.decode() if result.stdout else ''
         supported = re.search(r'\d+\.\d+', log)
         if not supported:
@@ -160,7 +162,7 @@ class CliDisplaysVersionInformationInline(TestCase):
                            ).format(log.replace('\n', '\n  ')),
                           TestCaseWarning)
 
-        result = subprocess.run(cli + ' --version', stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        result = subprocess.run(cli + ['--version'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         log = result.stdout.decode() if result.stdout else ''
         supported = re.search(r'\d+\.\d+', log)
         if not supported:
