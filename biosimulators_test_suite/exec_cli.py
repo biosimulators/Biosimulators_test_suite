@@ -57,6 +57,10 @@ class BaseController(cement.Controller):
                 action='store_true',
                 help="If set, don't use capturer to collect stdout and stderr.",
             )),
+            (['--dry-run'], dict(
+                action='store_true',
+                help="If set, create synthetic archives, but do not use the simulator to execute them.",
+            )),
             (['-v', '--version'], dict(
                 action='version',
                 version=biosimulators_test_suite.__version__,
@@ -74,7 +78,8 @@ class BaseController(cement.Controller):
                 verbose=args.verbose,
                 synthetic_archives_dir=args.synthetic_archives_dir,
                 output_medium=OutputMedium.console,
-                log_std_out_err=not args.do_not_log_std_out_err)
+                log_std_out_err=not args.do_not_log_std_out_err,
+                dry_run=args.dry_run)
             results = validator.run()
 
             # print summary

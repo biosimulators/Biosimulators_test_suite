@@ -114,7 +114,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
         # passed
         class Case(TestCase):
-            def eval(self, specifications, synthetic_archives_dir=None):
+            def eval(self, specifications, synthetic_archives_dir=None, dry_run=False):
                 pass
 
         case = Case()
@@ -129,7 +129,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
         # passed, stdout
         class Case(TestCase):
-            def eval(self, specifications, synthetic_archives_dir=None):
+            def eval(self, specifications, synthetic_archives_dir=None, dry_run=False):
                 print('Message')
 
         case = Case()
@@ -144,7 +144,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
         # passed, stdout and std errr
         class Case(TestCase):
-            def eval(self, specifications, synthetic_archives_dir=None):
+            def eval(self, specifications, synthetic_archives_dir=None, dry_run=False):
                 print('Stdout', file=sys.stdout)
                 print('Stderr', file=sys.stderr)
 
@@ -160,7 +160,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
         # passed, warnings
         class Case(TestCase):
-            def eval(self, specifications, synthetic_archives_dir=None):
+            def eval(self, specifications, synthetic_archives_dir=None, dry_run=False):
                 warnings.warn('Warning-1', TestCaseWarning)
                 warnings.warn('Warning-2', UserWarning)
                 warnings.warn('Warning-3', TestCaseWarning)
@@ -179,7 +179,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
         # error
         class Case(TestCase):
-            def eval(self, specifications, synthetic_archives_dir=None):
+            def eval(self, specifications, synthetic_archives_dir=None, dry_run=False):
                 raise Exception('Big error')
 
         case = Case()
@@ -194,7 +194,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
         # skipped
         class Case(TestCase):
-            def eval(self, specifications, synthetic_archives_dir=None):
+            def eval(self, specifications, synthetic_archives_dir=None, dry_run=False):
                 raise SkippedTestCaseException('Reason for skipping')
 
         case = Case()
