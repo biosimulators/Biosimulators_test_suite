@@ -77,6 +77,20 @@ The test suite can also be run locally as illustrated below.
         published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint
 
 
+Directly testing a command-line interface (rather than a Docker image)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Optionally, the ``--cli`` argument can be used to instruct the test suite to directly verify a command interface
+rather than indirectly verify the interface through the entry point of a Docker image. Note, the Docker image tests will still
+use the Docker image.
+
+.. code-block:: text
+
+    # Run all tests
+    biosimulators-test-suite /path/to/simulator/specifications.json \
+      --cli /usr/local/bin/tellurium
+
+
 Executing the test suite with stdout/stderr capturing disabled
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
