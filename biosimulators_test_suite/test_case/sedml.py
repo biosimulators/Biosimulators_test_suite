@@ -1443,7 +1443,7 @@ class SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes(RepeatedTasksTestCa
     different shapes.
     """
     RANGE_TYPE = VectorRange
-    RANGE_LENS = (1, 3)
+    RANGE_LENS = (2, 3)
     NUM_SUB_TASKS = 2
     NUM_NESTED_REPEATED_TASKS = 1
     MIXED_SUB_TASK_TYPES = True

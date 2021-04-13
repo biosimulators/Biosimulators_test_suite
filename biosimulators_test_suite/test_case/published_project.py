@@ -753,7 +753,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
             if (
                 simulation.initial_time != 0
                 or simulation.output_start_time != 0
-                or simulation.number_of_points <= 0
+                or simulation.number_of_points < 1
                 or int(simulation.number_of_points / 2) != simulation.number_of_points / 2
             ):
                 return False

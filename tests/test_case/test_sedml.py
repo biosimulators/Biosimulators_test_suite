@@ -639,24 +639,26 @@ class SedmlTestCaseTest(unittest.TestCase):
         ReportWriter().run(doc.outputs[0], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[0].id)
 
         data_set_results = DataSetResults({
-            'A': numpy.full((1, 2, 50, 2, 50), numpy.nan),
+            'A': numpy.full((2, 2, 50, 2, 50), numpy.nan),
         })
         data_set_results['A'][0, 0, 0:50, 0, 0] = range(0, 50)
+        data_set_results['A'][1, 0, 0:50, 0, 0] = range(0, 50)
         for i in range(0, 3):
             for j in range(0, 2):
                 data_set_results['A'][0, 1, i, j, 0:50] = range(0, 50)
+                data_set_results['A'][1, 1, i, j, 0:50] = range(0, 50)
         ReportWriter().run(doc.outputs[1], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[1].id)
         case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         data_set_results = DataSetResults({
-            'A': numpy.full((2, 2, 50, 2, 50), numpy.nan),
+            'A': numpy.full((3, 2, 50, 2, 50), numpy.nan),
         })
         ReportWriter().run(doc.outputs[1], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[1].id)
         with self.assertRaisesRegex(InvalidOutputsException, 'slice for each iteration'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         data_set_results = DataSetResults({
-            'A': numpy.full((1, 3, 50, 2, 50), numpy.nan),
+            'A': numpy.full((2, 3, 50, 2, 50), numpy.nan),
         })
         ReportWriter().run(doc.outputs[1], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[1].id)
         with self.assertRaisesRegex(InvalidOutputsException, 'slice for each sub-task'):
@@ -670,57 +672,65 @@ class SedmlTestCaseTest(unittest.TestCase):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         data_set_results = DataSetResults({
-            'A': numpy.full((1, 2, 50, 1, 50), numpy.nan),
+            'A': numpy.full((2, 2, 50, 1, 50), numpy.nan),
         })
         ReportWriter().run(doc.outputs[1], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[1].id)
         with self.assertRaisesRegex(InvalidOutputsException, 'slice for each sub-task'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         data_set_results = DataSetResults({
-            'A': numpy.full((1, 2, 50, 2, 60), numpy.nan),
+            'A': numpy.full((2, 2, 50, 2, 60), numpy.nan),
         })
         ReportWriter().run(doc.outputs[1], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[1].id)
         with self.assertRaisesRegex(InvalidOutputsException, 'output of the basic task'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         data_set_results = DataSetResults({
-            'A': numpy.full((1, 2, 50, 2, 50), numpy.nan),
+            'A': numpy.full((2, 2, 50, 2, 50), numpy.nan),
         })
         for i in range(0, 3):
             for j in range(0, 2):
                 data_set_results['A'][0, 1, i, j, 0:50] = range(0, 50)
+                data_set_results['A'][1, 1, i, j, 0:50] = range(0, 50)
         ReportWriter().run(doc.outputs[1], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[1].id)
         with self.assertRaisesRegex(InvalidOutputsException, 'unexpected NaNs'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         data_set_results = DataSetResults({
-            'A': numpy.full((1, 2, 50, 2, 50), numpy.nan),
+            'A': numpy.full((2, 2, 50, 2, 50), numpy.nan),
         })
         data_set_results['A'][0, 0, 0:50, 0, 0] = range(0, 50)
         data_set_results['A'][0, 0, 0:50, 1, 0] = range(0, 50)
+        data_set_results['A'][1, 0, 0:50, 0, 0] = range(0, 50)
+        data_set_results['A'][1, 0, 0:50, 1, 0] = range(0, 50)
         for i in range(0, 3):
             for j in range(0, 2):
                 data_set_results['A'][0, 1, i, j, 0:50] = range(0, 50)
+                data_set_results['A'][1, 1, i, j, 0:50] = range(0, 50)
         ReportWriter().run(doc.outputs[1], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[1].id)
         with self.assertRaisesRegex(InvalidOutputsException, 'unexpected non-NaNs'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         data_set_results = DataSetResults({
-            'A': numpy.full((1, 2, 50, 2, 50), numpy.nan),
+            'A': numpy.full((2, 2, 50, 2, 50), numpy.nan),
         })
         data_set_results['A'][0, 0, 0:50, 0, 0] = range(0, 50)
+        data_set_results['A'][1, 0, 0:50, 0, 0] = range(0, 50)
         ReportWriter().run(doc.outputs[1], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[1].id)
         with self.assertRaisesRegex(InvalidOutputsException, 'unexpected NaNs'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         data_set_results = DataSetResults({
-            'A': numpy.full((1, 2, 50, 2, 50), numpy.nan),
+            'A': numpy.full((2, 2, 50, 2, 50), numpy.nan),
         })
         data_set_results['A'][0, 0, 0:50, 0, 0] = range(0, 50)
+        data_set_results['A'][1, 0, 0:50, 0, 0] = range(0, 50)
         for i in range(0, 3):
             for j in range(0, 2):
                 data_set_results['A'][0, 1, i, j, 0:50] = range(0, 50)
+                data_set_results['A'][1, 1, i, j, 0:50] = range(0, 50)
         data_set_results['A'][0, 1, 49, 0, 0:50] = range(0, 50)
+        data_set_results['A'][1, 1, 49, 0, 0:50] = range(0, 50)
         ReportWriter().run(doc.outputs[1], data_set_results, self.dirname, 'a.sedml/' + doc.outputs[1].id)
         with self.assertRaisesRegex(InvalidOutputsException, 'unexpected non-NaNs'):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
