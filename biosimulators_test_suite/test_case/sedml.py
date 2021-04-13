@@ -1256,7 +1256,8 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
         for data_set, repeated_data_set in zip(report.data_sets, repeated_report.data_sets):
             results_data_set = results[data_set.id]
             repeated_results_data_set = repeated_results[repeated_data_set.id]
-            if repeated_results_data_set.ndim - results_data_set.ndim != 2 * (self.NUM_NESTED_REPEATED_TASKS + 1):
+
+            if repeated_results_data_set.ndim - max(1, results_data_set.ndim) != 2 * (self.NUM_NESTED_REPEATED_TASKS + 1):
                 raise InvalidOutputsException('Each level of repeated task should contribute two additional dimensions to reports')
 
             if not self.MIXED_SUB_TASK_TYPES:
