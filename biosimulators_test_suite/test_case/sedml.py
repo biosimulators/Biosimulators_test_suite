@@ -1256,6 +1256,10 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
         for data_set, repeated_data_set in zip(report.data_sets, repeated_report.data_sets):
             results_data_set = results[data_set.id]
             repeated_results_data_set = repeated_results[repeated_data_set.id]
+
+            if results_data_set.ndim == 0:
+                results_data_set = results_data_set.reshape((1,))
+
             if repeated_results_data_set.ndim - results_data_set.ndim != 2 * (self.NUM_NESTED_REPEATED_TASKS + 1):
                 raise InvalidOutputsException('Each level of repeated task should contribute two additional dimensions to reports')
 
@@ -1443,7 +1447,7 @@ class SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes(RepeatedTasksTestCa
     different shapes.
     """
     RANGE_TYPE = VectorRange
-    RANGE_LENS = (1, 3)
+    RANGE_LENS = (2, 3)
     NUM_SUB_TASKS = 2
     NUM_NESTED_REPEATED_TASKS = 1
     MIXED_SUB_TASK_TYPES = True
@@ -1742,7 +1746,7 @@ class SimulatorSupportsDataGeneratorsWithDifferentShapes(UniformTimeCourseTestCa
             id=sim.id + '__copy_2',
             initial_time=sim.initial_time,
             output_start_time=sim.output_start_time,
-            output_end_time=sim.output_end_time,
+            output_end_time=sim.output_end_time + (sim.output_end_time - sim.output_start_time),
             number_of_points=sim.number_of_points * 2,
             algorithm=copy.deepcopy(sim.algorithm),
         )
@@ -1862,7 +1866,7 @@ class SimulatorSupportsDataSetsWithDifferentShapes(UniformTimeCourseTestCase):
             id=sim.id + '__copy_2',
             initial_time=sim.initial_time,
             output_start_time=sim.output_start_time,
-            output_end_time=sim.output_end_time,
+            output_end_time=sim.output_end_time + (sim.output_end_time - sim.output_start_time),
             number_of_points=sim.number_of_points * 2,
             algorithm=copy.deepcopy(sim.algorithm),
         )
@@ -1937,11 +1941,7 @@ class SimulatorSupportsDataSetsWithDifferentShapes(UniformTimeCourseTestCase):
                 expected_length = sim2.number_of_points + 1
 
                 if data_set.data_generator.variables[0].symbol:
-                    data_set_slice = tuple(
-                        [slice(0, dim_len) for dim_len in value.shape[0:-1]]
-                        + [slice(0, sim2.number_of_points + 1, 2)]
-                    )
-                    values2[data_set.data_generator.id.replace('__copy_2', '')] = value[data_set_slice]
+                    values2[data_set.data_generator.id.replace('__copy_2', '')] = value[0:sim1.number_of_points + 1]
 
             self._eval_data_set(data_set.id, value, expected_length)
 
