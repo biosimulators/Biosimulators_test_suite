@@ -569,13 +569,8 @@ class SedmlTestCaseTest(unittest.TestCase):
         self.assertTrue(case.eval(specs))
 
     def test_SimulatorSupportsRepeatedTasksWithChanges(self):
-        IMAGE = 'ghcr.io/biosimulators/biosimulators_gillespy2/gillespy2:latest'
-        CURATED_ARCHIVE_FILENAME = os.path.join(
-            os.path.dirname(__file__), '..', '..',
-            'examples', 'sbml-core', 'Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex')
-
-        specs = {'image': {'url': IMAGE}}
-        curated_case = SimulatorCanExecutePublishedProject(filename=CURATED_ARCHIVE_FILENAME)
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
 
         case = sedml.SimulatorSupportsRepeatedTasksWithChanges(
             published_projects_test_cases=[curated_case])
@@ -975,13 +970,8 @@ class SedmlTestCaseTest(unittest.TestCase):
             case.eval(specs)
 
     def test_SimulatorSupportsComputeModelChanges(self):
-        IMAGE = 'ghcr.io/biosimulators/biosimulators_gillespy2/gillespy2:latest'
-        CURATED_ARCHIVE_FILENAME = os.path.join(
-            os.path.dirname(__file__), '..', '..',
-            'examples', 'sbml-core', 'Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex')
-
-        specs = {'image': {'url': IMAGE}}
-        curated_case = SimulatorCanExecutePublishedProject(filename=CURATED_ARCHIVE_FILENAME)
+        specs = {'image': {'url': self.IMAGE}}
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
 
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorSupportsComputeModelChanges(
