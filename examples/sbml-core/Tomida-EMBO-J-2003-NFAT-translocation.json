@@ -6,7 +6,7 @@
     "simulationAlgorithm": "KISAO_0000560"
   }],
   "expectedReports": [{
-    "id": "BIOMD0000000678_sim.sedml/BIOMD0000000678_sim",
+    "id": "BIOMD0000000678_sim.sedml/report",
     "dataSets": [
       {"id": "data_set_time", "label": "Time (min)"},
       {"id": "data_set_NFAT_dephosphorylated", "label": "Dephosphorylated NFAT"},
@@ -24,7 +24,9 @@
       }
     }]
   }],
-  "expectedPlots": [],
+  "expectedPlots": [{
+    "id": "simulation.sedml/Figure_3c"
+  }],
   "runtimeFailureAlertType": "exception",
   "author": "Taichiro Tomida, Kenzo Hirose, Azusa Takizawa, Futoshi Shibasaki & Masamitsu Iino",
   "identifiers": [{
