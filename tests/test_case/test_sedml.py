@@ -821,6 +821,14 @@ class SedmlTestCaseTest(unittest.TestCase):
             writer.write(file)
         archive.files.append(ArchiveFile(archive_path='a.sedml/plot_2.pdf', local_path=plot_2_path))
         ArchiveWriter().run(archive, plots_path)
+        with self.assertRaisesRegex(InvalidOutputsException, 'did not produce data for the following plots'):
+            case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
+
+        data_set_results = DataSetResults({'x': numpy.array([1, 2, 3])})
+        plot = Report(id='plot_1')
+        ReportWriter().run(plot, data_set_results, self.dirname, 'a.sedml/plot_1')
+        plot = Report(id='plot_2')
+        ReportWriter().run(plot, data_set_results, self.dirname, 'a.sedml/plot_2')
         case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         plot_3_path = os.path.join(self.dirname, 'plot_3.pdf')
