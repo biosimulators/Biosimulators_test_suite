@@ -1555,6 +1555,27 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
                 '\n  - '.join(sorted('`' + id + '`' for id in extra_plot_ids)))
             warnings.warn(msg, InvalidOutputsWarning)
 
+        # check plot data saved
+        expected_plot_ids = set()
+        for doc_location, doc in synthetic_sed_docs.items():
+            doc_id = os.path.relpath(doc_location, './')
+            for output in doc.outputs:
+                if isinstance(output, (Plot2D, Plot3D)):
+                    expected_plot_ids.add(os.path.join(doc_id, output.id))
+
+        try:
+            plot_ids = ReportReader().get_ids(outputs_dir)
+        except Exception:
+            plot_ids = []
+
+        missing_plot_ids = expected_plot_ids.difference(set(plot_ids))
+
+        if missing_plot_ids:
+            raise InvalidOutputsException('Simulator did not produce data for the following plots:\n  - {}'.format(
+                '\n  - '.join(sorted('`' + id + '`' for id in missing_plot_ids))
+            ))
+
+        # remove temporary directory
         shutil.rmtree(tempdir)
 
 
