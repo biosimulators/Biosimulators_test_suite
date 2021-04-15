@@ -113,7 +113,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
         self.assertEqual(case.task_requirements[0].model_format, 'format_2585')
         self.assertEqual(case.task_requirements[0].simulation_algorithm, 'KISAO_0000019')
         self.assertEqual(len(case.expected_reports), 1)
-        self.assertEqual(case.expected_reports[0].id, 'BIOMD0000000912_sim.sedml/BIOMD0000000912_sim')
+        self.assertEqual(case.expected_reports[0].id, 'BIOMD0000000912_sim.sedml/report')
         self.assertEqual(set(data_set.label for data_set in case.expected_reports[0].data_sets), set(["time", "T", "E", "I"]))
         self.assertEqual(case.expected_reports[0].points, (5001,))
         self.assertEqual(case.expected_reports[0].values, {
@@ -218,7 +218,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             if not missing_report:
                 report = Report(data_sets=[DataSet(id=i, label=l) for i, l in zip(ids, labels)])
                 data_set_results = DataSetResults({i: d for i, d in zip(ids, data)})
-                ReportWriter().run(report, data_set_results, out_dir, 'BIOMD0000000912_sim.sedml/BIOMD0000000912_sim', ReportFormat.h5)
+                ReportWriter().run(report, data_set_results, out_dir, 'BIOMD0000000912_sim.sedml/report', ReportFormat.h5)
 
             plot_file = os.path.join(out_dir, 'plot.pdf')
             with open(plot_file, 'w'):
@@ -341,7 +341,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             if not missing_report:
                 report = Report(data_sets=[DataSet(id=i, label=l) for i, l in zip(ids, labels)])
                 data_set_results = DataSetResults({i: d for i, d in zip(ids, data)})
-                ReportWriter().run(report, data_set_results, out_dir, 'BIOMD0000000912_sim.sedml/BIOMD0000000912_sim', ReportFormat.h5)
+                ReportWriter().run(report, data_set_results, out_dir, 'BIOMD0000000912_sim.sedml/report', ReportFormat.h5)
 
             plot_file = os.path.join(out_dir, 'plot.pdf')
             with open(plot_file, 'w'):
