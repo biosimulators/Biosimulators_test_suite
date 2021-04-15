@@ -8,11 +8,11 @@
   "expectedReports": [{
     "id": "simulation.sedml/report",
     "dataSets": [
-      {"id": "data_set_time", "label": "time"},
-      {"id": "data_set_egf", "label": "egf"},
-      {"id": "data_set_erk", "label": "erk"},
-      {"id": "data_set_nfkb", "label": "nfkb"},
-      {"id": "data_set_tnfa", "label": "tnfa"}
+      {"id": "data_set_time", "label": "Time"},
+      {"id": "data_set_egf", "label": "EGF"},
+      {"id": "data_set_erk", "label": "ERK"},
+      {"id": "data_set_nfkb", "label": "NF-kB"},
+      {"id": "data_set_tnfa", "label": "TNFa"}
     ],
     "points": [21],
     "values": [{
