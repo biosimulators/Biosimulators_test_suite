@@ -223,7 +223,11 @@
       }]
     }
   ],
-  "expectedPlots": [{
+  "expectedPlots": [
+    {
+      "id": "simulation.sedml/Figure_2ab"
+    },
+    {
       "id": "simulation.sedml/plot2d_Fig_1a"
     },
     {

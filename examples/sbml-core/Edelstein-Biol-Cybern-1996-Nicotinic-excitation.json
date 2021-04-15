@@ -6,7 +6,7 @@
     "simulationAlgorithm": "KISAO_0000088"
   }],
   "expectedReports": [{
-    "id": "BIOMD0000000002_sim.sedml/BIOMD0000000002_sim",
+    "id": "BIOMD0000000002_sim.sedml/report",
     "dataSets": [
       {"id": "data_set_time", "label": "Time (dimensionless)"},
       {"id": "data_set_L", "label": "ACh"},
@@ -34,7 +34,9 @@
       }
     }]
   }],
-  "expectedPlots": [],
+  "expectedPlots": [{
+    "id": "BIOMD0000000002_sim.sedml/Figure_4b"
+  }],
   "runtimeFailureAlertType": "exception",
   "author": "Stuart J. Edelstein, Olivier Schaad, Eric Henry, Daniel Bertrand & Jean-Pierre Changeux",
   "identifiers": [{

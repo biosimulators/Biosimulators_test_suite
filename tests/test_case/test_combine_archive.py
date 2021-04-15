@@ -73,7 +73,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
 
         def get_expected_reports(archive, sed_documents):
             expected_reports = base_get_expected_reports(archive, sed_documents)
-            assert expected_reports == set(['BIOMD0000000678_sim.sedml/BIOMD0000000678_sim'])
+            assert expected_reports == set(['BIOMD0000000678_sim.sedml/report'])
             return expected_reports
 
         with mock.patch.object(combine_archive.WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile,
@@ -92,9 +92,10 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
 
         def get_expected_reports(archive, sed_documents):
             expected_reports = base_get_expected_reports(archive, sed_documents)
+
             assert expected_reports == set([
-                'BIOMD0000000678_sim.sedml/BIOMD0000000678_sim',
-                'BIOMD0000000678_sim__copy.sedml/BIOMD0000000678_sim',
+                'BIOMD0000000678_sim.sedml/report',
+                'BIOMD0000000678_sim__copy.sedml/report',
             ])
             return expected_reports
 
@@ -115,7 +116,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         def get_expected_reports(archive, sed_documents):
             expected_reports = base_get_expected_reports(archive, sed_documents)
             assert expected_reports == set([
-                'subdir/BIOMD0000000678_sim.sedml/BIOMD0000000678_sim',
+                'subdir/BIOMD0000000678_sim.sedml/report',
             ])
             return expected_reports
 
@@ -136,8 +137,8 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         def get_expected_reports(archive, sed_documents):
             expected_reports = base_get_expected_reports(archive, sed_documents)
             assert expected_reports == set([
-                'subdir/BIOMD0000000678_sim.sedml/BIOMD0000000678_sim',
-                'subdir__copy/BIOMD0000000678_sim.sedml/BIOMD0000000678_sim',
+                'subdir/BIOMD0000000678_sim.sedml/report',
+                'subdir__copy/BIOMD0000000678_sim.sedml/report',
             ])
             return expected_reports
 

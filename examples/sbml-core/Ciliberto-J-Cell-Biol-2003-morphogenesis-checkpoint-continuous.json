@@ -6,7 +6,7 @@
     "simulationAlgorithm": "KISAO_0000019"
   }],
   "expectedReports": [{
-    "id": "simulation_1.sedml/simulation_1",
+    "id": "simulation_1.sedml/report",
     "dataSets": [
       {"id": "data_set_time", "label": "Time (min)"},
       {"id": "data_set_Cdc20a", "label": "Activated Cdc20"},
