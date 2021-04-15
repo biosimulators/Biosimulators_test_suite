@@ -6,7 +6,7 @@
     "simulationAlgorithm": "KISAO_0000496"
   }],
   "expectedReports": [{
-    "id": "BIOMD0000000896_sim.sedml/BIOMD0000000896_sim",
+    "id": "BIOMD0000000896_sim.sedml/report",
     "dataSets": [
       {"id": "data_set_time", "label": "time"}, 
       {"id": "data_set_Hsp70", "label": "Hsp70"},
@@ -29,7 +29,9 @@
       }
     }]
   }],
-  "expectedPlots": [],
+  "expectedPlots": [{
+    "id": "BIOMD0000000896_sim.sedml/Figure_3"
+  }],
   "runtimeFailureAlertType": "exception",
   "author": "Zuzanna Szymańskaa & Maciej Zylicz",
   "identifiers": [{

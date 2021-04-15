@@ -6,7 +6,7 @@
     "simulationAlgorithm": "KISAO_0000019"
   }],
   "expectedReports": [{
-    "id": "BIOMD0000000912_sim.sedml/BIOMD0000000912_sim",
+    "id": "BIOMD0000000912_sim.sedml/report",
     "dataSets": [
       {"id": "data_set_time", "label": "time"}, 
       {"id": "data_set_T", "label": "T"},

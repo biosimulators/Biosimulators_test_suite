@@ -6,10 +6,24 @@
     "simulationAlgorithm": "KISAO_0000560"
   }],
   "expectedReports": [{
-    "id": "LSODA.sedml/report_1_task1",
+    "id": "LSODA.sedml/report",
     "dataSets": [
       {"id": "data_set_time", "label": "Time"}, 
-      {"id": "data_set_pmTORC1", "label": "pmTORC1"}
+      {"id": "data_set_Akt", "label": "Akt"},
+      {"id": "data_set_DEPTOR", "label": "DEPTOR"},
+      {"id": "data_set_iIRS", "label": "iIRS"},
+      {"id": "data_set_IR", "label": "IR"},
+      {"id": "data_set_IRS", "label": "IRS"},
+      {"id": "data_set_mTORC1", "label": "mTORC1"},
+      {"id": "data_set_mTORC1_DEPTOR", "label": "mTORC1_DEPTOR"},
+      {"id": "data_set_mTORC2", "label": "mTORC2"},
+      {"id": "data_set_mTORC2_DEPTOR", "label": "mTORC2_DEPTOR"},
+      {"id": "data_set_pAkt", "label": "pAkt"},
+      {"id": "data_set_pDEPTOR", "label": "pDEPTOR"},
+      {"id": "data_set_pIR", "label": "pIR"},
+      {"id": "data_set_pIRS", "label": "pIRS"},
+      {"id": "data_set_pmTORC1", "label": "pmTORC1"},
+      {"id": "data_set_pmTORC2", "label": "pmTORC2"}
     ],
     "points": [1001],
     "values": [{
@@ -21,7 +35,9 @@
       }
     }]
   }],
-  "expectedPlots": [],
+  "expectedPlots": [{
+    "id": "LSODA.sedml/Figure_2c"
+  }],
   "runtimeFailureAlertType": "exception",
   "author": "Thawfeek M. Varusai & Lan K. Nguyen",
   "identifiers": [{
