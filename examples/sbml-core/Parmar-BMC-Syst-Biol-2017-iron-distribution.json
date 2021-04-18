@@ -3,7 +3,7 @@
   "filename": "Parmar-BMC-Syst-Biol-2017-iron-distribution.omex",
   "taskRequirements": [{
     "modelFormat": "format_2585",
-    "simulationAlgorithm": "KISAO_0000019"
+    "simulationAlgorithm": "KISAO_000019"
   }],
   "expectedReports": [{
     "id": "Parmar2017_Deficient_Rich_tracer.sedml/report",
@@ -21,7 +21,6 @@
         {"id": "data_set_FeLiver", "label": "Liver"},
         {"id": "data_set_FeLiver_0", "label": "Liver (radioactive)"},
         {"id": "data_set_FeOutside", "label": "Outside of body"},
-        {"id": "data_set_FeOutside_0", "label": "Outside of body (radioactive)"},
         {"id": "data_set_FeRBC", "label": "Red blood cells"},
         {"id": "data_set_FeRBC_0", "label": "Red blood cells (radioactive)"},
         {"id": "data_set_FeRest", "label": "Rest of body"},
