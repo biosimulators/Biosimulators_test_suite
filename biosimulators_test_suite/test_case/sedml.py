@@ -1226,7 +1226,12 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
                 sed_doc.data_generators.append(data_gen_2)
 
                 variable = data_gen.variables[0]
-                variable_2 = Variable(id=data_gen_2.math, symbol=variable.symbol, target=variable.target, task=repeated_task)
+                variable_2 = Variable(
+                    id=data_gen_2.math, 
+                    symbol=variable.symbol, 
+                    target=variable.target, 
+                    target_namespaces=variable.target_namespaces,
+                    task=repeated_task)
                 data_gen_2.variables.append(variable_2)
 
         # return modified SED document
