@@ -1227,9 +1227,9 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
 
                 variable = data_gen.variables[0]
                 variable_2 = Variable(
-                    id=data_gen_2.math, 
-                    symbol=variable.symbol, 
-                    target=variable.target, 
+                    id=data_gen_2.math,
+                    symbol=variable.symbol,
+                    target=variable.target,
                     target_namespaces=variable.target_namespaces,
                     task=repeated_task)
                 data_gen_2.variables.append(variable_2)
