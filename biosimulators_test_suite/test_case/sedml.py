@@ -28,6 +28,7 @@ import numpy
 import numpy.testing
 import os
 import PyPDF2
+import re
 import shutil
 import tempfile
 import warnings
@@ -732,7 +733,7 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombin
 
                         for var in data_set.data_generator.variables:
                             copy_var = Variable(
-                                id=var.id,
+                                id=var.id + '__test_suite_copy',
                                 target=var.target,
                                 target_namespaces=var.target_namespaces,
                                 symbol=var.symbol,
@@ -740,6 +741,8 @@ class SimulatorSupportsMultipleTasksPerSedDocument(SingleMasterSedDocumentCombin
                             )
                             copy_var.task = copy_tasks[var.task.id]
                             copy_data_gen.variables.append(copy_var)
+
+                            copy_data_gen.math = re.sub(r'((^|\b){}(\b|$))'.format(var.id), copy_var.id, copy_data_gen.math)
                     copy_data_set.data_generator = copy_data_gen
 
         # return modified SED document
