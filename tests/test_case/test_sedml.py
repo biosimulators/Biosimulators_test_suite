@@ -14,6 +14,9 @@ from biosimulators_utils.sedml.data_model import (SedDocument, Task, Report, Dat
                                                   Plot2D, Plot3D, Surface, AxisScale, RepeatedTask, SubTask)
 from biosimulators_utils.simulator.io import read_simulator_specs
 from unittest import mock
+from kisao import Kisao
+from kisao.data_model import AlgorithmSubstitutionPolicy
+from kisao.utils import get_substitutable_algorithms_for_policy
 import numpy
 import os
 import PyPDF2
@@ -1167,3 +1170,37 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         with self.assertRaises(InvalidOutputsException):
             case._eval_time_data_sets(numpy.array([1, 2, 3]), numpy.array([3, 2, 1]))
+
+    def test_SimulatorSupportsSubstitutingAlgorithms(self):
+        curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
+
+        # test synthetic case generated and used to test simulator
+        case = sedml.SimulatorSupportsSubstitutingAlgorithms(
+            published_projects_test_cases=[curated_case])
+
+        specs = {
+            'algorithms': [
+                {'kisaoId': {'id': 'KISAO_0000019'}}
+            ]
+        }
+        alg = Algorithm(kisao_id='KISAO_0000019')
+        self.assertTrue(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, alg))
+
+        specs = {
+            'algorithms': [],
+        }
+        alg = Algorithm(kisao_id='KISAO_0000019')
+        kisao = Kisao()
+        cvode = kisao.get_term(alg.kisao_id)
+        alt_algs = get_substitutable_algorithms_for_policy(cvode, AlgorithmSubstitutionPolicy.SIMILAR_VARIABLES)
+        for alt_alg_id in kisao.get_term_ids(alt_algs):
+            specs['algorithms'].append({'kisaoId': {'id': alt_alg_id}})
+        self.assertFalse(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, alg))
+
+        specs = {
+            'image': {'url': self.IMAGE},
+            'algorithms': [
+                {'kisaoId': {'id': 'KISAO_0000560'}},
+            ]
+        }
+        case.eval(specs)

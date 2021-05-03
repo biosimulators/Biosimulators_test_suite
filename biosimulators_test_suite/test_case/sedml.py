@@ -21,6 +21,9 @@ from biosimulators_utils.sedml.data_model import (SedDocument, Task, Output, Rep
                                                   RepeatedTask, Range, UniformRange, UniformRangeType, VectorRange, FunctionalRange,
                                                   SetValueComputeModelChange, SubTask)
 from biosimulators_utils.sedml.utils import get_xml_node_namespace_tag_target
+from kisao import Kisao
+from kisao.data_model import AlgorithmSubstitutionPolicy
+from kisao.utils import get_substitutable_algorithms_for_policy
 from lxml import etree
 import abc
 import copy
@@ -56,6 +59,7 @@ __all__ = [
     'SimulatorProducesLinear3DPlots',
     'SimulatorProducesLogarithmic3DPlots',
     'SimulatorProducesMultiplePlots',
+    'SimulatorSupportsSubstitutingAlgorithms',
 ]
 
 
@@ -1990,3 +1994,96 @@ class SimulatorSupportsDataSetsWithDifferentShapes(UniformTimeCourseTestCase):
         except Exception as exception:
             raise InvalidOutputsException('Simulations with the same time courses should produce equivalent time data sets:\n\n  {}'.format(
                 str(exception).replace('\n', '\n  ')))
+
+
+class SimulatorSupportsSubstitutingAlgorithms(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
+    """ Check that a simulator can substitute algorithms that it doesn't implement with similar
+    algorithms when the algorithm substitution policy is less restrictive than
+    :obj:`AlgorithmSubstitutionPolicy.SAME_METHOD`. Also check that a simulator ignores unsupported
+    algorithm parameters when the algorithm substitution policy is less restrictive than
+    :obj:`AlgorithmSubstitutionPolicy.NONE`.
+    """
+    REPORT_ERROR_AS_SKIP = True
+
+    def is_curated_sed_algorithm_suitable_for_building_synthetic_archive(self, specifications, algorithm):
+        """ Determine if a SED algorithm is suitable for testing
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            algorithm (:obj:`Algorithm`): SED algorithm in curated archive
+
+        Returns:
+            :obj:`bool`: whether the algorithm is suitable for testing
+        """
+        kisao = Kisao()
+        alg_term = kisao.get_term(algorithm.kisao_id)
+        sub_algs = get_substitutable_algorithms_for_policy(
+            alg_term,
+            substitution_policy=AlgorithmSubstitutionPolicy.SIMILAR_VARIABLES)
+        sub_alg_ids = kisao.get_term_ids(sub_algs)
+
+        for alg_specs in specifications['algorithms']:
+            if alg_specs['kisaoId']['id'] in sub_alg_ids:
+                sub_alg_ids.remove(alg_specs['kisaoId']['id'])
+
+        if sub_alg_ids:
+            if 'KISAO_0000019' in sub_alg_ids:
+                self._alt_alg = 'KISAO_0000019'
+            elif 'KISAO_0000088' in sub_alg_ids:
+                self._alt_alg = 'KISAO_0000088'
+            else:
+                self._alt_alg = sub_alg_ids[0]
+            return True
+        else:
+            return False
+
+    def build_synthetic_archives(self, specifications, curated_archive, curated_archive_dir, curated_sed_docs):
+        """ Generate a synthetic archive with master and non-master SED documents
+
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            curated_archive (:obj:`CombineArchive`): curated COMBINE/OMEX archive
+            curated_archive_dir (:obj:`str`): directory with the contents of the curated COMBINE/OMEX archive
+            curated_sed_docs (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
+                SED documents in curated archive
+
+        Returns:
+            :obj:`list` of :obj:`ExpectedResultOfSyntheticArchive`
+        """
+        expected_results_of_synthetic_archives = super(SimulatorSupportsSubstitutingAlgorithms, self).build_synthetic_archives(
+            specifications, curated_archive, curated_archive_dir, curated_sed_docs)
+
+        sed_docs_1 = copy.deepcopy(curated_sed_docs)
+        doc = list(sed_docs_1.values())[0]
+        doc.simulations[0].algorithm.kisao_id = self._alt_alg
+        doc.simulations[0].algorithm.changes = []
+
+        sed_docs_2 = copy.deepcopy(curated_sed_docs)
+        doc = list(sed_docs_2.values())[0]
+        doc.simulations[0].algorithm.changes.append(AlgorithmParameterChange(
+            kisao_id='KISAO_0000000',
+            new_value='0.1',
+        ))
+
+        return [
+            ExpectedResultOfSyntheticArchive(
+                curated_archive,
+                sed_docs_1,
+                False,
+                environment={'ALGORITHM_SUBSTITUTION_POLICY': AlgorithmSubstitutionPolicy.NONE.name}),
+            ExpectedResultOfSyntheticArchive(
+                curated_archive,
+                sed_docs_1,
+                True,
+                environment={'ALGORITHM_SUBSTITUTION_POLICY': AlgorithmSubstitutionPolicy.SIMILAR_VARIABLES.name}),
+            ExpectedResultOfSyntheticArchive(
+                curated_archive,
+                sed_docs_2,
+                False,
+                environment={'ALGORITHM_SUBSTITUTION_POLICY': AlgorithmSubstitutionPolicy.NONE.name}),
+            ExpectedResultOfSyntheticArchive(
+                curated_archive,
+                sed_docs_2,
+                True,
+                environment={'ALGORITHM_SUBSTITUTION_POLICY': AlgorithmSubstitutionPolicy.SIMILAR_VARIABLES.name}),
+        ]
