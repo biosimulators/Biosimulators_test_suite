@@ -566,6 +566,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
         synthetic_archive = expected_results_of_synthetic_archive.archive
         synthetic_sed_docs = expected_results_of_synthetic_archive.sed_documents
         is_success_expected = expected_results_of_synthetic_archive.is_success_expected
+        environment = expected_results_of_synthetic_archive.environment
 
         sedml_writer = SedmlSimulationWriter()
         temp_dir = tempfile.mkdtemp()
@@ -604,10 +605,11 @@ class SyntheticCombineArchiveTestCase(TestCase):
 
             if cli:
                 biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_simulator_cli(
-                    synthetic_archive_filename, outputs_dir, cli)
+                    synthetic_archive_filename, outputs_dir, cli, environment=environment)
             else:
                 biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
                     synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=pull_docker_image,
+                    environment=environment,
                     user_to_exec_within_container=user_to_exec_within_container)
 
             if os.path.isdir(outputs_dir) and os.getenv('CI', 'false').lower() in ['1', 'true']:
@@ -827,12 +829,14 @@ class ExpectedResultOfSyntheticArchive(object):
         sed_documents (:obj:`dict` of :obj:`str` to :obj:`SedDocument`): map from locations to
           SED documents in synthetic archive
         is_success_expected (:obj:`bool`, optional): whether the execution of the archive is expected to succeed
+        environment (:obj:`dict`, optional): environment variables that the archive should be executed with
     """
 
-    def __init__(self, archive, sed_documents, is_success_expected=True):
+    def __init__(self, archive, sed_documents, is_success_expected=True, environment=None):
         self.archive = archive
         self.sed_documents = sed_documents
         self.is_success_expected = is_success_expected
+        self.environment = environment or {}
 
 
 def find_cases(specifications, dir_name=None, output_medium=OutputMedium.console):
