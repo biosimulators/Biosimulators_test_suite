@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3.1.2. biosimulators_test_suite.test_case package &#8212; BioSimulators test suite 0.1.35 documentation</title>
+    <title>3.1.2. biosimulators_test_suite.test_case package &#8212; BioSimulators test suite 0.1.36 documentation</title>
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -891,7 +891,7 @@ SED documents in curated archive</p></li>
 
 <dl class="py class">
 <dt id="biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.published_project.</span></code><code class="sig-name descname"><span class="pre">ExpectedResultOfSyntheticArchive</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">archive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sed_documents</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_success_expected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.published_project.</span></code><code class="sig-name descname"><span class="pre">ExpectedResultOfSyntheticArchive</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">archive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sed_documents</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_success_expected</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">environment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>An expected result of executing a synthetic COMBINE/OMEX archive</p>
 <dl class="py attribute">
@@ -924,6 +924,17 @@ SED documents in synthetic archive</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive.environment">
+<code class="sig-name descname"><span class="pre">environment</span></code><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.ExpectedResultOfSyntheticArchive.environment" title="Permalink to this definition">¶</a></dt>
+<dd><p>environment variables that the archive should be executed with</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>, optional</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2376,6 +2387,62 @@ different shapes.</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsSubstitutingAlgorithms">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.sedml.</span></code><code class="sig-name descname"><span class="pre">SimulatorSupportsSubstitutingAlgorithms</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsSubstitutingAlgorithms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports" title="biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.test_case.sedml.SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports</span></code></a></p>
+<p>Check that a simulator can substitute algorithms that it doesn’t implement with similar
+algorithms when the algorithm substitution policy is less restrictive than
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">AlgorithmSubstitutionPolicy.SAME_METHOD</span></code>. Also check that a simulator ignores unsupported
+algorithm parameters when the algorithm substitution policy is less restrictive than
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">AlgorithmSubstitutionPolicy.NONE</span></code>.</p>
+<dl class="py attribute">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsSubstitutingAlgorithms.REPORT_ERROR_AS_SKIP">
+<code class="sig-name descname"><span class="pre">REPORT_ERROR_AS_SKIP</span></code><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsSubstitutingAlgorithms.REPORT_ERROR_AS_SKIP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsSubstitutingAlgorithms.build_synthetic_archives">
+<code class="sig-name descname"><span class="pre">build_synthetic_archives</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curated_archive</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curated_archive_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curated_sed_docs</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsSubstitutingAlgorithms.build_synthetic_archives" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a synthetic archive with master and non-master SED documents</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
+<li><p><strong>curated_archive</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">CombineArchive</span></code>) – curated COMBINE/OMEX archive</p></li>
+<li><p><strong>curated_archive_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory with the contents of the curated COMBINE/OMEX archive</p></li>
+<li><p><strong>curated_sed_docs</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedDocument</span></code>) – map from locations to
+SED documents in curated archive</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ExpectedResultOfSyntheticArchive</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="biosimulators_test_suite.test_case.sedml.SimulatorSupportsSubstitutingAlgorithms.is_curated_sed_algorithm_suitable_for_building_synthetic_archive">
+<code class="sig-name descname"><span class="pre">is_curated_sed_algorithm_suitable_for_building_synthetic_archive</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/sedml.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.sedml.SimulatorSupportsSubstitutingAlgorithms.is_curated_sed_algorithm_suitable_for_building_synthetic_archive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if a SED algorithm is suitable for testing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
+<li><p><strong>algorithm</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">Algorithm</span></code>) – SED algorithm in curated archive</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>whether the algorithm is suitable for testing</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
 </dl>
 </dd></dl>
