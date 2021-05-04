@@ -818,7 +818,11 @@ class SimulatorSupportsMultipleReportsPerSedDocument(SingleMasterSedDocumentComb
             sed_doc.outputs[i_dataset % 2].data_sets.append(data_set)
 
         # to ensure that each report has at least one data set, including when there's only 1 data set total
-        sed_doc.outputs[1].data_sets.append(original_data_sets[0])
+        sed_doc.outputs[1].data_sets.append(DataSet(
+            id=original_data_sets[0].id + '__copy__',
+            label=original_data_sets[0].label,
+            data_generator=original_data_sets[0].data_generator,
+        ))
 
         # return modified SED document
         return expected_results_of_synthetic_archives
@@ -2050,7 +2054,7 @@ class SimulatorSupportsSubstitutingAlgorithms(SimulatorSupportsModelsSimulations
         Returns:
             :obj:`list` of :obj:`ExpectedResultOfSyntheticArchive`
         """
-        expected_results_of_synthetic_archives = super(SimulatorSupportsSubstitutingAlgorithms, self).build_synthetic_archives(
+        super(SimulatorSupportsSubstitutingAlgorithms, self).build_synthetic_archives(
             specifications, curated_archive, curated_archive_dir, curated_sed_docs)
 
         sed_docs_1 = copy.deepcopy(curated_sed_docs)
