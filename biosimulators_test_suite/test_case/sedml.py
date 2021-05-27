@@ -2065,7 +2065,7 @@ class SimulatorSupportsSubstitutingAlgorithms(SimulatorSupportsModelsSimulations
         sed_docs_2 = copy.deepcopy(curated_sed_docs)
         doc = list(sed_docs_2.values())[0]
         doc.simulations[0].algorithm.changes.append(AlgorithmParameterChange(
-            kisao_id='KISAO_0000000',
+            kisao_id='KISAO_0000428',
             new_value='0.1',
         ))
 
