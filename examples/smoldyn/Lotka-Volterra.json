@@ -1,0 +1,44 @@
+{
+  "name": "Lotka-Volterra model",
+  "filename": "Lotka-Volterra.omex",
+  "taskRequirements": [{
+    "modelFormat": "format_9001",
+    "simulationAlgorithm": "KISAO_0000057"
+  }],
+  "expectedReports": [{
+    "id": "simulation.sedml/report",
+    "dataSets": [{
+        "id": "data_set_time",
+        "label": "Time"
+      },
+      {
+        "id": "data_set_rabbit",
+        "label": "Rabbit"
+      },
+      {
+        "id": "data_set_fox",
+        "label": "Fox"
+      }
+    ],
+    "points": [2001],
+    "values": [{
+      "id": "data_set_time",
+      "label": "time",
+      "value": {
+        "0": 0,
+        "1": 0.01,
+        "2": 0.02,
+        "999": 9.99,
+        "2000": 20
+      }
+    }]
+  }],
+  "expectedPlots": [],
+  "runtimeFailureAlertType": "exception",
+  "author": "Steven S. Andrews",
+  "identifiers": [{
+    "namespace": "url",
+    "id": "http://www.smoldyn.org/archive/examples/S8_reactions/lotvolt/lotvolt.txt",
+    "url": "http://www.smoldyn.org/archive/examples/S8_reactions/lotvolt/lotvolt.txt"
+  }]
+}

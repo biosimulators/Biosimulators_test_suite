@@ -190,7 +190,8 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         """
         # validate specifications
         specifications = biosimulators_utils.simulator.io.read_simulator_specs(
-            submission.specifications_url, submission.specifications_patch)
+            submission.specifications_url, submission.specifications_patch,
+            validate=True)
 
         # check permissions
         self.validate_permissions(specifications['id'], specifications['name'], submitter)

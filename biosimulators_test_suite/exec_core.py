@@ -51,7 +51,7 @@ class SimulatorValidator(object):
     """
 
     def __init__(self, specifications, case_ids=None, verbose=False, synthetic_archives_dir=None, output_medium=OutputMedium.console,
-                 log_std_out_err=True, dry_run=False, cli=None):
+                 log_std_out_err=True, dry_run=False, cli=None, validate_specs=True):
         """
         Args:
             specifications (:obj:`str` or :obj:`dict`): path or URL to the specifications of the simulator, or the specifications of the simulator
@@ -64,10 +64,11 @@ class SimulatorValidator(object):
             dry_run (:obj:`bool`, optional): if :obj:`True`, do not use the simulator to execute COMBINE/OMEX archives.
             cli (:obj:`str`, optional): command-line interface to use to execute the tests involving the simulation of COMBINE/OMEX
                 archives rather than a Docker image
+            validate_specs (:obj:`bool`, optional): whether to validate specifications
         """
         # if necessary, get and validate specifications of simulator
         if isinstance(specifications, str):
-            specifications = biosimulators_utils.simulator.io.read_simulator_specs(specifications)
+            specifications = biosimulators_utils.simulator.io.read_simulator_specs(specifications, validate=validate_specs)
 
         self.specifications = specifications
         self.verbose = verbose
