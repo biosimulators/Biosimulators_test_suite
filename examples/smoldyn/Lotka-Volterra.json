@@ -33,7 +33,9 @@
       }
     }]
   }],
-  "expectedPlots": [],
+  "expectedPlots": [{
+    "id": "simulation.sedml/Figure"
+  }],
   "runtimeFailureAlertType": "exception",
   "author": "Steven S. Andrews",
   "identifiers": [{
