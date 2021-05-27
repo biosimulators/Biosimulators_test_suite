@@ -58,6 +58,10 @@ class BaseController(cement.Controller):
                 action='store_true',
                 help="If set, print the stdout and stderr of the execution of the tests in real time.",
             )),
+            (['--do-not-validate-specs'], dict(
+                action='store_true',
+                help="If set, don't validate the specifications of the simulator.",
+            )),
             (['--do-not-log-std-out-err'], dict(
                 action='store_true',
                 help="If set, don't use capturer to collect stdout and stderr.",
@@ -85,7 +89,8 @@ class BaseController(cement.Controller):
                 output_medium=OutputMedium.console,
                 log_std_out_err=not args.do_not_log_std_out_err,
                 dry_run=args.dry_run,
-                cli=args.cli)
+                cli=args.cli,
+                validate_specs=not args.do_not_validate_specs)
             results = validator.run()
 
             # print summary
