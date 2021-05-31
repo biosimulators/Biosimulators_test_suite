@@ -11,7 +11,8 @@ from biosimulators_utils.combine.data_model import CombineArchive
 from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
 from biosimulators_utils.report.data_model import DataSetResults
 from biosimulators_utils.report.io import ReportWriter, ReportFormat
-from biosimulators_utils.sedml.data_model import SedDocument, Task, DataGenerator, Report, DataSet, Plot2D, Symbol, Variable
+from biosimulators_utils.sedml.data_model import (SedDocument, Task, DataGenerator, Report,
+                                                  DataSet, Plot2D, Symbol, Variable, Model, ModelLanguage)
 from unittest import mock
 import functools
 import json
@@ -492,7 +493,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
                 pass
 
         doc = SedDocument()
-        task = Task()
+        task = Task(model=Model(language=ModelLanguage.SBML.value))
         doc.tasks.append(task)
         report = Report()
         doc.outputs.append(report)
@@ -506,7 +507,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
         self.assertEqual(report.data_sets[0].id, '__data_set_time__')
 
         doc = SedDocument()
-        task = Task()
+        task = Task(model=Model(language=ModelLanguage.SBML.value))
         doc.tasks.append(task)
         doc.data_generators.append(DataGenerator(variables=[Variable(task=task, symbol=Symbol.time)]))
         report = Report()
@@ -517,7 +518,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
         self.assertEqual(report.data_sets[0].id, '__data_set_time__')
 
         doc = SedDocument()
-        task = Task()
+        task = Task(model=Model(language=ModelLanguage.SBML.value))
         doc.tasks.append(task)
         doc.data_generators.append(DataGenerator(variables=[Variable(task=task, symbol=None)]))
         report = Report()
@@ -528,7 +529,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
         self.assertEqual(report.data_sets[0].id, '__data_set_time__')
 
         doc = SedDocument()
-        task = Task()
+        task = Task(model=Model(language=ModelLanguage.SBML.value))
         doc.tasks.append(task)
         doc.data_generators.append(DataGenerator(variables=[Variable(task=task, symbol=Symbol.time)]))
         report = Report()
@@ -540,7 +541,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
         self.assertEqual(report.data_sets[0].id, '__data_set_time__')
 
         doc = SedDocument()
-        task = Task()
+        task = Task(model=Model(language=ModelLanguage.SBML.value))
         doc.tasks.append(task)
         doc.data_generators.append(DataGenerator(variables=[Variable(task=task, symbol=Symbol.time)]))
         report = Report()
@@ -550,3 +551,11 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
         self.assertEqual(len(doc.data_generators), 1)
         self.assertEqual(len(report.data_sets), 2)
         self.assertEqual(report.data_sets[1].id, '__data_set_time__')
+
+        doc = SedDocument()
+        task = Task(model=Model(language=ModelLanguage.CellML.value))
+        doc.tasks.append(task)
+        report = Report()
+        doc.outputs.append(report)
+        with self.assertRaisesRegex(SkippedTestCaseException, 'supports the time symbol'):
+            Concrete().add_time_data_set(doc, task, report)

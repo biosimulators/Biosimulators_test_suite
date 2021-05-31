@@ -870,6 +870,8 @@ class SimulatorSupportsMultipleReportsPerSedDocument(SingleMasterSedDocumentComb
 class SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes(UniformTimeCourseTestCase):
     """ Test that a simulator supports time courses with non-zero output start times """
 
+    TEST_TIME = True
+
     def modify_simulation(self, simulation):
         """ Modify a simulation
 
@@ -883,6 +885,7 @@ class SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes(UniformTime
 class SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes(UniformTimeCourseTestCase):
     """ Test that a simulator supports multiple time courses with non-zero initial times """
 
+    TEST_TIME = True
     REPORT_ERROR_AS_SKIP = True
 
     def modify_simulation(self, simulation):
@@ -1750,6 +1753,8 @@ class SimulatorProducesMultiplePlots(SimulatorProduces2DPlotsTestCase):
 
 class SimulatorSupportsDataGeneratorsWithDifferentShapes(UniformTimeCourseTestCase):
     """ Test that a simulator supports data generators with different shapes """
+
+    TEST_TIME = False
     REPORT_ERROR_AS_SKIP = True
 
     def modify_simulation(self, simulation):
@@ -1870,6 +1875,8 @@ class SimulatorSupportsDataGeneratorsWithDifferentShapes(UniformTimeCourseTestCa
 
 class SimulatorSupportsDataSetsWithDifferentShapes(UniformTimeCourseTestCase):
     """ Test that a simulator supports data generators with different shapes """
+
+    TEST_TIME = False
     REPORT_ERROR_AS_SKIP = True
 
     def modify_simulation(self, simulation):

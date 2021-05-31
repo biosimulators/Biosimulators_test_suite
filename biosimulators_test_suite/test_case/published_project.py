@@ -20,7 +20,7 @@ from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import (  # noqa: F401
     Report, Task, UniformTimeCourseSimulation,
     DataGenerator, Variable, Symbol, DataSet,
-    Model, Simulation, Algorithm)
+    Model, ModelLanguagePattern, Simulation, Algorithm)
 from biosimulators_utils.sedml.io import SedmlSimulationReader, SedmlSimulationWriter
 from biosimulators_utils.sedml.utils import (remove_algorithm_parameter_changes,
                                              replace_complex_data_generators_with_generators_for_individual_variables,
@@ -1014,6 +1014,8 @@ class SingleMasterSedDocumentCombineArchiveTestCase(ConfigurableMasterCombineArc
 class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
     """ Test that a simulator supports multiple reports per SED document """
 
+    TEST_TIME = True
+
     def is_curated_sed_task_suitable_for_building_synthetic_archive(self, specifications, task):
         """ Determine if a SED task is suitable for testing
 
@@ -1063,7 +1065,8 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
             self.modify_simulation(sim)
             report = doc.outputs[0]
 
-            self.add_time_data_set(doc, task, report)
+            if self.TEST_TIME:
+                self.add_time_data_set(doc, task, report)
 
             expected_results_of_synthetic_archive.archive = curated_archive
             expected_results_of_synthetic_archive.sed_documents = curated_sed_docs
@@ -1087,6 +1090,13 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
                 break
 
         if not time_data_gen:
+            if re.match(ModelLanguagePattern.CellML.value, task.model.language):
+                msg = (
+                    'This test case requires a model language which supports the time symbol ({}). '
+                    '{} does not support the time symbol.'
+                ).format(Symbol.time.value, ModelLanguagePattern.CellML.name)
+                raise SkippedTestCaseException(msg)
+
             time_data_gen = DataGenerator(
                 id='__data_generator_time__',
                 variables=[
@@ -1154,14 +1164,15 @@ class UniformTimeCourseTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
                 has_warnings = True
                 break
 
-        try:
-            numpy.testing.assert_allclose(
-                data['__data_set_time__'],
-                numpy.linspace(sim.output_start_time, sim.output_end_time, sim.number_of_points + 1),
-                rtol=1e-4,
-            )
-        except Exception as exception:
-            raise ValueError('Simulator did not produce the expected time course:\n\n  {}'.format(
-                str(exception).replace('\n', '\n  ')))
+        if self.TEST_TIME:
+            try:
+                numpy.testing.assert_allclose(
+                    data['__data_set_time__'],
+                    numpy.linspace(sim.output_start_time, sim.output_end_time, sim.number_of_points + 1),
+                    rtol=1e-4,
+                )
+            except Exception as exception:
+                raise ValueError('Simulator did not produce the expected time course:\n\n  {}'.format(
+                    str(exception).replace('\n', '\n  ')))
 
         return not has_warnings
