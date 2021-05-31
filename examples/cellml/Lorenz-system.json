@@ -1,0 +1,36 @@
+{
+  "name": "Lorenz system",
+  "filename": "Lorenz-system.omex",
+  "taskRequirements": [{
+    "modelFormat": "format_3240",
+    "simulationAlgorithm": "KISAO_0000019"
+  }],
+  "expectedReports": [{
+    "id": "simulation.sedml/report",
+    "dataSets": [
+      {"id": "data_set_t", "label": "Time"}, 
+      {"id": "data_set_x", "label": "X"},
+      {"id": "data_set_y", "label": "Y"},
+      {"id": "data_set_z", "label": "Z"}
+    ],
+    "points": [1001],
+    "values": [{
+      "id": "data_set_t",
+      "label": "Time",
+      "value": {
+        "0": 0.0,
+        "1000": 50
+      }
+    }]
+  }],
+  "expectedPlots": [{
+    "id": "simulation.sedml/plot"
+  }],
+  "runtimeFailureAlertType": "exception",
+  "author": "Alan Garny",
+  "identifiers": [{
+    "namespace": "url",
+    "id": "https://raw.githubusercontent.com/opencor/opencor/master/models/tests/cellml/lorenz.cellml",
+    "url": "https://raw.githubusercontent.com/opencor/opencor/master/models/tests/cellml/lorenz.cellml"
+  }]
+}

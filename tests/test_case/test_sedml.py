@@ -10,7 +10,7 @@ from biosimulators_utils.report.data_model import DataSetResults
 from biosimulators_utils.report.io import ReportWriter, ReportReader
 from biosimulators_utils.sedml.data_model import (SedDocument, Task, Report, DataSet,
                                                   DataGenerator, Variable, UniformTimeCourseSimulation,
-                                                  Algorithm, Symbol, Model,
+                                                  Algorithm, Symbol, Model, ModelLanguage,
                                                   Plot2D, Plot3D, Surface, AxisScale, RepeatedTask, SubTask)
 from biosimulators_utils.simulator.io import read_simulator_specs
 from unittest import mock
@@ -330,7 +330,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         )
 
         doc = SedDocument()
-        doc.models.append(Model(source='model.xml'))
+        doc.models.append(Model(source='model.xml', language=ModelLanguage.SBML.value))
         doc.simulations.append(
             UniformTimeCourseSimulation(
                 algorithm=Algorithm(),
