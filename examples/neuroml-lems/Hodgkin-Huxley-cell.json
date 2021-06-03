@@ -1,0 +1,64 @@
+{
+  "name": "Hodgkin-Huxley cell with simple morphology",
+  "filename": "Hodgkin-Huxley-cell.omex",
+  "taskRequirements": [
+    {
+      "modelFormat": "format_9004",
+      "simulationAlgorithm": "KISAO_0000030"
+    }
+  ],
+  "expectedReports": [
+    {
+      "id": "simulation.sedml/report",
+      "dataSets": [
+        {
+          "id": "data_set_time",
+          "label": "Time"
+        },
+        {
+          "id": "data_set_v",
+          "label": "v"
+        },
+        {
+          "id": "data_set_m",
+          "label": "m"
+        },
+        {
+          "id": "data_set_h",
+          "label": "h"
+        },
+        {
+          "id": "data_set_n",
+          "label": "n"
+        }
+      ],
+      "points": [
+        30001
+      ],
+      "values": [
+        {
+          "id": "data_set_t",
+          "label": "Time",
+          "value": {
+            "0": 0,
+            "30000": 0.3
+          }
+        }
+      ]
+    }
+  ],
+  "expectedPlots": [
+    {
+      "id": "simulation.sedml/plot"
+    }
+  ],
+  "runtimeFailureAlertType": "exception",
+  "author": "Padraig Gleeson",
+  "identifiers": [
+    {
+      "namespace": "url",
+      "id": "https://raw.githubusercontent.com/NeuroML/pyNeuroML/master/examples/LEMS_NML2_Ex5_DetCell.xml",
+      "url": "https://raw.githubusercontent.com/NeuroML/pyNeuroML/master/examples/LEMS_NML2_Ex5_DetCell.xml"
+    }
+  ]
+}
