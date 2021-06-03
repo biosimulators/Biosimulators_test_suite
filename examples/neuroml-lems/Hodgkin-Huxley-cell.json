@@ -37,7 +37,7 @@
       ],
       "values": [
         {
-          "id": "data_set_t",
+          "id": "data_set_time",
           "label": "Time",
           "value": {
             "0": 0,
