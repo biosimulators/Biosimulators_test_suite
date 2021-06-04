@@ -1,10 +1,10 @@
 {
   "name": "Hodgkin-Huxley cell with simple morphology",
-  "filename": "Hodgkin-Huxley-cell.omex",
+  "filename": "Hodgkin-Huxley-cell-CVODE.omex",
   "taskRequirements": [
     {
       "modelFormat": "format_9004",
-      "simulationAlgorithm": "KISAO_0000030"
+      "simulationAlgorithm": "KISAO_0000019"
     }
   ],
   "expectedReports": [
