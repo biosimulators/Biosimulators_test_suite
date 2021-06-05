@@ -651,6 +651,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                         {
                             'version': '2.1.5',
                             'image': {'url': 'ghcr.io/biosimulators/tellurium/2.1.5'},
+                            'algorithms': [],
                             'biosimulators': {'validated': previous_version_validated},
                         },
                     ]
@@ -678,6 +679,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                         'image': {
                             'url': 'ghcr.io/biosimulators/Biosimulators_tellurium/tellurium:' + self.submitted_version
                         },
+                        'algorithms': [],
                         'biosimulators': {
                             'validated': False,
                         },
@@ -811,7 +813,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                 self.remote_images.add(new_url)
                 return '{}'
 
-            def convert_docker_image_to_singularity(self, image):
+            def convert_docker_image_to_singularity(self, image, singularity_filename=None):
                 if self.singularity_error:
                     raise Exception('Singularity error')
 

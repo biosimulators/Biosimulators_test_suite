@@ -8,6 +8,7 @@
 
 from ..data_model import TestCase
 from ..warnings import TestCaseWarning
+from .sedml import SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports
 from biosimulators_utils.simulator.environ import ENVIRONMENT_VARIABLES
 import warnings
 
@@ -16,6 +17,7 @@ __all__ = [
     'DeclaresSupportedEnvironmentVariables',
     'HasOciLabels',
     'HasBioContainersLabels',
+    'SingularityImageExecutesSimulationsSuccessfully',
 ]
 
 
@@ -161,3 +163,9 @@ class HasBioContainersLabels(TestCase):
         if missing_labels:
             warnings.warn('The Docker image should have the following BioContainers labels:\n  {}'.format(
                 '\n  '.join(sorted(missing_labels))), TestCaseWarning)
+
+
+class SingularityImageExecutesSimulationsSuccessfully(SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports):
+    """ Test that the Singularity version of a Docker image can sucessfully execute COMBINE archives """
+
+    EXEC_WITH_SINGULARITY = True

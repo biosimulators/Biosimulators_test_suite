@@ -248,7 +248,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'were not generated'):
             case.eval_outputs(None, None, None, self.dirname)
 
-        report = Report(data_sets=[DataSet(id='A', label='A'), DataSet(id='B', label='B')])
+        report = Report(id='report', data_sets=[DataSet(id='A', label='A'), DataSet(id='B', label='B')])
         data_set_results = DataSetResults({'A': numpy.array([1, 2, 3]), 'B': numpy.array([4, 5, 6])})
         ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/b')
         case.eval_outputs(None, None, None, self.dirname)
@@ -299,7 +299,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/report_2')
         self.assertTrue(case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname))
 
-        report = Report(data_sets=[DataSet(id='z', label='z')])
+        report = Report(id='report', data_sets=[DataSet(id='z', label='z')])
         data_set_results = DataSetResults({'z': numpy.array([7, 8, 9])})
         ReportWriter().run(report, data_set_results, self.dirname, 'a.sedml/report_3')
         with self.assertWarnsRegex(InvalidOutputsWarning, 'extra reports'):

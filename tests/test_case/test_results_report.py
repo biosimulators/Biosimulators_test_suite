@@ -42,7 +42,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         )
         synthetic_sed_docs = {'test.sedml': doc}
 
-        report = Report(data_sets=[DataSet(id='A', label='A'), DataSet(id='C', label='C')])
+        report = Report(id='report', data_sets=[DataSet(id='A', label='A'), DataSet(id='C', label='C')])
         data_set_results = DataSetResults({
             'A': numpy.array([1., 2., 3.]),
             'C': numpy.array([4., 5., 6.]),
@@ -51,7 +51,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'did not produce'):
             case.eval_outputs(None, None, synthetic_sed_docs, self.dirname)
 
-        report = Report(data_sets=[DataSet(id='A', label='A'), DataSet(id='B', label='B'), DataSet(id='C', label='C')])
+        report = Report(id='report', data_sets=[DataSet(id='A', label='A'), DataSet(id='B', label='B'), DataSet(id='C', label='C')])
         data_set_results = DataSetResults({
             'A': numpy.array([1., 2., 3.]),
             'B': numpy.array([4., 5., numpy.nan]),
@@ -61,7 +61,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         with self.assertWarnsRegex(TestCaseWarning, 'include `NaN`'):
             self.assertEqual(case.eval_outputs(None, None, synthetic_sed_docs, self.dirname), False)
 
-        report = Report(data_sets=[DataSet(id='A', label='A'), DataSet(id='B', label='B')])
+        report = Report(id='report', data_sets=[DataSet(id='A', label='A'), DataSet(id='B', label='B')])
         data_set_results = DataSetResults({
             'A': numpy.array([1., 2., 3.]),
             'B': numpy.array([4., 5., 6.]),

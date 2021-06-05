@@ -39,6 +39,8 @@ class Config(object):
             * Use ``_CURRENT_USER_`` to indicate that the Docker container should execute commands as the current user (``os.getuid()``)
             * Use the format ``<name|uid>[:<group|gid>]`` to indicate any other user/group that the Docker container should use to
               execute commands
+
+        singularity_image_dirname (:obj:`str`): directory to save Singularity images
     """
 
     def __init__(self,
@@ -54,7 +56,8 @@ class Config(object):
                  runbiosimulations_api_client_id=None, runbiosimulations_api_client_secret=None,
                  runbiosimulations_api_endpoint=None,
                  test_case_timeout=None,
-                 user_to_exec_in_simulator_containers=None):
+                 user_to_exec_in_simulator_containers=None,
+                 singularity_image_dirname=None):
         """
         Args:
             pull_docker_image (:obj:`bool`, optional): whether to pull the Docker image for the simulator (default: :obj:`True`)
@@ -83,6 +86,8 @@ class Config(object):
                 * Use ``_CURRENT_USER_`` to indicate that the Docker container should execute commands as the current user (``os.getuid()``)
                 * Use the format ``<name|uid>[:<group|gid>]`` to indicate any other user/group that the Docker container should use to
                   execute commands
+
+            singularity_image_dirname (:obj:`str`, optional): directory to save Singularity images
         """
         # Docker registry
         if pull_docker_image is None:
@@ -206,3 +211,9 @@ class Config(object):
             self.user_to_exec_in_simulator_containers = os.getenv('USER_TO_EXEC_IN_SIMULATOR_CONTAINERS', '_CURRENT_USER_') or None
         else:
             self.user_to_exec_in_simulator_containers = user_to_exec_in_simulator_containers
+
+        if singularity_image_dirname is None:
+            self.singularity_image_dirname = os.getenv('SINGULARITY_IMAGE_DIRNAME',
+                                                       os.path.join(os.path.expanduser('~'), '.biosimulators-test-suite', 'singularity'))
+        else:
+            self.singularity_image_dirname = singularity_image_dirname
