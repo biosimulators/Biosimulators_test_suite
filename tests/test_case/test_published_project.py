@@ -212,12 +212,12 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
                 data[1][0] = -1
 
             if extra_report:
-                report = Report(data_sets=[DataSet(id=i, label=l) for i, l in zip(ids, labels)])
+                report = Report(id='report', data_sets=[DataSet(id=i, label=l) for i, l in zip(ids, labels)])
                 data_set_results = DataSetResults({i: d for i, d in zip(ids, data)})
                 ReportWriter().run(report, data_set_results, out_dir, 'BIOMD0000000912_sim.sedml/extra', ReportFormat.h5)
 
             if not missing_report:
-                report = Report(data_sets=[DataSet(id=i, label=l) for i, l in zip(ids, labels)])
+                report = Report(id='report', data_sets=[DataSet(id=i, label=l) for i, l in zip(ids, labels)])
                 data_set_results = DataSetResults({i: d for i, d in zip(ids, data)})
                 ReportWriter().run(report, data_set_results, out_dir, 'BIOMD0000000912_sim.sedml/report', ReportFormat.h5)
 
@@ -340,7 +340,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
                 data[1][0] = -1
 
             if not missing_report:
-                report = Report(data_sets=[DataSet(id=i, label=l) for i, l in zip(ids, labels)])
+                report = Report(id='report', data_sets=[DataSet(id=i, label=l) for i, l in zip(ids, labels)])
                 data_set_results = DataSetResults({i: d for i, d in zip(ids, data)})
                 ReportWriter().run(report, data_set_results, out_dir, 'BIOMD0000000912_sim.sedml/report', ReportFormat.h5)
 

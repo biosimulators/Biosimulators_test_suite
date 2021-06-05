@@ -48,7 +48,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'did not generate'):
             case.eval_outputs(None, archive, sed_docs, self.dirname)
 
-        report = Report(data_sets=[DataSet(id='A', label='A'), DataSet(id='B', label='B')])
+        report = Report(id='report', data_sets=[DataSet(id='A', label='A'), DataSet(id='B', label='B')])
         data = DataSetResults({
             'A': numpy.array([1, 2, 3]),
             'B': numpy.array([4, 5, 6]),
