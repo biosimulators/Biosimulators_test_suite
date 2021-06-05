@@ -163,7 +163,12 @@ class SimulatorValidator(object):
         module_name = module.__name__.replace('biosimulators_test_suite.test_case.', '')
         for child_name in dir(module):
             child = getattr(module, child_name)
-            if isinstance(child, type) and issubclass(child, TestCase) and not inspect.isabstract(child):
+            if (
+                getattr(child, '__module__', None) == module.__name__
+                and isinstance(child, type)
+                and issubclass(child, TestCase)
+                and not inspect.isabstract(child)
+            ):
                 id = module_name + '.' + child_name
                 if ids is None or id in ids:
                     description = child.__doc__ or None
