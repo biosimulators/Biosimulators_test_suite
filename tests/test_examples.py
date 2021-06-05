@@ -4,6 +4,7 @@ from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.io import SedmlSimulationReader
 from unittest import mock
 import glob
+import h5py
 import json
 import numpy
 import os
@@ -44,7 +45,6 @@ class ExamplesTestCase(unittest.TestCase):
                 sedml_filename = os.path.join(archive_dirname, sedml_location)
                 doc = SedmlSimulationReader().run(sedml_filename)
 
-                print(archive_filename, [output.id for output in doc.outputs], report_id)
                 report = next(output for output in doc.outputs if output.id == report_id)
 
                 with mock.patch.dict(os.environ, {'H5_REPORTS_PATH': report_path}):
@@ -54,3 +54,14 @@ class ExamplesTestCase(unittest.TestCase):
                 self.assertEqual(report_results[report.data_sets[0].id].shape, tuple(expected_report['points']))
                 for data_set_result in report_results.values():
                     self.assertFalse(numpy.any(numpy.isnan(data_set_result)))
+
+                with h5py.File(os.path.join(example_base_dir, report_path), 'r') as file:
+                    group_ids = expected_report['id'].split(os.path.sep)[0:-1]
+                    for i_group in range(len(group_ids)):
+                        uri = '/'.join(group_ids[0:i_group + 1])
+                        group = file[uri]
+                        assert group.attrs['uri'] == uri, example_filename
+                        assert group.attrs['combineArchiveLocation'] == uri, example_filename
+
+                    data_set = file[expected_report['id']]
+                    assert data_set.attrs['uri'] == expected_report['id'], example_filename
