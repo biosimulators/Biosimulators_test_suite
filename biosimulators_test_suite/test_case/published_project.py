@@ -9,12 +9,14 @@
 from ..config import Config
 from ..data_model import (TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedDataSet, ExpectedSedPlot,
                           AlertType, OutputMedium)
-from ..exceptions import InvalidOutputsException, SkippedTestCaseException, TimeoutException
+from ..exceptions import InvalidOutputsException, SkippedTestCaseException, TimeoutException, TestCaseException
+from ..utils import get_singularity_image_filename
 from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning
 from .utils import are_array_shapes_equivalent
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContentFormatPattern  # noqa: F401
 from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
 from biosimulators_utils.config import get_config
+from biosimulators_utils.image import convert_docker_image_to_singularity
 from biosimulators_utils.report.data_model import ReportFormat
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import (  # noqa: F401
@@ -295,23 +297,8 @@ class SimulatorCanExecutePublishedProject(TestCase):
         out_dir = tempfile.mkdtemp()
 
         # pull image and execute COMBINE/OMEX archive for case
-        config = Config()
-        pull_docker_image = config.pull_docker_image
-        user_to_exec_within_container = config.user_to_exec_in_simulator_containers
         try:
-            if os.getenv('CI', 'false').lower() in ['1', 'true']:
-                user_to_exec_within_container = '_SUDO_'
-
-            if cli:
-                biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_simulator_cli(
-                    self.filename, out_dir, cli)
-            else:
-                biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
-                    self.filename, out_dir, specifications['image']['url'], pull_docker_image=pull_docker_image,
-                    user_to_exec_within_container=user_to_exec_within_container)
-
-                if os.path.isdir(out_dir) and os.getenv('CI', 'false').lower() in ['1', 'true']:
-                    subprocess.run(['sudo', 'chown', '{}:{}'.format(os.getuid(), os.getgid()), '-R', out_dir], check=True)
+            self.exec_sedml_docs_in_archive(specifications, out_dir, cli=cli)
 
         except Exception as exception:
             if os.path.isdir(out_dir) and os.getenv('CI', 'false').lower() in ['1', 'true']:
@@ -433,6 +420,32 @@ class SimulatorCanExecutePublishedProject(TestCase):
         if errors:
             raise InvalidOutputsException('\n\n'.join(errors))
 
+    def exec_sedml_docs_in_archive(self, specifications, out_dir, cli=None):
+        """
+        Args:
+            specifications (:obj:`dict`): specifications of the simulator to validate
+            out_dir (:obj:`str`): path to save simulation results
+            cli (:obj:`str`, optional): command-line interface to use to execute the tests involving the simulation of COMBINE/OMEX
+                archives rather than a Docker image
+        """
+        config = Config()
+        pull_docker_image = config.pull_docker_image
+        user_to_exec_within_container = config.user_to_exec_in_simulator_containers
+        if os.getenv('CI', 'false').lower() in ['1', 'true']:
+            user_to_exec_within_container = '_SUDO_'
+
+        if cli:
+            biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_simulator_cli(
+                self.filename, out_dir, cli)
+
+        else:
+            biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
+                self.filename, out_dir, specifications['image']['url'], pull_docker_image=pull_docker_image,
+                user_to_exec_within_container=user_to_exec_within_container)
+
+            if os.path.isdir(out_dir) and os.getenv('CI', 'false').lower() in ['1', 'true']:
+                subprocess.run(['sudo', 'chown', '{}:{}'.format(os.getuid(), os.getgid()), '-R', out_dir], check=True)
+
 
 class SyntheticCombineArchiveTestCase(TestCase):
     """ Test that involves a computationally-generated COMBINE/OMEX archive
@@ -448,6 +461,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
             that is used to generate example archives for testing
     """
 
+    EXEC_WITH_SINGULARITY = False
     REPORT_ERROR_AS_SKIP = False
 
     def __init__(self, id=None, name=None, description=None, output_medium=OutputMedium.console, published_projects_test_cases=None):
@@ -606,6 +620,36 @@ class SyntheticCombineArchiveTestCase(TestCase):
             if cli:
                 biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_simulator_cli(
                     synthetic_archive_filename, outputs_dir, cli, environment=environment)
+
+            elif self.EXEC_WITH_SINGULARITY:
+                docker_image_url = specifications['image']['url']
+
+                # get path for Singularity image
+                singularity_filename = get_singularity_image_filename(docker_image_url)
+
+                # convert image to Singularity format
+                convert_docker_image_to_singularity(docker_image_url, singularity_filename=singularity_filename)
+
+                # run a simulation with the Singularity image
+                if not os.path.isdir(outputs_dir):
+                    os.makedirs(outputs_dir)
+                temp_filename = os.path.join(outputs_dir, os.path.basename(synthetic_archive_filename))
+                shutil.copyfile(synthetic_archive_filename, temp_filename)
+
+                cmd = [
+                    'singularity', 'run',
+                    '-B', outputs_dir + ':/root',
+                    singularity_filename,
+                    '-i', '/root/' + os.path.basename(synthetic_archive_filename),
+                    '-o', '/root',
+                ]
+                result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
+                os.remove(temp_filename)
+                if result.returncode != 0:
+                    msg = 'The Docker image could not be successfully executed as a Singularity image:\n  {}'.format(
+                        result.stderr.decode().replace('\n', '\n  '))
+                    raise TestCaseException(msg)
+
             else:
                 biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator(
                     synthetic_archive_filename, outputs_dir, specifications['image']['url'], pull_docker_image=pull_docker_image,

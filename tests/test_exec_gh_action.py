@@ -813,7 +813,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                 self.remote_images.add(new_url)
                 return '{}'
 
-            def convert_docker_image_to_singularity(self, image):
+            def convert_docker_image_to_singularity(self, image, singularity_filename=None):
                 if self.singularity_error:
                     raise Exception('Singularity error')
 

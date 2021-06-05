@@ -12,6 +12,7 @@ from .data_model import OutputMedium
 from .exec_core import SimulatorValidator
 from .results.data_model import TestCaseResult, TestCaseResultType, TestResultsReport  # noqa: F401
 from .results.io import write_test_results
+from .utils import get_singularity_image_filename
 from biosimulators_utils.biosimulations.utils import validate_biosimulations_api_response
 from biosimulators_utils.config import Colors
 from biosimulators_utils.gh_action.data_model import Comment, GitHubActionCaughtError  # noqa: F401
@@ -296,7 +297,9 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         get_docker_image(docker_client, image_url, pull=True)
 
         # validate that Docker image can be converted to a Singularity image
-        biosimulators_utils.image.convert_docker_image_to_singularity(image_url)
+        biosimulators_utils.image.convert_docker_image_to_singularity(
+            image_url,
+            singularity_filename=get_singularity_image_filename(image_url))
 
         # validate that image is consistent with the BioSimulators standards
         validator = SimulatorValidator(specifications, output_medium=OutputMedium.gh_issue)
