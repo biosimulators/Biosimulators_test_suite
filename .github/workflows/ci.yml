@@ -47,7 +47,7 @@ jobs:
           python -m pip install --upgrade setuptools
 
       - name: Install Singularity # to validate that the Docker image can be converted into a Singularity image
-        uses: eWaterCycle/setup-singularity
+        uses: eWaterCycle/setup-singularity@v6
 
       # install package
       - name: Install the package
