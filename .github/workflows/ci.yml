@@ -70,7 +70,9 @@ jobs:
       - name: Run the tests
         # env:
         #   BIOSIMULATORS_API_ENDPOINT: https://api.biosimulators.dev/ # uncomment to run tests using the dev deployment
-        run: python -m pytest tests/ --cov=./biosimulators_test_suite --cov-report=xml
+        uses: GabrielBB/xvfb-action@v1
+        with:
+          run: python -m pytest tests/ --cov=./biosimulators_test_suite --cov-report=xml
 
       - name: Upload the coverage report to Codecov
         uses: codecov/codecov-action@v1.0.3
