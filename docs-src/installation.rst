@@ -6,14 +6,16 @@ Install the dependencies for the test suite
 
 First, install the following dependencies of the test suite:
 
-* `Docker <https://www.docker.com/>`_
 * `Python <https://www.python.org/downloads/>`_ (>= 3.7)
 * `pip <https://pip.pypa.io/>`_
+* `Docker <https://www.docker.com/>`_
 
 Install the optional dependencies for the test suite
 ----------------------------------------------------
 
 To check that Docker image for simulation tools can be converted into Singularity images, also install Singularity. Installation instructions are available at `https://sylabs.io/docs/ <https://sylabs.io/docs/>`_.
+
+In addition, `Java <https://www.java.com/>`_ is needed to test simulation tools that execute models encoded in LEMS.
 
 
 Install the test suite
