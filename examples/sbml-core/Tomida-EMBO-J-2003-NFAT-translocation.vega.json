@@ -147,12 +147,12 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.label == 'Time (min)' || indexof(['Dephosphorylated NFAT', 'Transported NFAT'], datum.label) >= 0"
+          "expr": "datum.id == 'data_gen_time' || indexof(['data_gen_NFAT_dephosphorylated', 'data_gen_NFAT_transported'], datum.id) >= 0"
         },
         {
           "type": "cross",
           "as": ["Time", "SpeciesLabelValues"],
-          "filter": "datum.Time.label == 'Time (min)' && datum.SpeciesLabelValues.label != 'Time (min)'"    
+          "filter": "datum.Time.id == 'data_gen_time' && datum.SpeciesLabelValues.id != 'data_gen_time'"    
         },
         {
           "type": "formula",
@@ -161,7 +161,7 @@
         },
         {
           "type": "formula",
-          "expr": "datum.SpeciesLabelValues.label",
+          "expr": "datum.SpeciesLabelValues.id",
           "as": "SpeciesLabel"
         },
         {

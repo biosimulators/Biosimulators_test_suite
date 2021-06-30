@@ -147,12 +147,12 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.label == 'Time (dimensionless)' || indexof(['Basal', 'Basal ACh', 'Active ACh2', 'Intermediate ACh2', 'Desensitised ACh2'], datum.label) >= 0"
+          "expr": "datum.id == 'data_set_time' || indexof(['data_set_B', 'data_set_BL', 'data_set_ALL', 'data_set_ILL', 'data_set_DLL'], datum.id) >= 0"
         },
         {
           "type": "cross",
           "as": ["Time", "SpeciesLabelValues"],
-          "filter": "datum.Time.label == 'Time (dimensionless)' && datum.SpeciesLabelValues.label != 'Time (dimensionless)'"    
+          "filter": "datum.Time.id == 'data_set_time' && datum.SpeciesLabelValues.id != 'data_set_time'"    
         },
         {
           "type": "formula",
@@ -161,7 +161,7 @@
         },
         {
           "type": "formula",
-          "expr": "datum.SpeciesLabelValues.label",
+          "expr": "datum.SpeciesLabelValues.id",
           "as": "SpeciesLabel"
         },
         {

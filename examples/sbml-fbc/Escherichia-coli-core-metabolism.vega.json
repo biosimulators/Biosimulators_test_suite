@@ -301,7 +301,7 @@
   "data": [{
       "name": "metabolitesData",
       "_mapToSedmlReport": false,
-      "url": "https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
+      "url": "https://cors.bridged.cc/https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
       "format": {
         "type": "json",
         "property": "metabolites"
@@ -310,7 +310,7 @@
     {
       "name": "reactionSegmentCoordinatesData",
       "_mapToSedmlReport": false,
-      "url": "https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
+      "url": "https://cors.bridged.cc/https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
       "format": {
         "type": "json",
         "property": "reactionSegmentCoordinates"
@@ -319,7 +319,7 @@
     {
       "name": "reactionArrowHeadCoordinatesData",
       "_mapToSedmlReport": false,
-      "url": "https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
+      "url": "https://cors.bridged.cc/https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
       "format": {
         "type": "json",
         "property": "reactionArrowHeadCoordinates"
@@ -328,7 +328,7 @@
     {
       "name": "reactionLabelsData",
       "_mapToSedmlReport": false,
-      "url": "https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
+      "url": "https://cors.bridged.cc/https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
       "format": {
         "type": "json",
         "property": "reactionLabelsData"
@@ -418,7 +418,13 @@
       "name": "reactionAbsFluxes",
       "_mapToSedmlReport": false,
       "source": "reactionFluxes",
-      "transform": [{
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "substring(datum.id, length('data_set_'))",
+          "as": "id"
+        },
+        {
           "type": "formula",
           "expr": "datum.values[0]",
           "as": "flux"
@@ -437,7 +443,7 @@
       "transform": [{
           "type": "lookup",
           "from": "reactionAbsFluxes",
-          "key": "label",
+          "key": "id",
           "fields": [
             "biggId"
           ],
