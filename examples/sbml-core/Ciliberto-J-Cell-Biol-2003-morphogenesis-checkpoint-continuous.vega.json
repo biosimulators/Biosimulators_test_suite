@@ -147,12 +147,12 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.label == 'Time (min)' || indexof(['Clb2', 'Cln', 'SBF', 'Sic1'], datum.label) >= 0"
+          "expr": "datum.id == 'data_gen_time' || indexof(['data_gen_Clb', 'data_gen_Cln', 'data_gen_SBF', 'data_gen_Sic'], datum.id) >= 0"
         },
         {
           "type": "cross",
           "as": ["Time", "SpeciesLabelValues"],
-          "filter": "datum.Time.label == 'Time (min)' && datum.SpeciesLabelValues.label != 'Time (min)'"    
+          "filter": "datum.Time.id == 'data_gen_time' && datum.SpeciesLabelValues.id != 'data_gen_time'"    
         },
         {
           "type": "formula",
@@ -161,7 +161,7 @@
         },
         {
           "type": "formula",
-          "expr": "datum.SpeciesLabelValues.label",
+          "expr": "datum.SpeciesLabelValues.id",
           "as": "SpeciesLabel"
         },
         {
