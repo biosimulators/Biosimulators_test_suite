@@ -1,7 +1,9 @@
 from biosimulators_utils.combine.io import CombineArchiveReader
+from biosimulators_utils.combine.data_model import CombineArchiveContentFormat
 from biosimulators_utils.report.data_model import ReportFormat
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.io import SedmlSimulationReader
+from biosimulators_utils.combine.validation import validate
 from unittest import mock
 import glob
 import h5py
@@ -36,7 +38,15 @@ class ExamplesTestCase(unittest.TestCase):
 
             archive_filename = os.path.join(example_base_dir, specs['filename'])
             archive_dirname = os.path.join(self.dirname, specs['filename'].replace('.omex', ''))
-            CombineArchiveReader().run(archive_filename, archive_dirname)
+            archive = CombineArchiveReader().run(archive_filename, archive_dirname)
+
+            errors, _ = validate(archive, archive_dirname,
+                                 formats_to_validate=list(CombineArchiveContentFormat.__members__.values()))
+            if errors:
+                msg = 'COMBINE/OMEX archive `{}` is invalid.\n  {}'.format(
+                    archive_filename,
+                    flatten_nested_list_of_strings(errors).replace('\n', '\n  '))
+                raise ValueError(msg)
 
             report_path = specs['filename'].replace('.omex', '.h5')
             for expected_report in specs['expectedReports']:
