@@ -4,9 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-    <title>2. Tutorial &#8212; BioSimulators test suite 0.1.44 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2. Tutorial &#8212; BioSimulators test suite 0.1.45 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -116,14 +115,14 @@
 
           <div class="body" role="main">
             
-  <section id="tutorial">
+  <div class="section" id="tutorial">
 <h1><span class="section-number">2. </span>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
 <p>Simulation software developers can utilize the test suite in two ways. First, developers can install and execute the test suite locally on their own machines. Second, developers can use the public cloud deployment of the test suite. In most cases, we recommend that developers use the public cloud deployment, which is easy to use. We recommend that developers deploy the test suite locally if they wish to test their simulator offline or wish to continuously test their simulator such as within their own continuous integration workflows (e.g., CircleCI, GitHub Actions).</p>
-<section id="using-the-public-cloud-deployment-of-the-test-suite">
+<div class="section" id="using-the-public-cloud-deployment-of-the-test-suite">
 <h2><span class="section-number">2.1. </span>Using the public cloud deployment of the test suite<a class="headerlink" href="#using-the-public-cloud-deployment-of-the-test-suite" title="Permalink to this headline">¶</a></h2>
 <p>The test suite is deployed as a GitHub Action workflow on issues submitted to the BioSimulators repository. Developers can run the test suite on their simulation tool by creating an issue with the label <code class="docutils literal notranslate"><span class="pre">Validate/submit</span> <span class="pre">simulator</span></code>. Developers can create issues either using this <a class="reference external" href="https://github.com/biosimulators/Biosimulators/issues/new?assignees=&amp;labels=Validate%2Fsubmit+simulator&amp;template=validate-submit-a-simulator.md&amp;title=">form</a> or using the GitHub API.</p>
 <p>Once an issue is created, a GitHub Action workflow will use the test suite to validate and/or commit your simulator to the BioSimulators registry. If your simulator is valid, the workflow will post a success message to your issue. If the test suite finds that your simulator is invalid, the workflow will post a description of the error to your workflow.</p>
-<section id="issue-content-and-format">
+<div class="section" id="issue-content-and-format">
 <h3><span class="section-number">2.1.1. </span>Issue content and format<a class="headerlink" href="#issue-content-and-format" title="Permalink to this headline">¶</a></h3>
 <p>The body of the issue should contain a YAML-encoded description of your simulator. This should describe the id of your simulator, the version of your simulator that you would like to validate or submit, a URL where the specifications of your simulator can be retrieved, and two flags which indicate whether you would like the Docker image for your simulator to be validated and whether you would like your simulator to be committed to the BioSimulators registry. Below is an example body for an issue.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>---
@@ -139,8 +138,8 @@ commitSimulator: true
 ---
 </pre></div>
 </div>
-</section>
-<section id="validating-and-submitting-simulators-via-the-github-api">
+</div>
+<div class="section" id="validating-and-submitting-simulators-via-the-github-api">
 <h3><span class="section-number">2.1.2. </span>Validating and submitting simulators via the GitHub API<a class="headerlink" href="#validating-and-submitting-simulators-via-the-github-api" title="Permalink to this headline">¶</a></h3>
 <p>Please follow these steps to use the GitHub API to programmatically submit issues to validate and/or submit simulators to the BioSimulators registry.</p>
 <ol class="arabic simple">
@@ -165,9 +164,9 @@ curl \
   -d &#39;{&quot;labels&quot;: [&quot;Validate/submit simulator&quot;], &quot;title&quot;: &quot;Submit tellurium 2.1.6&quot;, &quot;body&quot;: &quot;---\nname: tellurium\nversion: 2.1.6\nspecificationsUrl: https://raw.githubusercontent.com/biosimulators/Biosimulators_tellurium/2.1.6/biosimulators.json\nspecificationsPatch:\n  version: 2.1.6\n  image:\n    url: ghcr.io/biosimulators/biosimulators_tellurium/tellurium:2.1.6\nvalidateImage: true\ncommitSimulator: true\n\n---&quot;}&#39;
 </pre></div>
 </div>
-</section>
-</section>
-<section id="running-the-test-suite-locally">
+</div>
+</div>
+<div class="section" id="running-the-test-suite-locally">
 <h2><span class="section-number">2.2. </span>Running the test suite locally<a class="headerlink" href="#running-the-test-suite-locally" title="Permalink to this headline">¶</a></h2>
 <p>The test suite can also be run locally as illustrated below.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Run all tests
@@ -186,7 +185,7 @@ biosimulators-test-suite /path/to/simulator/specifications.json \
     published_project.SimulatorCanExecutePublishedProject:sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint
 </pre></div>
 </div>
-<section id="directly-testing-a-command-line-interface-rather-than-a-docker-image">
+<div class="section" id="directly-testing-a-command-line-interface-rather-than-a-docker-image">
 <h3><span class="section-number">2.2.1. </span>Directly testing a command-line interface (rather than a Docker image)<a class="headerlink" href="#directly-testing-a-command-line-interface-rather-than-a-docker-image" title="Permalink to this headline">¶</a></h3>
 <p>Optionally, the <code class="docutils literal notranslate"><span class="pre">--cli</span></code> argument can be used to instruct the test suite to directly verify a command interface
 rather than indirectly verify the interface through the entry point of a Docker image. Note, the Docker image tests will still
@@ -196,16 +195,16 @@ biosimulators-test-suite /path/to/simulator/specifications.json \
   --cli /usr/local/bin/tellurium
 </pre></div>
 </div>
-</section>
-<section id="executing-the-test-suite-with-stdout-stderr-capturing-disabled">
+</div>
+<div class="section" id="executing-the-test-suite-with-stdout-stderr-capturing-disabled">
 <h3><span class="section-number">2.2.2. </span>Executing the test suite with stdout/stderr capturing disabled<a class="headerlink" href="#executing-the-test-suite-with-stdout-stderr-capturing-disabled" title="Permalink to this headline">¶</a></h3>
 <p>Some Mac OS users have reported that capturer, the package that the test suite uses to collect the standard output and error produced by each test case, fails on their systems. In such cases, the <code class="docutils literal notranslate"><span class="pre">--do-not-log-std-out-err</span></code> option can be used to disable the collection of standard output and error.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>biosimulators-test-suite /path/to/simulator/specifications.json \
   --do-not-log-std-out-err
 </pre></div>
 </div>
-</section>
-<section id="saving-the-synthetic-combine-archives-generated-by-the-test-cases">
+</div>
+<div class="section" id="saving-the-synthetic-combine-archives-generated-by-the-test-cases">
 <h3><span class="section-number">2.2.3. </span>Saving the synthetic COMBINE archives generated by the test cases<a class="headerlink" href="#saving-the-synthetic-combine-archives-generated-by-the-test-cases" title="Permalink to this headline">¶</a></h3>
 <p>Optionally, the <code class="docutils literal notranslate"><span class="pre">--synthetic-archives-dir</span></code> argument can be used to save the synthetic
 COMBINE/OMEX archives generated by the test cases to a directory. This enables developers
@@ -230,8 +229,8 @@ biosimulators-test-suite /path/to/simulator/specifications.json \
   --dry-run
 </pre></div>
 </div>
-</section>
-<section id="saving-the-results-of-the-test-cases-to-a-file">
+</div>
+<div class="section" id="saving-the-results-of-the-test-cases-to-a-file">
 <h3><span class="section-number">2.2.4. </span>Saving the results of the test cases to a file<a class="headerlink" href="#saving-the-results-of-the-test-cases-to-a-file" title="Permalink to this headline">¶</a></h3>
 <p>Optionally, the <code class="docutils literal notranslate"><span class="pre">--report</span></code> argument can be used to save the results of the test cases
 to a JSON file.</p>
@@ -240,9 +239,9 @@ biosimulators-test-suite /path/to/simulator/specifications.json \
   --report /path/to/save/results.json
 </pre></div>
 </div>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
           </div>
