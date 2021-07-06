@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created by COPASI version 4.24 (Build 197) on 2019-03-04 15:47 with libSBML version 5.17.0. -->
+<sedML
+    xmlns="http://sed-ml.org/sed-ml/level1/version2" level="1" version="2"
+    xmlns:sbml="http://www.sbml.org/sbml/level2/version4">
+    <listOfSimulations>
+        <uniformTimeCourse id="simulation_1" initialTime="0" outputStartTime="0" outputEndTime="5100" numberOfPoints="300">
+            <algorithm kisaoID="KISAO:0000019"/>
+        </uniformTimeCourse>
+    </listOfSimulations>
+    <listOfModels>
+        <model id="model" language="urn:sedml:language:sbml" source="BIOMD0000000734.xml">
+            <listOfChanges>
+                <changeAttribute target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='Injected']/@value" newValue="3.074E15"/>
+            </listOfChanges>
+        </model>
+    </listOfModels>
+    <listOfTasks>
+        <task id="task_1" modelReference="model" simulationReference="simulation_1"/>
+    </listOfTasks>
+    <listOfDataGenerators>
+        <dataGenerator id="data_gen_time" name="Time">
+            <listOfVariables>
+                <variable id="var_time" symbol="urn:sedml:symbol:time" taskReference="task_1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_time </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_gen_Fe1Tf" name="Transferrin with a single bound iron ion">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_Fe1Tf </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_Fe1Tf" name="Transferrin with a single bound iron ion" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;Fe1Tf&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_Fe1Tf_0" name="Transferrin with a single bound iron ion (radioactive)">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_Fe1Tf_0 </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_Fe1Tf_0" name="Transferrin with a single bound iron ion (radioactive)" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;Fe1Tf_0&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_Fe2Tf" name="Transferrin with a two bound iron ions">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_Fe2Tf </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_Fe2Tf" name="Transferrin with a two bound iron ions" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;Fe2Tf&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_Fe2Tf_" name="Transferrin with a two bound iron ions (1 radioactive)">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_Fe2Tf_ </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_Fe2Tf_" name="Transferrin with a two bound iron ions (1 radioactive)" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;Fe2Tf_&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_Fe2Tf_0" name="Transferrin with a two bound iron ions (2 radioactive)">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_Fe2Tf_0 </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_Fe2Tf_0" name="Transferrin with a two bound iron ions (2 radioactive)" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;Fe2Tf_0&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_FeBM" name="Bone marrow">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_FeBM </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_FeBM" name="Bone marrow" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;FeBM&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_FeBM_0" name="Bone marrow (radioactive)">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_FeBM_0 </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_FeBM_0" name="Bone marrow (radioactive)" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;FeBM_0&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_FeDuo" name="Duodenum">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_FeDuo </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_FeDuo" name="Duodenum" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;FeDuo&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_FeDuo_0" name="Duodenum (radioactive)">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_FeDuo_0 </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_FeDuo_0" name="Duodenum (radioactive)" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;FeDuo_0&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_FeLiver" name="Liver">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_FeLiver </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_FeLiver" name="Liver" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;FeLiver&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_FeLiver_0" name="Liver (radioactive)">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_FeLiver_0 </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_FeLiver_0" name="Liver (radioactive)" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;FeLiver_0&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_FeOutside" name="Outside of body">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_FeOutside </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_FeOutside" name="Outside of body" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;FeOutside&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>        
+        <dataGenerator id="data_gen_FeRBC" name="Red blood cells">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_FeRBC </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_FeRBC" name="Red blood cells" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;FeRBC&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_FeRBC_0" name="Red blood cells (radioactive)">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_FeRBC_0 </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_FeRBC_0" name="Red blood cells (radioactive)" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;FeRBC_0&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_FeRest" name="Rest of body">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_FeRest </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_FeRest" name="Rest of body" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;FeRest&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_FeRest_0" name="Rest of body (radioactive)">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_FeRest_0 </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_FeRest_0" name="Rest of body (radioactive)" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;FeRest_0&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_FeSpleen" name="Spleen">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_FeSpleen </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_FeSpleen" name="Spleen" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;FeSpleen&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_FeSpleen_0" name="Spleen (radioactive)">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_FeSpleen_0 </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_FeSpleen_0" name="Spleen (radioactive)" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;FeSpleen_0&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_Hepcidin" name="Hepcidin">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_Hepcidin </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_Hepcidin" name="Hepcidin" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;Hepcidin&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_NTBI" name="Non-transferrin bound iron">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_NTBI </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_NTBI" name="Non-transferrin bound iron" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;NTBI&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_NTBI_0" name="Non-transferrin bound iron (radioactive)">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_NTBI_0 </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_NTBI_0" name="Non-transferrin bound iron (radioactive)" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;NTBI_0&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_Tf" name="Apo-transferrin">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_var_Tf </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_var_Tf" name="Apo-transferrin" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;Tf&apos;]" taskReference="task_1"/>
+            </listOfVariables>
+        </dataGenerator>
+    </listOfDataGenerators>
+    <listOfOutputs>
+        <report id="report">
+            <listOfDataSets>
+                <dataSet id="data_set_time" label="Time (days)" dataReference="data_gen_time"/>
+                <dataSet id="data_set_Fe1Tf" label="Transferrin with a single bound iron ion" dataReference="data_gen_Fe1Tf"/>
+                <dataSet id="data_set_Fe1Tf_0" label="Transferrin with a single bound iron ion (radioactive)" dataReference="data_gen_Fe1Tf_0"/>
+                <dataSet id="data_set_Fe2Tf" label="Transferrin with a two bound iron ions" dataReference="data_gen_Fe2Tf"/>
+                <dataSet id="data_set_Fe2Tf_" label="Transferrin with a two bound iron ions (1 radioactive)" dataReference="data_gen_Fe2Tf_"/>
+                <dataSet id="data_set_Fe2Tf_0" label="Transferrin with a two bound iron ions (2 radioactive)" dataReference="data_gen_Fe2Tf_0"/>
+                <dataSet id="data_set_FeBM" label="Bone marrow" dataReference="data_gen_FeBM"/>
+                <dataSet id="data_set_FeBM_0" label="Bone marrow (radioactive)" dataReference="data_gen_FeBM_0"/>
+                <dataSet id="data_set_FeDuo" label="Duodenum" dataReference="data_gen_FeDuo"/>
+                <dataSet id="data_set_FeDuo_0" label="Duodenum (radioactive)" dataReference="data_gen_FeDuo_0"/>
+                <dataSet id="data_set_FeLiver" label="Liver" dataReference="data_gen_FeLiver"/>
+                <dataSet id="data_set_FeLiver_0" label="Liver (radioactive)" dataReference="data_gen_FeLiver_0"/>
+                <dataSet id="data_set_FeOutside" label="Outside of body" dataReference="data_gen_FeOutside"/>
+                <dataSet id="data_set_FeRBC" label="Red blood cells" dataReference="data_gen_FeRBC"/>
+                <dataSet id="data_set_FeRBC_0" label="Red blood cells (radioactive)" dataReference="data_gen_FeRBC_0"/>
+                <dataSet id="data_set_FeRest" label="Rest of body" dataReference="data_gen_FeRest"/>
+                <dataSet id="data_set_FeRest_0" label="Rest of body (radioactive)" dataReference="data_gen_FeRest_0"/>
+                <dataSet id="data_set_FeSpleen" label="Spleen" dataReference="data_gen_FeSpleen"/>
+                <dataSet id="data_set_FeSpleen_0" label="Spleen (radioactive)" dataReference="data_gen_FeSpleen_0"/>
+                <dataSet id="data_set_Hepcidin" label="Hepcidin" dataReference="data_gen_Hepcidin"/>
+                <dataSet id="data_set_NTBI" label="Non-transferrin bound iron" dataReference="data_gen_NTBI"/>
+                <dataSet id="data_set_NTBI_0" label="Non-transferrin bound iron (radioactive)" dataReference="data_gen_NTBI_0"/>
+                <dataSet id="data_set_Tf" label="Apo-transferrin" dataReference="data_gen_Tf"/>
+            </listOfDataSets>
+        </report>
+        <plot2D id="Figure_3b" name="Figure 3b">
+            <listOfCurves>
+                <curve id="curve_FeDuo" name="Duodenum" xDataReference="data_gen_time" yDataReference="data_gen_FeDuo"/>
+            </listOfCurves>
+        </plot2D>
+        <plot2D id="Figure_3c" name="Figure 3c">
+            <listOfCurves>
+                <curve id="curve_FeBM" name="Bone marrow" xDataReference="data_gen_time" yDataReference="data_gen_FeBM"/>
+            </listOfCurves>
+        </plot2D>
+        <plot2D id="Figure_3d" name="Figure 3d">
+            <listOfCurves>
+                <curve id="curve_FeRBC" name="Red blood cells" xDataReference="data_gen_time" yDataReference="data_gen_FeRBC"/>
+            </listOfCurves>
+        </plot2D>
+        <plot2D id="Figure_3e" name="Figure 3e">
+            <listOfCurves>
+                <curve id="curve_FeLiver" name="Liver" xDataReference="data_gen_time" yDataReference="data_gen_FeLiver"/>
+            </listOfCurves>
+        </plot2D>
+        <plot2D id="Figure_3f" name="Figure 3f">
+            <listOfCurves>
+                <curve id="curve_FeSpleen" name="Spleen" xDataReference="data_gen_time" yDataReference="data_gen_FeSpleen"/>
+            </listOfCurves>
+        </plot2D>
+        <plot2D id="Figure_3g" name="Figure 3g">
+            <listOfCurves>
+                <curve id="curve_FeRest" name="Rest of body" xDataReference="data_gen_time" yDataReference="data_gen_FeRest"/>
+            </listOfCurves>
+        </plot2D>
+        <plot2D id="Figure_3h" name="Figure 3h">
+            <listOfCurves>
+                <curve id="curve_FeOutside" name="Execreted" xDataReference="data_gen_time" yDataReference="data_gen_FeOutside"/>
+            </listOfCurves>
+        </plot2D>
+    </listOfOutputs>
+</sedML>

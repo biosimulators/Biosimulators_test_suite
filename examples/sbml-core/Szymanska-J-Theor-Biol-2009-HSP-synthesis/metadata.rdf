@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:dcterms='http://purl.org/dc/terms/' xmlns:vCard='http://www.w3.org/2006/vcard/ns#' xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+  <rdf:Description rdf:about='./Szymanska2009.xml'>
+    <dcterms:description>Szymańska &amp; Zylicz. Journal of Theoretical Biology 2009: heat shock protein synthesis in response to temperature change</dcterms:description>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Szymańska</vCard:family-name>
+        <vCard:given-name>Zuzanna</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Zylicz</vCard:family-name>
+        <vCard:given-name>Maciej</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <bqmodel:isDescribedBy>
+      <rdf:Bag>
+        <rdf:li rdf:resource="https://doi.org/10.1016/j.jtbi.2009.03.021"/>
+      </rdf:Bag>
+    </bqmodel:isDescribedBy>
+    <bqmodel:is>
+      <rdf:Bag>
+        <rdf:li rdf:resource="http://identifiers.org/biomodels.db/BIOMD0000000896"/>
+      </rdf:Bag>
+    </bqmodel:is>
+    <dcterms:license>http://creativecommons.org/publicdomain/zero/1.0/</dcterms:license>
+  </rdf:Description>
+</rdf:RDF>

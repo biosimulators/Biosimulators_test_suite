@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version3" level="1" version="3">
+   <annotation>
+      <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+         <rdf:Description>
+            <rdf:value rdf:ID="id" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">simulation_1</rdf:value>
+            <rdf:value rdf:ID="name" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">simulation 1</rdf:value>
+            <rdf:Seq rdf:ID="authors">
+               <rdf:li>
+                  <rdf:Description>
+                     <rdf:value rdf:ID="firstName" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ali</rdf:value>
+                     <rdf:value rdf:ID="middleName" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sinan</rdf:value>
+                     <rdf:value rdf:ID="lastName" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Saglam</rdf:value>
+                  </rdf:Description>
+               </rdf:li>
+               <rdf:li>
+                  <rdf:Description>
+                     <rdf:value rdf:ID="firstName" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Jonathan</rdf:value>
+                     <rdf:value rdf:ID="middleName" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ross</rdf:value>
+                     <rdf:value rdf:ID="lastName" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Karr</rdf:value>
+                  </rdf:Description>
+               </rdf:li>
+            </rdf:Seq>
+            <rdf:value rdf:ID="description" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Description of simulation 1</rdf:value>
+            <rdf:Seq rdf:ID="tags">
+               <rdf:li>
+                  <rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">tag-1</rdf:value>
+               </rdf:li>
+               <rdf:li>
+                  <rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">tag-2</rdf:value>
+               </rdf:li>
+            </rdf:Seq>
+            <rdf:Seq rdf:ID="refs">
+               <rdf:li>
+                  <rdf:Description>
+                     <rdf:value rdf:ID="authors" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ali Sinan Saglam &amp; Jonathan R Karr</rdf:value>
+                     <rdf:value rdf:ID="title" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Report of simulation 1</rdf:value>
+                     <rdf:value rdf:ID="journal" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Journal of Biosimulation</rdf:value>
+                     <rdf:value rdf:ID="volume" rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</rdf:value>
+                     <rdf:value rdf:ID="num" rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</rdf:value>
+                     <rdf:value rdf:ID="pages" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1-10</rdf:value>
+                     <rdf:value rdf:ID="year" rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2020</rdf:value>
+                     <rdf:value rdf:ID="doi" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">10.1016/XXXX</rdf:value>
+                  </rdf:Description>
+               </rdf:li>
+            </rdf:Seq>
+            <rdf:value rdf:ID="license" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CC0</rdf:value>
+         </rdf:Description>
+      </rdf:RDF>
+   </annotation>
+   <listOfSimulations>
+      <uniformTimeCourse id="simulation_1" initialTime="0" outputStartTime="0" outputEndTime="10" numberOfPoints="100">
+         <algorithm kisaoID="KISAO:0000019">
+            <annotation>
+               <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                  <rdf:Description>
+                     <rdf:value rdf:ID="name" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">CVODE</rdf:value>
+                  </rdf:Description>
+               </rdf:RDF>
+            </annotation>
+            <listOfAlgorithmParameters>
+               <algorithmParameter kisaoID="KISAO:0000211" value="1e-6">
+                  <annotation>
+                     <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                        <rdf:Description>
+                           <rdf:value rdf:ID="name" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">absolute tolerance</rdf:value>
+                        </rdf:Description>
+                     </rdf:RDF>
+                  </annotation>
+               </algorithmParameter>
+               <algorithmParameter kisaoID="KISAO:0000209" value="1e-8">
+                  <annotation>
+                     <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                        <rdf:Description>
+                           <rdf:value rdf:ID="name" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">relative tolerance</rdf:value>
+                        </rdf:Description>
+                     </rdf:RDF>
+                  </annotation>
+               </algorithmParameter>
+            </listOfAlgorithmParameters>
+         </algorithm>
+      </uniformTimeCourse>
+   </listOfSimulations>
+   <listOfModels>
+      <model id="test_model" language="urn:sedml:language:bngl" source="test.bngl">
+         <listOfChanges>
+            <changeAttribute target="parameters.k_1.value" newValue="1.0">
+               <annotation>
+                  <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                     <rdf:Description>
+                        <rdf:value rdf:ID="name" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Kinetic constant 1</rdf:value>
+                     </rdf:Description>
+                  </rdf:RDF>
+               </annotation>
+            </changeAttribute>
+            <changeAttribute target="species.GeneA_00().initialCount" newValue="0">
+               <annotation>
+                  <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                     <rdf:Description>
+                        <rdf:value rdf:ID="name" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(0, 0) state of Gene A</rdf:value>
+                     </rdf:Description>
+                  </rdf:RDF>
+               </annotation>
+            </changeAttribute>
+            <changeAttribute target="functions.gfunc().expression" newValue="0.5">
+               <annotation>
+                  <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                     <rdf:Description>
+                        <rdf:value rdf:ID="name" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">expression of gfunc</rdf:value>
+                     </rdf:Description>
+                  </rdf:RDF>
+               </annotation>
+            </changeAttribute>
+         </listOfChanges>
+      </model>
+   </listOfModels>
+   <listOfTasks>
+      <task id="task_simulation_1" modelReference="test_model" simulationReference="simulation_1" />
+   </listOfTasks>
+   <listOfDataGenerators>
+      <dataGenerator id="data_generator_time" name="time">
+         <listOfVariables>
+            <variable id="var_time" name="time" symbol="urn:sedml:symbol:time" taskReference="task_simulation_1" />
+         </listOfVariables>
+         <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci>var_time</ci>
+         </math>
+      </dataGenerator>
+      <dataGenerator id="data_generator_Atot" name="Atot">
+         <listOfVariables>
+            <variable id="var_Atot" name="Atot" target="molecules.A().count" taskReference="task_simulation_1" />
+         </listOfVariables>
+         <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci>var_Atot</ci>
+         </math>
+      </dataGenerator>
+      <dataGenerator id="data_generator_Btot" name="Btot">
+         <listOfVariables>
+            <variable id="var_Btot" name="Btot" target="molecules.B().count" taskReference="task_simulation_1" />
+         </listOfVariables>
+         <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci>var_Btot</ci>
+         </math>
+      </dataGenerator>
+      <dataGenerator id="data_generator_GA00tot" name="GA00tot">
+         <listOfVariables>
+            <variable id="var_GA00tot" name="GA00tot" target="molecules.GeneA_00().count" taskReference="task_simulation_1" />
+         </listOfVariables>
+         <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci>var_GA00tot</ci>
+         </math>
+      </dataGenerator>
+      <dataGenerator id="data_generator_GA01tot" name="GA01tot">
+         <listOfVariables>
+            <variable id="var_GA01tot" name="GA01tot" target="molecules.GeneA_01().count" taskReference="task_simulation_1" />
+         </listOfVariables>
+         <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci>var_GA01tot</ci>
+         </math>
+      </dataGenerator>
+      <dataGenerator id="data_generator_GA10tot" name="GA10tot">
+         <listOfVariables>
+            <variable id="var_GA10tot" name="GA10tot" target="molecules.GeneA_10().count" taskReference="task_simulation_1" />
+         </listOfVariables>
+         <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci>var_GA10tot</ci>
+         </math>
+      </dataGenerator>
+      <dataGenerator id="data_generator_GB00tot" name="GB00tot">
+         <listOfVariables>
+            <variable id="var_GB00tot" name="GB00tot" target="molecules.GeneB_00().count" taskReference="task_simulation_1" />
+         </listOfVariables>
+         <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci>var_GB00tot</ci>
+         </math>
+      </dataGenerator>
+      <dataGenerator id="data_generator_GB01tot" name="GB01tot">
+         <listOfVariables>
+            <variable id="var_GB01tot" name="GB01tot" target="molecules.GeneB_01().count" taskReference="task_simulation_1" />
+         </listOfVariables>
+         <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci>var_GB01tot</ci>
+         </math>
+      </dataGenerator>
+      <dataGenerator id="data_generator_GB10tot" name="GB10tot">
+         <listOfVariables>
+            <variable id="var_GB10tot" name="GB10tot" target="molecules.GeneB_10().count" taskReference="task_simulation_1" />
+         </listOfVariables>
+         <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci>var_GB10tot</ci>
+         </math>
+      </dataGenerator>
+   </listOfDataGenerators>
+   <listOfOutputs>
+      <report id="report">
+         <listOfDataSets>
+            <dataSet id="data_set_time" label="time" dataReference="data_generator_time" />
+            <dataSet id="data_set_Atot" label="Atot" dataReference="data_generator_Atot" />
+            <dataSet id="data_set_Btot" label="Btot" dataReference="data_generator_Btot" />
+            <dataSet id="data_set_GA00tot" label="GA00tot" dataReference="data_generator_GA00tot" />
+            <dataSet id="data_set_GA01tot" label="GA01tot" dataReference="data_generator_GA01tot" />
+            <dataSet id="data_set_GA10tot" label="GA10tot" dataReference="data_generator_GA10tot" />
+            <dataSet id="data_set_GB00tot" label="GB00tot" dataReference="data_generator_GB00tot" />
+            <dataSet id="data_set_GB01tot" label="GB01tot" dataReference="data_generator_GB01tot" />
+            <dataSet id="data_set_GB10tot" label="GB10tot" dataReference="data_generator_GB10tot" />
+         </listOfDataSets>
+      </report>
+
+      <plot2D id="Figure">
+         <listOfCurves>
+            <curve id="curve_Atot" name="A" xDataReference="data_generator_time" yDataReference="data_generator_Atot" />
+            <curve id="curve_Btot" name="B" xDataReference="data_generator_time" yDataReference="data_generator_Btot" />
+            <curve id="curve_GA00tot" name="Gene A (0, 0)" xDataReference="data_generator_time" yDataReference="data_generator_GA00tot" />
+            <curve id="curve_GA01tot" name="Gene A (0, 1)" xDataReference="data_generator_time" yDataReference="data_generator_GA01tot" />
+            <curve id="curve_GA10tot" name="Gene A (1, 0)" xDataReference="data_generator_time" yDataReference="data_generator_GA10tot" />
+            <curve id="curve_GB00tot" name="Gene B (0, 0)" xDataReference="data_generator_time" yDataReference="data_generator_GB00tot" />
+            <curve id="curve_GB01tot" name="Gene B (0, 1)" xDataReference="data_generator_time" yDataReference="data_generator_GB01tot" />
+            <curve id="curve_GB10tot" name="Gene B (1, 0)" xDataReference="data_generator_time" yDataReference="data_generator_GB10tot" />
+         </listOfCurves>
+      </plot2D>
+   </listOfOutputs>
+</sedML>

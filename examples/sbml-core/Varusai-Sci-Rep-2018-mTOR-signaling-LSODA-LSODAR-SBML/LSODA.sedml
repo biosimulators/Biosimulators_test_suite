@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML
+    xmlns="http://sed-ml.org/sed-ml/level1/version3" level="1" version="3"
+    xmlns:sbml="http://www.sbml.org/sbml/level2/version4">
+    <listOfSimulations>
+        <uniformTimeCourse id="LSODA" initialTime="0" outputStartTime="0" outputEndTime="3600" numberOfPoints="1000">
+            <algorithm kisaoID="KISAO:0000560"/>
+        </uniformTimeCourse>
+    </listOfSimulations>
+    <listOfModels>
+        <model id="model" language="urn:sedml:language:sbml" source="Varusai2018.xml">
+            <listOfChanges>
+                <changeAttribute target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='Km3']/@value" newValue="50.01"/>
+            </listOfChanges>
+        </model>
+    </listOfModels>
+    <listOfTasks>
+        <task id="task1" modelReference="model" simulationReference="LSODA"/>
+    </listOfTasks>
+    <listOfDataGenerators>
+        <dataGenerator id="data_generator_time" name="Time">
+            <listOfVariables>
+                <variable id="var_time_task1" symbol="urn:sedml:symbol:time" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_time_task1 </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_Akt">
+            <listOfVariables>
+                <variable id="var_Akt" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;Akt&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_Akt </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_DEPTOR">
+            <listOfVariables>
+                <variable id="var_DEPTOR" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;DEPTOR&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_DEPTOR </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_iIRS">
+            <listOfVariables>
+                <variable id="var_iIRS" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;iIRS&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_iIRS </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_IR">
+            <listOfVariables>
+                <variable id="var_IR" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;IR&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_IR </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_IRS">
+            <listOfVariables>
+                <variable id="var_IRS" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;IRS&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_IRS </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_mTORC1">
+            <listOfVariables>
+                <variable id="var_mTORC1" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;mTORC1&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_mTORC1 </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_mTORC1_DEPTOR">
+            <listOfVariables>
+                <variable id="var_mTORC1_DEPTOR" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;mTORC1_DEPTOR&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_mTORC1_DEPTOR </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_mTORC2">
+            <listOfVariables>
+                <variable id="var_mTORC2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;mTORC2&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_mTORC2 </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_mTORC2_DEPTOR">
+            <listOfVariables>
+                <variable id="var_mTORC2_DEPTOR" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;mTORC2_DEPTOR&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_mTORC2_DEPTOR </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_pAkt">
+            <listOfVariables>
+                <variable id="var_pAkt" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;pAkt&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_pAkt </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_pDEPTOR">
+            <listOfVariables>
+                <variable id="var_pDEPTOR" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;pDEPTOR&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_pDEPTOR </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_pIR">
+            <listOfVariables>
+                <variable id="var_pIR" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;pIR&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_pIR </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_pIRS">
+            <listOfVariables>
+                <variable id="var_pIRS" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;pIRS&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_pIRS </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_pmTORC1">
+            <listOfVariables>
+                <variable id="var_pmTORC1" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;pmTORC1&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_pmTORC1 </ci>
+            </math>
+        </dataGenerator>
+        <dataGenerator id="data_generator_pmTORC2">
+            <listOfVariables>
+                <variable id="var_pmTORC2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;pmTORC2&apos;]" taskReference="task1"/>
+            </listOfVariables>
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_pmTORC2 </ci>
+            </math>
+        </dataGenerator>
+    </listOfDataGenerators>
+    <listOfOutputs>
+        <report id="report">
+            <listOfDataSets>
+                <dataSet id="data_set_time" label="Time" dataReference="data_generator_time"/>
+                <dataSet id="data_set_Akt" label="Akt" dataReference="data_generator_Akt"/>
+                <dataSet id="data_set_DEPTOR" label="DEPTOR" dataReference="data_generator_DEPTOR"/>
+                <dataSet id="data_set_iIRS" label="iIRS" dataReference="data_generator_iIRS"/>
+                <dataSet id="data_set_IR" label="IR" dataReference="data_generator_IR"/>
+                <dataSet id="data_set_IRS" label="IRS" dataReference="data_generator_IRS"/>
+                <dataSet id="data_set_mTORC1" label="mTORC1" dataReference="data_generator_mTORC1"/>
+                <dataSet id="data_set_mTORC1_DEPTOR" label="mTORC1_DEPTOR" dataReference="data_generator_mTORC1_DEPTOR"/>
+                <dataSet id="data_set_mTORC2" label="mTORC2" dataReference="data_generator_mTORC2"/>
+                <dataSet id="data_set_mTORC2_DEPTOR" label="mTORC2_DEPTOR" dataReference="data_generator_mTORC2_DEPTOR"/>
+                <dataSet id="data_set_pAkt" label="pAkt" dataReference="data_generator_pAkt"/>
+                <dataSet id="data_set_pDEPTOR" label="pDEPTOR" dataReference="data_generator_pDEPTOR"/>
+                <dataSet id="data_set_pIR" label="pIR" dataReference="data_generator_pIR"/>
+                <dataSet id="data_set_pIRS" label="pIRS" dataReference="data_generator_pIRS"/>
+                <dataSet id="data_set_pmTORC1" label="pmTORC1" dataReference="data_generator_pmTORC1"/>
+                <dataSet id="data_set_pmTORC2" label="pmTORC2" dataReference="data_generator_pmTORC2"/>
+            </listOfDataSets>
+        </report>
+        <plot2D id="Figure_2c" name="Figure 2c">
+            <listOfCurves>
+                <curve id="curve_pmTORC1" name="pmTORC1" xDataReference="data_generator_time" yDataReference="data_generator_pmTORC1"/>
+            </listOfCurves>
+        </plot2D>
+    </listOfOutputs>
+</sedML>

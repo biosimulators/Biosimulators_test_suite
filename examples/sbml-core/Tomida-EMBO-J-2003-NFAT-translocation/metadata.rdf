@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:dcterms='http://purl.org/dc/terms/' xmlns:vCard='http://www.w3.org/2006/vcard/ns#' xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+  <rdf:Description rdf:about='./BIOMD0000000678_url.xml'>
+    <dcterms:description>Tomida et al. EMBO Journal 2003: Calcium-induced NFAT translocation</dcterms:description>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Tomida</vCard:family-name>
+        <vCard:given-name>Taichiro</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Hirose</vCard:family-name>
+        <vCard:given-name>Kenzo</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Takizawa</vCard:family-name>
+        <vCard:given-name>Azusa</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Shibasaki</vCard:family-name>
+        <vCard:given-name>Futoshi</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Iino</vCard:family-name>
+        <vCard:given-name>Masamitsu</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <bqmodel:isDescribedBy>
+      <rdf:Bag>
+        <rdf:li rdf:resource="https://doi.org/10.1093/emboj/cdg381"/>
+      </rdf:Bag>
+    </bqmodel:isDescribedBy>
+    <bqmodel:is>
+      <rdf:Bag>
+        <rdf:li rdf:resource="http://identifiers.org/biomodels.db/BIOMD0000000678"/>
+      </rdf:Bag>
+    </bqmodel:is>
+    <dcterms:license>http://creativecommons.org/publicdomain/zero/1.0/</dcterms:license>
+  </rdf:Description>
+</rdf:RDF>

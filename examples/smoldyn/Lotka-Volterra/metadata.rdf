@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rdf:RDF
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:dcterms='http://purl.org/dc/terms/'
+    xmlns:vCard='http://www.w3.org/2006/vcard/ns#'
+    xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+    <rdf:Description rdf:about='./model.txt'>
+        <dcterms:description>Lotka-Volterra model</dcterms:description>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Steven</vCard:family-name>
+                <vCard:given-name>Andrews</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <bqmodel:is>
+            <rdf:Bag>
+                <rdf:li rdf:resource="http://www.smoldyn.org/archive/examples/S8_reactions/lotvolt/lotvolt.txt"/>
+            </rdf:Bag>
+        </bqmodel:is>
+        <dcterms:license>https://github.com/ssandrews/Smoldyn/blob/master/LICENSE</dcterms:license>
+    </rdf:Description>
+</rdf:RDF>

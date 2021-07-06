@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version3" metaid="_00000001" level="1" version="3"
+  xmlns:sbml="http://www.sbml.org/sbml/level2/version4">
+  <annotation>
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:bibo="http://purl.org/ontology/bibo/">
+      <rdf:Description rdf:about="#_00000001">
+        <dc:description dc:type="description">SED-ML file for figure 3C (high frequency) of the reference publication.</dc:description>
+        <dc:creator>
+          <rdf:Bag>
+            <rdf:li>
+              <vcard:N>
+                <vcard:Given>Taichiro</vcard:Given>
+                <vcard:Family>Tomida</vcard:Family>
+              </vcard:N>
+            </rdf:li>
+            <rdf:li>
+              <vcard:N>
+                <vcard:Given>Kenzo</vcard:Given>
+                <vcard:Family>Hirose</vcard:Family>
+              </vcard:N>
+            </rdf:li>
+            <rdf:li>
+              <vcard:N>
+                <vcard:Given>Azusa</vcard:Given>
+                <vcard:Family>Takizawa</vcard:Family>
+              </vcard:N>
+            </rdf:li>
+            <rdf:li>
+              <vcard:N>
+                <vcard:Given>Futoshi</vcard:Given>
+                <vcard:Family>Shibasaki</vcard:Family>
+              </vcard:N>
+            </rdf:li>
+            <rdf:li>
+              <vcard:N>
+                <vcard:Given>Masamitsu</vcard:Given>
+                <vcard:Family>Iino</vcard:Family>
+              </vcard:N>
+            </rdf:li>
+          </rdf:Bag>
+        </dc:creator>
+        <dcterms:references>
+          <rdf:Bag>
+            <rdf:li>
+              <bibo:Article>
+                <bibo:authorList>Taichiro Tomida, Kenzo Hirose, Azusa Takizawa, Futoshi Shibasaki &amp; Masamitsu Iino</bibo:authorList>
+                <dc:title>NFAT functions as a working memory of Ca2+ signals in decoding Ca2+ oscillation.</dc:title>
+                <bibo:journal>The EMBO journal</bibo:journal>
+                <bibo:volume>22</bibo:volume>
+                <bibo:issue>15</bibo:issue>
+                <bibo:pages>3825-3832</bibo:pages>
+                <dc:date>2003</dc:date>
+                <bibo:doi>10.1093/emboj/cdg381</bibo:doi>
+              </bibo:Article>
+            </rdf:li>
+          </rdf:Bag>
+        </dcterms:references>
+        <dcterms:license>CC0</dcterms:license>
+        <dcterms:mediator>BioSimulations</dcterms:mediator>
+      </rdf:Description>
+    </rdf:RDF>
+  </annotation>
+  <listOfModels>
+    <model id="BIOMD0000000678" name="Tomida2003 - Calcium Oscillatory-induced translocation of nuclear factor of activated T cells" language="urn:sedml:language:sbml" source="BIOMD0000000678_url.xml">
+      <listOfChanges>
+        <changeAttribute target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='k1']/@value" newValue="0.35901"/>
+      </listOfChanges>
+    </model>
+  </listOfModels>
+  <listOfSimulations>
+    <uniformTimeCourse id="BIOMD0000000678_sim" name="MODEL0912160005" initialTime="0" outputStartTime="0" outputEndTime="80" numberOfPoints="1000">
+      <algorithm kisaoID="KISAO:0000560"/>
+    </uniformTimeCourse>
+  </listOfSimulations>
+  <listOfTasks>
+    <task id="BIOMD0000000678_task" name="MODEL0912160005" modelReference="BIOMD0000000678" simulationReference="BIOMD0000000678_sim"/>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="data_gen_time" name="time">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_time </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_time" name="time" symbol="urn:sedml:symbol:time" taskReference="BIOMD0000000678_task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_NFAT_phosphorylated" name="NFAT_phosphorylated">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_NFAT_phosphorylated </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_NFAT_phosphorylated" name="NFAT_phosphorylated" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;NFAT_phosphorylated&apos;]" taskReference="BIOMD0000000678_task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_NFAT_dephosphorylated" name="NFAT_dephosphorylated">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_NFAT_dephosphorylated </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_NFAT_dephosphorylated" name="NFAT_dephosphorylated" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;NFAT_dephosphorylated&apos;]" taskReference="BIOMD0000000678_task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_NFAT_transported" name="NFAT_transported">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_NFAT_transported </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_NFAT_transported" name="NFAT_transported" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;NFAT_transported&apos;]" taskReference="BIOMD0000000678_task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_stimulus" name="stimulus">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_stimulus </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_stimulus" name="stimulus" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;stimulus&apos;]" taskReference="BIOMD0000000678_task"/>
+      </listOfVariables>
+    </dataGenerator>
+  </listOfDataGenerators>
+  <listOfOutputs>
+    <report id="report">
+      <listOfDataSets>
+        <dataSet id="data_set_time" label="Time (min)" dataReference="data_gen_time"/>
+        <dataSet id="data_set_NFAT_dephosphorylated" label="Dephosphorylated NFAT" dataReference="data_gen_NFAT_dephosphorylated"/>
+        <dataSet id="data_set_NFAT_phosphorylated" label="Phosphorylated NFAT" dataReference="data_gen_NFAT_phosphorylated"/>
+        <dataSet id="data_set_NFAT_transported" label="Transported NFAT" dataReference="data_gen_NFAT_transported"/>
+        <dataSet id="data_set_stimulus" label="Stimulus" dataReference="data_gen_stimulus"/>
+      </listOfDataSets>
+    </report>
+    <plot2D id="Figure_3c" name="Figure 3c">
+      <listOfCurves>
+        <curve id="curve_NFAT_dephosphorylated" name="Dephosphorylated NFAT" xDataReference="data_gen_time" yDataReference="data_gen_NFAT_dephosphorylated"/>
+        <curve id="curve_NFAT_transported" name="Transported NFAT" xDataReference="data_gen_time" yDataReference="data_gen_NFAT_transported"/>
+      </listOfCurves>
+    </plot2D>
+  </listOfOutputs>
+</sedML>

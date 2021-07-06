@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML
+    xmlns="http://sed-ml.org/sed-ml/level1/version3" level="1" version="3"
+    xmlns:sbml="http://www.sbml.org/sbml/level2/version4">
+    <listOfModels>
+        <model id="BIOMD0000000002" language="urn:sedml:language:sbml" source="BIOMD0000000002_url.xml">
+            <listOfChanges>
+                <changeAttribute target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='kf_11']/@value" newValue="20.01"/>
+            </listOfChanges>
+        </model>
+    </listOfModels>
+    <listOfSimulations>
+        <uniformTimeCourse id="BIOMD0000000002_sim" initialTime="0.0" outputStartTime="0" outputEndTime="100.0" numberOfPoints="1000">
+            <algorithm kisaoID="KISAO:0000088"/>
+        </uniformTimeCourse>
+    </listOfSimulations>
+    <listOfTasks>
+        <task id="BIOMD0000000002_task" modelReference="BIOMD0000000002" simulationReference="BIOMD0000000002_sim"/>
+    </listOfTasks>
+    <listOfDataGenerators>
+        <dataGenerator id="data_generator_time">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_time </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_time" symbol="urn:sedml:symbol:time" taskReference="BIOMD0000000002_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_generator_BLL">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_BLL </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_BLL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;BLL&apos;]" taskReference="BIOMD0000000002_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_generator_IL">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_IL </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_IL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;IL&apos;]" taskReference="BIOMD0000000002_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_generator_AL">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_AL </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_AL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;AL&apos;]" taskReference="BIOMD0000000002_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_generator_A">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_A </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_A" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;A&apos;]" taskReference="BIOMD0000000002_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_generator_BL">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_BL </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_BL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;BL&apos;]" taskReference="BIOMD0000000002_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_generator_B">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_B </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_B" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;B&apos;]" taskReference="BIOMD0000000002_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_generator_DLL">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_DLL </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_DLL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;DLL&apos;]" taskReference="BIOMD0000000002_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_generator_D">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_D </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_D" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;D&apos;]" taskReference="BIOMD0000000002_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_generator_ILL">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_ILL </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_ILL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;ILL&apos;]" taskReference="BIOMD0000000002_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_generator_DL">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_DL </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_DL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;DL&apos;]" taskReference="BIOMD0000000002_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_generator_I">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_I </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_I" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;I&apos;]" taskReference="BIOMD0000000002_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_generator_ALL">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_ALL </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_ALL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;ALL&apos;]" taskReference="BIOMD0000000002_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_generator_L">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_L </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_L" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;L&apos;]" taskReference="BIOMD0000000002_task"/>
+            </listOfVariables>
+        </dataGenerator>
+    </listOfDataGenerators>
+    <listOfOutputs>
+        <report id="report">
+            <listOfDataSets>
+                <dataSet id="data_set_time" label="Time (dimensionless)" dataReference="data_generator_time"/>
+                <dataSet id="data_set_L" label="ACh" dataReference="data_generator_L"/>
+                <dataSet id="data_set_A" label="Active" dataReference="data_generator_A"/>
+                <dataSet id="data_set_AL" label="Active ACh" dataReference="data_generator_AL"/>
+                <dataSet id="data_set_ALL" label="Active ACh2" dataReference="data_generator_ALL"/>
+                <dataSet id="data_set_B" label="Basal" dataReference="data_generator_B"/>
+                <dataSet id="data_set_BL" label="Basal ACh" dataReference="data_generator_BL"/>
+                <dataSet id="data_set_BLL" label="Basal ACh2" dataReference="data_generator_BLL"/>
+                <dataSet id="data_set_D" label="Desensitised" dataReference="data_generator_D"/>
+                <dataSet id="data_set_DL" label="Desensitised ACh" dataReference="data_generator_DL"/>
+                <dataSet id="data_set_DLL" label="Desensitised ACh2" dataReference="data_generator_DLL"/>
+                <dataSet id="data_set_I" label="Intermediate" dataReference="data_generator_I"/>
+                <dataSet id="data_set_IL" label="Intermediate ACh" dataReference="data_generator_IL"/>
+                <dataSet id="data_set_ILL" label="Intermediate ACh2" dataReference="data_generator_ILL"/>
+            </listOfDataSets>
+        </report>
+
+        <plot2D id="Figure_4b" name="Figure 4b">
+            <listOfCurves>
+                <curve id="curve_B" name="Basal" xDataReference="data_generator_time" yDataReference="data_generator_B" logX="true"/>
+                <curve id="curve_BL" name="Basal ACh" xDataReference="data_generator_time" yDataReference="data_generator_BL" logX="true"/>
+                <curve id="curve_ALL" name="Active ACh2" xDataReference="data_generator_time" yDataReference="data_generator_ALL" logX="true"/>
+                <curve id="curve_ILL" name="Intermediate ACh2" xDataReference="data_generator_time" yDataReference="data_generator_ILL" logX="true"/>
+                <curve id="curve_DLL" name="Desensitised ACh2" xDataReference="data_generator_time" yDataReference="data_generator_DLL" logX="true"/>
+            </listOfCurves>
+        </plot2D>
+    </listOfOutputs>
+</sedML>

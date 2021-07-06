@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version3" level="1" version="3"
+  xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core"
+  xmlns:qual="http://www.sbml.org/sbml/level3/version1/qual/version1">
+  <listOfModels>
+    <model id="model" language="urn:sedml:language:sbml" source="BIOMD0000000562_url.xml">
+      <listOfChanges>
+        <changeAttribute target="/sbml:sbml/sbml:model/@name" newValue="Example model"/>
+      </listOfChanges>
+    </model>
+  </listOfModels>
+  <listOfSimulations>
+    <uniformTimeCourse id="simulation" initialTime="0" outputStartTime="0" outputEndTime="20" numberOfPoints="20">
+      <algorithm kisaoID="KISAO:0000449"/>
+    </uniformTimeCourse>
+  </listOfSimulations>
+  <listOfTasks>
+    <task id="task" modelReference="model" simulationReference="simulation"/>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="data_generator_time" name="Time">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_time </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_time" name="Time" symbol="urn:sedml:symbol:time" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_egf" name="EGF">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_egf </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_egf" name="EGF" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;egf&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_erk" name="ERK">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_erk </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_erk" name="ERK" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;erk&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_nfkb" name="NF-κB">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_nfkb </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_nfkb" name="NF-κB" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;nfkb&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_tnfa" name="TNFα">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_tnfa </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_tnfa" name="TNFα" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;tnfa&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+  </listOfDataGenerators>
+  <listOfOutputs>
+    <report id="report">
+      <listOfDataSets>
+        <dataSet id="data_set_time" label="Time" dataReference="data_generator_time"/>
+        <dataSet id="data_set_egf" label="EGF" dataReference="data_generator_egf"/>
+        <dataSet id="data_set_erk" label="ERK" dataReference="data_generator_erk"/>
+        <dataSet id="data_set_nfkb" label="NF-kB" dataReference="data_generator_nfkb"/>
+        <dataSet id="data_set_tnfa" label="TNFa" dataReference="data_generator_tnfa"/>
+      </listOfDataSets>
+    </report>
+
+    <plot2D id="Figure_4a" name="Figure 4a">
+      <listOfCurves>
+        <curve id="curve_egf" name="EGF" xDataReference="data_generator_time" yDataReference="data_generator_egf"/>
+        <curve id="curve_tnfa" name="TNFα" xDataReference="data_generator_time" yDataReference="data_generator_tnfa"/>
+        <curve id="curve_erk" name="ERK" xDataReference="data_generator_time" yDataReference="data_generator_erk"/>
+        <curve id="curve_nfkb" name="NF-κB" xDataReference="data_generator_time" yDataReference="data_generator_nfkb"/>        
+      </listOfCurves>
+    </plot2D>
+  </listOfOutputs>
+</sedML>

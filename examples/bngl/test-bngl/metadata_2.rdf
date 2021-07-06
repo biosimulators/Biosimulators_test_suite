@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:dcterms='http://purl.org/dc/terms/' xmlns:vCard='http://www.w3.org/2006/vcard/ns#'>
+  <rdf:Description rdf:about='./test.sedml'>
+    <dcterms:description>Toy gene regulatory network</dcterms:description>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Karr</vCard:family-name>
+        <vCard:given-name>Jonathan</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:license>https://opensource.org/licenses/MIT</dcterms:license>
+  </rdf:Description>
+</rdf:RDF>

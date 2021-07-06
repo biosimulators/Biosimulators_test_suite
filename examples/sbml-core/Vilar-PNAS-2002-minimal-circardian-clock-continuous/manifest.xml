@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<omexManifest xmlns="http://identifiers.org/combine.specifications/omex-manifest">
+  <content location="simulation.sedml" format="http://identifiers.org/combine.specifications/sed-ml" master="true"/>
+  <content location="model_ODE_deterministic.xml" format="http://identifiers.org/combine.specifications/sbml" master="false"/>
+  <content location="model.vcml" format="http://purl.org/NET/mediatypes/application/vcml+xml" master="false"/>
+  <content location="metadata.rdf" format="http://identifiers.org/combine.specifications/omex-metadata" master="false"/>
+</omexManifest>
