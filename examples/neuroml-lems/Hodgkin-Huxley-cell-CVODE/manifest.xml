@@ -7,4 +7,6 @@
   <content location="LeakConductance.channel.nml" format="http://identifiers.org/combine.specifications/neuroml" master="false"/>
   <content location="NML2_SingleCompHHCell.nml" format="http://identifiers.org/combine.specifications/neuroml" master="false"/>
   <content location="metadata.rdf" format="http://identifiers.org/combine.specifications/omex-metadata" master="false"/>
+  <content location="expected-results.json" format="http://purl.org/NET/mediatypes/application/json" master="false"/>
+  <content location="reports.h5" format="http://purl.org/NET/mediatypes/application/x-hdf" master="false"/>
 </omexManifest>

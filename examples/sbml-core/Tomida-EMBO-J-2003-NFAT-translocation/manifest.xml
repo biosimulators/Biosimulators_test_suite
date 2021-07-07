@@ -4,4 +4,7 @@
   <content location="./BIOMD0000000678_sim.sedml" format="http://identifiers.org/combine.specifications/sed-ml" master="true"/>
   <content location="." format="http://identifiers.org/combine.specifications/omex"/>
   <content location="metadata.rdf" format="http://identifiers.org/combine.specifications/omex-metadata" master="false"/>
+  <content location="expected-results.json" format="http://purl.org/NET/mediatypes/application/json" master="false"/>
+  <content location="reports.h5" format="http://purl.org/NET/mediatypes/application/x-hdf" master="false"/>
+  <content location="Figure3c.vega.json" format="http://purl.org/NET/mediatypes/application/vega+json" master="false"/>
 </omexManifest>

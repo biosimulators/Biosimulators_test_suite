@@ -1,9 +1,10 @@
 from biosimulators_utils.combine.io import CombineArchiveReader
 from biosimulators_utils.combine.data_model import CombineArchiveContentFormat
+from biosimulators_utils.combine.validation import validate
 from biosimulators_utils.report.data_model import ReportFormat
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.io import SedmlSimulationReader
-from biosimulators_utils.combine.validation import validate
+from biosimulators_utils.utils.core import flatten_nested_list_of_strings
 from unittest import mock
 import glob
 import h5py
