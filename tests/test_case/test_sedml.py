@@ -736,9 +736,7 @@ class SedmlTestCaseTest(unittest.TestCase):
     def test_SimulatorProducesLinear2DPlots_is_curated_sed_report_suitable_for_building_synthetic_archive(self):
         specs = {'image': {'url': self.IMAGE}}
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
-        curated_case.from_json(os.path.dirname(
-            self.CURATED_ARCHIVE_FILENAME),
-            os.path.basename(self.CURATED_ARCHIVE_FILENAME).replace('.omex', '.json'))
+        curated_case.from_json(self.CURATED_ARCHIVE_FILENAME[0:-5], 'expected-results.json')
         case = sedml.SimulatorProducesLinear2DPlots()
         case._published_projects_test_case = curated_case
 
@@ -853,9 +851,7 @@ class SedmlTestCaseTest(unittest.TestCase):
     def test_SimulatorProducesLinear3DPlots_is_curated_sed_report_suitable_for_building_synthetic_archive(self):
         specs = {'image': {'url': self.IMAGE}}
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
-        curated_case.from_json(os.path.dirname(
-            self.CURATED_ARCHIVE_FILENAME),
-            os.path.basename(self.CURATED_ARCHIVE_FILENAME).replace('.omex', '.json'))
+        curated_case.from_json(self.CURATED_ARCHIVE_FILENAME[0:-5], 'expected-results.json')
         case = sedml.SimulatorProducesLinear3DPlots()
         case._published_projects_test_case = curated_case
 
@@ -919,9 +915,7 @@ class SedmlTestCaseTest(unittest.TestCase):
     def test_SimulatorProducesPlots(self):
         specs = {'image': {'url': self.IMAGE}}
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
-        curated_case.from_json(os.path.dirname(
-            self.CURATED_ARCHIVE_FILENAME),
-            os.path.basename(self.CURATED_ARCHIVE_FILENAME).replace('.omex', '.json'))
+        curated_case.from_json(self.CURATED_ARCHIVE_FILENAME[0:-5], 'expected-results.json')
 
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorProducesLinear2DPlots(
@@ -1122,9 +1116,7 @@ class SedmlTestCaseTest(unittest.TestCase):
             ],
         }
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_ARCHIVE_FILENAME)
-        curated_case.from_json(os.path.dirname(
-            self.CURATED_ARCHIVE_FILENAME),
-            os.path.basename(self.CURATED_ARCHIVE_FILENAME).replace('.omex', '.json'))
+        curated_case.from_json(self.CURATED_ARCHIVE_FILENAME[0:-5], 'expected-results.json')
         case = sedml.SimulatorProducesReportsWithCuratedNumberOfDimensions(
             published_projects_test_cases=[curated_case])
         case.eval(specs)

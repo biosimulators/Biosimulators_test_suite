@@ -162,9 +162,12 @@ class SimulatorCanExecutePublishedProject(TestCase):
         with open(os.path.join(base_path, filename), 'r') as file:
             data = json.load(file)
 
-        self.id = 'published_project.SimulatorCanExecutePublishedProject' + ':' + os.path.splitext(filename)[0]
+        id = filename.replace(os.sep + 'expected-results.json', '')
+        self.id = 'published_project.SimulatorCanExecutePublishedProject' + ':' + id
         self.name = data['name']
-        self.filename = os.path.join(os.path.dirname(os.path.join(base_path, filename)), data['filename'])
+        self.filename = os.path.join(
+            base_path,
+            os.path.relpath(os.path.join(os.path.dirname(filename), '..', data['filename']), '.'))
 
         return self.from_dict(data)
 
@@ -901,10 +904,8 @@ def find_cases(specifications, dir_name=None, output_medium=OutputMedium.console
 
     all_cases = []
     compatible_cases = []
-    for md_filename in glob.glob(os.path.join(dir_name, '**/*.json'), recursive=True):
-        if md_filename.endswith('.vega.json'):
-            continue
-
+    for example_filename in glob.glob(os.path.join(dir_name, '**/*.omex'), recursive=True):
+        md_filename = os.path.join(example_filename[0:-5], 'expected-results.json')
         rel_filename = os.path.relpath(md_filename, dir_name)
         case = SimulatorCanExecutePublishedProject(output_medium=output_medium).from_json(dir_name, rel_filename)
         all_cases.append(case)

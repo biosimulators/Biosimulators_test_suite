@@ -24,16 +24,15 @@ class ExamplesTestCase(unittest.TestCase):
 
     def test(self):
         examples_dir = os.path.join(os.path.dirname(__file__), '..', 'examples')
-        for example_filename in glob.glob(os.path.join(examples_dir, '**', '*.json')):
-            if example_filename.endswith('.vega.json'):
-                continue
+        for example_filename in glob.glob(os.path.join(examples_dir, '**', '*.omex')):
+            example_specs_filename = os.path.join(example_filename[0:-5], 'expected-results.json')
 
             example_base_dir = os.path.join(os.path.dirname(example_filename))
-            reports_filename = example_filename.replace('.omex', '.h5')
+            reports_filename = os.path.join(example_filename[0:-5], 'reports.h5')
             if not os.path.isfile(reports_filename):
                 continue
 
-            with open(example_filename, 'rb') as file:
+            with open(example_specs_filename, 'rb') as file:
                 specs = json.load(file)
 
             archive_filename = os.path.join(example_base_dir, specs['filename'])
@@ -48,7 +47,7 @@ class ExamplesTestCase(unittest.TestCase):
                     flatten_nested_list_of_strings(errors).replace('\n', '\n  '))
                 raise ValueError(msg)
 
-            report_path = specs['filename'].replace('.omex', '.h5')
+            report_path = os.path.join(specs['filename'][0:-5], 'reports.h5')
             for expected_report in specs['expectedReports']:
                 sedml_location = os.path.dirname(expected_report['id'])
                 report_id = os.path.basename(expected_report['id'])
