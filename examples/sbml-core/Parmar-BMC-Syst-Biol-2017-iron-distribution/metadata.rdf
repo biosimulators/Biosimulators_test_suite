@@ -39,3 +39,128 @@
     <dcterms:license>http://creativecommons.org/publicdomain/zero/1.0/</dcterms:license>
   </rdf:Description>
 </rdf:RDF>
+
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+    xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"
+    xmlns:bqmodel="http://biomodels.net/model-qualifiers/"
+    xmlns:collex="http://www.collex.org/schema#"
+    xmlns:dc="https://dublincore.org/specifications/dublin-core/dcmi-terms/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:om="http://ontology.eil.utoronto.ca/icity/OM/"
+    xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:scoro="http://purl.org/spar/scoro/"
+>
+  <rdf:Description rdf:about="http://omex-libary.org/BioSim0001.omex">
+    <!-- name -->
+    <dc:title>Parmar-BMC-Syst-Biol-2017-iron-distribution</dc:title>
+
+    <!-- short summary -->
+    <dc:abstract>Dynamic model of iron distribution in mice. This model includes normal iron and radioactive labelled tracer iron species and was used for parameter estimation given the data from Lopes et al. 2010 for mice fed an adequate iron diet.</dc:abstract>
+
+    <!-- keywords -->
+    <prism:keyword>Gene Ontology</prism:keyword>
+    <prism:keyword>ion homeostasis</prism:keyword>
+
+    <!-- thumbnail image -->
+    <content location="Figure2.png" format="http://purl.org/NET/mediatypes/image/png" master="false"/>
+
+    <!-- long description -->
+    <dc:description>Iron is an essential element of most living organisms but is a dangerous substance when poorly liganded in solution. The hormone hepcidin regulates the export of iron from tissues to the plasma contributing to iron homeostasis and also restricting its availability to infectious agents. Disruption of iron regulation in mammals leads to disorders such as anemia and hemochromatosis, and contributes to the etiology of several other diseases such as cancer and neurodegenerative diseases. Here we test the hypothesis that hepcidin alone is able to regulate iron distribution in different dietary regimes in the mouse using a computational model of iron distribution calibrated with radioiron tracer data.</dc:description>
+
+    <!-- taxon -->
+    <bqbiol:hasTaxon>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/9606"/>
+        <rdfs:label>Homo sapiens</rdfs:label>
+      </rdf:Description>
+    </bqbiol:hasTaxon>
+
+    <!-- authors(s) -->
+    <dc:creator>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
+        <foaf:name>Jonathan Karr</foaf:name>
+
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
+        <rdfs:label>Jonathan Karr</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+     <!-- authors(s) -->
+    <dc:creator>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
+        <foaf:name>Jignesh H Parmar</foaf:name>
+
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
+        <rdfs:label>Jignesh H Parmar</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    
+    <!-- authors(s) -->
+    <dc:creator>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
+        <foaf:name>Grey Davis</foaf:name>
+
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
+        <rdfs:label>Grey Davis</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    
+     <!-- authors(s) -->
+    <dc:creator>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
+        <foaf:name>Hope Shevchuk</foaf:name>
+
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
+        <rdfs:label>Hope Shevchuk</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    
+     <!-- authors(s) -->
+    <dc:creator>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
+        <foaf:name>Pedro Mendes</foaf:name>
+
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
+        <rdfs:label>Pedro Mendes</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    
+    <!-- contributor(s) -->
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>Pedro Mendes</foaf:name>
+
+        <rdfs:label>Krishna Kumar Tiwari</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+    <!-- citations -->
+    <bqmodel:isDescribedBy>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.copbio.2017.12.013"/>
+        <rdfs:label>Parmar JH, Davis G, Shevchuk H, Mendes P. Modeling the dynamics of mouse iron body distribution: hepcidin is necessary but not sufficient. BMC Syst Biol. 2017 May 18;11(1):57. doi: 10.1186/s12918-017-0431-3. PMID: 28521769; PMCID: PMC5437513.</rdfs:label>
+      </rdf:Description>
+    </bqmodel:isDescribedBy>
+
+    <bqmodel:isDescribedBy>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/pubmed:29275251"/>
+        <rdfs:label>Parmar JH, Davis G, Shevchuk H, Mendes P. Modeling the dynamics of mouse iron body distribution: hepcidin is necessary but not sufficient. BMC Syst Biol. 2017 May 18;11(1):57. doi: 10.1186/s12918-017-0431-3. PMID: 28521769; PMCID: PMC5437513.</rdfs:label>
+      </rdf:Description>
+    </bqmodel:isDescribedBy>
+
+    <!-- created -->
+    <dc:created>
+      <rdf:Description>
+        <dc:W3CDTF>2017-05-18</dc:W3CDTF>
+      </rdf:Description>
+    </dc:created>
