@@ -7,5 +7,5 @@
   <content location="Figure2.png" format="http://purl.org/NET/mediatypes/image/png" master="false"/>
   <content location="expected-results.json" format="http://purl.org/NET/mediatypes/application/json" master="false"/>
   <content location="reports.h5" format="http://purl.org/NET/mediatypes/application/x-hdf" master="false"/>
-  <content location="Figure4b.vega.json" format="http://purl.org/NET/mediatypes/application/vega+json" master="false"/>
+  <content location="Figure_4b.vega.json" format="http://purl.org/NET/mediatypes/application/vega+json" master="false"/>
 </omexManifest>

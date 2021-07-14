@@ -112,7 +112,7 @@
         <dataSet id="data_set_I" label="I" dataReference="data_gen_I"/>
       </listOfDataSets>
     </report>
-    <plot2D id="Figure_1" name="Figure 1">
+    <plot2D id="Figure_1_bottom_left" name="Figure 1 bottom, left">
       <listOfCurves>
         <curve id="plot_1_T_time" name="T" logX="false" xDataReference="data_gen_time" logY="false" yDataReference="data_gen_T"/>
         <curve id="plot_1_E_time" name="E" logX="false" xDataReference="data_gen_time" logY="false" yDataReference="data_gen_E"/>

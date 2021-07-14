@@ -115,6 +115,7 @@
   "data": [
     {
       "name": "rawTimeSpeciesConcentrations",
+      "sedml": "simulation_1.sedml/report",
       "values": [
         {
           "label": "Time (min)",
@@ -128,7 +129,7 @@
           ]
         },
         {
-          "label": "Dephosphorylated NFAT",
+          "label": "Clb2",
           "values": [
             0.000009999999999999999,
             0.000008428551267842631,
@@ -142,17 +143,16 @@
     },
     {
       "name": "timeSpeciesConcentrations",
-      "_mapToSedmlReport": false,
       "source": "rawTimeSpeciesConcentrations",
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.id == 'data_gen_time' || indexof(['data_gen_NFAT_dephosphorylated', 'data_gen_NFAT_transported'], datum.id) >= 0"
+          "expr": "datum.id == 'data_set_time' || indexof(['data_set_Clb', 'data_set_Cln', 'data_set_SBF', 'data_set_Sic'], datum.id) >= 0"
         },
         {
           "type": "cross",
           "as": ["Time", "SpeciesLabelValues"],
-          "filter": "datum.Time.id == 'data_gen_time' && datum.SpeciesLabelValues.id != 'data_gen_time'"    
+          "filter": "datum.Time.id == 'data_set_time' && datum.SpeciesLabelValues.id != 'data_set_time'"
         },
         {
           "type": "formula",
@@ -186,7 +186,6 @@
     },
     {
       "name": "selected",
-      "_mapToSedmlReport": false,
       "on": [
         {"trigger": "clear", "remove": true},
         {"trigger": "!shift", "remove": true},
@@ -210,7 +209,7 @@
       "nice": true,
       "zero": true,
       "domain": {
-        "data": "timeSpeciesConcentrations", 
+        "data": "timeSpeciesConcentrations",
         "field": "SpeciesConcentration"
       },
       "reverse": true
@@ -225,13 +224,13 @@
 
   "axes": [
     {
-      "orient": "bottom", 
+      "orient": "bottom",
       "offset": {"signal": "axesHeight"},
-      "scale": "TimeScale", 
+      "scale": "TimeScale",
       "title": "Time (min)"
     },
     {
-      "orient": "left", 
+      "orient": "left",
       "scale": "SpeciesConcentrationScale",
       "title": "Concentration (nM)"
     }
@@ -260,7 +259,7 @@
               "tooltip": {"field": "SpeciesLabel"}
             },
             "update": {
-              "strokeOpacity": [                
+              "strokeOpacity": [
                 {"test": "(!domain || inrange(datum.SpeciesLabel, domain)) && (!length(data('selected')) || indata('selected', 'value', datum.SpeciesLabel))", "value": 1 },
                 {"value": 0.15}
               ]

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rdf:RDF 
+<rdf:RDF
   xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"
   xmlns:bqmodel="http://biomodels.net/model-qualifiers/"
   xmlns:collex="http://www.collex.org/schema#"
@@ -70,7 +70,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-6961-1366"/>
         <foaf:name>Bela Novak</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-6961-1366"/>        
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-6961-1366"/>
         <rdfs:label>Bela Novak</rdfs:label>
       </rdf:Description>
     </dc:creator>
@@ -80,7 +80,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0001-7560-6013"/>
         <foaf:name>John J. Tyson</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-7560-6013"/>        
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-7560-6013"/>
         <rdfs:label>John J. Tyson</rdfs:label>
       </rdf:Description>
     </dc:creator>
@@ -136,13 +136,48 @@
   </rdf:Description>
 
   <!-- links from SED-ML plots to figures of articles -->
-  <rdf:Description rdf:about="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/simulation_1.sedml">
+  <rdf:Description rdf:about="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/Figure3a.vega.json">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
-        <rdfs:label>Figure 3</rdfs:label>
+        <rdfs:label>Figure 3a</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
   </rdf:Description>
 
+  <rdf:Description rdf:about="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/simulation_1.sedml/Figure_3a">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
+        <rdfs:label>Figure 3a</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/simulation_1.sedml/Figure_3b">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
+        <rdfs:label>Figure 3b</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/simulation_1.sedml/Figure_3c">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
+        <rdfs:label>Figure 3c</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/simulation_1.sedml/Figure_3d">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
+        <rdfs:label>Figure 3d</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
 </rdf:RDF>

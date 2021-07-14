@@ -150,6 +150,15 @@
   </rdf:Description>
 
   <!-- links from SED-ML plots to figures of articles -->
+  <rdf:Description rdf:about="http://omex-libary.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/Figure_4b.vega.json">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1007/s004220050302"/>
+        <rdfs:label>Figure 4b</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+
   <rdf:Description rdf:about="http://omex-libary.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/BIOMD0000000002_sim.sedml/Figure_4b">
     <bqmodel:is>
       <rdf:Description>

@@ -115,6 +115,7 @@
   "data": [
     {
       "name": "rawTimeSpeciesConcentrations",
+      "sedml": "BIOMD0000000002_sim.sedml/report",
       "values": [
         {
           "label": "Time (dimensionless)",
@@ -142,7 +143,6 @@
     },
     {
       "name": "timeSpeciesConcentrations",
-      "_mapToSedmlReport": false,
       "source": "rawTimeSpeciesConcentrations",
       "transform": [
         {
@@ -186,7 +186,6 @@
     },
     {
       "name": "selected",
-      "_mapToSedmlReport": false,
       "on": [
         {"trigger": "clear", "remove": true},
         {"trigger": "!shift", "remove": true},

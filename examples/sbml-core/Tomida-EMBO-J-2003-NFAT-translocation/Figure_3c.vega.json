@@ -115,6 +115,7 @@
   "data": [
     {
       "name": "rawTimeSpeciesConcentrations",
+      "sedml": "BIOMD0000000678_sim.sedml/report",
       "values": [
         {
           "label": "Time (min)",
@@ -128,7 +129,7 @@
           ]
         },
         {
-          "label": "Clb2",
+          "label": "Dephosphorylated NFAT",
           "values": [
             0.000009999999999999999,
             0.000008428551267842631,
@@ -142,17 +143,16 @@
     },
     {
       "name": "timeSpeciesConcentrations",
-      "_mapToSedmlReport": false,
       "source": "rawTimeSpeciesConcentrations",
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.id == 'data_gen_time' || indexof(['data_gen_Clb', 'data_gen_Cln', 'data_gen_SBF', 'data_gen_Sic'], datum.id) >= 0"
+          "expr": "datum.id == 'data_set_time' || indexof(['data_set_NFAT_dephosphorylated', 'data_set_NFAT_transported'], datum.id) >= 0"
         },
         {
           "type": "cross",
           "as": ["Time", "SpeciesLabelValues"],
-          "filter": "datum.Time.id == 'data_gen_time' && datum.SpeciesLabelValues.id != 'data_gen_time'"    
+          "filter": "datum.Time.id == 'data_set_time' && datum.SpeciesLabelValues.id != 'data_set_time'"    
         },
         {
           "type": "formula",
@@ -186,7 +186,6 @@
     },
     {
       "name": "selected",
-      "_mapToSedmlReport": false,
       "on": [
         {"trigger": "clear", "remove": true},
         {"trigger": "!shift", "remove": true},
