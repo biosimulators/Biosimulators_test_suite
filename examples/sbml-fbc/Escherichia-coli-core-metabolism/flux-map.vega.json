@@ -332,7 +332,7 @@
     },
     {
       "name": "reactionFluxes",
-      "sedml": "simulation.sedml/report",
+      "sedmlUri": ["simulation.sedml", "report"],
       "values": [{
         "label": "PGK",
         "values": [

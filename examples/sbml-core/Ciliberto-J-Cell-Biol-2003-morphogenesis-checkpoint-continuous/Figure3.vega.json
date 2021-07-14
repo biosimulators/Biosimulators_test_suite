@@ -73,7 +73,7 @@
   ],
   "data": [{
       "name": "rawTimeSpeciesConcentrations",
-      "sedml": "simulation_1.sedml/report",
+      "sedmlUri": ["simulation_1.sedml", "report"],
       "values": [{
         "label": "Time (min)",
         "values": [

@@ -68,7 +68,7 @@
   "data": [
     {
       "name": "rawTimeSpeciesConcentrations",
-      "sedml": "BIOMD0000000678_sim.sedml/report",
+      "sedmlUri": ["BIOMD0000000678_sim.sedml", "report"],
       "values": [
         {
           "label": "Time (min)",
