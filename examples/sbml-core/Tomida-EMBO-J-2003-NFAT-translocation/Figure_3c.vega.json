@@ -62,53 +62,6 @@
           "force":  true
         }
       ]
-    },
-    {
-      "name": "brush", "value": 0,
-      "on": [
-        {
-          "events": {"signal": "clear"},
-          "update": "clear ? [0, 0] : brush"
-        },
-        {
-          "events": "@xaxis:mousedown",
-          "update": "[x(), x()]"
-        },
-        {
-          "events": "[@xaxis:mousedown, window:mouseup] > window:mousemove!",
-          "update": "[brush[0], clamp(x(), 0, chartWidth)]"
-        },
-        {
-          "events": {"signal": "delta"},
-          "update": "clampRange([anchor[0] + delta, anchor[1] + delta], 0, chartWidth)"
-        }
-      ]
-    },
-    {
-      "name": "anchor", "value": null,
-      "on": [{"events": "@brush:mousedown", "update": "slice(brush)"}]
-    },
-    {
-      "name": "xdown", "value": 0,
-      "on": [{"events": "@brush:mousedown", "update": "x()"}]
-    },
-    {
-      "name": "delta", "value": 0,
-      "on": [
-        {
-          "events": "[@brush:mousedown, window:mouseup] > window:mousemove!",
-          "update": "x() - xdown"
-        }
-      ]
-    },
-    {
-      "name": "domain",
-      "on": [
-        {
-          "events": {"signal": "brush"},
-          "update": "span(brush) ? invert('x', brush) : null"
-        }
-      ]
     }
   ],
 
@@ -161,7 +114,7 @@
         },
         {
           "type": "formula",
-          "expr": "datum.SpeciesLabelValues.id",
+          "expr": "datum.SpeciesLabelValues.label",
           "as": "SpeciesLabel"
         },
         {
@@ -179,7 +132,7 @@
         },
         {
           "type": "formula",
-          "expr": "datum.SpeciesConcentration * 1e9",
+          "expr": "datum.SpeciesConcentration",
           "as": "SpeciesConcentration"
         }
       ]
@@ -260,7 +213,7 @@
             },
             "update": {
               "strokeOpacity": [                
-                {"test": "(!domain || inrange(datum.SpeciesLabel, domain)) && (!length(data('selected')) || indata('selected', 'value', datum.SpeciesLabel))", "value": 1 },
+                {"test": "(!length(data('selected')) || indata('selected', 'value', datum.SpeciesLabel))", "value": 1 },
                 {"value": 0.15}
               ]
             },

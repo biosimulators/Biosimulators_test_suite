@@ -136,11 +136,11 @@
   </rdf:Description>
 
   <!-- links from SED-ML plots to figures of articles -->
-  <rdf:Description rdf:about="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/Figure3a.vega.json">
+  <rdf:Description rdf:about="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/Figure3.vega.json">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
-        <rdfs:label>Figure 3a</rdfs:label>
+        <rdfs:label>Figure 3</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
   </rdf:Description>
