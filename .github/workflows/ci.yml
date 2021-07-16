@@ -68,7 +68,10 @@ jobs:
 
       # zip COMBINE/OMEX archives
       - name: Zip COMBINE/OMEX archives
-        run: python scripts/zip_examples.py
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends zipcmp
+          python scripts/zip_examples.py
 
       - id: commit-archives
         name: Commit zipped COMBINE/OMEX archives

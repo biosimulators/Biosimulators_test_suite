@@ -12,33 +12,47 @@ Zip example COMBINE/OMEX archives from directories
 import glob
 import os
 import subprocess
+import tempfile
 import zipfile
 
 
 def main():
     examples_dirname = os.path.join(os.path.dirname(__file__), '..', 'examples')
-    for archive_dirname in glob.glob(os.path.join(examples_dirname, '**', '*')):
-        if os.path.isdir(archive_dirname):
-            archive_filename = archive_dirname + '.omex'
+    archive_dirnames = [archive_dirname for archive_dirname in glob.glob(os.path.join(examples_dirname, '**', '*'))
+                        if os.path.isdir(archive_dirname)]
+    for i_archive, archive_dirname in enumerate(archive_dirnames):
+        archive_filename = archive_dirname + '.omex'
 
-            if os.path.isfile(archive_filename):
-                with zipfile.ZipFile(archive_filename, mode='r') as zip_file:
-                    cur_archive_names = zip_file.namelist()
+        fid, temp_archive_filename = tempfile.mkstemp(dir=archive_dirname, suffix='.omex')
+        os.close(fid)
 
-            archive_names = [
-                os.path.relpath(filename, archive_dirname)
-                for filename in glob.glob(os.path.join(archive_dirname, '**', "*"), recursive=True)
-                if os.path.isfile(filename)
-            ]
+        archive_contents = os.walk(archive_dirname)
+        with zipfile.ZipFile(temp_archive_filename, 'w') as zip_file:
+            for root, dirs, files in archive_contents:
+                for file in files:
+                    if os.path.abspath(os.path.join(root, file)) != temp_archive_filename:
+                        zip_file.write(os.path.join(root, file),
+                                       os.path.relpath(os.path.join(root, file),
+                                                       archive_dirname))
 
-            if set(cur_archive_names) != set(archive_names):
-                os.remove(archive_filename)
+        if os.path.isfile(archive_filename):
+            result = subprocess.run(['zipcmp', temp_archive_filename, archive_filename],
+                                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            if result.returncode == 0:
+                os.remove(temp_archive_filename)
+            else:
+                os.rename(temp_archive_filename, archive_filename)
+        else:
+            os.rename(temp_archive_filename, archive_filename)
 
-            for archive_name in archive_names:
-                cmd = ['zip', '-ur', os.path.relpath(archive_filename, archive_dirname), archive_name]
-                result = subprocess.run(cmd, cwd=archive_dirname, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-                if result.returncode not in [0, 12]:
-                    raise ValueError(result.stdout.decode(errors='ignore'))
+
+def zip_dir(path, ziph):
+    # ziph is zipfile handle
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            ziph.write(os.path.join(root, file),
+                       os.path.relpath(os.path.join(root, file),
+                                       os.path.join(path, '..')))
 
 
 if __name__ == "__main__":
