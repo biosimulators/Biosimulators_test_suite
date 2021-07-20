@@ -92,14 +92,11 @@ class CombineArchiveTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
 
         doc_2 = copy.deepcopy(doc)
         sed_docs[doc_location_2] = doc_2
-        now = datetime.datetime.now()
         archive.contents.append(
             CombineArchiveContent(
                 doc_location_2,
                 CombineArchiveContentFormat.SED_ML,
-                master=False,
-                created=now,
-                updated=now),
+                master=False),
         )
 
         return expected_results_of_synthetic_archives

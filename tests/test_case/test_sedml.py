@@ -317,16 +317,13 @@ class SedmlTestCaseTest(unittest.TestCase):
     def test_SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes_build_synthetic_archives(self):
         case = sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes()
 
-        now = case.get_current_time_utc()
         archive = CombineArchive(
             contents=[
                 CombineArchiveContent(
                     location='./a.sedml',
                     format=CombineArchiveContentFormat.SED_ML,
-                    updated=now,
                 ),
             ],
-            updated=now,
         )
 
         doc = SedDocument()
