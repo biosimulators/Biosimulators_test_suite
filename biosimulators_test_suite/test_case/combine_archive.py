@@ -13,7 +13,6 @@ from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import SedDocument, Report  # noqa: F401
 import abc
 import copy
-import datetime
 import os
 import shutil
 import warnings
