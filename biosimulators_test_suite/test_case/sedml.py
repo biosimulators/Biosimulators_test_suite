@@ -20,6 +20,7 @@ from biosimulators_utils.sedml.data_model import (SedDocument, Task, Output, Rep
                                                   ComputeModelChange, Parameter,
                                                   RepeatedTask, Range, UniformRange, UniformRangeType, VectorRange, FunctionalRange,
                                                   SetValueComputeModelChange, SubTask)
+from biosimulators_utils.sedml.exec import get_report_for_plot2d, get_report_for_plot3d
 from biosimulators_utils.sedml.utils import get_xml_node_namespace_tag_target
 from kisao import Kisao
 from kisao.data_model import AlgorithmSubstitutionPolicy
@@ -1503,14 +1504,30 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
             specifications, curated_archive, curated_archive_dir, curated_sed_docs)
         curated_sed_docs = expected_results_of_synthetic_archives[0].sed_documents
 
+        sed_docs_1 = copy.deepcopy(curated_sed_docs)
+        sed_docs_2 = copy.deepcopy(curated_sed_docs)
+
         # get a suitable SED document to modify
-        doc = list(curated_sed_docs.values())[0]
+        doc_1 = list(sed_docs_1.values())[0]
+        doc_2 = list(sed_docs_2.values())[0]
 
         # replace report with plot(s)
-        doc.outputs = self.build_plots(doc.data_generators)
+        doc_1.outputs = self.build_plots(doc_1.data_generators, False)
+        doc_2.outputs = self.build_plots(doc_2.data_generators, True)
 
         # return modified SED document
-        return expected_results_of_synthetic_archives
+        return [
+            ExpectedResultOfSyntheticArchive(
+                curated_archive,
+                sed_docs_1,
+                True,
+                expected_results_of_synthetic_archives[0].environment),
+            ExpectedResultOfSyntheticArchive(
+                curated_archive,
+                sed_docs_2,
+                True,
+                expected_results_of_synthetic_archives[0].environment),
+        ]
 
     @abc.abstractmethod
     def build_plots(self, data_generators):
@@ -1557,7 +1574,8 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
         doc_location = list(synthetic_sed_docs.keys())[0]
         doc_id = os.path.relpath(doc_location, './')
 
-        expected_plot_ids = set(os.path.join(doc_id, output.id + '.pdf') for output in doc.outputs)
+        plots = [output for output in doc.outputs if isinstance(output, (Plot2D, Plot3D))]
+        expected_plot_ids = set(os.path.join(doc_id, plot.id + '.pdf') for plot in plots)
         plot_ids = set(os.path.relpath(file.archive_path, './') for file in archive.files)
 
         missing_plot_ids = expected_plot_ids.difference(plot_ids)
@@ -1578,7 +1596,7 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
         expected_plot_ids = set()
         for doc_location, doc in synthetic_sed_docs.items():
             doc_id = os.path.relpath(doc_location, './')
-            for output in doc.outputs:
+            for output in plots:
                 if isinstance(output, (Plot2D, Plot3D)):
                     expected_plot_ids.add(os.path.join(doc_id, output.id))
 
@@ -1593,6 +1611,39 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
             raise InvalidOutputsException('Simulator did not produce data for the following plots:\n  - {}'.format(
                 '\n  - '.join(sorted('`' + id + '`' for id in missing_plot_ids))
             ))
+
+        # check plot data saved in expected format
+        for doc_location, doc in synthetic_sed_docs.items():
+            doc_id = os.path.relpath(doc_location, './')
+            for output in plots:
+                if isinstance(output, Plot2D):
+                    report = get_report_for_plot2d(output)
+                elif isinstance(output, Plot3D):
+                    report = get_report_for_plot3d(output)
+
+                results = ReportReader().run(report, outputs_dir, os.path.join(doc_id, output.id))
+
+                data_gen_ids = set(results.keys())
+                expected_data_gen_ids = set(data_set.id for data_set in report.data_sets)
+                missing_data_gen_ids = expected_data_gen_ids.difference(data_gen_ids)
+                extra_data_gen_ids = data_gen_ids.difference(expected_data_gen_ids)
+                if missing_data_gen_ids:
+                    raise InvalidOutputsException('Simulator did not record the following data generators:\n  - {}'.format(
+                        '\n  - '.join(sorted('`' + id + '`' for id in missing_data_gen_ids))
+                    ))
+                if extra_data_gen_ids:
+                    msg = 'Simulator recorded extra data generators:\n  - {}'.format(
+                        '\n  - '.join(sorted('`' + id + '`' for id in extra_data_gen_ids)))
+                    warnings.warn(msg, InvalidOutputsWarning)
+
+                for value in results.values():
+                    sim = doc.simulations[0]
+
+                    if value.shape[-1] != sim.number_of_points + 1:
+                        raise InvalidOutputsException('Data set does not have the expected shape')
+
+                    if numpy.any(numpy.isnan(value)):
+                        raise InvalidOutputsException('Data set has unexpected non-NaN values')
 
         # remove temporary directory
         shutil.rmtree(tempdir)
@@ -1625,21 +1676,23 @@ class SimulatorProduces2DPlotsTestCase(SimulatorProducesPlotsTestCase):
 
         return len(expected_report.points) == 1
 
-    def build_plots(self, data_generators):
+    def build_plots(self, data_generators, include_report=False):
         """ Build plots from the defined data generators
 
         Args:
             data_generators (:obj:`list` of :obj:`DataGenerator`): data generators
+            include_report (:obj:`bool`, optional): whether to define a report with the
+                same data generators involved in the plots
 
         Returns:
-            :obj:`list` of :obj:`Output`: plots
+            :obj:`list` of :obj:`Output`: outputs
         """
-        plots = []
+        outputs = []
         for i in range(self._num_plots):
-            plots.append(Plot2D(id='plot_' + str(i)))
+            outputs.append(Plot2D(id='plot_' + str(i)))
 
         for i_data_generator, data_generator in enumerate(data_generators):
-            plots[i_data_generator % self._num_plots].curves.append(
+            outputs[i_data_generator % self._num_plots].curves.append(
                 Curve(
                     id='curve_' + str(i_data_generator),
                     x_data_generator=data_generator,
@@ -1649,7 +1702,19 @@ class SimulatorProduces2DPlotsTestCase(SimulatorProducesPlotsTestCase):
                 ),
             )
 
-        return plots
+        # report with same data generators
+        if include_report:
+            report = Report(id='__report_with_same_data_generators__')
+            for i_data_generator, data_generator in enumerate(data_generators):
+                report.data_sets.append(DataSet(
+                    id='__report_data_set_{}__'.format(i_data_generator),
+                    label='__report_data_set_{}_label__'.format(i_data_generator),
+                    name='{} (Report with same data generators)'.format(data_generator.name or data_generator.id),
+                    data_generator=data_generator,
+                ))
+            outputs.append(report)
+
+        return outputs
 
 
 class SimulatorProduces3DPlotsTestCase(SimulatorProducesPlotsTestCase):
