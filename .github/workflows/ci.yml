@@ -75,6 +75,7 @@ jobs:
 
       - id: commit-archives
         name: Commit zipped COMBINE/OMEX archives
+        if: startsWith(github.ref, 'refs/heads/')
         env:
           HEAD: ${{ github.ref }}
         run: |
@@ -192,6 +193,7 @@ jobs:
 
       - id: commit-docs
         name: Commit the compiled documentation
+        if: startsWith(github.ref, 'refs/heads/')
         run: |
           git stash || true
           git pull
