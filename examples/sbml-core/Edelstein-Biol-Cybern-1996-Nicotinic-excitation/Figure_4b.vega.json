@@ -7,7 +7,7 @@
   "signals": [
     {
       "name": "legendWidth",
-      "value": -210
+      "value": -155
     },
     {
       "name": "legendPadding",
@@ -62,62 +62,16 @@
           "force":  true
         }
       ]
-    },
-    {
-      "name": "brush", "value": 0,
-      "on": [
-        {
-          "events": {"signal": "clear"},
-          "update": "clear ? [0, 0] : brush"
-        },
-        {
-          "events": "@xaxis:mousedown",
-          "update": "[x(), x()]"
-        },
-        {
-          "events": "[@xaxis:mousedown, window:mouseup] > window:mousemove!",
-          "update": "[brush[0], clamp(x(), 0, chartWidth)]"
-        },
-        {
-          "events": {"signal": "delta"},
-          "update": "clampRange([anchor[0] + delta, anchor[1] + delta], 0, chartWidth)"
-        }
-      ]
-    },
-    {
-      "name": "anchor", "value": null,
-      "on": [{"events": "@brush:mousedown", "update": "slice(brush)"}]
-    },
-    {
-      "name": "xdown", "value": 0,
-      "on": [{"events": "@brush:mousedown", "update": "x()"}]
-    },
-    {
-      "name": "delta", "value": 0,
-      "on": [
-        {
-          "events": "[@brush:mousedown, window:mouseup] > window:mousemove!",
-          "update": "x() - xdown"
-        }
-      ]
-    },
-    {
-      "name": "domain",
-      "on": [
-        {
-          "events": {"signal": "brush"},
-          "update": "span(brush) ? invert('x', brush) : null"
-        }
-      ]
     }
   ],
 
   "data": [
     {
       "name": "rawTimeSpeciesConcentrations",
+      "sedmlUri": ["BIOMD0000000002_sim.sedml", "report"],
       "values": [
         {
-          "label": "Time (min)",
+          "label": "Time (dimensionless)",
           "values": [
             0,
             0.1,
@@ -128,7 +82,7 @@
           ]
         },
         {
-          "label": "Clb2",
+          "label": "ACh",
           "values": [
             0.000009999999999999999,
             0.000008428551267842631,
@@ -142,17 +96,16 @@
     },
     {
       "name": "timeSpeciesConcentrations",
-      "_mapToSedmlReport": false,
       "source": "rawTimeSpeciesConcentrations",
       "transform": [
         {
           "type": "filter",
-          "expr": "datum.id == 'data_gen_time' || indexof(['data_gen_Clb', 'data_gen_Cln', 'data_gen_SBF', 'data_gen_Sic'], datum.id) >= 0"
+          "expr": "datum.id == 'data_set_time' || indexof(['data_set_B', 'data_set_BL', 'data_set_ALL', 'data_set_ILL', 'data_set_DLL'], datum.id) >= 0"
         },
         {
           "type": "cross",
           "as": ["Time", "SpeciesLabelValues"],
-          "filter": "datum.Time.id == 'data_gen_time' && datum.SpeciesLabelValues.id != 'data_gen_time'"    
+          "filter": "datum.Time.id == 'data_set_time' && datum.SpeciesLabelValues.id != 'data_set_time'"    
         },
         {
           "type": "formula",
@@ -161,7 +114,7 @@
         },
         {
           "type": "formula",
-          "expr": "datum.SpeciesLabelValues.id",
+          "expr": "datum.SpeciesLabelValues.label",
           "as": "SpeciesLabel"
         },
         {
@@ -186,7 +139,6 @@
     },
     {
       "name": "selected",
-      "_mapToSedmlReport": false,
       "on": [
         {"trigger": "clear", "remove": true},
         {"trigger": "!shift", "remove": true},
@@ -199,7 +151,7 @@
   "scales": [
     {
       "name": "TimeScale",
-      "type": "linear",
+      "type": "log",
       "range": {"signal": "chartWidthRange"},
       "domain": {"data": "timeSpeciesConcentrations", "field": "Time"}
     },
@@ -208,7 +160,7 @@
       "type": "linear",
       "range": {"signal": "chartHeightRange"},
       "nice": true,
-      "zero": true,
+      "zero": false,
       "domain": {
         "data": "timeSpeciesConcentrations", 
         "field": "SpeciesConcentration"
@@ -228,7 +180,7 @@
       "orient": "bottom", 
       "offset": {"signal": "axesHeight"},
       "scale": "TimeScale", 
-      "title": "Time (min)"
+      "title": "Time (dimensionless)"
     },
     {
       "orient": "left", 
@@ -261,7 +213,7 @@
             },
             "update": {
               "strokeOpacity": [                
-                {"test": "(!domain || inrange(datum.SpeciesLabel, domain)) && (!length(data('selected')) || indata('selected', 'value', datum.SpeciesLabel))", "value": 1 },
+                {"test": "(!length(data('selected')) || indata('selected', 'value', datum.SpeciesLabel))", "value": 1 },
                 {"value": 0.15}
               ]
             },

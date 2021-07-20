@@ -6,7 +6,7 @@ on:
 jobs:
   getVersionNumber:
     name: Get version number
-    if: startsWith(github.ref, 'refs/tags/')
+    if: startsWith(github.ref, 'refs/tags/') && github.actor != 'biosimulators-daemon'
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.get-version-number.outputs.version }}
@@ -21,12 +21,19 @@ jobs:
 
   build:
     name: Lint, test, and compile documentation
+    if: github.actor != 'biosimulators-daemon'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 1
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "biosimulators.daemon@gmail.com"
+          git config --local user.name "biosimulatorsdaemon"
+          git config pull.rebase false
 
       - name: Install Python
         uses: actions/setup-python@v2
@@ -58,6 +65,41 @@ jobs:
       # install package
       - name: Install the package
         run: python -m pip install .[all]
+
+      # zip COMBINE/OMEX archives
+      - name: Zip COMBINE/OMEX archives
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends zipcmp
+          python scripts/zip_examples.py
+
+      - id: commit-archives
+        name: Commit zipped COMBINE/OMEX archives
+        env:
+          HEAD: ${{ github.ref }}
+        run: |
+          git stash
+          git pull
+          set +e
+          git stash pop
+          git add examples/**/*.omex
+          git commit -m "Updated COMBINE/OMEX archives"
+          if [[ $? = 0 ]]; then
+            archivesChanged=1
+          else
+            archivesChanged=0
+          fi
+          echo "::set-output name=archivesChanged::$archivesChanged"
+
+          branch="${HEAD/refs\/heads\//}"
+          echo "::set-output name=branch::$branch"
+
+      - name: Push the zipped COMBINE/OMEX archives
+        if: steps.commit-archives.outputs.archivesChanged == '1' && startsWith(github.ref, 'refs/heads/')
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ steps.commit-archives.outputs.branch }}
 
       # lint
       - name: Install flake8
@@ -110,6 +152,12 @@ jobs:
           fetch-depth: 1
           ref: deploy
 
+      - name: Configure Git
+        run: |
+          git config --local user.email "biosimulators.daemon@gmail.com"
+          git config --local user.name "biosimulatorsdaemon"
+          git config pull.rebase false
+
       - name: Install Python
         uses: actions/setup-python@v2
         with:
@@ -145,9 +193,6 @@ jobs:
       - id: commit-docs
         name: Commit the compiled documentation
         run: |
-          git config --local user.email "biosimulators.daemon@gmail.com"
-          git config --local user.name "biosimulatorsdaemon"
-          git config pull.rebase false
           git stash
           git pull
           set +e

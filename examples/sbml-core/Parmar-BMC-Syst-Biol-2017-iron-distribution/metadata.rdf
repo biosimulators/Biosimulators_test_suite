@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2006/vcard/ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+  <rdf:Description rdf:about="./BIOMD0000000734.xml">
+    <dcterms:description>Parmar et al. BMC Systems Biology 2017: Mouse iron distribution</dcterms:description>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Parmar</vCard:family-name>
+        <vCard:given-name>Jignesh</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Davis</vCard:family-name>
+        <vCard:given-name>Grey</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Shevchuk</vCard:family-name>
+        <vCard:given-name>Hope</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Mendes</vCard:family-name>
+        <vCard:given-name>Pedro</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <bqmodel:isDescribedBy>
+      <rdf:Bag>
+        <rdf:li rdf:resource="https://doi.org/10.1186/s12918-017-0431-3"/>
+      </rdf:Bag>
+    </bqmodel:isDescribedBy>
+    <bqmodel:is>
+      <rdf:Bag>
+        <rdf:li rdf:resource="http://identifiers.org/biomodels.db/BIOMD0000000734"/>
+      </rdf:Bag>
+    </bqmodel:is>
+    <dcterms:license>http://creativecommons.org/publicdomain/zero/1.0/</dcterms:license>
+  </rdf:Description>
+</rdf:RDF>

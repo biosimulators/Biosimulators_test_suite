@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version3" level="1" version="3">
+  <listOfModels>
+    <model id="net1" language="urn:sedml:language:lems" source="model.xml"/>
+  </listOfModels>
+  <listOfSimulations>
+    <uniformTimeCourse id="simulation" initialTime="0" outputStartTime="0" outputEndTime="0.3" numberOfPoints="30000">
+      <algorithm kisaoID="KISAO:0000030"/>
+    </uniformTimeCourse>
+  </listOfSimulations>
+  <listOfTasks>
+    <task id="task" modelReference="net1" simulationReference="simulation"/>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="data_generator_time">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> time </ci>
+      </math>
+      <listOfVariables>
+        <variable id="time" symbol="urn:sedml:symbol:time" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_v">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> v </ci>
+      </math>
+      <listOfVariables>
+        <variable id="v" target="hhpop[0]/v" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_m">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> m </ci>
+      </math>
+      <listOfVariables>
+        <variable id="m" target="hhpop[0]/bioPhys1/membraneProperties/NaConductances/NaConductance/m/q" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_h">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> h </ci>
+      </math>
+      <listOfVariables>
+        <variable id="h" target="hhpop[0]/bioPhys1/membraneProperties/NaConductances/NaConductance/h/q" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_n">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> n </ci>
+      </math>
+      <listOfVariables>
+        <variable id="n" target="hhpop[0]/bioPhys1/membraneProperties/KConductances/KConductance/n/q" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+  </listOfDataGenerators>
+  <listOfOutputs>
+    <report id="report">
+      <listOfDataSets>
+        <dataSet id="data_set_time" label="Time" dataReference="data_generator_time"/>
+        <dataSet id="data_set_v" label="v" dataReference="data_generator_v"/>
+        <dataSet id="data_set_m" label="m" dataReference="data_generator_m"/>
+        <dataSet id="data_set_h" label="h" dataReference="data_generator_h"/>
+        <dataSet id="data_set_n" label="n" dataReference="data_generator_n"/>
+      </listOfDataSets>
+    </report>
+    <plot2D id="plot">
+      <listOfCurves>
+        <curve id="curve_v" name="v" xDataReference="data_generator_time" yDataReference="data_generator_v"/>
+        <curve id="curve_m" name="m" xDataReference="data_generator_time" yDataReference="data_generator_m"/>
+        <curve id="curve_h" name="h" xDataReference="data_generator_time" yDataReference="data_generator_h"/>
+        <curve id="curve_n" name="n" xDataReference="data_generator_time" yDataReference="data_generator_n"/>
+      </listOfCurves>
+    </plot2D>
+  </listOfOutputs>
+</sedML>

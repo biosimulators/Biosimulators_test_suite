@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version3" metaid="_00000001" level="1" version="3"
+  xmlns:sbml="http://www.sbml.org/sbml/level2/version4">
+  <annotation>
+    <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#" xmlns:bibo="http://purl.org/ontology/bibo/">
+      <rdf:Description rdf:about="#_00000001">
+        <dc:description dc:type="description">SEDML L1V2 Caravagna2010 - Tumour suppression by immune system</dc:description>
+        <dc:creator>
+          <rdf:Bag>
+            <rdf:li>
+              <vcard:N>
+                <vcard:Given>Giulio</vcard:Given>
+                <vcard:Family>Caravagna</vcard:Family>
+              </vcard:N>
+            </rdf:li>
+            <rdf:li>
+              <vcard:N>
+                <vcard:Given>Alberto</vcard:Given>
+                <vcard:Family>d&apos;Onofrio</vcard:Family>
+              </vcard:N>
+            </rdf:li>
+            <rdf:li>
+              <vcard:N>
+                <vcard:Given>Paolo</vcard:Given>
+                <vcard:Family>Milazzo</vcard:Family>
+              </vcard:N>
+            </rdf:li>
+            <rdf:li>
+              <vcard:N>
+                <vcard:Given>Roberto</vcard:Given>
+                <vcard:Family>Barbuti</vcard:Family>
+              </vcard:N>
+            </rdf:li>
+          </rdf:Bag>
+        </dc:creator>
+        <dcterms:references>
+          <rdf:Bag>
+            <rdf:li>
+              <bibo:Article>
+                <bibo:authorList>Giulio Caravagna, Alberto d&apos;Onofrio, Paolo Milazzo &amp; Roberto Barbuti</bibo:authorList>
+                <dc:title>Tumour suppression by immune system through stochastic oscillations.</dc:title>
+                <bibo:journal>Journal of theoretical biology</bibo:journal>
+                <bibo:volume>265</bibo:volume>
+                <bibo:issue>3</bibo:issue>
+                <bibo:pages>336-345</bibo:pages>
+                <dc:date>2010</dc:date>
+                <bibo:doi>10.1016/j.jtbi.2010.05.013</bibo:doi>
+              </bibo:Article>
+            </rdf:li>
+          </rdf:Bag>
+        </dcterms:references>
+        <dcterms:license>CC0</dcterms:license>
+        <dcterms:mediator>BioSimulations</dcterms:mediator>
+      </rdf:Description>
+    </rdf:RDF>
+  </annotation>
+  <listOfModels>
+    <model id="BIOMD0000000912" name="Caravagna2010 - Tumour suppression by immune system" language="urn:sedml:language:sbml" source="Caravagna2010.xml">
+      <listOfChanges>
+        <changeAttribute target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='r2']/@value" newValue="0.1799"/>
+      </listOfChanges>
+    </model>
+  </listOfModels>
+  <listOfSimulations>
+    <uniformTimeCourse id="BIOMD0000000912_sim" name="Caravagna2010" initialTime="0" outputStartTime="0" outputEndTime="1000" numberOfPoints="5000">
+      <algorithm kisaoID="KISAO:0000019"/>
+    </uniformTimeCourse>
+  </listOfSimulations>
+  <listOfTasks>
+    <task id="BIOMD0000000912_task" name="Caravagna2010" modelReference="BIOMD0000000912" simulationReference="BIOMD0000000912_sim"/>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="data_gen_time" name="time">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_time </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_time" name="time" symbol="urn:sedml:symbol:time" taskReference="BIOMD0000000912_task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_T" name="T">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_T </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_T" name="T" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;T&apos;]" taskReference="BIOMD0000000912_task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_E" name="E">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_E </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_E" name="E" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;E&apos;]" taskReference="BIOMD0000000912_task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_I" name="I">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_I </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_I" name="I" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;I&apos;]" taskReference="BIOMD0000000912_task"/>
+      </listOfVariables>
+    </dataGenerator>
+  </listOfDataGenerators>
+  <listOfOutputs>
+    <report id="report">
+      <listOfDataSets>
+        <dataSet id="data_set_time" label="time" dataReference="data_gen_time"/>
+        <dataSet id="data_set_T" label="T" dataReference="data_gen_T"/>
+        <dataSet id="data_set_E" label="E" dataReference="data_gen_E"/>
+        <dataSet id="data_set_I" label="I" dataReference="data_gen_I"/>
+      </listOfDataSets>
+    </report>
+    <plot2D id="Figure_1_bottom_left" name="Figure 1 bottom, left">
+      <listOfCurves>
+        <curve id="plot_1_T_time" name="T" logX="false" xDataReference="data_gen_time" logY="false" yDataReference="data_gen_T"/>
+        <curve id="plot_1_E_time" name="E" logX="false" xDataReference="data_gen_time" logY="false" yDataReference="data_gen_E"/>
+        <curve id="plot_1_I_time" name="I" logX="false" xDataReference="data_gen_time" logY="false" yDataReference="data_gen_I"/>
+      </listOfCurves>
+    </plot2D>
+  </listOfOutputs>
+</sedML>

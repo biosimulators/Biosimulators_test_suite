@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2006/vcard/ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+  <rdf:Description rdf:about="./Varusai2018.xml">
+    <dcterms:description>Varusai &amp; Nguyen Scientific Reports 2018: mTOR signalling network</dcterms:description>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Varusai</vCard:family-name>
+        <vCard:given-name>Thawfeek</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Nguyen</vCard:family-name>
+        <vCard:given-name>Lan</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <bqmodel:isDescribedBy>
+      <rdf:Bag>
+        <rdf:li rdf:resource="https://doi.org/10.1038/s41598-017-18400-z"/>
+      </rdf:Bag>
+    </bqmodel:isDescribedBy>
+    <bqmodel:is>
+      <rdf:Bag>
+        <rdf:li rdf:resource="http://identifiers.org/biomodels.db/BIOMD0000000823"/>
+      </rdf:Bag>
+    </bqmodel:is>
+    <dcterms:license>http://creativecommons.org/publicdomain/zero/1.0/</dcterms:license>
+  </rdf:Description>
+</rdf:RDF>

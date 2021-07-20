@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<omexManifest xmlns="http://identifiers.org/combine.specifications/omex-manifest">
+  <content location="./model.txt" format="http://purl.org/NET/mediatypes/text/smoldyn+plain" master="false"/>
+  <content location="./simulation.sedml" format="http://identifiers.org/combine.specifications/sed-ml" master="true"/>
+  <content location="." format="http://identifiers.org/combine.specifications/omex"/>
+  <content location="metadata.rdf" format="http://identifiers.org/combine.specifications/omex-metadata" master="false"/>
+  <content location="expected-results.json" format="http://purl.org/NET/mediatypes/application/json" master="false"/>
+  <content location="reports.h5" format="http://purl.org/NET/mediatypes/application/x-hdf" master="false"/>
+</omexManifest>

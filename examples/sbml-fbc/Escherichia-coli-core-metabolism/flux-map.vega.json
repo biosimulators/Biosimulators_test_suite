@@ -300,7 +300,6 @@
   ],
   "data": [{
       "name": "metabolitesData",
-      "_mapToSedmlReport": false,
       "url": "https://cors.bridged.cc/https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
       "format": {
         "type": "json",
@@ -309,7 +308,6 @@
     },
     {
       "name": "reactionSegmentCoordinatesData",
-      "_mapToSedmlReport": false,
       "url": "https://cors.bridged.cc/https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
       "format": {
         "type": "json",
@@ -318,7 +316,6 @@
     },
     {
       "name": "reactionArrowHeadCoordinatesData",
-      "_mapToSedmlReport": false,
       "url": "https://cors.bridged.cc/https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
       "format": {
         "type": "json",
@@ -327,7 +324,6 @@
     },
     {
       "name": "reactionLabelsData",
-      "_mapToSedmlReport": false,
       "url": "https://cors.bridged.cc/https://biosimulators.github.io/Biosimulators_test_suite/_static/data/Escherichia-coli-core-metabolism.map-coordinates.json",
       "format": {
         "type": "json",
@@ -336,6 +332,7 @@
     },
     {
       "name": "reactionFluxes",
+      "sedmlUri": ["simulation.sedml", "report"],
       "values": [{
         "label": "PGK",
         "values": [
@@ -345,7 +342,6 @@
     },
     {
       "name": "metabolitesScaled",
-      "_mapToSedmlReport": false,
       "source": "metabolitesData",
       "transform": [{
           "type": "formula",
@@ -386,7 +382,6 @@
     },
     {
       "name": "metaboliteLabelsVisibleScaled",
-      "_mapToSedmlReport": false,
       "source": "metabolitesData",
       "transform": [{
           "type": "filter",
@@ -416,7 +411,6 @@
     },
     {
       "name": "reactionAbsFluxes",
-      "_mapToSedmlReport": false,
       "source": "reactionFluxes",
       "transform": [
         {
@@ -438,7 +432,6 @@
     },
     {
       "name": "reactionSegmentPathsAndFluxesScaled",
-      "_mapToSedmlReport": false,
       "source": "reactionSegmentCoordinatesData",
       "transform": [{
           "type": "lookup",
@@ -525,7 +518,6 @@
     },
     {
       "name": "reactionArrowHeadsAndFluxesScaled",
-      "_mapToSedmlReport": false,
       "source": "reactionArrowHeadCoordinatesData",
       "transform": [{
           "type": "lookup",
@@ -587,7 +579,6 @@
     },
     {
       "name": "reactionLabelsVisibleScaled",
-      "_mapToSedmlReport": false,
       "source": "reactionLabelsData",
       "transform": [{
           "type": "filter",

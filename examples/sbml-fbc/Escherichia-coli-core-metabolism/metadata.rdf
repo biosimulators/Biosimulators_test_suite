@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:dcterms='http://purl.org/dc/terms/' xmlns:vCard='http://www.w3.org/2006/vcard/ns#' xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+  <rdf:Description rdf:about='./model.xml'>
+    <dcterms:description>Textbook Escherichia coli core metabolism</dcterms:description>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>COBRAPy</vCard:family-name>
+        <vCard:given-name>Team</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <bqmodel:is>
+      <rdf:Bag>
+        <rdf:li rdf:resource="https://github.com/opencobra/cobrapy/blob/devel/src/cobra/test/data/textbook.xml.gz"/>
+      </rdf:Bag>
+    </bqmodel:is>
+    <dcterms:license>https://spdx.org/licenses/GPL-2.0.html</dcterms:license>
+  </rdf:Description>
+</rdf:RDF>

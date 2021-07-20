@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:dcterms='http://purl.org/dc/terms/' xmlns:vCard='http://www.w3.org/2006/vcard/ns#' xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+  <rdf:Description rdf:about='.'>
+    <dcterms:description>Hodgkin-Huxley cell with simple morphology</dcterms:description>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Padraig</vCard:family-name>
+        <vCard:given-name>Gleeson</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <bqmodel:is>
+      <rdf:Bag>
+        <rdf:li rdf:resource="https://github.com/NeuroML/pyNeuroML/blob/master/examples/LEMS_NML2_Ex5_DetCell.xml"/>
+      </rdf:Bag>
+    </bqmodel:is>
+    <dcterms:license>https://github.com/NeuroML/pyNeuroML/blob/master/LICENSE.lesser</dcterms:license>
+  </rdf:Description>
+</rdf:RDF>

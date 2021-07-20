@@ -31,8 +31,6 @@ import biosimulators_utils.archive.io
 import biosimulators_utils.simulator.exec
 import biosimulators_utils.report.io
 import abc
-import datetime
-import dateutil.tz
 import glob
 import json
 import numpy
@@ -162,9 +160,12 @@ class SimulatorCanExecutePublishedProject(TestCase):
         with open(os.path.join(base_path, filename), 'r') as file:
             data = json.load(file)
 
-        self.id = 'published_project.SimulatorCanExecutePublishedProject' + ':' + os.path.splitext(filename)[0]
+        id = filename.replace(os.sep + 'expected-results.json', '')
+        self.id = 'published_project.SimulatorCanExecutePublishedProject' + ':' + id
         self.name = data['name']
-        self.filename = os.path.join(os.path.dirname(os.path.join(base_path, filename)), data['filename'])
+        self.filename = os.path.join(
+            base_path,
+            os.path.relpath(os.path.join(os.path.dirname(filename), '..', data['filename']), '.'))
 
         return self.from_dict(data)
 
@@ -830,23 +831,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
         Returns:
             :obj:`list` of :obj:`ExpectedResultOfSyntheticArchive`
         """
-
-        # set updated times because libCOMBINE requires this
-        now = self.get_current_time_utc()
-        curated_archive.updated = now
-        for content in curated_archive.contents:
-            content.updated = now
-
         return [ExpectedResultOfSyntheticArchive(curated_archive, curated_sed_docs, True)]
-
-    def get_current_time_utc(self):
-        """ Get the current time in UTC
-
-        Returns:
-            :obj:`datetime.datetime`: current time in UTC
-        """
-        now = datetime.datetime.now()
-        return datetime.datetime(now.year, now.month, now.day, now.hour, now.minute, now.second, tzinfo=dateutil.tz.tzutc())
 
     @abc.abstractmethod
     def eval_outputs(self, specifications, synthetic_archive, synthetic_sed_docs, outputs_dir):
@@ -901,10 +886,8 @@ def find_cases(specifications, dir_name=None, output_medium=OutputMedium.console
 
     all_cases = []
     compatible_cases = []
-    for md_filename in glob.glob(os.path.join(dir_name, '**/*.json'), recursive=True):
-        if md_filename.endswith('.vega.json'):
-            continue
-
+    for example_filename in glob.glob(os.path.join(dir_name, '**/*.omex'), recursive=True):
+        md_filename = os.path.join(example_filename[0:-5], 'expected-results.json')
         rel_filename = os.path.relpath(md_filename, dir_name)
         case = SimulatorCanExecutePublishedProject(output_medium=output_medium).from_json(dir_name, rel_filename)
         all_cases.append(case)

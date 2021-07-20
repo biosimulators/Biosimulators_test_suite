@@ -74,22 +74,22 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
 
     def test_SimulatorCanExecutePublishedProject_from_dict(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
-        filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
+        filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations/expected-results.json')
         with open(os.path.join(base_path, filename), 'r') as file:
             data = json.load(file)
         data['expectedReports'][0]['values'][0]['value'] = [0, 1, 2, 3, 4, 5]
         id = ('published_project.SimulatorCanExecutePublishedProject:'
-              'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
+              'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations/expected-results.json')
         case = SimulatorCanExecutePublishedProject(id=id).from_dict(data)
         numpy.testing.assert_allclose(case.expected_reports[0].values['data_set_time'], numpy.array([0, 1, 2, 3, 4, 5]))
 
     def test_SimulatorCanExecutePublishedProject_from_dict_error_handling(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
-        filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
+        filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations/expected-results.json')
         with open(os.path.join(base_path, filename), 'r') as file:
             data = json.load(file)
         id = ('published_project.SimulatorCanExecutePublishedProject:'
-              'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
+              'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations/expected-results.json')
 
         data['expectedReports'][0]['values'] = [{'id': 't', 'label': 't', 'value': [0, 1, 2, 3, 4, 5]}]
         with self.assertRaisesRegex(ValueError, "keys were not in the 'dataSets' property"):
@@ -104,7 +104,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
 
     def test_SimulatorCanExecutePublishedProject_from_json(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
-        filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
+        filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations/expected-results.json')
         case = SimulatorCanExecutePublishedProject().from_json(base_path, filename)
         self.assertEqual(case.id, ('published_project.SimulatorCanExecutePublishedProject:'
                                    'sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'))
@@ -138,7 +138,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
 
     def test_SimulatorCanExecutePublishedProject_eval(self):
         base_path = os.path.join(os.path.dirname(__file__), '..', '..', 'examples')
-        filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.json')
+        filename = os.path.join('sbml-core', 'Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations/expected-results.json')
         case = SimulatorCanExecutePublishedProject().from_json(base_path, filename)
         case.expected_reports[0].values['data_set_time'] = numpy.linspace(0., 1000., 5001,)
 

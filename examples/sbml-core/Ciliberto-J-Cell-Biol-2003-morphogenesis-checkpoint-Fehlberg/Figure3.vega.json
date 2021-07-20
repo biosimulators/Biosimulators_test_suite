@@ -1,0 +1,790 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 600,
+  "height": 400,
+  "padding": 0,
+  "signals": [{
+      "name": "rows",
+      "value": 2
+    },
+    {
+      "name": "columns",
+      "value": 2
+    },
+    {
+      "name": "chartXSpacing",
+      "value": 65
+    },
+    {
+      "name": "chartYSpacing",
+      "value": 55
+    },
+    {
+      "name": "axesPadding",
+      "value": 5
+    },
+    {
+      "name": "axesWidth",
+      "value": 55
+    },
+    {
+      "name": "axesHeight",
+      "value": 50
+    },
+    {
+      "name": "legendYOffset",
+      "value": 5
+    },
+    {
+      "name": "chartWidth",
+      "update": "max(10, (width - (columns - 1) * chartXSpacing - axesWidth - axesPadding) / columns)"
+    },
+    {
+      "name": "chartHeight",
+      "update": "max(10, (height - (rows - 1) * chartYSpacing - axesHeight -axesPadding) / rows)"
+    },
+    {
+      "name": "clear",
+      "value": true,
+      "on": [{
+        "events": "mouseup[!event.item]",
+        "update": "true",
+        "force": true
+      }]
+    },
+    {
+      "name": "shift",
+      "value": false,
+      "on": [{
+        "events": "@legendSymbol:click, @legendLabel:click",
+        "update": "event.shiftKey",
+        "force": true
+      }]
+    },
+    {
+      "name": "clicked",
+      "value": null,
+      "on": [{
+        "events": "@legendSymbol:click, @legendLabel:click",
+        "update": "{value: datum.value}",
+        "force": true
+      }]
+    }
+  ],
+  "data": [{
+      "name": "rawTimeSpeciesConcentrations",
+      "sedmlUri": ["simulation_1.sedml", "report"],
+      "values": [{
+        "label": "Time (min)",
+        "values": [
+          0,
+          0.1,
+          0.2,
+          0.30000000000000004,
+          0.4,
+          0.5
+        ]
+      }]
+    },
+    {
+      "name": "timeSpeciesConcentrations",
+      "source": "rawTimeSpeciesConcentrations",
+      "transform": [{
+          "type": "collect",
+          "sort": {
+            "field": "label"
+          }
+        },
+        {
+          "type": "cross",
+          "as": ["Time", "SpeciesLabelValues"],
+          "filter": "datum.Time.id == 'data_set_time' && datum.SpeciesLabelValues.id != 'data_set_time'"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.Time.values",
+          "as": "Time"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.SpeciesLabelValues.id",
+          "as": "SpeciesId"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.SpeciesLabelValues.label",
+          "as": "SpeciesLabel"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.SpeciesLabelValues.values",
+          "as": "SpeciesConcentration"
+        },
+        {
+          "type": "flatten",
+          "fields": ["Time", "SpeciesConcentration"]
+        },
+        {
+          "type": "formula",
+          "expr": "datum.SpeciesConcentration",
+          "as": "SpeciesConcentration"
+        }
+      ]
+    },
+    {
+      "name": "timeSpeciesConcentrationsR1C1",
+      "source": "timeSpeciesConcentrations",
+      "transform": [{
+        "type": "filter",
+        "expr": "indexof(['data_set_Clb', 'data_set_Cln', 'data_set_SBF', 'data_set_Sic'], datum.SpeciesId) >= 0"
+      }]
+    },
+    {
+      "name": "timeSpeciesConcentrationsR1C2",
+      "source": "timeSpeciesConcentrations",
+      "transform": [{
+        "type": "filter",
+        "expr": "indexof(['data_set_Cdc20a', 'data_set_Cdh1', 'data_set_Clb', 'data_set_IE'], datum.SpeciesId) >= 0"
+      }]
+    },
+    {
+      "name": "timeSpeciesConcentrationsR2C1",
+      "source": "timeSpeciesConcentrations",
+      "transform": [{
+        "type": "filter",
+        "expr": "indexof(['data_set_Swe1', 'data_set_Swe1M', 'data_set_Swe1T', 'data_set_PSwe1M'], datum.SpeciesId) >= 0"
+      }]
+    },
+    {
+      "name": "timeSpeciesConcentrationsR2C2",
+      "source": "timeSpeciesConcentrations",
+      "transform": [{
+        "type": "filter",
+        "expr": "indexof(['data_set_mass'], datum.SpeciesId) >= 0"
+      }]
+    },
+    {
+      "name": "selected",
+      "on": [{
+          "trigger": "clear",
+          "remove": true
+        },
+        {
+          "trigger": "!shift",
+          "remove": true
+        },
+        {
+          "trigger": "!shift && clicked",
+          "insert": "clicked"
+        },
+        {
+          "trigger": "shift && clicked",
+          "toggle": "clicked"
+        }
+      ]
+    }
+  ],
+  "scales": [{
+      "name": "TimeScaleR1C1",
+      "type": "linear",
+      "range": [{
+          "signal": "(1 - 1) * chartWidth + (1 - 1) * chartXSpacing"
+        },
+        {
+          "signal": "(1 - 0) * chartWidth + (1 - 1) * chartXSpacing"
+        }
+      ],
+      "domain": {
+        "data": "timeSpeciesConcentrationsR1C1",
+        "field": "Time"
+      }
+    },
+    {
+      "name": "TimeScaleR1C2",
+      "type": "linear",
+      "range": [{
+          "signal": "(2 - 1) * chartWidth + (2 - 1) * chartXSpacing"
+        },
+        {
+          "signal": "(2 - 0) * chartWidth + (2 - 1) * chartXSpacing"
+        }
+      ],
+      "domain": {
+        "data": "timeSpeciesConcentrationsR1C2",
+        "field": "Time"
+      }
+    },
+    {
+      "name": "TimeScaleR2C1",
+      "type": "linear",
+      "range": [{
+          "signal": "(1 - 1) * chartWidth + (1 - 1) * chartXSpacing"
+        },
+        {
+          "signal": "(1 - 0) * chartWidth + (1 - 1) * chartXSpacing"
+        }
+      ],
+      "domain": {
+        "data": "timeSpeciesConcentrationsR2C1",
+        "field": "Time"
+      }
+    },
+    {
+      "name": "TimeScaleR2C2",
+      "type": "linear",
+      "range": [{
+          "signal": "(2 - 1) * chartWidth + (2 - 1) * chartXSpacing"
+        },
+        {
+          "signal": "(2 - 0) * chartWidth + (2 - 1) * chartXSpacing"
+        }
+      ],
+      "domain": {
+        "data": "timeSpeciesConcentrationsR2C2",
+        "field": "Time"
+      }
+    },
+    {
+      "name": "SpeciesConcentrationScaleR1C1",
+      "type": "linear",
+      "range": [{
+          "signal": "(1 - 1) * chartHeight + (1 - 1) * chartYSpacing + axesPadding"
+        },
+        {
+          "signal": "1 * chartHeight + (1 - 1) * chartYSpacing + axesPadding"
+        }
+      ],
+      "nice": false,
+      "zero": true,
+      "domain": {
+        "data": "timeSpeciesConcentrationsR1C1",
+        "field": "SpeciesConcentration"
+      },
+      "reverse": true
+    },
+    {
+      "name": "SpeciesConcentrationScaleR1C2",
+      "type": "linear",
+      "range": [{
+          "signal": "(1 - 1) * chartHeight + (1 - 1) * chartYSpacing + axesPadding"
+        },
+        {
+          "signal": "1 * chartHeight + (1 - 1) * chartYSpacing + axesPadding"
+        }
+      ],
+      "nice": false,
+      "zero": true,
+      "domain": {
+        "data": "timeSpeciesConcentrationsR1C2",
+        "field": "SpeciesConcentration"
+      },
+      "reverse": true
+    },
+    {
+      "name": "SpeciesConcentrationScaleR2C1",
+      "type": "linear",
+      "range": [{
+          "signal": "(2 - 1) * chartHeight + (2 - 1) * chartYSpacing + axesPadding"
+        },
+        {
+          "signal": "2 * chartHeight + (2 - 1) * chartYSpacing + axesPadding"
+        }
+      ],
+      "nice": false,
+      "zero": true,
+      "domain": {
+        "data": "timeSpeciesConcentrationsR2C1",
+        "field": "SpeciesConcentration"
+      },
+      "reverse": true
+    },
+    {
+      "name": "SpeciesConcentrationScaleR2C2",
+      "type": "linear",
+      "range": [{
+          "signal": "(2 - 1) * chartHeight + (2 - 1) * chartYSpacing + axesPadding"
+        },
+        {
+          "signal": "2 * chartHeight + (2 - 1) * chartYSpacing + axesPadding"
+        }
+      ],
+      "nice": false,
+      "zero": false,
+      "domain": {
+        "data": "timeSpeciesConcentrationsR2C2",
+        "field": "SpeciesConcentration"
+      },
+      "reverse": true
+    },
+    {
+      "name": "colorR1C1",
+      "type": "ordinal",
+      "range": "category",
+      "domain": {
+        "data": "timeSpeciesConcentrationsR1C1",
+        "field": "SpeciesLabel"
+      }
+    },
+    {
+      "name": "colorR1C2",
+      "type": "ordinal",
+      "range": "category",
+      "domain": {
+        "data": "timeSpeciesConcentrationsR1C2",
+        "field": "SpeciesLabel"
+      }
+    },
+    {
+      "name": "colorR2C1",
+      "type": "ordinal",
+      "range": "category",
+      "domain": {
+        "data": "timeSpeciesConcentrationsR2C1",
+        "field": "SpeciesLabel"
+      }
+    },
+    {
+      "name": "colorR2C2",
+      "type": "ordinal",
+      "range": "category",
+      "domain": {
+        "data": "timeSpeciesConcentrationsR2C2",
+        "field": "SpeciesLabel"
+      }
+    }
+  ],
+  "axes": [{
+      "orient": "bottom",
+      "offset": {
+        "signal": "axesPadding - axesHeight - chartHeight - chartYSpacing"
+      },
+      "scale": "TimeScaleR1C1",
+      "title": "Time (min)",
+      "tickCount": 5
+    },
+    {
+      "orient": "bottom",
+      "offset": {
+        "signal": "axesPadding - axesHeight - chartHeight - chartYSpacing"
+      },
+      "scale": "TimeScaleR1C2",
+      "title": "Time (min)",
+      "tickCount": 5
+    },
+    {
+      "orient": "bottom",
+      "offset": {
+        "signal": "axesPadding - axesHeight"
+      },
+      "scale": "TimeScaleR2C1",
+      "title": "Time (min)",
+      "tickCount": 5
+    },
+    {
+      "orient": "bottom",
+      "offset": {
+        "signal": "axesPadding - axesHeight"
+      },
+      "scale": "TimeScaleR2C2",
+      "title": "Time (min)",
+      "tickCount": 5
+    },
+    {
+      "orient": "left",
+      "offset": {
+        "signal": "axesPadding"
+      },
+      "scale": "SpeciesConcentrationScaleR1C1",
+      "title": "Concentration (nM)",
+      "tickCount": 5
+    },
+    {
+      "orient": "left",
+      "offset": {
+        "signal": "axesPadding - chartWidth - chartXSpacing"
+      },
+      "scale": "SpeciesConcentrationScaleR1C2",
+      "title": "Concentration (nM)",
+      "tickCount": 5
+    },
+    {
+      "orient": "left",
+      "offset": {
+        "signal": "axesPadding"
+      },
+      "scale": "SpeciesConcentrationScaleR2C1",
+      "title": "Concentration (nM)",
+      "tickCount": 5
+    },
+    {
+      "orient": "left",
+      "offset": {
+        "signal": "axesPadding - chartWidth - chartXSpacing"
+      },
+      "scale": "SpeciesConcentrationScaleR2C2",
+      "title": "Mass (cells)",
+      "tickCount": 5
+    }
+  ],
+  "marks": [{
+      "type": "group",
+      "from": {
+        "facet": {
+          "name": "series",
+          "data": "timeSpeciesConcentrationsR1C1",
+          "groupby": "SpeciesLabel"
+        }
+      },
+      "marks": [{
+        "type": "line",
+        "from": {
+          "data": "series"
+        },
+        "encode": {
+          "enter": {
+            "x": {
+              "scale": "TimeScaleR1C1",
+              "field": "Time"
+            },
+            "y": {
+              "scale": "SpeciesConcentrationScaleR1C1",
+              "field": "SpeciesConcentration"
+            },
+            "stroke": {
+              "scale": "colorR1C1",
+              "field": "SpeciesLabel"
+            },
+            "strokeWidth": {
+              "value": 2
+            },
+            "tooltip": {
+              "field": "SpeciesLabel"
+            }
+          },
+          "update": {
+            "strokeOpacity": [{
+                "test": "(!length(data('selected')) || indata('selected', 'value', datum.SpeciesLabel))",
+                "value": 1
+              },
+              {
+                "value": 0.15
+              }
+            ]
+          },
+          "hover": {
+            "strokeOpacity": {
+              "value": 0.5
+            }
+          }
+        }
+      }]
+    },
+    {
+      "type": "group",
+      "from": {
+        "facet": {
+          "name": "series",
+          "data": "timeSpeciesConcentrationsR1C2",
+          "groupby": "SpeciesLabel"
+        }
+      },
+      "marks": [{
+        "type": "line",
+        "from": {
+          "data": "series"
+        },
+        "encode": {
+          "enter": {
+            "x": {
+              "scale": "TimeScaleR1C2",
+              "field": "Time"
+            },
+            "y": {
+              "scale": "SpeciesConcentrationScaleR1C2",
+              "field": "SpeciesConcentration"
+            },
+            "stroke": {
+              "scale": "colorR1C2",
+              "field": "SpeciesLabel"
+            },
+            "strokeWidth": {
+              "value": 2
+            },
+            "tooltip": {
+              "field": "SpeciesLabel"
+            }
+          },
+          "update": {
+            "strokeOpacity": [{
+                "test": "(!length(data('selected')) || indata('selected', 'value', datum.SpeciesLabel))",
+                "value": 1
+              },
+              {
+                "value": 0.15
+              }
+            ]
+          },
+          "hover": {
+            "strokeOpacity": {
+              "value": 0.5
+            }
+          }
+        }
+      }]
+    },
+    {
+      "type": "group",
+      "from": {
+        "facet": {
+          "name": "series",
+          "data": "timeSpeciesConcentrationsR2C1",
+          "groupby": "SpeciesLabel"
+        }
+      },
+      "marks": [{
+        "type": "line",
+        "from": {
+          "data": "series"
+        },
+        "encode": {
+          "enter": {
+            "x": {
+              "scale": "TimeScaleR2C1",
+              "field": "Time"
+            },
+            "y": {
+              "scale": "SpeciesConcentrationScaleR2C1",
+              "field": "SpeciesConcentration"
+            },
+            "stroke": {
+              "scale": "colorR2C1",
+              "field": "SpeciesLabel"
+            },
+            "strokeWidth": {
+              "value": 2
+            },
+            "tooltip": {
+              "field": "SpeciesLabel"
+            }
+          },
+          "update": {
+            "strokeOpacity": [{
+                "test": "(!length(data('selected')) || indata('selected', 'value', datum.SpeciesLabel))",
+                "value": 1
+              },
+              {
+                "value": 0.15
+              }
+            ]
+          },
+          "hover": {
+            "strokeOpacity": {
+              "value": 0.5
+            }
+          }
+        }
+      }]
+    },
+    {
+      "type": "group",
+      "from": {
+        "facet": {
+          "name": "series",
+          "data": "timeSpeciesConcentrationsR2C2",
+          "groupby": "SpeciesLabel"
+        }
+      },
+      "marks": [{
+        "type": "line",
+        "from": {
+          "data": "series"
+        },
+        "encode": {
+          "enter": {
+            "x": {
+              "scale": "TimeScaleR2C2",
+              "field": "Time"
+            },
+            "y": {
+              "scale": "SpeciesConcentrationScaleR2C2",
+              "field": "SpeciesConcentration"
+            },
+            "stroke": {
+              "scale": "colorR2C2",
+              "field": "SpeciesLabel"
+            },
+            "strokeWidth": {
+              "value": 2
+            },
+            "tooltip": {
+              "field": "SpeciesLabel"
+            }
+          },
+          "update": {
+            "strokeOpacity": [{
+                "test": "(!length(data('selected')) || indata('selected', 'value', datum.SpeciesLabel))",
+                "value": 1
+              },
+              {
+                "value": 0.15
+              }
+            ]
+          },
+          "hover": {
+            "strokeOpacity": {
+              "value": 0.5
+            }
+          }
+        }
+      }]
+    }
+  ],
+  "legends": [{
+      "stroke": "colorR1C1",
+      "orient": "none",
+      "legendX": {
+        "signal": "(1 - 0) * chartWidth + (1 - 1) * chartXSpacing - 35"
+      },
+      "legendY": {
+        "signal": "legendYOffset"
+      },
+      "encode": {
+        "symbols": {
+          "name": "legendSymbol",
+          "interactive": true,
+          "update": {
+            "fill": {
+              "value": "transparent"
+            },
+            "strokeWidth": {
+              "value": 2
+            },
+            "opacity": [{
+                "test": "!length(data('selected')) || indata('selected', 'value', datum.value)",
+                "value": 0.7
+              },
+              {
+                "value": 0.15
+              }
+            ],
+            "size": {
+              "value": 64
+            }
+          }
+        },
+        "labels": {
+          "name": "legendLabel",
+          "interactive": true,
+          "update": {
+            "opacity": [{
+                "test": "!length(data('selected')) || indata('selected', 'value', datum.value)",
+                "value": 1
+              },
+              {
+                "value": 0.25
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "stroke": "colorR1C2",
+      "orient": "none",
+      "legendX": {
+        "signal": "(2 - 0) * chartWidth + (2 - 1) * chartXSpacing - 106"
+      },
+      "legendY": {
+        "signal": "legendYOffset"
+      },
+      "encode": {
+        "symbols": {
+          "name": "legendSymbol",
+          "interactive": true,
+          "update": {
+            "fill": {
+              "value": "transparent"
+            },
+            "strokeWidth": {
+              "value": 2
+            },
+            "opacity": [{
+                "test": "!length(data('selected')) || indata('selected', 'value', datum.value)",
+                "value": 0.7
+              },
+              {
+                "value": 0.15
+              }
+            ],
+            "size": {
+              "value": 64
+            }
+          }
+        },
+        "labels": {
+          "name": "legendLabel",
+          "interactive": true,
+          "update": {
+            "opacity": [{
+                "test": "!length(data('selected')) || indata('selected', 'value', datum.value)",
+                "value": 1
+              },
+              {
+                "value": 0.25
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "stroke": "colorR2C1",
+      "orient": "none",
+      "legendX": {
+        "signal": "0"
+      },
+      "legendY": {
+        "signal": "legendYOffset + chartHeight + chartYSpacing"
+      },
+      "encode": {
+        "symbols": {
+          "name": "legendSymbol",
+          "interactive": true,
+          "update": {
+            "fill": {
+              "value": "transparent"
+            },
+            "strokeWidth": {
+              "value": 2
+            },
+            "opacity": [{
+                "test": "!length(data('selected')) || indata('selected', 'value', datum.value)",
+                "value": 0.7
+              },
+              {
+                "value": 0.15
+              }
+            ],
+            "size": {
+              "value": 64
+            }
+          }
+        },
+        "labels": {
+          "name": "legendLabel",
+          "interactive": true,
+          "update": {
+            "opacity": [{
+                "test": "!length(data('selected')) || indata('selected', 'value', datum.value)",
+                "value": 1
+              },
+              {
+                "value": 0.25
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

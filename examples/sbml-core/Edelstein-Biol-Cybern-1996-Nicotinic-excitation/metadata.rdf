@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+    xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"
+    xmlns:bqmodel="http://biomodels.net/model-qualifiers/"
+    xmlns:collex="http://www.collex.org/schema#"
+    xmlns:dc="https://dublincore.org/specifications/dublin-core/dcmi-terms/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:om="http://ontology.eil.utoronto.ca/icity/OM/"
+    xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:scoro="http://purl.org/spar/scoro/"
+>
+  <rdf:Description rdf:about="http://omex-libary.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex">
+    <!-- name -->
+    <dc:title>Nicotinic excitatory post-synaptic potential (Edelstein et al., Biological Cybernetics, 1996)</dc:title>
+
+    <!-- short summary -->
+    <dc:abstract>Model of a nicotinic Excitatory Post-Synaptic Potential in a Torpedo electric organ. Acetylcholine is represented explicitely as a molecular species.</dc:abstract>
+
+    <!-- keywords -->
+    <prism:keyword>Ion Channel Gating</prism:keyword>
+    <prism:keyword>Membrane Potentials</prism:keyword>
+    <prism:keyword>Receptors, Nicotinic</prism:keyword>
+    <prism:keyword>Synapses</prism:keyword>
+
+    <!-- thumbnail image -->
+    <collex:thumbnail rdf:resource="http://omex-libary.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/Figure2.png"/>
+
+    <!-- long description -->
+    <dc:description>A kinetic model that links conformational interconversion rates to agonist binding and extends the general principles of the Monod-Wyman-Changeux model of allosteric transitions. The crucial assumption is that the linkage is controlled by the position of the interconversion transition states on a hypothetical linear reaction coordinate. Application of the model to the peripheral nicotine acetylcholine receptor (nAChR) accounts for the main properties of ligand-gating, including single-channel events, and several new relationships are predicted. Kinetic simulations reveal errors inherent in using the dose-response analysis, but justify its application under defined conditions. The model predicts that (in order to overcome the intrinsic stability of the B state and to produce the appropriate cooperativity) channel activation is driven by an A state with a Kd in the 50 nM range, hence some 140-fold stronger than the apparent affinity of the open state deduced previously. According to the model, recovery from the desensitized states may occur via rapid transit through the A state with minimal channel opening, thus without necessarily undergoing a distinct recovery pathway, as assumed in the standard 'cycle' model. Transitions to the desensitized states by low concentration 'pre-pulses' are predicted to occur without significant channel opening, but equilibrium values of IC50 can be obtained only with long pre-pulse times. Predictions are also made concerning allosteric effectors and their possible role in coincidence detection.</dc:description>
+
+    <!-- taxon -->
+    <bqbiol:hasTaxon>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/7787"/>
+        <rdfs:label>Tetronarce californica</rdfs:label>
+      </rdf:Description>
+    </bqbiol:hasTaxon>
+
+    <!-- gene, RNA, protein, cell type, tissue, organ, disease -->
+    <bqbiol:encodes>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/GO:0007274"/>
+        <rdfs:label>neuromuscular synaptic transmission</rdfs:label>
+      </rdf:Description>
+    </bqbiol:encodes>
+
+    <bqbiol:encodes>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/GO:0019226"/>
+        <rdfs:label>transmission of nerve impulse</rdfs:label>
+      </rdf:Description>
+    </bqbiol:encodes>
+
+    <bqbiol:encodes>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/GO:0007166"/>
+        <rdfs:label>cell surface receptor signaling pathway</rdfs:label>
+      </rdf:Description>
+    </bqbiol:encodes>
+    
+    <!-- other identifiers -->
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000002"/>
+        <rdfs:label>biomodels.db:BIOMD0000000002</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+
+    <!-- authors(s) -->
+    <dc:creator>
+      <rdf:Description>
+        <rdfs:label>Stuart J. Edelstein</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <rdfs:label>Olivier Schaad</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <rdfs:label>Eric Henry</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <rdfs:label>Daniel Bertrand</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <rdfs:label>Jean-Pierre Changeux</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <!-- contributor(s) -->
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>Nicolas Le Novère</foaf:name>
+        <rdfs:label>Nicolas Le Novère</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
+        <foaf:name>Jonathan Karr</foaf:name>
+
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
+        <rdfs:label>Jonathan Karr</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+    <!-- citations -->
+    <bqmodel:isDescribedBy>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1007/s004220050302"/>
+        <rdfs:label>Edelstein SJ, Schaad O, Henry E, Bertrand D &amp; Changeux JP. A kinetic mechanism for nicotinic acetylcholine receptors based on multiple allosteric transitions. Biological cybernetics 1996, 75 (11): 361-379.</rdfs:label>
+      </rdf:Description>
+    </bqmodel:isDescribedBy>
+
+    <!-- license -->
+    <dc:license>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0"/>
+        <rdfs:label>CC0-1.0</rdfs:label>
+      </rdf:Description>
+    </dc:license>
+
+    <!-- created -->
+    <dc:created>
+      <rdf:Description>
+        <dc:W3CDTF>1996-11-01</dc:W3CDTF>
+      </rdf:Description>
+    </dc:created>
+
+    <!-- modified -->
+    <dc:modified>
+      <dcterms:W3CDTF>
+        <rdf:value>2021-07-06</rdf:value>
+      </dcterms:W3CDTF>
+    </dc:modified>
+  </rdf:Description>
+
+  <!-- links from SED-ML plots to figures of articles -->
+  <rdf:Description rdf:about="http://omex-libary.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/Figure_4b.vega.json">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1007/s004220050302"/>
+        <rdfs:label>Figure 4b</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://omex-libary.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/BIOMD0000000002_sim.sedml/Figure_4b">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1007/s004220050302"/>
+        <rdfs:label>Figure 4b</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rdf:RDF
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:dcterms='http://purl.org/dc/terms/'
+  xmlns:vCard='http://www.w3.org/2006/vcard/ns#'
+  xmlns:bqmodel="http://biomodels.net/model-qualifiers/"
+>
+  <rdf:Description rdf:about='./Dolan2015.bngl'>
+    <dcterms:description>Dolan et al. PLoS Computational Biology 2015: DNA damage repair by non-homologous end joining</dcterms:description>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Dolan</vCard:family-name>
+        <vCard:given-name>David</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Zupanic</vCard:family-name>
+        <vCard:given-name>Anze</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Nelson</vCard:family-name>
+        <vCard:given-name>Glyn</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Hall</vCard:family-name>
+        <vCard:given-name>Philip</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Miwa</vCard:family-name>
+        <vCard:given-name>Satomi</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Kirkwood</vCard:family-name>
+        <vCard:given-name>Thomas</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <dcterms:creator rdf:parseType='Resource'>
+      <vCard:hasName rdf:parseType='Resource'>
+        <vCard:family-name>Shanley</vCard:family-name>
+        <vCard:given-name>Daryl</vCard:given-name>
+      </vCard:hasName>
+    </dcterms:creator>
+    <bqmodel:isDescribedBy>
+      <rdf:Bag>
+        <rdf:li rdf:resource="https://doi.org/10.1371/journal.pcbi.1004246"/>
+      </rdf:Bag>
+    </bqmodel:isDescribedBy>
+    <bqmodel:is>
+      <rdf:Bag>
+        <rdf:li rdf:resource="https://github.com/RuleWorld/RuleHub/tree/master/Published/Dolan2015"/>
+      </rdf:Bag>
+    </bqmodel:is>
+    <dcterms:license>https://opensource.org/licenses/MIT</dcterms:license>
+  </rdf:Description>
+</rdf:RDF>

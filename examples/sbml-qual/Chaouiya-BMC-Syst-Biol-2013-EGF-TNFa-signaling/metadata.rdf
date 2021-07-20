@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rdf:RDF
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:dcterms='http://purl.org/dc/terms/'
+    xmlns:vCard='http://www.w3.org/2006/vcard/ns#'
+    xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+    <rdf:Description rdf:about='./BIOMD0000000562_url.xml'>
+        <dcterms:description>Chaouiya et al. BMC Systems Biology 2013: EGF and TNFα signaling</dcterms:description>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Chaouiya</vCard:family-name>
+                <vCard:given-name>Claudine</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Bérenguier</vCard:family-name>
+                <vCard:given-name>Duncan</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Keating</vCard:family-name>
+                <vCard:given-name>Sarah</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Naldi</vCard:family-name>
+                <vCard:given-name>Aurélien</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>van Iersel</vCard:family-name>
+                <vCard:given-name>Martijn</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Rodriguez</vCard:family-name>
+                <vCard:given-name>Nicolas</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Dräger</vCard:family-name>
+                <vCard:given-name>Andreas</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Büchel</vCard:family-name>
+                <vCard:given-name>Finja</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Cokelaer</vCard:family-name>
+                <vCard:given-name>Thomas</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Kowal</vCard:family-name>
+                <vCard:given-name>Bryan</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Wicks</vCard:family-name>
+                <vCard:given-name>Benjamin</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Gonçalves</vCard:family-name>
+                <vCard:given-name>Emanuel</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Dorier</vCard:family-name>
+                <vCard:given-name>Julien</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Page</vCard:family-name>
+                <vCard:given-name>Michel</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Monteiro</vCard:family-name>
+                <vCard:given-name>Pedro</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>von Kamp</vCard:family-name>
+                <vCard:given-name>Axel</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Xenarios</vCard:family-name>
+                <vCard:given-name>Ioannis</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>de Jong</vCard:family-name>
+                <vCard:given-name>Hidde</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Hucka</vCard:family-name>
+                <vCard:given-name>Michael</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Klamt</vCard:family-name>
+                <vCard:given-name>Steffen</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Thieffry</vCard:family-name>
+                <vCard:given-name>Denis</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Le Novère</vCard:family-name>
+                <vCard:given-name>Nicolas</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Saez-Rodriguez</vCard:family-name>
+                <vCard:given-name>Julio</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <dcterms:creator rdf:parseType='Resource'>
+            <vCard:hasName rdf:parseType='Resource'>
+                <vCard:family-name>Helikar</vCard:family-name>
+                <vCard:given-name>Tomáš</vCard:given-name>
+            </vCard:hasName>
+        </dcterms:creator>
+        <bqmodel:isDescribedBy>
+            <rdf:Bag>
+                <rdf:li rdf:resource="https://doi.org/10.1186/1752-0509-7-135"/>
+            </rdf:Bag>
+        </bqmodel:isDescribedBy>
+        <bqmodel:is>
+            <rdf:Bag>
+                <rdf:li rdf:resource="https://identifiers.org/biomodels.db/BIOMD0000000562"/>
+            </rdf:Bag>
+        </bqmodel:is>
+        <dcterms:license>http://creativecommons.org/publicdomain/zero/1.0/</dcterms:license>
+    </rdf:Description>
+</rdf:RDF>

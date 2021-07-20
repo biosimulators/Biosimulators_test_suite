@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML
+    xmlns="http://sed-ml.org/sed-ml/level1/version3" metaid="_00000001" level="1" version="3"
+    xmlns:sbml="http://www.sbml.org/sbml/level2/version4">
+    <annotation>
+        <rdf:RDF
+            xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:dc="http://purl.org/dc/elements/1.1/"
+            xmlns:dcterms="http://purl.org/dc/terms/"
+            xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#"
+            xmlns:bibo="http://purl.org/ontology/bibo/">
+            <rdf:Description rdf:about="#_00000001">
+                <dc:description dc:type="description">SED-ML file of Szymanska2009 - Mathematical modeling of heat shock protein synthesis in response to temperature change</dc:description>
+                <dc:creator>
+                    <rdf:Bag>
+                        <rdf:li>
+                            <vcard:N>
+                                <vcard:Given>Zuzanna</vcard:Given>
+                                <vcard:Family>Szymańska</vcard:Family>
+                            </vcard:N>
+                        </rdf:li>
+                        <rdf:li>
+                            <vcard:N>
+                                <vcard:Given>Maciej</vcard:Given>
+                                <vcard:Family>Zylicz</vcard:Family>
+                            </vcard:N>
+                        </rdf:li>
+                    </rdf:Bag>
+                </dc:creator>
+                <dcterms:references>
+                    <rdf:Bag>
+                        <rdf:li>
+                            <bibo:Article>
+                                <bibo:authorList>Zuzanna Szymańska &amp; Maciej Zylicz</bibo:authorList>
+                                <dc:title>Mathematical modeling of heat shock protein synthesis in response to temperature change.</dc:title>
+                                <bibo:journal>Journal of theoretical biology</bibo:journal>
+                                <bibo:volume>259</bibo:volume>
+                                <bibo:issue>3</bibo:issue>
+                                <bibo:pages>562-569</bibo:pages>
+                                <dc:date>2009</dc:date>
+                                <bibo:doi>10.1016/j.jtbi.2009.03.021</bibo:doi>
+                            </bibo:Article>
+                        </rdf:li>
+                    </rdf:Bag>
+                </dcterms:references>
+                <dcterms:license>CC0</dcterms:license>
+                <dcterms:mediator>BioSimulations</dcterms:mediator>
+            </rdf:Description>
+        </rdf:RDF>
+    </annotation>
+    <listOfModels>
+        <model id="BIOMD0000000896" name="Szymanska2009 - Mathematical modeling of heat shock protein synthesis in response to temperature change" language="urn:sedml:language:sbml" source="Szymanska2009.xml">
+            <listOfChanges>
+                <changeAttribute target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='k_1']/@value" newValue="0.4201"/>
+            </listOfChanges>
+        </model>
+    </listOfModels>
+    <listOfSimulations>
+        <uniformTimeCourse id="BIOMD0000000896_sim" name="Szymanska2009" initialTime="0" outputStartTime="0" outputEndTime="1000" numberOfPoints="4000">
+            <algorithm kisaoID="KISAO:0000496"/>
+        </uniformTimeCourse>
+    </listOfSimulations>
+    <listOfTasks>
+        <task id="BIOMD0000000896_task" name="Szymanska2009" modelReference="BIOMD0000000896" simulationReference="BIOMD0000000896_sim"/>
+    </listOfTasks>
+    <listOfDataGenerators>
+        <dataGenerator id="data_gen_time" name="time">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_time </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_time" name="time" symbol="urn:sedml:symbol:time" taskReference="BIOMD0000000896_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_Hsp70" name="Hsp70">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_Hsp70 </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_Hsp70" name="Hsp70" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;Hsp70&apos;]" taskReference="BIOMD0000000896_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_HSF" name="HSF">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_HSF </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_HSF" name="HSF" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;HSF&apos;]" taskReference="BIOMD0000000896_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_S" name="S">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_S </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_S" name="S" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;S&apos;]" taskReference="BIOMD0000000896_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_Hsp70_HSF" name="Hsp70_HSF">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_Hsp70_HSF </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_Hsp70_HSF" name="Hsp70_HSF" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;Hsp70_HSF&apos;]" taskReference="BIOMD0000000896_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_Hsp70_S" name="Hsp70_S">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_Hsp70_S </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_Hsp70_S" name="Hsp70_S" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;Hsp70_S&apos;]" taskReference="BIOMD0000000896_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_HSF_3" name="HSF_3">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_HSF_3 </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_HSF_3" name="HSF_3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;HSF_3&apos;]" taskReference="BIOMD0000000896_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_HSE" name="HSE">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_HSE </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_HSE" name="HSE" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;HSE&apos;]" taskReference="BIOMD0000000896_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_HSF_3_HSE" name="HSF_3_HSE">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_HSF_3_HSE </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_HSF_3_HSE" name="HSF_3_HSE" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;HSF_3_HSE&apos;]" taskReference="BIOMD0000000896_task"/>
+            </listOfVariables>
+        </dataGenerator>
+        <dataGenerator id="data_gen_mRNA" name="mRNA">
+            <math
+                xmlns="http://www.w3.org/1998/Math/MathML">
+                <ci> var_mRNA </ci>
+            </math>
+            <listOfVariables>
+                <variable id="var_mRNA" name="mRNA" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;mRNA&apos;]" taskReference="BIOMD0000000896_task"/>
+            </listOfVariables>
+        </dataGenerator>
+    </listOfDataGenerators>
+    <listOfOutputs>
+        <report id="report">
+            <listOfDataSets>
+                <dataSet id="data_set_time" label="time" dataReference="data_gen_time"/>
+                <dataSet id="data_set_Hsp70" label="Hsp70" dataReference="data_gen_Hsp70"/>
+                <dataSet id="data_set_HSF" label="HSF" dataReference="data_gen_HSF"/>
+                <dataSet id="data_set_S" label="S" dataReference="data_gen_S"/>
+                <dataSet id="data_set_Hsp70_HSF" label="Hsp70_HSF" dataReference="data_gen_Hsp70_HSF"/>
+                <dataSet id="data_set_Hsp70_S" label="Hsp70_S" dataReference="data_gen_Hsp70_S"/>
+                <dataSet id="data_set_HSF_3" label="HSF_3" dataReference="data_gen_HSF_3"/>
+                <dataSet id="data_set_HSE" label="HSE" dataReference="data_gen_HSE"/>
+                <dataSet id="data_set_HSF_3_HSE" label="HSF_3_HSE" dataReference="data_gen_HSF_3_HSE"/>
+                <dataSet id="data_set_mRNA" label="mRNA" dataReference="data_gen_mRNA"/>
+            </listOfDataSets>
+        </report>
+        <plot2D id="Figure_3" name="Figure 3">
+            <listOfCurves>
+                <curve id="curve_mRNA" name="mRNA" xDataReference="data_gen_time" yDataReference="data_gen_mRNA"/>
+            </listOfCurves>
+        </plot2D>
+    </listOfOutputs>
+</sedML>
