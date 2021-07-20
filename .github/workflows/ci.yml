@@ -78,10 +78,10 @@ jobs:
         env:
           HEAD: ${{ github.ref }}
         run: |
-          git stash
+          git stash || true
           git pull
           set +e
-          git stash pop
+          git stash pop || true
           git add examples/**/*.omex
           git commit -m "Updated COMBINE/OMEX archives"
           if [[ $? = 0 ]]; then
@@ -193,10 +193,10 @@ jobs:
       - id: commit-docs
         name: Commit the compiled documentation
         run: |
-          git stash
+          git stash || true
           git pull
           set +e
-          git stash pop
+          git stash pop || true
           git add docs
           git commit -m "Updating compiled documentation"
           if [[ $? = 0 ]]; then
