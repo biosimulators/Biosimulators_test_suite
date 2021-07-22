@@ -1,18 +1,58 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:dcterms='http://purl.org/dc/terms/' xmlns:vCard='http://www.w3.org/2006/vcard/ns#' xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-  <rdf:Description rdf:about='./lorenz.cellml'>
-    <dcterms:description>Lorenz model</dcterms:description>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Alan</vCard:family-name>
-        <vCard:given-name>Garny</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:dc="https://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdf:Description rdf:about="http://omex-libary.org/Lorenz-system.omex">
+    <!-- name -->
+    <dc:title>Lorenz system (Garny, 2019)</dc:title>
+    <!-- short summary -->
+    <dc:abstract>An example CellML model of a Lorenz system.</dc:abstract>
+    <!-- other identifiers -->
     <bqmodel:is>
-      <rdf:Bag>
-        <rdf:li rdf:resource="https://github.com/opencor/opencor/blob/master/models/tests/cellml/lorenz.cellml"/>
-      </rdf:Bag>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://raw.githubusercontent.com/opencor/opencor/master/models/tests/cellml/lorenz.cellml" />
+        <rdfs:label>github:opencor/opencor/models/tests/cellml/lorenz.cellml</rdfs:label>
+      </rdf:Description>
     </bqmodel:is>
-    <dcterms:license>https://raw.githubusercontent.com/opencor/opencor/master/LICENSE.txt</dcterms:license>
+    <!-- authors(s) -->
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Alan Garny</foaf:name>
+        <rdfs:label>Alan Garny</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <!-- contributor(s) -->
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
+        <foaf:name>Jonathan Karr</foaf:name>
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <rdfs:label>Jonathan Karr</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+    <!-- citations -->
+    <bqmodel:isDescribedBy>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.3389/fphys.2015.00026" />
+        <rdfs:label>Alan Garny &amp; Peter J. Hunter. OpenCOR: a modular and interoperable approach to computational biology. Front Physiol 6 (2015): 26.</rdfs:label>
+      </rdf:Description>
+    </bqmodel:isDescribedBy>
+    <!-- license -->
+    <dc:license>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/spdx:GPL-3.0-only" />
+        <rdfs:label>GPL-3.0-only</rdfs:label>
+      </rdf:Description>
+    </dc:license>
+    <!-- created -->
+    <dc:created>
+      <rdf:Description>
+        <dc:W3CDTF>2019-11-18</dc:W3CDTF>
+      </rdf:Description>
+    </dc:created>
+    <!-- modified -->
+    <dc:modified>
+      <rdf:Description>
+        <dc:W3CDTF>2021-07-21</dc:W3CDTF>
+      </rdf:Description>
+    </dc:modified>
   </rdf:Description>
 </rdf:RDF>

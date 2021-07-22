@@ -11,7 +11,7 @@
   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   >
   <rdf:Description rdf:about='http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex'>
-    <dc:title>Morphogenesis checkpoint in budding yeast (continuous) (Ciliberto et al., Journal Cell Biology, 2003)</dc:title>
+    <dc:title>Morphogenesis checkpoint in budding yeast (continuous) (Ciliberto et al., J Cell Biol, 2003)</dc:title>
 
     <dc:abstract>Continuous kinetic model of the molecular network that controls Swe1 and the regulation of cyclin-dependent kinase.</dc:abstract>
 
@@ -33,6 +33,28 @@
         <rdfs:label>Schizosaccharomyces pombe</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
+
+    <!-- encoded biology -->
+    <bqbiol:encodes>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/kegg.pathway:ko04111" />
+        <rdfs:label>cell cycle</rdfs:label>
+      </rdf:Description>
+    </bqbiol:encodes>
+
+    <bqbiol:encodes>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/GO:0009653" />
+        <rdfs:label>anatomical structure morphogenesis</rdfs:label>
+      </rdf:Description>
+    </bqbiol:encodes>
+
+    <bqbiol:encodes>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/GO:0044879" />
+        <rdfs:label>mitotic morphogenesis checkpoint signaling</rdfs:label>
+      </rdf:Description>
+    </bqbiol:encodes>
 
     <!-- ancestor(s) of this work -->
     <bqmodel:isDerivedFrom>

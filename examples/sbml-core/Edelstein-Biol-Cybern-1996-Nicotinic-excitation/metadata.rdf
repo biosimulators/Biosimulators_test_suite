@@ -6,15 +6,14 @@
     xmlns:dc="https://dublincore.org/specifications/dublin-core/dcmi-terms/"
     xmlns:dcterms="http://purl.org/dc/terms/"
     xmlns:foaf="http://xmlns.com/foaf/0.1/"
-    xmlns:om="http://ontology.eil.utoronto.ca/icity/OM/"
+   
     xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:scoro="http://purl.org/spar/scoro/"
 >
   <rdf:Description rdf:about="http://omex-libary.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex">
     <!-- name -->
-    <dc:title>Nicotinic excitatory post-synaptic potential (Edelstein et al., Biological Cybernetics, 1996)</dc:title>
+    <dc:title>Nicotinic excitatory post-synaptic potential (Edelstein et al., Biol Cybern, 1996)</dc:title>
 
     <!-- short summary -->
     <dc:abstract>Model of a nicotinic Excitatory Post-Synaptic Potential in a Torpedo electric organ. Acetylcholine is represented explicitely as a molecular species.</dc:abstract>

@@ -1,41 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2006/vcard/ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-  <rdf:Description rdf:about="./BIOMD0000000734.xml">
-    <dcterms:description>Parmar et al. BMC Systems Biology 2017: Mouse iron distribution</dcterms:description>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Parmar</vCard:family-name>
-        <vCard:given-name>Jignesh</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Davis</vCard:family-name>
-        <vCard:given-name>Grey</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Shevchuk</vCard:family-name>
-        <vCard:given-name>Hope</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Mendes</vCard:family-name>
-        <vCard:given-name>Pedro</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <bqmodel:isDescribedBy>
-      <rdf:Bag>
-        <rdf:li rdf:resource="https://doi.org/10.1186/s12918-017-0431-3"/>
-      </rdf:Bag>
-    </bqmodel:isDescribedBy>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:collex="http://www.collex.org/schema#" xmlns:dc="https://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex">
+    <!-- name -->
+    <dc:title>Mouse iron distribution (Parmar et al., BMC Syst Biol, 2017)</dc:title>
+
+    <!-- short summary -->
+    <dc:abstract>Dynamic model of iron distribution in mice. This model includes normal iron and radioactive labelled tracer iron species and was used for parameter estimation given the data from Lopes et al. 2010 for mice fed an adequate iron diet.</dc:abstract>
+
+    <!-- keywords -->
+    <prism:keyword>anemia</prism:keyword>
+    <prism:keyword>Hemochromatosis</prism:keyword>
+    <prism:keyword>Hepcidins</prism:keyword>
+    <prism:keyword>iron</prism:keyword>
+    <prism:keyword>metabolism</prism:keyword>
+
+    <!-- thumbnail image -->
+    <collex:thumbnail rdf:resource="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Figure1.png"/>
+
+    <!-- long description -->
+    <dc:description>Iron is an essential element of most living organisms but is a dangerous substance when poorly liganded in solution. The hormone hepcidin regulates the export of iron from tissues to the plasma contributing to iron homeostasis and also restricting its availability to infectious agents. Disruption of iron regulation in mammals leads to disorders such as anemia and hemochromatosis, and contributes to the etiology of several other diseases such as cancer and neurodegenerative diseases. Here we test the hypothesis that hepcidin alone is able to regulate iron distribution in different dietary regimes in the mouse using a computational model of iron distribution calibrated with radioiron tracer data.</dc:description>
+
+    <!-- taxon -->
+    <bqbiol:hasTaxon>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/10090" />
+        <rdfs:label>Mus musculus</rdfs:label>
+      </rdf:Description>
+    </bqbiol:hasTaxon>
+
+    <!-- encoded biology -->
+    <bqbiol:encodes>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/GO:0055072" />
+        <rdfs:label>iron ion homeostasis</rdfs:label>
+      </rdf:Description>
+    </bqbiol:encodes>
+
+    <!-- other identifiers -->
     <bqmodel:is>
-      <rdf:Bag>
-        <rdf:li rdf:resource="http://identifiers.org/biomodels.db/BIOMD0000000734"/>
-      </rdf:Bag>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000734" />
+        <rdfs:label>biomodels.db:BIOMD0000000734</rdfs:label>
+      </rdf:Description>
     </bqmodel:is>
-    <dcterms:license>http://creativecommons.org/publicdomain/zero/1.0/</dcterms:license>
+
+    <!-- authors(s) -->
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Jignesh H Parmar</foaf:name>
+        <rdfs:label>Jignesh H Parmar</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Grey Davis</foaf:name>
+        <rdfs:label>Grey Davis</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Hope Shevchuk</foaf:name>
+        <rdfs:label>Hope Shevchuk</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Pedro Mendes</foaf:name>
+        <rdfs:label>Pedro Mendes</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <!-- contributor(s) -->
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>Krishna Kumar Tiwari</foaf:name>
+        <rdfs:label>Krishna Kumar Tiwari</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
+        <foaf:name>Jonathan Karr</foaf:name>
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <rdfs:label>Jonathan Karr</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>Ryann Jordan</foaf:name>
+        <rdfs:label>Ryann Jordan</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+    <!-- citations -->
+    <bqmodel:isDescribedBy>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <rdfs:label>Jignesh H Parmar, Grey Davis, Hope Shevchuk &amp; Pedro Mendes. Modeling the dynamics of mouse iron body distribution: hepcidin is necessary but not sufficient. BMC Syst Biol 11, 1 (2017): 57.</rdfs:label>
+      </rdf:Description>
+    </bqmodel:isDescribedBy>
+
+    <!-- license -->
+    <dc:license>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0" />
+        <rdfs:label>CC0-1.0</rdfs:label>
+      </rdf:Description>
+    </dc:license>
+
+    <!-- created -->
+    <dc:created>
+      <rdf:Description>
+        <dc:W3CDTF>2017-05-18</dc:W3CDTF>
+      </rdf:Description>
+    </dc:created>
+
+    <!-- modified -->
+    <dc:modified>
+      <rdf:Description>
+        <dc:W3CDTF>2021-07-21</dc:W3CDTF>
+      </rdf:Description>
+    </dc:modified>
+  </rdf:Description>
+
+  <!-- links from SED-ML plots to figures of articles -->
+  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3b">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <rdfs:label>Figure 3b</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3c">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <rdfs:label>Figure 3c</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3d">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <rdfs:label>Figure 3d</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3e">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <rdfs:label>Figure 3e</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3f">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <rdfs:label>Figure 3f</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3g">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <rdfs:label>Figure 3g</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3h">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <rdfs:label>Figure 3h</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
   </rdf:Description>
 </rdf:RDF>

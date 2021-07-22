@@ -1,165 +1,242 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<rdf:RDF
-    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
-    xmlns:dcterms='http://purl.org/dc/terms/'
-    xmlns:vCard='http://www.w3.org/2006/vcard/ns#'
-    xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-    <rdf:Description rdf:about='./BIOMD0000000562_url.xml'>
-        <dcterms:description>Chaouiya et al. BMC Systems Biology 2013: EGF and TNFα signaling</dcterms:description>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Chaouiya</vCard:family-name>
-                <vCard:given-name>Claudine</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Bérenguier</vCard:family-name>
-                <vCard:given-name>Duncan</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Keating</vCard:family-name>
-                <vCard:given-name>Sarah</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Naldi</vCard:family-name>
-                <vCard:given-name>Aurélien</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>van Iersel</vCard:family-name>
-                <vCard:given-name>Martijn</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Rodriguez</vCard:family-name>
-                <vCard:given-name>Nicolas</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Dräger</vCard:family-name>
-                <vCard:given-name>Andreas</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Büchel</vCard:family-name>
-                <vCard:given-name>Finja</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Cokelaer</vCard:family-name>
-                <vCard:given-name>Thomas</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Kowal</vCard:family-name>
-                <vCard:given-name>Bryan</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Wicks</vCard:family-name>
-                <vCard:given-name>Benjamin</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Gonçalves</vCard:family-name>
-                <vCard:given-name>Emanuel</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Dorier</vCard:family-name>
-                <vCard:given-name>Julien</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Page</vCard:family-name>
-                <vCard:given-name>Michel</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Monteiro</vCard:family-name>
-                <vCard:given-name>Pedro</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>von Kamp</vCard:family-name>
-                <vCard:given-name>Axel</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Xenarios</vCard:family-name>
-                <vCard:given-name>Ioannis</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>de Jong</vCard:family-name>
-                <vCard:given-name>Hidde</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Hucka</vCard:family-name>
-                <vCard:given-name>Michael</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Klamt</vCard:family-name>
-                <vCard:given-name>Steffen</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Thieffry</vCard:family-name>
-                <vCard:given-name>Denis</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Le Novère</vCard:family-name>
-                <vCard:given-name>Nicolas</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Saez-Rodriguez</vCard:family-name>
-                <vCard:given-name>Julio</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <dcterms:creator rdf:parseType='Resource'>
-            <vCard:hasName rdf:parseType='Resource'>
-                <vCard:family-name>Helikar</vCard:family-name>
-                <vCard:given-name>Tomáš</vCard:given-name>
-            </vCard:hasName>
-        </dcterms:creator>
-        <bqmodel:isDescribedBy>
-            <rdf:Bag>
-                <rdf:li rdf:resource="https://doi.org/10.1186/1752-0509-7-135"/>
-            </rdf:Bag>
-        </bqmodel:isDescribedBy>
-        <bqmodel:is>
-            <rdf:Bag>
-                <rdf:li rdf:resource="https://identifiers.org/biomodels.db/BIOMD0000000562"/>
-            </rdf:Bag>
-        </bqmodel:is>
-        <dcterms:license>http://creativecommons.org/publicdomain/zero/1.0/</dcterms:license>
-    </rdf:Description>
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:collex="http://www.collex.org/schema#" xmlns:dc="https://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdf:Description rdf:about="http://omex-libary.org/Chaouiya-BMC-Syst-Biol-2013-EGF-TNFa-signaling.omex">
+    <!-- name -->
+    <dc:title>EGF and TNFα signaling (Chaouiya et al., BMC Syst Biol, 2013)</dc:title>
+    <!-- short summary -->
+    <dc:abstract>Qualitative model of the EGF and TNFα signaling pathways.</dc:abstract>
+    <!-- thumbnail image -->
+    <collex:thumbnail rdf:resource="http://omex-libary.org/Chaouiya-BMC-Syst-Biol-2013-EGF-TNFa-signaling.omex/Figure3.jpg" />
+    <!-- long description -->
+    <dc:description>Qualitative model of the EGF and TNFα signaling pathways which captures how EGF and TNFα ligands stimulate ERK, JNK and p38 MAPK cascades, the PI3K/AKT pathways, and the NFκB cascade. In addition, the model encompasses cross-talks between these pathways, as well as two negative feedback loops: one in the NFκB cascade and one in the MAPK cascade.</dc:description>
+    <!-- taxon -->
+    <bqbiol:hasTaxon>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/9606" />
+        <rdfs:label>Homo sapiens</rdfs:label>
+      </rdf:Description>
+    </bqbiol:hasTaxon>
+    <!-- encoded biology -->
+    <bqbiol:encodes>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/GO:0033209" />
+        <rdfs:label>tumor necrosis factor-mediated signaling pathway</rdfs:label>
+      </rdf:Description>
+    </bqbiol:encodes>
+    <bqbiol:encodes>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/GO:0007173" />
+        <rdfs:label>epidermal growth factor receptor signaling pathway</rdfs:label>
+      </rdf:Description>
+    </bqbiol:encodes>
+    <!-- ancestor(s) of this work -->
+    <bqmodel:isDerivedFrom>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1088/1478-3975/9/4/045003" />
+        <rdfs:label>Aidan MacNamara, Camille Terfve, David Henriques, Beatriz Peñalver Bernabé &amp; Julio Saez-Rodriguez. State-time spectrum of signal transduction logic models. Phys Biol 7 (2012): 045003.</rdfs:label>
+      </rdf:Description>
+    </bqmodel:isDerivedFrom>
+    <!-- other identifiers -->
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000562" />
+        <rdfs:label>biomodels.db:BIOMD0000000562</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+    <!-- authors(s) -->
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Claudine Chaouiya</foaf:name>
+        <rdfs:label>Claudine Chaouiya</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Duncan Bérenguier</foaf:name>
+        <rdfs:label>Duncan Bérenguier</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Sarah M Keating</foaf:name>
+        <rdfs:label>Sarah M Keating</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Aurélien Naldi</foaf:name>
+        <rdfs:label>Aurélien Naldi</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Martijn P van Iersel</foaf:name>
+        <rdfs:label>Martijn P van Iersel</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Nicolas Rodriguez</foaf:name>
+        <rdfs:label>Nicolas Rodriguez</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Andreas Dräger</foaf:name>
+        <rdfs:label>Andreas Dräger</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Finja Büchel</foaf:name>
+        <rdfs:label>Finja Büchel</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Thomas Cokelaer</foaf:name>
+        <rdfs:label>Thomas Cokelaer</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Bryan Kowal</foaf:name>
+        <rdfs:label>Bryan Kowal</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Benjamin Wicks</foaf:name>
+        <rdfs:label>Benjamin Wicks</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Emanuel Gonçalves</foaf:name>
+        <rdfs:label>Emanuel Gonçalves</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Julien Dorier</foaf:name>
+        <rdfs:label>Julien Dorier</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Michel Page</foaf:name>
+        <rdfs:label>Michel Page</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Pedro T Monteiro</foaf:name>
+        <rdfs:label>Pedro T Monteiro</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Axel von Kamp</foaf:name>
+        <rdfs:label>Axel von Kamp</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Ioannis Xenarios</foaf:name>
+        <rdfs:label>Ioannis Xenarios</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Hidde de Jong</foaf:name>
+        <rdfs:label>Hidde de Jong</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Michael Hucka</foaf:name>
+        <rdfs:label>Michael Hucka</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Steffen Klamt</foaf:name>
+        <rdfs:label>Steffen Klamt</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Denis Thieffry</foaf:name>
+        <rdfs:label>Denis Thieffry</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Nicolas Le Novère</foaf:name>
+        <rdfs:label>Nicolas Le Novère</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Julio Saez-Rodriguez</foaf:name>
+        <rdfs:label>Julio Saez-Rodriguez</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Tomáš Helikar</foaf:name>
+        <rdfs:label>Tomáš Helikar</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <!-- contributor(s) -->
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>Thomas Cokelaer</foaf:name>
+        <rdfs:label>Thomas Cokelaer</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
+        <foaf:name>Jonathan Karr</foaf:name>
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <rdfs:label>Jonathan Karr</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+    <!-- citations -->
+    <bqmodel:isDescribedBy>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/1752-0509-7-135" />
+        <rdfs:label>Claudine Chaouiya, Duncan Bérenguier, Sarah M Keating, Aurélien Naldi, Martijn P van Iersel, Nicolas Rodriguez, Andreas Dräger, Finja Büchel, Thomas Cokelaer, Bryan Kowal, Benjamin Wicks, Emanuel Gonçalves, Julien Dorier, Michel Page, Pedro T Monteiro, Axel von Kamp, Ioannis Xenarios, Hidde de Jong, Michael Hucka, Steffen Klamt, Denis Thieffry, Nicolas Le Novère, Julio Saez-Rodriguez &amp; Tomáš Helikar. SBML qualitative models: a model representation format and infrastructure to foster interactions between qualitative modelling formalisms and tools. BMC Syst Biol 7 (2013): 135.</rdfs:label>
+      </rdf:Description>
+    </bqmodel:isDescribedBy>
+    <!-- license -->
+    <dc:license>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0" />
+        <rdfs:label>CC0-1.0</rdfs:label>
+      </rdf:Description>
+    </dc:license>
+    <!-- created -->
+    <dc:created>
+      <rdf:Description>
+        <dc:W3CDTF>2013-12-10</dc:W3CDTF>
+      </rdf:Description>
+    </dc:created>
+    <!-- modified -->
+    <dc:modified>
+      <rdf:Description>
+        <dc:W3CDTF>2021-07-21</dc:W3CDTF>
+      </rdf:Description>
+    </dc:modified>
+  </rdf:Description>
+  <!-- links from SED-ML plots to figures of articles -->
+  <rdf:Description rdf:about="http://omex-libary.org/Chaouiya-BMC-Syst-Biol-2013-EGF-TNFa-signaling.omex/simulation.sedml/Figure_4a">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/1752-0509-7-135" />
+        <rdfs:label>Figure 4a</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
 </rdf:RDF>
