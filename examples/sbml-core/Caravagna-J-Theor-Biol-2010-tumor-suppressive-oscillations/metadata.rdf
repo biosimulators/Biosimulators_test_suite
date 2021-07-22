@@ -11,7 +11,7 @@
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 >
   <rdf:Description rdf:about='http://omex-libary.org/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex'>
-    <dc:title>Tumor-suppressive oscillations (Caravagna et al., Journal of Theoretical Biology, 2010)</dc:title>
+    <dc:title>Tumor-suppressive oscillations (Caravagna et al., J Theor Biol, 2010)</dc:title>
 
     <dc:abstract>Hybrid-stochastic model of tumour suppression by the immune system through stochastic oscillations</dc:abstract>
 

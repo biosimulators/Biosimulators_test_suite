@@ -1,64 +1,117 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<rdf:RDF
-  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
-  xmlns:dcterms='http://purl.org/dc/terms/'
-  xmlns:vCard='http://www.w3.org/2006/vcard/ns#'
-  xmlns:bqmodel="http://biomodels.net/model-qualifiers/"
->
-  <rdf:Description rdf:about='./Dolan2015.bngl'>
-    <dcterms:description>Dolan et al. PLoS Computational Biology 2015: DNA damage repair by non-homologous end joining</dcterms:description>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Dolan</vCard:family-name>
-        <vCard:given-name>David</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Zupanic</vCard:family-name>
-        <vCard:given-name>Anze</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Nelson</vCard:family-name>
-        <vCard:given-name>Glyn</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Hall</vCard:family-name>
-        <vCard:given-name>Philip</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Miwa</vCard:family-name>
-        <vCard:given-name>Satomi</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Kirkwood</vCard:family-name>
-        <vCard:given-name>Thomas</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Shanley</vCard:family-name>
-        <vCard:given-name>Daryl</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <bqmodel:isDescribedBy>
-      <rdf:Bag>
-        <rdf:li rdf:resource="https://doi.org/10.1371/journal.pcbi.1004246"/>
-      </rdf:Bag>
-    </bqmodel:isDescribedBy>
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:collex="http://www.collex.org/schema#" xmlns:dc="https://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdf:Description rdf:about="http://omex-libary.org/Dolan-PLoS-Comput-Biol-2015-NHEJ.omex">
+    <!-- name -->
+    <dc:title>DNA damage repair by non-homologous end joining (Dolan et al., PLoS Comput Biol, 2015)</dc:title>
+    <!-- short summary -->
+    <dc:abstract>An integrated stochastic model of DNA damage repair by non-homologous end joining and of gamma irradiation-induced cellular senescence in human cells that are not apoptosis-prone, which successfully explains the changes that occur in the dynamics of DNA damage repair after irradiation.</dc:abstract>
+    <!-- keywords -->
+    <prism:keyword>Cellular Senescence</prism:keyword>
+    <prism:keyword>Cyclin-Dependent Kinase Inhibitor p21</prism:keyword>
+    <prism:keyword>DNA damage</prism:keyword>
+    <prism:keyword>DNA End-Joining Repair</prism:keyword>
+    <prism:keyword>Tumor Suppressor Protein p53</prism:keyword>
+    <!-- thumbnail image -->
+    <collex:thumbnail rdf:resource="http://omex-libary.org/Dolan-PLoS-Comput-Biol-2015-NHEJ.omex/Figure1.png" />
+    <!-- long description -->
+    <dc:description>An integrated stochastic model of DNA damage repair by non-homologous end joining and of gamma irradiation-induced cellular senescence in human cells that are not apoptosis-prone. The integrated model successfully explains the changes that occur in the dynamics of DNA damage repair after irradiation. Simulations of p53/p21 dynamics after irradiation agree well with previously published experimental studies. Additionally, the model captures that low-dose fractionated irradiation of cells leads to temporal patterns in p53/p21 that lead to significant cellular senescence. The integrated model is valuable for studying the processes of DNA damage induced cell fate and predicting the effectiveness of DNA damage related medical interventions at the cellular level.</dc:description>
+    <!-- taxon -->
+    <bqbiol:hasTaxon>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/9606" />
+        <rdfs:label>Homo sapiens</rdfs:label>
+      </rdf:Description>
+    </bqbiol:hasTaxon>
+    <!-- other identifiers -->
     <bqmodel:is>
-      <rdf:Bag>
-        <rdf:li rdf:resource="https://github.com/RuleWorld/RuleHub/tree/master/Published/Dolan2015"/>
-      </rdf:Bag>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://github.com/RuleWorld/RuleHub/tree/master/Published/Dolan2015" />
+        <rdfs:label>RuleHub:Dolan2015</rdfs:label>
+      </rdf:Description>
     </bqmodel:is>
-    <dcterms:license>https://opensource.org/licenses/MIT</dcterms:license>
+    <!-- authors(s) -->
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>David W. P. Dolan</foaf:name>
+        <rdfs:label>David W. P. Dolan</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Anze Zupanic</foaf:name>
+        <rdfs:label>Anze Zupanic</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Glyn Nelson</foaf:name>
+        <rdfs:label>Glyn Nelson</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Philip Hall</foaf:name>
+        <rdfs:label>Philip Hall</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Satomi Miwa</foaf:name>
+        <rdfs:label>Satomi Miwa</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Thomas B. L. Kirkwood</foaf:name>
+        <rdfs:label>Thomas B. L. Kirkwood</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Daryl P. Shanley</foaf:name>
+        <rdfs:label>Daryl P. Shanley</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <!-- contributor(s) -->
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>James Faeder</foaf:name>
+        <rdfs:label>James Faeder</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
+        <foaf:name>Jonathan Karr</foaf:name>
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <rdfs:label>Jonathan Karr</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+    <!-- citations -->
+    <bqmodel:isDescribedBy>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1371/journal.pcbi.1004246" />
+        <rdfs:label>David W. P. Dolan, Anze Zupanic, Glyn Nelson, Philip Hall, Satomi Miwa, Thomas B. L. Kirkwood &amp; Daryl P. Shanley. Integrated Stochastic Model of DNA Damage Repair by Non-homologous End Joining and p53/p21- Mediated Early Senescence Signalling. PLoS Comput Biol 11, 5 (2015): e1004246.</rdfs:label>
+      </rdf:Description>
+    </bqmodel:isDescribedBy>
+    <!-- license -->
+    <dc:license>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/spdx:MIT" />
+        <rdfs:label>MIT</rdfs:label>
+      </rdf:Description>
+    </dc:license>
+    <!-- created -->
+    <dc:created>
+      <rdf:Description>
+        <dc:W3CDTF>2015-05-28</dc:W3CDTF>
+      </rdf:Description>
+    </dc:created>
+    <!-- modified -->
+    <dc:modified>
+      <rdf:Description>
+        <dc:W3CDTF>2021-07-21</dc:W3CDTF>
+      </rdf:Description>
+    </dc:modified>
   </rdf:Description>
 </rdf:RDF>

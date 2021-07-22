@@ -1,120 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2006/vcard/ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-  <rdf:Description rdf:about="./Varusai2018.xml">
-    <dcterms:description>Varusai &amp; Nguyen Scientific Reports 2018: mTOR signalling network</dcterms:description>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Varusai</vCard:family-name>
-        <vCard:given-name>Thawfeek</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Nguyen</vCard:family-name>
-        <vCard:given-name>Lan</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <bqmodel:isDescribedBy>
-      <rdf:Bag>
-        <rdf:li rdf:resource="https://doi.org/10.1038/s41598-017-18400-z"/>
-      </rdf:Bag>
-    </bqmodel:isDescribedBy>
-    <bqmodel:is>
-      <rdf:Bag>
-        <rdf:li rdf:resource="http://identifiers.org/biomodels.db/BIOMD0000000823"/>
-      </rdf:Bag>
-    </bqmodel:is>
-    <dcterms:license>http://creativecommons.org/publicdomain/zero/1.0/</dcterms:license>
-  </rdf:Description>
-</rdf:RDF>
-
-<?xml version="1.0" encoding="utf-8"?>
-<rdf:RDF
-    xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"
-    xmlns:bqmodel="http://biomodels.net/model-qualifiers/"
-    xmlns:collex="http://www.collex.org/schema#"
-    xmlns:dc="https://dublincore.org/specifications/dublin-core/dcmi-terms/"
-    xmlns:dcterms="http://purl.org/dc/terms/"
-    xmlns:foaf="http://xmlns.com/foaf/0.1/"
-    xmlns:om="http://ontology.eil.utoronto.ca/icity/OM/"
-    xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:scoro="http://purl.org/spar/scoro/"
->
-  <rdf:Description rdf:about="http://omex-libary.org/BioSim0001.omex">
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:collex="http://www.collex.org/schema#" xmlns:dc="https://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdf:Description rdf:about="http://omex-libary.org/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML.omex">
     <!-- name -->
-    <dc:title>Tomida-EMBO-J-2003-NFAT-translocation</dc:title>
-
+    <dc:title>mTOR signalling network (Varusai &amp; Nguyen, Sci Reports, 2018)</dc:title>
     <!-- short summary -->
     <dc:abstract>This is a mathematical describing the effect that DEP domain-containing mTOR-interacting protein (DEPTOR) has on the mammalian target of rapamycin (mTOR) signalling network.</dc:abstract>
-
     <!-- keywords -->
     <prism:keyword>Signal Transduction</prism:keyword>
-    <prism:keyword>Intracellular Signaling Peptides and Proteins</prism:keyword>
-
-  <!-- long description -->
-    <dc:description>Description</dc:description>
-
+    <!-- thumbnail image -->
+    <collex:thumbnail rdf:resource="http://omex-libary.org/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML.omex/Figure1.jpg" />
+    <!-- long description -->
+    <dc:description>Model of the mechanistic Target of Rapamycin (mTOR) signalling network, an evolutionarily conserved network that controls key cellular processes, including cell growth and metabolism. The model represents the major kinase complexes mTOR Complex 1 and 2 (mTORC1/2) and captures their interactions and feedback loops. The model captures the recently identified DEP domain-containing mTOR-interacting protein (DEPTOR), an endogenous inhibitor of both mTORC1 and 2 through direct interactions which are degraded by mTORC1/2. The model captures abrupt, bistable switches, oscillations and co-existing bistable/oscillatory responses.</dc:description>
     <!-- taxon -->
     <bqbiol:hasTaxon>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/9606"/>
+        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/9606" />
         <rdfs:label>Homo sapiens</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
-
-    <!-- authors(s) -->
-    <dc:creator>
+    <!-- encoded biology -->
+    <bqbiol:encodes>
       <rdf:Description>
-        <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
-        <foaf:name>Jonathan Karr</foaf:name>
-
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
-        <rdfs:label>Jonathan Karr</rdfs:label>
+        <dc:identifier rdf:resource="https://identifiers.org/PW:0000180" />
+        <rdfs:label>mTOR signaling pathway</rdfs:label>
       </rdf:Description>
-    </dc:creator>
-
+    </bqbiol:encodes>
+    <bqbiol:encodes>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/ncit:C101595" />
+        <rdfs:label>DEP Domain-Containing mTOR-Interacting Protein</rdfs:label>
+      </rdf:Description>
+    </bqbiol:encodes>
+    <!-- other identifiers -->
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000823" />
+        <rdfs:label>biomodels.db:BIOMD0000000823</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
     <!-- authors(s) -->
     <dc:creator>
       <rdf:Description>
-        <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
         <foaf:name>Thawfeek M Varusai</foaf:name>
-
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
         <rdfs:label>Thawfeek M Varusai</rdfs:label>
       </rdf:Description>
     </dc:creator>
-
-    <!-- authors(s) -->
     <dc:creator>
       <rdf:Description>
-        <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
         <foaf:name>Lan K Nguyen</foaf:name>
-
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
         <rdfs:label>Lan K Nguyen</rdfs:label>
       </rdf:Description>
     </dc:creator>
-
+    <!-- contributor(s) -->
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>Johannes Meyer</foaf:name>
+        <rdfs:label>Johannes Meyer</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
+        <foaf:name>Jonathan Karr</foaf:name>
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <rdfs:label>Jonathan Karr</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>Ryann Jordan</foaf:name>
+        <rdfs:label>Ryann Jordan</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
     <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.copbio.2017.12.013"/>
-        <rdfs:label>Varusai TM, Nguyen LK. Dynamic modelling of the mTOR signalling network reveals complex emergent behaviours conferred by DEPTOR. Sci Rep. 2018 Jan 12;8(1):643. doi: 10.1038/s41598-017-18400-z. PMID: 29330362; PMCID: PMC5766521.</rdfs:label>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1038/s41598-017-18400-z" />
+        <rdfs:label>Thawfeek M Varusai &amp; Lan K Nguyen. Dynamic modelling of the mTOR signalling network reveals complex emergent behaviours conferred by DEPTOR. Sci Rep 8, 1 (2018): 643.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
-
-    <bqmodel:isDescribedBy>
+    <!-- license -->
+    <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/pubmed:29275251"/>
-        <rdfs:label>Varusai TM, Nguyen LK. Dynamic modelling of the mTOR signalling network reveals complex emergent behaviours conferred by DEPTOR. Sci Rep. 2018 Jan 12;8(1):643. doi: 10.1038/s41598-017-18400-z. PMID: 29330362; PMCID: PMC5766521.</rdfs:label>
+        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0" />
+        <rdfs:label>CC0-1.0</rdfs:label>
       </rdf:Description>
-    </bqmodel:isDescribedBy>
-
+    </dc:license>
     <!-- created -->
     <dc:created>
       <rdf:Description>
         <dc:W3CDTF>2018-01-12</dc:W3CDTF>
       </rdf:Description>
     </dc:created>
+    <!-- modified -->
+    <dc:modified>
+      <rdf:Description>
+        <dc:W3CDTF>2021-07-21</dc:W3CDTF>
+      </rdf:Description>
+    </dc:modified>
+  </rdf:Description>
+  <!-- links from SED-ML plots to figures of articles -->
+  <rdf:Description rdf:about="http://omex-libary.org/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML.omex/LSODA.sedml/Figure_2c">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1038/s41598-017-18400-z" />
+        <rdfs:label>Figure 2c</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,174 +1,106 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:dcterms='http://purl.org/dc/terms/' xmlns:vCard='http://www.w3.org/2006/vcard/ns#' xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
-  <rdf:Description rdf:about='./Szymanska2009.xml'>
-    <dcterms:description>Szymańska &amp; Zylicz. Journal of Theoretical Biology 2009: heat shock protein synthesis in response to temperature change</dcterms:description>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Szymańska</vCard:family-name>
-        <vCard:given-name>Zuzanna</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <dcterms:creator rdf:parseType='Resource'>
-      <vCard:hasName rdf:parseType='Resource'>
-        <vCard:family-name>Zylicz</vCard:family-name>
-        <vCard:given-name>Maciej</vCard:given-name>
-      </vCard:hasName>
-    </dcterms:creator>
-    <bqmodel:isDescribedBy>
-      <rdf:Bag>
-        <rdf:li rdf:resource="https://doi.org/10.1016/j.jtbi.2009.03.021"/>
-      </rdf:Bag>
-    </bqmodel:isDescribedBy>
-    <bqmodel:is>
-      <rdf:Bag>
-        <rdf:li rdf:resource="http://identifiers.org/biomodels.db/BIOMD0000000896"/>
-      </rdf:Bag>
-    </bqmodel:is>
-    <dcterms:license>http://creativecommons.org/publicdomain/zero/1.0/</dcterms:license>
-  </rdf:Description>
-</rdf:RDF>
-
-<?xml version="1.0" encoding="utf-8"?>
-<rdf:RDF
-    xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"
-    xmlns:bqmodel="http://biomodels.net/model-qualifiers/"
-    xmlns:collex="http://www.collex.org/schema#"
-    xmlns:dc="https://dublincore.org/specifications/dublin-core/dcmi-terms/"
-    xmlns:dcterms="http://purl.org/dc/terms/"
-    xmlns:foaf="http://xmlns.com/foaf/0.1/"
-    xmlns:om="http://ontology.eil.utoronto.ca/icity/OM/"
-    xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:scoro="http://purl.org/spar/scoro/"
->
-  <rdf:Description rdf:about="http://omex-libary.org/BioSim0001.omex">
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:collex="http://www.collex.org/schema#" xmlns:dc="https://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdf:Description rdf:about="http://omex-libary.org/Szymanska-J-Theor-Biol-2009-HSP-synthesis.omex">
     <!-- name -->
-    <dc:title>Szymanska-J-Theor-Biol-2009-HSP-synthesis</dc:title>
-
+    <dc:title>Heat shock protein synthesis in response to temperature change (Szymanska &amp; Zylicz, J Theor Biol, 2009)</dc:title>
     <!-- short summary -->
-    <dc:abstract>This is a mathematical model of Hsp70 induction. To model heat shock effects, the model incorporates temperature dependencies in transcirption to Hsp70 mRNA and in dissociation of transcriptional complexes, in addition to a formal expression relating temperature to protein denaturation.</dc:abstract>
-
+    <dc:abstract>This is a mathematical model of heat shock protein synthesis induced by an external temperature stimulus. The model consists of a system of nine nonlinear ordinary differential equations describing the temporal evolution of key variables involved in the regulation of HSP synthesis.</dc:abstract>
     <!-- keywords -->
-    <prism:keyword>HSP70 Heat-Shock Proteins</prism:keyword>
-    <prism:keyword>Protein Denaturation</prism:keyword>
+    <prism:keyword>Heat shock proteins</prism:keyword>
     <prism:keyword>Heat shock response</prism:keyword>
-
     <!-- thumbnail image -->
-    <collex:thumbnail rdf:resource="http://omex-libary.org/BioSim0001.omex/thumbnail.png"/>
-
+    <collex:thumbnail rdf:resource="http://omex-libary.org/Szymanska-J-Theor-Biol-2009-HSP-synthesis.omex/Figure1.jpg" />
     <!-- long description -->
-    <dc:description>A proper response to rapid environmental changes is essential for cell survival and requires efficient modifications in the pattern of gene expression. In this respect, a prominent example is Hsp70, a chaperone protein whose synthesis is dynamically regulated in stress conditions. In this paper, we expand a formal model of Hsp70 heat induction originally proposed in previous articles. To accurately capture various modes of heat shock effects, we not only introduce temperature dependencies in transcription to Hsp70 mRNA and in dissociation of transcriptional complexes, but we also derive a new formal expression for the temperature dependence in protein denaturation. We calibrate our model using comprehensive sets of both previously published experimental data and also biologically justified constraints. Interestingly, we obtain a biologically plausible temperature dependence of the transcriptional complex dissociation, despite the lack of biological constraints imposed in the calibration process. Finally, based on a sensitivity analysis of the model carried out in both deterministic and stochastic settings, we suggest that the regulation of the binding of transcriptional complexes plays a key role in Hsp70 induction upon heat shock. In conclusion, we provide a model that is able to capture the essential dynamics of the Hsp70 heat induction whilst being biologically sound in terms of temperature dependencies, description of protein denaturation and imposed calibration constraints.</dc:description>
-
+    <dc:description>Mathematical model of heat shock protein synthesis induced by an external temperature stimulus. Our model consists of a system of nine nonlinear ordinary differential equations describing the temporal evolution of the key variables involved in the regulation of HSP synthesis.</dc:description>
+    <!-- taxon -->
+    <bqbiol:hasTaxon>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/9606" />
+        <rdfs:label>Homo sapiens</rdfs:label>
+      </rdf:Description>
+    </bqbiol:hasTaxon>
+    <!-- encoded biology -->
+    <bqbiol:encodes>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/ncit:C17132" />
+        <rdfs:label>signaling pathway</rdfs:label>
+      </rdf:Description>
+    </bqbiol:encodes>
+    <!-- other identifiers -->
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000896" />
+        <rdfs:label>biomodels.db:BIOMD0000000896</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
     <!-- authors(s) -->
     <dc:creator>
       <rdf:Description>
-        <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
-        <foaf:name>Grzegorz Dudziuk</foaf:name>
-
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
-        <rdfs:label>Grzegorz Dudziuk</rdfs:label>
-      </rdf:Description>
-    </dc:creator>
-
-        <!-- authors(s) -->
-    <dc:creator>
-      <rdf:Description>
-        <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
-        <foaf:name>Weronika Wronowska</foaf:name>
-
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
-        <rdfs:label>Weronika Wronowska</rdfs:label>
-      </rdf:Description>
-    </dc:creator>
-    
-        <!-- authors(s) -->
-    <dc:creator>
-      <rdf:Description>
-        <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
-        <foaf:name>Anna Gambin</foaf:name>
-
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
-        <rdfs:label>Anna Gambin</rdfs:label>
-      </rdf:Description>
-    </dc:creator>
-    
-        <!-- authors(s) -->
-    <dc:creator>
-      <rdf:Description>
-        <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
         <foaf:name>Zuzanna Szymańska</foaf:name>
-
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
         <rdfs:label>Zuzanna Szymańska</rdfs:label>
       </rdf:Description>
     </dc:creator>
-    
-        <!-- authors(s) -->
     <dc:creator>
       <rdf:Description>
-        <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
-        <foaf:name>Mikołaj Rybiński</foaf:name>
-
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
-        <rdfs:label>Mikołaj Rybiński</rdfs:label>
+        <foaf:name>Maciej Zylicz</foaf:name>
+        <rdfs:label>Maciej Zylicz</rdfs:label>
       </rdf:Description>
     </dc:creator>
-    
     <!-- contributor(s) -->
     <dc:contributor>
       <rdf:Description>
         <foaf:name>Johannes Meyer</foaf:name>
-
         <rdfs:label>Johannes Meyer</rdfs:label>
       </rdf:Description>
     </dc:contributor>
-
-     <!-- contributor(s) -->
     <dc:contributor>
       <rdf:Description>
-        <foaf:name>Grzegorz</foaf:name>
-
-        <rdfs:label>Grzegorz</rdfs:label>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
+        <foaf:name>Jonathan Karr</foaf:name>
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
-    
-     <!-- contributor(s) -->
     <dc:contributor>
       <rdf:Description>
-        <foaf:name>Krishna Kumar Tiwari</foaf:name>
-
-        <rdfs:label>Krishna Kumar Tiwari</rdfs:label>
+        <foaf:name>Ryann Jordan</foaf:name>
+        <rdfs:label>Ryann Jordan</rdfs:label>
       </rdf:Description>
     </dc:contributor>
-    
-     <!-- contributor(s) -->
-    <dc:contributor>
-      <rdf:Description>
-        <foaf:name>Tung Nguyen</foaf:name>
-
-        <rdfs:label>Tung Nguyen</rdfs:label>
-      </rdf:Description>
-    </dc:contributor>
-    
     <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.copbio.2017.12.013"/>
-        <rdfs:label>Dudziuk G, Wronowska W, Gambin A, Szymańska Z, Rybiński M. Biologically sound formal model of Hsp70 heat induction. J Theor Biol. 2019 Oct 7;478:74-101. doi: 10.1016/j.jtbi.2019.05.022. Epub 2019 Jun 8. PMID: 31181241.</rdfs:label>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.jtbi.2009.03.021" />
+        <rdfs:label>Zuzanna Szymańska Z &amp; Maciej Zylicz. Mathematical modeling of heat shock protein synthesis in response to temperature change. Journal of Theoretical Biology 259, 3 (2009): 562-569.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
-
-    <bqmodel:isDescribedBy>
+    <!-- license -->
+    <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/pubmed:29275251"/>
-        <rdfs:label>Dudziuk G, Wronowska W, Gambin A, Szymańska Z, Rybiński M. Biologically sound formal model of Hsp70 heat induction. J Theor Biol. 2019 Oct 7;478:74-101. doi: 10.1016/j.jtbi.2019.05.022. Epub 2019 Jun 8. PMID: 31181241.</rdfs:label>
+        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0" />
+        <rdfs:label>CC0-1.0</rdfs:label>
       </rdf:Description>
-    </bqmodel:isDescribedBy>
-
+    </dc:license>
     <!-- created -->
     <dc:created>
       <rdf:Description>
-        <dc:W3CDTF>2019-10-07</dc:W3CDTF>
+        <dc:W3CDTF>2009-08-07</dc:W3CDTF>
       </rdf:Description>
     </dc:created>
+    <!-- modified -->
+    <dc:modified>
+      <rdf:Description>
+        <dc:W3CDTF>2021-07-21</dc:W3CDTF>
+      </rdf:Description>
+    </dc:modified>
+  </rdf:Description>
+  <!-- links from SED-ML plots to figures of articles -->
+  <rdf:Description rdf:about="http://omex-libary.org/Szymanska-J-Theor-Biol-2009-HSP-synthesis.omex/BIOMD0000000896_sim.sedml/Figure_3">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.jtbi.2009.03.021" />
+        <rdfs:label>Figure 3</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+</rdf:RDF>
