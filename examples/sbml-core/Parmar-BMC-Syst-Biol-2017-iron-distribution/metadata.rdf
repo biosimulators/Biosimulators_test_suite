@@ -15,7 +15,7 @@
     <prism:keyword>metabolism</prism:keyword>
 
     <!-- thumbnail image -->
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Figure1.png"/>
+    <collex:thumbnail rdf:resource="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Figure1.jpg"/>
 
     <!-- long description -->
     <dc:description>Iron is an essential element of most living organisms but is a dangerous substance when poorly liganded in solution. The hormone hepcidin regulates the export of iron from tissues to the plasma contributing to iron homeostasis and also restricting its availability to infectious agents. Disruption of iron regulation in mammals leads to disorders such as anemia and hemochromatosis, and contributes to the etiology of several other diseases such as cancer and neurodegenerative diseases. Here we test the hypothesis that hepcidin alone is able to regulate iron distribution in different dietary regimes in the mouse using a computational model of iron distribution calibrated with radioiron tracer data.</dc:description>

@@ -1,6 +1,7 @@
 from biosimulators_utils.combine.io import CombineArchiveReader
 from biosimulators_utils.combine.data_model import CombineArchiveContentFormat
 from biosimulators_utils.combine.validation import validate
+from biosimulators_utils.omex_meta.data_model import OmexMetaSchema
 from biosimulators_utils.report.data_model import ReportFormat
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.io import SedmlSimulationReader
@@ -25,7 +26,8 @@ class ExamplesTestCase(unittest.TestCase):
 
     def test(self):
         examples_dir = os.path.join(os.path.dirname(__file__), '..', 'examples')
-        for example_filename in glob.glob(os.path.join(examples_dir, '**', '*.omex')):
+        example_filenames = glob.glob(os.path.join(examples_dir, '**', '*.omex'))
+        for example_filename in example_filenames:
             example_specs_filename = os.path.join(example_filename[0:-5], 'expected-results.json')
 
             example_base_dir = os.path.join(os.path.dirname(example_filename))
@@ -41,7 +43,8 @@ class ExamplesTestCase(unittest.TestCase):
             archive = CombineArchiveReader().run(archive_filename, archive_dirname)
 
             errors, _ = validate(archive, archive_dirname,
-                                 formats_to_validate=list(CombineArchiveContentFormat.__members__.values()))
+                                 formats_to_validate=list(CombineArchiveContentFormat.__members__.values()),
+                                 metadata_schema=OmexMetaSchema.biosimulations)
             if errors:
                 msg = 'COMBINE/OMEX archive `{}` is invalid.\n  {}'.format(
                     archive_filename,
