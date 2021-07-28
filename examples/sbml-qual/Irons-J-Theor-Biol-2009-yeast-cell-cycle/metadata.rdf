@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:collex="http://www.collex.org/schema#" xmlns:dc="http://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdf:Description rdf:about="http://omex-libary.org/Irons-J-Theor-Biol-2009-yeast-cell-cycle.omex">
+    <!-- name -->
+    <dc:title>Budding yeast cell cycle (Irons, J Theor Biol, 2009)</dc:title>
+    <!-- short summary -->
+    <dc:abstract>Boolean model of the budding yeast cell cycle.</dc:abstract>
+    <!-- thumbnail image -->
+    <collex:thumbnail rdf:resource="http://omex-libary.org/Irons-J-Theor-Biol-2009-yeast-cell-cycle.omex/Figure2.jpg" />
+    <!-- long description -->
+    <dc:description>Boolean model of the budding yeast cell cycle. The model is consistent with a wide range of wild type and mutant phenotypes and shows remarkable robustness against perturbations, both to reaction times and the states of component genes/proteins.</dc:description>
+    <!-- taxon -->
+    <bqbiol:hasTaxon>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/4932" />
+        <rdfs:label>Saccharomyces cerevisiae</rdfs:label>
+      </rdf:Description>
+    </bqbiol:hasTaxon>
+    <!-- encoded biology -->
+    <bqbiol:encodes>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/GO:0007049" />
+        <rdfs:label>cell cycle</rdfs:label>
+      </rdf:Description>
+    </bqbiol:encodes>
+    <!-- other identifiers -->
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="http://ginsim.org/node/35" />
+        <rdfs:label>ginsim:35</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+    <!-- authors(s) -->
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>D. J. Irons</foaf:name>
+        <rdfs:label>D. J. Irons</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+    <!-- contributor(s) -->
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>Adrien Fauré</foaf:name>
+        <rdfs:label>Adrien Fauré</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>Claudine Chaouiya</foaf:name>
+        <rdfs:label>Claudine Chaouiya</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
+        <foaf:name>Jonathan Karr</foaf:name>
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <rdfs:label>Jonathan Karr</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+    <!-- citations -->
+    <bqmodel:isDescribedBy>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/1752-0509-7-135" />
+        <rdfs:label>DJ Irons. Logical analysis of the budding yeast cell cycle. J Theor Biol 257, 4 (2009): 543-559.</rdfs:label>
+      </rdf:Description>
+    </bqmodel:isDescribedBy>
+    <!-- license -->
+    <dc:license>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/spdx:GPL-3.0-only" />
+        <rdfs:label>GPL-3.0-only</rdfs:label>
+      </rdf:Description>
+    </dc:license>
+    <!-- created -->
+    <dc:created>
+      <rdf:Description>
+        <dc:W3CDTF>2009-04-21</dc:W3CDTF>
+      </rdf:Description>
+    </dc:created>
+    <!-- modified -->
+    <dc:modified>
+      <rdf:Description>
+        <dc:W3CDTF>2021-07-23</dc:W3CDTF>
+      </rdf:Description>
+    </dc:modified>
+  </rdf:Description>
+</rdf:RDF>

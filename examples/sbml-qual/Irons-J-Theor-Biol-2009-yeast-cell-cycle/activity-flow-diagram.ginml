@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE gxl SYSTEM "http://gin.univ-mrs.fr/GINsim/GINML_2_1.dtd">
+<gxl xmlns:xlink="http://www.w3.org/1999/xlink">
+	<graph id="Iron_4v_2009" class="regulatory" nodeorder="Cln3 SMBF Cln2 Clb5 Yhp1 Clb2 SFF Cdc20 FEAR MEN Cdc14 Swi5 CKI Cdh1 S B M CD">
+<node id="Clb5" name="Clb5" maxvalue="1">
+  <parameter idActiveInteractions=" SMBF:Clb5" val="1"/>
+  <parameter idActiveInteractions=" SMBF:Clb5 CKI:Clb5" val="1"/>
+  <value val="1">
+    <exp str="!Cdc20 &amp; SMBF"/>
+    <exp str="!Cdc20 &amp; !CKI &amp; SMBF"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="482" y="179" width="60" height="30" backgroundColor="#99ff00" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="S" name="Synthesis" maxvalue="1">
+  <parameter idActiveInteractions=" S:S" val="1"/>
+  <parameter idActiveInteractions=" S:S Clb2:S" val="1"/>
+  <parameter idActiveInteractions=" S:S Clb5:S" val="1"/>
+  <parameter idActiveInteractions=" S:S Clb5:S Clb2:S" val="1"/>
+  <parameter idActiveInteractions=" Clb2:S" val="1"/>
+  <parameter idActiveInteractions=" Clb5:S" val="1"/>
+  <parameter idActiveInteractions=" Clb5:S Clb2:S" val="1"/>
+  <value val="1">
+    <exp str="!CD &amp; S"/>
+    <exp str="!CD &amp; (Clb5 | Clb2)"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="554" y="219" width="60" height="30" backgroundColor="#000000" foregroundColor="#ffffff"/>
+			</nodevisualsetting>
+</node>
+<node id="CKI" maxvalue="1">
+  <parameter idActiveInteractions=" Swi5:CKI Cdc14:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI Cdc14:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI Cdc14:CKI Clb5:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI Cdc14:CKI Clb5:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI Cln2:CKI Cdc14:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI Cln2:CKI Cdc14:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI Cln2:CKI Cdc14:CKI Clb5:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI Cln2:CKI Cdc14:CKI Clb5:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI CKI:CKI Cdc14:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI CKI:CKI Cdc14:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI CKI:CKI Cdc14:CKI Clb5:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI CKI:CKI Cdc14:CKI Clb5:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI CKI:CKI Cln2:CKI Cdc14:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI CKI:CKI Cln2:CKI Cdc14:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI CKI:CKI Cln2:CKI Cdc14:CKI Clb5:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI CKI:CKI Cln2:CKI Cdc14:CKI Clb5:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI Cdc14:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI Cdc14:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI Cdc14:CKI Clb5:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI Cdc14:CKI Clb5:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI Cln2:CKI Cdc14:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI Cln2:CKI Cdc14:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI Cln2:CKI Cdc14:CKI Clb5:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI Cln2:CKI Cdc14:CKI Clb5:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI CKI:CKI Cdc14:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI CKI:CKI Cdc14:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI CKI:CKI Cdc14:CKI Clb5:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI CKI:CKI Cdc14:CKI Clb5:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI CKI:CKI Cln2:CKI Cdc14:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI CKI:CKI Cln2:CKI Cdc14:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI CKI:CKI Cln2:CKI Cdc14:CKI Clb5:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI CKI:CKI Cln2:CKI Cdc14:CKI Clb5:CKI Clb2:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI CKI:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI" val="1"/>
+  <parameter idActiveInteractions=" Swi5:CKI SMBF:CKI CKI:CKI" val="1"/>
+  <parameter idActiveInteractions=" CKI:CKI" val="1"/>
+  <parameter idActiveInteractions=" CKI:CKI Cdc14:CKI" val="1"/>
+  <parameter idActiveInteractions=" SMBF:CKI CKI:CKI" val="1"/>
+  <parameter idActiveInteractions=" SMBF:CKI CKI:CKI Cdc14:CKI" val="1"/>
+  <value val="1">
+    <exp str="Cdc14 &amp; Swi5"/>
+    <exp str="!Cln2 &amp; !Clb5 &amp; !Clb2 &amp; Swi5"/>
+    <exp str="!Cln2 &amp; !Clb5 &amp; !Clb2 &amp; CKI"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="68" y="167" width="60" height="30" backgroundColor="#ffff33" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Cln3" maxvalue="1">
+  <parameter val="1"/>
+  <value val="1">
+    <exp str="!Yhp1"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="403" y="58" width="60" height="30" backgroundColor="#ccffff" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="FEAR" maxvalue="1">
+  <parameter idActiveInteractions=" Cdc20:FEAR" val="1"/>
+  <value val="1">
+    <exp str="Cdc20"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="195" y="443" width="60" height="30" backgroundColor="#ffffff" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="CD" name="Cell Division" maxvalue="1">
+  <parameter idActiveInteractions=" M:CD FEAR:CD Cdc14:CD" val="1"/>
+  <value val="1">
+    <exp str="!CD &amp; M &amp; FEAR &amp; Cdc14"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="6" y="240" width="60" height="30" backgroundColor="#000000" foregroundColor="#ffffff"/>
+			</nodevisualsetting>
+</node>
+<node id="B" name="Bud growth" maxvalue="1">
+  <parameter idActiveInteractions=" B:B" val="1"/>
+  <parameter idActiveInteractions=" B:B Clb5:B" val="1"/>
+  <parameter idActiveInteractions=" B:B Cln2:B" val="1"/>
+  <parameter idActiveInteractions=" B:B Cln2:B Clb5:B" val="1"/>
+  <parameter idActiveInteractions=" Clb5:B" val="1"/>
+  <parameter idActiveInteractions=" Cln2:B" val="1"/>
+  <parameter idActiveInteractions=" Cln2:B Clb5:B" val="1"/>
+  <value val="1">
+    <exp str="!CD &amp; B"/>
+    <exp str="!CD &amp; (Cln2 | Clb5)"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="256" y="37" width="60" height="30" backgroundColor="#000000" foregroundColor="#ffffff"/>
+			</nodevisualsetting>
+</node>
+<node id="Clb2" maxvalue="1">
+  <parameter idActiveInteractions=" B:Clb2" val="1"/>
+  <parameter idActiveInteractions=" B:Clb2 Clb2:Clb2" val="1"/>
+  <parameter idActiveInteractions=" B:Clb2 Cdc20:Clb2" val="1"/>
+  <parameter idActiveInteractions=" B:Clb2 Cdc20:Clb2 Clb2:Clb2" val="1"/>
+  <parameter idActiveInteractions=" B:Clb2 SFF:Clb2" val="1"/>
+  <parameter idActiveInteractions=" B:Clb2 SFF:Clb2 Clb2:Clb2" val="1"/>
+  <parameter idActiveInteractions=" B:Clb2 SFF:Clb2 Cdc20:Clb2" val="1"/>
+  <parameter idActiveInteractions=" B:Clb2 SFF:Clb2 Cdc20:Clb2 Clb2:Clb2" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:Clb2 B:Clb2" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:Clb2 B:Clb2 Clb2:Clb2" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:Clb2 B:Clb2 SFF:Clb2" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:Clb2 B:Clb2 SFF:Clb2 Clb2:Clb2" val="1"/>
+  <parameter idActiveInteractions=" SFF:Clb2 Clb2:Clb2" val="1"/>
+  <parameter idActiveInteractions=" SFF:Clb2 Cdc20:Clb2 Clb2:Clb2" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:Clb2 SFF:Clb2 Clb2:Clb2" val="1"/>
+  <value val="1">
+    <exp str="!CKI &amp; !Cdh1 &amp; B"/>
+    <exp str="!CKI &amp; !Cdc20 &amp; B"/>
+    <exp str="!CKI &amp; !Cdh1 &amp; Clb2 &amp; SFF"/>
+    <exp str="!CKI &amp; !Cdc20 &amp; Clb2 &amp; SFF"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="225" y="269" width="60" height="30" backgroundColor="#00ff33" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="SFF" name="SFF" maxvalue="1">
+  <parameter idActiveInteractions=" B:SFF" val="1"/>
+  <parameter idActiveInteractions=" B:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" B:SFF Cdc20:SFF" val="1"/>
+  <parameter idActiveInteractions=" B:SFF Cdc20:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" B:SFF SFF:SFF" val="1"/>
+  <parameter idActiveInteractions=" B:SFF SFF:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" B:SFF SFF:SFF Cdc20:SFF" val="1"/>
+  <parameter idActiveInteractions=" B:SFF SFF:SFF Cdc20:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:SFF B:SFF" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:SFF B:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:SFF B:SFF SFF:SFF" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:SFF B:SFF SFF:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" SFF:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" SFF:SFF Cdc20:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" CKI:SFF SFF:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" CKI:SFF SFF:SFF Cdc20:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" CKI:SFF B:SFF SFF:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" CKI:SFF B:SFF SFF:SFF Cdc20:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:SFF SFF:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:SFF SFF:SFF Cdc20:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:SFF B:SFF SFF:SFF Cdc20:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:SFF CKI:SFF SFF:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:SFF CKI:SFF SFF:SFF Cdc20:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:SFF CKI:SFF B:SFF SFF:SFF Clb2:SFF" val="1"/>
+  <parameter idActiveInteractions=" Cdh1:SFF CKI:SFF B:SFF SFF:SFF Cdc20:SFF Clb2:SFF" val="1"/>
+  <value val="1">
+    <exp str="!CKI &amp; !Cdh1 &amp; B"/>
+    <exp str="!CKI &amp; !Cdc20 &amp; B"/>
+    <exp str="Clb2 &amp; SFF"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="313" y="314" width="60" height="30" backgroundColor="#ccccff" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Swi5" maxvalue="1">
+  <parameter idActiveInteractions=" SFF:Swi5" val="1"/>
+  <parameter idActiveInteractions=" SFF:Swi5 Cdc14:Swi5" val="1"/>
+  <parameter idActiveInteractions=" SFF:Swi5 Cdc14:Swi5 Clb2:Swi5" val="1"/>
+  <value val="1">
+    <exp str="!Clb2 &amp; SFF"/>
+    <exp str="Cdc14 &amp; SFF"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="184" y="340" width="60" height="30" backgroundColor="#ffff99" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="MEN" name="MEN" maxvalue="1">
+  <parameter idActiveInteractions=" FEAR:MEN Clb2:MEN" val="1"/>
+  <value val="1">
+    <exp str="FEAR &amp; Clb2"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="120" y="418" width="60" height="30" backgroundColor="#ffffff" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Yhp1" name="Yhp1" maxvalue="1">
+  <parameter idActiveInteractions=" SMBF:Yhp1" val="1"/>
+  <value val="1">
+    <exp str="SMBF"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="463" y="95" width="60" height="30" backgroundColor="#ffffff" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="SMBF" name="SBF/MBF" maxvalue="1">
+  <parameter idActiveInteractions=" Cln2:SMBF" val="1"/>
+  <parameter idActiveInteractions=" Cln3:SMBF" val="1"/>
+  <parameter idActiveInteractions=" Cln3:SMBF Cln2:SMBF" val="1"/>
+  <parameter idActiveInteractions=" SMBF:SMBF" val="1"/>
+  <parameter idActiveInteractions=" SMBF:SMBF Cln2:SMBF" val="1"/>
+  <parameter idActiveInteractions=" SMBF:SMBF Cln3:SMBF" val="1"/>
+  <parameter idActiveInteractions=" SMBF:SMBF Cln3:SMBF Cln2:SMBF" val="1"/>
+  <value val="1">
+    <exp str="!Clb2 &amp; (Cln3 | Cln2 | SMBF)"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="342" y="141" width="60" height="30" backgroundColor="#00ffff" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Cdc14" maxvalue="1">
+  <parameter idActiveInteractions=" FEAR:Cdc14 MEN:Cdc14" val="1"/>
+  <value val="1">
+    <exp str="FEAR &amp; MEN"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="68" y="354" width="60" height="30" backgroundColor="#ffffff" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="M" name="Mitosis" maxvalue="1">
+  <parameter idActiveInteractions=" M:M" val="1"/>
+  <parameter idActiveInteractions=" M:M Clb2:M" val="1"/>
+  <parameter idActiveInteractions=" M:M S:M" val="1"/>
+  <parameter idActiveInteractions=" M:M S:M Clb2:M" val="1"/>
+  <parameter idActiveInteractions=" S:M Clb2:M" val="1"/>
+  <value val="1">
+    <exp str="!CD &amp; M"/>
+    <exp str="!CD &amp; S &amp; Clb2"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="260" y="489" width="60" height="30" backgroundColor="#000000" foregroundColor="#ffffff"/>
+			</nodevisualsetting>
+</node>
+<node id="Cdh1" maxvalue="1">
+  <parameter idActiveInteractions=" Cdc14:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" Cdc14:Cdh1 Clb2:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" Cdc14:Cdh1 Clb5:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" Cdc14:Cdh1 Clb5:Cdh1 Clb2:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" Cln2:Cdh1 Cdc14:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" Cln2:Cdh1 Cdc14:Cdh1 Clb2:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" Cln2:Cdh1 Cdc14:Cdh1 Clb5:Cdh1" val="1"/>
+  <parameter idActiveInteractions=" Cln2:Cdh1 Cdc14:Cdh1 Clb5:Cdh1 Clb2:Cdh1" val="1"/>
+  <parameter val="1"/>
+  <value val="1">
+    <exp str="Cdc14"/>
+    <exp str="!Cln2 &amp; !Clb5 &amp; !Clb2"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="412" y="235" width="60" height="30" backgroundColor="#ff0000" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Cln2" name="Cln2" maxvalue="1">
+  <parameter idActiveInteractions=" SMBF:Cln2" val="1"/>
+  <value val="1">
+    <exp str="SMBF"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="143" y="74" width="60" height="30" backgroundColor="#33ffcc" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+<node id="Cdc20" maxvalue="1">
+  <parameter idActiveInteractions=" M:Cdc20 SFF:Cdc20 Clb2:Cdc20" val="1"/>
+  <value val="1">
+    <exp str="M &amp; Clb2 &amp; SFF"/>
+  </value>
+
+			<nodevisualsetting>
+				<ellipse x="363" y="436" width="60" height="30" backgroundColor="#ff9933" foregroundColor="#000000"/>
+			</nodevisualsetting>
+</node>
+		<edge id="Clb5:CKI" from="Clb5" to="CKI" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="512,194 496,182 98,182" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb5:Cdh1" from="Clb5" to="Cdh1" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="512,194 497,248 442,250" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb5:S" from="Clb5" to="S" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="512,194 565,194 584,234" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb5:B" from="Clb5" to="B" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="512,194 529,48 286,52" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="S:S" from="S" to="S" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="584,234 574,202 584,198 594,202 584,234" line_style="curve" line_color="#009900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="S:M" from="S" to="M" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="584,234 586,502 290,504" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CKI:Clb2" from="CKI" to="Clb2" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="98,182 109,279 255,284" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CKI:CKI" from="CKI" to="CKI" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="98,182 88,150 98,146 108,150 98,182" line_style="curve" line_color="#009900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CKI:Clb5" from="CKI" to="Clb5" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="98,182 349,194 512,194" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CKI:SFF" from="CKI" to="SFF" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="98,182 100,320 343,329" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cln3:SMBF" from="Cln3" to="SMBF" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="433,73 394,72 372,156" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="FEAR:Cdc14" from="FEAR" to="Cdc14" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="225,458 78,458 98,369" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="FEAR:MEN" from="FEAR" to="MEN" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="225,458 237,436 150,433" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="FEAR:CD" from="FEAR" to="CD" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="225,458 47,466 36,255" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CD:S" from="CD" to="S" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="36,255 19,9 607,9 584,234" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CD:B" from="CD" to="B" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="36,255 51,41 286,52" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CD:M" from="CD" to="M" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="36,255 31,500 290,504" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="CD:CD" from="CD" to="CD" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="36,255 26,223 36,219 46,223 36,255" line_style="curve" line_color="#ff0000" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="B:Clb2" from="B" to="Clb2" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="286,52 268,174 255,284" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="B:SFF" from="B" to="SFF" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="286,52 326,57 343,329" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="B:B" from="B" to="B" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="286,52 276,20 286,16 296,20 286,52" line_style="curve" line_color="#009900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb2:Cdc20" from="Clb2" to="Cdc20" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="255,284 281,444 393,451" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb2:SMBF" from="Clb2" to="SMBF" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="255,284 242,159 372,156" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb2:CKI" from="Clb2" to="CKI" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="255,284 119,269 98,182" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb2:Clb2" from="Clb2" to="Clb2" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="255,284 245,252 255,248 265,252 255,284" line_style="curve" line_color="#009900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb2:SFF" from="Clb2" to="SFF" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="255,284 291,312 343,329" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb2:MEN" from="Clb2" to="MEN" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="255,284 270,424 150,433" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb2:Swi5" from="Clb2" to="Swi5" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="255,284 227,291 227,328 214,355" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb2:Cdh1" from="Clb2" to="Cdh1" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="255,284 278,253 442,250" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb2:S" from="Clb2" to="S" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="255,284 577,282 584,234" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Clb2:M" from="Clb2" to="M" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="255,284 276,416 290,504" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SFF:Clb2" from="SFF" to="Clb2" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="343,329 306,302 255,284" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SFF:SFF" from="SFF" to="SFF" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="343,329 333,297 343,293 353,297 343,329" line_style="curve" line_color="#009900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SFF:Cdc20" from="SFF" to="Cdc20" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="343,329 348,438 393,451" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SFF:Swi5" from="SFF" to="Swi5" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="343,329 339,362 214,355" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Swi5:CKI" from="Swi5" to="CKI" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="214,355 93,347 98,182" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="MEN:Cdc14" from="MEN" to="Cdc14" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="150,433 96,431 98,369" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Yhp1:Cln3" from="Yhp1" to="Cln3" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="493,110 494,66 433,73" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SMBF:CKI" from="SMBF" to="CKI" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="372,156 117,149 98,182" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SMBF:SMBF" from="SMBF" to="SMBF" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="372,156 362,124 372,120 382,124 372,156" line_style="curve" line_color="#009900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SMBF:Cln2" from="SMBF" to="Cln2" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="372,156 192,141 173,89" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SMBF:Clb5" from="SMBF" to="Clb5" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="372,156 507,160 512,194" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="SMBF:Yhp1" from="SMBF" to="Yhp1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="372,156 495,154 493,110" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc14:CKI" from="Cdc14" to="CKI" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="98,369 83,268 98,182" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc14:Swi5" from="Cdc14" to="Swi5" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="98,369 147,364 214,355" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc14:Cdh1" from="Cdc14" to="Cdh1" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="98,369 442,375 442,250" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc14:CD" from="Cdc14" to="CD" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="98,369 56,361 36,255" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="M:Cdc20" from="M" to="Cdc20" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="290,504 414,490 393,451" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="M:M" from="M" to="M" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="290,504 280,472 290,468 300,472 290,504" line_style="curve" line_color="#009900" line_width="2" routage="auto"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="M:CD" from="M" to="CD" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="290,504 24,509 36,255" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdh1:Clb2" from="Cdh1" to="Clb2" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="442,250 422,274 255,284" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdh1:SFF" from="Cdh1" to="SFF" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="442,250 429,324 343,329" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cln2:SMBF" from="Cln2" to="SMBF" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="173,89 353,101 372,156" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cln2:CKI" from="Cln2" to="CKI" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="173,89 78,85 98,182" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cln2:Cdh1" from="Cln2" to="Cdh1" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="173,89 182,240 442,250" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cln2:B" from="Cln2" to="B" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="173,89 173,51 286,52" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc20:Clb2" from="Cdc20" to="Clb2" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="393,451 410,287 255,284" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc20:FEAR" from="Cdc20" to="FEAR" minvalue="1" sign="positive">
+			<edgevisualsetting>
+				<polyline points="393,451 346,453 225,458" line_style="straight" line_color="#009900" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc20:Clb5" from="Cdc20" to="Clb5" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="393,451 516,450 512,194" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+		<edge id="Cdc20:SFF" from="Cdc20" to="SFF" minvalue="1" sign="negative">
+			<edgevisualsetting>
+				<polyline points="393,451 399,332 343,329" line_style="straight" line_color="#ff0000" line_width="2" routage="manual"/>
+			</edgevisualsetting>
+		</edge>
+	</graph>
+</gxl>
