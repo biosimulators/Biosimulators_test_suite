@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version3" level="1" version="3"
+  xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core"
+  xmlns:qual="http://www.sbml.org/sbml/level3/version1/qual/version1">
+  <listOfModels>
+    <model id="model_wt" language="urn:sedml:language:sbml" source="model.xml">
+    </model>
+    <model id="model_del_Cln2" language="urn:sedml:language:sbml" source="#model_wt">
+      <listOfChanges>
+        <changeAttribute target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cln2&apos;]/@qual:initialLevel" newValue="0"/>
+        <removeXML target="/sbml:sbml/sbml:model/qual:listOfTransitions/qual:transition[@qual:id=&apos;tr_Cln2&apos;]" />
+      </listOfChanges>
+    </model>
+    <model id="model_del_Cln3" language="urn:sedml:language:sbml" source="#model_wt">
+      <listOfChanges>
+        <changeAttribute target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cln3&apos;]/@qual:initialLevel" newValue="0"/>
+        <removeXML target="/sbml:sbml/sbml:model/qual:listOfTransitions/qual:transition[@qual:id=&apos;tr_Cln3&apos;]" />
+      </listOfChanges>
+    </model>
+  </listOfModels>
+  <listOfSimulations>
+    <uniformTimeCourse id="simulation" initialTime="0" outputStartTime="0" outputEndTime="100" numberOfPoints="100">
+      <algorithm kisaoID="KISAO:0000449"/>
+    </uniformTimeCourse>
+  </listOfSimulations>
+  <listOfTasks>
+    <task id="task_wt" modelReference="model_wt" simulationReference="simulation"/>
+    <task id="task_del_Cln2" modelReference="model_del_Cln2" simulationReference="simulation"/>
+    <task id="task_del_Cln3" modelReference="model_del_Cln3" simulationReference="simulation"/>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="wt_data_generator_time">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> wt_var_time </ci>
+      </math>
+      <listOfVariables>
+        <variable id="wt_var_time" symbol="urn:sedml:symbol:time" taskReference="task_wt"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="wt_data_generator_Cln3"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_Cln3 </ci></math><listOfVariables><variable id="wt_var_Cln3" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cln3&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_SMBF"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_SMBF </ci></math><listOfVariables><variable id="wt_var_SMBF" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;SMBF&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_Cln2"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_Cln2 </ci></math><listOfVariables><variable id="wt_var_Cln2" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cln2&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_Clb5"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_Clb5 </ci></math><listOfVariables><variable id="wt_var_Clb5" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Clb5&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_Yhp1"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_Yhp1 </ci></math><listOfVariables><variable id="wt_var_Yhp1" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Yhp1&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_Clb2"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_Clb2 </ci></math><listOfVariables><variable id="wt_var_Clb2" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Clb2&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_SFF"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_SFF </ci></math><listOfVariables><variable id="wt_var_SFF" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;SFF&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_Cdc20"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_Cdc20 </ci></math><listOfVariables><variable id="wt_var_Cdc20" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cdc20&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_FEAR"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_FEAR </ci></math><listOfVariables><variable id="wt_var_FEAR" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;FEAR&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_MEN"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_MEN </ci></math><listOfVariables><variable id="wt_var_MEN" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;MEN&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_Cdc14"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_Cdc14 </ci></math><listOfVariables><variable id="wt_var_Cdc14" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cdc14&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_Swi5"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_Swi5 </ci></math><listOfVariables><variable id="wt_var_Swi5" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Swi5&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_CKI"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_CKI </ci></math><listOfVariables><variable id="wt_var_CKI" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;CKI&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_Cdh1"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_Cdh1 </ci></math><listOfVariables><variable id="wt_var_Cdh1" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cdh1&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_S"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_S </ci></math><listOfVariables><variable id="wt_var_S" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;S&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_B"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_B </ci></math><listOfVariables><variable id="wt_var_B" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;B&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_M"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_M </ci></math><listOfVariables><variable id="wt_var_M" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;M&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+    <dataGenerator id="wt_data_generator_CD"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> wt_var_CD </ci></math><listOfVariables><variable id="wt_var_CD" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;CD&apos;]" taskReference="task_wt"/></listOfVariables></dataGenerator>
+
+    <dataGenerator id="del_Cln2_data_generator_time">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> del_Cln2_var_time </ci>
+      </math>
+      <listOfVariables>
+        <variable id="del_Cln2_var_time" symbol="urn:sedml:symbol:time" taskReference="task_del_Cln2"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_Cln3"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_Cln3 </ci></math><listOfVariables><variable id="del_Cln2_var_Cln3" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cln3&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_SMBF"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_SMBF </ci></math><listOfVariables><variable id="del_Cln2_var_SMBF" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;SMBF&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_Cln2"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_Cln2 </ci></math><listOfVariables><variable id="del_Cln2_var_Cln2" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cln2&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_Clb5"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_Clb5 </ci></math><listOfVariables><variable id="del_Cln2_var_Clb5" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Clb5&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_Yhp1"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_Yhp1 </ci></math><listOfVariables><variable id="del_Cln2_var_Yhp1" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Yhp1&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_Clb2"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_Clb2 </ci></math><listOfVariables><variable id="del_Cln2_var_Clb2" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Clb2&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_SFF"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_SFF </ci></math><listOfVariables><variable id="del_Cln2_var_SFF" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;SFF&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_Cdc20"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_Cdc20 </ci></math><listOfVariables><variable id="del_Cln2_var_Cdc20" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cdc20&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_FEAR"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_FEAR </ci></math><listOfVariables><variable id="del_Cln2_var_FEAR" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;FEAR&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_MEN"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_MEN </ci></math><listOfVariables><variable id="del_Cln2_var_MEN" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;MEN&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_Cdc14"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_Cdc14 </ci></math><listOfVariables><variable id="del_Cln2_var_Cdc14" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cdc14&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_Swi5"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_Swi5 </ci></math><listOfVariables><variable id="del_Cln2_var_Swi5" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Swi5&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_CKI"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_CKI </ci></math><listOfVariables><variable id="del_Cln2_var_CKI" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;CKI&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_Cdh1"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_Cdh1 </ci></math><listOfVariables><variable id="del_Cln2_var_Cdh1" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cdh1&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_S"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_S </ci></math><listOfVariables><variable id="del_Cln2_var_S" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;S&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_B"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_B </ci></math><listOfVariables><variable id="del_Cln2_var_B" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;B&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_M"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_M </ci></math><listOfVariables><variable id="del_Cln2_var_M" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;M&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln2_data_generator_CD"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln2_var_CD </ci></math><listOfVariables><variable id="del_Cln2_var_CD" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;CD&apos;]" taskReference="task_del_Cln2"/></listOfVariables></dataGenerator>
+
+    <dataGenerator id="del_Cln3_data_generator_time">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> del_Cln3_var_time </ci>
+      </math>
+      <listOfVariables>
+        <variable id="del_Cln3_var_time" symbol="urn:sedml:symbol:time" taskReference="task_del_Cln3"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_Cln3"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_Cln3 </ci></math><listOfVariables><variable id="del_Cln3_var_Cln3" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cln3&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_SMBF"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_SMBF </ci></math><listOfVariables><variable id="del_Cln3_var_SMBF" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;SMBF&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_Cln2"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_Cln2 </ci></math><listOfVariables><variable id="del_Cln3_var_Cln2" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cln2&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_Clb5"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_Clb5 </ci></math><listOfVariables><variable id="del_Cln3_var_Clb5" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Clb5&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_Yhp1"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_Yhp1 </ci></math><listOfVariables><variable id="del_Cln3_var_Yhp1" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Yhp1&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_Clb2"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_Clb2 </ci></math><listOfVariables><variable id="del_Cln3_var_Clb2" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Clb2&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_SFF"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_SFF </ci></math><listOfVariables><variable id="del_Cln3_var_SFF" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;SFF&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_Cdc20"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_Cdc20 </ci></math><listOfVariables><variable id="del_Cln3_var_Cdc20" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cdc20&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_FEAR"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_FEAR </ci></math><listOfVariables><variable id="del_Cln3_var_FEAR" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;FEAR&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_MEN"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_MEN </ci></math><listOfVariables><variable id="del_Cln3_var_MEN" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;MEN&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_Cdc14"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_Cdc14 </ci></math><listOfVariables><variable id="del_Cln3_var_Cdc14" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cdc14&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_Swi5"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_Swi5 </ci></math><listOfVariables><variable id="del_Cln3_var_Swi5" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Swi5&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_CKI"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_CKI </ci></math><listOfVariables><variable id="del_Cln3_var_CKI" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;CKI&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_Cdh1"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_Cdh1 </ci></math><listOfVariables><variable id="del_Cln3_var_Cdh1" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;Cdh1&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_S"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_S </ci></math><listOfVariables><variable id="del_Cln3_var_S" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;S&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_B"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_B </ci></math><listOfVariables><variable id="del_Cln3_var_B" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;B&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_M"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_M </ci></math><listOfVariables><variable id="del_Cln3_var_M" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;M&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+    <dataGenerator id="del_Cln3_data_generator_CD"><math xmlns="http://www.w3.org/1998/Math/MathML"><ci> del_Cln3_var_CD </ci></math><listOfVariables><variable id="del_Cln3_var_CD" target="/sbml:sbml/sbml:model/qual:listOfQualitativeSpecies/qual:qualitativeSpecies[@qual:id=&apos;CD&apos;]" taskReference="task_del_Cln3"/></listOfVariables></dataGenerator>
+  </listOfDataGenerators>
+  <listOfOutputs>
+    <report id="report_wt" name="Wild-type">
+      <listOfDataSets>
+        <dataSet id="wt_data_set_time" label="Time (dimensionless)" dataReference="wt_data_generator_time"/>
+
+        <dataSet id="wt_data_set_Cln3" label="Cln3" dataReference="wt_data_generator_Cln3"/>
+        <dataSet id="wt_data_set_SMBF" label="SBF/MBF" dataReference="wt_data_generator_SMBF"/>
+        <dataSet id="wt_data_set_Cln2" label="Cln2" dataReference="wt_data_generator_Cln2"/>
+        <dataSet id="wt_data_set_Clb5" label="Clb5" dataReference="wt_data_generator_Clb5"/>
+        <dataSet id="wt_data_set_Yhp1" label="Yhp1" dataReference="wt_data_generator_Yhp1"/>
+        <dataSet id="wt_data_set_Clb2" label="Clb2" dataReference="wt_data_generator_Clb2"/>
+        <dataSet id="wt_data_set_SFF" label="SFF" dataReference="wt_data_generator_SFF"/>
+        <dataSet id="wt_data_set_Cdc20" label="Cdc20" dataReference="wt_data_generator_Cdc20"/>
+        <dataSet id="wt_data_set_FEAR" label="FEAR" dataReference="wt_data_generator_FEAR"/>
+        <dataSet id="wt_data_set_MEN" label="MEN" dataReference="wt_data_generator_MEN"/>
+        <dataSet id="wt_data_set_Cdc14" label="Cdc14" dataReference="wt_data_generator_Cdc14"/>
+        <dataSet id="wt_data_set_Swi5" label="Swi5" dataReference="wt_data_generator_Swi5"/>
+        <dataSet id="wt_data_set_CKI" label="CKI" dataReference="wt_data_generator_CKI"/>
+        <dataSet id="wt_data_set_Cdh1" label="Cdh1" dataReference="wt_data_generator_Cdh1"/>
+        <dataSet id="wt_data_set_S" label="Synthesis" dataReference="wt_data_generator_S"/>
+        <dataSet id="wt_data_set_B" label="Bud growth" dataReference="wt_data_generator_B"/>
+        <dataSet id="wt_data_set_M" label="Mitosis" dataReference="wt_data_generator_M"/>
+        <dataSet id="wt_data_set_CD" label="Cell Division" dataReference="wt_data_generator_CD"/>
+      </listOfDataSets>
+    </report>
+
+    <report id="report_del_Cln2" name="&#916;Cln2">
+      <listOfDataSets>
+        <dataSet id="del_Cln2_data_set_time" label="Time (dimensionless)" dataReference="del_Cln2_data_generator_time"/>
+
+        <dataSet id="del_Cln2_data_set_Cln3" label="Cln3" dataReference="del_Cln2_data_generator_Cln3"/>
+        <dataSet id="del_Cln2_data_set_SMBF" label="SBF/MBF" dataReference="del_Cln2_data_generator_SMBF"/>
+        <dataSet id="del_Cln2_data_set_Cln2" label="Cln2" dataReference="del_Cln2_data_generator_Cln2"/>
+        <dataSet id="del_Cln2_data_set_Clb5" label="Clb5" dataReference="del_Cln2_data_generator_Clb5"/>
+        <dataSet id="del_Cln2_data_set_Yhp1" label="Yhp1" dataReference="del_Cln2_data_generator_Yhp1"/>
+        <dataSet id="del_Cln2_data_set_Clb2" label="Clb2" dataReference="del_Cln2_data_generator_Clb2"/>
+        <dataSet id="del_Cln2_data_set_SFF" label="SFF" dataReference="del_Cln2_data_generator_SFF"/>
+        <dataSet id="del_Cln2_data_set_Cdc20" label="Cdc20" dataReference="del_Cln2_data_generator_Cdc20"/>
+        <dataSet id="del_Cln2_data_set_FEAR" label="FEAR" dataReference="del_Cln2_data_generator_FEAR"/>
+        <dataSet id="del_Cln2_data_set_MEN" label="MEN" dataReference="del_Cln2_data_generator_MEN"/>
+        <dataSet id="del_Cln2_data_set_Cdc14" label="Cdc14" dataReference="del_Cln2_data_generator_Cdc14"/>
+        <dataSet id="del_Cln2_data_set_Swi5" label="Swi5" dataReference="del_Cln2_data_generator_Swi5"/>
+        <dataSet id="del_Cln2_data_set_CKI" label="CKI" dataReference="del_Cln2_data_generator_CKI"/>
+        <dataSet id="del_Cln2_data_set_Cdh1" label="Cdh1" dataReference="del_Cln2_data_generator_Cdh1"/>
+        <dataSet id="del_Cln2_data_set_S" label="Synthesis" dataReference="del_Cln2_data_generator_S"/>
+        <dataSet id="del_Cln2_data_set_B" label="Bud growth" dataReference="del_Cln2_data_generator_B"/>
+        <dataSet id="del_Cln2_data_set_M" label="Mitosis" dataReference="del_Cln2_data_generator_M"/>
+        <dataSet id="del_Cln2_data_set_CD" label="Cell Division" dataReference="del_Cln2_data_generator_CD"/>
+      </listOfDataSets>
+    </report>
+
+    <report id="report_del_Cln3" name="&#916;Cln3">
+      <listOfDataSets>
+        <dataSet id="del_Cln3_data_set_time" label="Time (dimensionless)" dataReference="del_Cln3_data_generator_time"/>
+
+        <dataSet id="del_Cln3_data_set_Cln3" label="Cln3" dataReference="del_Cln3_data_generator_Cln3"/>
+        <dataSet id="del_Cln3_data_set_SMBF" label="SBF/MBF" dataReference="del_Cln3_data_generator_SMBF"/>
+        <dataSet id="del_Cln3_data_set_Cln2" label="Cln2" dataReference="del_Cln3_data_generator_Cln2"/>
+        <dataSet id="del_Cln3_data_set_Clb5" label="Clb5" dataReference="del_Cln3_data_generator_Clb5"/>
+        <dataSet id="del_Cln3_data_set_Yhp1" label="Yhp1" dataReference="del_Cln3_data_generator_Yhp1"/>
+        <dataSet id="del_Cln3_data_set_Clb2" label="Clb2" dataReference="del_Cln3_data_generator_Clb2"/>
+        <dataSet id="del_Cln3_data_set_SFF" label="SFF" dataReference="del_Cln3_data_generator_SFF"/>
+        <dataSet id="del_Cln3_data_set_Cdc20" label="Cdc20" dataReference="del_Cln3_data_generator_Cdc20"/>
+        <dataSet id="del_Cln3_data_set_FEAR" label="FEAR" dataReference="del_Cln3_data_generator_FEAR"/>
+        <dataSet id="del_Cln3_data_set_MEN" label="MEN" dataReference="del_Cln3_data_generator_MEN"/>
+        <dataSet id="del_Cln3_data_set_Cdc14" label="Cdc14" dataReference="del_Cln3_data_generator_Cdc14"/>
+        <dataSet id="del_Cln3_data_set_Swi5" label="Swi5" dataReference="del_Cln3_data_generator_Swi5"/>
+        <dataSet id="del_Cln3_data_set_CKI" label="CKI" dataReference="del_Cln3_data_generator_CKI"/>
+        <dataSet id="del_Cln3_data_set_Cdh1" label="Cdh1" dataReference="del_Cln3_data_generator_Cdh1"/>
+        <dataSet id="del_Cln3_data_set_S" label="Synthesis" dataReference="del_Cln3_data_generator_S"/>
+        <dataSet id="del_Cln3_data_set_B" label="Bud growth" dataReference="del_Cln3_data_generator_B"/>
+        <dataSet id="del_Cln3_data_set_M" label="Mitosis" dataReference="del_Cln3_data_generator_M"/>
+        <dataSet id="del_Cln3_data_set_CD" label="Cell Division" dataReference="del_Cln3_data_generator_CD"/>
+      </listOfDataSets>
+    </report>
+  </listOfOutputs>
+</sedML>

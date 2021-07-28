@@ -1,0 +1,122 @@
+{
+  "name": "Budding yeast cell cycle (Irons, J Theor Biol, 2009)",
+  "filename": "Irons-J-Theor-Biol-2009-yeast-cell-cycle.omex",
+  "taskRequirements": [{
+    "modelFormat": "format_2585",
+    "simulationAlgorithm": "KISAO_0000449"
+  }],
+  "expectedReports": [{
+    "id": "simulation.sedml/report_wt",
+    "dataSets": [
+      {"id": "wt_data_set_time", "label": "Time (dimensionless)"},
+      {"id": "wt_data_set_Cln3", "label": "Cln3"},
+      {"id": "wt_data_set_SMBF", "label": "SBF/MBF"},
+      {"id": "wt_data_set_Cln2", "label": "Cln2"},
+      {"id": "wt_data_set_Clb5", "label": "Clb5"},
+      {"id": "wt_data_set_Yhp1", "label": "Yhp1"},
+      {"id": "wt_data_set_Clb2", "label": "Clb2"},
+      {"id": "wt_data_set_SFF", "label": "SFF"},
+      {"id": "wt_data_set_Cdc20", "label": "Cdc20"},
+      {"id": "wt_data_set_FEAR", "label": "FEAR"},
+      {"id": "wt_data_set_MEN", "label": "MEN"},
+      {"id": "wt_data_set_Cdc14", "label": "Cdc14"},
+      {"id": "wt_data_set_Swi5", "label": "Swi5"},
+      {"id": "wt_data_set_CKI", "label": "CKI"},
+      {"id": "wt_data_set_Cdh1", "label": "Cdh1"},
+      {"id": "wt_data_set_S", "label": "Synthesis"},
+      {"id": "wt_data_set_B", "label": "Bud growth"},
+      {"id": "wt_data_set_M", "label": "Mitosis"},
+      {"id": "wt_data_set_CD", "label": "Cell Division"}
+    ],
+    "points": [101],
+    "values": [{
+      "id": "wt_data_set_time",
+      "label": "time",
+      "value": {
+        "0": 0,
+        "99": 99,
+        "100": 100
+      }
+    }]
+  },
+  {
+    "id": "simulation.sedml/report_del_Cln2",
+    "dataSets": [
+      {"id": "del_Cln2_data_set_time", "label": "Time (dimensionless)"},
+      {"id": "del_Cln2_data_set_Cln3", "label": "Cln3"},
+      {"id": "del_Cln2_data_set_SMBF", "label": "SBF/MBF"},
+      {"id": "del_Cln2_data_set_Cln2", "label": "Cln2"},
+      {"id": "del_Cln2_data_set_Clb5", "label": "Clb5"},
+      {"id": "del_Cln2_data_set_Yhp1", "label": "Yhp1"},
+      {"id": "del_Cln2_data_set_Clb2", "label": "Clb2"},
+      {"id": "del_Cln2_data_set_SFF", "label": "SFF"},
+      {"id": "del_Cln2_data_set_Cdc20", "label": "Cdc20"},
+      {"id": "del_Cln2_data_set_FEAR", "label": "FEAR"},
+      {"id": "del_Cln2_data_set_MEN", "label": "MEN"},
+      {"id": "del_Cln2_data_set_Cdc14", "label": "Cdc14"},
+      {"id": "del_Cln2_data_set_Swi5", "label": "Swi5"},
+      {"id": "del_Cln2_data_set_CKI", "label": "CKI"},
+      {"id": "del_Cln2_data_set_Cdh1", "label": "Cdh1"},
+      {"id": "del_Cln2_data_set_S", "label": "Synthesis"},
+      {"id": "del_Cln2_data_set_B", "label": "Bud growth"},
+      {"id": "del_Cln2_data_set_M", "label": "Mitosis"},
+      {"id": "del_Cln2_data_set_CD", "label": "Cell Division"}
+    ],
+    "points": [101],
+    "values": [{
+      "id": "del_Cln2_data_set_time",
+      "label": "time",
+      "value": {
+        "0": 0,
+        "99": 99,
+        "100": 100
+      }
+    }]
+  },
+  {
+    "id": "simulation.sedml/report_del_Cln3",
+    "dataSets": [
+      {"id": "del_Cln3_data_set_time", "label": "Time (dimensionless)"},
+      {"id": "del_Cln3_data_set_Cln3", "label": "Cln3"},
+      {"id": "del_Cln3_data_set_SMBF", "label": "SBF/MBF"},
+      {"id": "del_Cln3_data_set_Cln2", "label": "Cln2"},
+      {"id": "del_Cln3_data_set_Clb5", "label": "Clb5"},
+      {"id": "del_Cln3_data_set_Yhp1", "label": "Yhp1"},
+      {"id": "del_Cln3_data_set_Clb2", "label": "Clb2"},
+      {"id": "del_Cln3_data_set_SFF", "label": "SFF"},
+      {"id": "del_Cln3_data_set_Cdc20", "label": "Cdc20"},
+      {"id": "del_Cln3_data_set_FEAR", "label": "FEAR"},
+      {"id": "del_Cln3_data_set_MEN", "label": "MEN"},
+      {"id": "del_Cln3_data_set_Cdc14", "label": "Cdc14"},
+      {"id": "del_Cln3_data_set_Swi5", "label": "Swi5"},
+      {"id": "del_Cln3_data_set_CKI", "label": "CKI"},
+      {"id": "del_Cln3_data_set_Cdh1", "label": "Cdh1"},
+      {"id": "del_Cln3_data_set_S", "label": "Synthesis"},
+      {"id": "del_Cln3_data_set_B", "label": "Bud growth"},
+      {"id": "del_Cln3_data_set_M", "label": "Mitosis"},
+      {"id": "del_Cln3_data_set_CD", "label": "Cell Division"}
+    ],
+    "points": [101],
+    "values": [{
+      "id": "del_Cln3_data_set_time",
+      "label": "time",
+      "value": {
+        "0": 0,
+        "99": 99,
+        "100": 100
+      }
+    }]
+  }],
+  "expectedPlots": [],
+  "runtimeFailureAlertType": "exception",
+  "author": "D. J. Irons",
+  "identifiers": [{
+    "namespace": "ginsim",
+    "id": "35",
+    "url": "http://ginsim.org/node/35"
+  }, {
+    "namespace": "doi",
+    "id": "10.1016/j.jtbi.2008.12.028",
+    "url": "https://doi.org/10.1016/j.jtbi.2008.12.028"
+  }]
+}
