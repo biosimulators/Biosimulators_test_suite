@@ -1,0 +1,70 @@
+{
+  "name": "Elowitz & Leibler. Nature 2000: Represillator",
+  "filename": "Elowitz-Nature-2000-Repressilator.omex",
+  "taskRequirements": [{
+    "modelFormat": "format_2585",
+    "simulationAlgorithm": "KISAO_0000019"
+  }],
+  "expectedReports": [{
+    "id": "simulation.sedml/report",
+    "dataSets": [{
+        "id": "data_set_time",
+        "label": "Time"
+      },
+      {
+        "id": "data_set_laci_protein",
+        "label": "LacI protein"
+      },
+      {
+        "id": "data_set_tetr_protein",
+        "label": "TetR protein"
+      },
+      {
+        "id": "data_set_ci_protein",
+        "label": "cI protein"
+      }, {
+        "id": "data_set_laci_mrna",
+        "label": "LacI mRNA"
+      },
+      {
+        "id": "data_set_tetr_mrna",
+        "label": "TetR mRNA"
+      },
+      {
+        "id": "data_set_ci_mrna",
+        "label": "cI mRNA"
+      }
+    ],
+    "points": [601],
+    "values": [{
+      "id": "data_set_time",
+      "label": "time",
+      "value": {
+        "0": 400,
+        "1": 401,
+        "2": 402,
+        "1000": 1000
+      }
+    }]
+  }],
+  "expectedPlots": [{
+    "id": "simulation.sedml/Figure_1c"
+  }],
+  "runtimeFailureAlertType": "exception",
+  "author": "Michael B. Elowitz, Stanislas Leibler",
+  "identifiers": [{
+      "namespace": "biomodels.db",
+      "id": "BIOMD0000000012",
+      "url": "https://identifiers.org/biomodels.db/BIOMD0000000012"
+    }, {
+      "namespace": "doi",
+      "id": "10.1038/35002125",
+      "url": "https://doi.org/10.1038/35002125"
+    },
+    {
+      "namespace": "pmr",
+      "id": "48",
+      "url": "https://models.physiomeproject.org/e/48"
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version3" level="1" version="3"
+  xmlns:cellml="http://www.cellml.org/cellml/1.0#">
+  <listOfModels>
+    <model id="model" language="urn:sedml:language:cellml" source="elowitz_leibler_2000.cellml">
+      <listOfChanges>
+        <changeAttribute target="/cellml:model/cellml:component[@name=&apos;parameters&apos;]/cellml:variable[@name=&apos;mRNA_halflife&apos;]/@initial_value" newValue="2"/>
+      </listOfChanges>
+    </model>
+  </listOfModels>
+  <listOfSimulations>
+    <uniformTimeCourse id="simulation" initialTime="0" outputStartTime="400" outputEndTime="1000" numberOfPoints="600">
+      <algorithm kisaoID="KISAO:0000019"/>
+    </uniformTimeCourse>
+  </listOfSimulations>
+  <listOfTasks>
+    <task id="task" modelReference="model" simulationReference="simulation"/>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="data_gen_time" name="time">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_time </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_time" name="time" target="/cellml:model/cellml:component[@name=&apos;environment&apos;]/cellml:variable[@name=&apos;time&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_px" name="LacI protein">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_px </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_px" name="LacI protein" target="/cellml:model/cellml:component[@name=&apos;P_lacl&apos;]/cellml:variable[@name=&apos;P_lacl&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_py" name="TetR protein">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_py </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_py" name="TetR protein" target="/cellml:model/cellml:component[@name=&apos;P_tetR&apos;]/cellml:variable[@name=&apos;P_tetR&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_pz" name="cI protein">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_pz </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_pz" name="cI protein" target="/cellml:model/cellml:component[@name=&apos;P_cl&apos;]/cellml:variable[@name=&apos;P_cl&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_x" name="LacI mRNA">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_x </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_x" name="LacI mRNA" target="/cellml:model/cellml:component[@name=&apos;M_lacl&apos;]/cellml:variable[@name=&apos;M_lacl&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_y" name="TetR mRNA">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_y </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_y" name="TetR mRNA" target="/cellml:model/cellml:component[@name=&apos;M_tetR&apos;]/cellml:variable[@name=&apos;M_tetR&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_z" name="cI mRNA">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_z </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_z" name="cI mRNA" target="/cellml:model/cellml:component[@name=&apos;M_cl&apos;]/cellml:variable[@name=&apos;M_cl&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+  </listOfDataGenerators>
+  <listOfOutputs>
+    <report id="report" name="Report">
+      <listOfDataSets>
+        <dataSet id="data_set_time" label="Time" dataReference="data_gen_time"/>
+        <dataSet id="data_set_laci_protein" label="LacI protein" dataReference="data_gen_px"/>
+        <dataSet id="data_set_tetr_protein" label="TetR protein" dataReference="data_gen_py"/>
+        <dataSet id="data_set_ci_protein" label="cI protein" dataReference="data_gen_pz"/>
+        <dataSet id="data_set_laci_mrna" label="LacI mRNA" dataReference="data_gen_x"/>
+        <dataSet id="data_set_tetr_mrna" label="TetR mRNA" dataReference="data_gen_y"/>
+        <dataSet id="data_set_ci_mrna" label="cI mRNA" dataReference="data_gen_z"/>
+      </listOfDataSets>
+    </report>
+    <plot2D id="Figure_1c" name="Figure 1c">
+      <listOfCurves>
+        <curve id="Figure_1c_laci_protein" name="LacI protein" logX="false" xDataReference="data_gen_time" logY="false" yDataReference="data_gen_px"/>
+        <curve id="Figure_1c_tetr_protein" name="TetR protein" logX="false" xDataReference="data_gen_time" logY="false" yDataReference="data_gen_py"/>
+        <curve id="Figure_1c_ci_protein" name="cI protein" logX="false" xDataReference="data_gen_time" logY="false" yDataReference="data_gen_pz"/>
+      </listOfCurves>
+    </plot2D>
+  </listOfOutputs>
+</sedML>

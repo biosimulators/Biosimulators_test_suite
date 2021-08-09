@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rdf:RDF
+    xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"
+    xmlns:bqmodel="http://biomodels.net/model-qualifiers/"
+    xmlns:collex="http://www.collex.org/schema#"
+    xmlns:dc="http://dublincore.org/specifications/dublin-core/dcmi-terms/"
+    xmlns:dcterms='http://purl.org/dc/terms/'
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/"
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about='http://omex-libary.org/Elowitz-Nature-2000-Repressilator.omex'>
+    <dc:title>Repressilator (Elowitz &amp; Leibler, Nature, 2000)</dc:title>
+
+    <dc:abstract>Mathematical model of a synthetic oscillator</dc:abstract>
+
+    <prism:keyword>oscillator</prism:keyword>
+    <prism:keyword>Biological Clocks</prism:keyword>
+    <prism:keyword>synthetic biology</prism:keyword>
+
+    <dc:description>Mathematical model of a synthetic oscillator implemented using three transcriptional repressors (LacI, tetracycline-resistance transposon (TetR), and cI from phage lambda) and induced in Escherichia coli. In this system, LacI inhibits tetR, TetR inhibits cI, and CI inhibits lacI. Under some combinations of parameters the system oscillates.</dc:description>
+
+    <collex:thumbnail rdf:resource="http://omex-libary.org/Elowitz-Nature-2000-Repressilator.omex/Figure_1a.png"/>
+
+    <!-- taxon -->
+    <bqbiol:hasTaxon>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/562"/>
+        <rdfs:label>Escherichia coli</rdfs:label>
+      </rdf:Description>
+    </bqbiol:hasTaxon>
+
+    <!-- taxon -->
+    <bqbiol:encodes>
+      <rdf:Description>
+        <dc:identifier rdf:resource="http://identifiers.org/go/GO:0040029"/>
+        <rdfs:label>regulation of gene expression, epigenetic</rdfs:label>
+      </rdf:Description>
+    </bqbiol:encodes>
+
+    <!-- other identifiers -->
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000012"/>
+        <rdfs:label>biomodels.db:BIOMD0000000012</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://models.physiomeproject.org/e/48"/>
+        <rdfs:label>pmr:48</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+
+    <!-- authors -->
+    <dc:creator>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0002-1221-0967"/>
+        <foaf:name>Michael Elowitz</foaf:name>
+
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-1221-0967"/>
+        <rdfs:label>Michael Elowitz</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Stanislas Leibler</foaf:name>
+
+        <rdfs:label>Stanislas Leibler</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <!-- contributors (e.g., curators) -->
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>Nicolas Le Novère</foaf:name>
+
+        <rdfs:label>Nicolas Le Novère</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>Jeelean Lim</foaf:name>
+
+        <rdfs:label>Jeelean Lim</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>Lukas Endler</foaf:name>
+
+        <rdfs:label>Lukas Endler</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>Dougal Cowan</foaf:name>
+
+        <rdfs:label>Dougal Cowan</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080"/>
+        <foaf:name>Jonathan Karr</foaf:name>
+
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080"/>
+        <rdfs:label>Jonathan Karr</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+     <!-- citations -->
+    <bqmodel:isDescribedBy>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1038/35002125"/>
+        <rdfs:label>Michael B Elowitz &amp; Stanislas Leibler. A synthetic oscillatory network of transcriptional regulators. Nature 403, 6767 (2000) 335-338.</rdfs:label>
+      </rdf:Description>
+    </bqmodel:isDescribedBy>
+
+    <!-- license -->
+    <dc:license>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0"/>
+        <rdfs:label>CC0-1.0</rdfs:label>
+      </rdf:Description>
+    </dc:license>
+
+    <!-- created -->
+    <dc:created>
+      <rdf:Description>
+        <dc:W3CDTF>2000-01-20</dc:W3CDTF>
+      </rdf:Description>
+    </dc:created>
+
+    <!-- modified -->
+    <dc:modified>
+      <dcterms:W3CDTF>
+        <rdf:value>2021-08-09</rdf:value>
+      </dcterms:W3CDTF>
+    </dc:modified>
+  </rdf:Description>
+
+  <!-- links from SED-ML plots to figures of articles -->
+  <rdf:Description rdf:about="http://omex-libary.org/Elowitz-Nature-2000-Repressilator.omex/simulation.sedml/Figure_1c">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1038/35002125"/>
+        <rdfs:label>Figure 1c</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+</rdf:RDF>
