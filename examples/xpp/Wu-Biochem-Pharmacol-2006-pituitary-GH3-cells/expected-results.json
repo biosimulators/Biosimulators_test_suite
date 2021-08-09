@@ -1,0 +1,63 @@
+{
+  "name": "Wu & Chang. Biochemical Pharmacology 2006: Pituitary GH(3) cells",
+  "filename": "Wu-Biochem-Pharmacol-2006-pituitary-GH3-cells.omex",
+  "taskRequirements": [{
+    "modelFormat": "format_9010",
+    "simulationAlgorithm": "KISAO_0000019"
+  }],
+  "expectedReports": [{
+    "id": "simulation.sedml/report",
+    "dataSets": [{
+        "id": "data_set_time",
+        "label": "Time"
+      },
+      {
+        "id": "data_set_v",
+        "label": "V"
+      },
+      {
+        "id": "data_set_c",
+        "label": "C"
+      },
+      {
+        "id": "data_set_n",
+        "label": "N"
+      }, {
+        "id": "data_set_cer",
+        "label": "CER"
+      }, {
+        "id": "data_set_a",
+        "label": "A"
+      }, {
+        "id": "data_set_nir",
+        "label": "nIR"
+      }, {
+        "id": "data_set_rir",
+        "label": "rIR"
+      }
+    ],
+    "points": [40001],
+    "values": [{
+      "id": "data_set_time",
+      "label": "time",
+      "value": {
+        "0": 0.0,
+        "40000": 80000
+      }
+    }]
+  }],
+  "expectedPlots": [{
+    "id": "simulation.sedml/Figure_7a"
+  }],
+  "runtimeFailureAlertType": "exception",
+  "author": "Sheng-Nan Wu & Han-Dong Chang",
+  "identifiers": [{
+    "namespace": "modeldb",
+    "id": "62272",
+    "url": "https://identifiers.org/modeldb/62272"
+  }, {
+    "namespace": "doi",
+    "id": "10.1016/j.bcp.2005.11.016",
+    "url": "https://doi.org/10.1016/j.bcp.2005.11.016"
+  }]
+}
