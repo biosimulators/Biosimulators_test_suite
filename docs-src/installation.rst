@@ -15,7 +15,11 @@ Install the optional dependencies for the test suite
 
 To check that Docker image for simulation tools can be converted into Singularity images, also install Singularity. Installation instructions are available at `https://sylabs.io/docs/ <https://sylabs.io/docs/>`_.
 
-In addition, `Java <https://www.java.com/>`_ is needed to test simulation tools that execute models encoded in LEMS.
+The following packages are also required to test simulation tools that execute models encoded in several specific languages:
+ 
+ * `Java <https://www.java.com/>`_: required to test simulation tools that execute models encoded in NeuroML/LEMS.
+ * `Perl <https://www.perl.org/>`_: required to test simulation tools that execute models encoded in BioNetGen.
+ * `XPP <http://www.math.pitt.edu/~bard/xpp/xpp.html>`_: required to test simulation tools that execute models encoded in XPP.
 
 
 Install the test suite

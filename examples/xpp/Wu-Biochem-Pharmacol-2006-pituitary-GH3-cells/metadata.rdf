@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rdf:RDF
+    xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"
+    xmlns:bqmodel="http://biomodels.net/model-qualifiers/"
+    xmlns:collex="http://www.collex.org/schema#"
+    xmlns:dc="http://dublincore.org/specifications/dublin-core/dcmi-terms/"
+    xmlns:dcterms='http://purl.org/dc/terms/'
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/"
+    xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about='http://omex-libary.org/Wu-Biochem-Pharmacol-2006-pituitary-GH3-cells.omex'>
+    <dc:title>Pituitary GH(3) cells (Wu &amp; Chang, Biochem Pharmacol, 2006)</dc:title>
+
+    <dc:abstract>Model how DEPC modifies KATP-channel activity in pituitary GH3 cells.</dc:abstract>
+
+    <prism:keyword>Pituitary cell</prism:keyword>
+    <prism:keyword>K channel</prism:keyword>
+    <prism:keyword>IP3</prism:keyword>
+    <prism:keyword>Kir6.2 KCNJ11</prism:keyword>
+    <prism:keyword>ATP-senstive potassium current</prism:keyword>
+
+    <collex:thumbnail rdf:resource="http://omex-libary.org/Wu-Biochem-Pharmacol-2006-pituitary-GH3-cells.omex/Figure4.gif"/>
+
+    <!-- taxon -->
+    <bqbiol:hasTaxon>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/taxonomy:10116"/>
+        <rdfs:label>Rattus norvegicus</rdfs:label>
+      </rdf:Description>
+    </bqbiol:hasTaxon>
+
+    <!-- other identifiers -->
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/modeldb:62272"/>
+        <rdfs:label>modeldb:62272</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+
+    <!-- authors -->
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Sheng-Nan Wu</foaf:name>
+
+        <rdfs:label>Sheng-Nan Wu</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Han-Dong Chang</foaf:name>
+
+        <rdfs:label>Han-Dong Chang</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <!-- contributors (e.g., curators) -->
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>SenseLab</foaf:name>
+
+        <rdfs:label>SenseLab</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080"/>        
+        <foaf:name>Jonathan Karr</foaf:name>
+
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080"/>
+        <rdfs:label>Jonathan Karr</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+     <!-- citations -->
+    <bqmodel:isDescribedBy>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.bcp.2005.11.016"/>
+        <rdfs:label>Sheng-Nan Wu &amp; Han-Dong Chang. Diethyl pyrocarbonate, a histidine-modifying agent, directly stimulates activity of ATP-sensitive potassium channels in pituitary GH(3) cells. Biochem Pharmacol 71, 5 (2006) 615-623.</rdfs:label>
+      </rdf:Description>
+    </bqmodel:isDescribedBy>
+
+    <!-- license -->
+    <dc:license>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0"/>
+        <rdfs:label>CC0-1.0</rdfs:label>
+      </rdf:Description>
+    </dc:license>
+
+    <!-- created -->
+    <dc:created>
+      <rdf:Description>
+        <dc:W3CDTF>2006-02-28</dc:W3CDTF>
+      </rdf:Description>
+    </dc:created>
+
+    <!-- modified -->
+    <dc:modified>
+      <dcterms:W3CDTF>
+        <rdf:value>2021-08-09</rdf:value>
+      </dcterms:W3CDTF>
+    </dc:modified>
+  </rdf:Description>
+
+  <!-- links from SED-ML plots to figures of articles -->
+  <rdf:Description rdf:about="http://omex-libary.org/Wu-Biochem-Pharmacol-2006-pituitary-GH3-cells.omex/simulation.sedml/Figure_7a">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.bcp.2005.11.016"/>
+        <rdfs:label>Figure 7a</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version3" level="1" version="3"> 
+  <listOfModels>
+    <model id="model" language="urn:sedml:language:xpp" source="GH3_Katp.ode">
+      <listOfChanges>
+        <changeAttribute target="parameters.gca" newValue="1000"/>
+        <changeAttribute target="initialConditions.V" newValue="-60.0"/>
+      </listOfChanges>
+    </model>
+  </listOfModels>
+  <listOfSimulations>
+    <uniformTimeCourse id="simulation" initialTime="0" outputStartTime="0" outputEndTime="80000" numberOfPoints="40000">
+      <algorithm kisaoID="KISAO:0000019"/>
+    </uniformTimeCourse>
+  </listOfSimulations>
+  <listOfTasks>
+    <task id="task" modelReference="model" simulationReference="simulation"/>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="data_gen_time" name="time">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_time </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_time" name="time" symbol="urn:sedml:symbol:time" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_v">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_v </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_v" target="V" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_c">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_c" target="C" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_n">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_n </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_n" target="N" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_cer">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_cer </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_cer" target="CER" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_a">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_a </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_a" target="A" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_nir">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_nir </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_nir" target="NIR" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_gen_rir">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_rir </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_rir" target="RIR" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+  </listOfDataGenerators>
+  <listOfOutputs>
+    <report id="report">
+      <listOfDataSets>
+        <dataSet id="data_set_time" label="Time" dataReference="data_gen_time"/>
+        <dataSet id="data_set_v" label="V" dataReference="data_gen_v"/>
+        <dataSet id="data_set_c" label="C" dataReference="data_gen_c"/>
+        <dataSet id="data_set_n" label="N" dataReference="data_gen_n"/>
+        <dataSet id="data_set_cer" label="CER" dataReference="data_gen_cer"/>
+        <dataSet id="data_set_a" label="A" dataReference="data_gen_a"/>
+        <dataSet id="data_set_nir" label="nIR" dataReference="data_gen_nir"/>
+        <dataSet id="data_set_rir" label="rIR" dataReference="data_gen_rir"/>
+      </listOfDataSets>
+    </report>
+    <plot2D id="Figure_7a" name="Figure 7a">
+      <listOfCurves>
+        <curve id="v_vs_time_0" name="V vs time" logX="false" xDataReference="data_gen_time" logY="false" yDataReference="data_gen_v"/>
+      </listOfCurves>
+    </plot2D>
+  </listOfOutputs>
+</sedML>
