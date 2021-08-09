@@ -39,7 +39,7 @@ class ExamplesTestCase(unittest.TestCase):
                 specs = json.load(file)
 
             archive_filename = os.path.join(example_base_dir, specs['filename'])
-            archive_dirname = os.path.join(self.dirname, specs['filename'].replace('.omex', ''))
+            archive_dirname = os.path.join(self.dirname, os.path.relpath(example_filename.replace('.omex', ''), examples_dir))
             archive = CombineArchiveReader().run(archive_filename, archive_dirname)
 
             errors, _ = validate(archive, archive_dirname,
