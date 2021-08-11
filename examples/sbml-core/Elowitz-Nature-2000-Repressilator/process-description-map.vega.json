@@ -1,0 +1,1347 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 700,
+  "height": 557.7878103837472,
+  "padding": 0,
+  "autosize": "none",
+  "signals": [
+    {
+      "name": "soureAndSinkPath",
+      "value": "M -0.75, a 0.75,0.75 0 1,0 1.5,0 a 0.75,0.75 0 1,0 -1.5, 0 M 1,-1 L -1,1"
+    },
+    {
+      "name": "macromoleculeColor",
+      "value": "#2196f3"
+    },
+    {
+      "name": "nucleicAcidFeatureColor",
+      "value": "#ff9800"
+    },
+    {
+      "name": "processColor",
+      "value": "#000000"
+    },
+    {
+      "name": "sourceSinkColor",
+      "value": "#CCCCCC"
+    },
+    {
+      "name": "strokeWidth",
+      "description": "stroke width",
+      "value": 2
+    },
+    {
+      "name": "filledUnpaintedGlyphOpacity",
+      "value": 0.25
+    },
+    {
+      "name": "filledPaintedGlyphOpacity",
+      "value": 0.5
+    },
+    {
+      "name": "cornerRadius",
+      "value": 5
+    },
+    {
+      "name": "sbgnWidth",
+      "value": 700
+    },
+    {
+      "name": "sbgnHeight",
+      "value": 557.7878103837472
+    },
+    {
+      "name": "Paint_report",
+      "description": "Paint glyphs with data",
+      "value": true,
+      "bind": {
+        "input": "checkbox"
+      }
+    },
+    {
+      "name": "OutputStartTime",
+      "sedmlUri": [
+        "SedDocument:simulation.sedml",
+        "Simulation:simulation",
+        "outputStartTime"
+      ]
+    },
+    {
+      "name": "OutputEndTime",
+      "sedmlUri": [
+        "SedDocument:simulation.sedml",
+        "Simulation:simulation",
+        "outputEndTime"
+      ]
+    },
+    {
+      "name": "NumberOfSteps",
+      "sedmlUri": [
+        "SedDocument:simulation.sedml",
+        "Simulation:simulation",
+        "numberOfSteps"
+      ]
+    },
+    {
+      "name": "Time_step",
+      "description": "Time step",
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": {
+          "sedmlUri": [
+            "SedDocument:simulation.sedml",
+            "Simulation:simulation",
+            "numberOfSteps"
+          ]
+        },
+        "step": 1
+      },
+      "value": 0
+    },
+    {
+      "name": "CurTime",
+      "update": "OutputStartTime + (OutputEndTime - OutputStartTime) / NumberOfSteps * Time_step"
+    },
+    {
+      "name": "Glyph_labels",
+      "value": true,
+      "bind": {
+        "input": "checkbox"
+      }
+    },
+    {
+      "name": "colorScaleWidth",
+      "value": 65
+    },
+    {
+      "name": "colorScalePadding",
+      "value": 20
+    },
+    {
+      "name": "signalHeight",
+      "value": 20
+    },
+    {
+      "name": "signalPadding",
+      "value": 10
+    },
+    {
+      "name": "timeHeight",
+      "value": 12
+    },
+    {
+      "name": "timePadding",
+      "value": 10
+    },
+    {
+      "name": "mapMaxWidth",
+      "update": "width - colorScalePadding - colorScaleWidth"
+    },
+    {
+      "name": "mapMaxHeight",
+      "update": "height - signalPadding - signalHeight"
+    },
+    {
+      "name": "sbgnScale",
+      "update": "min(mapMaxWidth / sbgnWidth, mapMaxHeight / sbgnHeight)"
+    },
+    {
+      "name": "mapWidth",
+      "update": "sbgnScale * sbgnWidth"
+    },
+    {
+      "name": "mapHeight",
+      "update": "sbgnScale * sbgnHeight"
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "domain": [
+        0,
+        {
+          "signal": "sbgnWidth"
+        }
+      ],
+      "range": [
+        {
+          "signal": "width / 2 - (mapWidth + colorScalePadding + colorScaleWidth) / 2"
+        },
+        {
+          "signal": "width / 2 - (mapWidth + colorScalePadding + colorScaleWidth) / 2 + mapWidth"
+        }
+      ]
+    },
+    {
+      "name": "y",
+      "domain": [
+        0,
+        {
+          "signal": "sbgnHeight"
+        }
+      ],
+      "range": [
+        {
+          "signal": "mapHeight / 2 - mapHeight / 2"
+        },
+        {
+          "signal": "mapHeight / 2 + mapHeight / 2"
+        }
+      ]
+    },
+    {
+      "name": "color",
+      "type": "linear",
+      "domain": {
+        "data": "glyphsFlattenedValues",
+        "field": "value"
+      },
+      "range": {
+        "scheme": "viridis"
+      }
+    }
+  ],
+  "data": [
+    {
+      "name": "glyphsData",
+      "values": [
+        {
+          "id": "glyph3",
+          "label": null,
+          "class": "source and sink",
+          "orientation": null,
+          "x": 429.00677200902936,
+          "y": 2.37020316027088,
+          "width": 28.442437923250566,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph2",
+          "label": null,
+          "class": "source and sink",
+          "orientation": null,
+          "x": 85.3273137697517,
+          "y": 2.37020316027088,
+          "width": 28.442437923250566,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph11",
+          "label": null,
+          "class": "source and sink",
+          "orientation": null,
+          "x": 350.0,
+          "y": 207.78781038374717,
+          "width": 28.442437923250566,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph12",
+          "label": null,
+          "class": "source and sink",
+          "orientation": null,
+          "x": 496.1625282167043,
+          "y": 81.37697516930022,
+          "width": 28.442437923250566,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph5",
+          "label": null,
+          "class": "process",
+          "orientation": null,
+          "x": 166.70428893905193,
+          "y": 8.690744920993229,
+          "width": 15.80135440180587,
+          "height": 15.80135440180587
+        },
+        {
+          "id": "glyph10",
+          "label": null,
+          "class": "source and sink",
+          "orientation": null,
+          "x": 393.45372460496617,
+          "y": 250.14909255079007,
+          "width": 28.442437923250566,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph15",
+          "label": null,
+          "class": "source and sink",
+          "orientation": null,
+          "x": 654.176072234763,
+          "y": 26.072234762979683,
+          "width": 28.442437923250566,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph25",
+          "label": null,
+          "class": "source and sink",
+          "orientation": null,
+          "x": 654.176072234763,
+          "y": 314.4469525959368,
+          "width": 28.442437923250566,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph16",
+          "label": null,
+          "class": "process",
+          "orientation": "vertical",
+          "x": 660.4966139954853,
+          "y": 95.5981941309255,
+          "width": 15.80135440180587,
+          "height": 15.80135440180587
+        },
+        {
+          "id": "glyph8",
+          "label": "LacI protein",
+          "class": "macromolecule",
+          "orientation": null,
+          "x": 225.16930022573365,
+          "y": 2.37020316027088,
+          "width": 56.88487584650113,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph30",
+          "label": null,
+          "class": "source and sink",
+          "orientation": null,
+          "x": 456.65914221218964,
+          "y": 527.765237020316,
+          "width": 28.442437923250566,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph14",
+          "label": null,
+          "class": "process",
+          "orientation": "vertical",
+          "x": 462.97968397291197,
+          "y": 466.93002257336343,
+          "width": 15.80135440180587,
+          "height": 15.80135440180587
+        },
+        {
+          "id": "glyph17",
+          "label": null,
+          "class": "source and sink",
+          "orientation": null,
+          "x": 77.42663656884876,
+          "y": 405.30474040632055,
+          "width": 28.442437923250566,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph19",
+          "label": null,
+          "class": "source and sink",
+          "orientation": null,
+          "x": 302.59593679458237,
+          "y": 250.14909255079007,
+          "width": 28.442437923250566,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph18",
+          "label": null,
+          "class": "source and sink",
+          "orientation": null,
+          "x": 2.37020316027088,
+          "y": 250.14887133182847,
+          "width": 28.442437923250566,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph27",
+          "label": "cI protein",
+          "class": "macromolecule",
+          "orientation": null,
+          "x": 639.9548532731377,
+          "y": 148.53273137697516,
+          "width": 56.88487584650113,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph24",
+          "label": "TetR protein",
+          "class": "macromolecule",
+          "orientation": null,
+          "x": 442.4379232505643,
+          "y": 405.30474040632055,
+          "width": 56.88487584650113,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph13",
+          "label": null,
+          "class": "process",
+          "orientation": null,
+          "x": 462.97968397291197,
+          "y": 256.46963431151244,
+          "width": 15.80135440180587,
+          "height": 15.80135440180587
+        },
+        {
+          "id": "glyph26",
+          "label": null,
+          "class": "process",
+          "orientation": "vertical",
+          "x": 660.4966139954853,
+          "y": 256.46963431151244,
+          "width": 15.80135440180587,
+          "height": 15.80135440180587
+        },
+        {
+          "id": "glyph22",
+          "label": null,
+          "class": "source and sink",
+          "orientation": null,
+          "x": 551.4672686230249,
+          "y": 368.69829571106095,
+          "width": 28.442437923250566,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph21",
+          "label": "cI mRNA",
+          "class": "nucleic acid feature",
+          "orientation": null,
+          "x": 537.2460496613995,
+          "y": 250.14887133182847,
+          "width": 56.88487584650113,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph28",
+          "label": null,
+          "class": "process",
+          "orientation": "vertical",
+          "x": 557.7878103837472,
+          "y": 311.8134198645598,
+          "width": 15.80135440180587,
+          "height": 15.80135440180587
+        },
+        {
+          "id": "glyph32",
+          "label": null,
+          "class": "process",
+          "orientation": null,
+          "x": 245.71106094808127,
+          "y": 256.46963431151244,
+          "width": 15.80135440180587,
+          "height": 15.80135440180587
+        },
+        {
+          "id": "glyph9",
+          "label": null,
+          "class": "process",
+          "orientation": null,
+          "x": 85.3273137697517,
+          "y": 256.46963431151244,
+          "width": 15.80135440180587,
+          "height": 15.80135440180587
+        },
+        {
+          "id": "glyph1",
+          "label": "TetR mRNA",
+          "class": "nucleic acid feature",
+          "orientation": null,
+          "x": 138.26185101580137,
+          "y": 250.14887133182847,
+          "width": 56.88487584650113,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph23",
+          "label": null,
+          "class": "process",
+          "orientation": null,
+          "x": 159.59367945823928,
+          "y": 411.6252821670429,
+          "width": 15.80135440180587,
+          "height": 15.80135440180587
+        },
+        {
+          "id": "glyph4",
+          "label": null,
+          "class": "process",
+          "orientation": null,
+          "x": 356.32054176072234,
+          "y": 8.690744920993229,
+          "width": 15.80135440180587,
+          "height": 15.80135440180587
+        },
+        {
+          "id": "glyph7",
+          "label": null,
+          "class": "process",
+          "orientation": "vertical",
+          "x": 356.32054176072234,
+          "y": 154.85327313769753,
+          "width": 15.80135440180587,
+          "height": 15.80135440180587
+        },
+        {
+          "id": "glyph20",
+          "label": "LacI mRNA",
+          "class": "nucleic acid feature",
+          "orientation": null,
+          "x": 335.77878103837475,
+          "y": 81.37697516930022,
+          "width": 56.88487584650113,
+          "height": 28.442437923250566
+        },
+        {
+          "id": "glyph6",
+          "label": null,
+          "class": "process",
+          "orientation": null,
+          "x": 435.3273137697517,
+          "y": 87.69751693002257,
+          "width": 15.80135440180587,
+          "height": 15.80135440180587
+        }
+      ]
+    },
+    {
+      "sedmlUri": [
+        "simulation.sedml",
+        "report"
+      ],
+      "name": "glyphsValues"
+    },
+    {
+      "name": "glyphsFlattenedValues",
+      "source": "glyphsValues",
+      "transform": [
+        {
+          "type": "flatten",
+          "fields": [
+            "values"
+          ],
+          "as": [
+            "values"
+          ]
+        },
+        {
+          "type": "project",
+          "fields": [
+            "values"
+          ],
+          "as": [
+            "value"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "glyphsDataTransformed",
+      "source": "glyphsData",
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "scale('x', datum.x)",
+          "as": "x"
+        },
+        {
+          "type": "formula",
+          "expr": "scale('y', datum.y)",
+          "as": "y"
+        },
+        {
+          "type": "formula",
+          "expr": "sbgnScale * datum.width",
+          "as": "width"
+        },
+        {
+          "type": "formula",
+          "expr": "sbgnScale * datum.height",
+          "as": "height"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.x + datum.width / 2",
+          "as": "centerX"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.y + datum.height / 2",
+          "as": "centerY"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.width * datum.height",
+          "as": "size"
+        }
+      ]
+    },
+    {
+      "name": "glyphsCurValues",
+      "source": "glyphsValues",
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum.values[Time_step]",
+          "as": "value"
+        },
+        {
+          "type": "project",
+          "fields": [
+            "label",
+            "value"
+          ],
+          "as": [
+            "label",
+            "value"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "glyphsDataTransformedAndCurValues",
+      "source": "glyphsDataTransformed",
+      "transform": [
+        {
+          "type": "lookup",
+          "from": "glyphsCurValues",
+          "key": "label",
+          "fields": [
+            "label"
+          ],
+          "values": [
+            "value"
+          ],
+          "as": [
+            "value"
+          ]
+        },
+        {
+          "type": "project",
+          "fields": [
+            "label",
+            "class",
+            "x",
+            "y",
+            "centerX",
+            "centerY",
+            "width",
+            "height",
+            "size",
+            "value"
+          ],
+          "as": [
+            "label",
+            "class",
+            "x",
+            "y",
+            "centerX",
+            "centerY",
+            "width",
+            "height",
+            "size",
+            "value"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sourceAndSinkGlyphsData",
+      "source": "glyphsDataTransformedAndCurValues",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.class === 'source and sink'"
+        }
+      ]
+    },
+    {
+      "name": "processGlyphsData",
+      "source": "glyphsDataTransformedAndCurValues",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.class === 'process'"
+        }
+      ]
+    },
+    {
+      "name": "macromoleculeGlyphsData",
+      "source": "glyphsDataTransformedAndCurValues",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.class === 'macromolecule'"
+        }
+      ]
+    },
+    {
+      "name": "nucleicAcidFeatureGlyphsData",
+      "source": "glyphsDataTransformedAndCurValues",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.class === 'nucleic acid feature'"
+        }
+      ]
+    },
+    {
+      "name": "arcsData",
+      "values": [
+        {
+          "id": "arc1",
+          "class": "consumption",
+          "source": "glyph3",
+          "target": "glyph4.2",
+          "x1": 429.00677200902936,
+          "y1": 16.591422121896162,
+          "x2": 380.02257336343115,
+          "y2": 16.591422121896162
+        },
+        {
+          "id": "arc4",
+          "class": "production",
+          "source": "glyph5.1",
+          "target": "glyph2",
+          "x1": 158.803611738149,
+          "y1": 16.591422121896162,
+          "x2": 113.76975169300226,
+          "y2": 16.591422121896162
+        },
+        {
+          "id": "arc6",
+          "class": "consumption",
+          "source": "glyph11",
+          "target": "glyph7.2",
+          "x1": 364.2212189616253,
+          "y1": 207.78781038374717,
+          "x2": 364.2212189616253,
+          "y2": 178.5553047404063
+        },
+        {
+          "id": "arc9",
+          "class": "production",
+          "source": "glyph6.2",
+          "target": "glyph12",
+          "x1": 459.0293453724605,
+          "y1": 95.5981941309255,
+          "x2": 496.1625282167043,
+          "y2": 95.5981941309255
+        },
+        {
+          "id": "arc3",
+          "class": "consumption",
+          "source": "glyph8",
+          "target": "glyph5.2",
+          "x1": 225.16930022573365,
+          "y1": 16.591422121896162,
+          "x2": 190.40632054176072,
+          "y2": 16.591422121896162
+        },
+        {
+          "id": "arc19",
+          "class": "consumption",
+          "source": "glyph10",
+          "target": "glyph13.1",
+          "x1": 421.89616252821673,
+          "y1": 264.37031151241536,
+          "x2": 455.07900677200905,
+          "y2": 264.37031151241536
+        },
+        {
+          "id": "arc22",
+          "class": "production",
+          "source": "glyph4.1",
+          "target": "glyph8",
+          "x1": 348.4198645598194,
+          "y1": 16.591422121896162,
+          "x2": 282.0541760722348,
+          "y2": 16.591422121896162
+        },
+        {
+          "id": "arc24",
+          "class": "production",
+          "source": "glyph16.1",
+          "target": "glyph15",
+          "x1": 668.3972911963883,
+          "y1": 87.69751693002257,
+          "x2": 668.3972911963883,
+          "y2": 54.51467268623025
+        },
+        {
+          "id": "arc10",
+          "class": "production",
+          "source": "glyph26.1",
+          "target": "glyph27",
+          "x1": 668.3972911963883,
+          "y1": 248.5689571106095,
+          "x2": 668.3972911963883,
+          "y2": 176.97516930022573
+        },
+        {
+          "id": "arc11",
+          "class": "consumption",
+          "source": "glyph25",
+          "target": "glyph26.2",
+          "x1": 668.3972911963883,
+          "y1": 314.4469525959368,
+          "x2": 668.3972911963883,
+          "y2": 280.1716659142212
+        },
+        {
+          "id": "arc13",
+          "class": "consumption",
+          "source": "glyph27",
+          "target": "glyph16.2",
+          "x1": 668.3972911963883,
+          "y1": 148.53273137697516,
+          "x2": 668.3972911963883,
+          "y2": 119.30022573363432
+        },
+        {
+          "id": "arc15",
+          "class": "inhibition",
+          "source": "glyph8",
+          "target": "glyph32",
+          "x1": 253.61173814898422,
+          "y1": 30.812641083521445,
+          "x2": 253.61173814898422,
+          "y2": 256.46963431151244
+        },
+        {
+          "id": "arc16",
+          "class": "production",
+          "source": "glyph14.2",
+          "target": "glyph30",
+          "x1": 470.8803611738149,
+          "y1": 490.63205417607224,
+          "x2": 470.8803611738149,
+          "y2": 527.765237020316
+        },
+        {
+          "id": "arc17",
+          "class": "consumption",
+          "source": "glyph24",
+          "target": "glyph14.1",
+          "x1": 470.8803611738149,
+          "y1": 433.7471783295711,
+          "x2": 470.8803611738149,
+          "y2": 459.0293453724605
+        },
+        {
+          "id": "arc20",
+          "class": "consumption",
+          "source": "glyph17",
+          "target": "glyph23.1",
+          "x1": 105.86907449209933,
+          "y1": 419.52595936794586,
+          "x2": 151.69300225733633,
+          "y2": 419.52595936794586
+        },
+        {
+          "id": "arc21",
+          "class": "production",
+          "source": "glyph23.2",
+          "target": "glyph24",
+          "x1": 183.2957110609481,
+          "y1": 419.52595936794586,
+          "x2": 442.4379232505643,
+          "y2": 419.52595936794586
+        },
+        {
+          "id": "arc25",
+          "class": "consumption",
+          "source": "glyph19",
+          "target": "glyph32.2",
+          "x1": 302.59593679458237,
+          "y1": 264.37031151241536,
+          "x2": 269.41309255079005,
+          "y2": 264.37031151241536
+        },
+        {
+          "id": "arc28",
+          "class": "production",
+          "source": "glyph9.1",
+          "target": "glyph18",
+          "x1": 77.42663656884876,
+          "y1": 264.37031151241536,
+          "x2": 30.812641083521445,
+          "y2": 264.37009029345376
+        },
+        {
+          "id": "arc2",
+          "class": "inhibition",
+          "source": "glyph27",
+          "target": "glyph7",
+          "x1": 639.9548532731377,
+          "y1": 162.75395033860045,
+          "x2": 372.12189616252823,
+          "y2": 162.75395033860045
+        },
+        {
+          "id": "arc23",
+          "class": "inhibition",
+          "source": "glyph24",
+          "target": "glyph13",
+          "x1": 470.8803611738149,
+          "y1": 405.30474040632055,
+          "x2": 470.8803611738149,
+          "y2": 272.2709887133183
+        },
+        {
+          "id": "arc5",
+          "class": "production",
+          "source": "glyph13.2",
+          "target": "glyph21",
+          "x1": 486.6817155756208,
+          "y1": 264.37031151241536,
+          "x2": 537.2460496613995,
+          "y2": 264.37009029345376
+        },
+        {
+          "id": "arc7",
+          "class": "necessary stimulation",
+          "source": "glyph21",
+          "target": "glyph26",
+          "x1": 594.1309255079007,
+          "y1": 264.37009029345376,
+          "x2": 660.4966139954853,
+          "y2": 264.37031151241536
+        },
+        {
+          "id": "arc8",
+          "class": "production",
+          "source": "glyph28.2",
+          "target": "glyph22",
+          "x1": 565.6884875846501,
+          "y1": 335.51545146726863,
+          "x2": 565.6884875846501,
+          "y2": 368.69829571106095
+        },
+        {
+          "id": "arc12",
+          "class": "consumption",
+          "source": "glyph21",
+          "target": "glyph28.1",
+          "x1": 565.6884875846501,
+          "y1": 278.591309255079,
+          "x2": 565.6884875846501,
+          "y2": 303.9127426636569
+        },
+        {
+          "id": "arc14",
+          "class": "production",
+          "source": "glyph32.1",
+          "target": "glyph1",
+          "x1": 237.81038374717832,
+          "y1": 264.37031151241536,
+          "x2": 195.1467268623025,
+          "y2": 264.37009029345376
+        },
+        {
+          "id": "arc18",
+          "class": "consumption",
+          "source": "glyph1",
+          "target": "glyph9.2",
+          "x1": 138.26185101580137,
+          "y1": 264.37009029345376,
+          "x2": 109.0293453724605,
+          "y2": 264.37031151241536
+        },
+        {
+          "id": "arc26",
+          "class": "necessary stimulation",
+          "source": "glyph1",
+          "target": "glyph23",
+          "x1": 166.77669074492098,
+          "y1": 278.591309255079,
+          "x2": 167.45411851015803,
+          "y2": 411.6252821670429
+        },
+        {
+          "id": "arc27",
+          "class": "necessary stimulation",
+          "source": "glyph20",
+          "target": "glyph4",
+          "x1": 364.2212189616253,
+          "y1": 81.37697516930022,
+          "x2": 364.2212189616253,
+          "y2": 24.4920993227991
+        },
+        {
+          "id": "arc29",
+          "class": "production",
+          "source": "glyph7.1",
+          "target": "glyph20",
+          "x1": 364.2212189616253,
+          "y1": 146.95259593679458,
+          "x2": 364.2212189616253,
+          "y2": 109.81941309255079
+        },
+        {
+          "id": "arc30",
+          "class": "consumption",
+          "source": "glyph20",
+          "target": "glyph6.1",
+          "x1": 392.6636568848759,
+          "y1": 95.5981941309255,
+          "x2": 427.4266365688488,
+          "y2": 95.5981941309255
+        }
+      ]
+    },
+    {
+      "name": "arcsDataTransformed",
+      "source": "arcsData",
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "scale('x', datum.x1)",
+          "as": "x1"
+        },
+        {
+          "type": "formula",
+          "expr": "scale('y', datum.y1)",
+          "as": "y1"
+        },
+        {
+          "type": "formula",
+          "expr": "scale('x', datum.x2)",
+          "as": "x2"
+        },
+        {
+          "type": "formula",
+          "expr": "scale('y', datum.y2)",
+          "as": "y2"
+        },
+        {
+          "type": "formula",
+          "expr": "atan2(datum.y2 - datum.y1, datum.x2 - datum.x1) * 180 / PI + 90",
+          "as": "angle2"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.x2 + (datum.class === 'inhibition' ? sbgnScale * 5 * sin(datum.angle2 * PI/180) : 0)",
+          "as": "endX"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.y2 + (datum.class === 'inhibition' ? sbgnScale * -5 * cos(datum.angle2 * PI/180) : 0)",
+          "as": "endY"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.class === 'inhibition' ? 'stroke' : 'triangle'",
+          "as": "shape"
+        },
+        {
+          "type": "formula",
+          "expr": "100 * pow(sbgnScale, 2)",
+          "as": "size"
+        },
+        {
+          "type": "formula",
+          "expr": "strokeWidth * (datum.class == 'inhibition' ? 1.5 : 1)",
+          "as": "strokeWidth"
+        },
+        {
+          "type": "formula",
+          "expr": "datum.class == 'production' ? '#FFFFFF' : '#000000'",
+          "as": "fill"
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "name": "Source and sink glyphs",
+      "type": "symbol",
+      "from": {
+        "data": "sourceAndSinkGlyphsData"
+      },
+      "encode": {
+        "enter": {
+          "shape": {
+            "signal": "soureAndSinkPath"
+          },
+          "x": {
+            "field": "centerX"
+          },
+          "y": {
+            "field": "centerY"
+          },
+          "size": {
+            "field": "size"
+          },
+          "stroke": {
+            "signal": "sourceSinkColor"
+          },
+          "strokeWidth": {
+            "signal": "strokeWidth"
+          },
+          "fill": {
+            "value": null
+          }
+        }
+      }
+    },
+    {
+      "name": "Process glyphs",
+      "type": "rect",
+      "from": {
+        "data": "processGlyphsData"
+      },
+      "encode": {
+        "enter": {
+          "xc": {
+            "field": "centerX"
+          },
+          "yc": {
+            "field": "centerY"
+          },
+          "width": {
+            "field": "width"
+          },
+          "height": {
+            "field": "height"
+          },
+          "stroke": {
+            "signal": "processColor"
+          },
+          "strokeWidth": {
+            "signal": "strokeWidth"
+          },
+          "fill": {
+            "signal": "processColor"
+          },
+          "fillOpacity": {
+            "signal": "filledUnpaintedGlyphOpacity"
+          }
+        }
+      }
+    },
+    {
+      "name": "Macromolecule glyphs",
+      "type": "path",
+      "from": {
+        "data": "macromoleculeGlyphsData"
+      },
+      "encode": {
+        "enter": {
+          "path": {
+            "signal": "'M 0,' + cornerRadius + ' a ' + cornerRadius + ',' + cornerRadius + ' 0 0,1 ' + cornerRadius + ',-' + cornerRadius + ' h ' + (datum.width - 2 * cornerRadius) + ' a ' + cornerRadius + ',' + cornerRadius + ' 0 0,1 ' + cornerRadius + ',' + cornerRadius + ' v ' + (datum.height - 2 * cornerRadius) + ' a ' + cornerRadius + ',' + cornerRadius + ' 0 0,1 -' + cornerRadius + ',' + cornerRadius + ' h -' + (datum.width - 2 * cornerRadius) + ' a ' + cornerRadius + ',' + cornerRadius + ' 0 0,1 -' + cornerRadius + ',-' + cornerRadius + ' z'"
+          },
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "width": {
+            "field": "width"
+          },
+          "height": {
+            "field": "height"
+          },
+          "strokeWidth": {
+            "signal": "strokeWidth"
+          }
+        },
+        "update": {
+          "stroke": {
+            "signal": "Paint_report ? scale('color', datum.value) : macromoleculeColor"
+          },
+          "fill": {
+            "signal": "Paint_report ? scale('color', datum.value) : macromoleculeColor"
+          },
+          "fillOpacity": {
+            "signal": "Paint_report ? filledPaintedGlyphOpacity : filledUnpaintedGlyphOpacity"
+          }
+        }
+      }
+    },
+    {
+      "name": "Nucleic acid feature glyphs",
+      "type": "path",
+      "from": {
+        "data": "nucleicAcidFeatureGlyphsData"
+      },
+      "encode": {
+        "enter": {
+          "path": {
+            "signal": "'M 0,0 h ' + datum.width + ' v ' + (datum.height - cornerRadius) + ' a ' + cornerRadius + ',' + cornerRadius + ' 0 0,1 -' + cornerRadius + ',' + cornerRadius + ' h -' + (datum.width - 2 * cornerRadius) + ' a ' + cornerRadius + ',' + cornerRadius + ' 0 0,1 -' + cornerRadius + ',-' + cornerRadius + ' z'"
+          },
+          "x": {
+            "field": "x"
+          },
+          "y": {
+            "field": "y"
+          },
+          "strokeWidth": {
+            "signal": "strokeWidth"
+          }
+        },
+        "update": {
+          "stroke": {
+            "signal": "Paint_report ? scale('color', datum.value) : nucleicAcidFeatureColor"
+          },
+          "fill": {
+            "signal": "Paint_report ? scale('color', datum.value) : nucleicAcidFeatureColor"
+          },
+          "fillOpacity": {
+            "signal": "Paint_report ? filledPaintedGlyphOpacity : filledUnpaintedGlyphOpacity"
+          }
+        }
+      }
+    },
+    {
+      "name": "Arcs",
+      "type": "path",
+      "from": {
+        "data": "arcsDataTransformed"
+      },
+      "encode": {
+        "enter": {
+          "path": {
+            "signal": "'M ' + datum.x1 + ',' + datum.y1 + ' L ' + datum.x2 + ',' + datum.y2"
+          },
+          "stroke": {
+            "value": "#000000"
+          }
+        },
+        "update": {
+          "strokeWidth": {
+            "signal": "strokeWidth"
+          }
+        }
+      }
+    },
+    {
+      "name": "Arc ends",
+      "type": "symbol",
+      "from": {
+        "data": "arcsDataTransformed"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "datum.endX - sqrt(datum.size / 2) * sin(datum.angle2 / 180 * PI)"
+          },
+          "y": {
+            "signal": "datum.endY + sqrt(datum.size / 2) * cos(datum.angle2 / 180 * PI)"
+          },
+          "size": {
+            "field": "size"
+          },
+          "shape": {
+            "field": "shape"
+          },
+          "angle": {
+            "field": "angle2"
+          },
+          "strokeWidth": {
+            "field": "strokeWidth"
+          },
+          "fill": {
+            "field": "fill"
+          },
+          "stroke": {
+            "value": "#000000"
+          }
+        }
+      }
+    },
+    {
+      "name": "Glyph labels",
+      "type": "text",
+      "from": {
+        "data": "glyphsDataTransformedAndCurValues"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "field": "centerX"
+          },
+          "y": {
+            "field": "centerY"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fontSize": {
+            "value": 12
+          }
+        },
+        "update": {
+          "text": [
+            {
+              "test": "Glyph_labels",
+              "field": "label"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Current time",
+      "type": "text",
+      "encode": {
+        "enter": {
+          "fontSize": {
+            "value": 12
+          },
+          "fill": {
+            "value": "#000000"
+          },
+          "fontWeight": {
+            "value": "bold"
+          },
+          "align": {
+            "value": "left"
+          },
+          "baseline": {
+            "value": "top"
+          }
+        },
+        "update": {
+          "x": {
+            "signal": "width / 2 - (mapWidth + colorScalePadding + colorScaleWidth) / 2 + mapWidth + colorScalePadding"
+          },
+          "y": {
+            "signal": "mapHeight / 2 - mapHeight / 2"
+          },
+          "text": {
+            "signal": "'Time: ' + CurTime"
+          }
+        }
+      }
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color",
+      "title": "Conc.",
+      "titleFontSize": 12,
+      "titlePadding": 2,
+      "titleAlign": "left",
+      "orient": "none",
+      "legendX": {
+        "signal": "width / 2 - (mapWidth + colorScalePadding + colorScaleWidth) / 2 + mapWidth + colorScalePadding"
+      },
+      "legendY": {
+        "signal": "mapHeight / 2 - mapHeight / 2 + timeHeight + timePadding"
+      },
+      "gradientLength": {
+        "signal": "mapHeight - timeHeight - timePadding - 12 - 2"
+      },
+      "direction": "vertical"
+    }
+  ]
+}
