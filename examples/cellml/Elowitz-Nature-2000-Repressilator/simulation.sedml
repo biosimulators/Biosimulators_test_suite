@@ -4,7 +4,7 @@
   <listOfModels>
     <model id="model" language="urn:sedml:language:cellml" source="elowitz_leibler_2000.cellml">
       <listOfChanges>
-        <changeAttribute target="/cellml:model/cellml:component[@name=&apos;parameters&apos;]/cellml:variable[@name=&apos;mRNA_halflife&apos;]/@initial_value" newValue="2"/>
+        <changeAttribute target="/cellml:model/cellml:component[@name=&apos;P_lacl&apos;]/cellml:variable[@name=&apos;P_lacl&apos;]/@initial_value" newValue="0"/>
       </listOfChanges>
     </model>
   </listOfModels>

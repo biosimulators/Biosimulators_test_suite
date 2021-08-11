@@ -4,7 +4,7 @@
   <listOfModels>
     <model id="model" language="urn:sedml:language:sbml" source="BIOMD0000000012_url.xml">
       <listOfChanges>
-        <changeAttribute target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='beta']/@value" newValue="0.2"/>
+        <changeAttribute target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PX']/@initialAmount" newValue="0"/>
       </listOfChanges>
     </model>
   </listOfModels>
