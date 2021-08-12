@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rdf:RDF
+  xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"
+  xmlns:bqmodel="http://biomodels.net/model-qualifiers/"
+  xmlns:collex="http://www.collex.org/schema#"
+  xmlns:dc="http://dublincore.org/specifications/dublin-core/dcmi-terms/"
+  xmlns:dcterms='http://purl.org/dc/terms/'
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/"
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  >
+  <rdf:Description rdf:about='http://omex-libary.org/Bordbar-Cell-Syst-2015-RBC-metabolism.omex'>
+    <dc:title>Red blood cell metabolism (Bordbar et al., Cell Syst, 2015)</dc:title>
+
+    <dc:abstract>A Mass Action Stoichiometric Simulation (MASS) model of the metabolism of human red blood cells.</dc:abstract>
+
+    <prism:keyword>erythrocyte</prism:keyword>
+    <prism:keyword>metabolism</prism:keyword>
+
+    <collex:thumbnail rdf:resource="http://omex-libary.org/Bordbar-Cell-Syst-2015-RBC-metabolism.omex/GraphicalAbstract.jpg"/>
+
+    <!-- taxon -->
+    <bqbiol:hasTaxon>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/9606"/>
+        <rdfs:label>Homo sapiens</rdfs:label>
+      </rdf:Description>
+    </bqbiol:hasTaxon>
+
+    <!-- other identifiers -->
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://raw.githubusercontent.com/SBRG/MASSpy/62cddda08113258031cb993d8a65ed8f87d53b99/mass/test/data/models/WholeCellRBC_MA_Rates.xml"/>
+        <rdfs:label>github:SBRG/MASSpy/mass/test/data/models/WholeCellRBC_MA_Rates.xml</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+
+    <!-- authors -->
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Aarash Bordbar</foaf:name>
+        <rdfs:label>Aarash Bordbar</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Douglas McCloskey</foaf:name>
+        <rdfs:label>Douglas McCloskey</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Daniel C. Zielinski</foaf:name>
+        <rdfs:label>Daniel C. Zielinski</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Nikolaus Sonnenschein</foaf:name>
+        <rdfs:label>Nikolaus Sonnenschein</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Neema Jamshidi</foaf:name>
+        <rdfs:label>Neema Jamshidi</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Bernhard O.Palsson</foaf:name>
+        <rdfs:label>Bernhard O.Palsson</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <!-- contributors (e.g., curators) -->
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:name>Zachary Haiman</foaf:name>
+
+        <rdfs:label>Zachary Haiman</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080"/>
+        <foaf:name>Jonathan Karr</foaf:name>
+
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080"/>
+        <rdfs:label>Jonathan Karr</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+     <!-- citations -->
+    <bqmodel:isDescribedBy>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.cels.2015.10.003"/>
+        <rdfs:label>Aarash Bordbar, Douglas McCloskey, Daniel C Zielinski, Nikolaus Sonnenschein, Neema Jamshidi &amp; Bernhard O Palsson. Personalized Whole-Cell Kinetic Models of Metabolism for Discovery in Genomics and Pharmacodynamics. Cell Syst 1, 4 (2015): 283-292.</rdfs:label>
+      </rdf:Description>
+    </bqmodel:isDescribedBy>
+
+    <!-- license -->
+    <dc:license>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/spdx:MIT"/>
+        <rdfs:label>MIT</rdfs:label>
+      </rdf:Description>
+    </dc:license>
+
+    <!-- created -->
+    <dc:created>
+      <rdf:Description>
+        <dc:W3CDTF>2019-11-05</dc:W3CDTF>
+      </rdf:Description>
+    </dc:created>
+
+    <!-- modified -->
+    <dc:modified>
+      <dcterms:W3CDTF>
+        <rdf:value>2021-08-12</rdf:value>
+      </dcterms:W3CDTF>
+    </dc:modified>
+  </rdf:Description>
+</rdf:RDF>

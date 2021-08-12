@@ -1,0 +1,2848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version3" xmlns:sbml="http://www.sbml.org/sbml/level3/version1/core" level="1" version="3">
+  <listOfModels>
+    <model id="model" language="urn:sedml:language:sbml" source="WholeCellRBC_MA_Rates.xml">
+      <listOfChanges>
+        <changeAttribute target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id=&apos;cobra_default_lb&apos;]/@value" newValue="-1000"/>
+      </listOfChanges>
+    </model>
+  </listOfModels>
+  <listOfSimulations>
+    <uniformTimeCourse id="simulation" initialTime="0" outputStartTime="0" outputEndTime="1000" numberOfPoints="1000">
+      <algorithm kisaoID="KISAO:0000019"/>
+    </uniformTimeCourse>
+  </listOfSimulations>
+  <listOfTasks>
+    <task id="task" modelReference="model" simulationReference="simulation"/>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="data_generator_time" name="Time">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> var_time </ci>
+      </math>
+      <listOfVariables>
+        <variable id="var_time" name="Time" symbol="urn:sedml:symbol:time" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M__13dpg_c" name="3-Phospho-D-glyceroyl phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M__13dpg_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M__13dpg_c" name="3-Phospho-D-glyceroyl phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M__13dpg_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M__23dpg_c" name="2 3 Disphospho D glycerate C3H3O10P2">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M__23dpg_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M__23dpg_c" name="2 3 Disphospho D glycerate C3H3O10P2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M__23dpg_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M__2kmb_c" name="2-keto-4-methylthiobutyrate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M__2kmb_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M__2kmb_c" name="2-keto-4-methylthiobutyrate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M__2kmb_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M__2pg_c" name="D-Glycerate 2-phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M__2pg_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M__2pg_c" name="D-Glycerate 2-phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M__2pg_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M__35cgmp_c" name="3&apos;,5&apos;-Cyclic GMP">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M__35cgmp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M__35cgmp_c" name="3&apos;,5&apos;-Cyclic GMP" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M__35cgmp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M__35cgmp_e" name="3&apos;,5&apos;-Cyclic GMP">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M__35cgmp_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M__35cgmp_e" name="3&apos;,5&apos;-Cyclic GMP" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M__35cgmp_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M__3pg_c" name="3-Phospho-D-glycerate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M__3pg_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M__3pg_c" name="3-Phospho-D-glycerate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M__3pg_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M__5mdr1p_c" name="5-Methylthio-5-deoxy-D-ribose 1-phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M__5mdr1p_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M__5mdr1p_c" name="5-Methylthio-5-deoxy-D-ribose 1-phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M__5mdr1p_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M__5mdru1p_c" name="5-Methylthio-5-deoxy-D-ribulose 1-phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M__5mdru1p_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M__5mdru1p_c" name="5-Methylthio-5-deoxy-D-ribulose 1-phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M__5mdru1p_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M__5mta_c" name="5-Methylthioadenosine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M__5mta_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M__5mta_c" name="5-Methylthioadenosine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M__5mta_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M__5oxpro_c" name="5-Oxoproline">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M__5oxpro_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M__5oxpro_c" name="5-Oxoproline" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M__5oxpro_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M__5oxpro_e" name="5-Oxoproline">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M__5oxpro_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M__5oxpro_e" name="5-Oxoproline" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M__5oxpro_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M__6pgc_c" name="6-Phospho-D-gluconate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M__6pgc_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M__6pgc_c" name="6-Phospho-D-gluconate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M__6pgc_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M__6pgl_c" name="6-phospho-D-glucono-1,5-lactone">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M__6pgl_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M__6pgl_c" name="6-phospho-D-glucono-1,5-lactone" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M__6pgl_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_accoa_c" name="Acetyl-CoA">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_accoa_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_accoa_c" name="Acetyl-CoA" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_accoa_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ade_c" name="Adenine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ade_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ade_c" name="Adenine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ade_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ade_e" name="Adenine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ade_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ade_e" name="Adenine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ade_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_adn_c" name="Adenosine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_adn_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_adn_c" name="Adenosine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_adn_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_adn_e" name="Adenosine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_adn_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_adn_e" name="Adenosine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_adn_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_adp_c" name="ADP C10H12N5O10P2">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_adp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_adp_c" name="ADP C10H12N5O10P2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_adp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ahcys_c" name="S-Adenosyl-L-homocysteine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ahcys_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ahcys_c" name="S-Adenosyl-L-homocysteine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ahcys_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_akg_c" name="2-Oxoglutarate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_akg_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_akg_c" name="2-Oxoglutarate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_akg_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_akg_e" name="2-Oxoglutarate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_akg_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_akg_e" name="2-Oxoglutarate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_akg_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ala__L_c" name="L-Alanine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ala__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ala__L_c" name="L-Alanine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ala__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ala__L_e" name="L-Alanine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ala__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ala__L_e" name="L-Alanine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ala__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_amet_c" name="S-Adenosyl-L-methionine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_amet_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_amet_c" name="S-Adenosyl-L-methionine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_amet_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ametam_c" name="S-Adenosylmethioninamine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ametam_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ametam_c" name="S-Adenosylmethioninamine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ametam_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_amp_c" name="AMP C10H12N5O7P">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_amp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_amp_c" name="AMP C10H12N5O7P" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_amp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_arg__L_c" name="L-Arginine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_arg__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_arg__L_c" name="L-Arginine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_arg__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_arg__L_e" name="L-Arginine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_arg__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_arg__L_e" name="L-Arginine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_arg__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ascb__L_c" name="L-Ascorbate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ascb__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ascb__L_c" name="L-Ascorbate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ascb__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ascb__L_e" name="L-Ascorbate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ascb__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ascb__L_e" name="L-Ascorbate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ascb__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_asn__L_c" name="L-Asparagine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_asn__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_asn__L_c" name="L-Asparagine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_asn__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_asn__L_e" name="L-Asparagine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_asn__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_asn__L_e" name="L-Asparagine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_asn__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_atp_c" name="ATP C10H12N5O13P3">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_atp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_atp_c" name="ATP C10H12N5O13P3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_atp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_band_c" name="Band membrane protein (universal, erythrocyte -&gt; 2.1,3,4.1)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_band_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_band_c" name="Band membrane protein (universal, erythrocyte -&gt; 2.1,3,4.1)" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_band_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_bandmt_c" name="Band membrane protein (methylated, universal, erythrocyte -&gt; 2.1,3,4.1)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_bandmt_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_bandmt_c" name="Band membrane protein (methylated, universal, erythrocyte -&gt; 2.1,3,4.1)" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_bandmt_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ca2_c" name="Calcium">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ca2_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ca2_c" name="Calcium" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ca2_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ca2_e" name="Calcium">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ca2_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ca2_e" name="Calcium" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ca2_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_camp_c" name="CAMP C10H11N5O6P">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_camp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_camp_c" name="CAMP C10H11N5O6P" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_camp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_camp_e" name="CAMP C10H11N5O6P">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_camp_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_camp_e" name="CAMP C10H11N5O6P" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_camp_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_cit_c" name="Citrate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_cit_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_cit_c" name="Citrate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_cit_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_cit_e" name="Citrate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_cit_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_cit_e" name="Citrate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_cit_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_cl_c" name="Chloride">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_cl_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_cl_c" name="Chloride" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_cl_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_cl_e" name="Chloride">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_cl_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_cl_e" name="Chloride" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_cl_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_co2_c" name="CO2">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_co2_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_co2_c" name="CO2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_co2_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_co2_e" name="CO2">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_co2_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_co2_e" name="CO2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_co2_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_coa_c" name="Coenzyme A">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_coa_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_coa_c" name="Coenzyme A" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_coa_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_cys__L_c" name="L-Cysteine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_cys__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_cys__L_c" name="L-Cysteine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_cys__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_cys__L_e" name="L-Cysteine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_cys__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_cys__L_e" name="L-Cysteine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_cys__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_dhap_c" name="Dihydroxyacetone phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_dhap_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_dhap_c" name="Dihydroxyacetone phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_dhap_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_dhdascb_c" name="Dehydroascorbate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_dhdascb_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_dhdascb_c" name="Dehydroascorbate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_dhdascb_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_dhdascb_e" name="Dehydroascorbate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_dhdascb_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_dhdascb_e" name="Dehydroascorbate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_dhdascb_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_dhmtp_c" name="1,2-Dihydroxy-5-(methylthio)pent-1-en-3-one">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_dhmtp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_dhmtp_c" name="1,2-Dihydroxy-5-(methylthio)pent-1-en-3-one" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_dhmtp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_dkmpp_c" name="2,3-diketo-5-methylthio-1-phosphopentane">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_dkmpp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_dkmpp_c" name="2,3-diketo-5-methylthio-1-phosphopentane" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_dkmpp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_e4p_c" name="D-Erythrose 4-phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_e4p_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_e4p_c" name="D-Erythrose 4-phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_e4p_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_f6p_c" name="D-Fructose 6-phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_f6p_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_f6p_c" name="D-Fructose 6-phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_f6p_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_fdp_c" name="D-Fructose 1,6-bisphosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_fdp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_fdp_c" name="D-Fructose 1,6-bisphosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_fdp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_for_c" name="Formate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_for_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_for_c" name="Formate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_for_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_fru_c" name="D-Fructose">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_fru_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_fru_c" name="D-Fructose" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_fru_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_fru_e" name="D-Fructose">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_fru_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_fru_e" name="D-Fructose" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_fru_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_fum_c" name="Fumarate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_fum_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_fum_c" name="Fumarate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_fum_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_fum_e" name="Fumarate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_fum_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_fum_e" name="Fumarate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_fum_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_g3p_c" name="Glyceraldehyde 3-phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_g3p_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_g3p_c" name="Glyceraldehyde 3-phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_g3p_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_g6p_c" name="D-Glucose 6-phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_g6p_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_g6p_c" name="D-Glucose 6-phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_g6p_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_gdp_c" name="GDP C10H12N5O11P2">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_gdp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_gdp_c" name="GDP C10H12N5O11P2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_gdp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_glc__D_c" name="D-Glucose">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_glc__D_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_glc__D_c" name="D-Glucose" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_glc__D_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_glc__D_e" name="D-Glucose">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_glc__D_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_glc__D_e" name="D-Glucose" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_glc__D_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_gln__L_c" name="L-Glutamine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_gln__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_gln__L_c" name="L-Glutamine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_gln__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_gln__L_e" name="L-Glutamine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_gln__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_gln__L_e" name="L-Glutamine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_gln__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_gluala_e" name="5 L Glutamyl L alanine C8H13N2O5">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_gluala_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_gluala_e" name="5 L Glutamyl L alanine C8H13N2O5" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_gluala_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_glucys_c" name="Gamma-L-Glutamyl-L-cysteine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_glucys_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_glucys_c" name="Gamma-L-Glutamyl-L-cysteine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_glucys_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_glu__L_c" name="L-Glutamate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_glu__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_glu__L_c" name="L-Glutamate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_glu__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_gly_c" name="Glycine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_gly_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_gly_c" name="Glycine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_gly_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_gly_e" name="Glycine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_gly_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_gly_e" name="Glycine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_gly_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_gmp_c" name="GMP C10H12N5O8P">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_gmp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_gmp_c" name="GMP C10H12N5O8P" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_gmp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_gsn_c" name="Guanosine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_gsn_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_gsn_c" name="Guanosine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_gsn_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_gthox_c" name="Oxidized glutathione">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_gthox_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_gthox_c" name="Oxidized glutathione" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_gthox_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_gthox_e" name="Oxidized glutathione">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_gthox_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_gthox_e" name="Oxidized glutathione" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_gthox_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_gthrd_c" name="Reduced glutathione">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_gthrd_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_gthrd_c" name="Reduced glutathione" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_gthrd_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_gtp_c" name="GTP C10H12N5O14P3">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_gtp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_gtp_c" name="GTP C10H12N5O14P3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_gtp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_gua_c" name="Guanine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_gua_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_gua_c" name="Guanine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_gua_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_h_c" name="H+">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_h_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_h_c" name="H+" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_h_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_h_e" name="H+">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_h_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_h_e" name="H+" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_h_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_h2o_c" name="H2O">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_h2o_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_h2o_c" name="H2O" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_h2o_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_h2o_e" name="H2O">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_h2o_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_h2o_e" name="H2O" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_h2o_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_h2o2_c" name="Hydrogen peroxide">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_h2o2_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_h2o2_c" name="Hydrogen peroxide" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_h2o2_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_h2o2_e" name="Hydrogen peroxide">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_h2o2_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_h2o2_e" name="Hydrogen peroxide" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_h2o2_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_hco3_c" name="Bicarbonate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_hco3_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_hco3_c" name="Bicarbonate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_hco3_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_hco3_e" name="Bicarbonate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_hco3_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_hco3_e" name="Bicarbonate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_hco3_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_hcys__L_c" name="L-Homocysteine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_hcys__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_hcys__L_c" name="L-Homocysteine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_hcys__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_hcys__L_e" name="L-Homocysteine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_hcys__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_hcys__L_e" name="L-Homocysteine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_hcys__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_his__L_c" name="L-Histidine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_his__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_his__L_c" name="L-Histidine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_his__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_his__L_e" name="L-Histidine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_his__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_his__L_e" name="L-Histidine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_his__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_hxan_c" name="Hypoxanthine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_hxan_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_hxan_c" name="Hypoxanthine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_hxan_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_hxan_e" name="Hypoxanthine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_hxan_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_hxan_e" name="Hypoxanthine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_hxan_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ile__L_c" name="L-Isoleucine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ile__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ile__L_c" name="L-Isoleucine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ile__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ile__L_e" name="L-Isoleucine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ile__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ile__L_e" name="L-Isoleucine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ile__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_imp_c" name="IMP C10H11N4O8P">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_imp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_imp_c" name="IMP C10H11N4O8P" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_imp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ins_c" name="Inosine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ins_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ins_c" name="Inosine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ins_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ins_e" name="Inosine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ins_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ins_e" name="Inosine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ins_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_k_c" name="Potassium">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_k_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_k_c" name="Potassium" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_k_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_k_e" name="Potassium">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_k_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_k_e" name="Potassium" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_k_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_lac__L_c" name="L-Lactate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_lac__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_lac__L_c" name="L-Lactate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_lac__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_lac__L_e" name="L-Lactate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_lac__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_lac__L_e" name="L-Lactate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_lac__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_leu__L_c" name="L-Leucine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_leu__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_leu__L_c" name="L-Leucine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_leu__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_leu__L_e" name="L-Leucine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_leu__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_leu__L_e" name="L-Leucine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_leu__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_lys__L_c" name="L-Lysine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_lys__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_lys__L_c" name="L-Lysine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_lys__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_lys__L_e" name="L-Lysine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_lys__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_lys__L_e" name="L-Lysine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_lys__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_mal__L_c" name="L-Malate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_mal__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_mal__L_c" name="L-Malate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_mal__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_mal__L_e" name="L-Malate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_mal__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_mal__L_e" name="L-Malate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_mal__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_man_c" name="D-Mannose">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_man_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_man_c" name="D-Mannose" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_man_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_man_e" name="D-Mannose">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_man_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_man_e" name="D-Mannose" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_man_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_man6p_c" name="D-Mannose 6-phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_man6p_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_man6p_c" name="D-Mannose 6-phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_man6p_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_met__L_c" name="L-Methionine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_met__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_met__L_c" name="L-Methionine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_met__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_met__L_e" name="L-Methionine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_met__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_met__L_e" name="L-Methionine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_met__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_na1_c" name="Sodium">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_na1_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_na1_c" name="Sodium" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_na1_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_na1_e" name="Sodium">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_na1_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_na1_e" name="Sodium" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_na1_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_nad_c" name="Nicotinamide adenine dinucleotide">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_nad_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_nad_c" name="Nicotinamide adenine dinucleotide" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_nad_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_nadh_c" name="Nicotinamide adenine dinucleotide - reduced">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_nadh_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_nadh_c" name="Nicotinamide adenine dinucleotide - reduced" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_nadh_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_nadp_c" name="Nicotinamide adenine dinucleotide phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_nadp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_nadp_c" name="Nicotinamide adenine dinucleotide phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_nadp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_nadph_c" name="Nicotinamide adenine dinucleotide phosphate - reduced">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_nadph_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_nadph_c" name="Nicotinamide adenine dinucleotide phosphate - reduced" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_nadph_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_nh4_c" name="Ammonium">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_nh4_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_nh4_c" name="Ammonium" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_nh4_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_nh4_e" name="Ammonium">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_nh4_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_nh4_e" name="Ammonium" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_nh4_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_o2_c" name="O2">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_o2_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_o2_c" name="O2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_o2_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_o2_e" name="O2">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_o2_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_o2_e" name="O2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_o2_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_oaa_c" name="Oxaloacetate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_oaa_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_oaa_c" name="Oxaloacetate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_oaa_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_orn_c" name="Ornithine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_orn_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_orn_c" name="Ornithine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_orn_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_pep_c" name="Phosphoenolpyruvate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_pep_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_pep_c" name="Phosphoenolpyruvate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_pep_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_phe__L_c" name="L-Phenylalanine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_phe__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_phe__L_c" name="L-Phenylalanine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_phe__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_phe__L_e" name="L-Phenylalanine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_phe__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_phe__L_e" name="L-Phenylalanine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_phe__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_phpyr_c" name="Phenylpyruvate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_phpyr_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_phpyr_c" name="Phenylpyruvate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_phpyr_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_pi_c" name="phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_pi_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_pi_c" name="phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_pi_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_pi_e" name="phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_pi_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_pi_e" name="phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_pi_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ppi_c" name="Diphosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ppi_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ppi_c" name="Diphosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ppi_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_prpp_c" name="5-Phospho-alpha-D-ribose 1-diphosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_prpp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_prpp_c" name="5-Phospho-alpha-D-ribose 1-diphosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_prpp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ptrc_c" name="Putrescine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ptrc_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ptrc_c" name="Putrescine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ptrc_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ptrc_e" name="Putrescine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ptrc_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ptrc_e" name="Putrescine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ptrc_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_pyr_c" name="Pyruvate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_pyr_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_pyr_c" name="Pyruvate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_pyr_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_pyr_e" name="Pyruvate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_pyr_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_pyr_e" name="Pyruvate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_pyr_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_r1p_c" name="Alpha-D-Ribose 1-phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_r1p_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_r1p_c" name="Alpha-D-Ribose 1-phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_r1p_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_r5p_c" name="Alpha-D-Ribose 5-phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_r5p_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_r5p_c" name="Alpha-D-Ribose 5-phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_r5p_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ru5p__D_c" name="D-Ribulose 5-phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ru5p__D_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ru5p__D_c" name="D-Ribulose 5-phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ru5p__D_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_s7p_c" name="Sedoheptulose 7-phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_s7p_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_s7p_c" name="Sedoheptulose 7-phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_s7p_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_sbt__D_c" name="D-Sorbitol">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_sbt__D_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_sbt__D_c" name="D-Sorbitol" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_sbt__D_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ser__L_c" name="L-Serine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ser__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ser__L_c" name="L-Serine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ser__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_ser__L_e" name="L-Serine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_ser__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_ser__L_e" name="L-Serine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_ser__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_spmd_c" name="Spermidine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_spmd_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_spmd_c" name="Spermidine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_spmd_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_spmd_e" name="Spermidine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_spmd_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_spmd_e" name="Spermidine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_spmd_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_sprm_c" name="Spermine C10H30N4">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_sprm_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_sprm_c" name="Spermine C10H30N4" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_sprm_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_sprm_e" name="Spermine C10H30N4">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_sprm_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_sprm_e" name="Spermine C10H30N4" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_sprm_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_thr__L_c" name="L-Threonine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_thr__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_thr__L_c" name="L-Threonine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_thr__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_thr__L_e" name="L-Threonine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_thr__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_thr__L_e" name="L-Threonine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_thr__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_trp__L_c" name="L-Tryptophan">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_trp__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_trp__L_c" name="L-Tryptophan" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_trp__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_trp__L_e" name="L-Tryptophan">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_trp__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_trp__L_e" name="L-Tryptophan" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_trp__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_tyr__L_c" name="L-Tyrosine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_tyr__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_tyr__L_c" name="L-Tyrosine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_tyr__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_tyr__L_e" name="L-Tyrosine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_tyr__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_tyr__L_e" name="L-Tyrosine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_tyr__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_urate_c" name="Urate C5H4N4O3">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_urate_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_urate_c" name="Urate C5H4N4O3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_urate_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_urate_e" name="Urate C5H4N4O3">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_urate_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_urate_e" name="Urate C5H4N4O3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_urate_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_urea_c" name="Urea CH4N2O">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_urea_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_urea_c" name="Urea CH4N2O" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_urea_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_urea_e" name="Urea CH4N2O">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_urea_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_urea_e" name="Urea CH4N2O" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_urea_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_uri_c" name="Uridine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_uri_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_uri_c" name="Uridine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_uri_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_uri_e" name="Uridine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_uri_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_uri_e" name="Uridine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_uri_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_val__L_c" name="L-Valine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_val__L_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_val__L_c" name="L-Valine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_val__L_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_val__L_e" name="L-Valine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_val__L_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_val__L_e" name="L-Valine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_val__L_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_xan_c" name="Xanthine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_xan_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_xan_c" name="Xanthine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_xan_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_xan_e" name="Xanthine">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_xan_e </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_xan_e" name="Xanthine" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_xan_e&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_xmp_c" name="Xanthosine 5&apos;-phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_xmp_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_xmp_c" name="Xanthosine 5&apos;-phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_xmp_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_M_xu5p__D_c" name="D-Xylulose 5-phosphate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> M_xu5p__D_c </ci>
+      </math>
+      <listOfVariables>
+        <variable id="M_xu5p__D_c" name="D-Xylulose 5-phosphate" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;M_xu5p__D_c&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_UNK3" name="2-keto-4-methylthiobutyrate transamination">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_UNK3 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_UNK3" name="2-keto-4-methylthiobutyrate transamination" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_UNK3&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ADA" name="Adenosine deaminase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ADA </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ADA" name="Adenosine deaminase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ADA&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ADEt" name="Adenine transport via diffusion">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ADEt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ADEt" name="Adenine transport via diffusion" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ADEt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ADK1" name="Adenylate kinase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ADK1 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ADK1" name="Adenylate kinase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ADK1&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ADMDC" name="Adenosylmethionine decarboxylase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ADMDC </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ADMDC" name="Adenosylmethionine decarboxylase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ADMDC&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ADNCYC" name="Adenylate cyclase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ADNCYC </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ADNCYC" name="Adenylate cyclase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ADNCYC&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ADNK1" name="Adenosine kinase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ADNK1 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ADNK1" name="Adenosine kinase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ADNK1&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ADNt" name="Adenosine facilated transport in cytosol">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ADNt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ADNt" name="Adenosine facilated transport in cytosol" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ADNt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ADPT" name="Adenine phosphoribosyltransferase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ADPT </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ADPT" name="Adenine phosphoribosyltransferase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ADPT&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_AHCi" name="Adenosylhomocysteinase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_AHCi </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_AHCi" name="Adenosylhomocysteinase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_AHCi&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ALAt4" name="Alanine-Sodium symporter">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ALAt4 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ALAt4" name="Alanine-Sodium symporter" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ALAt4&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_AMPDA" name="Adenosine monophosphate deaminase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_AMPDA </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_AMPDA" name="Adenosine monophosphate deaminase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_AMPDA&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ARD" name="1;2-dihydroxy-3-keto-5-methylthiopentene dioxygenase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ARD </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ARD" name="1;2-dihydroxy-3-keto-5-methylthiopentene dioxygenase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ARD&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ARGN" name="Arginase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ARGN </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ARGN" name="Arginase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ARGN&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ARGt5r" name="ARGtiDF">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ARGt5r </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ARGt5r" name="ARGtiDF" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ARGt5r&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ENOPH" name="Enolase-phosphatase E1">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ENOPH </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ENOPH" name="Enolase-phosphatase E1" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ENOPH&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ASCBt" name="L-ascorbate transport via facilitated diffusion">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ASCBt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ASCBt" name="L-ascorbate transport via facilitated diffusion" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ASCBt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_BANDMT" name="Band membrane protein-methyltransferase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_BANDMT </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_BANDMT" name="Band membrane protein-methyltransferase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_BANDMT&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_CA2t" name="Calcium (Ca+2) transport via diffusion (extracellular to periplasm)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_CA2t </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_CA2t" name="Calcium (Ca+2) transport via diffusion (extracellular to periplasm)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_CA2t&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_CAATPS" name="CAATPS">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_CAATPS </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_CAATPS" name="CAATPS" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_CAATPS&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_CAMPt" name="CAMP transport (ATP-dependent)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_CAMPt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_CAMPt" name="CAMP transport (ATP-dependent)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_CAMPt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_CAT" name="Catalase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_CAT </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_CAT" name="Catalase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_CAT&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_CGMPt" name="CGMP transport (ATP-dependent)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_CGMPt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_CGMPt" name="CGMP transport (ATP-dependent)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_CGMPt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_CO2t" name="CO2 transporter via diffusion">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_CO2t </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_CO2t" name="CO2 transporter via diffusion" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_CO2t&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_CYStec" name="L-cysteine transport via diffusion (extracellular to cytosol)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_CYStec </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_CYStec" name="L-cysteine transport via diffusion (extracellular to cytosol)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_CYStec&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_DHAAt1r" name="Dehydroascorbate transport (uniport)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_DHAAt1r </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_DHAAt1r" name="Dehydroascorbate transport (uniport)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_DHAAt1r&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_DM_nadh" name="Demand NADH">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_DM_nadh </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_DM_nadh" name="Demand NADH" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_DM_nadh&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_DPGM" name="Diphosphoglyceromutase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_DPGM </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_DPGM" name="Diphosphoglyceromutase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_DPGM&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_DPGase" name="Diphosphoglycerate phosphatase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_DPGase </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_DPGase" name="Diphosphoglycerate phosphatase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_DPGase&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ENO" name="Enolase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ENO </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ENO" name="Enolase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ENO&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_FBA" name="Fructose-bisphosphate aldolase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_FBA </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_FBA" name="Fructose-bisphosphate aldolase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_FBA&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_FRUt1r" name="D-fructose transport in via uniport">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_FRUt1r </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_FRUt1r" name="D-fructose transport in via uniport" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_FRUt1r&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_G6PDH2r" name="Glucose 6-phosphate dehydrogenase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_G6PDH2r </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_G6PDH2r" name="Glucose 6-phosphate dehydrogenase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_G6PDH2r&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GAPD" name="Glyceraldehyde-3-phosphate dehydrogenase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GAPD </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GAPD" name="Glyceraldehyde-3-phosphate dehydrogenase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GAPD&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GGLUCT" name="Gamma-glutamylcyclotransferase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GGLUCT </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GGLUCT" name="Gamma-glutamylcyclotransferase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GGLUCT&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GK1" name="Guanylate kinase (GMP:ATP)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GK1 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GK1" name="Guanylate kinase (GMP:ATP)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GK1&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GLCt1" name="Glucose transport uniport">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GLCt1 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GLCt1" name="Glucose transport uniport" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GLCt1&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GLNS" name="Glutamine synthetase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GLNS </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GLNS" name="Glutamine synthetase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GLNS&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GLNt4" name="L-glutamine reversible transport via sodium symport">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GLNt4 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GLNt4" name="L-glutamine reversible transport via sodium symport" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GLNt4&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GLUCYS" name="Gamma-glutamylcysteine synthetase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GLUCYS </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GLUCYS" name="Gamma-glutamylcysteine synthetase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GLUCYS&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GLYt7_211_r" name="GLYt7 LPAREN 211 RPAREN r">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GLYt7_211_r </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GLYt7_211_r" name="GLYt7 LPAREN 211 RPAREN r" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GLYt7_211_r&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GMPR" name="GMP reductase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GMPR </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GMPR" name="GMP reductase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GMPR&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GMPS2" name="GMP synthase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GMPS2 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GMPS2" name="GMP synthase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GMPS2&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GND" name="Phosphogluconate dehydrogenase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GND </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GND" name="Phosphogluconate dehydrogenase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GND&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GTHDH" name="Glutathione dehydrogenase (dehydroascorbate reductase)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GTHDH </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GTHDH" name="Glutathione dehydrogenase (dehydroascorbate reductase)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GTHDH&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GTHOr" name="Glutathione oxidoreductase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GTHOr </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GTHOr" name="Glutathione oxidoreductase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GTHOr&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GTHOXti2" name="Oxidized glutathione irreversible active transport (rbc)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GTHOXti2 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GTHOXti2" name="Oxidized glutathione irreversible active transport (rbc)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GTHOXti2&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GTHPi" name="Glutathione peridoxase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GTHPi </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GTHPi" name="Glutathione peridoxase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GTHPi&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GTHS" name="Glutathione synthetase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GTHS </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GTHS" name="Glutathione synthetase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GTHS&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GUACYC" name="Guanylate cyclase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GUACYC </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GUACYC" name="Guanylate cyclase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GUACYC&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GUAPRT" name="Guanine phosphoribosyltransferase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GUAPRT </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GUAPRT" name="Guanine phosphoribosyltransferase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GUAPRT&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_H2O2t" name="Hydrogen peroxide transport via diffusion">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_H2O2t </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_H2O2t" name="Hydrogen peroxide transport via diffusion" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_H2O2t&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_H2Ot" name="H2O transport via diffusion">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_H2Ot </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_H2Ot" name="H2O transport via diffusion" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_H2Ot&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_HCO3E" name="HCO3 equilibration reaction">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_HCO3E </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_HCO3E" name="HCO3 equilibration reaction" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_HCO3E&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_HCO3_CLt" name="Bicarbonate transport (Cl-/HCO3- exchange)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_HCO3_CLt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_HCO3_CLt" name="Bicarbonate transport (Cl-/HCO3- exchange)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_HCO3_CLt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_HCYSte" name="Homocysteine transport (extracellular)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_HCYSte </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_HCYSte" name="Homocysteine transport (extracellular)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_HCYSte&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_HEX1" name="Hexokinase (D-glucose:ATP)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_HEX1 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_HEX1" name="Hexokinase (D-glucose:ATP)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_HEX1&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_HEX4" name="Hexokinase (D-mannose:ATP)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_HEX4 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_HEX4" name="Hexokinase (D-mannose:ATP)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_HEX4&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_HEX7" name="Hexokinase (D-fructose:ATP)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_HEX7 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_HEX7" name="Hexokinase (D-fructose:ATP)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_HEX7&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_HXPRT" name="Hypoxanthine phosphoribosyltransferase (Hypoxanthine)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_HXPRT </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_HXPRT" name="Hypoxanthine phosphoribosyltransferase (Hypoxanthine)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_HXPRT&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_HYXNt" name="Hypoxanthine transport">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_HYXNt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_HYXNt" name="Hypoxanthine transport" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_HYXNt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_Ht" name="Proton diffusion">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_Ht </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_Ht" name="Proton diffusion" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_Ht&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_IMPD" name="IMP dehydrogenase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_IMPD </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_IMPD" name="IMP dehydrogenase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_IMPD&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_INSt" name="Inosine transport (diffusion)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_INSt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_INSt" name="Inosine transport (diffusion)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_INSt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_KCCt" name="K+-Cl- cotransport">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_KCCt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_KCCt" name="K+-Cl- cotransport" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_KCCt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_L_LACt2r" name="L lactate reversible transport via proton symport">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_L_LACt2r </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_L_LACt2r" name="L lactate reversible transport via proton symport" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_L_LACt2r&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_LDH_L" name="L-lactate dehydrogenase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_LDH_L </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_LDH_L" name="L-lactate dehydrogenase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_LDH_L&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_MAN6PI" name="Mannose-6-phosphate isomerase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_MAN6PI </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_MAN6PI" name="Mannose-6-phosphate isomerase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_MAN6PI&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_MANt1r" name="Mannose transport (uniport)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_MANt1r </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_MANt1r" name="Mannose transport (uniport)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_MANt1r&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_MDRPD" name="5-Methylthio-5-deoxy-D-ribulose 1-phosphate dehydratase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_MDRPD </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_MDRPD" name="5-Methylthio-5-deoxy-D-ribulose 1-phosphate dehydratase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_MDRPD&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_METAT" name="Methionine adenosyltransferase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_METAT </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_METAT" name="Methionine adenosyltransferase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_METAT&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_METtec" name="L-methionine transport via diffusion (extracellular to cytosol)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_METtec </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_METtec" name="L-methionine transport via diffusion (extracellular to cytosol)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_METtec&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_MTAP" name="5 methylthioadenosine phosphorylase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_MTAP </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_MTAP" name="5 methylthioadenosine phosphorylase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_MTAP&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_MTRI" name="5-methylthioribose-1-phosphate isomerase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_MTRI </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_MTRI" name="5-methylthioribose-1-phosphate isomerase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_MTRI&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_NAt" name="Sodium transport (uniport)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_NAt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_NAt" name="Sodium transport (uniport)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_NAt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_NDPK1" name="Nucleoside-diphosphate kinase (ATP:GDP)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_NDPK1 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_NDPK1" name="Nucleoside-diphosphate kinase (ATP:GDP)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_NDPK1&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_NH4t3r" name="Ammonia transport via proton antiport">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_NH4t3r </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_NH4t3r" name="Ammonia transport via proton antiport" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_NH4t3r&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_NTD11" name="5&apos;-nucleotidase (IMP)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_NTD11 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_NTD11" name="5&apos;-nucleotidase (IMP)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_NTD11&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_NTD7" name="5&apos;-nucleotidase (AMP)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_NTD7 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_NTD7" name="5&apos;-nucleotidase (AMP)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_NTD7&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_NTD9" name="5&apos;-nucleotidase (GMP)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_NTD9 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_NTD9" name="5&apos;-nucleotidase (GMP)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_NTD9&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_NaKt" name="Na+/K+ exchanging ATPase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_NaKt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_NaKt" name="Na+/K+ exchanging ATPase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_NaKt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_O2t" name="O2 transport diffusion">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_O2t </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_O2t" name="O2 transport diffusion" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_O2t&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_OPAH" name="5-Oxoproline amidohydrolase (ATP-hydrolysing) (ir)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_OPAH </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_OPAH" name="5-Oxoproline amidohydrolase (ATP-hydrolysing) (ir)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_OPAH&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ORNDC" name="Ornithine Decarboxylase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ORNDC </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ORNDC" name="Ornithine Decarboxylase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ORNDC&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PDE1" name="3&apos;,5&apos;-cyclic-nucleotide phosphodiesterase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PDE1 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PDE1" name="3&apos;,5&apos;-cyclic-nucleotide phosphodiesterase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PDE1&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PFK" name="Phosphofructokinase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PFK </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PFK" name="Phosphofructokinase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PFK&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PGI" name="Glucose-6-phosphate isomerase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PGI </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PGI" name="Glucose-6-phosphate isomerase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PGI&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PGK" name="Phosphoglycerate kinase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PGK </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PGK" name="Phosphoglycerate kinase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PGK&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PGL" name="6-phosphogluconolactonase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PGL </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PGL" name="6-phosphogluconolactonase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PGL&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PGM" name="Phosphoglycerate mutase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PGM </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PGM" name="Phosphoglycerate mutase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PGM&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PHETA1" name="Phenylalanine transaminase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PHETA1 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PHETA1" name="Phenylalanine transaminase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PHETA1&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PHEtec" name="L-phenylalanine transport via diffusion (extracellular to cytosol)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PHEtec </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PHEtec" name="L-phenylalanine transport via diffusion (extracellular to cytosol)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PHEtec&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PIt" name="Inorganic phosphate exchange, diffusion">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PIt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PIt" name="Inorganic phosphate exchange, diffusion" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PIt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PPA" name="Inorganic diphosphatase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PPA </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PPA" name="Inorganic diphosphatase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PPA&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PPM" name="Phosphopentomutase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PPM </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PPM" name="Phosphopentomutase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PPM&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PRPPS" name="Phosphoribosylpyrophosphate synthetase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PRPPS </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PRPPS" name="Phosphoribosylpyrophosphate synthetase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PRPPS&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PTRCtex2" name="Putrescine excretion cytosol to extracellular">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PTRCtex2 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PTRCtex2" name="Putrescine excretion cytosol to extracellular" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PTRCtex2&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PUNP3" name="Purine-nucleoside phosphorylase (Guanosine)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PUNP3 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PUNP3" name="Purine-nucleoside phosphorylase (Guanosine)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PUNP3&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PUNP5" name="Purine-nucleoside phosphorylase (Inosine)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PUNP5 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PUNP5" name="Purine-nucleoside phosphorylase (Inosine)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PUNP5&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PYK" name="Pyruvate kinase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PYK </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PYK" name="Pyruvate kinase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PYK&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PYRt2" name="Pyruvate transport in via proton symport">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PYRt2 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PYRt2" name="Pyruvate transport in via proton symport" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PYRt2&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_RPE" name="Ribulose 5-phosphate 3-epimerase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_RPE </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_RPE" name="Ribulose 5-phosphate 3-epimerase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_RPE&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_RPI" name="Ribose-5-phosphate isomerase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_RPI </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_RPI" name="Ribose-5-phosphate isomerase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_RPI&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_SBTD_D2" name="D sorbitol dehydrogenase D fructose producing">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_SBTD_D2 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_SBTD_D2" name="D sorbitol dehydrogenase D fructose producing" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_SBTD_D2&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_SBTR" name="D sorbitol reductase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_SBTR </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_SBTR" name="D sorbitol reductase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_SBTR&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_SPMDtex2" name="Spermidine excretion cytosol to extracellular">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_SPMDtex2 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_SPMDtex2" name="Spermidine excretion cytosol to extracellular" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_SPMDtex2&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_SPMS" name="Spermidine synthase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_SPMS </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_SPMS" name="Spermidine synthase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_SPMS&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_SPRMS" name="Spermine synthase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_SPRMS </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_SPRMS" name="Spermine synthase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_SPRMS&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_SPRMt2i" name="Spermine transport via proton antiport irreversible">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_SPRMt2i </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_SPRMt2i" name="Spermine transport via proton antiport irreversible" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_SPRMt2i&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_TALA" name="Transaldolase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_TALA </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_TALA" name="Transaldolase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_TALA&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_TKT1" name="Transketolase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_TKT1 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_TKT1" name="Transketolase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_TKT1&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_TKT2" name="Transketolase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_TKT2 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_TKT2" name="Transketolase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_TKT2&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_TPI" name="Triose-phosphate isomerase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_TPI </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_TPI" name="Triose-phosphate isomerase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_TPI&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_UREAt" name="Urea transport via facilitate diffusion">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_UREAt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_UREAt" name="Urea transport via facilitate diffusion" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_UREAt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_URIt" name="Uridine facilated transport in cytosol">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_URIt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_URIt" name="Uridine facilated transport in cytosol" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_URIt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_Kt1" name="Potassium transport via uniport (facilitated diffusion)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_Kt1 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_Kt1" name="Potassium transport via uniport (facilitated diffusion)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_Kt1&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_AKGtr" name="AKG transport (extracellular to cytosol)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_AKGtr </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_AKGtr" name="AKG transport (extracellular to cytosol)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_AKGtr&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ALATA_L" name="L-alanine transaminase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ALATA_L </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ALATA_L" name="L-alanine transaminase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ALATA_L&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ASNt5r" name="L asparagine transport out via proton symport vacuolar (extracellular to cytosol)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ASNt5r </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ASNt5r" name="L asparagine transport out via proton symport vacuolar (extracellular to cytosol)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ASNt5r&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GLUN" name="Glutaminase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GLUN </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GLUN" name="Glutaminase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GLUN&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_HIStiDF" name="L-histidine transport via diffusion (extracellular to cytosol)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_HIStiDF </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_HIStiDF" name="L-histidine transport via diffusion (extracellular to cytosol)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_HIStiDF&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ILEtec" name="L-isoleucine transport via diffusion (extracellular to cytosol)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ILEtec </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ILEtec" name="L-isoleucine transport via diffusion (extracellular to cytosol)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ILEtec&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_LEUtec" name="L-leucine transport via diffusion">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_LEUtec </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_LEUtec" name="L-leucine transport via diffusion" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_LEUtec&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_LYSt5r" name="LYStiDF">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_LYSt5r </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_LYSt5r" name="LYStiDF" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_LYSt5r&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_SERt5r" name="L-Serine Transport  (extracellular to cytosol)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_SERt5r </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_SERt5r" name="L-Serine Transport  (extracellular to cytosol)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_SERt5r&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_THRt5r" name="L-Threonine Transport (extracellular to cytosol)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_THRt5r </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_THRt5r" name="L-Threonine Transport (extracellular to cytosol)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_THRt5r&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_TRPt" name="L-tryptophan transport">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_TRPt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_TRPt" name="L-tryptophan transport" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_TRPt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_TYRt" name="L-tyrosine transport">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_TYRt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_TYRt" name="L-tyrosine transport" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_TYRt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_VALtec" name="L-valine transport via diffusion (extracellular to cytosol)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_VALtec </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_VALtec" name="L-valine transport via diffusion (extracellular to cytosol)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_VALtec&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_GGCT" name="(5-L-Glutamyl)-L-amino-acid 5-glutamyltransferase (cyclizing) Glutathione metabolism EC:2.3.2.4">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_GGCT </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_GGCT" name="(5-L-Glutamyl)-L-amino-acid 5-glutamyltransferase (cyclizing) Glutathione metabolism EC:2.3.2.4" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_GGCT&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R__5OXPROt" name="Transport of 5-oxoprolinate">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R__5OXPROt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R__5OXPROt" name="Transport of 5-oxoprolinate" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R__5OXPROt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_XAO2" name="Xanthine oxidase (hypoxanthine)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_XAO2 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_XAO2" name="Xanthine oxidase (hypoxanthine)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_XAO2&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_XAO" name="Xanthine oxidase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_XAO </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_XAO" name="Xanthine oxidase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_XAO&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_XANt" name="Xanthine reversible transport">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_XANt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_XANt" name="Xanthine reversible transport" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_XANt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_URATEt" name="Urate export from cytosol">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_URATEt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_URATEt" name="Urate export from cytosol" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_URATEt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_FUM" name="Fumarase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_FUM </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_FUM" name="Fumarase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_FUM&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_MDH" name="Malate dehydrogenase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_MDH </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_MDH" name="Malate dehydrogenase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_MDH&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_ACITL" name="ATP-Citrate lyase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_ACITL </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_ACITL" name="ATP-Citrate lyase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_ACITL&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PEPCK_re" name="Phosphoenolpyruvate carboxykinase (GTP)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PEPCK_re </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PEPCK_re" name="Phosphoenolpyruvate carboxykinase (GTP)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PEPCK_re&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_CITt4" name="Citrate transport via sodium symport">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_CITt4 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_CITt4" name="Citrate transport via sodium symport" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_CITt4&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_MALt" name="Malate exchange, diffusion">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_MALt </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_MALt" name="Malate exchange, diffusion" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_MALt&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_FUMtr" name="Fumarate transport via diffusion (reversible)">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_FUMtr </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_FUMtr" name="Fumarate transport via diffusion (reversible)" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_FUMtr&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="data_generator_R_PDE4" name="3&apos;,5&apos;-cyclic-nucleotide phosphodiesterase">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> R_PDE4 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="R_PDE4" name="3&apos;,5&apos;-cyclic-nucleotide phosphodiesterase" target="/sbml:sbml/sbml:model/sbml:listOfReactions/sbml:reaction[@id=&apos;R_PDE4&apos;]" taskReference="task"/>
+      </listOfVariables>
+    </dataGenerator>
+  </listOfDataGenerators>
+  <listOfOutputs>
+    <report id="metabolite_concentrations" name="Metabolite concentrations">
+      <listOfDataSets>
+        <dataSet id="data_set_time_metabolite_concentrations" name="Time" label="Time" dataReference="data_generator_time"/>
+        <dataSet id="data_set_M__13dpg_c" name="3-Phospho-D-glyceroyl phosphate (c)" label="3-Phospho-D-glyceroyl phosphate (c)" dataReference="data_generator_M__13dpg_c"/>
+        <dataSet id="data_set_M__23dpg_c" name="2 3 Disphospho D glycerate C3H3O10P2 (c)" label="2 3 Disphospho D glycerate C3H3O10P2 (c)" dataReference="data_generator_M__23dpg_c"/>
+        <dataSet id="data_set_M__2kmb_c" name="2-keto-4-methylthiobutyrate (c)" label="2-keto-4-methylthiobutyrate (c)" dataReference="data_generator_M__2kmb_c"/>
+        <dataSet id="data_set_M__2pg_c" name="D-Glycerate 2-phosphate (c)" label="D-Glycerate 2-phosphate (c)" dataReference="data_generator_M__2pg_c"/>
+        <dataSet id="data_set_M__35cgmp_c" name="3&apos;,5&apos;-Cyclic GMP (c)" label="3&apos;,5&apos;-Cyclic GMP (c)" dataReference="data_generator_M__35cgmp_c"/>
+        <dataSet id="data_set_M__35cgmp_e" name="3&apos;,5&apos;-Cyclic GMP (e)" label="3&apos;,5&apos;-Cyclic GMP (e)" dataReference="data_generator_M__35cgmp_e"/>
+        <dataSet id="data_set_M__3pg_c" name="3-Phospho-D-glycerate (c)" label="3-Phospho-D-glycerate (c)" dataReference="data_generator_M__3pg_c"/>
+        <dataSet id="data_set_M__5mdr1p_c" name="5-Methylthio-5-deoxy-D-ribose 1-phosphate (c)" label="5-Methylthio-5-deoxy-D-ribose 1-phosphate (c)" dataReference="data_generator_M__5mdr1p_c"/>
+        <dataSet id="data_set_M__5mdru1p_c" name="5-Methylthio-5-deoxy-D-ribulose 1-phosphate (c)" label="5-Methylthio-5-deoxy-D-ribulose 1-phosphate (c)" dataReference="data_generator_M__5mdru1p_c"/>
+        <dataSet id="data_set_M__5mta_c" name="5-Methylthioadenosine (c)" label="5-Methylthioadenosine (c)" dataReference="data_generator_M__5mta_c"/>
+        <dataSet id="data_set_M__5oxpro_c" name="5-Oxoproline (c)" label="5-Oxoproline (c)" dataReference="data_generator_M__5oxpro_c"/>
+        <dataSet id="data_set_M__5oxpro_e" name="5-Oxoproline (e)" label="5-Oxoproline (e)" dataReference="data_generator_M__5oxpro_e"/>
+        <dataSet id="data_set_M__6pgc_c" name="6-Phospho-D-gluconate (c)" label="6-Phospho-D-gluconate (c)" dataReference="data_generator_M__6pgc_c"/>
+        <dataSet id="data_set_M__6pgl_c" name="6-phospho-D-glucono-1,5-lactone (c)" label="6-phospho-D-glucono-1,5-lactone (c)" dataReference="data_generator_M__6pgl_c"/>
+        <dataSet id="data_set_M_accoa_c" name="Acetyl-CoA (c)" label="Acetyl-CoA (c)" dataReference="data_generator_M_accoa_c"/>
+        <dataSet id="data_set_M_ade_c" name="Adenine (c)" label="Adenine (c)" dataReference="data_generator_M_ade_c"/>
+        <dataSet id="data_set_M_ade_e" name="Adenine (e)" label="Adenine (e)" dataReference="data_generator_M_ade_e"/>
+        <dataSet id="data_set_M_adn_c" name="Adenosine (c)" label="Adenosine (c)" dataReference="data_generator_M_adn_c"/>
+        <dataSet id="data_set_M_adn_e" name="Adenosine (e)" label="Adenosine (e)" dataReference="data_generator_M_adn_e"/>
+        <dataSet id="data_set_M_adp_c" name="ADP C10H12N5O10P2 (c)" label="ADP C10H12N5O10P2 (c)" dataReference="data_generator_M_adp_c"/>
+        <dataSet id="data_set_M_ahcys_c" name="S-Adenosyl-L-homocysteine (c)" label="S-Adenosyl-L-homocysteine (c)" dataReference="data_generator_M_ahcys_c"/>
+        <dataSet id="data_set_M_akg_c" name="2-Oxoglutarate (c)" label="2-Oxoglutarate (c)" dataReference="data_generator_M_akg_c"/>
+        <dataSet id="data_set_M_akg_e" name="2-Oxoglutarate (e)" label="2-Oxoglutarate (e)" dataReference="data_generator_M_akg_e"/>
+        <dataSet id="data_set_M_ala__L_c" name="L-Alanine (c)" label="L-Alanine (c)" dataReference="data_generator_M_ala__L_c"/>
+        <dataSet id="data_set_M_ala__L_e" name="L-Alanine (e)" label="L-Alanine (e)" dataReference="data_generator_M_ala__L_e"/>
+        <dataSet id="data_set_M_amet_c" name="S-Adenosyl-L-methionine (c)" label="S-Adenosyl-L-methionine (c)" dataReference="data_generator_M_amet_c"/>
+        <dataSet id="data_set_M_ametam_c" name="S-Adenosylmethioninamine (c)" label="S-Adenosylmethioninamine (c)" dataReference="data_generator_M_ametam_c"/>
+        <dataSet id="data_set_M_amp_c" name="AMP C10H12N5O7P (c)" label="AMP C10H12N5O7P (c)" dataReference="data_generator_M_amp_c"/>
+        <dataSet id="data_set_M_arg__L_c" name="L-Arginine (c)" label="L-Arginine (c)" dataReference="data_generator_M_arg__L_c"/>
+        <dataSet id="data_set_M_arg__L_e" name="L-Arginine (e)" label="L-Arginine (e)" dataReference="data_generator_M_arg__L_e"/>
+        <dataSet id="data_set_M_ascb__L_c" name="L-Ascorbate (c)" label="L-Ascorbate (c)" dataReference="data_generator_M_ascb__L_c"/>
+        <dataSet id="data_set_M_ascb__L_e" name="L-Ascorbate (e)" label="L-Ascorbate (e)" dataReference="data_generator_M_ascb__L_e"/>
+        <dataSet id="data_set_M_asn__L_c" name="L-Asparagine (c)" label="L-Asparagine (c)" dataReference="data_generator_M_asn__L_c"/>
+        <dataSet id="data_set_M_asn__L_e" name="L-Asparagine (e)" label="L-Asparagine (e)" dataReference="data_generator_M_asn__L_e"/>
+        <dataSet id="data_set_M_atp_c" name="ATP C10H12N5O13P3 (c)" label="ATP C10H12N5O13P3 (c)" dataReference="data_generator_M_atp_c"/>
+        <dataSet id="data_set_M_band_c" name="Band membrane protein (universal, erythrocyte -&gt; 2.1,3,4.1) (c)" label="Band membrane protein (universal, erythrocyte -&gt; 2.1,3,4.1) (c)" dataReference="data_generator_M_band_c"/>
+        <dataSet id="data_set_M_bandmt_c" name="Band membrane protein (methylated, universal, erythrocyte -&gt; 2.1,3,4.1) (c)" label="Band membrane protein (methylated, universal, erythrocyte -&gt; 2.1,3,4.1) (c)" dataReference="data_generator_M_bandmt_c"/>
+        <dataSet id="data_set_M_ca2_c" name="Calcium (c)" label="Calcium (c)" dataReference="data_generator_M_ca2_c"/>
+        <dataSet id="data_set_M_ca2_e" name="Calcium (e)" label="Calcium (e)" dataReference="data_generator_M_ca2_e"/>
+        <dataSet id="data_set_M_camp_c" name="CAMP C10H11N5O6P (c)" label="CAMP C10H11N5O6P (c)" dataReference="data_generator_M_camp_c"/>
+        <dataSet id="data_set_M_camp_e" name="CAMP C10H11N5O6P (e)" label="CAMP C10H11N5O6P (e)" dataReference="data_generator_M_camp_e"/>
+        <dataSet id="data_set_M_cit_c" name="Citrate (c)" label="Citrate (c)" dataReference="data_generator_M_cit_c"/>
+        <dataSet id="data_set_M_cit_e" name="Citrate (e)" label="Citrate (e)" dataReference="data_generator_M_cit_e"/>
+        <dataSet id="data_set_M_cl_c" name="Chloride (c)" label="Chloride (c)" dataReference="data_generator_M_cl_c"/>
+        <dataSet id="data_set_M_cl_e" name="Chloride (e)" label="Chloride (e)" dataReference="data_generator_M_cl_e"/>
+        <dataSet id="data_set_M_co2_c" name="CO2 (c)" label="CO2 (c)" dataReference="data_generator_M_co2_c"/>
+        <dataSet id="data_set_M_co2_e" name="CO2 (e)" label="CO2 (e)" dataReference="data_generator_M_co2_e"/>
+        <dataSet id="data_set_M_coa_c" name="Coenzyme A (c)" label="Coenzyme A (c)" dataReference="data_generator_M_coa_c"/>
+        <dataSet id="data_set_M_cys__L_c" name="L-Cysteine (c)" label="L-Cysteine (c)" dataReference="data_generator_M_cys__L_c"/>
+        <dataSet id="data_set_M_cys__L_e" name="L-Cysteine (e)" label="L-Cysteine (e)" dataReference="data_generator_M_cys__L_e"/>
+        <dataSet id="data_set_M_dhap_c" name="Dihydroxyacetone phosphate (c)" label="Dihydroxyacetone phosphate (c)" dataReference="data_generator_M_dhap_c"/>
+        <dataSet id="data_set_M_dhdascb_c" name="Dehydroascorbate (c)" label="Dehydroascorbate (c)" dataReference="data_generator_M_dhdascb_c"/>
+        <dataSet id="data_set_M_dhdascb_e" name="Dehydroascorbate (e)" label="Dehydroascorbate (e)" dataReference="data_generator_M_dhdascb_e"/>
+        <dataSet id="data_set_M_dhmtp_c" name="1,2-Dihydroxy-5-(methylthio)pent-1-en-3-one (c)" label="1,2-Dihydroxy-5-(methylthio)pent-1-en-3-one (c)" dataReference="data_generator_M_dhmtp_c"/>
+        <dataSet id="data_set_M_dkmpp_c" name="2,3-diketo-5-methylthio-1-phosphopentane (c)" label="2,3-diketo-5-methylthio-1-phosphopentane (c)" dataReference="data_generator_M_dkmpp_c"/>
+        <dataSet id="data_set_M_e4p_c" name="D-Erythrose 4-phosphate (c)" label="D-Erythrose 4-phosphate (c)" dataReference="data_generator_M_e4p_c"/>
+        <dataSet id="data_set_M_f6p_c" name="D-Fructose 6-phosphate (c)" label="D-Fructose 6-phosphate (c)" dataReference="data_generator_M_f6p_c"/>
+        <dataSet id="data_set_M_fdp_c" name="D-Fructose 1,6-bisphosphate (c)" label="D-Fructose 1,6-bisphosphate (c)" dataReference="data_generator_M_fdp_c"/>
+        <dataSet id="data_set_M_for_c" name="Formate (c)" label="Formate (c)" dataReference="data_generator_M_for_c"/>
+        <dataSet id="data_set_M_fru_c" name="D-Fructose (c)" label="D-Fructose (c)" dataReference="data_generator_M_fru_c"/>
+        <dataSet id="data_set_M_fru_e" name="D-Fructose (e)" label="D-Fructose (e)" dataReference="data_generator_M_fru_e"/>
+        <dataSet id="data_set_M_fum_c" name="Fumarate (c)" label="Fumarate (c)" dataReference="data_generator_M_fum_c"/>
+        <dataSet id="data_set_M_fum_e" name="Fumarate (e)" label="Fumarate (e)" dataReference="data_generator_M_fum_e"/>
+        <dataSet id="data_set_M_g3p_c" name="Glyceraldehyde 3-phosphate (c)" label="Glyceraldehyde 3-phosphate (c)" dataReference="data_generator_M_g3p_c"/>
+        <dataSet id="data_set_M_g6p_c" name="D-Glucose 6-phosphate (c)" label="D-Glucose 6-phosphate (c)" dataReference="data_generator_M_g6p_c"/>
+        <dataSet id="data_set_M_gdp_c" name="GDP C10H12N5O11P2 (c)" label="GDP C10H12N5O11P2 (c)" dataReference="data_generator_M_gdp_c"/>
+        <dataSet id="data_set_M_glc__D_c" name="D-Glucose (c)" label="D-Glucose (c)" dataReference="data_generator_M_glc__D_c"/>
+        <dataSet id="data_set_M_glc__D_e" name="D-Glucose (e)" label="D-Glucose (e)" dataReference="data_generator_M_glc__D_e"/>
+        <dataSet id="data_set_M_gln__L_c" name="L-Glutamine (c)" label="L-Glutamine (c)" dataReference="data_generator_M_gln__L_c"/>
+        <dataSet id="data_set_M_gln__L_e" name="L-Glutamine (e)" label="L-Glutamine (e)" dataReference="data_generator_M_gln__L_e"/>
+        <dataSet id="data_set_M_gluala_e" name="5 L Glutamyl L alanine C8H13N2O5 (e)" label="5 L Glutamyl L alanine C8H13N2O5 (e)" dataReference="data_generator_M_gluala_e"/>
+        <dataSet id="data_set_M_glucys_c" name="Gamma-L-Glutamyl-L-cysteine (c)" label="Gamma-L-Glutamyl-L-cysteine (c)" dataReference="data_generator_M_glucys_c"/>
+        <dataSet id="data_set_M_glu__L_c" name="L-Glutamate (c)" label="L-Glutamate (c)" dataReference="data_generator_M_glu__L_c"/>
+        <dataSet id="data_set_M_gly_c" name="Glycine (c)" label="Glycine (c)" dataReference="data_generator_M_gly_c"/>
+        <dataSet id="data_set_M_gly_e" name="Glycine (e)" label="Glycine (e)" dataReference="data_generator_M_gly_e"/>
+        <dataSet id="data_set_M_gmp_c" name="GMP C10H12N5O8P (c)" label="GMP C10H12N5O8P (c)" dataReference="data_generator_M_gmp_c"/>
+        <dataSet id="data_set_M_gsn_c" name="Guanosine (c)" label="Guanosine (c)" dataReference="data_generator_M_gsn_c"/>
+        <dataSet id="data_set_M_gthox_c" name="Oxidized glutathione (c)" label="Oxidized glutathione (c)" dataReference="data_generator_M_gthox_c"/>
+        <dataSet id="data_set_M_gthox_e" name="Oxidized glutathione (e)" label="Oxidized glutathione (e)" dataReference="data_generator_M_gthox_e"/>
+        <dataSet id="data_set_M_gthrd_c" name="Reduced glutathione (c)" label="Reduced glutathione (c)" dataReference="data_generator_M_gthrd_c"/>
+        <dataSet id="data_set_M_gtp_c" name="GTP C10H12N5O14P3 (c)" label="GTP C10H12N5O14P3 (c)" dataReference="data_generator_M_gtp_c"/>
+        <dataSet id="data_set_M_gua_c" name="Guanine (c)" label="Guanine (c)" dataReference="data_generator_M_gua_c"/>
+        <dataSet id="data_set_M_h_c" name="H+ (c)" label="H+ (c)" dataReference="data_generator_M_h_c"/>
+        <dataSet id="data_set_M_h_e" name="H+ (e)" label="H+ (e)" dataReference="data_generator_M_h_e"/>
+        <dataSet id="data_set_M_h2o_c" name="H2O (c)" label="H2O (c)" dataReference="data_generator_M_h2o_c"/>
+        <dataSet id="data_set_M_h2o_e" name="H2O (e)" label="H2O (e)" dataReference="data_generator_M_h2o_e"/>
+        <dataSet id="data_set_M_h2o2_c" name="Hydrogen peroxide (c)" label="Hydrogen peroxide (c)" dataReference="data_generator_M_h2o2_c"/>
+        <dataSet id="data_set_M_h2o2_e" name="Hydrogen peroxide (e)" label="Hydrogen peroxide (e)" dataReference="data_generator_M_h2o2_e"/>
+        <dataSet id="data_set_M_hco3_c" name="Bicarbonate (c)" label="Bicarbonate (c)" dataReference="data_generator_M_hco3_c"/>
+        <dataSet id="data_set_M_hco3_e" name="Bicarbonate (e)" label="Bicarbonate (e)" dataReference="data_generator_M_hco3_e"/>
+        <dataSet id="data_set_M_hcys__L_c" name="L-Homocysteine (c)" label="L-Homocysteine (c)" dataReference="data_generator_M_hcys__L_c"/>
+        <dataSet id="data_set_M_hcys__L_e" name="L-Homocysteine (e)" label="L-Homocysteine (e)" dataReference="data_generator_M_hcys__L_e"/>
+        <dataSet id="data_set_M_his__L_c" name="L-Histidine (c)" label="L-Histidine (c)" dataReference="data_generator_M_his__L_c"/>
+        <dataSet id="data_set_M_his__L_e" name="L-Histidine (e)" label="L-Histidine (e)" dataReference="data_generator_M_his__L_e"/>
+        <dataSet id="data_set_M_hxan_c" name="Hypoxanthine (c)" label="Hypoxanthine (c)" dataReference="data_generator_M_hxan_c"/>
+        <dataSet id="data_set_M_hxan_e" name="Hypoxanthine (e)" label="Hypoxanthine (e)" dataReference="data_generator_M_hxan_e"/>
+        <dataSet id="data_set_M_ile__L_c" name="L-Isoleucine (c)" label="L-Isoleucine (c)" dataReference="data_generator_M_ile__L_c"/>
+        <dataSet id="data_set_M_ile__L_e" name="L-Isoleucine (e)" label="L-Isoleucine (e)" dataReference="data_generator_M_ile__L_e"/>
+        <dataSet id="data_set_M_imp_c" name="IMP C10H11N4O8P (c)" label="IMP C10H11N4O8P (c)" dataReference="data_generator_M_imp_c"/>
+        <dataSet id="data_set_M_ins_c" name="Inosine (c)" label="Inosine (c)" dataReference="data_generator_M_ins_c"/>
+        <dataSet id="data_set_M_ins_e" name="Inosine (e)" label="Inosine (e)" dataReference="data_generator_M_ins_e"/>
+        <dataSet id="data_set_M_k_c" name="Potassium (c)" label="Potassium (c)" dataReference="data_generator_M_k_c"/>
+        <dataSet id="data_set_M_k_e" name="Potassium (e)" label="Potassium (e)" dataReference="data_generator_M_k_e"/>
+        <dataSet id="data_set_M_lac__L_c" name="L-Lactate (c)" label="L-Lactate (c)" dataReference="data_generator_M_lac__L_c"/>
+        <dataSet id="data_set_M_lac__L_e" name="L-Lactate (e)" label="L-Lactate (e)" dataReference="data_generator_M_lac__L_e"/>
+        <dataSet id="data_set_M_leu__L_c" name="L-Leucine (c)" label="L-Leucine (c)" dataReference="data_generator_M_leu__L_c"/>
+        <dataSet id="data_set_M_leu__L_e" name="L-Leucine (e)" label="L-Leucine (e)" dataReference="data_generator_M_leu__L_e"/>
+        <dataSet id="data_set_M_lys__L_c" name="L-Lysine (c)" label="L-Lysine (c)" dataReference="data_generator_M_lys__L_c"/>
+        <dataSet id="data_set_M_lys__L_e" name="L-Lysine (e)" label="L-Lysine (e)" dataReference="data_generator_M_lys__L_e"/>
+        <dataSet id="data_set_M_mal__L_c" name="L-Malate (c)" label="L-Malate (c)" dataReference="data_generator_M_mal__L_c"/>
+        <dataSet id="data_set_M_mal__L_e" name="L-Malate (e)" label="L-Malate (e)" dataReference="data_generator_M_mal__L_e"/>
+        <dataSet id="data_set_M_man_c" name="D-Mannose (c)" label="D-Mannose (c)" dataReference="data_generator_M_man_c"/>
+        <dataSet id="data_set_M_man_e" name="D-Mannose (e)" label="D-Mannose (e)" dataReference="data_generator_M_man_e"/>
+        <dataSet id="data_set_M_man6p_c" name="D-Mannose 6-phosphate (c)" label="D-Mannose 6-phosphate (c)" dataReference="data_generator_M_man6p_c"/>
+        <dataSet id="data_set_M_met__L_c" name="L-Methionine (c)" label="L-Methionine (c)" dataReference="data_generator_M_met__L_c"/>
+        <dataSet id="data_set_M_met__L_e" name="L-Methionine (e)" label="L-Methionine (e)" dataReference="data_generator_M_met__L_e"/>
+        <dataSet id="data_set_M_na1_c" name="Sodium (c)" label="Sodium (c)" dataReference="data_generator_M_na1_c"/>
+        <dataSet id="data_set_M_na1_e" name="Sodium (e)" label="Sodium (e)" dataReference="data_generator_M_na1_e"/>
+        <dataSet id="data_set_M_nad_c" name="Nicotinamide adenine dinucleotide (c)" label="Nicotinamide adenine dinucleotide (c)" dataReference="data_generator_M_nad_c"/>
+        <dataSet id="data_set_M_nadh_c" name="Nicotinamide adenine dinucleotide - reduced (c)" label="Nicotinamide adenine dinucleotide - reduced (c)" dataReference="data_generator_M_nadh_c"/>
+        <dataSet id="data_set_M_nadp_c" name="Nicotinamide adenine dinucleotide phosphate (c)" label="Nicotinamide adenine dinucleotide phosphate (c)" dataReference="data_generator_M_nadp_c"/>
+        <dataSet id="data_set_M_nadph_c" name="Nicotinamide adenine dinucleotide phosphate - reduced (c)" label="Nicotinamide adenine dinucleotide phosphate - reduced (c)" dataReference="data_generator_M_nadph_c"/>
+        <dataSet id="data_set_M_nh4_c" name="Ammonium (c)" label="Ammonium (c)" dataReference="data_generator_M_nh4_c"/>
+        <dataSet id="data_set_M_nh4_e" name="Ammonium (e)" label="Ammonium (e)" dataReference="data_generator_M_nh4_e"/>
+        <dataSet id="data_set_M_o2_c" name="O2 (c)" label="O2 (c)" dataReference="data_generator_M_o2_c"/>
+        <dataSet id="data_set_M_o2_e" name="O2 (e)" label="O2 (e)" dataReference="data_generator_M_o2_e"/>
+        <dataSet id="data_set_M_oaa_c" name="Oxaloacetate (c)" label="Oxaloacetate (c)" dataReference="data_generator_M_oaa_c"/>
+        <dataSet id="data_set_M_orn_c" name="Ornithine (c)" label="Ornithine (c)" dataReference="data_generator_M_orn_c"/>
+        <dataSet id="data_set_M_pep_c" name="Phosphoenolpyruvate (c)" label="Phosphoenolpyruvate (c)" dataReference="data_generator_M_pep_c"/>
+        <dataSet id="data_set_M_phe__L_c" name="L-Phenylalanine (c)" label="L-Phenylalanine (c)" dataReference="data_generator_M_phe__L_c"/>
+        <dataSet id="data_set_M_phe__L_e" name="L-Phenylalanine (e)" label="L-Phenylalanine (e)" dataReference="data_generator_M_phe__L_e"/>
+        <dataSet id="data_set_M_phpyr_c" name="Phenylpyruvate (c)" label="Phenylpyruvate (c)" dataReference="data_generator_M_phpyr_c"/>
+        <dataSet id="data_set_M_pi_c" name="phosphate (c)" label="phosphate (c)" dataReference="data_generator_M_pi_c"/>
+        <dataSet id="data_set_M_pi_e" name="phosphate (e)" label="phosphate (e)" dataReference="data_generator_M_pi_e"/>
+        <dataSet id="data_set_M_ppi_c" name="Diphosphate (c)" label="Diphosphate (c)" dataReference="data_generator_M_ppi_c"/>
+        <dataSet id="data_set_M_prpp_c" name="5-Phospho-alpha-D-ribose 1-diphosphate (c)" label="5-Phospho-alpha-D-ribose 1-diphosphate (c)" dataReference="data_generator_M_prpp_c"/>
+        <dataSet id="data_set_M_ptrc_c" name="Putrescine (c)" label="Putrescine (c)" dataReference="data_generator_M_ptrc_c"/>
+        <dataSet id="data_set_M_ptrc_e" name="Putrescine (e)" label="Putrescine (e)" dataReference="data_generator_M_ptrc_e"/>
+        <dataSet id="data_set_M_pyr_c" name="Pyruvate (c)" label="Pyruvate (c)" dataReference="data_generator_M_pyr_c"/>
+        <dataSet id="data_set_M_pyr_e" name="Pyruvate (e)" label="Pyruvate (e)" dataReference="data_generator_M_pyr_e"/>
+        <dataSet id="data_set_M_r1p_c" name="Alpha-D-Ribose 1-phosphate (c)" label="Alpha-D-Ribose 1-phosphate (c)" dataReference="data_generator_M_r1p_c"/>
+        <dataSet id="data_set_M_r5p_c" name="Alpha-D-Ribose 5-phosphate (c)" label="Alpha-D-Ribose 5-phosphate (c)" dataReference="data_generator_M_r5p_c"/>
+        <dataSet id="data_set_M_ru5p__D_c" name="D-Ribulose 5-phosphate (c)" label="D-Ribulose 5-phosphate (c)" dataReference="data_generator_M_ru5p__D_c"/>
+        <dataSet id="data_set_M_s7p_c" name="Sedoheptulose 7-phosphate (c)" label="Sedoheptulose 7-phosphate (c)" dataReference="data_generator_M_s7p_c"/>
+        <dataSet id="data_set_M_sbt__D_c" name="D-Sorbitol (c)" label="D-Sorbitol (c)" dataReference="data_generator_M_sbt__D_c"/>
+        <dataSet id="data_set_M_ser__L_c" name="L-Serine (c)" label="L-Serine (c)" dataReference="data_generator_M_ser__L_c"/>
+        <dataSet id="data_set_M_ser__L_e" name="L-Serine (e)" label="L-Serine (e)" dataReference="data_generator_M_ser__L_e"/>
+        <dataSet id="data_set_M_spmd_c" name="Spermidine (c)" label="Spermidine (c)" dataReference="data_generator_M_spmd_c"/>
+        <dataSet id="data_set_M_spmd_e" name="Spermidine (e)" label="Spermidine (e)" dataReference="data_generator_M_spmd_e"/>
+        <dataSet id="data_set_M_sprm_c" name="Spermine C10H30N4 (c)" label="Spermine C10H30N4 (c)" dataReference="data_generator_M_sprm_c"/>
+        <dataSet id="data_set_M_sprm_e" name="Spermine C10H30N4 (e)" label="Spermine C10H30N4 (e)" dataReference="data_generator_M_sprm_e"/>
+        <dataSet id="data_set_M_thr__L_c" name="L-Threonine (c)" label="L-Threonine (c)" dataReference="data_generator_M_thr__L_c"/>
+        <dataSet id="data_set_M_thr__L_e" name="L-Threonine (e)" label="L-Threonine (e)" dataReference="data_generator_M_thr__L_e"/>
+        <dataSet id="data_set_M_trp__L_c" name="L-Tryptophan (c)" label="L-Tryptophan (c)" dataReference="data_generator_M_trp__L_c"/>
+        <dataSet id="data_set_M_trp__L_e" name="L-Tryptophan (e)" label="L-Tryptophan (e)" dataReference="data_generator_M_trp__L_e"/>
+        <dataSet id="data_set_M_tyr__L_c" name="L-Tyrosine (c)" label="L-Tyrosine (c)" dataReference="data_generator_M_tyr__L_c"/>
+        <dataSet id="data_set_M_tyr__L_e" name="L-Tyrosine (e)" label="L-Tyrosine (e)" dataReference="data_generator_M_tyr__L_e"/>
+        <dataSet id="data_set_M_urate_c" name="Urate C5H4N4O3 (c)" label="Urate C5H4N4O3 (c)" dataReference="data_generator_M_urate_c"/>
+        <dataSet id="data_set_M_urate_e" name="Urate C5H4N4O3 (e)" label="Urate C5H4N4O3 (e)" dataReference="data_generator_M_urate_e"/>
+        <dataSet id="data_set_M_urea_c" name="Urea CH4N2O (c)" label="Urea CH4N2O (c)" dataReference="data_generator_M_urea_c"/>
+        <dataSet id="data_set_M_urea_e" name="Urea CH4N2O (e)" label="Urea CH4N2O (e)" dataReference="data_generator_M_urea_e"/>
+        <dataSet id="data_set_M_uri_c" name="Uridine (c)" label="Uridine (c)" dataReference="data_generator_M_uri_c"/>
+        <dataSet id="data_set_M_uri_e" name="Uridine (e)" label="Uridine (e)" dataReference="data_generator_M_uri_e"/>
+        <dataSet id="data_set_M_val__L_c" name="L-Valine (c)" label="L-Valine (c)" dataReference="data_generator_M_val__L_c"/>
+        <dataSet id="data_set_M_val__L_e" name="L-Valine (e)" label="L-Valine (e)" dataReference="data_generator_M_val__L_e"/>
+        <dataSet id="data_set_M_xan_c" name="Xanthine (c)" label="Xanthine (c)" dataReference="data_generator_M_xan_c"/>
+        <dataSet id="data_set_M_xan_e" name="Xanthine (e)" label="Xanthine (e)" dataReference="data_generator_M_xan_e"/>
+        <dataSet id="data_set_M_xmp_c" name="Xanthosine 5&apos;-phosphate (c)" label="Xanthosine 5&apos;-phosphate (c)" dataReference="data_generator_M_xmp_c"/>
+        <dataSet id="data_set_M_xu5p__D_c" name="D-Xylulose 5-phosphate (c)" label="D-Xylulose 5-phosphate (c)" dataReference="data_generator_M_xu5p__D_c"/>
+      </listOfDataSets>
+    </report>
+    <report id="reaction_fluxes" name="Reaction fluxes">
+      <listOfDataSets>
+        <dataSet id="data_set_time_reaction_fluxes" name="Time" label="Time" dataReference="data_generator_time"/>
+        <dataSet id="data_set_R_UNK3" name="2-keto-4-methylthiobutyrate transamination" label="2-keto-4-methylthiobutyrate transamination" dataReference="data_generator_R_UNK3"/>
+        <dataSet id="data_set_R_ADA" name="Adenosine deaminase" label="Adenosine deaminase" dataReference="data_generator_R_ADA"/>
+        <dataSet id="data_set_R_ADEt" name="Adenine transport via diffusion" label="Adenine transport via diffusion" dataReference="data_generator_R_ADEt"/>
+        <dataSet id="data_set_R_ADK1" name="Adenylate kinase" label="Adenylate kinase" dataReference="data_generator_R_ADK1"/>
+        <dataSet id="data_set_R_ADMDC" name="Adenosylmethionine decarboxylase" label="Adenosylmethionine decarboxylase" dataReference="data_generator_R_ADMDC"/>
+        <dataSet id="data_set_R_ADNCYC" name="Adenylate cyclase" label="Adenylate cyclase" dataReference="data_generator_R_ADNCYC"/>
+        <dataSet id="data_set_R_ADNK1" name="Adenosine kinase" label="Adenosine kinase" dataReference="data_generator_R_ADNK1"/>
+        <dataSet id="data_set_R_ADNt" name="Adenosine facilated transport in cytosol" label="Adenosine facilated transport in cytosol" dataReference="data_generator_R_ADNt"/>
+        <dataSet id="data_set_R_ADPT" name="Adenine phosphoribosyltransferase" label="Adenine phosphoribosyltransferase" dataReference="data_generator_R_ADPT"/>
+        <dataSet id="data_set_R_AHCi" name="Adenosylhomocysteinase" label="Adenosylhomocysteinase" dataReference="data_generator_R_AHCi"/>
+        <dataSet id="data_set_R_ALAt4" name="Alanine-Sodium symporter" label="Alanine-Sodium symporter" dataReference="data_generator_R_ALAt4"/>
+        <dataSet id="data_set_R_AMPDA" name="Adenosine monophosphate deaminase" label="Adenosine monophosphate deaminase" dataReference="data_generator_R_AMPDA"/>
+        <dataSet id="data_set_R_ARD" name="1;2-dihydroxy-3-keto-5-methylthiopentene dioxygenase" label="1;2-dihydroxy-3-keto-5-methylthiopentene dioxygenase" dataReference="data_generator_R_ARD"/>
+        <dataSet id="data_set_R_ARGN" name="Arginase" label="Arginase" dataReference="data_generator_R_ARGN"/>
+        <dataSet id="data_set_R_ARGt5r" name="ARGtiDF" label="ARGtiDF" dataReference="data_generator_R_ARGt5r"/>
+        <dataSet id="data_set_R_ENOPH" name="Enolase-phosphatase E1" label="Enolase-phosphatase E1" dataReference="data_generator_R_ENOPH"/>
+        <dataSet id="data_set_R_ASCBt" name="L-ascorbate transport via facilitated diffusion" label="L-ascorbate transport via facilitated diffusion" dataReference="data_generator_R_ASCBt"/>
+        <dataSet id="data_set_R_BANDMT" name="Band membrane protein-methyltransferase" label="Band membrane protein-methyltransferase" dataReference="data_generator_R_BANDMT"/>
+        <dataSet id="data_set_R_CA2t" name="Calcium (Ca+2) transport via diffusion (extracellular to periplasm)" label="Calcium (Ca+2) transport via diffusion (extracellular to periplasm)" dataReference="data_generator_R_CA2t"/>
+        <dataSet id="data_set_R_CAATPS" name="CAATPS" label="CAATPS" dataReference="data_generator_R_CAATPS"/>
+        <dataSet id="data_set_R_CAMPt" name="CAMP transport (ATP-dependent)" label="CAMP transport (ATP-dependent)" dataReference="data_generator_R_CAMPt"/>
+        <dataSet id="data_set_R_CAT" name="Catalase" label="Catalase" dataReference="data_generator_R_CAT"/>
+        <dataSet id="data_set_R_CGMPt" name="CGMP transport (ATP-dependent)" label="CGMP transport (ATP-dependent)" dataReference="data_generator_R_CGMPt"/>
+        <dataSet id="data_set_R_CO2t" name="CO2 transporter via diffusion" label="CO2 transporter via diffusion" dataReference="data_generator_R_CO2t"/>
+        <dataSet id="data_set_R_CYStec" name="L-cysteine transport via diffusion (extracellular to cytosol)" label="L-cysteine transport via diffusion (extracellular to cytosol)" dataReference="data_generator_R_CYStec"/>
+        <dataSet id="data_set_R_DHAAt1r" name="Dehydroascorbate transport (uniport)" label="Dehydroascorbate transport (uniport)" dataReference="data_generator_R_DHAAt1r"/>
+        <dataSet id="data_set_R_DM_nadh" name="Demand NADH" label="Demand NADH" dataReference="data_generator_R_DM_nadh"/>
+        <dataSet id="data_set_R_DPGM" name="Diphosphoglyceromutase" label="Diphosphoglyceromutase" dataReference="data_generator_R_DPGM"/>
+        <dataSet id="data_set_R_DPGase" name="Diphosphoglycerate phosphatase" label="Diphosphoglycerate phosphatase" dataReference="data_generator_R_DPGase"/>
+        <dataSet id="data_set_R_ENO" name="Enolase" label="Enolase" dataReference="data_generator_R_ENO"/>
+        <dataSet id="data_set_R_FBA" name="Fructose-bisphosphate aldolase" label="Fructose-bisphosphate aldolase" dataReference="data_generator_R_FBA"/>
+        <dataSet id="data_set_R_FRUt1r" name="D-fructose transport in via uniport" label="D-fructose transport in via uniport" dataReference="data_generator_R_FRUt1r"/>
+        <dataSet id="data_set_R_G6PDH2r" name="Glucose 6-phosphate dehydrogenase" label="Glucose 6-phosphate dehydrogenase" dataReference="data_generator_R_G6PDH2r"/>
+        <dataSet id="data_set_R_GAPD" name="Glyceraldehyde-3-phosphate dehydrogenase" label="Glyceraldehyde-3-phosphate dehydrogenase" dataReference="data_generator_R_GAPD"/>
+        <dataSet id="data_set_R_GGLUCT" name="Gamma-glutamylcyclotransferase" label="Gamma-glutamylcyclotransferase" dataReference="data_generator_R_GGLUCT"/>
+        <dataSet id="data_set_R_GK1" name="Guanylate kinase (GMP:ATP)" label="Guanylate kinase (GMP:ATP)" dataReference="data_generator_R_GK1"/>
+        <dataSet id="data_set_R_GLCt1" name="Glucose transport uniport" label="Glucose transport uniport" dataReference="data_generator_R_GLCt1"/>
+        <dataSet id="data_set_R_GLNS" name="Glutamine synthetase" label="Glutamine synthetase" dataReference="data_generator_R_GLNS"/>
+        <dataSet id="data_set_R_GLNt4" name="L-glutamine reversible transport via sodium symport" label="L-glutamine reversible transport via sodium symport" dataReference="data_generator_R_GLNt4"/>
+        <dataSet id="data_set_R_GLUCYS" name="Gamma-glutamylcysteine synthetase" label="Gamma-glutamylcysteine synthetase" dataReference="data_generator_R_GLUCYS"/>
+        <dataSet id="data_set_R_GLYt7_211_r" name="GLYt7 LPAREN 211 RPAREN r" label="GLYt7 LPAREN 211 RPAREN r" dataReference="data_generator_R_GLYt7_211_r"/>
+        <dataSet id="data_set_R_GMPR" name="GMP reductase" label="GMP reductase" dataReference="data_generator_R_GMPR"/>
+        <dataSet id="data_set_R_GMPS2" name="GMP synthase" label="GMP synthase" dataReference="data_generator_R_GMPS2"/>
+        <dataSet id="data_set_R_GND" name="Phosphogluconate dehydrogenase" label="Phosphogluconate dehydrogenase" dataReference="data_generator_R_GND"/>
+        <dataSet id="data_set_R_GTHDH" name="Glutathione dehydrogenase (dehydroascorbate reductase)" label="Glutathione dehydrogenase (dehydroascorbate reductase)" dataReference="data_generator_R_GTHDH"/>
+        <dataSet id="data_set_R_GTHOr" name="Glutathione oxidoreductase" label="Glutathione oxidoreductase" dataReference="data_generator_R_GTHOr"/>
+        <dataSet id="data_set_R_GTHOXti2" name="Oxidized glutathione irreversible active transport (rbc)" label="Oxidized glutathione irreversible active transport (rbc)" dataReference="data_generator_R_GTHOXti2"/>
+        <dataSet id="data_set_R_GTHPi" name="Glutathione peridoxase" label="Glutathione peridoxase" dataReference="data_generator_R_GTHPi"/>
+        <dataSet id="data_set_R_GTHS" name="Glutathione synthetase" label="Glutathione synthetase" dataReference="data_generator_R_GTHS"/>
+        <dataSet id="data_set_R_GUACYC" name="Guanylate cyclase" label="Guanylate cyclase" dataReference="data_generator_R_GUACYC"/>
+        <dataSet id="data_set_R_GUAPRT" name="Guanine phosphoribosyltransferase" label="Guanine phosphoribosyltransferase" dataReference="data_generator_R_GUAPRT"/>
+        <dataSet id="data_set_R_H2O2t" name="Hydrogen peroxide transport via diffusion" label="Hydrogen peroxide transport via diffusion" dataReference="data_generator_R_H2O2t"/>
+        <dataSet id="data_set_R_H2Ot" name="H2O transport via diffusion" label="H2O transport via diffusion" dataReference="data_generator_R_H2Ot"/>
+        <dataSet id="data_set_R_HCO3E" name="HCO3 equilibration reaction" label="HCO3 equilibration reaction" dataReference="data_generator_R_HCO3E"/>
+        <dataSet id="data_set_R_HCO3_CLt" name="Bicarbonate transport (Cl-/HCO3- exchange)" label="Bicarbonate transport (Cl-/HCO3- exchange)" dataReference="data_generator_R_HCO3_CLt"/>
+        <dataSet id="data_set_R_HCYSte" name="Homocysteine transport (extracellular)" label="Homocysteine transport (extracellular)" dataReference="data_generator_R_HCYSte"/>
+        <dataSet id="data_set_R_HEX1" name="Hexokinase (D-glucose:ATP)" label="Hexokinase (D-glucose:ATP)" dataReference="data_generator_R_HEX1"/>
+        <dataSet id="data_set_R_HEX4" name="Hexokinase (D-mannose:ATP)" label="Hexokinase (D-mannose:ATP)" dataReference="data_generator_R_HEX4"/>
+        <dataSet id="data_set_R_HEX7" name="Hexokinase (D-fructose:ATP)" label="Hexokinase (D-fructose:ATP)" dataReference="data_generator_R_HEX7"/>
+        <dataSet id="data_set_R_HXPRT" name="Hypoxanthine phosphoribosyltransferase (Hypoxanthine)" label="Hypoxanthine phosphoribosyltransferase (Hypoxanthine)" dataReference="data_generator_R_HXPRT"/>
+        <dataSet id="data_set_R_HYXNt" name="Hypoxanthine transport" label="Hypoxanthine transport" dataReference="data_generator_R_HYXNt"/>
+        <dataSet id="data_set_R_Ht" name="Proton diffusion" label="Proton diffusion" dataReference="data_generator_R_Ht"/>
+        <dataSet id="data_set_R_IMPD" name="IMP dehydrogenase" label="IMP dehydrogenase" dataReference="data_generator_R_IMPD"/>
+        <dataSet id="data_set_R_INSt" name="Inosine transport (diffusion)" label="Inosine transport (diffusion)" dataReference="data_generator_R_INSt"/>
+        <dataSet id="data_set_R_KCCt" name="K+-Cl- cotransport" label="K+-Cl- cotransport" dataReference="data_generator_R_KCCt"/>
+        <dataSet id="data_set_R_L_LACt2r" name="L lactate reversible transport via proton symport" label="L lactate reversible transport via proton symport" dataReference="data_generator_R_L_LACt2r"/>
+        <dataSet id="data_set_R_LDH_L" name="L-lactate dehydrogenase" label="L-lactate dehydrogenase" dataReference="data_generator_R_LDH_L"/>
+        <dataSet id="data_set_R_MAN6PI" name="Mannose-6-phosphate isomerase" label="Mannose-6-phosphate isomerase" dataReference="data_generator_R_MAN6PI"/>
+        <dataSet id="data_set_R_MANt1r" name="Mannose transport (uniport)" label="Mannose transport (uniport)" dataReference="data_generator_R_MANt1r"/>
+        <dataSet id="data_set_R_MDRPD" name="5-Methylthio-5-deoxy-D-ribulose 1-phosphate dehydratase" label="5-Methylthio-5-deoxy-D-ribulose 1-phosphate dehydratase" dataReference="data_generator_R_MDRPD"/>
+        <dataSet id="data_set_R_METAT" name="Methionine adenosyltransferase" label="Methionine adenosyltransferase" dataReference="data_generator_R_METAT"/>
+        <dataSet id="data_set_R_METtec" name="L-methionine transport via diffusion (extracellular to cytosol)" label="L-methionine transport via diffusion (extracellular to cytosol)" dataReference="data_generator_R_METtec"/>
+        <dataSet id="data_set_R_MTAP" name="5 methylthioadenosine phosphorylase" label="5 methylthioadenosine phosphorylase" dataReference="data_generator_R_MTAP"/>
+        <dataSet id="data_set_R_MTRI" name="5-methylthioribose-1-phosphate isomerase" label="5-methylthioribose-1-phosphate isomerase" dataReference="data_generator_R_MTRI"/>
+        <dataSet id="data_set_R_NAt" name="Sodium transport (uniport)" label="Sodium transport (uniport)" dataReference="data_generator_R_NAt"/>
+        <dataSet id="data_set_R_NDPK1" name="Nucleoside-diphosphate kinase (ATP:GDP)" label="Nucleoside-diphosphate kinase (ATP:GDP)" dataReference="data_generator_R_NDPK1"/>
+        <dataSet id="data_set_R_NH4t3r" name="Ammonia transport via proton antiport" label="Ammonia transport via proton antiport" dataReference="data_generator_R_NH4t3r"/>
+        <dataSet id="data_set_R_NTD11" name="5&apos;-nucleotidase (IMP)" label="5&apos;-nucleotidase (IMP)" dataReference="data_generator_R_NTD11"/>
+        <dataSet id="data_set_R_NTD7" name="5&apos;-nucleotidase (AMP)" label="5&apos;-nucleotidase (AMP)" dataReference="data_generator_R_NTD7"/>
+        <dataSet id="data_set_R_NTD9" name="5&apos;-nucleotidase (GMP)" label="5&apos;-nucleotidase (GMP)" dataReference="data_generator_R_NTD9"/>
+        <dataSet id="data_set_R_NaKt" name="Na+/K+ exchanging ATPase" label="Na+/K+ exchanging ATPase" dataReference="data_generator_R_NaKt"/>
+        <dataSet id="data_set_R_O2t" name="O2 transport diffusion" label="O2 transport diffusion" dataReference="data_generator_R_O2t"/>
+        <dataSet id="data_set_R_OPAH" name="5-Oxoproline amidohydrolase (ATP-hydrolysing) (ir)" label="5-Oxoproline amidohydrolase (ATP-hydrolysing) (ir)" dataReference="data_generator_R_OPAH"/>
+        <dataSet id="data_set_R_ORNDC" name="Ornithine Decarboxylase" label="Ornithine Decarboxylase" dataReference="data_generator_R_ORNDC"/>
+        <dataSet id="data_set_R_PDE1" name="3&apos;,5&apos;-cyclic-nucleotide phosphodiesterase" label="3&apos;,5&apos;-cyclic-nucleotide phosphodiesterase 1" dataReference="data_generator_R_PDE1"/>
+        <dataSet id="data_set_R_PFK" name="Phosphofructokinase" label="Phosphofructokinase" dataReference="data_generator_R_PFK"/>
+        <dataSet id="data_set_R_PGI" name="Glucose-6-phosphate isomerase" label="Glucose-6-phosphate isomerase" dataReference="data_generator_R_PGI"/>
+        <dataSet id="data_set_R_PGK" name="Phosphoglycerate kinase" label="Phosphoglycerate kinase" dataReference="data_generator_R_PGK"/>
+        <dataSet id="data_set_R_PGL" name="6-phosphogluconolactonase" label="6-phosphogluconolactonase" dataReference="data_generator_R_PGL"/>
+        <dataSet id="data_set_R_PGM" name="Phosphoglycerate mutase" label="Phosphoglycerate mutase" dataReference="data_generator_R_PGM"/>
+        <dataSet id="data_set_R_PHETA1" name="Phenylalanine transaminase" label="Phenylalanine transaminase" dataReference="data_generator_R_PHETA1"/>
+        <dataSet id="data_set_R_PHEtec" name="L-phenylalanine transport via diffusion (extracellular to cytosol)" label="L-phenylalanine transport via diffusion (extracellular to cytosol)" dataReference="data_generator_R_PHEtec"/>
+        <dataSet id="data_set_R_PIt" name="Inorganic phosphate exchange, diffusion" label="Inorganic phosphate exchange, diffusion" dataReference="data_generator_R_PIt"/>
+        <dataSet id="data_set_R_PPA" name="Inorganic diphosphatase" label="Inorganic diphosphatase" dataReference="data_generator_R_PPA"/>
+        <dataSet id="data_set_R_PPM" name="Phosphopentomutase" label="Phosphopentomutase" dataReference="data_generator_R_PPM"/>
+        <dataSet id="data_set_R_PRPPS" name="Phosphoribosylpyrophosphate synthetase" label="Phosphoribosylpyrophosphate synthetase" dataReference="data_generator_R_PRPPS"/>
+        <dataSet id="data_set_R_PTRCtex2" name="Putrescine excretion cytosol to extracellular" label="Putrescine excretion cytosol to extracellular" dataReference="data_generator_R_PTRCtex2"/>
+        <dataSet id="data_set_R_PUNP3" name="Purine-nucleoside phosphorylase (Guanosine)" label="Purine-nucleoside phosphorylase (Guanosine)" dataReference="data_generator_R_PUNP3"/>
+        <dataSet id="data_set_R_PUNP5" name="Purine-nucleoside phosphorylase (Inosine)" label="Purine-nucleoside phosphorylase (Inosine)" dataReference="data_generator_R_PUNP5"/>
+        <dataSet id="data_set_R_PYK" name="Pyruvate kinase" label="Pyruvate kinase" dataReference="data_generator_R_PYK"/>
+        <dataSet id="data_set_R_PYRt2" name="Pyruvate transport in via proton symport" label="Pyruvate transport in via proton symport" dataReference="data_generator_R_PYRt2"/>
+        <dataSet id="data_set_R_RPE" name="Ribulose 5-phosphate 3-epimerase" label="Ribulose 5-phosphate 3-epimerase" dataReference="data_generator_R_RPE"/>
+        <dataSet id="data_set_R_RPI" name="Ribose-5-phosphate isomerase" label="Ribose-5-phosphate isomerase" dataReference="data_generator_R_RPI"/>
+        <dataSet id="data_set_R_SBTD_D2" name="D sorbitol dehydrogenase D fructose producing" label="D sorbitol dehydrogenase D fructose producing" dataReference="data_generator_R_SBTD_D2"/>
+        <dataSet id="data_set_R_SBTR" name="D sorbitol reductase" label="D sorbitol reductase" dataReference="data_generator_R_SBTR"/>
+        <dataSet id="data_set_R_SPMDtex2" name="Spermidine excretion cytosol to extracellular" label="Spermidine excretion cytosol to extracellular" dataReference="data_generator_R_SPMDtex2"/>
+        <dataSet id="data_set_R_SPMS" name="Spermidine synthase" label="Spermidine synthase" dataReference="data_generator_R_SPMS"/>
+        <dataSet id="data_set_R_SPRMS" name="Spermine synthase" label="Spermine synthase" dataReference="data_generator_R_SPRMS"/>
+        <dataSet id="data_set_R_SPRMt2i" name="Spermine transport via proton antiport irreversible" label="Spermine transport via proton antiport irreversible" dataReference="data_generator_R_SPRMt2i"/>
+        <dataSet id="data_set_R_TALA" name="Transaldolase" label="Transaldolase" dataReference="data_generator_R_TALA"/>
+        <dataSet id="data_set_R_TKT1" name="Transketolase" label="Transketolase 1" dataReference="data_generator_R_TKT1"/>
+        <dataSet id="data_set_R_TKT2" name="Transketolase" label="Transketolase 2" dataReference="data_generator_R_TKT2"/>
+        <dataSet id="data_set_R_TPI" name="Triose-phosphate isomerase" label="Triose-phosphate isomerase" dataReference="data_generator_R_TPI"/>
+        <dataSet id="data_set_R_UREAt" name="Urea transport via facilitate diffusion" label="Urea transport via facilitate diffusion" dataReference="data_generator_R_UREAt"/>
+        <dataSet id="data_set_R_URIt" name="Uridine facilated transport in cytosol" label="Uridine facilated transport in cytosol" dataReference="data_generator_R_URIt"/>
+        <dataSet id="data_set_R_Kt1" name="Potassium transport via uniport (facilitated diffusion)" label="Potassium transport via uniport (facilitated diffusion)" dataReference="data_generator_R_Kt1"/>
+        <dataSet id="data_set_R_AKGtr" name="AKG transport (extracellular to cytosol)" label="AKG transport (extracellular to cytosol)" dataReference="data_generator_R_AKGtr"/>
+        <dataSet id="data_set_R_ALATA_L" name="L-alanine transaminase" label="L-alanine transaminase" dataReference="data_generator_R_ALATA_L"/>
+        <dataSet id="data_set_R_ASNt5r" name="L asparagine transport out via proton symport vacuolar (extracellular to cytosol)" label="L asparagine transport out via proton symport vacuolar (extracellular to cytosol)" dataReference="data_generator_R_ASNt5r"/>
+        <dataSet id="data_set_R_GLUN" name="Glutaminase" label="Glutaminase" dataReference="data_generator_R_GLUN"/>
+        <dataSet id="data_set_R_HIStiDF" name="L-histidine transport via diffusion (extracellular to cytosol)" label="L-histidine transport via diffusion (extracellular to cytosol)" dataReference="data_generator_R_HIStiDF"/>
+        <dataSet id="data_set_R_ILEtec" name="L-isoleucine transport via diffusion (extracellular to cytosol)" label="L-isoleucine transport via diffusion (extracellular to cytosol)" dataReference="data_generator_R_ILEtec"/>
+        <dataSet id="data_set_R_LEUtec" name="L-leucine transport via diffusion" label="L-leucine transport via diffusion" dataReference="data_generator_R_LEUtec"/>
+        <dataSet id="data_set_R_LYSt5r" name="LYStiDF" label="LYStiDF" dataReference="data_generator_R_LYSt5r"/>
+        <dataSet id="data_set_R_SERt5r" name="L-Serine Transport  (extracellular to cytosol)" label="L-Serine Transport  (extracellular to cytosol)" dataReference="data_generator_R_SERt5r"/>
+        <dataSet id="data_set_R_THRt5r" name="L-Threonine Transport (extracellular to cytosol)" label="L-Threonine Transport (extracellular to cytosol)" dataReference="data_generator_R_THRt5r"/>
+        <dataSet id="data_set_R_TRPt" name="L-tryptophan transport" label="L-tryptophan transport" dataReference="data_generator_R_TRPt"/>
+        <dataSet id="data_set_R_TYRt" name="L-tyrosine transport" label="L-tyrosine transport" dataReference="data_generator_R_TYRt"/>
+        <dataSet id="data_set_R_VALtec" name="L-valine transport via diffusion (extracellular to cytosol)" label="L-valine transport via diffusion (extracellular to cytosol)" dataReference="data_generator_R_VALtec"/>
+        <dataSet id="data_set_R_GGCT" name="(5-L-Glutamyl)-L-amino-acid 5-glutamyltransferase (cyclizing) Glutathione metabolism EC:2.3.2.4" label="(5-L-Glutamyl)-L-amino-acid 5-glutamyltransferase (cyclizing) Glutathione metabolism EC:2.3.2.4" dataReference="data_generator_R_GGCT"/>
+        <dataSet id="data_set_R__5OXPROt" name="Transport of 5-oxoprolinate" label="Transport of 5-oxoprolinate" dataReference="data_generator_R__5OXPROt"/>
+        <dataSet id="data_set_R_XAO2" name="Xanthine oxidase (hypoxanthine)" label="Xanthine oxidase (hypoxanthine)" dataReference="data_generator_R_XAO2"/>
+        <dataSet id="data_set_R_XAO" name="Xanthine oxidase" label="Xanthine oxidase" dataReference="data_generator_R_XAO"/>
+        <dataSet id="data_set_R_XANt" name="Xanthine reversible transport" label="Xanthine reversible transport" dataReference="data_generator_R_XANt"/>
+        <dataSet id="data_set_R_URATEt" name="Urate export from cytosol" label="Urate export from cytosol" dataReference="data_generator_R_URATEt"/>
+        <dataSet id="data_set_R_FUM" name="Fumarase" label="Fumarase" dataReference="data_generator_R_FUM"/>
+        <dataSet id="data_set_R_MDH" name="Malate dehydrogenase" label="Malate dehydrogenase" dataReference="data_generator_R_MDH"/>
+        <dataSet id="data_set_R_ACITL" name="ATP-Citrate lyase" label="ATP-Citrate lyase" dataReference="data_generator_R_ACITL"/>
+        <dataSet id="data_set_R_PEPCK_re" name="Phosphoenolpyruvate carboxykinase (GTP)" label="Phosphoenolpyruvate carboxykinase (GTP)" dataReference="data_generator_R_PEPCK_re"/>
+        <dataSet id="data_set_R_CITt4" name="Citrate transport via sodium symport" label="Citrate transport via sodium symport" dataReference="data_generator_R_CITt4"/>
+        <dataSet id="data_set_R_MALt" name="Malate exchange, diffusion" label="Malate exchange, diffusion" dataReference="data_generator_R_MALt"/>
+        <dataSet id="data_set_R_FUMtr" name="Fumarate transport via diffusion (reversible)" label="Fumarate transport via diffusion (reversible)" dataReference="data_generator_R_FUMtr"/>
+        <dataSet id="data_set_R_PDE4" name="3&apos;,5&apos;-cyclic-nucleotide phosphodiesterase" label="3&apos;,5&apos;-cyclic-nucleotide phosphodiesterase 2" dataReference="data_generator_R_PDE4"/>
+      </listOfDataSets>
+    </report>
+  </listOfOutputs>
+</sedML>
