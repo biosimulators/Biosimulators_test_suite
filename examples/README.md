@@ -16,13 +16,14 @@ The purpose of this directory is two-fold:
 
 The archives in this directory involve the following modeling frameworks:
 
-| Name                   | SBO id                                                                                                           |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| flux balance           | [SBO_0000624](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000624) |
-| logical                | [SBO_0000234](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000234) |
-| non-spatial continuous | [SBO_0000293](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000293) |
-| non-spatial discrete   | [SBO_0000295](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000295) |
-| spatial discrete       | [SBO_0000294](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000294) |
+| Name                          | SBO id                                                                                                           |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| flux balance                  | [SBO_0000624](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000624) |
+| hybrid flux balance-continous | [SBO_0000684](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000684) |
+| logical                       | [SBO_0000234](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000234) |
+| non-spatial continuous        | [SBO_0000293](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000293) |
+| non-spatial discrete          | [SBO_0000295](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000295) |
+| spatial discrete              | [SBO_0000294](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000294) |
 
 ## Simulation algorithms employed by the example archives
 
@@ -46,10 +47,11 @@ The archives in this directory involve the following model formats:
 | [Systems Biology Markup Language](http://sbml.org) (core) | SBML    | [format_2585](https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http%3A%2F%2Fedamontology.org%2Fformat_2585) |
 | [SBML flux balance constraints package](http://sbml.org/Documents/Specifications/SBML_Level_3/Packages/fbc) | SBML-fbc    | [format_2585](https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http%3A%2F%2Fedamontology.org%2Fformat_2585) |
 | [SBML qualitative modeling package](http://sbml.org/Documents/Specifications/SBML_Level_3/Packages/qual) | SBML-qual    | [format_2585](https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http%3A%2F%2Fedamontology.org%2Fformat_2585) |
+| [SBML MASS schema](https://masspy.readthedocs.io/en/stable/tutorials/reading_writing_models.html) |     |  |
 | [XPP Language](http://www.math.pitt.edu/~bard/xpp/xpp.html) |     |  |
 
 
-Note, more specific EDAM terms have SBML-fbc, SBML-qual, and other packages have been requested.
+Note, more specific EDAM terms have SBML-fbc, SBML-qual, and other formats have been requested.
 
 ## Formats for the example data visualizations for the results of the example archives
 
@@ -68,6 +70,7 @@ Below is information about the compatibility of a selection of archives.
 
 | Source | Archive  | Results | Data visualization (Vega) | Modeling framework (SBO id) | Simulation algorithm (KiSAO id) | Model format (EDAM id) | Compatibile simulators |
 | ----- | -------- | ------- | --------------------------------- | --------------------------- | ------------------------------- | ---------------------- | ---------------------- |
+| [Bordbar *Cell Syst*](https://doi.org/10.1016/j.cels.2015.10.003) | [`.omex`](https://github.com/biosimulators/Biosimulators_test_suite/raw/dev/examples/mass/Bordbar-Cell-Syst-2015-RBC-metabolism.omex) | [`.h5`](https://github.com/biosimulators/Biosimulators_test_suite/raw/dev/examples/mass/Bordbar-Cell-Syst-2015-RBC-metabolism/reports.h5) | | non-spatial continuous ([0000293](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000293)) | CVODE ([0000019](https://www.ebi.ac.uk/ols/ontologies/kisao/terms?iri=http%3A%2F%2Fwww.biomodels.net%2Fkisao%2FKISAO%23KISAO_0000019))           | SBML ([format_2585](https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http%3A%2F%2Fedamontology.org%2Fformat_2585))     | [tellurium](https://biosimulators.org/simulators/tellurium) |
 | [Caravagna *J Theor Biol*](https://doi.org/10.1083/jcb.200306139) | [`.omex`](https://github.com/biosimulators/Biosimulators_test_suite/raw/dev/examples/sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex) | [`.h5`](https://github.com/biosimulators/Biosimulators_test_suite/raw/dev/examples/sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations/reports.h5) | | non-spatial continuous ([0000293](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000293)) | CVODE ([0000019](https://www.ebi.ac.uk/ols/ontologies/kisao/terms?iri=http%3A%2F%2Fwww.biomodels.net%2Fkisao%2FKISAO%23KISAO_0000019))           | SBML ([format_2585](https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http%3A%2F%2Fedamontology.org%2Fformat_2585))     | [PySCeS](https://biosimulators.org/simulators/pysces), [tellurium](https://biosimulators.org/simulators/tellurium), [VCell](https://biosimulators.org/simulators/vcell)                 |
 | [Chaouiya *BMC Syst Biol*](https://doi.org/10.1186/1752-0509-7-135) | [`.omex`](https://github.com/biosimulators/Biosimulators_test_suite/raw/dev/examples/sbml-qual/Chaouiya-BMC-Syst-Biol-2013-EGF-TNFa-signaling.omex) | [`.h5`](https://github.com/biosimulators/Biosimulators_test_suite/raw/dev/examples/sbml-qual/Chaouiya-BMC-Syst-Biol-2013-EGF-TNFa-signaling/reports.h5) | | logical ([0000234](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000234)) | synchronous updating ([0000449](https://www.ebi.ac.uk/ols/ontologies/kisao/terms?iri=http%3A%2F%2Fwww.biomodels.net%2Fkisao%2FKISAO%23KISAO_0000449))           | SBML qual ([format_2585](https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http%3A%2F%2Fedamontology.org%2Fformat_2585))     | [BoolNet](https://biosimulators.org/simulators/boolnet), [GINsim](https://biosimulators.org/simulators/ginsim) |
 | [Ciliberto *J Cell Biol*](https://doi.org/10.1083/jcb.200306139) | [`.omex`](https://github.com/biosimulators/Biosimulators_test_suite/raw/dev/examples/sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex) | [`.h5`](https://github.com/biosimulators/Biosimulators_test_suite/raw/dev/examples/sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous/reports.h5) | [`.json`](https://github.com/biosimulators/Biosimulators_test_suite/raw/dev/examples/sbml-core/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous/Figure3.vega.json) | non-spatial continuous ([0000295](https://www.ebi.ac.uk/ols/ontologies/sbo/terms?iri=http%3A%2F%2Fbiomodels.net%2FSBO%2FSBO_0000293)) | CVODE ([0000019](https://www.ebi.ac.uk/ols/ontologies/kisao/terms?iri=http%3A%2F%2Fwww.biomodels.net%2Fkisao%2FKISAO%23KISAO_0000019))           | SBML ([format_2585](https://www.ebi.ac.uk/ols/ontologies/edam/terms?iri=http%3A%2F%2Fedamontology.org%2Fformat_2585))     | [PySCeS](https://biosimulators.org/simulators/pysces), [tellurium](https://biosimulators.org/simulators/tellurium), [VCell](https://biosimulators.org/simulators/vcell)                 |
