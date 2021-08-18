@@ -12,7 +12,7 @@
       "id": "simulation.sedml/metabolite_concentrations",
       "dataSets": [
         {
-          "id": "data_set_time",
+          "id": "data_set_time_metabolite_concentrations",
           "label": "Time"
         },
         {
@@ -697,8 +697,8 @@
       ],
       "values": [
         {
-          "id": "data_set_time",
-          "label": "time",
+          "id": "data_set_time_metabolite_concentrations",
+          "label": "Time",
           "value": {
             "0": 0,
             "1000": 1000
@@ -710,7 +710,7 @@
       "id": "simulation.sedml/reaction_fluxes",
       "dataSets": [
         {
-          "id": "data_set_time",
+          "id": "data_set_time_reaction_fluxes",
           "label": "Time"
         },
         {
@@ -1291,8 +1291,8 @@
       ],
       "values": [
         {
-          "id": "data_set_time",
-          "label": "time",
+          "id": "data_set_time_reaction_fluxes",
+          "label": "Time",
           "value": {
             "0": 0,
             "1000": 1000
