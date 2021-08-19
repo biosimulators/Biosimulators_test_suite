@@ -66,7 +66,7 @@ class TestCaseResult(object):
             :obj:`dict`: dictionary representation
         """
         log = self.log
-        if max_log_len is not None and len(log) > max_log_len:
+        if max_log_len is not None and log and len(log) > max_log_len:
             log = log[0:max_log_len - 1] + ' ...'
 
         return {
