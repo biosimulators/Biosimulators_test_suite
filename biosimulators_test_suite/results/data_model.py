@@ -56,12 +56,19 @@ class TestCaseResult(object):
         self.skip_reason = skip_reason
         self.log = log
 
-    def to_dict(self):
+    def to_dict(self, max_log_len=None):
         """ Generate a dictionary representation e.g., for export to JSON
+
+        Args:
+            max_log_len (:obj:`int`, optional): maximum log length
 
         Returns:
             :obj:`dict`: dictionary representation
         """
+        log = self.log
+        if max_log_len is not None and len(log) > max_log_len:
+            log = log[0:max_log_len - 1] + ' ...'
+
         return {
             'case': {
                 'id': self.case.id,
@@ -79,7 +86,7 @@ class TestCaseResult(object):
                 'category': self.skip_reason.__class__.__name__,
                 'message': str(self.skip_reason),
             } if self.skip_reason else None,
-            'log': self.log,
+            'log': log,
         }
 
 
@@ -106,15 +113,18 @@ class TestResultsReport(object):
         self.gh_issue = gh_issue
         self.gh_action_run = gh_action_run
 
-    def to_dict(self):
+    def to_dict(self, max_log_len=None):
         """ Generate a dictionary representation e.g., for export to JSON
+
+        Args:
+            max_log_len (:obj:`int`, optional): maximum log length
 
         Returns:
             :obj:`dict`: dictionary representation
         """
         return {
             'testSuiteVersion': self.test_suite_version,
-            'results': [result.to_dict() for result in self.results],
+            'results': [result.to_dict(max_log_len=max_log_len) for result in self.results],
             'ghIssue': self.gh_issue,
             'ghActionRun': self.gh_action_run,
         }

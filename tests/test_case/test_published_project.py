@@ -36,7 +36,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             'algorithms': [
                 {
                     'kisaoId': {'id': 'KISAO_0000019'},
-                    'modelFormats': [{'id': 'format_2585'}],
+                    'modelFormats': [{'id': 'format_2585', 'supportedFeatures': []}],
                 }
             ]
         })
@@ -50,7 +50,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
                 'algorithms': [
                     {
                         'kisaoId': {'id': 'KISAO_0000019'},
-                        'modelFormats': [{'id': 'format_2585'}],
+                        'modelFormats': [{'id': 'format_2585', 'supportedFeatures': []}],
                     }
                 ]
             }, dir_name='does_not_exist')
@@ -152,7 +152,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
         specs = {
             'algorithms': [{
                 'kisaoId': {'id': 'KISAO_0000019'},
-                'modelFormats': [{'id': 'format_2584'}],
+                'modelFormats': [{'id': 'format_2584', 'supportedFeatures': []}],
             }],
         }
         with self.assertRaisesRegex(SkippedTestCaseException, 'requires'):
@@ -161,7 +161,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
         specs = {
             'algorithms': [{
                 'kisaoId': {'id': 'KISAO_0000018'},
-                'modelFormats': [{'id': 'format_2585'}],
+                'modelFormats': [{'id': 'format_2585', 'supportedFeatures': []}],
             }],
         }
         with self.assertRaisesRegex(SkippedTestCaseException, 'requires'):
@@ -174,7 +174,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             },
             'algorithms': [{
                 'kisaoId': {'id': 'KISAO_0000019'},
-                'modelFormats': [{'id': 'format_2585'}],
+                'modelFormats': [{'id': 'format_2585', 'supportedFeatures': []}],
             }],
         }
         exec_archive_method = 'biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator'

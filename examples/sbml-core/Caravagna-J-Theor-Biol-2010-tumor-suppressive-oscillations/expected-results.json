@@ -3,6 +3,7 @@
   "filename": "Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex",
   "taskRequirements": [{
     "modelFormat": "format_2585",
+    "modelFormatFeatures": [],
     "simulationAlgorithm": "KISAO_0000019"
   }],
   "expectedReports": [{

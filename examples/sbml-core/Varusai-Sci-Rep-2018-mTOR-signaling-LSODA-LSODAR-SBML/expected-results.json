@@ -3,6 +3,7 @@
   "filename": "Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML.omex",
   "taskRequirements": [{
     "modelFormat": "format_2585",
+    "modelFormatFeatures": [],
     "simulationAlgorithm": "KISAO_0000560"
   }],
   "expectedReports": [{

@@ -441,7 +441,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             specifications['biosimulators']['validated'] = True
             specifications['biosimulators']['validationTests'] = TestResultsReport(
                 results=test_results, gh_issue=int(self.issue_number), gh_action_run=int(self.get_gh_action_run_id()),
-            ).to_dict()
+            ).to_dict(max_log_len=2**16)
 
         else:
             specifications['biosimulators']['validated'] = False

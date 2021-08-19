@@ -88,16 +88,21 @@ class SedTaskRequirements(object):
 
     Attributes:
         model_format (:obj:`str`): EDAM id for the format of the model involved in the task
+        model_format_features (:obj:`set` of :obj:`str`): model format features required to execute the task
+                such as SBML packages
         simulation_algorithm (:obj:`str`): KiSAO id for the simulation algorithm involved in the task
     """
 
-    def __init__(self, model_format=None, simulation_algorithm=None):
+    def __init__(self, model_format=None, model_format_features=None, simulation_algorithm=None):
         """
         Args:
             model_format (:obj:`str`, optional): EDAM id for the format of the model involved in the task
+            model_format_features (:obj:`set` of :obj:`str`, optional): model format features required to execute the task
+                such as SBML packages
             simulation_algorithm (:obj:`str`, optional): KiSAO id for the simulation algorithm involved in the task
         """
         self.model_format = model_format
+        self.model_format_features = model_format_features or set()
         self.simulation_algorithm = simulation_algorithm
 
 

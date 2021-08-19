@@ -3,6 +3,7 @@
   "filename": "test-bngl.omex",
   "taskRequirements": [{
     "modelFormat": "format_3972",
+    "modelFormatFeatures": [],
     "simulationAlgorithm": "KISAO_0000019"
   }],
   "expectedReports": [{

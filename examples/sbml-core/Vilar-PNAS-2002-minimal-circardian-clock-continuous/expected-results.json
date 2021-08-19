@@ -3,10 +3,12 @@
   "filename": "Vilar-PNAS-2002-minimal-circardian-clock-continuous.omex",
   "taskRequirements": [{
       "modelFormat": "format_2585",
+      "modelFormatFeatures": [],
       "simulationAlgorithm": "KISAO_0000019"
     },
     {
       "modelFormat": "format_2585",
+      "modelFormatFeatures": [],
       "simulationAlgorithm": "KISAO_0000030"
     }
   ],
