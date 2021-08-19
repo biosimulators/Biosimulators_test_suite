@@ -3,6 +3,7 @@
   "filename": "Tomida-EMBO-J-2003-NFAT-translocation.omex",
   "taskRequirements": [{
     "modelFormat": "format_2585",
+    "modelFormatFeatures": [],
     "simulationAlgorithm": "KISAO_0000560"
   }],
   "expectedReports": [{

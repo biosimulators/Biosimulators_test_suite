@@ -3,6 +3,7 @@
   "filename": "Wu-Biochem-Pharmacol-2006-pituitary-GH3-cells.omex",
   "taskRequirements": [{
     "modelFormat": "format_9010",
+    "modelFormatFeatures": [],
     "simulationAlgorithm": "KISAO_0000019"
   }],
   "expectedReports": [{

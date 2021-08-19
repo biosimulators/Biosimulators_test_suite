@@ -4,6 +4,7 @@
   "taskRequirements": [
     {
       "modelFormat": "format_2585",
+      "modelFormatFeatures": ["fbc", "groups", "mass"],
       "simulationAlgorithm": "KISAO_0000019"
     }
   ],

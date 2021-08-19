@@ -3,6 +3,7 @@
   "filename": "Escherichia-coli-core-metabolism.omex",
   "taskRequirements": [{
     "modelFormat": "format_2585",
+    "modelFormatFeatures": ["fbc"],
     "simulationAlgorithm": "KISAO_0000437"
   }],
   "expectedReports": [{

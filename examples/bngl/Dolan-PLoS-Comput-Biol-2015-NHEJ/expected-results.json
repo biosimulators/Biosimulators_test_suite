@@ -3,6 +3,7 @@
   "filename": "Dolan-PLoS-Comput-Biol-2015-NHEJ.omex",
   "taskRequirements": [{
     "modelFormat": "format_3972",
+    "modelFormatFeatures": [],
     "simulationAlgorithm": "KISAO_0000263"
   }],
   "expectedReports": [{

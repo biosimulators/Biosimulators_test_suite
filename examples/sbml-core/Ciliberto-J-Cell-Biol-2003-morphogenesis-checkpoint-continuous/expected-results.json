@@ -3,6 +3,7 @@
   "filename": "Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex",
   "taskRequirements": [{
     "modelFormat": "format_2585",
+    "modelFormatFeatures": [],
     "simulationAlgorithm": "KISAO_0000019"
   }],
   "expectedReports": [{

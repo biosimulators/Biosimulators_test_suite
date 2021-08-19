@@ -3,6 +3,7 @@
   "filename": "Parmar-BMC-Syst-Biol-2017-iron-distribution.omex",
   "taskRequirements": [{
     "modelFormat": "format_2585",
+    "modelFormatFeatures": [],
     "simulationAlgorithm": "KISAO_000019"
   }],
   "expectedReports": [{

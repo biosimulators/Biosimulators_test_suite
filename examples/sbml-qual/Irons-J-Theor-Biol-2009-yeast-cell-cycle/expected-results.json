@@ -3,6 +3,7 @@
   "filename": "Irons-J-Theor-Biol-2009-yeast-cell-cycle.omex",
   "taskRequirements": [{
     "modelFormat": "format_2585",
+    "modelFormatFeatures": ["qual"],
     "simulationAlgorithm": "KISAO_0000449"
   }],
   "expectedReports": [{

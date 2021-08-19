@@ -3,6 +3,7 @@
   "filename": "Chaouiya-BMC-Syst-Biol-2013-EGF-TNFa-signaling.omex",
   "taskRequirements": [{
     "modelFormat": "format_2585",
+    "modelFormatFeatures": ["qual"],
     "simulationAlgorithm": "KISAO_0000449"
   }],
   "expectedReports": [{

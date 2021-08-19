@@ -3,6 +3,7 @@
   "filename": "Vilar-PNAS-2002-minimal-circardian-clock-discrete-SSA.omex",
   "taskRequirements": [{
     "modelFormat": "format_2585",
+    "modelFormatFeatures": [],
     "simulationAlgorithm": "KISAO_0000029"
   }],
   "expectedReports": [{

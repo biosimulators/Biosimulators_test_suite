@@ -182,6 +182,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
         for task_req_def in data['taskRequirements']:
             self.task_requirements.append(SedTaskRequirements(
                 model_format=task_req_def['modelFormat'],
+                model_format_features=set(task_req_def.get('modelFormatFeatures', [])),
                 simulation_algorithm=task_req_def['simulationAlgorithm'],
             ))
 
@@ -257,8 +258,18 @@ class SimulatorCanExecutePublishedProject(TestCase):
         for task_reqs in self.task_requirements:
             reqs_satisfied = False
             for alg_specs in specifications['algorithms']:
-                if (task_reqs.model_format in set(format['id'] for format in alg_specs['modelFormats'])
-                        and task_reqs.simulation_algorithm == alg_specs['kisaoId']['id']):
+                format_reqs_satisfied = False
+                for format in alg_specs['modelFormats']:
+                    if (
+                        task_reqs.model_format == format['id']
+                        and task_reqs.model_format_features == set(format.get('supportedFeatures', []) or [])
+                    ):
+                        format_reqs_satisfied = True
+                        break
+                if not format_reqs_satisfied:
+                    break
+
+                if task_reqs.simulation_algorithm == alg_specs['kisaoId']['id']:
                     reqs_satisfied = True
                     break
 

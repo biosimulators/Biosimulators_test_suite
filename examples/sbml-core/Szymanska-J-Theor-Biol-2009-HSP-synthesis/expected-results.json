@@ -3,6 +3,7 @@
   "filename": "Szymanska-J-Theor-Biol-2009-HSP-synthesis.omex",
   "taskRequirements": [{
     "modelFormat": "format_2585",
+    "modelFormatFeatures": [],
     "simulationAlgorithm": "KISAO_0000496"
   }],
   "expectedReports": [{
