@@ -27,26 +27,6 @@
         </listOfAlgorithmParameters>
       </algorithm>
     </uniformTimeCourse>
-    <uniformTimeCourse id="Euler_default" name="Euler default" initialTime="0.0" outputStartTime="0.0" outputEndTime="200.0" numberOfPoints="1000">
-      <notes>
-        <p xmlns="http://www.w3.org/1999/xhtml">Actual Solver Name : 'Forward Euler (First Order, Fixed Time Step)'.</p>
-      </notes>
-      <algorithm kisaoID="KISAO:0000030">
-        <listOfAlgorithmParameters>
-          <algorithmParameter kisaoID="KISAO:0000483" value="0.1" />
-        </listOfAlgorithmParameters>
-      </algorithm>
-    </uniformTimeCourse>
-    <uniformTimeCourse id="Euler_small_step_size" name="Euler small step size" initialTime="0.0" outputStartTime="0.0" outputEndTime="200.0" numberOfPoints="1000">
-      <notes>
-        <p xmlns="http://www.w3.org/1999/xhtml">Actual Solver Name : 'Forward Euler (First Order, Fixed Time Step)'.</p>
-      </notes>
-      <algorithm kisaoID="KISAO:0000030">
-        <listOfAlgorithmParameters>
-          <algorithmParameter kisaoID="KISAO:0000483" value="0.001" />
-        </listOfAlgorithmParameters>
-      </algorithm>
-    </uniformTimeCourse>
   </listOfSimulations>
   <listOfModels>
     <model id="ODE_deterministic" name="ODE deterministic" language="urn:sedml:language:sbml" source="model_ODE_deterministic.xml" />
@@ -59,8 +39,6 @@
   <listOfTasks>
     <task id="tsk_0_0" name="tsk_0_0" modelReference="ODE_deterministic" simulationReference="Fig_1a" />
     <task id="tsk_0_1" name="tsk_0_1" modelReference="ODE_deterministic_0" simulationReference="low_delta_R_det" />
-    <task id="tsk_0_2" name="tsk_0_2" modelReference="ODE_deterministic" simulationReference="Euler_default" />
-    <task id="tsk_0_3" name="tsk_0_3" modelReference="ODE_deterministic" simulationReference="Euler_small_step_size" />
   </listOfTasks>
   <listOfDataGenerators>
     <dataGenerator id="time_tsk_0_0" name="time_tsk_0_0">
@@ -223,166 +201,6 @@
         <math:ci>var_tsk_0_1_mRNA_A_</math:ci>
       </math:math>
     </dataGenerator>
-    <dataGenerator id="time_tsk_0_2" name="time_tsk_0_2">
-      <listOfVariables>
-        <variable id="var_tsk_0_2_t" name="t" taskReference="tsk_0_2" symbol="urn:sedml:symbol:time" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_2_t</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_2_mRNA_R" name="dataGen_tsk_0_2_mRNA_R">
-      <listOfVariables>
-        <variable id="var_tsk_0_2_mRNA_R" name="mRNA_R" taskReference="tsk_0_2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='mRNA_R']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_2_mRNA_R</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_2_A" name="dataGen_tsk_0_2_A">
-      <listOfVariables>
-        <variable id="var_tsk_0_2_A" name="A" taskReference="tsk_0_2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='A']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_2_A</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_2_R" name="dataGen_tsk_0_2_R">
-      <listOfVariables>
-        <variable id="var_tsk_0_2_R" name="R" taskReference="tsk_0_2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='R']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_2_R</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_2_PrmA" name="dataGen_tsk_0_2_PrmA">
-      <listOfVariables>
-        <variable id="var_tsk_0_2_PrmA" name="PrmA" taskReference="tsk_0_2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PrmA']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_2_PrmA</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_2_PrmR" name="dataGen_tsk_0_2_PrmR">
-      <listOfVariables>
-        <variable id="var_tsk_0_2_PrmR" name="PrmR" taskReference="tsk_0_2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PrmR']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_2_PrmR</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_2_C" name="dataGen_tsk_0_2_C">
-      <listOfVariables>
-        <variable id="var_tsk_0_2_C" name="C" taskReference="tsk_0_2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='C']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_2_C</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_2_PrmA_bound" name="dataGen_tsk_0_2_PrmA_bound">
-      <listOfVariables>
-        <variable id="var_tsk_0_2_PrmA_bound" name="PrmA_bound" taskReference="tsk_0_2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PrmA_bound']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_2_PrmA_bound</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_2_PrmR_bound" name="dataGen_tsk_0_2_PrmR_bound">
-      <listOfVariables>
-        <variable id="var_tsk_0_2_PrmR_bound" name="PrmR_bound" taskReference="tsk_0_2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PrmR_bound']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_2_PrmR_bound</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_2_mRNA_A_" name="dataGen_tsk_0_2_mRNA_A_">
-      <listOfVariables>
-        <variable id="var_tsk_0_2_mRNA_A_" name="mRNA_A_" taskReference="tsk_0_2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='mRNA_A_']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_2_mRNA_A_</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="time_tsk_0_3" name="time_tsk_0_3">
-      <listOfVariables>
-        <variable id="var_tsk_0_3_t" name="t" taskReference="tsk_0_3" symbol="urn:sedml:symbol:time" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_3_t</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_3_mRNA_R" name="dataGen_tsk_0_3_mRNA_R">
-      <listOfVariables>
-        <variable id="var_tsk_0_3_mRNA_R" name="mRNA_R" taskReference="tsk_0_3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='mRNA_R']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_3_mRNA_R</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_3_A" name="dataGen_tsk_0_3_A">
-      <listOfVariables>
-        <variable id="var_tsk_0_3_A" name="A" taskReference="tsk_0_3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='A']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_3_A</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_3_R" name="dataGen_tsk_0_3_R">
-      <listOfVariables>
-        <variable id="var_tsk_0_3_R" name="R" taskReference="tsk_0_3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='R']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_3_R</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_3_PrmA" name="dataGen_tsk_0_3_PrmA">
-      <listOfVariables>
-        <variable id="var_tsk_0_3_PrmA" name="PrmA" taskReference="tsk_0_3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PrmA']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_3_PrmA</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_3_PrmR" name="dataGen_tsk_0_3_PrmR">
-      <listOfVariables>
-        <variable id="var_tsk_0_3_PrmR" name="PrmR" taskReference="tsk_0_3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PrmR']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_3_PrmR</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_3_C" name="dataGen_tsk_0_3_C">
-      <listOfVariables>
-        <variable id="var_tsk_0_3_C" name="C" taskReference="tsk_0_3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='C']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_3_C</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_3_PrmA_bound" name="dataGen_tsk_0_3_PrmA_bound">
-      <listOfVariables>
-        <variable id="var_tsk_0_3_PrmA_bound" name="PrmA_bound" taskReference="tsk_0_3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PrmA_bound']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_3_PrmA_bound</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_3_PrmR_bound" name="dataGen_tsk_0_3_PrmR_bound">
-      <listOfVariables>
-        <variable id="var_tsk_0_3_PrmR_bound" name="PrmR_bound" taskReference="tsk_0_3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='PrmR_bound']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_3_PrmR_bound</math:ci>
-      </math:math>
-    </dataGenerator>
-    <dataGenerator id="dataGen_tsk_0_3_mRNA_A_" name="dataGen_tsk_0_3_mRNA_A_">
-      <listOfVariables>
-        <variable id="var_tsk_0_3_mRNA_A_" name="mRNA_A_" taskReference="tsk_0_3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='mRNA_A_']" />
-      </listOfVariables>
-      <math:math xmlns:math="http://www.w3.org/1998/Math/MathML">
-        <math:ci>var_tsk_0_3_mRNA_A_</math:ci>
-      </math:math>
-    </dataGenerator>
   </listOfDataGenerators>
   <listOfOutputs>
     <report id="report_Fig_1a">
@@ -417,40 +235,6 @@
         <dataSet id="dataSet_1_6" label="dataSet_6" dataReference="dataGen_tsk_0_1_PrmA_bound" />
         <dataSet id="dataSet_1_7" label="dataSet_7" dataReference="dataGen_tsk_0_1_PrmR_bound" />
         <dataSet id="dataSet_1_8" label="dataSet_8" dataReference="dataGen_tsk_0_1_mRNA_A_" />
-      </listOfDataSets>
-    </report>
-    <report id="report_Euler_default">
-      <notes>
-        <p xmlns="http://www.w3.org/1999/xhtml">All variables and output functions from application 'ODE deterministic' ; simulation 'Euler default' in VCell model</p>
-      </notes>
-      <listOfDataSets>
-        <dataSet id="dataSet_2_time" label="dataSet_time" dataReference="time_tsk_0_2" />
-        <dataSet id="dataSet_2_0" label="dataSet_0" dataReference="dataGen_tsk_0_2_mRNA_R" />
-        <dataSet id="dataSet_2_1" label="dataSet_1" dataReference="dataGen_tsk_0_2_A" />
-        <dataSet id="dataSet_2_2" label="dataSet_2" dataReference="dataGen_tsk_0_2_R" />
-        <dataSet id="dataSet_2_3" label="dataSet_3" dataReference="dataGen_tsk_0_2_PrmA" />
-        <dataSet id="dataSet_2_4" label="dataSet_4" dataReference="dataGen_tsk_0_2_PrmR" />
-        <dataSet id="dataSet_2_5" label="dataSet_5" dataReference="dataGen_tsk_0_2_C" />
-        <dataSet id="dataSet_2_6" label="dataSet_6" dataReference="dataGen_tsk_0_2_PrmA_bound" />
-        <dataSet id="dataSet_2_7" label="dataSet_7" dataReference="dataGen_tsk_0_2_PrmR_bound" />
-        <dataSet id="dataSet_2_8" label="dataSet_8" dataReference="dataGen_tsk_0_2_mRNA_A_" />
-      </listOfDataSets>
-    </report>
-    <report id="report_Euler_small_step_size">
-      <notes>
-        <p xmlns="http://www.w3.org/1999/xhtml">All variables and output functions from application 'ODE deterministic' ; simulation 'Euler small step size' in VCell model</p>
-      </notes>
-      <listOfDataSets>
-        <dataSet id="dataSet_3_time" label="dataSet_time" dataReference="time_tsk_0_3" />
-        <dataSet id="dataSet_3_0" label="dataSet_0" dataReference="dataGen_tsk_0_3_mRNA_R" />
-        <dataSet id="dataSet_3_1" label="dataSet_1" dataReference="dataGen_tsk_0_3_A" />
-        <dataSet id="dataSet_3_2" label="dataSet_2" dataReference="dataGen_tsk_0_3_R" />
-        <dataSet id="dataSet_3_3" label="dataSet_3" dataReference="dataGen_tsk_0_3_PrmA" />
-        <dataSet id="dataSet_3_4" label="dataSet_4" dataReference="dataGen_tsk_0_3_PrmR" />
-        <dataSet id="dataSet_3_5" label="dataSet_5" dataReference="dataGen_tsk_0_3_C" />
-        <dataSet id="dataSet_3_6" label="dataSet_6" dataReference="dataGen_tsk_0_3_PrmA_bound" />
-        <dataSet id="dataSet_3_7" label="dataSet_7" dataReference="dataGen_tsk_0_3_PrmR_bound" />
-        <dataSet id="dataSet_3_8" label="dataSet_8" dataReference="dataGen_tsk_0_3_mRNA_A_" />
       </listOfDataSets>
     </report>
 
@@ -491,38 +275,6 @@
         <curve id="plot2d_low_delta_R_det_curve_6" name="curve_6" logX="false" logY="false" xDataReference="time_tsk_0_1" yDataReference="dataGen_tsk_0_1_PrmA_bound" />
         <curve id="plot2d_low_delta_R_det_curve_7" name="curve_7" logX="false" logY="false" xDataReference="time_tsk_0_1" yDataReference="dataGen_tsk_0_1_PrmR_bound" />
         <curve id="plot2d_low_delta_R_det_curve_8" name="curve_8" logX="false" logY="false" xDataReference="time_tsk_0_1" yDataReference="dataGen_tsk_0_1_mRNA_A_" />
-      </listOfCurves>
-    </plot2D>
-    <plot2D id="plot2d_Euler_default" name="ODE deterministicplots">
-      <notes>
-        <p xmlns="http://www.w3.org/1999/xhtml">Plot of all variables and output functions from application 'ODE deterministic' ; simulation 'Euler default' in VCell model</p>
-      </notes>
-      <listOfCurves>
-        <curve id="plot2d_Euler_default_curve_0" name="curve_0" logX="false" logY="false" xDataReference="time_tsk_0_2" yDataReference="dataGen_tsk_0_2_mRNA_R" />
-        <curve id="plot2d_Euler_default_curve_1" name="curve_1" logX="false" logY="false" xDataReference="time_tsk_0_2" yDataReference="dataGen_tsk_0_2_A" />
-        <curve id="plot2d_Euler_default_curve_2" name="curve_2" logX="false" logY="false" xDataReference="time_tsk_0_2" yDataReference="dataGen_tsk_0_2_R" />
-        <curve id="plot2d_Euler_default_curve_3" name="curve_3" logX="false" logY="false" xDataReference="time_tsk_0_2" yDataReference="dataGen_tsk_0_2_PrmA" />
-        <curve id="plot2d_Euler_default_curve_4" name="curve_4" logX="false" logY="false" xDataReference="time_tsk_0_2" yDataReference="dataGen_tsk_0_2_PrmR" />
-        <curve id="plot2d_Euler_default_curve_5" name="curve_5" logX="false" logY="false" xDataReference="time_tsk_0_2" yDataReference="dataGen_tsk_0_2_C" />
-        <curve id="plot2d_Euler_default_curve_6" name="curve_6" logX="false" logY="false" xDataReference="time_tsk_0_2" yDataReference="dataGen_tsk_0_2_PrmA_bound" />
-        <curve id="plot2d_Euler_default_curve_7" name="curve_7" logX="false" logY="false" xDataReference="time_tsk_0_2" yDataReference="dataGen_tsk_0_2_PrmR_bound" />
-        <curve id="plot2d_Euler_default_curve_8" name="curve_8" logX="false" logY="false" xDataReference="time_tsk_0_2" yDataReference="dataGen_tsk_0_2_mRNA_A_" />
-      </listOfCurves>
-    </plot2D>
-    <plot2D id="plot2d_Euler_small_step_size" name="ODE deterministicplots">
-      <notes>
-        <p xmlns="http://www.w3.org/1999/xhtml">Plot of all variables and output functions from application 'ODE deterministic' ; simulation 'Euler small step size' in VCell model</p>
-      </notes>
-      <listOfCurves>
-        <curve id="plot2d_Euler_small_step_size_curve_0" name="curve_0" logX="false" logY="false" xDataReference="time_tsk_0_3" yDataReference="dataGen_tsk_0_3_mRNA_R" />
-        <curve id="plot2d_Euler_small_step_size_curve_1" name="curve_1" logX="false" logY="false" xDataReference="time_tsk_0_3" yDataReference="dataGen_tsk_0_3_A" />
-        <curve id="plot2d_Euler_small_step_size_curve_2" name="curve_2" logX="false" logY="false" xDataReference="time_tsk_0_3" yDataReference="dataGen_tsk_0_3_R" />
-        <curve id="plot2d_Euler_small_step_size_curve_3" name="curve_3" logX="false" logY="false" xDataReference="time_tsk_0_3" yDataReference="dataGen_tsk_0_3_PrmA" />
-        <curve id="plot2d_Euler_small_step_size_curve_4" name="curve_4" logX="false" logY="false" xDataReference="time_tsk_0_3" yDataReference="dataGen_tsk_0_3_PrmR" />
-        <curve id="plot2d_Euler_small_step_size_curve_5" name="curve_5" logX="false" logY="false" xDataReference="time_tsk_0_3" yDataReference="dataGen_tsk_0_3_C" />
-        <curve id="plot2d_Euler_small_step_size_curve_6" name="curve_6" logX="false" logY="false" xDataReference="time_tsk_0_3" yDataReference="dataGen_tsk_0_3_PrmA_bound" />
-        <curve id="plot2d_Euler_small_step_size_curve_7" name="curve_7" logX="false" logY="false" xDataReference="time_tsk_0_3" yDataReference="dataGen_tsk_0_3_PrmR_bound" />
-        <curve id="plot2d_Euler_small_step_size_curve_8" name="curve_8" logX="false" logY="false" xDataReference="time_tsk_0_3" yDataReference="dataGen_tsk_0_3_mRNA_A_" />
       </listOfCurves>
     </plot2D>
   </listOfOutputs>
