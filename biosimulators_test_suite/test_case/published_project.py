@@ -1024,6 +1024,11 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
             doc.outputs = [key_report]
             key_report.data_sets = [data_set for data_set in key_report.data_sets if data_set.data_generator in doc.data_generators]
 
+            # limit number of data set
+            max_data_sets = 10
+            key_report.data_sets = key_report.data_sets[0:max_data_sets]
+            doc.data_generators = [data_set.data_generator for data_set in key_report.data_sets]
+
         curated_sed_docs = {
             doc_content.location: doc,
         }
