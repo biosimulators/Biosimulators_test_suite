@@ -29,12 +29,12 @@
       {"id": "data_set_SBF", "label": "SBF"},
       {"id": "data_set_Sic", "label": "Sic1"},
       {"id": "data_set_Swe1", "label": "Swe1"},
-      {"id": "data_set_Swe1", "label": "Total Swe1"}
+      {"id": "data_set_Swe1T", "label": "Total Swe1"}
     ],
     "points": [201],
     "values": [{
       "id": "data_set_time",
-      "label": "time",
+      "label": "Time (min)",
       "value": {
         "0": 0.0,
         "1": 0.7,

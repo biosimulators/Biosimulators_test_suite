@@ -19,7 +19,7 @@ The test suite is composed of two parts:
     * Simulation tools support the [BioSimulators conventions for the outputs of SED-ML files in COMBINE/OMEX archives](https://biosimulators.org/conventions/simulation-reports).
 
 ## Installation instructions, tutorial, and API documentation
-Installation instructions, tutorial, and API documentation are available [here](https://biosimulators.github.io/Biosimulators_test_suite/).
+Installation instructions, tutorial, and API documentation are available [here](https://docs.biosimulators.org/Biosimulators_test_suite/).
 
 ## License
 The software in this package is released under the [MIT License](LICENSE). The modeling projects in this package are released under the [Creative Commons 1.0 Universal (CC0) license](LICENSE-DATA).

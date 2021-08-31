@@ -24,7 +24,7 @@
     "points": [2001],
     "values": [{
       "id": "data_set_time",
-      "label": "time",
+      "label": "Time",
       "value": {
         "0": 0,
         "1": 0.01,
