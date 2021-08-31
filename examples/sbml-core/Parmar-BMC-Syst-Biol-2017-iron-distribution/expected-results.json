@@ -36,7 +36,7 @@
     "points": [301],
     "values": [{
       "id": "data_set_time",
-      "label": "time",
+      "label": "Time (days)",
       "value": {
         "0": 0.0,
         "300": 5100.0

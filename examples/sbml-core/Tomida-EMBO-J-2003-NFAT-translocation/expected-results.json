@@ -18,7 +18,7 @@
     "points": [1001],
     "values": [{
       "id": "data_set_time",
-      "label": "time",
+      "label": "Time (min)",
       "value": {
         "0": 0.0,
         "1000": 80

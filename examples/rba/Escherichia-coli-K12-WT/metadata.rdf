@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rdf:RDF
+  xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"
+  xmlns:bqmodel="http://biomodels.net/model-qualifiers/"
+  xmlns:collex="http://www.collex.org/schema#"
+  xmlns:dc="http://dublincore.org/specifications/dublin-core/dcmi-terms/"
+  xmlns:dcterms='http://purl.org/dc/terms/'
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/"
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  >
+  <rdf:Description rdf:about='http://omex-libary.org/Escherichia-coli-K12-WT.omex'>
+    <dc:title>Escherichia coli K-12 resource allocation (Bulović et al., Metab Eng, 2019)</dc:title>
+
+    <dc:abstract>A Resource Balance Analysis (RBA) model of wildtype Escherichia coli K-12.</dc:abstract>
+
+    <prism:keyword>metabolism</prism:keyword>
+    <prism:keyword>resource balance allocation</prism:keyword>
+    <prism:keyword>resource balance analysis</prism:keyword>
+    <prism:keyword>RBA</prism:keyword>
+
+    <collex:thumbnail rdf:resource="http://omex-libary.org/Escherichia-coli-K12-WT.omex/FigureS13.jpg"/>
+
+    <!-- taxon -->
+    <bqbiol:hasTaxon>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/83333"/>
+        <rdfs:label>Escherichia coli K-12</rdfs:label>
+      </rdf:Description>
+    </bqbiol:hasTaxon>
+
+    <!-- ancestor(s) of this work -->
+    <bqmodel:isDerivedFrom>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1038/msb.2011.65"/>
+        <rdfs:label>Jeffrey D Orth, Tom M Conrad, Jessica Na, Joshua A Lerman, Hojung Nam, Adam M Feist &amp; Bernhard Ø Palsson. A comprehensive genome-scale reconstruction of Escherichia coli metabolism—2011. Molecular Systems Biology 7 (2011): 535.</rdfs:label>
+      </rdf:Description>
+    </bqmodel:isDerivedFrom>
+
+    <!-- other identifiers -->
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://github.com/SysBioInra/Bacterial-RBA-models/tree/master/Escherichia-coli-K12-WT"/>
+        <rdfs:label>github:SysBioInra/Bacterial-RBA-models/tree/master/Escherichia-coli-K12-WT</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+
+    <!-- authors -->
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Ana Bulović</foaf:name>
+        <rdfs:label>Ana Bulović</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Stephan Fischer</foaf:name>
+        <rdfs:label>Stephan Fischer</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Marc Dinh</foaf:name>
+        <rdfs:label>Marc Dinh</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Felipe Golib</foaf:name>
+        <rdfs:label>Felipe Golib</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Wolfram Liebermeister</foaf:name>
+        <rdfs:label>Wolfram Liebermeister</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Christian Poirier</foaf:name>
+        <rdfs:label>Christian Poirier</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Laurent Tournier</foaf:name>
+        <rdfs:label>Laurent Tournier</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Edda Klipp</foaf:name>
+        <rdfs:label>Edda Klipp</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Vincent Fromion</foaf:name>
+        <rdfs:label>Vincent Fromion</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <dc:creator>
+      <rdf:Description>
+        <foaf:name>Anne Goelzer</foaf:name>
+        <rdfs:label>Anne Goelzer</rdfs:label>
+      </rdf:Description>
+    </dc:creator>
+
+    <!-- contributors (e.g., curators) -->
+    <dc:contributor>
+      <rdf:Description>
+        <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080"/>
+        <foaf:name>Jonathan Karr</foaf:name>
+
+        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080"/>
+        <rdfs:label>Jonathan Karr</rdfs:label>
+      </rdf:Description>
+    </dc:contributor>
+
+     <!-- citations -->
+    <bqmodel:isDescribedBy>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.ymben.2019.06.001"/>
+        <rdfs:label>Ana Bulović, Stephan Fischer, Marc Dinh, Felipe Golib, Wolfram Liebermeister, Christian Poirier, Laurent Tournier, Edda Klipp, Vincent Fromion &amp; Anne Goelzer. Automated generation of bacterial resource allocation models. Metabolic Engineering 55 (2019): 12-22.</rdfs:label>
+      </rdf:Description>
+    </bqmodel:isDescribedBy>
+
+    <!-- license -->
+    <dc:license>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/spdx:GPL-3.0-or-later"/>
+        <rdfs:label>GPL-3.0-or-later</rdfs:label>
+      </rdf:Description>
+    </dc:license>
+
+    <!-- created -->
+    <dc:created>
+      <rdf:Description>
+        <dc:W3CDTF>2019-06-19</dc:W3CDTF>
+      </rdf:Description>
+    </dc:created>
+
+    <!-- modified -->
+    <dc:modified>
+      <dcterms:W3CDTF>
+        <rdf:value>2021-08-28</rdf:value>
+      </dcterms:W3CDTF>
+    </dc:modified>
+  </rdf:Description>
+
+  <!-- links from SED-ML plots to figures of articles -->
+  <rdf:Description rdf:about="http://omex-libary.org/Escherichia-coli-K12-WT.omex/flux-map.vega.json">
+    <bqmodel:is>
+      <rdf:Description>
+        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.ymben.2019.06.001"/>
+        <rdfs:label>Figure S13</rdfs:label>
+      </rdf:Description>
+    </bqmodel:is>
+  </rdf:Description>
+</rdf:RDF>

@@ -39,7 +39,7 @@
     "points": [601],
     "values": [{
       "id": "data_set_time",
-      "label": "time",
+      "label": "Time",
       "value": {
         "0": 400,
         "1": 401,

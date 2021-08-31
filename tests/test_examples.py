@@ -64,9 +64,24 @@ class ExamplesTestCase(unittest.TestCase):
                     report_results = ReportReader().run(report, example_base_dir, expected_report['id'], format=ReportFormat.h5)
 
                 self.assertEqual(set(report_results.keys()), set([data_set.id for data_set in report.data_sets]))
+                self.assertEqual(set(report_results.keys()), set([data_set['id'] for data_set in expected_report['dataSets']]))
+                expected_data_set_id_labels = {data_set['id']: data_set['label'] for data_set in expected_report['dataSets']}
+                data_set_id_labels = {data_set.id: data_set.label for data_set in report.data_sets}
+                self.assertEqual(data_set_id_labels, expected_data_set_id_labels)
+
                 self.assertEqual(report_results[report.data_sets[0].id].shape, tuple(expected_report['points']))
                 for data_set_result in report_results.values():
                     self.assertFalse(numpy.any(numpy.isnan(data_set_result)))
+
+                for expected_data_set_value in expected_report['values']:
+                    self.assertEqual(expected_data_set_value['label'], expected_data_set_id_labels[expected_data_set_value['id']])
+                    expected_value = expected_data_set_value['value']
+                    value = report_results[expected_data_set_value['id']]
+                    if isinstance(expected_value, dict):
+                        for idx in expected_value.keys():
+                            numpy.testing.assert_allclose(value[int(idx)], expected_value[idx])
+                    else:
+                        numpy.testing.assert_allclose(value, expected_value)
 
                 with h5py.File(os.path.join(example_base_dir, report_path), 'r') as file:
                     group_ids = expected_report['id'].split(os.path.sep)[0:-1]
