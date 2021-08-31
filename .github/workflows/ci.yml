@@ -86,7 +86,9 @@ jobs:
 
       # install package
       - name: Install the package
-        run: python -m pip install .[all]
+        run: |
+          python -m pip install git+https://github.com/biosimulators/RBApy.git#egg=rba
+          python -m pip install .[all]
 
       # zip COMBINE/OMEX archives
       - name: Zip COMBINE/OMEX archives
