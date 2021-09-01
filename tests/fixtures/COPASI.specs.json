@@ -12,6 +12,10 @@
     },
     "operatingSystemType": "Linux"
   },
+  "pythonApi": {
+    "package": "biosimulators-copasi",
+    "module": "biosimulators_copasi"
+  },
   "authors": [{
       "firstName": "Frank",
       "middleName": "T.",
