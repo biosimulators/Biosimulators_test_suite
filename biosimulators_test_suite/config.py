@@ -203,7 +203,7 @@ class Config(object):
             self.runbiosimulations_api_endpoint = runbiosimulations_api_endpoint
 
         if test_case_timeout is None:
-            self.test_case_timeout = int(os.getenv('TEST_CASE_TIMEOUT', '300'))  # 300 seconds
+            self.test_case_timeout = int(os.getenv('TEST_CASE_TIMEOUT', '600'))  # seconds
         else:
             self.test_case_timeout = test_case_timeout
 
