@@ -6,6 +6,7 @@
     "modelFormatFeatures": ["fbc"],
     "simulationAlgorithm": "KISAO_0000437"
   }],
+  "skippedSimulators": [],
   "expectedReports": [{
     "id": "simulation.sedml/report",
     "dataSets": [{

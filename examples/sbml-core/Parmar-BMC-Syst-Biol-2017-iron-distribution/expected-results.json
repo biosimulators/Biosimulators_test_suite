@@ -6,6 +6,7 @@
     "modelFormatFeatures": [],
     "simulationAlgorithm": "KISAO_000019"
   }],
+  "skippedSimulators": [],
   "expectedReports": [{
     "id": "Parmar2017_Deficient_Rich_tracer.sedml/report",
     "dataSets": [

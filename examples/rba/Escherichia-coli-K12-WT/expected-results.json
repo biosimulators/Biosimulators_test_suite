@@ -6,6 +6,7 @@
     "modelFormatFeatures": [],
     "simulationAlgorithm": "KISAO_0000669"
   }],
+  "skippedSimulators": [],
   "expectedReports": [{
       "id": "simulation.sedml/objective_value",
       "dataSets": [{
