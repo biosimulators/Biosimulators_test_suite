@@ -8,6 +8,7 @@
       "simulationAlgorithm": "KISAO_0000019"
     }
   ],
+  "skippedSimulators": [],
   "expectedReports": [
     {
       "id": "simulation.sedml/report",

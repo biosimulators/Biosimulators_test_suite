@@ -7,6 +7,13 @@
       "simulationAlgorithm": "KISAO_0000019"
     }
   ],
+  "skippedSimulators": [
+    {
+      "id": "pysces",
+      "reason": "Convergence test failures occurred too many times during one internal time step or minimum step size was reached. At time 0.000000",
+      "issue": "https://github.com/PySCeS/pysces/issues/66"
+    }
+  ],
   "expectedReports": [{
       "id": "simulation.sedml/report_Fig_1a",
       "dataSets": [{

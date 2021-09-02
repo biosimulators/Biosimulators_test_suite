@@ -65,6 +65,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
         filename (:obj:`str`): path to archive
         task_requirements (:obj:`list` of :obj:`SedTaskRequirements`): list of the required model format and simulation algorithm
             for each task in the COMBINE/OMEX archive
+        skipped_simulators (:obj:`list` of :obj:`str`): list of simulation tools to not test the COMBINE archive with
         expected_reports (:obj:`list` of :obj:`ExpectedSedReport`): list of reports expected to be produced by algorithm
         expected_plots (:obj:`list` of :obj:`ExpectedSedPlot`): list of plots expected to be produced by algorithm
         runtime_failure_alert_type (:obj:`AlertType`): whether a run-time failure should be raised as an error or warning
@@ -76,9 +77,12 @@ class SimulatorCanExecutePublishedProject(TestCase):
         a_tol (:obj:`float`): absolute tolerence
     """
 
-    def __init__(self, id=None, name=None, filename=None, task_requirements=None, expected_reports=None, expected_plots=None,
+    def __init__(self, id=None, name=None, filename=None,
+                 task_requirements=None, skipped_simulators=None,
+                 expected_reports=None, expected_plots=None,
                  runtime_failure_alert_type=AlertType.exception,
-                 assert_no_extra_reports=False, assert_no_extra_datasets=False, assert_no_missing_plots=False, assert_no_extra_plots=False,
+                 assert_no_extra_reports=False, assert_no_extra_datasets=False,
+                 assert_no_missing_plots=False, assert_no_extra_plots=False,
                  r_tol=1e-4, a_tol=0.,
                  output_medium=OutputMedium.console):
         """
@@ -88,6 +92,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
             filename (:obj:`str`, optional): path to archive
             task_requirements (:obj:`list` of :obj:`SedTaskRequirements`, optional): list of the required model format and simulation algorithm
                 for each task in the COMBINE/OMEX archive
+            skipped_simulators (:obj:`list` of :obj:`str`, optional): list of simulation tools to not test the COMBINE archive with
             expected_reports (:obj:`list` of :obj:`ExpectedSedReport`, optional): list of reports expected to be produced by algorithm
             expected_plots (:obj:`list` of :obj:`ExpectedSedPlot`, optional): list of plots expected to be produced by algorithm
             runtime_failure_alert_type (:obj:`AlertType`, optional): whether a run-time failure should be raised as an error or warning
@@ -102,6 +107,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
         super(SimulatorCanExecutePublishedProject, self).__init__(id, name, output_medium=output_medium)
         self.filename = filename
         self.task_requirements = task_requirements or []
+        self.skipped_simulators = skipped_simulators or []
         self.expected_reports = expected_reports or []
         self.expected_plots = expected_plots or []
 
@@ -186,6 +192,8 @@ class SimulatorCanExecutePublishedProject(TestCase):
                 simulation_algorithm=task_req_def['simulationAlgorithm'],
             ))
 
+        self.skipped_simulators = [simulator['id'] for simulator in data['skippedSimulators']]
+
         self.expected_reports = []
         for exp_report_def in data.get('expectedReports', []):
             id = exp_report_def['id']
@@ -255,6 +263,9 @@ class SimulatorCanExecutePublishedProject(TestCase):
 
     def compatible_with_specifications(self, specifications):
         # determine if case is applicable to simulator
+        if specifications.get('id', None) in self.skipped_simulators:
+            return False
+
         for task_reqs in self.task_requirements:
             reqs_satisfied = False
             for alg_specs in specifications['algorithms']:

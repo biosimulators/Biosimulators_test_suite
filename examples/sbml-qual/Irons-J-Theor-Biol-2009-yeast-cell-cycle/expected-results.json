@@ -6,6 +6,7 @@
     "modelFormatFeatures": ["qual"],
     "simulationAlgorithm": "KISAO_0000449"
   }],
+  "skippedSimulators": [],
   "expectedReports": [{
     "id": "simulation.sedml/report_wt",
     "dataSets": [
