@@ -219,14 +219,16 @@ jobs:
 
       - id: commit-docs
         name: Commit the compiled documentation
-        if: startsWith(github.ref, 'refs/heads/')
         run: |
           git stash || true
           git pull
           set +e
           git stash pop || true
           git add docs
+          git add docs-src
           git commit -m "Updating compiled documentation"
+          git checkout .
+          git clean -f -d
           if [[ $? = 0 ]]; then
             docsChanged=1
           else
