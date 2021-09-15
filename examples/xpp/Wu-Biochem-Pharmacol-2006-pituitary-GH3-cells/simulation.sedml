@@ -3,8 +3,8 @@
   <listOfModels>
     <model id="model" language="urn:sedml:language:xpp" source="GH3_Katp.ode">
       <listOfChanges>
-        <changeAttribute target="parameters.gca" newValue="1000"/>
-        <changeAttribute target="initialConditions.V" newValue="-60.0"/>
+        <changeAttribute target="gca" newValue="1000"/>
+        <changeAttribute target="V" newValue="-60.0"/>
       </listOfChanges>
     </model>
   </listOfModels>
