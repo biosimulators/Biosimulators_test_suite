@@ -5,9 +5,29 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3.1.2. biosimulators_test_suite.test_case package &#8212; BioSimulators test suite 0.1.45 documentation</title>
+    <title>biosimulators_test_suite.test_case package &#8212; BioSimulators test suite 0.1.62 documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/biosimulators.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -15,117 +35,201 @@
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. About the BioSimulators test suite" href="../about.html" />
-    <link rel="prev" title="3.1.1. biosimulators_test_suite.results package" href="biosimulators_test_suite.results.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="next" title="About the BioSimulators test suite" href="../about.html" />
+    <link rel="prev" title="biosimulators_test_suite.results package" href="biosimulators_test_suite.results.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+      
+      <link rel="icon" sizes="16x16" href="https://github.com/biosimulations/biosimulations/raw/dev/libs/shared/assets/src/assets/icons/favicon-16x16.png">
+      
+    
+      
+      <link rel="icon" sizes="32x32" href="https://github.com/biosimulations/biosimulations/raw/dev/libs/shared/assets/src/assets/icons/favicon-32x32.png">
+      
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/biosimulators-logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
-  </head><body>
-  <div class="document">
-    
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">BioSimulators test suite</a></h1>
-
-
-
-<p class="blurb">Tool for validating that biosimulation software tools implement the BioSimulators standards for biosimulation tools</p>
-
-
-
-
-<p>
-<iframe src="https://ghbtns.com/github-btn.html?user=biosimulators&repo=Biosimulators_test_suite&type=watch&count=true&size=large&v=2"
-  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
-</p>
-
-
-
-
-
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../installation.html">1. Installation instructions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">2. Tutorial</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="biosimulators_test_suite.html">3. API documentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="biosimulators_test_suite.html#subpackages">3.1. Subpackages</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="biosimulators_test_suite.results.html">3.1.1. biosimulators_test_suite.results package</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">3.1.2. biosimulators_test_suite.test_case package</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#submodules">3.2. Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.config">3.3. biosimulators_test_suite.config module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.data_model">3.4. biosimulators_test_suite.data_model module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exceptions">3.5. biosimulators_test_suite.exceptions module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_cli">3.6. biosimulators_test_suite.exec_cli module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_core">3.7. biosimulators_test_suite.exec_core module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.exec_gh_action">3.8. biosimulators_test_suite.exec_gh_action module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.utils">3.9. biosimulators_test_suite.utils module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="biosimulators_test_suite.html#module-biosimulators_test_suite.warnings">3.10. biosimulators_test_suite.warnings module</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../about.html">4. About the BioSimulators test suite</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../genindex.html">5. Index</a></li>
-</ul>
-
-
-<hr />
-<ul>
-    
-    <li class="toctree-l1"><a href="https://biosimulators.org">BioSimulators</a></li>
-    
-    <li class="toctree-l1"><a href="https://run.biosimulations.org">runBioSimulations</a></li>
-    
-    <li class="toctree-l1"><a href="https://biosimulations.org">BioSimulations</a></li>
-    
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="biosimulators_test_suite.html"><span class="section-number">3. </span>biosimulators_test_suite package</a><ul>
-      <li>Previous: <a href="biosimulators_test_suite.results.html" title="previous chapter"><span class="section-number">3.1.1. </span>biosimulators_test_suite.results package</a></li>
-      <li>Next: <a href="../about.html" title="next chapter"><span class="section-number">4. </span>About the BioSimulators test suite</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
 
-
-
-
-
-
-
-
-        </div>
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Quick links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/biosimulators/Biosimulators_test_suite" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="fab fa-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/biosimulators" rel="noopener" target="_blank" title="Twitter">
+            <span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only">Twitter</label>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="mailto:info@biosimulators.org" rel="noopener" target="_blank" title="Email">
+            <span><i class="fas fa-envelope"></i></span>
+            <label class="sr-only">Email</label>
+          </a>
+        </li>
+      </ul>
       </div>
-      <div class="documentwrapper">
-        <div class="bodywrapper">
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Enter text to search for ..." aria-label="Enter text to search for ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="biosimulators_test_suite.results.html">
+   biosimulators_test_suite.results package
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   biosimulators_test_suite.test_case package
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
           
 
-          <div class="body" role="main">
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
             
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submodules">
+   Submodules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-biosimulators_test_suite.test_case.cli">
+   biosimulators_test_suite.test_case.cli module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-biosimulators_test_suite.test_case.combine_archive">
+   biosimulators_test_suite.test_case.combine_archive module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-biosimulators_test_suite.test_case.docker_image">
+   biosimulators_test_suite.test_case.docker_image module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-biosimulators_test_suite.test_case.log">
+   biosimulators_test_suite.test_case.log module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-biosimulators_test_suite.test_case.published_project">
+   biosimulators_test_suite.test_case.published_project module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-biosimulators_test_suite.test_case.results_report">
+   biosimulators_test_suite.test_case.results_report module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-biosimulators_test_suite.test_case.sedml">
+   biosimulators_test_suite.test_case.sedml module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-biosimulators_test_suite.test_case.utils">
+   biosimulators_test_suite.test_case.utils module
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+
+<div class="tocsection editthispage">
+    <a href="https://github.com/biosimulators/Biosimulators_test_suite/edit/dev/docs-src/source/biosimulators_test_suite.test_case.rst">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
   <div class="section" id="module-biosimulators_test_suite.test_case">
-<span id="biosimulators-test-suite-test-case-package"></span><h1><span class="section-number">3.1.2. </span>biosimulators_test_suite.test_case package<a class="headerlink" href="#module-biosimulators_test_suite.test_case" title="Permalink to this headline">¶</a></h1>
+<span id="biosimulators-test-suite-test-case-package"></span><h1>biosimulators_test_suite.test_case package<a class="headerlink" href="#module-biosimulators_test_suite.test_case" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
-<h2><span class="section-number">3.1.2.1. </span>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-biosimulators_test_suite.test_case.cli">
-<span id="biosimulators-test-suite-test-case-cli-module"></span><h2><span class="section-number">3.1.2.2. </span>biosimulators_test_suite.test_case.cli module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.cli" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-test-case-cli-module"></span><h2>biosimulators_test_suite.test_case.cli module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.cli" title="Permalink to this headline">¶</a></h2>
 <p>Methods for test cases involving checking command-line interfaces</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -143,18 +247,19 @@
 </dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.cli.CliDescribesSupportedEnvironmentVariablesInline">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.cli.</span></span><span class="sig-name descname"><span class="pre">CliDescribesSupportedEnvironmentVariablesInline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">description=None</span></em>, <em class="sig-param"><span class="pre">output_medium=&lt;OutputMedium.console:</span> <span class="pre">'console'&gt;</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/cli.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.cli.CliDescribesSupportedEnvironmentVariablesInline" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.cli.</span></span><span class="sig-name descname"><span class="pre">CliDescribesSupportedEnvironmentVariablesInline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_medium</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">OutputMedium.console</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/cli.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.cli.CliDescribesSupportedEnvironmentVariablesInline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.TestCase" title="biosimulators_test_suite.data_model.TestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.TestCase</span></code></a></p>
 <p>Test that the inline help for a command-line interface describes the environment variables that the
 simulator supports.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.cli.CliDescribesSupportedEnvironmentVariablesInline.eval">
-<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/cli.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.cli.CliDescribesSupportedEnvironmentVariablesInline.eval" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dirname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/cli.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.cli.CliDescribesSupportedEnvironmentVariablesInline.eval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a simulator’s performance on a test case</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
+<li><p><strong>working_dirname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory for temporary files for evaluating test case</p></li>
 <li><p><strong>synthetic_archives_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Directory to save the synthetic COMBINE/OMEX archives
 generated by the test cases</p></li>
 <li><p><strong>dry_run</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>) – if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, do not use the simulator to execute COMBINE/OMEX archives.</p></li>
@@ -172,17 +277,18 @@ archives rather than a Docker image</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.cli.CliDisplaysHelpInline">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.cli.</span></span><span class="sig-name descname"><span class="pre">CliDisplaysHelpInline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">description=None</span></em>, <em class="sig-param"><span class="pre">output_medium=&lt;OutputMedium.console:</span> <span class="pre">'console'&gt;</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/cli.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.cli.CliDisplaysHelpInline" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.cli.</span></span><span class="sig-name descname"><span class="pre">CliDisplaysHelpInline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_medium</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">OutputMedium.console</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/cli.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.cli.CliDisplaysHelpInline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.TestCase" title="biosimulators_test_suite.data_model.TestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.TestCase</span></code></a></p>
 <p>Test that a command-line interface provides inline help.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.cli.CliDisplaysHelpInline.eval">
-<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/cli.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.cli.CliDisplaysHelpInline.eval" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dirname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/cli.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.cli.CliDisplaysHelpInline.eval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a simulator’s performance on a test case</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
+<li><p><strong>working_dirname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory for temporary files for evaluating test case</p></li>
 <li><p><strong>synthetic_archives_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Directory to save the synthetic COMBINE/OMEX archives
 generated by the test cases</p></li>
 <li><p><strong>dry_run</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>) – if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, do not use the simulator to execute COMBINE/OMEX archives.</p></li>
@@ -200,17 +306,18 @@ archives rather than a Docker image</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.cli.CliDisplaysVersionInformationInline">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.cli.</span></span><span class="sig-name descname"><span class="pre">CliDisplaysVersionInformationInline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">description=None</span></em>, <em class="sig-param"><span class="pre">output_medium=&lt;OutputMedium.console:</span> <span class="pre">'console'&gt;</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/cli.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.cli.CliDisplaysVersionInformationInline" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.cli.</span></span><span class="sig-name descname"><span class="pre">CliDisplaysVersionInformationInline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_medium</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">OutputMedium.console</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/cli.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.cli.CliDisplaysVersionInformationInline" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.TestCase" title="biosimulators_test_suite.data_model.TestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.TestCase</span></code></a></p>
 <p>Test that a command-line interface provides version information inline.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.cli.CliDisplaysVersionInformationInline.eval">
-<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/cli.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.cli.CliDisplaysVersionInformationInline.eval" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dirname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/cli.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.cli.CliDisplaysVersionInformationInline.eval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a simulator’s performance on a test case</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
+<li><p><strong>working_dirname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory for temporary files for evaluating test case</p></li>
 <li><p><strong>synthetic_archives_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Directory to save the synthetic COMBINE/OMEX archives
 generated by the test cases</p></li>
 <li><p><strong>dry_run</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>) – if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, do not use the simulator to execute COMBINE/OMEX archives.</p></li>
@@ -228,7 +335,7 @@ archives rather than a Docker image</p></li>
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.test_case.combine_archive">
-<span id="biosimulators-test-suite-test-case-combine-archive-module"></span><h2><span class="section-number">3.1.2.3. </span>biosimulators_test_suite.test_case.combine_archive module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.combine_archive" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-test-case-combine-archive-module"></span><h2>biosimulators_test_suite.test_case.combine_archive module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.combine_archive" title="Permalink to this headline">¶</a></h2>
 <p>Methods for test cases involving checking support for the COMBINE/OMEX standards</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -432,7 +539,7 @@ executes all SED-ML files.</p>
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.test_case.docker_image">
-<span id="biosimulators-test-suite-test-case-docker-image-module"></span><h2><span class="section-number">3.1.2.4. </span>biosimulators_test_suite.test_case.docker_image module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.docker_image" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-test-case-docker-image-module"></span><h2>biosimulators_test_suite.test_case.docker_image module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.docker_image" title="Permalink to this headline">¶</a></h2>
 <p>Methods for test cases involving checking Docker images</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -450,17 +557,18 @@ executes all SED-ML files.</p>
 </dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.docker_image.DeclaresSupportedEnvironmentVariables">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.docker_image.</span></span><span class="sig-name descname"><span class="pre">DeclaresSupportedEnvironmentVariables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">description=None</span></em>, <em class="sig-param"><span class="pre">output_medium=&lt;OutputMedium.console:</span> <span class="pre">'console'&gt;</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.DeclaresSupportedEnvironmentVariables" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.docker_image.</span></span><span class="sig-name descname"><span class="pre">DeclaresSupportedEnvironmentVariables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_medium</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">OutputMedium.console</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.DeclaresSupportedEnvironmentVariables" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.TestCase" title="biosimulators_test_suite.data_model.TestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.TestCase</span></code></a></p>
 <p>Test if a Docker image declares the environment variables that is supports</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.docker_image.DeclaresSupportedEnvironmentVariables.eval">
-<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.DeclaresSupportedEnvironmentVariables.eval" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dirname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.DeclaresSupportedEnvironmentVariables.eval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a simulator’s performance on a test case</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
+<li><p><strong>working_dirname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory for temporary files for evaluating test case</p></li>
 <li><p><strong>synthetic_archives_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Directory to save the synthetic COMBINE/OMEX archives
 generated by the test cases</p></li>
 <li><p><strong>dry_run</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>) – if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, do not use the simulator to execute COMBINE/OMEX archives.</p></li>
@@ -478,17 +586,18 @@ archives rather than a Docker image</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.docker_image.DefaultUserIsRoot">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.docker_image.</span></span><span class="sig-name descname"><span class="pre">DefaultUserIsRoot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">description=None</span></em>, <em class="sig-param"><span class="pre">output_medium=&lt;OutputMedium.console:</span> <span class="pre">'console'&gt;</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.DefaultUserIsRoot" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.docker_image.</span></span><span class="sig-name descname"><span class="pre">DefaultUserIsRoot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_medium</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">OutputMedium.console</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.DefaultUserIsRoot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.TestCase" title="biosimulators_test_suite.data_model.TestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.TestCase</span></code></a></p>
 <p>Test that the default user of a Docker image is root</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.docker_image.DefaultUserIsRoot.eval">
-<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(None,</span> <span class="pre">'',</span> <span class="pre">'0')</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.DefaultUserIsRoot.eval" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dirname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_user</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(None,</span> <span class="pre">'',</span> <span class="pre">'0')</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.DefaultUserIsRoot.eval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a simulator’s performance on a test case</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
+<li><p><strong>working_dirname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory for temporary files for evaluating test case</p></li>
 <li><p><strong>synthetic_archives_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Directory to save the synthetic COMBINE/OMEX archives
 generated by the test cases</p></li>
 <li><p><strong>expected_user</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code>, optional) – expected user</p></li>
@@ -507,7 +616,7 @@ archives rather than a Docker image</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.docker_image.HasBioContainersLabels">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.docker_image.</span></span><span class="sig-name descname"><span class="pre">HasBioContainersLabels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">description=None</span></em>, <em class="sig-param"><span class="pre">output_medium=&lt;OutputMedium.console:</span> <span class="pre">'console'&gt;</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.HasBioContainersLabels" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.docker_image.</span></span><span class="sig-name descname"><span class="pre">HasBioContainersLabels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_medium</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">OutputMedium.console</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.HasBioContainersLabels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.TestCase" title="biosimulators_test_suite.data_model.TestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.TestCase</span></code></a></p>
 <p>Test that a Docker image has BioContainers labels with metadata
 about the image</p>
@@ -518,12 +627,13 @@ about the image</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.docker_image.HasBioContainersLabels.eval">
-<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.HasBioContainersLabels.eval" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dirname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.HasBioContainersLabels.eval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a simulator’s performance on a test case</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
+<li><p><strong>working_dirname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory for temporary files for evaluating test case</p></li>
 <li><p><strong>synthetic_archives_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Directory to save the synthetic COMBINE/OMEX archives
 generated by the test cases</p></li>
 <li><p><strong>dry_run</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>) – if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, do not use the simulator to execute COMBINE/OMEX archives.</p></li>
@@ -541,7 +651,7 @@ archives rather than a Docker image</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.docker_image.HasOciLabels">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.docker_image.</span></span><span class="sig-name descname"><span class="pre">HasOciLabels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">description=None</span></em>, <em class="sig-param"><span class="pre">output_medium=&lt;OutputMedium.console:</span> <span class="pre">'console'&gt;</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.HasOciLabels" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.docker_image.</span></span><span class="sig-name descname"><span class="pre">HasOciLabels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_medium</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">OutputMedium.console</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.HasOciLabels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.TestCase" title="biosimulators_test_suite.data_model.TestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.TestCase</span></code></a></p>
 <p>Test that a Docker image has Open Container Initiative (OCI) labels
 with metadata about the image</p>
@@ -552,12 +662,13 @@ with metadata about the image</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.docker_image.HasOciLabels.eval">
-<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.HasOciLabels.eval" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dirname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/docker_image.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.docker_image.HasOciLabels.eval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a simulator’s performance on a test case</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
+<li><p><strong>working_dirname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory for temporary files for evaluating test case</p></li>
 <li><p><strong>synthetic_archives_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Directory to save the synthetic COMBINE/OMEX archives
 generated by the test cases</p></li>
 <li><p><strong>dry_run</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>) – if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, do not use the simulator to execute COMBINE/OMEX archives.</p></li>
@@ -587,7 +698,7 @@ archives rather than a Docker image</p></li>
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.test_case.log">
-<span id="biosimulators-test-suite-test-case-log-module"></span><h2><span class="section-number">3.1.2.5. </span>biosimulators_test_suite.test_case.log module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.log" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-test-case-log-module"></span><h2>biosimulators_test_suite.test_case.log module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.log" title="Permalink to this headline">¶</a></h2>
 <p>Methods for checking support for reports of the execution status of modeling projects</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -778,7 +889,7 @@ document in the synthetic archive to the document</p></li>
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.test_case.published_project">
-<span id="biosimulators-test-suite-test-case-published-project-module"></span><h2><span class="section-number">3.1.2.6. </span>biosimulators_test_suite.test_case.published_project module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.published_project" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-test-case-published-project-module"></span><h2>biosimulators_test_suite.test_case.published_project module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.published_project" title="Permalink to this headline">¶</a></h2>
 <p>Methods for test cases involving manually curated COMBINE/OMEX archives</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -956,7 +1067,7 @@ SED documents in synthetic archive</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.published_project.</span></span><span class="sig-name descname"><span class="pre">SimulatorCanExecutePublishedProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">filename=None</span></em>, <em class="sig-param"><span class="pre">task_requirements=None</span></em>, <em class="sig-param"><span class="pre">expected_reports=None</span></em>, <em class="sig-param"><span class="pre">expected_plots=None</span></em>, <em class="sig-param"><span class="pre">runtime_failure_alert_type=&lt;AlertType.exception:</span> <span class="pre">'exception'&gt;</span></em>, <em class="sig-param"><span class="pre">assert_no_extra_reports=False</span></em>, <em class="sig-param"><span class="pre">assert_no_extra_datasets=False</span></em>, <em class="sig-param"><span class="pre">assert_no_missing_plots=False</span></em>, <em class="sig-param"><span class="pre">assert_no_extra_plots=False</span></em>, <em class="sig-param"><span class="pre">r_tol=0.0001</span></em>, <em class="sig-param"><span class="pre">a_tol=0.0</span></em>, <em class="sig-param"><span class="pre">output_medium=&lt;OutputMedium.console:</span> <span class="pre">'console'&gt;</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.published_project.</span></span><span class="sig-name descname"><span class="pre">SimulatorCanExecutePublishedProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_requirements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipped_simulators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_reports</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expected_plots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">runtime_failure_alert_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">AlertType.exception</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assert_no_extra_reports</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assert_no_extra_datasets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assert_no_missing_plots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assert_no_extra_plots</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_medium</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">OutputMedium.console</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.TestCase" title="biosimulators_test_suite.data_model.TestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.TestCase</span></code></a></p>
 <p>A test case for validating a simulator that involves executing a COMBINE/OMEX archive</p>
 <dl class="py attribute">
@@ -1000,6 +1111,17 @@ for each task in the COMBINE/OMEX archive</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">SedTaskRequirements</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject.skipped_simulators">
+<span class="sig-name descname"><span class="pre">skipped_simulators</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject.skipped_simulators" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of simulation tools to not test the COMBINE archive with</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1110,12 +1232,13 @@ for each task in the COMBINE/OMEX archive</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject.eval">
-<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject.eval" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dirname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SimulatorCanExecutePublishedProject.eval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a simulator’s performance on a test case</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
+<li><p><strong>working_dirname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory for temporary files for evaluating test case</p></li>
 <li><p><strong>synthetic_archives_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Directory to save the synthetic COMBINE/OMEX archives
 generated by the test cases</p></li>
 <li><p><strong>dry_run</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>) – if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, do not use the simulator to execute COMBINE/OMEX archives.</p></li>
@@ -1220,7 +1343,7 @@ archives rather than a Docker image</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.published_project.</span></span><span class="sig-name descname"><span class="pre">SyntheticCombineArchiveTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">id=None</span></em>, <em class="sig-param"><span class="pre">name=None</span></em>, <em class="sig-param"><span class="pre">description=None</span></em>, <em class="sig-param"><span class="pre">output_medium=&lt;OutputMedium.console:</span> <span class="pre">'console'&gt;</span></em>, <em class="sig-param"><span class="pre">published_projects_test_cases=None</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.published_project.</span></span><span class="sig-name descname"><span class="pre">SyntheticCombineArchiveTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_medium</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">OutputMedium.console</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">published_projects_test_cases</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="biosimulators_test_suite.html#biosimulators_test_suite.data_model.TestCase" title="biosimulators_test_suite.data_model.TestCase"><code class="xref py py-class docutils literal notranslate"><span class="pre">biosimulators_test_suite.data_model.TestCase</span></code></a></p>
 <p>Test that involves a computationally-generated COMBINE/OMEX archive</p>
 <dl class="py attribute">
@@ -1322,12 +1445,13 @@ SED documents in curated archive</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.eval">
-<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.eval" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">working_dirname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synthetic_archives_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cli</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.eval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluate a simulator’s performance on a test case</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>specifications</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code>) – specifications of the simulator to validate</p></li>
+<li><p><strong>working_dirname</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – directory for temporary files for evaluating test case</p></li>
 <li><p><strong>synthetic_archives_dir</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>, optional) – Directory to save the synthetic COMBINE/OMEX archives
 generated by the test cases</p></li>
 <li><p><strong>dry_run</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>) – if <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, do not use the simulator to execute COMBINE/OMEX archives.</p></li>
@@ -1366,20 +1490,6 @@ document in the synthetic archive to the document</p></li>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.get_current_time_utc">
-<span class="sig-name descname"><span class="pre">get_current_time_utc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.SyntheticCombineArchiveTestCase.get_current_time_utc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the current time in UTC</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>current time in UTC</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">datetime.datetime</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1637,7 +1747,7 @@ document in the synthetic archive to the document</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="biosimulators_test_suite.test_case.published_project.find_cases">
-<span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.published_project.</span></span><span class="sig-name descname"><span class="pre">find_cases</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">specifications</span></em>, <em class="sig-param"><span class="pre">dir_name=None</span></em>, <em class="sig-param"><span class="pre">output_medium=&lt;OutputMedium.console:</span> <span class="pre">'console'&gt;</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.find_cases" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.test_case.published_project.</span></span><span class="sig-name descname"><span class="pre">find_cases</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">specifications</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_medium</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">OutputMedium.console</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/test_case/published_project.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.test_case.published_project.find_cases" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collect test cases</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1658,7 +1768,7 @@ document in the synthetic archive to the document</p></li>
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.test_case.results_report">
-<span id="biosimulators-test-suite-test-case-results-report-module"></span><h2><span class="section-number">3.1.2.7. </span>biosimulators_test_suite.test_case.results_report module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.results_report" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-test-case-results-report-module"></span><h2>biosimulators_test_suite.test_case.results_report module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.results_report" title="Permalink to this headline">¶</a></h2>
 <p>Methods for checking support for reports of simulation results</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -1707,7 +1817,7 @@ document in the synthetic archive to the document</p></li>
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.test_case.sedml">
-<span id="biosimulators-test-suite-test-case-sedml-module"></span><h2><span class="section-number">3.1.2.8. </span>biosimulators_test_suite.test_case.sedml module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.sedml" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-test-case-sedml-module"></span><h2>biosimulators_test_suite.test_case.sedml module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.sedml" title="Permalink to this headline">¶</a></h2>
 <p>Methods for testing that simulators support the features of SED-ML</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -2540,7 +2650,7 @@ SED documents in curated archive</p></li>
 
 </div>
 <div class="section" id="module-biosimulators_test_suite.test_case.utils">
-<span id="biosimulators-test-suite-test-case-utils-module"></span><h2><span class="section-number">3.1.2.9. </span>biosimulators_test_suite.test_case.utils module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.utils" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-test-case-utils-module"></span><h2>biosimulators_test_suite.test_case.utils module<a class="headerlink" href="#module-biosimulators_test_suite.test_case.utils" title="Permalink to this headline">¶</a></h2>
 <p>Utility methods</p>
 <dl class="field-list simple">
 <dt class="field-odd">Author</dt>
@@ -2608,26 +2718,27 @@ are also the same</p></li>
 </div>
 
 
-          </div>
+              </div>
+              
+              
+          </main>
           
-        </div>
+
       </div>
-    <div class="clearer"></div>
-  </div>
-    <div class="footer">
-      &copy;2021, BioSimulators Team.
-      
-      |
-      <a href="../_sources/source/biosimulators_test_suite.test_case.rst.txt"
-          rel="nofollow">Page source</a>
     </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
     
-    <a href="https://github.com/biosimulators/Biosimulators_test_suite" class="github">
-        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
-    </a>
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, BioSimulators Team.<br/>
+</p>
+    </div>
     
-
-    
+  </div>
+</footer>
   </body>
 </html>
