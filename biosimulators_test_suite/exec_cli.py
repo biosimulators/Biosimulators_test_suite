@@ -58,6 +58,13 @@ class BaseController(cement.Controller):
                 action='store_true',
                 help="If set, print the stdout and stderr of the execution of the tests in real time.",
             )),
+            (['--work-dir'], dict(
+                default=None,
+                help=(
+                    "Working directory for files for evaluating tests. This option enables intermediate files "
+                    "to be inspected rather than automatically cleaned up."
+                ),
+            )),
             (['--do-not-validate-specs'], dict(
                 action='store_true',
                 help="If set, don't validate the specifications of the simulator.",
@@ -88,13 +95,14 @@ class BaseController(cement.Controller):
                 synthetic_archives_dir=args.synthetic_archives_dir,
                 output_medium=OutputMedium.console,
                 log_std_out_err=not args.do_not_log_std_out_err,
+                working_dirname=args.work_dir,
                 dry_run=args.dry_run,
                 cli=args.cli,
                 validate_specs=not args.do_not_validate_specs)
             results = validator.run()
 
             # print summary
-            summary, failure_details, warning_details, skipped_details = validator.summarize_results(results)
+            summary, failure_details, warning_details, skipped_details = validator.summarize_results(results, debug=args.debug)
             print('')
             print('=============== SUMMARY ===============')
             print('')

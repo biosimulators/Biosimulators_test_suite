@@ -114,7 +114,7 @@ class LogTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = log.SimulatorReportsTheStatusOfTheExecutionOfCombineArchives(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
         self.assertTrue(case.is_concrete())
 
     def test_SimulatorReportsTheStatusOfTheExecutionOfSedDocuments(self):
@@ -124,7 +124,7 @@ class LogTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = log.SimulatorReportsTheStatusOfTheExecutionOfSedDocuments(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
         self.assertTrue(case.is_concrete())
 
     def test_SimulatorReportsTheStatusOfTheExecutionOfSedTasks(self):
@@ -134,7 +134,7 @@ class LogTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = log.SimulatorReportsTheStatusOfTheExecutionOfSedTasks(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
         self.assertTrue(case.is_concrete())
 
     def test_SimulatorReportsTheStatusOfTheExecutionOfSedOutputs(self):
@@ -144,5 +144,5 @@ class LogTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = log.SimulatorReportsTheStatusOfTheExecutionOfSedOutputs(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
         self.assertTrue(case.is_concrete())

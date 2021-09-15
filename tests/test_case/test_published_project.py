@@ -29,7 +29,8 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
         self.tmp_dirname = tempfile.mkdtemp()
 
     def tearDown(self):
-        shutil.rmtree(self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
     def test_find_cases(self):
         all_cases, _ = find_cases({
@@ -147,7 +148,9 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             'algorithms': [],
         }
         with self.assertRaisesRegex(SkippedTestCaseException, 'requires'):
-            case.eval(specs)
+            case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         specs = {
             'algorithms': [{
@@ -156,7 +159,9 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             }],
         }
         with self.assertRaisesRegex(SkippedTestCaseException, 'requires'):
-            case.eval(specs)
+            case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         specs = {
             'algorithms': [{
@@ -165,7 +170,9 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             }],
         }
         with self.assertRaisesRegex(SkippedTestCaseException, 'requires'):
-            case.eval(specs)
+            case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         # execute case
         specs = {
@@ -235,84 +242,114 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
 
         with mock.patch(exec_archive_method, functools.partial(
                 exec_archive, False, False, False, False, False, False, False, False, False, False)):
-            case.eval(specs)
+            case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         with self.assertRaisesRegex(RuntimeError, 'Could not execute task'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, True, False, False, False, False, False, False, False, False, False)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         case.runtime_failure_alert_type = data_model.AlertType.warning
         with self.assertWarnsRegex(SimulatorRuntimeErrorWarning, 'Could not execute task'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, True, False, False, False, False, False, False, False, False, False)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
         case.runtime_failure_alert_type = data_model.AlertType.exception
 
         with self.assertRaisesRegex(InvalidOutputsException, 'No reports were generated'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, True, False, False, False, False, False, False, False, False)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         with self.assertRaisesRegex(InvalidOutputsException, 'could not be read'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, True, True, False, False, False, False, False, False, False)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         with self.assertWarnsRegex(InvalidOutputsWarning, 'Unexpected reports were produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, True, False, False, False, False, False, False, False)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         with self.assertRaisesRegex(InvalidOutputsException, 'does not contain expected data sets'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, True, False, False, False, False, False, False)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         with self.assertRaisesRegex(InvalidOutputsException, 'incorrect number of points'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, True, False, False, False, False)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         with self.assertRaisesRegex(InvalidOutputsException, 'does not have expected value'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, True, False, False, False)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         with self.assertWarnsRegex(InvalidOutputsWarning, 'Plots were not produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, True, False, False)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         with self.assertWarnsRegex(InvalidOutputsWarning, 'Plots were not produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, False, True, False)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         with self.assertWarnsRegex(InvalidOutputsWarning, 'Extra plots were produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, False, False, True)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         case.assert_no_extra_reports = True
         with self.assertRaisesRegex(InvalidOutputsException, 'Unexpected reports were produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, True, False, False, False, False, False, False, False)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
         case.assert_no_extra_reports = False
 
         case.assert_no_missing_plots = True
         with self.assertRaisesRegex(InvalidOutputsException, 'Plots were not produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, True, False, False)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
         case.assert_no_missing_plots = False
 
         case.assert_no_extra_plots = True
         with self.assertRaisesRegex(InvalidOutputsException, 'Extra plots were produced'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, False, False, False, True)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
         case.assert_no_extra_plots = False
 
         case.expected_reports[0].values = {
@@ -358,12 +395,16 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
 
         with mock.patch(exec_archive_method, functools.partial(
                 exec_archive, False, False, False, False, False, False, False, False, False, False)):
-            case.eval(specs)
+            case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
         with self.assertRaisesRegex(InvalidOutputsException, 'does not have expected value'):
             with mock.patch(exec_archive_method, functools.partial(
                     exec_archive, False, False, False, False, False, False, True, False, False, False)):
-                case.eval(specs)
+                case.eval(specs, self.tmp_dirname)
+        if os.path.isdir(self.tmp_dirname):
+            shutil.rmtree(self.tmp_dirname)
 
     def test_TestCaseResult(self):
         case = SimulatorCanExecutePublishedProject(id='case')
@@ -391,7 +432,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
 
         with self.assertRaisesRegex(SkippedTestCaseException, 'No curated COMBINE/OMEX archives are available'):
             with mock.patch.object(CombineArchiveReader, 'run', return_value=CombineArchive()):
-                case.eval(None)
+                case.eval(None, self.tmp_dirname)
 
     def test_SyntheticCombineArchiveTestCase_build_synthetic_archives(self):
         class ConcreteSyntheticCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
@@ -453,13 +494,13 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             with mock.patch.object(CombineArchiveWriter, 'run', return_value=None):
                 with mock.patch.object(Concrete, 'eval_outputs', return_value=True):
                     self.assertFalse(Concrete()._eval_synthetic_archive(
-                        specifications, expected_results_of_synthetic_archive, shared_archive_dir, None))
+                        specifications, expected_results_of_synthetic_archive, shared_archive_dir, None, self.tmp_dirname))
 
         with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator', return_value=None):
             with mock.patch.object(CombineArchiveWriter, 'run', return_value=None):
                 with mock.patch.object(Concrete, 'eval_outputs', return_value=False):
                     self.assertTrue(Concrete()._eval_synthetic_archive(
-                        specifications, expected_results_of_synthetic_archive, shared_archive_dir, None))
+                        specifications, expected_results_of_synthetic_archive, shared_archive_dir, None, self.tmp_dirname))
 
         with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator',
                         side_effect=RuntimeError):
@@ -467,7 +508,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
                 with mock.patch.object(Concrete, 'eval_outputs', return_value=False):
                     with self.assertRaises(RuntimeError):
                         Concrete()._eval_synthetic_archive(
-                            specifications, expected_results_of_synthetic_archive, shared_archive_dir, None)
+                            specifications, expected_results_of_synthetic_archive, shared_archive_dir, None, self.tmp_dirname)
 
         expected_results_of_synthetic_archive.is_success_expected = False
         with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator',
@@ -475,14 +516,14 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             with mock.patch.object(CombineArchiveWriter, 'run', return_value=None):
                 with mock.patch.object(Concrete, 'eval_outputs', return_value=False):
                     self.assertFalse(Concrete()._eval_synthetic_archive(
-                        specifications, expected_results_of_synthetic_archive, shared_archive_dir, None))
+                        specifications, expected_results_of_synthetic_archive, shared_archive_dir, None, self.tmp_dirname))
 
         with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator', return_value=None):
             with mock.patch.object(CombineArchiveWriter, 'run', return_value=None):
                 with mock.patch.object(Concrete, 'eval_outputs', return_value=False):
                     with self.assertRaisesRegex(ValueError, 'did not fail as expected'):
                         Concrete()._eval_synthetic_archive(
-                            specifications, expected_results_of_synthetic_archive, shared_archive_dir, None)
+                            specifications, expected_results_of_synthetic_archive, shared_archive_dir, None, self.tmp_dirname)
 
     def test_UniformTimeCourseTestCase_add_time_data_set(self):
         class Concrete(UniformTimeCourseTestCase):

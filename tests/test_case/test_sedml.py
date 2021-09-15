@@ -38,7 +38,8 @@ class SedmlTestCaseTest(unittest.TestCase):
         self.dirname = tempfile.mkdtemp()
 
     def tearDown(self):
-        shutil.rmtree(self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
     def test_SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports_eval_outputs(self):
         case = sedml.SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports()
@@ -93,7 +94,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorSupportsModelsSimulationsTasksDataGeneratorsAndReports(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
 
     def test_SimulatorSupportsMultipleTasksPerSedDocument_is_curated_sed_doc_suitable_for_building_synthetic_archive(self):
         case = sedml.SimulatorSupportsMultipleTasksPerSedDocument()
@@ -260,13 +261,17 @@ class SedmlTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorSupportsMultipleTasksPerSedDocument(
             published_projects_test_cases=[curated_case])
-        case.eval(specs)
+        case.eval(specs, self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
         # no curated cases to use
         case = sedml.SimulatorSupportsMultipleTasksPerSedDocument(
             published_projects_test_cases=[])
         with self.assertRaisesRegex(SkippedTestCaseException, 'No curated COMBINE/OMEX archives are available'):
-            case.eval(specs)
+            case.eval(specs, self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
     def test_SimulatorSupportsMultipleReportsPerSedDocument_eval_outputs(self):
         case = sedml.SimulatorSupportsMultipleReportsPerSedDocument()
@@ -312,7 +317,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorSupportsMultipleReportsPerSedDocument(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
 
     def test_SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes_build_synthetic_archives(self):
         case = sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes()
@@ -422,7 +427,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
 
     def test_SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -431,12 +436,16 @@ class SedmlTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroInitialTimes(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
         with mock.patch('biosimulators_utils.simulator.exec.exec_sedml_docs_in_archive_with_containerized_simulator',
                         side_effect=Exception('Simulation failed')):
             with self.assertRaises(SkippedTestCaseException):
-                self.assertFalse(case.eval(specs))
+                self.assertFalse(case.eval(specs, self.dirname))
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
     def test_SimulatorSupportsRepeatedTasksWithLinearUniformRanges(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -444,7 +453,7 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         case = sedml.SimulatorSupportsRepeatedTasksWithLinearUniformRanges(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
 
     def test_SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -452,7 +461,7 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         case = sedml.SimulatorSupportsRepeatedTasksWithLogarithmicUniformRanges(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
 
     def test_SimulatorSupportsRepeatedTasksWithVectorRanges(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -460,7 +469,7 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         case = sedml.SimulatorSupportsRepeatedTasksWithVectorRanges(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
 
         # error handling
         doc = SedDocument()
@@ -535,7 +544,7 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         case = sedml.SimulatorSupportsRepeatedTasksWithFunctionalRanges(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
 
     def test_SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -543,7 +552,7 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         case = sedml.SimulatorSupportsRepeatedTasksWithNestedFunctionalRanges(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
 
     def test_SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -551,14 +560,14 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         case = sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
 
         # test test ignored for non-XML models
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_NON_XML_ARCHIVE_FILENAME)
         case = sedml.SimulatorSupportsRepeatedTasksWithFunctionalRangeVariables(
             published_projects_test_cases=[curated_case])
         with self.assertRaisesRegex(SkippedTestCaseException, 'only implemented for XML-based model'):
-            case.eval(specs)
+            case.eval(specs, self.dirname)
 
     def test_SimulatorSupportsRepeatedTasksWithMultipleSubTasks(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -566,7 +575,7 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         case = sedml.SimulatorSupportsRepeatedTasksWithMultipleSubTasks(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
 
     def test_SimulatorSupportsRepeatedTasksWithChanges(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -574,14 +583,18 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         case = sedml.SimulatorSupportsRepeatedTasksWithChanges(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
         # test test ignored for non-XML models
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_NON_XML_ARCHIVE_FILENAME)
         case = sedml.SimulatorSupportsRepeatedTasksWithChanges(
             published_projects_test_cases=[curated_case])
         with self.assertRaisesRegex(SkippedTestCaseException, 'only implemented for XML-based model'):
-            case.eval(specs)
+            case.eval(specs, self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
     def test_SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -589,7 +602,7 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         case = sedml.SimulatorSupportsRepeatedTasksWithNestedRepeatedTasks(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
 
     def test_SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -597,7 +610,7 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         case = sedml.SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
 
     def test_SimulatorSupportsRepeatedTasksWithSubTasksOfMixedTypes_eval_outputs(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -917,25 +930,35 @@ class SedmlTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorProducesLinear2DPlots(
             published_projects_test_cases=[curated_case])
-        case.eval(specs)
+        case.eval(specs, self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
         case = sedml.SimulatorProducesLogarithmic2DPlots(
             published_projects_test_cases=[curated_case])
-        case.eval(specs)
+        case.eval(specs, self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
         with self.assertRaises(SkippedTestCaseException):
             case = sedml.SimulatorProducesLinear3DPlots(
                 published_projects_test_cases=[curated_case])
-            case.eval(specs)
+            case.eval(specs, self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
         with self.assertRaises(SkippedTestCaseException):
             case = sedml.SimulatorProducesLogarithmic3DPlots(
                 published_projects_test_cases=[curated_case])
-            case.eval(specs)
+            case.eval(specs, self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
         case = sedml.SimulatorProducesMultiplePlots(
             published_projects_test_cases=[curated_case])
-        case.eval(specs)
+        case.eval(specs, self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
     def test_SimulatorCanResolveModelSourcesDefinedByUriFragments(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -944,7 +967,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorCanResolveModelSourcesDefinedByUriFragments(
             published_projects_test_cases=[curated_case])
-        case.eval(specs)
+        case.eval(specs, self.dirname)
 
     def test_SimulatorCanResolveModelSourcesDefinedByUriFragmentsAndInheritChanges(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -953,7 +976,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorCanResolveModelSourcesDefinedByUriFragmentsAndInheritChanges(
             published_projects_test_cases=[curated_case])
-        case.eval(specs)
+        case.eval(specs, self.dirname)
 
     def test_SimulatorSupportsModelAttributeChanges(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -962,14 +985,18 @@ class SedmlTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorSupportsModelAttributeChanges(
             published_projects_test_cases=[curated_case])
-        case.eval(specs)
+        case.eval(specs, self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
         # test test ignored for non-XML models
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_NON_XML_ARCHIVE_FILENAME)
         case = sedml.SimulatorSupportsModelAttributeChanges(
             published_projects_test_cases=[curated_case])
         with self.assertRaisesRegex(SkippedTestCaseException, 'only implemented for XML-based model'):
-            case.eval(specs)
+            case.eval(specs, self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
     def test_SimulatorSupportsComputeModelChanges(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -978,14 +1005,18 @@ class SedmlTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorSupportsComputeModelChanges(
             published_projects_test_cases=[curated_case])
-        case.eval(specs)
+        case.eval(specs, self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
         # test test ignored for non-XML models
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_NON_XML_ARCHIVE_FILENAME)
         case = sedml.SimulatorSupportsComputeModelChanges(
             published_projects_test_cases=[curated_case])
         with self.assertRaisesRegex(SkippedTestCaseException, 'only implemented for XML-based model'):
-            case.eval(specs)
+            case.eval(specs, self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
     def test_SimulatorSupportsAddReplaceRemoveModelElementChanges(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -994,14 +1025,18 @@ class SedmlTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorSupportsAddReplaceRemoveModelElementChanges(
             published_projects_test_cases=[curated_case])
-        case.eval(specs)
+        case.eval(specs, self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
         # test test ignored for non-XML models
         curated_case = SimulatorCanExecutePublishedProject(filename=self.CURATED_NON_XML_ARCHIVE_FILENAME)
         case = sedml.SimulatorSupportsAddReplaceRemoveModelElementChanges(
             published_projects_test_cases=[curated_case])
         with self.assertRaisesRegex(SkippedTestCaseException, 'only implemented for XML-based model'):
-            case.eval(specs)
+            case.eval(specs, self.dirname)
+        if os.path.isdir(self.dirname):
+            shutil.rmtree(self.dirname)
 
     def test_SimulatorSupportsAlgorithmParameters(self):
         specs_path = os.path.join(
@@ -1015,7 +1050,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorSupportsAlgorithmParameters(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
 
         specs = {'algorithms': []}
         self.assertFalse(case.is_curated_sed_algorithm_suitable_for_building_synthetic_archive(specs, Algorithm(kisao_id='KISAO_0000001')))
@@ -1116,7 +1151,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         curated_case.from_json(self.CURATED_ARCHIVE_FILENAME[0:-5], 'expected-results.json')
         case = sedml.SimulatorProducesReportsWithCuratedNumberOfDimensions(
             published_projects_test_cases=[curated_case])
-        case.eval(specs)
+        case.eval(specs, self.dirname)
 
     def test_SimulatorSupportsDataGeneratorsWithDifferentShapes(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -1125,7 +1160,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorSupportsDataGeneratorsWithDifferentShapes(
             published_projects_test_cases=[curated_case])
-        case.eval(specs)
+        case.eval(specs, self.dirname)
 
         case._eval_data_set(numpy.array([1, 3, 4, numpy.nan]), 4, 3)
 
@@ -1145,7 +1180,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = sedml.SimulatorSupportsDataSetsWithDifferentShapes(
             published_projects_test_cases=[curated_case])
-        case.eval(specs)
+        case.eval(specs, self.dirname)
 
         case._eval_data_set('', numpy.array([1, 3, 4, 6]), 4)
 
@@ -1192,4 +1227,4 @@ class SedmlTestCaseTest(unittest.TestCase):
                 {'kisaoId': {'id': 'KISAO_0000560'}},
             ]
         }
-        case.eval(specs)
+        case.eval(specs, self.dirname)

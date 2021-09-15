@@ -6,6 +6,7 @@
 :License: MIT
 """
 from ..exceptions import InvalidOutputsException, SkippedTestCaseException
+from ..utils import simulation_results_isnan
 from ..warnings import InvalidOutputsWarning
 from .published_project import SingleMasterSedDocumentCombineArchiveTestCase, UniformTimeCourseTestCase, ExpectedResultOfSyntheticArchive
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
@@ -1290,7 +1291,10 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
                 if not set(repeated_results_data_set.shape[1:2 * (self.NUM_NESTED_REPEATED_TASKS + 1):2]) == set([self.NUM_SUB_TASKS]):
                     raise InvalidOutputsException('The results of the repeated tasks should have a slice for each sub-task')
 
-                if not numpy.any(numpy.isnan(results_data_set)) and numpy.any(numpy.isnan(repeated_results_data_set)):
+                if (
+                    not numpy.any(simulation_results_isnan(results_data_set))
+                    and numpy.any(simulation_results_isnan(repeated_results_data_set))
+                ):
                     raise InvalidOutputsException('The results of the repeated tasks have unexpected NaNs')
             else:
                 shape = results_data_set.shape
@@ -1324,7 +1328,10 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
                             slice(0, self.RANGE_LENS[1]),
                             slice(0, self.NUM_SUB_TASKS),
                         ] + [slice(0, dim_len) for dim_len in repeated_shape[4:]])
-                        if not numpy.any(numpy.isnan(results_data_set)) and numpy.any(numpy.isnan(repeated_results_data_set[slices])):
+                        if (
+                            not numpy.any(simulation_results_isnan(results_data_set))
+                            and numpy.any(simulation_results_isnan(repeated_results_data_set[slices]))
+                        ):
                             raise InvalidOutputsException('The results of repeated tasks have unexpected NaNs')
 
                         slices = tuple([
@@ -1333,7 +1340,7 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
                             slice(self.RANGE_LENS[1], repeated_shape[2]),
                             slice(0, repeated_shape[3]),
                         ] + [slice(0, dim_len) for dim_len in repeated_shape[4:]])
-                        if not numpy.all(numpy.isnan(repeated_results_data_set[slices])):
+                        if not numpy.all(simulation_results_isnan(repeated_results_data_set[slices])):
                             raise InvalidOutputsException('The results of repeated tasks have unexpected non-NaNs')
 
                     else:
@@ -1345,7 +1352,10 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
                         ] + [
                             slice(0, 1) for dim_len in repeated_shape[2 + len(shape):]
                         ])
-                        if not numpy.any(numpy.isnan(results_data_set)) and numpy.any(numpy.isnan(repeated_results_data_set[slices])):
+                        if (
+                            not numpy.any(simulation_results_isnan(results_data_set))
+                            and numpy.any(simulation_results_isnan(repeated_results_data_set[slices]))
+                        ):
                             raise InvalidOutputsException('The results of repeated tasks have unexpected NaNs')
 
                         remaining_dims = repeated_shape[2 + len(shape):]
@@ -1361,7 +1371,7 @@ class RepeatedTasksTestCase(SimulatorSupportsModelsSimulationsTasksDataGenerator
                             slices.extend([slice(0, remaining_dims[ii_dim]) for ii_dim in range(i_dim + 1, len(remaining_dims))])
                             slices = tuple(slices)
 
-                            if not numpy.all(numpy.isnan(repeated_results_data_set[slices])):
+                            if not numpy.all(simulation_results_isnan(repeated_results_data_set[slices])):
                                 raise InvalidOutputsException('The results of repeated tasks have unexpected non-NaNs')
 
         return True
@@ -1642,7 +1652,7 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
                     if value.shape[-1] != sim.number_of_points + 1:
                         raise InvalidOutputsException('Data set does not have the expected shape')
 
-                    if numpy.any(numpy.isnan(value)):
+                    if numpy.any(simulation_results_isnan(value)):
                         raise InvalidOutputsException('Data set has unexpected non-NaN values')
 
         # remove temporary directory
@@ -1927,14 +1937,14 @@ class SimulatorSupportsDataGeneratorsWithDifferentShapes(UniformTimeCourseTestCa
             raise InvalidOutputsException('Data set does not have the expected shape')
 
         data_set_slice = tuple([slice(0, dim_len) for dim_len in value.shape[0:-1]] + [slice(0, non_nan_points)])
-        if numpy.any(numpy.isnan(value[data_set_slice])):
+        if numpy.any(simulation_results_isnan(value[data_set_slice])):
             raise InvalidOutputsException('Data set has unexpected NaN values')
 
         data_set_slice = tuple(
             [slice(0, dim_len) for dim_len in value.shape[0:-1]]
             + [slice(non_nan_points, length)]
         )
-        if not numpy.all(numpy.isnan(value[data_set_slice])):
+        if not numpy.all(simulation_results_isnan(value[data_set_slice])):
             raise InvalidOutputsException('Data set has unexpected non-NaN values')
 
 
@@ -2061,7 +2071,7 @@ class SimulatorSupportsDataSetsWithDifferentShapes(UniformTimeCourseTestCase):
         if value.shape[-1] != expected_length:
             raise InvalidOutputsException('Data set `{}` does not have the expected shape'.format(id))
 
-        if numpy.any(numpy.isnan(value)):
+        if numpy.any(simulation_results_isnan(value)):
             raise InvalidOutputsException('Data set `{}` has unexpected NaN values'.format(id))
 
     def _eval_time_data_sets(self, value1, value2):

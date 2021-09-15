@@ -78,7 +78,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
 
         with mock.patch.object(combine_archive.WhenACombineArchiveHasAMasterFileSimulatorOnlyExecutesThisFile,
                                'get_expected_reports', side_effect=get_expected_reports):
-            case.eval(specs)
+            case.eval(specs, self.dirname)
 
     def test_WhenACombineArchiveHasNoMasterFileSimulatorExecutesAllSedDocuments(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -101,7 +101,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
 
         with mock.patch.object(combine_archive.WhenACombineArchiveHasNoMasterFileSimulatorExecutesAllSedDocuments,
                                'get_expected_reports', side_effect=get_expected_reports):
-            case.eval(specs)
+            case.eval(specs, self.dirname)
 
     def test_CombineArchiveHasSedDocumentsInNestedDirectories(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -122,7 +122,7 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
 
         with mock.patch.object(combine_archive.CombineArchiveHasSedDocumentsInNestedDirectories,
                                'get_expected_reports', side_effect=get_expected_reports):
-            case.eval(specs)
+            case.eval(specs, self.dirname)
 
     def test_CombineArchiveHasSedDocumentsWithSameNamesInDifferentInNestedDirectories(self):
         specs = {'image': {'url': self.IMAGE}}
@@ -144,4 +144,4 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
 
         with mock.patch.object(combine_archive.CombineArchiveHasSedDocumentsWithSameNamesInDifferentInNestedDirectories,
                                'get_expected_reports', side_effect=get_expected_reports):
-            case.eval(specs)
+            case.eval(specs, self.dirname)

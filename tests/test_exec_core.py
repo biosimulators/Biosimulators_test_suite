@@ -7,11 +7,19 @@ from biosimulators_test_suite.test_case.docker_image import HasBioContainersLabe
 from biosimulators_test_suite.warnings import TestCaseWarning, IgnoredTestCaseWarning
 from unittest import mock
 import sys
+import shutil
+import tempfile
 import unittest
 import warnings
 
 
 class ValidateSimulatorTestCase(unittest.TestCase):
+    def setUp(self):
+        self.dirname = tempfile.mkdtemp()
+
+    def tearDown(self):
+        shutil.rmtree(self.dirname)
+
     def test_summarize_results(self):
         reqs = [
             SedTaskRequirements(model_format='format_2585', simulation_algorithm='KISAO_0000019'),
@@ -56,7 +64,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
                 log="Detail of error",
             ),
         ]
-        summary, failure_details, warning_details, skipped_details = SimulatorValidator.summarize_results(results)
+        summary, failure_details, warning_details, skipped_details = SimulatorValidator.summarize_results(results, debug=True)
         self.assertRegex(summary, 'Passed 3 test cases')
         self.assertRegex(summary, 'Failed 2 test cases')
         self.assertRegex(summary, 'Skipped 3 test cases')
@@ -114,11 +122,11 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
         # passed
         class Case(TestCase):
-            def eval(self, specifications, synthetic_archives_dir=None, dry_run=False, cli=None):
+            def eval(self, specifications, working_dirname, synthetic_archives_dir=None, dry_run=False, cli=None):
                 pass
 
         case = Case()
-        result = validator.eval_case(case)
+        result = validator.eval_case(case, self.dirname)
         self.assertEqual(result.case, case)
         self.assertEqual(result.type, TestCaseResultType.passed)
         self.assertGreater(result.duration, 0.)
@@ -129,11 +137,11 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
         # passed, stdout
         class Case(TestCase):
-            def eval(self, specifications, synthetic_archives_dir=None, dry_run=False, cli=None):
+            def eval(self, specifications, working_dirname, synthetic_archives_dir=None, dry_run=False, cli=None):
                 print('Message')
 
         case = Case()
-        result = validator.eval_case(case)
+        result = validator.eval_case(case, self.dirname)
         self.assertEqual(result.case, case)
         self.assertEqual(result.type, TestCaseResultType.passed)
         self.assertGreater(result.duration, 0.)
@@ -144,12 +152,12 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
         # passed, stdout and std errr
         class Case(TestCase):
-            def eval(self, specifications, synthetic_archives_dir=None, dry_run=False, cli=None):
+            def eval(self, specifications, working_dirname, synthetic_archives_dir=None, dry_run=False, cli=None):
                 print('Stdout', file=sys.stdout)
                 print('Stderr', file=sys.stderr)
 
         case = Case()
-        result = validator.eval_case(case)
+        result = validator.eval_case(case, self.dirname)
         self.assertEqual(result.case, case)
         self.assertEqual(result.type, TestCaseResultType.passed)
         self.assertGreater(result.duration, 0.)
@@ -160,13 +168,13 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
         # passed, warnings
         class Case(TestCase):
-            def eval(self, specifications, synthetic_archives_dir=None, dry_run=False, cli=None):
+            def eval(self, specifications, working_dirname, synthetic_archives_dir=None, dry_run=False, cli=None):
                 warnings.warn('Warning-1', TestCaseWarning)
                 warnings.warn('Warning-2', UserWarning)
                 warnings.warn('Warning-3', TestCaseWarning)
 
         case = Case()
-        result = validator.eval_case(case)
+        result = validator.eval_case(case, self.dirname)
         self.assertEqual(result.case, case)
         self.assertEqual(result.type, TestCaseResultType.passed)
         self.assertGreater(result.duration, 0.)
@@ -179,11 +187,11 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
         # error
         class Case(TestCase):
-            def eval(self, specifications, synthetic_archives_dir=None, dry_run=False, cli=None):
+            def eval(self, specifications, working_dirname, synthetic_archives_dir=None, dry_run=False, cli=None):
                 raise Exception('Big error')
 
         case = Case()
-        result = validator.eval_case(case)
+        result = validator.eval_case(case, self.dirname)
         self.assertEqual(result.case, case)
         self.assertEqual(result.type, TestCaseResultType.failed)
         self.assertGreater(result.duration, 0.)
@@ -194,11 +202,11 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
         # skipped
         class Case(TestCase):
-            def eval(self, specifications, synthetic_archives_dir=None, dry_run=False, cli=None):
+            def eval(self, specifications, working_dirname, synthetic_archives_dir=None, dry_run=False, cli=None):
                 raise SkippedTestCaseException('Reason for skipping')
 
         case = Case()
-        result = validator.eval_case(case)
+        result = validator.eval_case(case, self.dirname)
         self.assertEqual(result.case, case)
         self.assertEqual(result.type, TestCaseResultType.skipped)
         self.assertGreater(result.duration, 0.)

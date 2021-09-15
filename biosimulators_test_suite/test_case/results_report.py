@@ -6,6 +6,7 @@
 :License: MIT
 """
 
+from ..utils import simulation_results_isnan
 from ..warnings import TestCaseWarning
 from .published_project import SingleMasterSedDocumentCombineArchiveTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
@@ -66,7 +67,7 @@ class SimulatorGeneratesReportsOfSimulationResults(SingleMasterSedDocumentCombin
                             '\n  - '.join(sorted(missing_data_sets))))
 
                     for data_set_data in report_data.values():
-                        if numpy.any(numpy.isnan(data_set_data)):
+                        if numpy.any(simulation_results_isnan(data_set_data)):
                             warnings.warn('The results produced by the simulator include `NaN`.', TestCaseWarning)
                             has_warning = True
 

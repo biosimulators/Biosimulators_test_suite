@@ -50,6 +50,7 @@ class ResultsIoTestCase(unittest.TestCase):
                 'exception': {
                     'category': 'NotImplementedError',
                     'message': 'Not implemented',
+                    'traceback': None,
                 },
                 'warnings': [
                     {'category': 'TestCaseWarning', 'message': 'A first important warning'},

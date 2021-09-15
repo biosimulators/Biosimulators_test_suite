@@ -76,4 +76,4 @@ class CombineArchiveTestCaseTest(unittest.TestCase):
         # test synthetic case generated and used to test simulator
         case = results_report.SimulatorGeneratesReportsOfSimulationResults(
             published_projects_test_cases=[curated_case])
-        self.assertTrue(case.eval(specs))
+        self.assertTrue(case.eval(specs, self.dirname))
