@@ -108,7 +108,7 @@ jobs:
           set +e
           git stash pop || true
           git add examples/**/*.omex
-          git commit -m "Updated COMBINE/OMEX archives"
+          git commit -m "chore: Updated COMBINE/OMEX archives"
           if [[ $? = 0 ]]; then
             archivesChanged=1
           else
@@ -226,7 +226,7 @@ jobs:
           git stash pop || true
           git add docs
           git add docs-src
-          git commit -m "Updating compiled documentation"
+          git commit -m "chore: Updating compiled documentation"
           git checkout .
           git clean -f -d
           if [[ $? = 0 ]]; then
