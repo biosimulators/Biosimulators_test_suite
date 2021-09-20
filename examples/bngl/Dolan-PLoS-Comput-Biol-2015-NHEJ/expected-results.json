@@ -25,7 +25,7 @@
     }]
   }],
   "expectedPlots": [{
-    "id": "simulation.sedml/Figure"
+    "id": "Dolan2015.sedml/Figure"
   }],
   "runtimeFailureAlertType": "exception",
   "author": "David W. P. Dolan, Anze Zupanic, Glyn Nelson, Philip Hall, Satomi Miwa, Thomas B. L. Kirkwood & Daryl P. Shanley",
