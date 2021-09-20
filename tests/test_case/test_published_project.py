@@ -128,7 +128,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             },
         })
         self.assertEqual(len(case.expected_plots), 1)
-        self.assertEqual(case.expected_plots[0].id, 'BIOMD0000000912_sim.sedml/plot_1')
+        self.assertEqual(case.expected_plots[0].id, 'BIOMD0000000912_sim.sedml/Figure_1_bottom_left')
 
         self.assertEqual(case.assert_no_extra_reports, False)
         self.assertEqual(case.assert_no_extra_datasets, False)
