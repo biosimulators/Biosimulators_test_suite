@@ -27,7 +27,7 @@
     }]
   }],
   "expectedPlots": [{
-    "id": "simulation.sedml/Figure_3c"
+    "id": "BIOMD0000000678_sim.sedml/Figure_3c"
   }],
   "runtimeFailureAlertType": "exception",
   "author": "Taichiro Tomida, Kenzo Hirose, Azusa Takizawa, Futoshi Shibasaki & Masamitsu Iino",

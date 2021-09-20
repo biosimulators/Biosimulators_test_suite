@@ -29,7 +29,7 @@
     }]
   }],
   "expectedPlots": [{
-    "id": "BIOMD0000000912_sim.sedml/plot_1"
+    "id": "BIOMD0000000912_sim.sedml/Figure_1_bottom_left"
   }],
   "runtimeFailureAlertType": "exception",
   "author": "Giulio Caravagna, Alberto d'Onofrio, Paolo Milazzo, Roberto Barbuti",

@@ -46,16 +46,16 @@
     }]
   }],
   "expectedPlots": [{
-    "id": "simulation.sedml/Figure_3a"
+    "id": "simulation_1.sedml/Figure_3a"
   },
   {
-    "id": "simulation.sedml/Figure_3b"
+    "id": "simulation_1.sedml/Figure_3b"
   },
   {
-    "id": "simulation.sedml/Figure_3c"
+    "id": "simulation_1.sedml/Figure_3c"
   },
   {
-    "id": "simulation.sedml/Figure_3d"
+    "id": "simulation_1.sedml/Figure_3d"
   }],
   "runtimeFailureAlertType": "exception",
   "author": "Andrea Ciliberto, Bela Novak & John J. Tyson",

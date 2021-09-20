@@ -12,27 +12,27 @@
     "dataSets": [
       {"id": "data_set_time", "label": "Time (days)"}, 
       {"id": "data_set_Fe1Tf", "label": "Transferrin with a single bound iron ion"},
-        {"id": "data_set_Fe1Tf_0", "label": "Transferrin with a single bound iron ion (radioactive)"},
-        {"id": "data_set_Fe2Tf", "label": "Transferrin with a two bound iron ions"},
-        {"id": "data_set_Fe2Tf_", "label": "Transferrin with a two bound iron ions (1 radioactive)"},
-        {"id": "data_set_Fe2Tf_0", "label": "Transferrin with a two bound iron ions (2 radioactive)"},
-        {"id": "data_set_FeBM", "label": "Bone marrow"},
-        {"id": "data_set_FeBM_0", "label": "Bone marrow (radioactive)"},
-        {"id": "data_set_FeDuo", "label": "Duodenum"},
-        {"id": "data_set_FeDuo_0", "label": "Duodenum (radioactive)"},
-        {"id": "data_set_FeLiver", "label": "Liver"},
-        {"id": "data_set_FeLiver_0", "label": "Liver (radioactive)"},
-        {"id": "data_set_FeOutside", "label": "Outside of body"},
-        {"id": "data_set_FeRBC", "label": "Red blood cells"},
-        {"id": "data_set_FeRBC_0", "label": "Red blood cells (radioactive)"},
-        {"id": "data_set_FeRest", "label": "Rest of body"},
-        {"id": "data_set_FeRest_0", "label": "Rest of body (radioactive)"},
-        {"id": "data_set_FeSpleen", "label": "Spleen"},
-        {"id": "data_set_FeSpleen_0", "label": "Spleen (radioactive)"},
-        {"id": "data_set_Hepcidin", "label": "Hepcidin"},
-        {"id": "data_set_NTBI", "label": "Non-transferrin bound iron"},
-        {"id": "data_set_NTBI_0", "label": "Non-transferrin bound iron (radioactive)"},
-        {"id": "data_set_Tf", "label": "Apo-transferrin"}
+      {"id": "data_set_Fe1Tf_0", "label": "Transferrin with a single bound iron ion (radioactive)"},
+      {"id": "data_set_Fe2Tf", "label": "Transferrin with a two bound iron ions"},
+      {"id": "data_set_Fe2Tf_", "label": "Transferrin with a two bound iron ions (1 radioactive)"},
+      {"id": "data_set_Fe2Tf_0", "label": "Transferrin with a two bound iron ions (2 radioactive)"},
+      {"id": "data_set_FeBM", "label": "Bone marrow"},
+      {"id": "data_set_FeBM_0", "label": "Bone marrow (radioactive)"},
+      {"id": "data_set_FeDuo", "label": "Duodenum"},
+      {"id": "data_set_FeDuo_0", "label": "Duodenum (radioactive)"},
+      {"id": "data_set_FeLiver", "label": "Liver"},
+      {"id": "data_set_FeLiver_0", "label": "Liver (radioactive)"},
+      {"id": "data_set_FeOutside", "label": "Outside of body"},
+      {"id": "data_set_FeRBC", "label": "Red blood cells"},
+      {"id": "data_set_FeRBC_0", "label": "Red blood cells (radioactive)"},
+      {"id": "data_set_FeRest", "label": "Rest of body"},
+      {"id": "data_set_FeRest_0", "label": "Rest of body (radioactive)"},
+      {"id": "data_set_FeSpleen", "label": "Spleen"},
+      {"id": "data_set_FeSpleen_0", "label": "Spleen (radioactive)"},
+      {"id": "data_set_Hepcidin", "label": "Hepcidin"},
+      {"id": "data_set_NTBI", "label": "Non-transferrin bound iron"},
+      {"id": "data_set_NTBI_0", "label": "Non-transferrin bound iron (radioactive)"},
+      {"id": "data_set_Tf", "label": "Apo-transferrin"}
     ],
     "points": [301],
     "values": [{
@@ -45,8 +45,27 @@
     }]
   }],
   "expectedPlots": [{
-    "id": "Parmar2017_Deficient_Rich_tracer.sedml/Figure_3b"
-  }],
+      "id": "Parmar2017_Deficient_Rich_tracer.sedml/Figure_3b"
+    },
+    {
+      "id": "Parmar2017_Deficient_Rich_tracer.sedml/Figure_3c"
+    },
+    {
+      "id": "Parmar2017_Deficient_Rich_tracer.sedml/Figure_3d"
+    },
+    {
+      "id": "Parmar2017_Deficient_Rich_tracer.sedml/Figure_3e"
+    },
+    {
+      "id": "Parmar2017_Deficient_Rich_tracer.sedml/Figure_3f"
+    },
+    {
+      "id": "Parmar2017_Deficient_Rich_tracer.sedml/Figure_3g"
+    },
+    {
+      "id": "Parmar2017_Deficient_Rich_tracer.sedml/Figure_3h"
+    }
+  ],
   "runtimeFailureAlertType": "exception",
   "author": "Jignesh H. Parmar, Grey Davis, Hope Shevchuk & Pedro Mendes",
   "identifiers": [{
