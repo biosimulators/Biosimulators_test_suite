@@ -4,6 +4,13 @@ graphics opengl
 graphic_iter 5
 
 dim 3
+
+define K_RABBIT_REPRODUCTION 10
+define K_FOX_EAT_RABBIT_AND_REPRODUCE 8000
+define K_FOX_DEATH 10
+define INIT_RABBIT_COUNT 1000
+define INIT_FOX_COUNT 1000
+
 species rabbit fox
 
 boundaries x -100 100 p
@@ -25,12 +32,12 @@ mol_list fox flist
 molperbox 1
 
 difc all 100
-reaction r1 rabbit -> rabbit + rabbit 10
-reaction r2 rabbit + fox -> fox + fox 8000
-reaction r3 fox -> 0 10
+reaction r1 rabbit -> rabbit + rabbit K_RABBIT_REPRODUCTION
+reaction r2 rabbit + fox -> fox + fox K_FOX_EAT_RABBIT_AND_REPRODUCE
+reaction r3 fox -> 0 K_FOX_DEATH
 
-mol 1000 rabbit u u u
-mol 1000 fox u u u
+mol INIT_RABBIT_COUNT rabbit u u u
+mol INIT_FOX_COUNT fox u u u
 
 #cmd B pause
 #output_files lotvoltout.txt

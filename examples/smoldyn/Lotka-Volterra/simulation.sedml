@@ -3,8 +3,7 @@
   <listOfModels>
     <model id="model" language="urn:sedml:language:smoldyn" source="model.txt">
       <listOfChanges>
-        <changeAttribute target="mol rabbit u u u" newValue="500"/>
-        <changeAttribute target="mol fox u u u" newValue="500"/>
+        <changeAttribute target="define K_RABBIT_REPRODUCTION" newValue="10"/>
       </listOfChanges>
     </model>
   </listOfModels>
