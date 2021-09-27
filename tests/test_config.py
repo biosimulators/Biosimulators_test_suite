@@ -51,7 +51,7 @@ class ConfigTestCase(unittest.TestCase):
             runbiosimulations_auth_endpoint='https://run.auth.biosimulations.org', runbiosimulations_audience='runbiosimulations_audience',
             runbiosimulations_api_client_id='runbiosimulations_client_id',
             runbiosimulations_api_client_secret='runbiosimulations_client_secret',
-            runbiosimulations_api_endpoint='https://run.api.biosimulations.org')
+            runbiosimulations_api_endpoint='https://api.biosimulations.org')
 
         self.assertEqual(config.pull_docker_image, True)
         self.assertEqual(config.docker_hub_username, 'user')
@@ -72,4 +72,4 @@ class ConfigTestCase(unittest.TestCase):
         self.assertEqual(config.runbiosimulations_audience, 'runbiosimulations_audience')
         self.assertEqual(config.runbiosimulations_api_client_id, 'runbiosimulations_client_id')
         self.assertEqual(config.runbiosimulations_api_client_secret, 'runbiosimulations_client_secret')
-        self.assertEqual(config.runbiosimulations_api_endpoint, 'https://run.api.biosimulations.org')
+        self.assertEqual(config.runbiosimulations_api_endpoint, 'https://api.biosimulations.org')

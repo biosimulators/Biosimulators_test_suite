@@ -198,7 +198,7 @@ class Config(object):
             self.runbiosimulations_api_client_secret = runbiosimulations_api_client_secret
 
         if runbiosimulations_api_endpoint is None:
-            self.runbiosimulations_api_endpoint = os.getenv('RUNBIOSIMULATIONS_API_ENDPOINT', 'https://run.api.biosimulations.org/')
+            self.runbiosimulations_api_endpoint = os.getenv('RUNBIOSIMULATIONS_API_ENDPOINT', 'https://api.biosimulations.org/')
         else:
             self.runbiosimulations_api_endpoint = runbiosimulations_api_endpoint
 
