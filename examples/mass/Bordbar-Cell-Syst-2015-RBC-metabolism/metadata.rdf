@@ -10,7 +10,7 @@
   xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   >
-  <rdf:Description rdf:about='http://omex-libary.org/Bordbar-Cell-Syst-2015-RBC-metabolism.omex'>
+  <rdf:Description rdf:about='http://omex-library.org/Bordbar-Cell-Syst-2015-RBC-metabolism.omex'>
     <dc:title>Red blood cell metabolism (Bordbar et al., Cell Syst, 2015)</dc:title>
 
     <dc:abstract>A Mass Action Stoichiometric Simulation (MASS) model of the metabolism of human red blood cells.</dc:abstract>
@@ -18,7 +18,7 @@
     <prism:keyword>erythrocyte</prism:keyword>
     <prism:keyword>metabolism</prism:keyword>
 
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Bordbar-Cell-Syst-2015-RBC-metabolism.omex/GraphicalAbstract.jpg"/>
+    <collex:thumbnail rdf:resource="http://omex-library.org/Bordbar-Cell-Syst-2015-RBC-metabolism.omex/GraphicalAbstract.jpg"/>
 
     <!-- taxon -->
     <bqbiol:hasTaxon>

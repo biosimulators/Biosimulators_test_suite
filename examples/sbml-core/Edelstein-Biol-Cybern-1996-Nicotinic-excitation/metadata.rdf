@@ -11,7 +11,7 @@
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 >
-  <rdf:Description rdf:about="http://omex-libary.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex">
+  <rdf:Description rdf:about="http://omex-library.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex">
     <!-- name -->
     <dc:title>Nicotinic excitatory post-synaptic potential (Edelstein et al., Biol Cybern, 1996)</dc:title>
 
@@ -25,7 +25,7 @@
     <prism:keyword>Synapses</prism:keyword>
 
     <!-- thumbnail image -->
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/Figure2.png"/>
+    <collex:thumbnail rdf:resource="http://omex-library.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/Figure2.png"/>
 
     <!-- long description -->
     <dc:description>A kinetic model that links conformational interconversion rates to agonist binding and extends the general principles of the Monod-Wyman-Changeux model of allosteric transitions. The crucial assumption is that the linkage is controlled by the position of the interconversion transition states on a hypothetical linear reaction coordinate. Application of the model to the peripheral nicotine acetylcholine receptor (nAChR) accounts for the main properties of ligand-gating, including single-channel events, and several new relationships are predicted. Kinetic simulations reveal errors inherent in using the dose-response analysis, but justify its application under defined conditions. The model predicts that (in order to overcome the intrinsic stability of the B state and to produce the appropriate cooperativity) channel activation is driven by an A state with a Kd in the 50 nM range, hence some 140-fold stronger than the apparent affinity of the open state deduced previously. According to the model, recovery from the desensitized states may occur via rapid transit through the A state with minimal channel opening, thus without necessarily undergoing a distinct recovery pathway, as assumed in the standard 'cycle' model. Transitions to the desensitized states by low concentration 'pre-pulses' are predicted to occur without significant channel opening, but equilibrium values of IC50 can be obtained only with long pre-pulse times. Predictions are also made concerning allosteric effectors and their possible role in coincidence detection.</dc:description>
@@ -149,7 +149,7 @@
   </rdf:Description>
 
   <!-- links from SED-ML plots to figures of articles -->
-  <rdf:Description rdf:about="http://omex-libary.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/Figure_4b.vega.json">
+  <rdf:Description rdf:about="http://omex-library.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/Figure_4b.vega.json">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1007/s004220050302"/>
@@ -158,7 +158,7 @@
     </bqmodel:is>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://omex-libary.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/BIOMD0000000002_sim.sedml/Figure_4b">
+  <rdf:Description rdf:about="http://omex-library.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/BIOMD0000000002_sim.sedml/Figure_4b">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1007/s004220050302"/>

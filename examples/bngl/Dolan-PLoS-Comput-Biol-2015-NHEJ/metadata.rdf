@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:collex="http://www.collex.org/schema#" xmlns:dc="http://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-  <rdf:Description rdf:about="http://omex-libary.org/Dolan-PLoS-Comput-Biol-2015-NHEJ.omex">
+  <rdf:Description rdf:about="http://omex-library.org/Dolan-PLoS-Comput-Biol-2015-NHEJ.omex">
     <!-- name -->
     <dc:title>DNA damage repair by non-homologous end joining (Dolan et al., PLoS Comput Biol, 2015)</dc:title>
     <!-- short summary -->
@@ -12,7 +12,7 @@
     <prism:keyword>DNA End-Joining Repair</prism:keyword>
     <prism:keyword>Tumor Suppressor Protein p53</prism:keyword>
     <!-- thumbnail image -->
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Dolan-PLoS-Comput-Biol-2015-NHEJ.omex/Figure1.png" />
+    <collex:thumbnail rdf:resource="http://omex-library.org/Dolan-PLoS-Comput-Biol-2015-NHEJ.omex/Figure1.png" />
     <!-- long description -->
     <dc:description>An integrated stochastic model of DNA damage repair by non-homologous end joining and of gamma irradiation-induced cellular senescence in human cells that are not apoptosis-prone. The integrated model successfully explains the changes that occur in the dynamics of DNA damage repair after irradiation. Simulations of p53/p21 dynamics after irradiation agree well with previously published experimental studies. Additionally, the model captures that low-dose fractionated irradiation of cells leads to temporal patterns in p53/p21 that lead to significant cellular senescence. The integrated model is valuable for studying the processes of DNA damage induced cell fate and predicting the effectiveness of DNA damage related medical interventions at the cellular level.</dc:description>
     <!-- taxon -->

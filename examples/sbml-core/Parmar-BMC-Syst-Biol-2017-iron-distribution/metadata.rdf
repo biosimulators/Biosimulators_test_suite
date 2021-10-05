@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:collex="http://www.collex.org/schema#" xmlns:dc="http://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex">
+  <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex">
     <!-- name -->
     <dc:title>Mouse iron distribution (Parmar et al., BMC Syst Biol, 2017)</dc:title>
 
@@ -15,7 +15,7 @@
     <prism:keyword>metabolism</prism:keyword>
 
     <!-- thumbnail image -->
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Figure1.jpg"/>
+    <collex:thumbnail rdf:resource="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Figure1.jpg"/>
 
     <!-- long description -->
     <dc:description>Iron is an essential element of most living organisms but is a dangerous substance when poorly liganded in solution. The hormone hepcidin regulates the export of iron from tissues to the plasma contributing to iron homeostasis and also restricting its availability to infectious agents. Disruption of iron regulation in mammals leads to disorders such as anemia and hemochromatosis, and contributes to the etiology of several other diseases such as cancer and neurodegenerative diseases. Here we test the hypothesis that hepcidin alone is able to regulate iron distribution in different dietary regimes in the mouse using a computational model of iron distribution calibrated with radioiron tracer data.</dc:description>
@@ -129,7 +129,7 @@
   </rdf:Description>
 
   <!-- links from SED-ML plots to figures of articles -->
-  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3b">
+  <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3b">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
@@ -138,7 +138,7 @@
     </bqmodel:is>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3c">
+  <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3c">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
@@ -147,7 +147,7 @@
     </bqmodel:is>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3d">
+  <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3d">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
@@ -156,7 +156,7 @@
     </bqmodel:is>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3e">
+  <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3e">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
@@ -165,7 +165,7 @@
     </bqmodel:is>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3f">
+  <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3f">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
@@ -174,7 +174,7 @@
     </bqmodel:is>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3g">
+  <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3g">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
@@ -183,7 +183,7 @@
     </bqmodel:is>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3h">
+  <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3h">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />

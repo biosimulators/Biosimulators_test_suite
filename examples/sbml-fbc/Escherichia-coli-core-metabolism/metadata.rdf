@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:collex="http://www.collex.org/schema#" xmlns:dc="http://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-  <rdf:Description rdf:about="http://omex-libary.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex">
+  <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex">
     <!-- name -->
     <dc:title>Textbook model of Escherichia coli core metabolism (COBRApy Team, 2020)</dc:title>
     <!-- short summary -->

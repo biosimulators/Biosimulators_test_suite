@@ -10,7 +10,7 @@
     xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 >
-  <rdf:Description rdf:about='http://omex-libary.org/Elowitz-Nature-2000-Repressilator.omex'>
+  <rdf:Description rdf:about='http://omex-library.org/Elowitz-Nature-2000-Repressilator.omex'>
     <dc:title>Repressilator (Elowitz &amp; Leibler, Nature, 2000)</dc:title>
 
     <dc:abstract>Mathematical model of a synthetic oscillator</dc:abstract>
@@ -21,7 +21,7 @@
 
     <dc:description>Mathematical model of a synthetic oscillator implemented using three transcriptional repressors (LacI, tetracycline-resistance transposon (TetR), and cI from phage lambda) and induced in Escherichia coli. In this system, LacI inhibits tetR, TetR inhibits cI, and CI inhibits lacI. Under some combinations of parameters the system oscillates.</dc:description>
 
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Elowitz-Nature-2000-Repressilator.omex/Figure_1a.png"/>
+    <collex:thumbnail rdf:resource="http://omex-library.org/Elowitz-Nature-2000-Repressilator.omex/Figure_1a.png"/>
 
     <!-- taxon -->
     <bqbiol:hasTaxon>
@@ -148,7 +148,7 @@
   </rdf:Description>
 
   <!-- links from SED-ML plots to figures of articles -->
-  <rdf:Description rdf:about="http://omex-libary.org/Elowitz-Nature-2000-Repressilator.omex/simulation.sedml/Figure_1c">
+  <rdf:Description rdf:about="http://omex-library.org/Elowitz-Nature-2000-Repressilator.omex/simulation.sedml/Figure_1c">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1038/35002125"/>

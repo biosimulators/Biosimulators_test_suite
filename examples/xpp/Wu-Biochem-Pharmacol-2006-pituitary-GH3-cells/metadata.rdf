@@ -10,7 +10,7 @@
     xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 >
-  <rdf:Description rdf:about='http://omex-libary.org/Wu-Biochem-Pharmacol-2006-pituitary-GH3-cells.omex'>
+  <rdf:Description rdf:about='http://omex-library.org/Wu-Biochem-Pharmacol-2006-pituitary-GH3-cells.omex'>
     <dc:title>Pituitary GH(3) cells (Wu &amp; Chang, Biochem Pharmacol, 2006)</dc:title>
 
     <dc:abstract>Model how DEPC modifies KATP-channel activity in pituitary GH3 cells.</dc:abstract>
@@ -21,7 +21,7 @@
     <prism:keyword>Kir6.2 KCNJ11</prism:keyword>
     <prism:keyword>ATP-senstive potassium current</prism:keyword>
 
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Wu-Biochem-Pharmacol-2006-pituitary-GH3-cells.omex/Figure4.gif"/>
+    <collex:thumbnail rdf:resource="http://omex-library.org/Wu-Biochem-Pharmacol-2006-pituitary-GH3-cells.omex/Figure4.gif"/>
 
     <!-- taxon -->
     <bqbiol:hasTaxon>
@@ -107,7 +107,7 @@
   </rdf:Description>
 
   <!-- links from SED-ML plots to figures of articles -->
-  <rdf:Description rdf:about="http://omex-libary.org/Wu-Biochem-Pharmacol-2006-pituitary-GH3-cells.omex/simulation.sedml/Figure_7a">
+  <rdf:Description rdf:about="http://omex-library.org/Wu-Biochem-Pharmacol-2006-pituitary-GH3-cells.omex/simulation.sedml/Figure_7a">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.bcp.2005.11.016"/>

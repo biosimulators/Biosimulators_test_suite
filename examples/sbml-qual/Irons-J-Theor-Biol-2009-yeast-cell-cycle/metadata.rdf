@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:collex="http://www.collex.org/schema#" xmlns:dc="http://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-  <rdf:Description rdf:about="http://omex-libary.org/Irons-J-Theor-Biol-2009-yeast-cell-cycle.omex">
+  <rdf:Description rdf:about="http://omex-library.org/Irons-J-Theor-Biol-2009-yeast-cell-cycle.omex">
     <!-- name -->
     <dc:title>Budding yeast cell cycle (Irons, J Theor Biol, 2009)</dc:title>
     <!-- short summary -->
     <dc:abstract>Boolean model of the budding yeast cell cycle.</dc:abstract>
     <!-- thumbnail image -->
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Irons-J-Theor-Biol-2009-yeast-cell-cycle.omex/Figure2.jpg" />
+    <collex:thumbnail rdf:resource="http://omex-library.org/Irons-J-Theor-Biol-2009-yeast-cell-cycle.omex/Figure2.jpg" />
     <!-- long description -->
     <dc:description>Boolean model of the budding yeast cell cycle. The model is consistent with a wide range of wild type and mutant phenotypes and shows remarkable robustness against perturbations, both to reaction times and the states of component genes/proteins.</dc:description>
     <!-- taxon -->
