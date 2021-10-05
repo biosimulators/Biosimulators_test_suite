@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:collex="http://www.collex.org/schema#" xmlns:dc="http://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-  <rdf:Description rdf:about="http://omex-libary.org/Vilar-PNAS-2002-minimal-circardian-clock.omex">
+  <rdf:Description rdf:about="http://omex-library.org/Vilar-PNAS-2002-minimal-circardian-clock.omex">
     <!-- name -->
     <dc:title>Minimal circadian clock (Vilar et al. PNAS, 2002)</dc:title>
     <!-- short summary -->
@@ -8,7 +8,7 @@
     <!-- keywords -->
     <prism:keyword>Circadian Rhythm</prism:keyword>
     <!-- thumbnail image -->
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Vilar-PNAS-2002-minimal-circardian-clock.omex/Figure1.jpg" />
+    <collex:thumbnail rdf:resource="http://omex-library.org/Vilar-PNAS-2002-minimal-circardian-clock.omex/Figure1.jpg" />
     <!-- long description -->
     <dc:description>Model of the circardian clock that incorporates just the essential elements found experimentally: the concentration of a repressor protein and the dynamics of an activator protein forming an inactive complex with the repressor.</dc:description>
     <!-- taxon -->
@@ -107,7 +107,7 @@
     </dc:modified>
   </rdf:Description>
   <!-- links from SED-ML plots to figures of articles -->
-  <rdf:Description rdf:about="http://omex-libary.org/Vilar-PNAS-2002-minimal-circardian-clock.omex/simulation.sedml/plot2d_Fig_1a">
+  <rdf:Description rdf:about="http://omex-library.org/Vilar-PNAS-2002-minimal-circardian-clock.omex/simulation.sedml/plot2d_Fig_1a">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1073/pnas.092133899" />
@@ -115,7 +115,7 @@
       </rdf:Description>
     </bqmodel:is>
   </rdf:Description>
-  <rdf:Description rdf:about="http://omex-libary.org/Vilar-PNAS-2002-minimal-circardian-clock.omex/simulation.sedml/plot2d_Fig_1_c">
+  <rdf:Description rdf:about="http://omex-library.org/Vilar-PNAS-2002-minimal-circardian-clock.omex/simulation.sedml/plot2d_Fig_1_c">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1073/pnas.092133899" />

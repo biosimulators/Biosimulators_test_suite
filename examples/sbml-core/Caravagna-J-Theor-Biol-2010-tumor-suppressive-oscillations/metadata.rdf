@@ -10,7 +10,7 @@
     xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 >
-  <rdf:Description rdf:about='http://omex-libary.org/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex'>
+  <rdf:Description rdf:about='http://omex-library.org/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex'>
     <dc:title>Tumor-suppressive oscillations (Caravagna et al., J Theor Biol, 2010)</dc:title>
 
     <dc:abstract>Hybrid-stochastic model of tumour suppression by the immune system through stochastic oscillations</dc:abstract>
@@ -22,7 +22,7 @@
 
     <dc:description>Hybrid-stochastic version of the Kirschner-Panetta model for tumour-immune System interplay which reproduces a number of features of this essential interaction, including tumour suppression by the immune system through stochastic oscillations.</dc:description>
 
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex/Figure1.jpg"/>
+    <collex:thumbnail rdf:resource="http://omex-library.org/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex/Figure1.jpg"/>
 
     <!-- taxon -->
     <bqbiol:hasTaxon>
@@ -139,7 +139,7 @@
   </rdf:Description>
 
   <!-- links from SED-ML plots to figures of articles -->
-  <rdf:Description rdf:about="http://omex-libary.org/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex/BIOMD0000000912_sim.sedml/Figure_1_bottom_left">
+  <rdf:Description rdf:about="http://omex-library.org/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex/BIOMD0000000912_sim.sedml/Figure_1_bottom_left">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.jtbi.2010.05.013"/>

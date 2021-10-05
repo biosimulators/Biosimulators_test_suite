@@ -10,7 +10,7 @@
   xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   >
-  <rdf:Description rdf:about='http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex'>
+  <rdf:Description rdf:about='http://omex-library.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex'>
     <dc:title>Morphogenesis checkpoint in budding yeast (continuous) (Ciliberto et al., J Cell Biol, 2003)</dc:title>
 
     <dc:abstract>Continuous kinetic model of the molecular network that controls Swe1 and the regulation of cyclin-dependent kinase.</dc:abstract>
@@ -23,8 +23,8 @@
 
     <dc:description>Set of ordinary differential equations that model the molecular network that controls Swe1 and the regulation of cyclin-dependent kinase. The model is based on published observations of budding yeast and analogous control signals in fission yeast. Simulations of the model accurately reproduce the phenotypes of a dozen checkpoint mutants. Among other predictions, the model attributes a new role to Hsl1, a kinase known to play a role in Swe1 degradation: Hsl1 must also be indirectly responsible for potent inhibition of Swe1 activity. The model supports the idea that the morphogenesis checkpoint, like other checkpoints, raises the cell size threshold for progression from one phase of the cell cycle to the next.</dc:description>
 
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/Figure1.jpg"/>
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/Figure2.jpg"/>
+    <collex:thumbnail rdf:resource="http://omex-library.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/Figure1.jpg"/>
+    <collex:thumbnail rdf:resource="http://omex-library.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/Figure2.jpg"/>
 
     <!-- taxon -->
     <bqbiol:hasTaxon>
@@ -158,7 +158,7 @@
   </rdf:Description>
 
   <!-- links from SED-ML plots to figures of articles -->
-  <rdf:Description rdf:about="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/Figure3.vega.json">
+  <rdf:Description rdf:about="http://omex-library.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/Figure3.vega.json">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
@@ -167,7 +167,7 @@
     </bqmodel:is>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/simulation_1.sedml/Figure_3a">
+  <rdf:Description rdf:about="http://omex-library.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/simulation_1.sedml/Figure_3a">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
@@ -176,7 +176,7 @@
     </bqmodel:is>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/simulation_1.sedml/Figure_3b">
+  <rdf:Description rdf:about="http://omex-library.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/simulation_1.sedml/Figure_3b">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
@@ -185,7 +185,7 @@
     </bqmodel:is>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/simulation_1.sedml/Figure_3c">
+  <rdf:Description rdf:about="http://omex-library.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/simulation_1.sedml/Figure_3c">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
@@ -194,7 +194,7 @@
     </bqmodel:is>
   </rdf:Description>
 
-  <rdf:Description rdf:about="http://omex-libary.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/simulation_1.sedml/Figure_3d">
+  <rdf:Description rdf:about="http://omex-library.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-continuous.omex/simulation_1.sedml/Figure_3d">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>

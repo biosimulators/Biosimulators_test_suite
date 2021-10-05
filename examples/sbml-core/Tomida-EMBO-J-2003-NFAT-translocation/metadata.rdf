@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:collex="http://www.collex.org/schema#" xmlns:dc="http://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-  <rdf:Description rdf:about="http://omex-libary.org/Tomida-EMBO-J-2003-NFAT-translocation.omex">
+  <rdf:Description rdf:about="http://omex-library.org/Tomida-EMBO-J-2003-NFAT-translocation.omex">
     <!-- name -->
     <dc:title>Calcium-induced NFAT translocation (Tomida et al., EMBO J, 2003)</dc:title>
     <!-- short summary -->
@@ -10,7 +10,7 @@
     <prism:keyword>Cricetinae</prism:keyword>
     <prism:keyword>NFATC Transcription Factors</prism:keyword>
     <!-- thumbnail image -->
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Tomida-EMBO-J-2003-NFAT-translocation.omex/Figure3a.jpg" />
+    <collex:thumbnail rdf:resource="http://omex-library.org/Tomida-EMBO-J-2003-NFAT-translocation.omex/Figure3a.jpg" />
     <!-- long description -->
     <dc:description>Transcription by the nuclear factor of activated T cells (NFAT) is regulated by the frequency of Ca(2+) oscillation. However, why and how Ca(2+) oscillation regulates NFAT activity remain elusive. NFAT is dephosphorylated by Ca(2+)-dependent phosphatase calcineurin and translocates from the cytoplasm to the nucleus to initiate transcription. We analyzed the kinetics of dephosphorylation and translocation of NFAT. We show that Ca(2+)-dependent dephosphorylation proceeds rapidly, while the rephosphorylation and nuclear transport of NFAT proceed slowly. Therefore, after brief Ca(2+) stimulation, dephosphorylated NFAT has a lifetime of several minutes in the cytoplasm. Thus, Ca(2+) oscillation induces a build-up of dephosphorylated NFAT in the cytoplasm, allowing effective nuclear translocation, provided that the oscillation interval is shorter than the lifetime of dephosphorylated NFAT. We also show that Ca(2+) oscillation is more cost-effective in inducing the translocation of NFAT than continuous Ca(2+) signaling. Thus, the lifetime of dephosphorylated NFAT functions as a working memory of Ca(2+) signals and enables the control of NFAT nuclear translocation by the frequency of Ca(2+) oscillation at a reduced cost of Ca(2+) signaling.</dc:description>
     <!-- taxon -->
@@ -120,7 +120,7 @@
     </dc:modified>
   </rdf:Description>
   <!-- links from SED-ML plots to figures of articles -->
-  <rdf:Description rdf:about="http://omex-libary.org/Tomida-EMBO-J-2003-NFAT-translocation.omex/BIOMD0000000678_sim.sedml/Figure_3c">
+  <rdf:Description rdf:about="http://omex-library.org/Tomida-EMBO-J-2003-NFAT-translocation.omex/BIOMD0000000678_sim.sedml/Figure_3c">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1093/emboj/cdg381" />

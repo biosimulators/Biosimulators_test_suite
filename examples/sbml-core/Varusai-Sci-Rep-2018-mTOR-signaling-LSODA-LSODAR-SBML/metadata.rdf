@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:collex="http://www.collex.org/schema#" xmlns:dc="http://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-  <rdf:Description rdf:about="http://omex-libary.org/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML.omex">
+  <rdf:Description rdf:about="http://omex-library.org/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML.omex">
     <!-- name -->
     <dc:title>mTOR signalling network (Varusai &amp; Nguyen, Sci Reports, 2018)</dc:title>
     <!-- short summary -->
@@ -8,7 +8,7 @@
     <!-- keywords -->
     <prism:keyword>Signal Transduction</prism:keyword>
     <!-- thumbnail image -->
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML.omex/Figure1.jpg" />
+    <collex:thumbnail rdf:resource="http://omex-library.org/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML.omex/Figure1.jpg" />
     <!-- long description -->
     <dc:description>Model of the mechanistic Target of Rapamycin (mTOR) signalling network, an evolutionarily conserved network that controls key cellular processes, including cell growth and metabolism. The model represents the major kinase complexes mTOR Complex 1 and 2 (mTORC1/2) and captures their interactions and feedback loops. The model captures the recently identified DEP domain-containing mTOR-interacting protein (DEPTOR), an endogenous inhibitor of both mTORC1 and 2 through direct interactions which are degraded by mTORC1/2. The model captures abrupt, bistable switches, oscillations and co-existing bistable/oscillatory responses.</dc:description>
     <!-- taxon -->
@@ -100,7 +100,7 @@
     </dc:modified>
   </rdf:Description>
   <!-- links from SED-ML plots to figures of articles -->
-  <rdf:Description rdf:about="http://omex-libary.org/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML.omex/LSODA.sedml/Figure_2c">
+  <rdf:Description rdf:about="http://omex-library.org/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML.omex/LSODA.sedml/Figure_2c">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1038/s41598-017-18400-z" />

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:collex="http://www.collex.org/schema#" xmlns:dc="http://dublincore.org/specifications/dublin-core/dcmi-terms/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-  <rdf:Description rdf:about="http://omex-libary.org/Chaouiya-BMC-Syst-Biol-2013-EGF-TNFa-signaling.omex">
+  <rdf:Description rdf:about="http://omex-library.org/Chaouiya-BMC-Syst-Biol-2013-EGF-TNFa-signaling.omex">
     <!-- name -->
     <dc:title>EGF and TNFα signaling (Chaouiya et al., BMC Syst Biol, 2013)</dc:title>
     <!-- short summary -->
     <dc:abstract>Qualitative model of the EGF and TNFα signaling pathways.</dc:abstract>
     <!-- thumbnail image -->
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Chaouiya-BMC-Syst-Biol-2013-EGF-TNFa-signaling.omex/Figure3.jpg" />
+    <collex:thumbnail rdf:resource="http://omex-library.org/Chaouiya-BMC-Syst-Biol-2013-EGF-TNFa-signaling.omex/Figure3.jpg" />
     <!-- long description -->
     <dc:description>Qualitative model of the EGF and TNFα signaling pathways which captures how EGF and TNFα ligands stimulate ERK, JNK and p38 MAPK cascades, the PI3K/AKT pathways, and the NFκB cascade. In addition, the model encompasses cross-talks between these pathways, as well as two negative feedback loops: one in the NFκB cascade and one in the MAPK cascade.</dc:description>
     <!-- taxon -->
@@ -231,7 +231,7 @@
     </dc:modified>
   </rdf:Description>
   <!-- links from SED-ML plots to figures of articles -->
-  <rdf:Description rdf:about="http://omex-libary.org/Chaouiya-BMC-Syst-Biol-2013-EGF-TNFa-signaling.omex/simulation.sedml/Figure_4a">
+  <rdf:Description rdf:about="http://omex-library.org/Chaouiya-BMC-Syst-Biol-2013-EGF-TNFa-signaling.omex/simulation.sedml/Figure_4a">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/1752-0509-7-135" />

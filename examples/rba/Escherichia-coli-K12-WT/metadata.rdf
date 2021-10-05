@@ -10,7 +10,7 @@
   xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
   >
-  <rdf:Description rdf:about='http://omex-libary.org/Escherichia-coli-K12-WT.omex'>
+  <rdf:Description rdf:about='http://omex-library.org/Escherichia-coli-K12-WT.omex'>
     <dc:title>Escherichia coli K-12 resource allocation (Bulović et al., Metab Eng, 2019)</dc:title>
 
     <dc:abstract>A Resource Balance Analysis (RBA) model of wildtype Escherichia coli K-12.</dc:abstract>
@@ -20,7 +20,7 @@
     <prism:keyword>resource balance analysis</prism:keyword>
     <prism:keyword>RBA</prism:keyword>
 
-    <collex:thumbnail rdf:resource="http://omex-libary.org/Escherichia-coli-K12-WT.omex/FigureS13.jpg"/>
+    <collex:thumbnail rdf:resource="http://omex-library.org/Escherichia-coli-K12-WT.omex/FigureS13.jpg"/>
 
     <!-- taxon -->
     <bqbiol:hasTaxon>
@@ -160,7 +160,7 @@
   </rdf:Description>
 
   <!-- links from SED-ML plots to figures of articles -->
-  <rdf:Description rdf:about="http://omex-libary.org/Escherichia-coli-K12-WT.omex/flux-map.vega.json">
+  <rdf:Description rdf:about="http://omex-library.org/Escherichia-coli-K12-WT.omex/flux-map.vega.json">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.ymben.2019.06.001"/>
