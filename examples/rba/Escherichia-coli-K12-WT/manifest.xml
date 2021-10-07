@@ -8,6 +8,6 @@
   <content location="FigureS13.jpg" format="http://purl.org/NET/mediatypes/image/jpeg" master="false"/>
   <content location="expected-results.json" format="http://purl.org/NET/mediatypes/application/json" master="false"/>
   <content location="reports.h5" format="http://purl.org/NET/mediatypes/application/x-hdf" master="false"/>
-  <content location="flux-map.vega.json" format="http://purl.org/NET/mediatypes/application/vega+json" master="false"/>
+  <content location="flux-map.vg.json" format="http://purl.org/NET/mediatypes/application/vnd.vega.v5+json" master="false"/>
   <content location="flux-map.escher.json" format="http://purl.org/NET/mediatypes/application/escher+json" master="false"/>
 </omexManifest>

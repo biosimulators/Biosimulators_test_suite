@@ -149,7 +149,7 @@
   </rdf:Description>
 
   <!-- links from SED-ML plots to figures of articles -->
-  <rdf:Description rdf:about="http://omex-library.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/Figure_4b.vega.json">
+  <rdf:Description rdf:about="http://omex-library.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/Figure_4b.vg.json">
     <bqmodel:is>
       <rdf:Description>
         <dc:identifier rdf:resource="https://identifiers.org/doi:10.1007/s004220050302"/>
