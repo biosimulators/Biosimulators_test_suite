@@ -2,7 +2,8 @@ from biosimulators_utils.combine.io import CombineArchiveReader
 from biosimulators_utils.combine.data_model import CombineArchiveContentFormat
 from biosimulators_utils.combine.utils import get_sedml_contents
 from biosimulators_utils.combine.validation import validate
-from biosimulators_utils.omex_meta.data_model import OmexMetaSchema
+from biosimulators_utils.config import Config
+from biosimulators_utils.omex_meta.data_model import OmexMetadataSchema
 from biosimulators_utils.report.data_model import ReportFormat
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import Report, Plot2D
@@ -51,7 +52,9 @@ class ExamplesTestCase(unittest.TestCase):
 
         errors, _ = validate(archive, archive_dirname,
                              formats_to_validate=list(CombineArchiveContentFormat.__members__.values()),
-                             metadata_schema=OmexMetaSchema.biosimulations)
+                             config=Config(
+                                 OMEX_METADATA_SCHEMA=OmexMetadataSchema.biosimulations),
+                             )
         if errors:
             msg = 'COMBINE/OMEX archive `{}` is invalid.\n  {}'.format(
                 archive_filename,
