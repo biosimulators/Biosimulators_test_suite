@@ -67,7 +67,7 @@ class LoggingTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
 
         try:
             with open(log_path, 'r') as file:
-                log = yaml.load(file)
+                log = yaml.load(file, Loader=yaml.FullLoader)
         except Exception as exception:
             msg = 'The execution status report produced by the simulator is not valid:\n\n  {}'.format(
                 str(exception).replace('\n', '\n  '))
