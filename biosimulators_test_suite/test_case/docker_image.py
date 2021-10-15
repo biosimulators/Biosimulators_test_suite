@@ -124,7 +124,7 @@ class HasOciLabels(TestCase):
         image = self.get_simulator_docker_image(specifications)
         missing_labels = set(self.EXPECTED_LABELS).difference(set(image.labels.keys()))
         if missing_labels:
-            warnings.warn('The Docker image should have the following Open Container Initiative (OCI) labels:\n  {}'.format(
+            warnings.warn('Docker images are encouraged to have the following Open Container Initiative (OCI) labels:\n  {}'.format(
                 '\n  '.join(sorted(missing_labels))), TestCaseWarning)
 
 
@@ -165,7 +165,7 @@ class HasBioContainersLabels(TestCase):
         image = self.get_simulator_docker_image(specifications)
         missing_labels = set(self.EXPECTED_LABELS).difference(set(image.labels.keys()))
         if missing_labels:
-            warnings.warn('The Docker image should have the following BioContainers labels:\n  {}'.format(
+            warnings.warn('Docker images are encouraged to have the following BioContainers labels:\n  {}'.format(
                 '\n  '.join(sorted(missing_labels))), TestCaseWarning)
 
 

@@ -33,13 +33,13 @@ class DockerImageTestCaseTest(unittest.TestCase):
     def test_HasOciLabels(self):
         case = docker_image.HasOciLabels()
         case.eval({'image': {'url': self.IMAGE}}, self.dirname)
-        with self.assertWarnsRegex(TestCaseWarning, 'should have the following'):
+        with self.assertWarnsRegex(TestCaseWarning, 'are encouraged to have the following'):
             case.eval({'image': {'url': 'hello-world'}}, self.dirname)
 
     def test_HasBioContainersLabels(self):
         case = docker_image.HasBioContainersLabels()
         case.eval({'image': {'url': self.IMAGE}}, self.dirname)
-        with self.assertWarnsRegex(TestCaseWarning, 'should have the following'):
+        with self.assertWarnsRegex(TestCaseWarning, 'are encouraged to have the following'):
             case.eval({'image': {'url': 'hello-world'}}, self.dirname)
 
     def test_SingularityImageExecutesSimulationsSuccessfully(self):
