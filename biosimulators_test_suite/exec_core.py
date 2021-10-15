@@ -304,13 +304,14 @@ class SimulatorValidator(object):
                     log=captured.get_text())
 
     @staticmethod
-    def summarize_results(results, debug=False):
+    def summarize_results(results, debug=False, output_medium=OutputMedium.console):
         """ Get a summary of the results of a set of test cases
 
         Args:
             results (:obj:`list` :obj:`TestCaseResult`): results of executing test cases
             debug (:obj:`bool`, optional): whether to display traceback information about each error with
                 additional information for debugging
+            output_medium (:obj:`OutputMedium`, optional): environment where outputs will be sent
 
         Returns:
             :obj:`tuple`
@@ -336,7 +337,10 @@ class SimulatorValidator(object):
                 failed.append(result_str)
 
                 detail = ''
-                detail += '`{}` ({:.1f} s)\n'.format(result.case.id, result.duration)
+                if output_medium == OutputMedium.gh_issue:
+                    detail += '<details><summary><b><code>{}</code> ({:.1f} s)</b></summary>\n<br/>\n'.format(result.case.id, result.duration)
+                else:
+                    detail += '`{}` ({:.1f} s)\n'.format(result.case.id, result.duration)
                 detail += '\n'
                 if result.case.description:
                     detail += '  {}\n'.format(result.case.description.replace('\n', '\n  '))
@@ -352,11 +356,17 @@ class SimulatorValidator(object):
                 detail += '  ```\n'
                 detail += '\n'
 
-                detail += '  Log:\n'
-                detail += '\n'
-                detail += '  ```\n'
-                detail += '  {}\n'.format(result.log.replace('\n', '\n  ') if result.log else '')
-                detail += '  ```'
+                if result.log:
+                    detail += '  Log:\n'
+                    detail += '\n'
+                    detail += '  ```\n'
+                    detail += '  {}\n'.format(result.log.replace('\n', '\n  '))
+                    detail += '  ```'
+                else:
+                    detail += '  Log: None'
+
+                if output_medium == OutputMedium.gh_issue:
+                    detail += '\n</details>'
 
                 failure_details.append(detail)
 
@@ -365,7 +375,10 @@ class SimulatorValidator(object):
                 skipped.append(result_str)
 
                 detail = ''
-                detail += '`{}` ({:.1f} s)\n'.format(result.case.id, result.duration)
+                if output_medium == OutputMedium.gh_issue:
+                    detail += '<details><summary><b><code>{}</code> ({:.1f} s)</b></summary>\n<br/>\n'.format(result.case.id, result.duration)
+                else:
+                    detail += '`{}` ({:.1f} s)\n'.format(result.case.id, result.duration)
                 detail += '\n'
                 if result.case.description:
                     detail += '  {}\n'.format(result.case.description.replace('\n', '\n  '))
@@ -387,17 +400,26 @@ class SimulatorValidator(object):
                         detail += '  ```\n'
                     detail += '\n'
 
-                detail += '  Log:\n'
-                detail += '\n'
-                detail += '  ```\n'
-                detail += '  {}\n'.format(result.log.replace('\n', '\n  ') if result.log else '')
-                detail += '  ```'
+                if result.log:
+                    detail += '  Log:\n'
+                    detail += '\n'
+                    detail += '  ```\n'
+                    detail += '  {}\n'.format(result.log.replace('\n', '\n  '))
+                    detail += '  ```'
+                else:
+                    detail += '  Log: None\n'
+
+                if output_medium == OutputMedium.gh_issue:
+                    detail += '\n</details>'
 
                 skipped_details.append(detail)
 
             if result.warnings:
                 detail = ''
-                detail += '`{}` ({:.1f} s)\n'.format(result.case.id, result.duration)
+                if output_medium == OutputMedium.gh_issue:
+                    detail += '<details><summary><b><code>{}</code> ({:.1f} s)</b></summary>\n<br/>\n'.format(result.case.id, result.duration)
+                else:
+                    detail += '`{}` ({:.1f} s)\n'.format(result.case.id, result.duration)
                 detail += '\n'
                 if result.case.description:
                     detail += '  {}\n'.format(result.case.description.replace('\n', '\n  '))
@@ -411,11 +433,17 @@ class SimulatorValidator(object):
                     detail += '  ```\n'
                 detail += '\n'
 
-                detail += '  Log:\n'
-                detail += '\n'
-                detail += '  ```\n'
-                detail += '  {}\n'.format(result.log.replace('\n', '\n  ') if result.log else '')
-                detail += '  ```'
+                if result.log:
+                    detail += '  Log:\n'
+                    detail += '\n'
+                    detail += '  ```\n'
+                    detail += '  {}\n'.format(result.log.replace('\n', '\n  '))
+                    detail += '  ```'
+                else:
+                    detail += '  Log: None'
+
+                if output_medium == OutputMedium.gh_issue:
+                    detail += '\n</details>'
 
                 warning_details.append(detail)
 
