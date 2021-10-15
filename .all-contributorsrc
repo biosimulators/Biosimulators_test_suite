@@ -1,0 +1,24 @@
+{
+  "files": [
+    "CONTRIBUTORS.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "jonrkarr",
+      "name": "Jonathan Karr",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2848297?v=4",
+      "profile": "https://www.karrlab.org",
+      "contributions": [
+        "code"
+      ]
+    } 
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Biosimulators_test_suite",
+  "projectOwner": "biosimulators",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}

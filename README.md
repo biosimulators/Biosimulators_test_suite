@@ -2,6 +2,7 @@
 [![PyPI](https://img.shields.io/pypi/v/Biosimulators-test-suite)](https://pypi.org/project/Biosimulators-test-suite/)
 [![CI status](https://github.com/biosimulators/Biosimulators_test_suite/workflows/Continuous%20integration/badge.svg)](https://github.com/biosimulators/Biosimulators_test_suite/actions?query=workflow%3A%22Continuous+integration%22)
 [![Test coverage](https://codecov.io/gh/biosimulators/Biosimulators_test_suite/branch/dev/graph/badge.svg)](https://codecov.io/gh/biosimulators/Biosimulators_test_suite)
+[![All Contributors](https://img.shields.io/github/all-contributors/biosimulators/Biosimulators_test_suite/HEAD)](#contributors-)
 
 # BioSimulators test suite
 
@@ -25,7 +26,7 @@ Installation instructions, tutorial, and API documentation are available [here](
 The software in this package is released under the [MIT License](LICENSE). The modeling projects in this package are released under the [Creative Commons 1.0 Universal (CC0) license](LICENSE-DATA).
 
 ## Development team
-This package was developed by the [Karr Lab](https://www.karrlab.org) at the Icahn School of Medicine at Mount Sinai in New York, the [https://health.uconn.edu/cell-analysis-modeling/](https://health.uconn.edu/cell-analysis-modeling/) at the University of Connecticut, and the [Center for Reproducible Biomedical Modeling](http://reproduciblebiomodels.org).
+This package was developed by the [Karr Lab](https://www.karrlab.org) at the Icahn School of Medicine at Mount Sinai in New York, the [https://health.uconn.edu/cell-analysis-modeling/](https://health.uconn.edu/cell-analysis-modeling/) at the University of Connecticut, and the [Center for Reproducible Biomedical Modeling](http://reproduciblebiomodels.org) with assistance from the contributors listed [here](CONTRIBUTORS.md).
 
 ## Contributing to the test suite
 We enthusiastically welcome contributions to the test suite! Please see the [guide to contributing](CONTRIBUTING.md) and the [developer's code of conduct](CODE_OF_CONDUCT.md).
