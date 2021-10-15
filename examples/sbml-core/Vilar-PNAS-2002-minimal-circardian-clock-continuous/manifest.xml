@@ -6,5 +6,5 @@
   <content location="metadata.rdf" format="http://identifiers.org/combine.specifications/omex-metadata" master="false"/>
   <content location="expected-results.json" format="http://purl.org/NET/mediatypes/application/json" master="false"/>
   <content location="reports.h5" format="http://purl.org/NET/mediatypes/application/x-hdf" master="false"/>
-  <content location="Figure1.jpg" format="http://purl.org/NET/mediatypes/images/jpeg" master="false"/>
+  <content location="Figure1.jpg" format="http://purl.org/NET/mediatypes/image/jpeg" master="false"/>
 </omexManifest>
