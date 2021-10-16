@@ -13,12 +13,41 @@
       "contributions": [
         "code"
       ]
-    } 
+    },
+    {
+      "login": "moraru",
+      "name": "moraru",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7397814?v=4",
+      "profile": "https://github.com/moraru",
+      "contributions": [
+        "data",
+        "ideas"
+      ]
+    },
+    {
+      "login": "gmarupilla",
+      "name": "GMarupilla",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53095348?v=4",
+      "profile": "https://github.com/gmarupilla",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "bilalshaikh42",
+      "name": "Bilal Shaikh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32490144?v=4",
+      "profile": "https://github.com/bilalshaikh42",
+      "contributions": [
+        "ideas"
+      ]
+    }
   ],
   "contributorsPerLine": 7,
   "projectName": "Biosimulators_test_suite",
   "projectOwner": "biosimulators",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "none"
 }
