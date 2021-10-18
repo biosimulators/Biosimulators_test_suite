@@ -475,6 +475,9 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         biosimulators_utils.image.tag_and_push_docker_image(docker_client, image, copy_image_url)
         specifications['image']['url'] = copy_image_url
 
+        image = get_docker_image(docker_client, copy_image_url, pull=False)
+        specifications['image']['digest'] = image.attrs['RepoDigests'][0].partition('@')[2]
+
         is_latest = self.is_submission_latest_version_of_simulator(specifications, existing_version_specifications)
 
         if is_latest:
