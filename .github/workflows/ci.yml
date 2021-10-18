@@ -6,7 +6,7 @@ on:
 jobs:
   getVersionNumber:
     name: Get version number
-    if: startsWith(github.ref, 'refs/tags/') && github.actor != 'biosimulators-daemon' && "!contains(github.event.head_commit.message, '[skip ci]')"
+    if: startsWith(github.ref, 'refs/tags/') && github.actor != 'biosimulators-daemon' && !contains(github.event.head_commit.message, '[skip ci]')
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.get-version-number.outputs.version }}
@@ -21,7 +21,7 @@ jobs:
 
   build:
     name: Lint, test, and compile documentation
-    if: github.actor != 'biosimulators-daemon' && "!contains(github.event.head_commit.message, '[skip ci]')"
+    if: github.actor != 'biosimulators-daemon' && !contains(github.event.head_commit.message, '[skip ci]')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
