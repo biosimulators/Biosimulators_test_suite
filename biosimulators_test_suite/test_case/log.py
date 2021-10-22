@@ -6,6 +6,7 @@
 :License: MIT
 """
 
+from ..config import Config
 from ..exceptions import InvalidOutputsException, SkippedTestCaseException
 from .published_project import SingleMasterSedDocumentCombineArchiveTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
@@ -14,6 +15,8 @@ from biosimulators_utils.log.data_model import Status
 from biosimulators_utils.sedml.data_model import SedDocument, Report  # noqa: F401
 import abc
 import os
+import requests
+import requests.exceptions
 import yaml
 
 __all__ = [
@@ -73,6 +76,27 @@ class LoggingTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
                 str(exception).replace('\n', '\n  '))
             raise InvalidOutputsException(msg)
 
+        config = Config()
+        if config.runbiosimulations_api_endpoint:
+            endpoint = config.runbiosimulations_api_endpoint + 'logs/validate'
+            response = requests.post(endpoint, json=log)
+            try:
+                response.raise_for_status()
+            except requests.exceptions.HTTPError:
+                msg = (
+                    'The simulation log is invalid. Documentation about the log format is available at '
+                    'https://biosimulators.org/conventions and https://api.biosimulators.org.'
+                )
+                error = response.json()['error'][0]
+
+                pointer = error.get('source', {}).get('pointer', None)
+                if pointer:
+                    msg += '\n\nSource: ' + pointer
+
+                msg += '\n\n' + error['detail']
+
+                raise InvalidOutputsException(msg)
+
         self._status_valid = True
 
         def is_status_valid(status, self=self):
@@ -99,10 +123,9 @@ class LoggingTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
                             is_status_valid(output_log['status'])
 
                             els = output_log.get('dataSets', output_log.get('curves', output_log.get('surfaces', None)))
-                            if els is None:
-                                raise KeyError('Outputs must have one of the keys `dataSets`, `curves` or `surfaces`')
-                            for el in els:
-                                is_status_valid(el['status'])
+                            if els is not None:
+                                for el in els:
+                                    is_status_valid(el['status'])
 
         except Exception as exception:
             msg = 'The execution status report produced by the simulator is not valid:\n\n  {}'.format(
