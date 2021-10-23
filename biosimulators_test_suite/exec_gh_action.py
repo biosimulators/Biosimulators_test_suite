@@ -345,15 +345,15 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         self.add_comment_to_issue(self.issue_number, msg, alternative_comment=unable_to_post_results_msg)
 
         if failure_details:
-            msg = '\n## Failures\n\n{}\n\n'.format('### ' + '\n### '.join(failure_details))
+            msg = '\n## Failures\n\n{}\n\n'.format('\n\n'.join(failure_details))
             self.add_comment_to_issue(self.issue_number, msg, alternative_comment=unable_to_post_results_msg)
 
         if warning_details:
-            msg = '\n## Warnings\n\n{}\n\n'.format('### ' + '\n### '.join(warning_details))
+            msg = '\n## Warnings\n\n{}\n\n'.format('\n\n'.join(warning_details))
             self.add_comment_to_issue(self.issue_number, msg, alternative_comment=unable_to_post_results_msg)
 
         if skipped_details:
-            msg = '\n## Skips\n\n{}\n\n'.format('### ' + '\n### '.join(skipped_details))
+            msg = '\n## Skips\n\n{}\n\n'.format('\n\n'.join(skipped_details))
             self.add_comment_to_issue(self.issue_number, msg, alternative_comment=unable_to_post_results_msg)
 
         invalid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.failed]
@@ -426,14 +426,6 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
             test_results (:obj:`list` of :obj:`TestCaseResults`): results of test cases
         """
-        # commit image
-        if submission.validate_image:
-            # copy image to BioSimulators namespace of Docker registry (GitHub Container Registry)
-            self.push_image(specifications, existing_version_specifications)
-
-            # instruct runBioSimulations to generate a Singularity image for the Docker image
-            self.trigger_conversion_of_docker_image_to_singularity(specifications)
-
         # commit submission to BioSimulators database
         if 'biosimulators' not in specifications:
             specifications['biosimulators'] = {}
@@ -449,6 +441,14 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             specifications['biosimulators']['validationTests'] = None
 
         self.post_entry_to_biosimulators_api(specifications, existing_version_specifications)
+
+        # commit image
+        if submission.validate_image:
+            # copy image to BioSimulators namespace of Docker registry (GitHub Container Registry)
+            self.push_image(specifications, existing_version_specifications)
+
+            # instruct runBioSimulations to generate a Singularity image for the Docker image
+            self.trigger_conversion_of_docker_image_to_singularity(specifications)
 
     def push_image(self, specifications, existing_version_specifications):
         """ Push the image for a simulation tool to the GitHub Container Registry
