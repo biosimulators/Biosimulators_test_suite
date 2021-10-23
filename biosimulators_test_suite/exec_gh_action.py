@@ -345,15 +345,15 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         self.add_comment_to_issue(self.issue_number, msg, alternative_comment=unable_to_post_results_msg)
 
         if failure_details:
-            msg = '\n## Failures\n\n{}\n\n'.format('### ' + '\n### '.join(failure_details))
+            msg = '\n## Failures\n\n{}\n\n'.format('\n\n'.join(failure_details))
             self.add_comment_to_issue(self.issue_number, msg, alternative_comment=unable_to_post_results_msg)
 
         if warning_details:
-            msg = '\n## Warnings\n\n{}\n\n'.format('### ' + '\n### '.join(warning_details))
+            msg = '\n## Warnings\n\n{}\n\n'.format('\n\n'.join(warning_details))
             self.add_comment_to_issue(self.issue_number, msg, alternative_comment=unable_to_post_results_msg)
 
         if skipped_details:
-            msg = '\n## Skips\n\n{}\n\n'.format('### ' + '\n### '.join(skipped_details))
+            msg = '\n## Skips\n\n{}\n\n'.format('\n\n'.join(skipped_details))
             self.add_comment_to_issue(self.issue_number, msg, alternative_comment=unable_to_post_results_msg)
 
         invalid_cases = [case_result for case_result in case_results if case_result.type == TestCaseResultType.failed]
