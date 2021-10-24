@@ -426,6 +426,11 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
             test_results (:obj:`list` of :obj:`TestCaseResults`): results of test cases
         """
+        # commit image
+        if submission.validate_image:
+            # copy image to BioSimulators namespace of Docker registry (GitHub Container Registry)
+            self.push_image(specifications, existing_version_specifications)
+
         # commit submission to BioSimulators database
         if 'biosimulators' not in specifications:
             specifications['biosimulators'] = {}
@@ -444,9 +449,6 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
 
         # commit image
         if submission.validate_image:
-            # copy image to BioSimulators namespace of Docker registry (GitHub Container Registry)
-            self.push_image(specifications, existing_version_specifications)
-
             # instruct runBioSimulations to generate a Singularity image for the Docker image
             self.trigger_conversion_of_docker_image_to_singularity(specifications)
 
