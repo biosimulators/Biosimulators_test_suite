@@ -10,8 +10,8 @@
     }
   ],
   "image": {
-    "url": "ghcr.io/biosimulators/biosimulators_copasi/copasi:latest",
-    "digest": "sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "url": "ghcr.io/biosimulators/biosimulators_copasi/copasi:4.34.251",
+    "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
     "format": {
       "namespace": "EDAM",
       "id": "format_3973", "version": null, "supportedFeatures": []
@@ -290,7 +290,7 @@
         "title": "COPASI and its applications in biotechnology",
         "authors": "Frank T. Bergmann, Stefan Hoops, Brian Klahn, Ursula Kummer, Pedro Mendes Jürgen Pahle & Sven Sahle",
         "journal": "Journal of Biotechnology",
-        "volume": 261,
+        "volume": "261",
         "pages": "215-220",
         "year": 2017,
         "identifiers": [
@@ -305,7 +305,7 @@
         "title": "Computational modeling of biochemical networks using COPASI",
         "authors": "Pedro Mendes, Stefan Hoops, Sven Sahle, Ralph Gauges, Joseph Dada & Ursula Kummer",
         "journal": "Methods in Molecular Biology",
-        "volume": 500,
+        "volume": "500",
         "pages": "17-59",
         "year": 2009,
         "identifiers": [
@@ -320,8 +320,8 @@
         "title": "COPASI—a complex pathway simulator",
         "authors": "Stefan Hoops, Sven Sahle, Ralph Gauges, Christine Lee, Jürgen Pahle, Natalia Simus, Mudita Singhal, Liang Xu, Pedro Mendes & Ursula Kummer",
         "journal": "Bioinformatics",
-        "volume": 22,
-        "issue": 24,
+        "volume": "22",
+        "issue": "24",
         "pages": "3067-3074",
         "year": 2006,
         "identifiers": [
@@ -655,8 +655,8 @@
           "title": "Implicit Runge--Kutta methods based on Radau quadrature formula",
           "authors": "Xiaohua Ding & Jiabo Tan",
           "journal": "International Journal of Computer Mathematics",
-          "volume": 86,
-          "issue": 8,
+          "volume": "86",
+          "issue": "8",
           "pages": "1394-1404",
           "year": 2009,
           "identifiers": [
@@ -872,8 +872,8 @@
           "title": "Efficient exact stochastic simulation of chemical systems with many species and many channels",
           "authors": "Michael A. Gibson & Jehoshua Bruck",
           "journal": "Journal of Physical Chemistry A",
-          "volume": 104,
-          "issue": 9,
+          "volume": "104",
+          "issue": "9",
           "pages": "1876-1889",
           "year": 2000,
           "identifiers": [
@@ -1038,8 +1038,8 @@
           "title": "Exact stochastic simulation of coupled chemical reactions",
           "authors": "Daniel T. Gillespie",
           "journal": "Journal of Physical Chemistry",
-          "volume": 81,
-          "issue": 25,
+          "volume": "81",
+          "issue": "25",
           "pages": "2340-2361",
           "year": 1977,
           "identifiers": [
@@ -1204,8 +1204,8 @@
           "title": "Approximate accelerated stochastic simulation of chemically reacting systems",
           "authors": "Daniel T. Gillespie",
           "journal": "Journal of Chemical Physics",
-          "volume": 115,
-          "issue": 4,
+          "volume": "115",
+          "issue": "4",
           "pages": "1716–1733",
           "year": 2001,
           "identifiers": [
@@ -1387,8 +1387,8 @@
           "title": "Adaptive explicit-implicit tau-leaping method with automatic tau selection",
           "authors": "Yang Cao, Daniel T. Gillespie & Linda R. Petzold",
           "journal": "Journal of Chemical Physics",
-          "volume": 126,
-          "issue": 22,
+          "volume": "126",
+          "issue": "22",
           "pages": "224101",
           "year": 2007,
           "identifiers": [
@@ -1570,7 +1570,7 @@
           "title": "COPASI and its applications in biotechnology",
           "authors": "Frank T. Bergmann, Stefan Hoops, Brian Klahn, Ursula Kummer, Pedro Mendes Jürgen Pahle & Sven Sahle",
           "journal": "Journal of Biotechnology",
-          "volume": 261,
+          "volume": "261",
           "pages": "215-220",
           "year": 2017,
           "identifiers": [
@@ -1585,7 +1585,7 @@
           "title": "Computational modeling of biochemical networks using COPASI",
           "authors": "Pedro Mendes, Stefan Hoops, Sven Sahle, Ralph Gauges, Joseph Dada & Ursula Kummer",
           "journal": "Methods in Molecular Biology",
-          "volume": 500,
+          "volume": "500",
           "pages": "17-59",
           "year": 2009,
           "identifiers": [
@@ -1600,8 +1600,8 @@
           "title": "COPASI—a complex pathway simulator",
           "authors": "Stefan Hoops, Sven Sahle, Ralph Gauges, Christine Lee, Jürgen Pahle, Natalia Simus, Mudita Singhal, Liang Xu, Pedro Mendes & Ursula Kummer",
           "journal": "Bioinformatics",
-          "volume": 22,
-          "issue": 24,
+          "volume": "22",
+          "issue": "24",
           "pages": "3067-3074",
           "year": 2006,
           "identifiers": [
@@ -1848,7 +1848,7 @@
           "title": "COPASI and its applications in biotechnology",
           "authors": "Frank T. Bergmann, Stefan Hoops, Brian Klahn, Ursula Kummer, Pedro Mendes Jürgen Pahle & Sven Sahle",
           "journal": "Journal of Biotechnology",
-          "volume": 261,
+          "volume": "261",
           "pages": "215-220",
           "year": 2017,
           "identifiers": [
@@ -1863,7 +1863,7 @@
           "title": "Computational modeling of biochemical networks using COPASI",
           "authors": "Pedro Mendes, Stefan Hoops, Sven Sahle, Ralph Gauges, Joseph Dada & Ursula Kummer",
           "journal": "Methods in Molecular Biology",
-          "volume": 500,
+          "volume": "500",
           "pages": "17-59",
           "year": 2009,
           "identifiers": [
@@ -1878,8 +1878,8 @@
           "title": "COPASI—a complex pathway simulator",
           "authors": "Stefan Hoops, Sven Sahle, Ralph Gauges, Christine Lee, Jürgen Pahle, Natalia Simus, Mudita Singhal, Liang Xu, Pedro Mendes & Ursula Kummer",
           "journal": "Bioinformatics",
-          "volume": 22,
-          "issue": 24,
+          "volume": "22",
+          "issue": "24",
           "pages": "3067-3074",
           "year": 2006,
           "identifiers": [
@@ -2177,7 +2177,7 @@
           "title": "COPASI and its applications in biotechnology",
           "authors": "Frank T. Bergmann, Stefan Hoops, Brian Klahn, Ursula Kummer, Pedro Mendes Jürgen Pahle & Sven Sahle",
           "journal": "Journal of Biotechnology",
-          "volume": 261,
+          "volume": "261",
           "pages": "215-220",
           "year": 2017,
           "identifiers": [
@@ -2192,7 +2192,7 @@
           "title": "Computational modeling of biochemical networks using COPASI",
           "authors": "Pedro Mendes, Stefan Hoops, Sven Sahle, Ralph Gauges, Joseph Dada & Ursula Kummer",
           "journal": "Methods in Molecular Biology",
-          "volume": 500,
+          "volume": "500",
           "pages": "17-59",
           "year": 2009,
           "identifiers": [
@@ -2207,8 +2207,8 @@
           "title": "COPASI—a complex pathway simulator",
           "authors": "Stefan Hoops, Sven Sahle, Ralph Gauges, Christine Lee, Jürgen Pahle, Natalia Simus, Mudita Singhal, Liang Xu, Pedro Mendes & Ursula Kummer",
           "journal": "Bioinformatics",
-          "volume": 22,
-          "issue": 24,
+          "volume": "22",
+          "issue": "24",
           "pages": "3067-3074",
           "year": 2006,
           "identifiers": [
@@ -2440,8 +2440,8 @@
           "title": "Second order Runge-Kutta methods for Itô stochastic differential equations",
           "authors": "Andreas Rößler",
           "journal": "SIAM Journal Numerical Analysis",
-          "volume": 47,
-          "issue": 3,
+          "volume": "47",
+          "issue": "3",
           "pages": "1713-1738",
           "year": 2009,
           "identifiers": [
@@ -2456,7 +2456,7 @@
           "title": "The chemical Langevin equation",
           "authors": "Daniel T. Gillespie",
           "journal": "Journal Chemical Physics",
-          "volume": 113,
+          "volume": "113",
           "pages": "297",
           "year": 2000,
           "identifiers": [

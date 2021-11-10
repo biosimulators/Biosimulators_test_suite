@@ -1042,6 +1042,7 @@ class SedmlTestCaseTest(unittest.TestCase):
         specs_path = os.path.join(
             os.path.dirname(__file__), '..', 'fixtures', 'COPASI.specs.json')
         specs = read_simulator_specs(specs_path)
+        specs['image']['url'] = 'ghcr.io/biosimulators/biosimulators_copasi/copasi:latest'
         curated_case = SimulatorCanExecutePublishedProject(
             filename=os.path.join(
                 os.path.dirname(__file__), '..', '..',
