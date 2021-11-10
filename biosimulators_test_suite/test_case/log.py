@@ -31,7 +31,7 @@ __all__ = [
 class LoggingTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
     """ Test that simulation tool can log its execution """
 
-    REPORT_ERROR_AS_SKIP = True
+    REPORT_ERROR_AS_SKIP = False
     VALIDATE_SED_DOCUMENT_LOGS = False
     VALIDATE_TASK_LOGS = False
     VALIDATE_OUTPUT_LOGS = False
