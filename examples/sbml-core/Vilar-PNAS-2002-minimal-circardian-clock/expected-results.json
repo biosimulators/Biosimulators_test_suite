@@ -9,11 +9,6 @@
     {
       "modelFormat": "format_2585",
       "modelFormatFeatures": [],
-      "simulationAlgorithm": "KISAO_0000030"
-    },
-    {
-      "modelFormat": "format_2585",
-      "modelFormatFeatures": [],
       "simulationAlgorithm": "KISAO_0000027"
     }
   ],
@@ -123,60 +118,7 @@
           "400": 200.0
         }
       }]
-    },
-    {
-      "id": "simulation.sedml/report_Euler_default",
-      "dataSets": [{
-          "id": "dataSet_2_time",
-          "label": "dataSet_time"
-        },
-        {
-          "id": "dataSet_2_0",
-          "label": "dataSet_0"
-        },
-        {
-          "id": "dataSet_2_1",
-          "label": "dataSet_1"
-        },
-        {
-          "id": "dataSet_2_2",
-          "label": "dataSet_2"
-        },
-        {
-          "id": "dataSet_2_3",
-          "label": "dataSet_3"
-        },
-        {
-          "id": "dataSet_2_4",
-          "label": "dataSet_4"
-        },
-        {
-          "id": "dataSet_2_5",
-          "label": "dataSet_5"
-        },
-        {
-          "id": "dataSet_2_6",
-          "label": "dataSet_6"
-        },
-        {
-          "id": "dataSet_2_7",
-          "label": "dataSet_7"
-        },
-        {
-          "id": "dataSet_2_8",
-          "label": "dataSet_8"
-        }
-      ],
-      "points": [1001],
-      "values": [{
-        "id": "dataSet_2_time",
-        "label": "dataSet_time",
-        "value": {
-          "0": 0.0,
-          "1000": 200.0
-        }
-      }]
-    },
+    },    
     {
       "id": "simulation.sedml/report_Euler_small_step_size",
       "dataSets": [{
@@ -342,8 +284,6 @@
     },
     {
       "id": "simulation.sedml/plot2d_low_delta_R_det"
-    }, {
-      "id": "simulation.sedml/plot2d_Euler_default"
     }, {
       "id": "simulation.sedml/plot2d_Euler_small_step_size"
     }, {
