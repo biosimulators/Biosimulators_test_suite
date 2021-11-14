@@ -183,7 +183,7 @@ class Config(object):
             self.runbiosimulations_auth_endpoint = runbiosimulations_auth_endpoint
 
         if runbiosimulations_audience is None:
-            self.runbiosimulations_audience = os.getenv('RUNBIOSIMULATIONS_AUDIENCE', 'dispatch.biosimulations.org')
+            self.runbiosimulations_audience = os.getenv('RUNBIOSIMULATIONS_AUDIENCE', 'api.biosimulations.org')
         else:
             self.runbiosimulations_audience = runbiosimulations_audience
 
