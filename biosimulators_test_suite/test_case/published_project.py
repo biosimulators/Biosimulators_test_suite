@@ -20,7 +20,7 @@ from biosimulators_utils.image import convert_docker_image_to_singularity
 from biosimulators_utils.report.data_model import ReportFormat
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import (  # noqa: F401
-    Report, Task, UniformTimeCourseSimulation,
+    Output, Report, Task, UniformTimeCourseSimulation,
     DataGenerator, Variable, Symbol, DataSet,
     Model, ModelLanguagePattern, Simulation, Algorithm)
 from biosimulators_utils.sedml.io import SedmlSimulationReader, SedmlSimulationWriter
@@ -396,7 +396,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
                             errors.append('Data set {} of report {} does not have expected values'.format(
                                 data_set_id, expected_report.id))
 
-            report_ids = set(report_reader.get_ids(working_dirname))
+            report_ids = set(report_reader.get_ids(working_dirname, type=Report))
             expected_report_ids = set(report.id for report in self.expected_reports)
             extra_report_ids = report_ids.difference(expected_report_ids)
             if extra_report_ids:
@@ -406,6 +406,17 @@ class SimulatorCanExecutePublishedProject(TestCase):
                 else:
                     warnings.warn('Unexpected reports were produced:\n  {}'.format(
                         '\n  '.join(sorted(extra_report_ids))), InvalidOutputsWarning)
+
+            plot_ids = set(report_reader.get_ids(working_dirname, type=Output)).difference(report_ids)
+            expected_plot_ids = set(plot.id for plot in self.expected_plots)
+            extra_plot_ids = plot_ids.difference(expected_plot_ids)
+            if extra_plot_ids:
+                if self.assert_no_extra_plots:
+                    errors.append('Unexpected reports for data for plots were produced:\n  {}'.format(
+                        '\n  '.join(sorted(extra_plot_ids))))
+                else:
+                    warnings.warn('Unexpected reports for data for plots were produced:\n  {}'.format(
+                        '\n  '.join(sorted(extra_plot_ids))), InvalidOutputsWarning)
 
         # check expected outputs created: plots
         if os.path.isfile(os.path.join(working_dirname, get_config().PLOTS_PATH)):
