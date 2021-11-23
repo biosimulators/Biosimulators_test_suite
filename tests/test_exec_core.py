@@ -74,10 +74,22 @@ class ValidateSimulatorTestCase(unittest.TestCase):
 
     def test_find_cases(self):
         specifications = 'https://raw.githubusercontent.com/biosimulators/Biosimulators_COPASI/dev/biosimulators.json'
+
         case_ids = [
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+        ]
+        validator = SimulatorValidator(specifications, case_ids=case_ids)
+        n_cases = 0
+        for suite_cases in validator.cases.values():
+            n_cases += len(suite_cases)
+        self.assertEqual(n_cases, 6)
+
+        case_ids = [
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock-continuous',
         ]
         validator = SimulatorValidator(specifications, case_ids=case_ids)
         self.assertGreaterEqual(len(validator.cases), 4)
@@ -221,7 +233,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
         case_ids = [
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
-            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock-continuous',
         ]
         validator = SimulatorValidator(specifications, case_ids=case_ids)
         self.assertGreaterEqual(len(validator.cases), 3)
@@ -246,7 +258,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
         case_ids = [
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
-            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock-continuous',
         ]
         validator = SimulatorValidator(specifications, case_ids=case_ids)
 
@@ -264,7 +276,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
         case_ids = [
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
-            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock-continuous',
         ]
         validator = SimulatorValidator(specifications, case_ids=case_ids)
 
@@ -282,7 +294,7 @@ class ValidateSimulatorTestCase(unittest.TestCase):
         case_ids = [
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Tomida-EMBO-J-2003-NFAT-translocation',
             'published_project.SimulatorCanExecutePublishedProject:sbml-core/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML',
-            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock',
+            'published_project.SimulatorCanExecutePublishedProject:sbml-core/Vilar-PNAS-2002-minimal-circardian-clock-continuous',
         ]
         validator = SimulatorValidator(specifications, case_ids=case_ids)
 

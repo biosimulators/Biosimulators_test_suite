@@ -137,10 +137,11 @@ class SimulatorValidator(object):
             if ids is None:
                 cases[suite_name].append(case)
                 break
-            for id in ids:
-                if id in case.id:
-                    cases[suite_name].append(case)
-                    break
+            else:
+                for id in ids:
+                    if id in case.id:
+                        cases[suite_name].append(case)
+                        break
 
         # warn if desired cases weren't found
         if ids is not None:
