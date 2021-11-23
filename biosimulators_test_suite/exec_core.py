@@ -134,8 +134,13 @@ class SimulatorValidator(object):
         suite_name = published_project.__name__.replace('biosimulators_test_suite.test_case.', '')
         cases[suite_name] = []
         for case in all_published_projects_test_cases:
-            if ids is None or case.id in ids:
+            if ids is None:
                 cases[suite_name].append(case)
+                break
+            for id in ids:
+                if id in case.id:
+                    cases[suite_name].append(case)
+                    break
 
         # warn if desired cases weren't found
         if ids is not None:
@@ -175,8 +180,18 @@ class SimulatorValidator(object):
                 and issubclass(child, TestCase)
                 and not inspect.isabstract(child)
             ):
-                id = module_name + '.' + child_name
-                if ids is None or id in ids:
+                case_id = module_name + '.' + child_name
+
+                if ids is None:
+                    use_case = True
+                else:
+                    use_case = False
+                    for id in ids:
+                        if id in case_id:
+                            use_case = True
+                            break
+
+                if use_case:
                     description = child.__doc__ or None
                     if description:
                         description_lines = (description
@@ -187,13 +202,14 @@ class SimulatorValidator(object):
                                              .split('\n'))
                         description = ' '.join(line.strip() for line in description_lines) or None
                     if issubclass(child, published_project.SyntheticCombineArchiveTestCase):
-                        case = child(id=id, description=description, output_medium=self.output_medium,
+                        case = child(id=case_id, description=description, output_medium=self.output_medium,
                                      published_projects_test_cases=published_projects_test_cases)
                     else:
-                        case = child(id=id, description=description, output_medium=self.output_medium)
+                        case = child(id=case_id, description=description, output_medium=self.output_medium)
                     cases.append(case)
+
                 else:
-                    ignored_ids.append(id)
+                    ignored_ids.append(case_id)
 
         if ignored_ids:
             warnings.warn('Some test case(s) were ignored:\n  {}'.format('\n  '.join(sorted(ignored_ids))), IgnoredTestCaseWarning)

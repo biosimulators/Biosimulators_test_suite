@@ -37,7 +37,9 @@ class BaseController(cement.Controller):
                     "Ids of test cases of evaluate (e.g., "
                       "'sedml.SimulatorSupportsModelAttributeChanges', "
                       "'published_project.SimulatorCanExecutePublishedProject:"
-                      "sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations'). "
+                      "sbml-core/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations') "
+                      "substrings of ids of test cases to evaluate (e.g., 'sedml.', 'published_project.' "
+                      "to evaluate all SED-ML test cases or all test cases involving published projects). "
                       "Default: evaluate all test cases"
                 ),
             )),
