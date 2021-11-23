@@ -110,7 +110,7 @@ class CliDescribesSupportedEnvironmentVariablesInline(TestCase):
         image_url = specifications['image']['url']
 
         cli = [cli] if cli else ['docker', 'run', '--tty', '--rm', image_url]
-        result = subprocess.run(cli + [' -h'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        result = subprocess.run(cli + ['-h'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         log = result.stdout.decode() if result.stdout else ''
 
         potentially_missing_env_vars = []
