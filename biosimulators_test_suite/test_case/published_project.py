@@ -74,6 +74,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
         assert_no_extra_plots (:obj:`bool`): if :obj:`True`, raise an exception if the simulator produces unexpected plots
         r_tol (:obj:`float`): relative tolerence
         a_tol (:obj:`float`): absolute tolerence
+        minimum_number_of_synthetic_uniform_time_steps (:obj:`int`): minimum number of steps to use for derived simulation experiments
     """
 
     def __init__(self, id=None, name=None, filename=None,
@@ -82,7 +83,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
                  runtime_failure_alert_type=AlertType.exception,
                  assert_no_extra_reports=False, assert_no_extra_datasets=False,
                  assert_no_missing_plots=False, assert_no_extra_plots=False,
-                 r_tol=1e-4, a_tol=0.,
+                 r_tol=1e-4, a_tol=0., minimum_number_of_synthetic_uniform_time_steps=10,
                  output_medium=OutputMedium.console):
         """
         Args:
@@ -101,6 +102,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
             assert_no_extra_plots (:obj:`bool`, optional): if :obj:`True`, raise an exception if the simulator produces unexpected plots
             r_tol (:obj:`float`, optional): relative tolerence
             a_tol (:obj:`float`, optional): absolute tolerence
+            minimum_number_of_synthetic_uniform_time_steps (:obj:`int`, optional): minimum number of steps to use for derived simulation experiments
             output_medium (:obj:`OutputMedium`, optional): medium the description should be formatted for
         """
         super(SimulatorCanExecutePublishedProject, self).__init__(id, name, output_medium=output_medium)
@@ -119,6 +121,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
         self.assert_no_extra_plots = assert_no_extra_plots
         self.r_tol = r_tol
         self.a_tol = a_tol
+        self.minimum_number_of_synthetic_uniform_time_steps = minimum_number_of_synthetic_uniform_time_steps
 
     def get_description(self):
         """ Get a description of the case
