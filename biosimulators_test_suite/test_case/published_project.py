@@ -1033,7 +1033,10 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
             if False and isinstance(key_sim, UniformTimeCourseSimulation):
                 key_sim.output_end_time = (
                     key_sim.output_start_time
-                    + min(self._published_projects_test_case.minimum_number_of_uniform_time_steps_points, key_sim.number_of_points) / key_sim.number_of_points * (key_sim.output_end_time - key_sim.output_start_time)
+                    + (
+                        min(self._published_projects_test_case.minimum_number_of_uniform_time_steps_points, key_sim.number_of_points)
+                        / key_sim.number_of_points * (key_sim.output_end_time - key_sim.output_start_time)
+                      )
                 )
                 key_sim.number_of_points = min(self._published_projects_test_case.minimum_number_of_uniform_time_steps, key_sim.number_of_points)
 
