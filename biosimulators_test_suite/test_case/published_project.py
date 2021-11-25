@@ -255,6 +255,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
         self.assert_no_extra_plots = data.get('assertNoExtraPlots', False)
         self.r_tol = data.get('r_tol', 1e-4)
         self.a_tol = data.get('a_tol', 0.)
+        self.minimum_number_of_uniform_time_steps = data.get('minimumNumberOfUniformTimeSteps', 10)
 
         self.description = self.get_description()
 
@@ -1029,12 +1030,12 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
                         break
 
             key_sim = key_task.simulation
-            if isinstance(key_sim, UniformTimeCourseSimulation):
+            if False and isinstance(key_sim, UniformTimeCourseSimulation):
                 key_sim.output_end_time = (
                     key_sim.output_start_time
-                    + 10 / key_sim.number_of_points * (key_sim.output_end_time - key_sim.output_start_time)
+                    + min(self._published_projects_test_case.minimum_number_of_uniform_time_steps_points, key_sim.number_of_points) / key_sim.number_of_points * (key_sim.output_end_time - key_sim.output_start_time)
                 )
-                key_sim.number_of_points = 10
+                key_sim.number_of_points = min(self._published_projects_test_case.minimum_number_of_uniform_time_steps, key_sim.number_of_points)
 
             doc.models = [key_task.model]
             doc.simulations = [key_task.simulation]
