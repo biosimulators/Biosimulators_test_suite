@@ -321,6 +321,7 @@ class SedmlTestCaseTest(unittest.TestCase):
 
     def test_SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes_build_synthetic_archives(self):
         case = sedml.SimulatorSupportsUniformTimeCoursesWithNonZeroOutputStartTimes()
+        case._published_projects_test_case = mock.Mock(minimum_number_of_synthetic_uniform_time_steps=10)
 
         archive = CombineArchive(
             contents=[
