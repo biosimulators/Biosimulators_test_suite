@@ -136,7 +136,6 @@ class SimulatorValidator(object):
         for case in all_published_projects_test_cases:
             if ids is None:
                 cases[suite_name].append(case)
-                break
             else:
                 for id in ids:
                     if id in case.id:

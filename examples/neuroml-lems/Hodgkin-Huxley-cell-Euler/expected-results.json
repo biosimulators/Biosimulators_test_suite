@@ -62,5 +62,6 @@
       "id": "https://raw.githubusercontent.com/NeuroML/pyNeuroML/master/examples/LEMS_NML2_Ex5_DetCell.xml",
       "url": "https://raw.githubusercontent.com/NeuroML/pyNeuroML/master/examples/LEMS_NML2_Ex5_DetCell.xml"
     }
-  ]
+  ],
+  "minimumNumberOfSyntheticUniformTimeSteps": 21000
 }
