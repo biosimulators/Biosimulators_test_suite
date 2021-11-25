@@ -1030,7 +1030,7 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
                         break
 
             key_sim = key_task.simulation
-            if False and isinstance(key_sim, UniformTimeCourseSimulation):
+            if isinstance(key_sim, UniformTimeCourseSimulation):
                 key_sim.output_end_time = (
                     key_sim.output_start_time
                     + (
