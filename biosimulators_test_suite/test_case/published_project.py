@@ -1038,7 +1038,8 @@ class ConfigurableMasterCombineArchiveTestCase(SyntheticCombineArchiveTestCase):
                         / key_sim.number_of_points * (key_sim.output_end_time - key_sim.output_start_time)
                       )
                 )
-                key_sim.number_of_points = min(self._published_projects_test_case.minimum_number_of_synthetic_uniform_time_steps, key_sim.number_of_points)
+                key_sim.number_of_points = min(self._published_projects_test_case.minimum_number_of_synthetic_uniform_time_steps,
+                                               key_sim.number_of_points)
 
             doc.models = [key_task.model]
             doc.simulations = [key_task.simulation]
