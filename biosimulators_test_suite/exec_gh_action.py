@@ -503,7 +503,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         version_comparison_func = natsort_keygen()
         for existing_version_spec in existing_version_specifications:
             if (
-                existing_version_spec['image']
+                existing_version_spec.get('image', None)
                 and existing_version_spec.get('biosimulators', {}).get('validated', False)
                 and version_comparison_func(existing_version_spec['version']) > version_comparison_func(specifications['version'])
             ):
