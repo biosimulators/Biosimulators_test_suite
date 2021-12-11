@@ -392,7 +392,7 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
             validate_image=False, commit_simulator=False,
             previous_run_valid=None, manually_approved=False,
             specs_valid=False, singularity_error=False, validation_state='passes')
-        with self.assertRaisesRegex(requests.RequestException, "specifications of simulation tools must adhere to BioSimulators' schema"):
+        with self.assertRaisesRegex(ValueError, "are invalid. The specifications of simulation tools must adhere"):
             self._exec_run_mock_objs(requests_mock, docker_mock, validation_run_results)
         self.assertEqual(requests_mock.issue_state, 'open')
         self.assertEqual(requests_mock.simulator_versions, [])
