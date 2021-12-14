@@ -64,7 +64,7 @@ class LoggingTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
             msg = (
                 'The simulator did not export information about the status of its execution. '
                 'Simulators are encouraged to stream information about their execution status.\n\n'
-                'More information: https://biosimulators.org/conventions/status'
+                'More information: https://docs.biosimulations.org/concepts/conventions/simulation-run-logs/'
             )
             raise SkippedTestCaseException(msg)
 
@@ -85,7 +85,7 @@ class LoggingTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
             except requests.exceptions.HTTPError:
                 msg = (
                     'The simulation log is invalid. Documentation about the log format is available at '
-                    'https://biosimulators.org/conventions and https://api.biosimulators.org.'
+                    'https://docs.biosimulations.org/concepts/conventions/simulation-run-logs/ and https://api.biosimulations.org.'
                 )
                 error = response.json()['error'][0]
 

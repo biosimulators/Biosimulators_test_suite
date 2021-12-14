@@ -6,7 +6,7 @@
 
 # BioSimulators test suite
 
-The BioSimulators test suite is a tool for validating that biosimulation software tools implement the [BioSimulators conventions for biosimulation tools](https://biosimulators.org/conventions).
+The BioSimulators test suite is a tool for validating that biosimulation software tools implement the [BioSimulators conventions for biosimulation tools](https://docs.biosimulations.org/concepts/conventions/).
 
 The test suite is composed of two parts:
 
@@ -14,10 +14,10 @@ The test suite is composed of two parts:
 
 * Software for checking that biosimulation tools execute these projects according to the BioSimulators conventions.
 
-    * Simulation tools support the [BioSimulators standard command-line arguments](https://biosimulators.org/conventions/simulator-interfaces).
-    * Simulation tools support the [BioSimulators conventions for Docker images](https://biosimulators.org/conventions/simulator-images).
-    * Simulation tools follow the [BioSimulators conventions for executing simulations described by SED-ML files in COMBINE/OMEX archives](https://biosimulators.org/conventions/simulation-experiments).
-    * Simulation tools support the [BioSimulators conventions for the outputs of SED-ML files in COMBINE/OMEX archives](https://biosimulators.org/conventions/simulation-reports).
+    * Simulation tools support the [BioSimulators standard command-line arguments](https://docs.biosimulations.org/concepts/conventions/simulator-interfaces/).
+    * Simulation tools support the [BioSimulators conventions for Docker images](https://docs.biosimulations.org/concepts/conventions/simulator-images/).
+    * Simulation tools follow the [BioSimulators conventions for executing simulations described by SED-ML files in COMBINE/OMEX archives](https://docs.biosimulations.org/concepts/conventions/simulation-experiments/).
+    * Simulation tools support the [BioSimulators conventions for the outputs of SED-ML files in COMBINE/OMEX archives](https://docs.biosimulations.org/concepts/conventions/simulation-run-reports/).
 
 ## Installation instructions, tutorial, and API documentation
 Installation instructions, tutorial, and API documentation are available [here](https://docs.biosimulators.org/Biosimulators_test_suite/).
