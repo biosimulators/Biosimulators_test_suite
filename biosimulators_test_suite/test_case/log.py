@@ -17,6 +17,7 @@ import abc
 import os
 import requests
 import requests.exceptions
+import simplejson.errors
 import yaml
 
 __all__ = [
@@ -87,13 +88,17 @@ class LoggingTestCase(SingleMasterSedDocumentCombineArchiveTestCase):
                     'The simulation log is invalid. Documentation about the log format is available at '
                     'https://docs.biosimulations.org/concepts/conventions/simulation-run-logs/ and https://api.biosimulations.org.'
                 )
-                error = response.json()['error'][0]
 
-                pointer = error.get('source', {}).get('pointer', None)
-                if pointer:
-                    msg += '\n\nSource: ' + pointer
+                try:
+                    error = response.json()['error'][0]
 
-                msg += '\n\n' + error['detail']
+                    pointer = error.get('source', {}).get('pointer', None)
+                    if pointer:
+                        msg += '\n\nSource: ' + pointer
+
+                    msg += '\n\n' + error['detail']
+                except simplejson.errors.JSONDecodeError:
+                    msg += '\n\n{}: {}'.format(response.status_code, response.text)
 
                 raise InvalidOutputsException(msg)
 
