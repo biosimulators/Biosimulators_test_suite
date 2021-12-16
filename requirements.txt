@@ -5,4 +5,5 @@ natsort
 PyPDF2
 python_dateutil
 pyyaml
+simplejson
 termcolor
