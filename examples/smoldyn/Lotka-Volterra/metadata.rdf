@@ -24,21 +24,21 @@
       <rdf:Description>
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
         <foaf:name>Jonathan Karr</foaf:name>
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080" />
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
     <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1093/bioinformatics/btw700" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1093/bioinformatics/btw700" />
         <rdfs:label>Steven S. Andrews. Smoldyn: particle-based simulation with rule-based modeling, improved molecular interaction and a library interface. Bioinformatics 33, 5 (2017): 710-717.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:GPL-3.0-only" />
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:GPL-3.0-only" />
         <rdfs:label>GPL-3.0-only</rdfs:label>
       </rdf:Description>
     </dc:license>

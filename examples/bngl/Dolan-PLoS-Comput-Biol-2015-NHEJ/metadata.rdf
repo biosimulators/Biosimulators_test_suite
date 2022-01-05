@@ -18,7 +18,7 @@
     <!-- taxon -->
     <bqbiol:hasTaxon>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/9606" />
+        <dc:identifier rdf:resource="http://identifiers.org/taxonomy/9606" />
         <rdfs:label>Homo sapiens</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
@@ -83,21 +83,21 @@
       <rdf:Description>
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
         <foaf:name>Jonathan Karr</foaf:name>
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080" />
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
     <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1371/journal.pcbi.1004246" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1371/journal.pcbi.1004246" />
         <rdfs:label>David W. P. Dolan, Anze Zupanic, Glyn Nelson, Philip Hall, Satomi Miwa, Thomas B. L. Kirkwood &amp; Daryl P. Shanley. Integrated Stochastic Model of DNA Damage Repair by Non-homologous End Joining and p53/p21- Mediated Early Senescence Signalling. PLoS Comput Biol 11, 5 (2015): e1004246.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:MIT" />
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:MIT" />
         <rdfs:label>MIT</rdfs:label>
       </rdf:Description>
     </dc:license>

@@ -24,14 +24,14 @@
       <rdf:Description>
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
         <foaf:name>Jonathan Karr</foaf:name>
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080" />
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:MIT" />
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:MIT" />
         <rdfs:label>MIT</rdfs:label>
       </rdf:Description>
     </dc:license>

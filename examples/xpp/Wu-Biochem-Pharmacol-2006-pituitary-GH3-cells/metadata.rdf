@@ -26,7 +26,7 @@
     <!-- taxon -->
     <bqbiol:hasTaxon>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/taxonomy:10116"/>
+        <dc:identifier rdf:resource="http://identifiers.org/taxonomy:10116"/>
         <rdfs:label>Rattus norvegicus</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
@@ -34,7 +34,7 @@
     <!-- other identifiers -->
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/modeldb:62272"/>
+        <dc:identifier rdf:resource="http://identifiers.org/modeldb:62272"/>
         <rdfs:label>modeldb:62272</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -70,7 +70,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080"/>        
         <foaf:name>Jonathan Karr</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080"/>
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080"/>
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
@@ -78,7 +78,7 @@
      <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.bcp.2005.11.016"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1016/j.bcp.2005.11.016"/>
         <rdfs:label>Sheng-Nan Wu &amp; Han-Dong Chang. Diethyl pyrocarbonate, a histidine-modifying agent, directly stimulates activity of ATP-sensitive potassium channels in pituitary GH(3) cells. Biochem Pharmacol 71, 5 (2006) 615-623.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
@@ -86,7 +86,7 @@
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0"/>
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:CC0-1.0"/>
         <rdfs:label>CC0-1.0</rdfs:label>
       </rdf:Description>
     </dc:license>
@@ -110,7 +110,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Wu-Biochem-Pharmacol-2006-pituitary-GH3-cells.omex/simulation.sedml/Figure_7a">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.bcp.2005.11.016"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1016/j.bcp.2005.11.016"/>
         <rdfs:label>Figure 7a</rdfs:label>
       </rdf:Description>
     </bqmodel:is>

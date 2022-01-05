@@ -23,7 +23,7 @@
     <!-- taxon -->
     <bqbiol:hasTaxon>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/10090" />
+        <dc:identifier rdf:resource="http://identifiers.org/taxonomy/10090" />
         <rdfs:label>Mus musculus</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
@@ -31,7 +31,7 @@
     <!-- encoded biology -->
     <bqbiol:encodes>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/GO:0055072" />
+        <dc:identifier rdf:resource="http://identifiers.org/GO:0055072" />
         <rdfs:label>iron ion homeostasis</rdfs:label>
       </rdf:Description>
     </bqbiol:encodes>
@@ -39,7 +39,7 @@
     <!-- other identifiers -->
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000734" />
+        <dc:identifier rdf:resource="http://identifiers.org/biomodels.db:BIOMD0000000734" />
         <rdfs:label>biomodels.db:BIOMD0000000734</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -85,7 +85,7 @@
       <rdf:Description>
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
         <foaf:name>Jonathan Karr</foaf:name>
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080" />
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
@@ -100,7 +100,7 @@
     <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1186/s12918-017-0431-3" />
         <rdfs:label>Jignesh H Parmar, Grey Davis, Hope Shevchuk &amp; Pedro Mendes. Modeling the dynamics of mouse iron body distribution: hepcidin is necessary but not sufficient. BMC Syst Biol 11, 1 (2017): 57.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
@@ -108,7 +108,7 @@
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0" />
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:CC0-1.0" />
         <rdfs:label>CC0-1.0</rdfs:label>
       </rdf:Description>
     </dc:license>
@@ -132,7 +132,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3b">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1186/s12918-017-0431-3" />
         <rdfs:label>Figure 3b</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -141,7 +141,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3c">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1186/s12918-017-0431-3" />
         <rdfs:label>Figure 3c</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -150,7 +150,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3d">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1186/s12918-017-0431-3" />
         <rdfs:label>Figure 3d</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -159,7 +159,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3e">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1186/s12918-017-0431-3" />
         <rdfs:label>Figure 3e</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -168,7 +168,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3f">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1186/s12918-017-0431-3" />
         <rdfs:label>Figure 3f</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -177,7 +177,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3g">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1186/s12918-017-0431-3" />
         <rdfs:label>Figure 3g</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -186,7 +186,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Parmar-BMC-Syst-Biol-2017-iron-distribution.omex/Parmar2017_Deficient_Rich_tracer.sedml/Figure_3h">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/s12918-017-0431-3" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1186/s12918-017-0431-3" />
         <rdfs:label>Figure 3h</rdfs:label>
       </rdf:Description>
     </bqmodel:is>

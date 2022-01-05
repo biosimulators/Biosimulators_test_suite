@@ -8,7 +8,7 @@
     <!-- taxon -->
     <bqbiol:hasTaxon>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/562" />
+        <dc:identifier rdf:resource="http://identifiers.org/taxonomy/562" />
         <rdfs:label>Escherichia coli</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
@@ -37,21 +37,21 @@
       <rdf:Description>
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
         <foaf:name>Jonathan Karr</foaf:name>
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080" />
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
     <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/1752-0509-7-74" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1186/1752-0509-7-74" />
         <rdfs:label>Ali Ebrahim, Joshua A Lerman, Bernhard O Palsson &amp; Daniel R Hyduke. COBRApy: COnstraints-Based Reconstruction and Analysis for Python. BMC Syst Biol 7 (2013): 74.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:GPL-2.0" />
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:GPL-2.0" />
         <rdfs:label>GPL-2.0</rdfs:label>
       </rdf:Description>
     </dc:license>

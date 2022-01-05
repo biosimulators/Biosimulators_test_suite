@@ -14,28 +14,28 @@
     <!-- taxon -->
     <bqbiol:hasTaxon>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/131567" />
+        <dc:identifier rdf:resource="http://identifiers.org/taxonomy/131567" />
         <rdfs:label>cellular organisms</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
     <!-- encoded biology -->
     <bqbiol:encodes>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/GO:0042752" />
+        <dc:identifier rdf:resource="http://identifiers.org/GO:0042752" />
         <rdfs:label>regulation of circadian rhythm</rdfs:label>
       </rdf:Description>
     </bqbiol:encodes>
     <!-- ancestor(s) of this work -->
     <bqmodel:isDerivedFrom>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1038/35002258" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1038/35002258" />
         <rdfs:label>Naama Barkai &amp; Stanislas Leibler. Circadian clocks limited by noise. Nature 403, 6767 (2000): 267-268.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDerivedFrom>
     <!-- other identifiers -->
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000035" />
+        <dc:identifier rdf:resource="http://identifiers.org/biomodels.db:BIOMD0000000035" />
         <rdfs:label>biomodels.db:BIOMD0000000035</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -75,21 +75,21 @@
       <rdf:Description>
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
         <foaf:name>Jonathan Karr</foaf:name>
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080" />
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
     <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1073/pnas.092133899" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1073/pnas.092133899" />
         <rdfs:label>José M Vilar, Hao Y Kueh, Naama Barkai &amp; Stanislas Leibler. Mechanisms of noise-resistance in genetic oscillators. Proc Natl Acad Sci USA 99, 9 (2002): 5988-5992.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0" />
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:CC0-1.0" />
         <rdfs:label>CC0-1.0</rdfs:label>
       </rdf:Description>
     </dc:license>
@@ -110,7 +110,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Vilar-PNAS-2002-minimal-circardian-clock-discrete-NRM.omex/simulation.sedml/plot2d_Fig_1_c">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1073/pnas.092133899" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1073/pnas.092133899" />
         <rdfs:label>Figure 1c</rdfs:label>
       </rdf:Description>
     </bqmodel:is>

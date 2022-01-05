@@ -26,7 +26,7 @@
     <!-- taxon -->
     <bqbiol:hasTaxon>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/562"/>
+        <dc:identifier rdf:resource="http://identifiers.org/taxonomy/562"/>
         <rdfs:label>Escherichia coli</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
@@ -42,7 +42,7 @@
     <!-- other identifiers -->
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000012"/>
+        <dc:identifier rdf:resource="http://identifiers.org/biomodels.db:BIOMD0000000012"/>
         <rdfs:label>biomodels.db:BIOMD0000000012</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -60,7 +60,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-1221-0967"/>
         <foaf:name>Michael Elowitz</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-1221-0967"/>
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-1221-0967"/>
         <rdfs:label>Michael Elowitz</rdfs:label>
       </rdf:Description>
     </dc:creator>
@@ -111,7 +111,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080"/>
         <foaf:name>Jonathan Karr</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080"/>
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080"/>
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
@@ -119,7 +119,7 @@
      <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1038/35002125"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1038/35002125"/>
         <rdfs:label>Michael B Elowitz &amp; Stanislas Leibler. A synthetic oscillatory network of transcriptional regulators. Nature 403, 6767 (2000) 335-338.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
@@ -127,7 +127,7 @@
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0"/>
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:CC0-1.0"/>
         <rdfs:label>CC0-1.0</rdfs:label>
       </rdf:Description>
     </dc:license>
@@ -151,7 +151,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Elowitz-Nature-2000-Repressilator.omex/simulation.sedml/Figure_1c">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1038/35002125"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1038/35002125"/>
         <rdfs:label>Figure 1c</rdfs:label>
       </rdf:Description>
     </bqmodel:is>

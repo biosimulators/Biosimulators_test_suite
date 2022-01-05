@@ -14,27 +14,27 @@
     <!-- taxon -->
     <bqbiol:hasTaxon>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/9606" />
+        <dc:identifier rdf:resource="http://identifiers.org/taxonomy/9606" />
         <rdfs:label>Homo sapiens</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
     <!-- encoded biology -->
     <bqbiol:encodes>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/PW:0000180" />
+        <dc:identifier rdf:resource="http://identifiers.org/PW:0000180" />
         <rdfs:label>mTOR signaling pathway</rdfs:label>
       </rdf:Description>
     </bqbiol:encodes>
     <bqbiol:encodes>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/ncit:C101595" />
+        <dc:identifier rdf:resource="http://identifiers.org/ncit:C101595" />
         <rdfs:label>DEP Domain-Containing mTOR-Interacting Protein</rdfs:label>
       </rdf:Description>
     </bqbiol:encodes>
     <!-- other identifiers -->
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000823" />
+        <dc:identifier rdf:resource="http://identifiers.org/biomodels.db:BIOMD0000000823" />
         <rdfs:label>biomodels.db:BIOMD0000000823</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -62,7 +62,7 @@
       <rdf:Description>
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
         <foaf:name>Jonathan Karr</foaf:name>
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080" />
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
@@ -75,14 +75,14 @@
     <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1038/s41598-017-18400-z" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1038/s41598-017-18400-z" />
         <rdfs:label>Thawfeek M Varusai &amp; Lan K Nguyen. Dynamic modelling of the mTOR signalling network reveals complex emergent behaviours conferred by DEPTOR. Sci Rep 8, 1 (2018): 643.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0" />
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:CC0-1.0" />
         <rdfs:label>CC0-1.0</rdfs:label>
       </rdf:Description>
     </dc:license>
@@ -103,7 +103,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Varusai-Sci-Rep-2018-mTOR-signaling-LSODA-LSODAR-SBML.omex/LSODA.sedml/Figure_2c">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1038/s41598-017-18400-z" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1038/s41598-017-18400-z" />
         <rdfs:label>Figure 2c</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
