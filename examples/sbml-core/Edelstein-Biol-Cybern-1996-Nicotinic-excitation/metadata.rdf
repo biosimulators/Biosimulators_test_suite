@@ -33,7 +33,7 @@
     <!-- taxon -->
     <bqbiol:hasTaxon>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/7787"/>
+        <dc:identifier rdf:resource="http://identifiers.org/taxonomy/7787"/>
         <rdfs:label>Tetronarce californica</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
@@ -41,21 +41,21 @@
     <!-- gene, RNA, protein, cell type, tissue, organ, disease -->
     <bqbiol:encodes>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/GO:0007274"/>
+        <dc:identifier rdf:resource="http://identifiers.org/GO:0007274"/>
         <rdfs:label>neuromuscular synaptic transmission</rdfs:label>
       </rdf:Description>
     </bqbiol:encodes>
 
     <bqbiol:encodes>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/GO:0019226"/>
+        <dc:identifier rdf:resource="http://identifiers.org/GO:0019226"/>
         <rdfs:label>transmission of nerve impulse</rdfs:label>
       </rdf:Description>
     </bqbiol:encodes>
 
     <bqbiol:encodes>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/GO:0007166"/>
+        <dc:identifier rdf:resource="http://identifiers.org/GO:0007166"/>
         <rdfs:label>cell surface receptor signaling pathway</rdfs:label>
       </rdf:Description>
     </bqbiol:encodes>
@@ -63,7 +63,7 @@
     <!-- other identifiers -->
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000002"/>
+        <dc:identifier rdf:resource="http://identifiers.org/biomodels.db:BIOMD0000000002"/>
         <rdfs:label>biomodels.db:BIOMD0000000002</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -112,7 +112,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0001-8254-4958"/>
         <foaf:name>Jonathan Karr</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-8254-4958"/>
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0001-8254-4958"/>
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
@@ -120,7 +120,7 @@
     <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1007/s004220050302"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1007/s004220050302"/>
         <rdfs:label>Edelstein SJ, Schaad O, Henry E, Bertrand D &amp; Changeux JP. A kinetic mechanism for nicotinic acetylcholine receptors based on multiple allosteric transitions. Biological cybernetics 1996, 75 (11): 361-379.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
@@ -128,7 +128,7 @@
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0"/>
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:CC0-1.0"/>
         <rdfs:label>CC0-1.0</rdfs:label>
       </rdf:Description>
     </dc:license>
@@ -152,7 +152,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/Figure_4b.vg.json">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1007/s004220050302"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1007/s004220050302"/>
         <rdfs:label>Figure 4b</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -161,7 +161,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Edelstein-Biol-Cybern-1996-Nicotinic-excitation.omex/BIOMD0000000002_sim.sedml/Figure_4b">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1007/s004220050302"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1007/s004220050302"/>
         <rdfs:label>Figure 4b</rdfs:label>
       </rdf:Description>
     </bqmodel:is>

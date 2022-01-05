@@ -12,34 +12,34 @@
     <!-- taxon -->
     <bqbiol:hasTaxon>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/9606" />
+        <dc:identifier rdf:resource="http://identifiers.org/taxonomy/9606" />
         <rdfs:label>Homo sapiens</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
     <!-- encoded biology -->
     <bqbiol:encodes>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/GO:0033209" />
+        <dc:identifier rdf:resource="http://identifiers.org/GO:0033209" />
         <rdfs:label>tumor necrosis factor-mediated signaling pathway</rdfs:label>
       </rdf:Description>
     </bqbiol:encodes>
     <bqbiol:encodes>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/GO:0007173" />
+        <dc:identifier rdf:resource="http://identifiers.org/GO:0007173" />
         <rdfs:label>epidermal growth factor receptor signaling pathway</rdfs:label>
       </rdf:Description>
     </bqbiol:encodes>
     <!-- ancestor(s) of this work -->
     <bqmodel:isDerivedFrom>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1088/1478-3975/9/4/045003" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1088/1478-3975/9/4/045003" />
         <rdfs:label>Aidan MacNamara, Camille Terfve, David Henriques, Beatriz Peñalver Bernabé &amp; Julio Saez-Rodriguez. State-time spectrum of signal transduction logic models. Phys Biol 7 (2012): 045003.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDerivedFrom>
     <!-- other identifiers -->
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000562" />
+        <dc:identifier rdf:resource="http://identifiers.org/biomodels.db:BIOMD0000000562" />
         <rdfs:label>biomodels.db:BIOMD0000000562</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -199,21 +199,21 @@
       <rdf:Description>
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
         <foaf:name>Jonathan Karr</foaf:name>
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080" />
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
     <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/1752-0509-7-135" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1186/1752-0509-7-135" />
         <rdfs:label>Claudine Chaouiya, Duncan Bérenguier, Sarah M Keating, Aurélien Naldi, Martijn P van Iersel, Nicolas Rodriguez, Andreas Dräger, Finja Büchel, Thomas Cokelaer, Bryan Kowal, Benjamin Wicks, Emanuel Gonçalves, Julien Dorier, Michel Page, Pedro T Monteiro, Axel von Kamp, Ioannis Xenarios, Hidde de Jong, Michael Hucka, Steffen Klamt, Denis Thieffry, Nicolas Le Novère, Julio Saez-Rodriguez &amp; Tomáš Helikar. SBML qualitative models: a model representation format and infrastructure to foster interactions between qualitative modelling formalisms and tools. BMC Syst Biol 7 (2013): 135.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0" />
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:CC0-1.0" />
         <rdfs:label>CC0-1.0</rdfs:label>
       </rdf:Description>
     </dc:license>
@@ -234,7 +234,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Chaouiya-BMC-Syst-Biol-2013-EGF-TNFa-signaling.omex/simulation.sedml/Figure_4a">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1186/1752-0509-7-135" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1186/1752-0509-7-135" />
         <rdfs:label>Figure 4a</rdfs:label>
       </rdf:Description>
     </bqmodel:is>

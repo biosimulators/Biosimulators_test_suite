@@ -23,7 +23,7 @@
     <!-- taxon -->
     <bqbiol:hasTaxon>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/9606"/>
+        <dc:identifier rdf:resource="http://identifiers.org/taxonomy/9606"/>
         <rdfs:label>Homo sapiens</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
@@ -93,7 +93,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080"/>
         <foaf:name>Jonathan Karr</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080"/>
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080"/>
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
@@ -101,7 +101,7 @@
      <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.cels.2015.10.003"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1016/j.cels.2015.10.003"/>
         <rdfs:label>Aarash Bordbar, Douglas McCloskey, Daniel C Zielinski, Nikolaus Sonnenschein, Neema Jamshidi &amp; Bernhard O Palsson. Personalized Whole-Cell Kinetic Models of Metabolism for Discovery in Genomics and Pharmacodynamics. Cell Syst 1, 4 (2015): 283-292.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
@@ -109,7 +109,7 @@
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:MIT"/>
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:MIT"/>
         <rdfs:label>MIT</rdfs:label>
       </rdf:Description>
     </dc:license>

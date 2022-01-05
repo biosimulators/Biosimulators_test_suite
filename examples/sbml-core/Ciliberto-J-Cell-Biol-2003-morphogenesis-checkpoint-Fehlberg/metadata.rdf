@@ -29,7 +29,7 @@
     <!-- taxon -->
     <bqbiol:hasTaxon>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/4896"/>
+        <dc:identifier rdf:resource="http://identifiers.org/taxonomy/4896"/>
         <rdfs:label>Schizosaccharomyces pombe</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
@@ -37,21 +37,21 @@
     <!-- encoded biology -->
     <bqbiol:encodes>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/kegg.pathway:ko04111" />
+        <dc:identifier rdf:resource="http://identifiers.org/kegg.pathway:ko04111" />
         <rdfs:label>cell cycle</rdfs:label>
       </rdf:Description>
     </bqbiol:encodes>
 
     <bqbiol:encodes>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/GO:0009653" />
+        <dc:identifier rdf:resource="http://identifiers.org/GO:0009653" />
         <rdfs:label>anatomical structure morphogenesis</rdfs:label>
       </rdf:Description>
     </bqbiol:encodes>
 
     <bqbiol:encodes>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/GO:0044879" />
+        <dc:identifier rdf:resource="http://identifiers.org/GO:0044879" />
         <rdfs:label>mitotic morphogenesis checkpoint signaling</rdfs:label>
       </rdf:Description>
     </bqbiol:encodes>
@@ -59,14 +59,14 @@
     <!-- ancestor(s) of this work -->
     <bqmodel:isDerivedFrom>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1006/jtbi.2001.2293"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1006/jtbi.2001.2293"/>
         <rdfs:label>John J. Tyson &amp; Bela Novak. Regulation of the eukaryotic cell cycle: molecular antagonism, hysteresis, and irreversible transitions. Journal of Theoretical Biology 210 (2001): 249-263.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDerivedFrom>
 
     <bqmodel:isDerivedFrom>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1091/mbc.11.1.369"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1091/mbc.11.1.369"/>
         <rdfs:label>Katherine C. Chen, Attila Csikasz-Nagy, Bela Gyorffy, John Val, Bela Novak &amp; John J. Tyson. Kinetic analysis of a molecular model of the budding yeast cell cycle. Mololecular Biology of the Cell 11 (2000): 369-391.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDerivedFrom>
@@ -74,7 +74,7 @@
     <!-- other identifiers -->
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000297"/>
+        <dc:identifier rdf:resource="http://identifiers.org/biomodels.db:BIOMD0000000297"/>
         <rdfs:label>biomodels.db:BIOMD0000000297</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -92,7 +92,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-6961-1366"/>
         <foaf:name>Bela Novak</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-6961-1366"/>
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-6961-1366"/>
         <rdfs:label>Bela Novak</rdfs:label>
       </rdf:Description>
     </dc:creator>
@@ -102,7 +102,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0001-7560-6013"/>
         <foaf:name>John J. Tyson</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-7560-6013"/>
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0001-7560-6013"/>
         <rdfs:label>John J. Tyson</rdfs:label>
       </rdf:Description>
     </dc:creator>
@@ -121,7 +121,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080"/>
         <foaf:name>Jonathan Karr</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080"/>
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080"/>
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
@@ -129,7 +129,7 @@
      <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1083/jcb.200306139"/>
         <rdfs:label>Andrea Ciliberto, Bela Novak &amp; John J. Tyson. Cell Biology 163, 3 (2003): 1243-1254.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
@@ -137,7 +137,7 @@
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0"/>
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:CC0-1.0"/>
         <rdfs:label>CC0-1.0</rdfs:label>
       </rdf:Description>
     </dc:license>
@@ -161,7 +161,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-Fehlberg.omex/Figure3.vg.json">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1083/jcb.200306139"/>
         <rdfs:label>Figure 3</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -170,7 +170,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-Fehlberg.omex/simulation_1.sedml/Figure_3a">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1083/jcb.200306139"/>
         <rdfs:label>Figure 3a</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -179,7 +179,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-Fehlberg.omex/simulation_1.sedml/Figure_3b">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1083/jcb.200306139"/>
         <rdfs:label>Figure 3b</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -188,7 +188,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-Fehlberg.omex/simulation_1.sedml/Figure_3c">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1083/jcb.200306139"/>
         <rdfs:label>Figure 3c</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -197,7 +197,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Ciliberto-J-Cell-Biol-2003-morphogenesis-checkpoint-Fehlberg.omex/simulation_1.sedml/Figure_3d">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1083/jcb.200306139"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1083/jcb.200306139"/>
         <rdfs:label>Figure 3d</rdfs:label>
       </rdf:Description>
     </bqmodel:is>

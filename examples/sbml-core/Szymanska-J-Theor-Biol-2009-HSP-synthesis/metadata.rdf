@@ -15,21 +15,21 @@
     <!-- taxon -->
     <bqbiol:hasTaxon>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/9606" />
+        <dc:identifier rdf:resource="http://identifiers.org/taxonomy/9606" />
         <rdfs:label>Homo sapiens</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
     <!-- encoded biology -->
     <bqbiol:encodes>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/ncit:C17132" />
+        <dc:identifier rdf:resource="http://identifiers.org/ncit:C17132" />
         <rdfs:label>signaling pathway</rdfs:label>
       </rdf:Description>
     </bqbiol:encodes>
     <!-- other identifiers -->
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000896" />
+        <dc:identifier rdf:resource="http://identifiers.org/biomodels.db:BIOMD0000000896" />
         <rdfs:label>biomodels.db:BIOMD0000000896</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -57,7 +57,7 @@
       <rdf:Description>
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
         <foaf:name>Jonathan Karr</foaf:name>
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080" />
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080" />
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
@@ -70,14 +70,14 @@
     <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.jtbi.2009.03.021" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1016/j.jtbi.2009.03.021" />
         <rdfs:label>Zuzanna Szymańska Z &amp; Maciej Zylicz. Mathematical modeling of heat shock protein synthesis in response to temperature change. Journal of Theoretical Biology 259, 3 (2009): 562-569.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0" />
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:CC0-1.0" />
         <rdfs:label>CC0-1.0</rdfs:label>
       </rdf:Description>
     </dc:license>
@@ -98,7 +98,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Szymanska-J-Theor-Biol-2009-HSP-synthesis.omex/BIOMD0000000896_sim.sedml/Figure_3">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.jtbi.2009.03.021" />
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1016/j.jtbi.2009.03.021" />
         <rdfs:label>Figure 3</rdfs:label>
       </rdf:Description>
     </bqmodel:is>

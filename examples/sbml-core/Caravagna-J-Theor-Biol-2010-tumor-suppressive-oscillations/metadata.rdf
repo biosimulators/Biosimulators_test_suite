@@ -27,7 +27,7 @@
     <!-- taxon -->
     <bqbiol:hasTaxon>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/taxonomy/9606"/>
+        <dc:identifier rdf:resource="http://identifiers.org/taxonomy/9606"/>
         <rdfs:label>Homo sapiens</rdfs:label>
       </rdf:Description>
     </bqbiol:hasTaxon>
@@ -35,7 +35,7 @@
     <!-- ancestor(s) of this work -->
     <bqmodel:isDerivedFrom>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1007/s002850050127"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1007/s002850050127"/>
         <rdfs:label>Denise Kirschner &amp; John Carl Panetta. Modeling immunotherapy of the tumor-immune interaction. Journal of Mathematical Biology 37, 3 (1998): 235-252.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDerivedFrom>
@@ -43,7 +43,7 @@
     <!-- other identifiers -->
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/biomodels.db:BIOMD0000000912"/>
+        <dc:identifier rdf:resource="http://identifiers.org/biomodels.db:BIOMD0000000912"/>
         <rdfs:label>biomodels.db:BIOMD0000000912</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
@@ -54,7 +54,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0003-4240-3265"/>
         <foaf:name>Giulio Caravagna</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0003-4240-3265"/>
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0003-4240-3265"/>
         <rdfs:label>Giulio Caravagna</rdfs:label>
       </rdf:Description>
     </dc:creator>
@@ -64,7 +64,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2190-272"/>
         <foaf:name>Alberto d'Onofrio</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2190-272X"/>
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2190-272X"/>
         <rdfs:label>Alberto d'Onofrio</rdfs:label>
       </rdf:Description>
     </dc:creator>
@@ -74,7 +74,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-7309-6424"/>
         <foaf:name>Paolo Milazzo</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-7309-6424"/>
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-7309-6424"/>
         <rdfs:label>Paolo Milazzo</rdfs:label>
       </rdf:Description>
     </dc:creator>
@@ -92,7 +92,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0001-9521-6012"/>        
         <foaf:name>Mohammad Umer Sharif Shohan</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0001-9521-6012"/>
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0001-9521-6012"/>
         <rdfs:label>Mohammad Umer Sharif Shohan</rdfs:label>
       </rdf:Description>
     </dc:contributor>
@@ -102,7 +102,7 @@
         <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080"/>        
         <foaf:name>Jonathan Karr</foaf:name>
 
-        <dc:identifier rdf:resource="https://identifiers.org/orcid:0000-0002-2605-5080"/>
+        <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080"/>
         <rdfs:label>Jonathan Karr</rdfs:label>
       </rdf:Description>
     </dc:contributor>
@@ -110,7 +110,7 @@
      <!-- citations -->
     <bqmodel:isDescribedBy>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.jtbi.2010.05.013"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1016/j.jtbi.2010.05.013"/>
         <rdfs:label>Giulio Caravagna, Alberto d'Onofrio, Paolo Milazzo &amp; Roberto Barbuti. Journal of Theoretical Biology 265, 3 (2010) 336-345.</rdfs:label>
       </rdf:Description>
     </bqmodel:isDescribedBy>
@@ -118,7 +118,7 @@
     <!-- license -->
     <dc:license>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/spdx:CC0-1.0"/>
+        <dc:identifier rdf:resource="http://identifiers.org/spdx:CC0-1.0"/>
         <rdfs:label>CC0-1.0</rdfs:label>
       </rdf:Description>
     </dc:license>
@@ -142,7 +142,7 @@
   <rdf:Description rdf:about="http://omex-library.org/Caravagna-J-Theor-Biol-2010-tumor-suppressive-oscillations.omex/BIOMD0000000912_sim.sedml/Figure_1_bottom_left">
     <bqmodel:is>
       <rdf:Description>
-        <dc:identifier rdf:resource="https://identifiers.org/doi:10.1016/j.jtbi.2010.05.013"/>
+        <dc:identifier rdf:resource="http://identifiers.org/doi:10.1016/j.jtbi.2010.05.013"/>
         <rdfs:label>Figure 1 (bottom left)</rdfs:label>
       </rdf:Description>
     </bqmodel:is>
