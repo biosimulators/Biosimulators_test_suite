@@ -27,7 +27,7 @@ def main():
         os.close(fid)
 
         archive_contents = os.walk(archive_dirname)
-        with zipfile.ZipFile(temp_archive_filename, 'w') as zip_file:
+        with zipfile.ZipFile(temp_archive_filename, mode='w', compression=zipfile.ZIP_DEFLATED) as zip_file:
             for root, dirs, files in archive_contents:
                 for file in files:
                     if os.path.abspath(os.path.join(root, file)) != temp_archive_filename:
