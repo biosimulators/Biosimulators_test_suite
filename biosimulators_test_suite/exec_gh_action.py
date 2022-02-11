@@ -14,7 +14,7 @@ from .results.data_model import TestCaseResult, TestCaseResultType, TestResultsR
 from .results.io import write_test_results
 from .utils import get_singularity_image_filename
 from biosimulators_utils.biosimulations.utils import validate_biosimulations_api_response
-from biosimulators_utils.config import Colors
+from biosimulators_utils.config import Colors, Config as BioSimulatorsUtilsConfig
 from biosimulators_utils.gh_action.data_model import Comment, GitHubActionCaughtError  # noqa: F401
 from biosimulators_utils.gh_action.core import GitHubAction, GitHubActionErrorHandling
 from biosimulators_utils.image import get_docker_image
@@ -96,7 +96,8 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         self.add_labels_to_issue(self.issue_number, [IssueLabel.validated.value])
 
         # get specifications of other versions of simulator
-        existing_version_specifications = get_simulator_version_specs(specifications['id'])
+        config = BioSimulatorsUtilsConfig()
+        existing_version_specifications = get_simulator_version_specs(specifications['id'], config)
 
         # determine if simulator is approved: issue is a revision of an existing version of a validated simulator,
         # a new version of a validated simulator, or the issue has been manually approved by the BioSimulators Team
@@ -445,7 +446,12 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             specifications['biosimulators']['validated'] = False
             specifications['biosimulators']['validationTests'] = None
 
-        self.post_entry_to_biosimulators_api(specifications, existing_version_specifications)
+        config = BioSimulatorsUtilsConfig(BIOSIMULATORS_API_ENDPOINT=self.config.biosimulators_prod_api_endpoint)
+        self.post_entry_to_biosimulators_api(specifications, existing_version_specifications, self.config.biosimulators_prod_api_endpoint)
+
+        config = BioSimulatorsUtilsConfig(BIOSIMULATORS_API_ENDPOINT=self.config.biosimulators_dev_api_endpoint)
+        existing_version_specifications = get_simulator_version_specs(specifications['id'], config)
+        self.post_entry_to_biosimulators_api(specifications, existing_version_specifications, self.config.biosimulators_dev_api_endpoint)
 
         # commit image
         if submission.validate_image:
@@ -528,12 +534,13 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                                  })
         validate_biosimulations_api_response(response, 'A Singularity image could not be generated for the Docker image')
 
-    def post_entry_to_biosimulators_api(self, specifications, existing_version_specifications):
+    def post_entry_to_biosimulators_api(self, specifications, existing_version_specifications, biosimulators_api_endpoint):
         """ Post the simulation to the BioSimulators database
 
         Args:
             specifications (:obj:`dict`): specifications of a simulation tool
             existing_version_specifications (:obj:`list` of :obj:`dict`): specifications of other versions of simulation tool
+            biosimulators_api_endpoint (:obj:`str`): endpoint for the BioSimulators API (e.g., ``https://api.biosimulators.org``)
         """
         auth_headers = self.get_auth_headers_for_biosimulations_api(
             self.config.biosimulators_auth_endpoint, self.config.biosimulators_audience,
@@ -542,11 +549,11 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         existing_versions = [existing_version_spec['version'] for existing_version_spec in existing_version_specifications]
         update_simulator = specifications['version'] in existing_versions
         if update_simulator:
-            endpoint = '{}simulators/{}/{}'.format(self.config.biosimulators_api_endpoint, specifications['id'], specifications['version'])
+            endpoint = '{}simulators/{}/{}'.format(biosimulators_api_endpoint, specifications['id'], specifications['version'])
             requests_method = requests.put
             method = 'updated'
         else:
-            endpoint = '{}simulators'.format(self.config.biosimulators_api_endpoint)
+            endpoint = '{}simulators'.format(biosimulators_api_endpoint)
             requests_method = requests.post
             method = 'added'
         response = requests_method(endpoint, headers=auth_headers, json=specifications)
