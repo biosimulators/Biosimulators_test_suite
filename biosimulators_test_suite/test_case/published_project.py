@@ -320,9 +320,6 @@ class SimulatorCanExecutePublishedProject(TestCase):
         if dry_run:
             return
 
-        if not os.path.isdir(working_dirname):
-            os.makedirs(working_dirname)
-
         # pull image and execute COMBINE/OMEX archive for case
         try:
             self.exec_sedml_docs_in_archive(specifications, working_dirname, cli=cli)

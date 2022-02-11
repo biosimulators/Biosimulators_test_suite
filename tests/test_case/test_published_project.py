@@ -218,6 +218,9 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
                 data[0][0] = -1
                 data[1][0] = -1
 
+            if not os.path.isdir(out_dir):
+                os.makedirs(out_dir)
+
             if extra_report:
                 report = Report(id='report', data_sets=[DataSet(id=i, label=l) for i, l in zip(ids, labels)])
                 data_set_results = DataSetResults({i: d for i, d in zip(ids, data)})
@@ -229,6 +232,7 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
                 ReportWriter().run(report, data_set_results, out_dir, 'BIOMD0000000912_sim.sedml/report', ReportFormat.h5)
 
             plot_file = os.path.join(out_dir, 'plot.pdf')
+
             with open(plot_file, 'w'):
                 pass
 
