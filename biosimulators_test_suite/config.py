@@ -20,7 +20,8 @@ class Config(object):
         biosimulators_audience (:obj:`str`): Open API audience for the BioSimulators API
         biosimulators_api_client_id (:obj:`str`): Client id of the BioSimulators API
         biosimulators_api_client_secret (:obj:`str`): Client secret of the BioSimulators API
-        biosimulators_api_endpoint (:obj:`str`): Base URL for the BioSimulators API
+        biosimulators_prod_api_endpoint (:obj:`str`): Base URL for the BioSimulators API
+        biosimulators_dev_api_endpoint (:obj:`str`): Base URL for the BioSimulators API
         biosimulators_curator_gh_ids (:obj:`list` of :obj:`str`): GitHub user ids of the BioSimulators curators
         biosimulators_default_specifications_version (:obj:`str`): Default version of the BioSimulators simulation specifications
         biosimulators_default_image_version (:obj:`str`): Default version of the BioSimulators Docker image format
@@ -47,7 +48,8 @@ class Config(object):
                  pull_docker_image=None, docker_hub_username=None, docker_hub_token=None,
                  biosimulators_auth_endpoint=None, biosimulators_audience=None,
                  biosimulators_api_client_id=None, biosimulators_api_client_secret=None,
-                 biosimulators_api_endpoint=None,
+                 biosimulators_prod_api_endpoint=None,
+                 biosimulators_dev_api_endpoint=None,
                  biosimulators_curator_gh_ids=None, biosimulators_default_specifications_version=None,
                  biosimulators_default_image_version=None, biosimulators_docker_registry_url=None,
                  biosimulators_docker_registry_username=None, biosimulators_docker_registry_token=None,
@@ -67,7 +69,8 @@ class Config(object):
             biosimulators_audience (:obj:`str`, optional): Open API audience for the BioSimulators API
             biosimulators_api_client_id (:obj:`str`, optional): Client id of the BioSimulators API
             biosimulators_api_client_secret (:obj:`str`, optional): Client secret of the BioSimulators API
-            biosimulators_api_endpoint (:obj:`str`, optional): Base URL for the BioSimulators API
+            biosimulators_prod_api_endpoint (:obj:`str`, optional): Base URL for the BioSimulators API
+            biosimulators_dev_api_endpoint (:obj:`str`, optional): Base URL for the BioSimulators API
             biosimulators_curator_gh_ids (:obj:`list` of :obj:`str`, optional): GitHub user ids of the BioSimulators curators
             biosimulators_default_specifications_version (:obj:`str`, optional): Default version of the BioSimulators simulation specifications
             biosimulators_default_image_version (:obj:`str`, optional): Default version of the BioSimulators Docker image format
@@ -127,10 +130,15 @@ class Config(object):
         else:
             self.biosimulators_api_client_secret = biosimulators_api_client_secret
 
-        if biosimulators_api_endpoint is None:
-            self.biosimulators_api_endpoint = os.getenv('BIOSIMULATORS_API_ENDPOINT', 'https://api.biosimulators.org/')
+        if biosimulators_prod_api_endpoint is None:
+            self.biosimulators_prod_api_endpoint = os.getenv('BIOSIMULATORS_PROD_API_ENDPOINT', 'https://api.biosimulators.org/')
         else:
-            self.biosimulators_api_endpoint = biosimulators_api_endpoint
+            self.biosimulators_prod_api_endpoint = biosimulators_prod_api_endpoint
+
+        if biosimulators_dev_api_endpoint is None:
+            self.biosimulators_dev_api_endpoint = os.getenv('BIOSIMULATORS_DEV_API_ENDPOINT', 'https://api.biosimulators.dev/')
+        else:
+            self.biosimulators_dev_api_endpoint = biosimulators_dev_api_endpoint
 
         if biosimulators_curator_gh_ids is None:
             ids = os.getenv('BIOSIMULATORS_CURATOR_GH_IDS', 'jonrkarr').strip()

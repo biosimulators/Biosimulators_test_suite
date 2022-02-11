@@ -318,14 +318,14 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                     self.parent.assertIn('grant_type', json)
                     return mock.Mock(raise_for_status=lambda: None, json=lambda: {'token_type': 'Bearer', 'access_token': '******'})
                 else:
-                    self.parent.assertEqual(url, Config().biosimulators_api_endpoint + 'simulators')
+                    self.parent.assertEqual(url, Config().biosimulators_prod_api_endpoint + 'simulators')
                     self.parent.assertEqual(headers, {'Authorization': 'Bearer ******'})
                     self.parent.assertEqual(json, {'id': 'tellurium', 'version': '2.1.6'})
                     return mock.Mock(raise_for_status=lambda: None)
 
             def put(self, url, json=None, headers=None):
                 self.n_put = self.n_put + 1
-                self.parent.assertEqual(url, Config().biosimulators_api_endpoint + 'simulators/tellurium/2.1.6')
+                self.parent.assertEqual(url, Config().biosimulators_prod_api_endpoint + 'simulators/tellurium/2.1.6')
                 self.parent.assertEqual(json, {'id': 'tellurium', 'version': '2.1.6'})
                 return mock.Mock(raise_for_status=lambda: None)
 
@@ -335,14 +335,14 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.6'}]
         with mock.patch('requests.post', side_effect=requests_mock.post):
             with mock.patch('requests.put', side_effect=requests_mock.put):
-                action.post_entry_to_biosimulators_api(specs, existing_version_specs)
+                action.post_entry_to_biosimulators_api(specs, existing_version_specs, action.config.biosimulators_prod_api_endpoint)
         self.assertEqual(requests_mock.n_post, 1)
         self.assertEqual(requests_mock.n_put, 1)
 
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.5'}]
         with mock.patch('requests.post', side_effect=requests_mock.post):
             with mock.patch('requests.put', side_effect=requests_mock.put):
-                action.post_entry_to_biosimulators_api(specs, existing_version_specs)
+                action.post_entry_to_biosimulators_api(specs, existing_version_specs, action.config.biosimulators_prod_api_endpoint)
         self.assertEqual(requests_mock.n_post, 3)
         self.assertEqual(requests_mock.n_put, 1)
 
@@ -368,22 +368,22 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.5'}]
         with mock.patch('requests.post', side_effect=requests_mock.post):
             action.commit_simulator(SimulatorSubmission(validate_image=False), specs, existing_version_specs, [])
-        self.assertEqual(requests_mock.n_post, 2)
+        self.assertEqual(requests_mock.n_post, 2 + 2)
 
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.5'}]
         with mock.patch.dict(os.environ, self.env):
             with mock.patch('requests.post', side_effect=requests_mock.post):
                 with mock.patch.object(exec_gh_action.ValidateCommitSimulatorGitHubAction, 'push_image', return_value=None):
                     action.commit_simulator(SimulatorSubmission(validate_image=True), specs, existing_version_specs, [])
-        self.assertEqual(requests_mock.n_post, 6)
+        self.assertEqual(requests_mock.n_post, 6 + 4)
 
         existing_version_specs = [{'id': 'tellurium', 'version': '2.1.6'}]
         with mock.patch.dict(os.environ, self.env):
             with mock.patch('requests.post', side_effect=requests_mock.post):
                 with mock.patch('requests.put', side_effect=requests_mock.put):
                     action.commit_simulator(SimulatorSubmission(validate_image=False), specs, existing_version_specs, [])
-        self.assertEqual(requests_mock.n_post, 7)
-        self.assertEqual(requests_mock.n_put, 1)
+        self.assertEqual(requests_mock.n_post, 7 + 6)
+        self.assertEqual(requests_mock.n_put, 1 + 0)
 
     def test_run(self):
         # validate specs of valid new simulator, fail on invalid specs
@@ -716,7 +716,10 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                     }
                 elif url == 'https://api.github.com/repos/biosimulators/Biosimulators/issues/11/labels':
                     response = [{'name': label} for label in self.issue_labels]
-                elif url == Config().biosimulators_api_endpoint + 'simulators/tellurium':
+                elif url in [
+                    Config().biosimulators_prod_api_endpoint + 'simulators/tellurium',
+                    Config().biosimulators_dev_api_endpoint + 'simulators/tellurium',
+                ]:
                     response = self.simulator_versions
                 else:
                     raise ValueError('Invalid url: {}'.format(url))
@@ -726,11 +729,17 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                 if url == Config().biosimulators_auth_endpoint:
                     error = None
                     response = {'token_type': 'Bearer', 'access_token': '******'}
-                elif url == Config().biosimulators_api_endpoint + 'simulators':
+                elif url in [
+                    Config().biosimulators_prod_api_endpoint + 'simulators',
+                    Config().biosimulators_dev_api_endpoint + 'simulators',
+                ]:
                     self.simulator_versions.append(json)
                     error = None
                     response = None
-                elif url == Config().biosimulators_api_endpoint + 'simulators/validate':
+                elif url in [
+                    Config().biosimulators_prod_api_endpoint + 'simulators/validate',
+                    Config().biosimulators_dev_api_endpoint + 'simulators/validate',
+                ]:
                     if self.specs_valid:
                         error = None
                         response = None
@@ -775,7 +784,10 @@ class ValidateCommitWorkflowTestCase(unittest.TestCase):
                 return mock.Mock(raise_for_status=lambda: None, json=lambda: response)
 
             def put(self, url, json=None, auth=None, headers=None):
-                if url.startswith(Config().biosimulators_api_endpoint + 'simulators/tellurium/'):
+                if (
+                    url.startswith(Config().biosimulators_prod_api_endpoint + 'simulators/tellurium/') or
+                    url.startswith(Config().biosimulators_dev_api_endpoint + 'simulators/tellurium/')
+                ):
                     for i_version, version in enumerate(self.simulator_versions):
                         if version['version'] == json['version']:
                             self.simulator_versions[i_version] = json

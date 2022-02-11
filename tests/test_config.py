@@ -43,7 +43,8 @@ class ConfigTestCase(unittest.TestCase):
             pull_docker_image=True, docker_hub_username='user', docker_hub_token='token',
             biosimulators_auth_endpoint='https://auth.biosimulators.org', biosimulators_audience='biosimulators_audience',
             biosimulators_api_client_id='biosimulators_client_id', biosimulators_api_client_secret='biosimulators_client_secret',
-            biosimulators_api_endpoint='https://api.biosimulators.org',
+            biosimulators_prod_api_endpoint='https://api.biosimulators.org',
+            biosimulators_dev_api_endpoint='https://api.biosimulators.dev',
             biosimulators_curator_gh_ids=['user'], biosimulators_default_specifications_version='1.0.0',
             biosimulators_default_image_version='1.0.0', biosimulators_docker_registry_url='ghcr.io',
             biosimulators_docker_registry_username='user@ghcr.io', biosimulators_docker_registry_token='token@ghcr.io',
@@ -60,7 +61,8 @@ class ConfigTestCase(unittest.TestCase):
         self.assertEqual(config.biosimulators_audience, 'biosimulators_audience')
         self.assertEqual(config.biosimulators_api_client_id, 'biosimulators_client_id')
         self.assertEqual(config.biosimulators_api_client_secret, 'biosimulators_client_secret')
-        self.assertEqual(config.biosimulators_api_endpoint, 'https://api.biosimulators.org')
+        self.assertEqual(config.biosimulators_prod_api_endpoint, 'https://api.biosimulators.org')
+        self.assertEqual(config.biosimulators_dev_api_endpoint, 'https://api.biosimulators.dev')
         self.assertEqual(config.biosimulators_curator_gh_ids, ['user'])
         self.assertEqual(config.biosimulators_default_specifications_version, '1.0.0')
         self.assertEqual(config.biosimulators_default_image_version, '1.0.0')
