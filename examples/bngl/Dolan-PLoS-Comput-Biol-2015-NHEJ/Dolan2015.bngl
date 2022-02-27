@@ -162,7 +162,7 @@ LiIV(cs)
 PARP(dna,liIII)
 I()
 
-Sen(int~1~10~PLUS~MINUS,State~normal~sen)
+Sen(int~1~10~Plus~Minus,State~normal~sen)
 
 end molecule types
 
@@ -2953,8 +2953,8 @@ DNA50(site!1~cdsb).Ku(dna!1,cs,cys~ox) -> DNA50(site~cdsb) + Ku(dna,cs,cys~ox)  
 
 #Senescent Shift Rules
 
-Sen(int~?,State~normal) -> Sen(int~PLUS,State~normal) kplus()
-Sen(int~?,State~normal) -> Sen(int~MINUS,State~normal) kminus()
+Sen(int~?,State~normal) -> Sen(int~Plus,State~normal) kplus()
+Sen(int~?,State~normal) -> Sen(int~Minus,State~normal) kminus()
 Sen(int~10,State~normal) -> Sen(int~10,State~sen) ksen
 
 Ku(dna,cs,cys~?) -> Sink() kKuDown() * kKustop()
