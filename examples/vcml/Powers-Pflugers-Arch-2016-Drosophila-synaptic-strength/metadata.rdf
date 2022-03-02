@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+    xmlns:bqbiol="http://biomodels.net/biology-qualifiers/"
+    xmlns:bqmodel="http://biomodels.net/model-qualifiers/"
+    xmlns:collex="http://www.collex.org/schema#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"	
+>
+    <rdf:Description rdf:about="http://omex-library.org/Powers-Pflugers-Arch-2016-Drosophila-synaptic-strength.omex">
+        <dc:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Regulation of quantal currents determines synaptic strength at neuromuscular synapses in larval Drosophila</dc:title>
+        <dc:abstract>The model captures the generation of minEPSPs using a single compartment with membrane reactions describing the currents resulting from the synaptic and resting conductances as in our previous study. The time course of the synaptic conductance (G syn) was simulated using the equation: G syn = K(e −t/τ2 − e −t/τ1)G syn peak; where K is the scaling constant, τ 1 is the rise time constant, τ 2 is the decay time constant, and G syn peak is the peak G syn. G syn peak was calculated from the minEPSCs amplitude using a reversal potential of −1 mV. Values for K, τ 1, and τ 2 were chosen to give the best fit to the minEPSC waveform. Simulations demonstrated that the increase in minEPSC size resulted in a 129% increase in minEPSP amplitude for third-instar larvae; this was mainly due to the increase in minEPSC duration.</dc:abstract>
+        <prism:keyword>synapse</prism:keyword>
+        <prism:keyword>homeostasis</prism:keyword>
+        <prism:keyword>neuromuscular junction</prism:keyword>
+        <collex:thumbnail rdf:resource="http://omex-library.org/Powers-Pflugers-Arch-2016-Drosophila-synaptic-strength.omex/Figure6.webp"/>
+        <!-- taxon -->
+        <bqbiol:hasTaxon>
+            <rdf:Description>
+                <dc:identifier rdf:resource="http://identifiers.org/taxonomy/7227" />
+                <rdfs:label>Drosophila melanogaster</rdfs:label>
+            </rdf:Description>
+        </bqbiol:hasTaxon>
+        <!-- other identifiers -->
+        <bqmodel:is>
+            <rdf:Description>
+                <dc:identifier rdf:resource="http://identifiers.org/vcell:100596964"/>
+                <rdfs:label>vcell:100596964</rdfs:label>
+            </rdf:Description>
+        </bqmodel:is>
+        <!-- derived from -->
+        <bqmodel:isDerivedFrom>
+            <rdf:Description>
+                <dc:identifier rdf:resource="http://identifiers.org/doi:10.1152/jn.00903.2013"/>
+                <rdfs:label>Daniel M. Gertner, Sunil Desai &amp; Gregory A. Lnenicka. Synaptic excitation is regulated by the postsynaptic dSK channel at the Drosophila larval NMJ. J Neurophysiol 111 (12), 2533-2543 (2014).</rdfs:label>
+            </rdf:Description>
+        </bqmodel:isDerivedFrom>
+        <!-- creators -->
+        <dc:creator>
+            <rdf:Description>
+                <foaf:name>Andrew S. Powers</foaf:name>
+                <rdfs:label>Andrew S. Powers</rdfs:label>
+            </rdf:Description>
+        </dc:creator>
+        <dc:creator>
+            <rdf:Description>
+                <foaf:name>Jeffrey Grizzaffi</foaf:name>
+                <rdfs:label>Jeffrey Grizzaffi</rdfs:label>
+            </rdf:Description>
+        </dc:creator>
+        <dc:creator>
+            <rdf:Description>
+                <foaf:name>Richard Ribchester</foaf:name>
+                <rdfs:label>Richard Ribchester</rdfs:label>
+                <foaf:accountName rdf:resource="https://orcid.org/0000-0003-2670-6995" />
+                <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0003-2670-6995"/>
+            </rdf:Description>
+        </dc:creator>
+        <dc:creator>
+            <rdf:Description>
+                <foaf:name>Gregory A. Lnenicka</foaf:name>
+                <rdfs:label>Gregory A. Lnenicka</rdfs:label>
+            </rdf:Description>
+        </dc:creator>
+        <!-- contributors (e.g., curators) -->
+        <dc:contributor>
+            <rdf:Description>
+                <foaf:name>Dan Vasilescu</foaf:name>
+                <rdfs:label>Dan Vasilescu</rdfs:label>
+            </rdf:Description>
+        </dc:contributor>
+        <dc:contributor>
+            <rdf:Description>
+                <foaf:name>Michael Blinov</foaf:name>
+                <rdfs:label>Michael Blinov</rdfs:label>
+                <foaf:accountName rdf:resource="https://orcid.org/0000-0002-9363-9705" />
+                <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-9363-9705"/>
+            </rdf:Description>
+        </dc:contributor>
+        <dc:contributor>
+            <rdf:Description>
+                <foaf:name>Ion Moraru</foaf:name>
+                <rdfs:label>Ion Moraru</rdfs:label>
+                <foaf:accountName rdf:resource="https://orcid.org/0000-0002-6961-1366" />
+                <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-6961-1366"/>
+            </rdf:Description>
+        </dc:contributor>
+        <dc:contributor>
+            <rdf:Description>
+                <foaf:accountName rdf:resource="https://orcid.org/0000-0002-2605-5080" />
+                <foaf:name>Jonathan Karr</foaf:name>
+                <dc:identifier rdf:resource="http://identifiers.org/orcid:0000-0002-2605-5080" />
+                <rdfs:label>Jonathan Karr</rdfs:label>
+            </rdf:Description>
+        </dc:contributor>
+        <!-- citations -->
+        <bqmodel:isDescribedBy>
+            <rdf:Description>
+                <dc:identifier rdf:resource="http://identifiers.org/doi:10.1007/s00424-016-1893-7"/>
+                <rdfs:label>Andrew S. Powers, Jeffrey Grizzaffi, Richard Ribchester &amp; Gregory A. Lnenicka. Regulation of quantal currents determines synaptic strength at neuromuscular synapses in larval Drosophila. Pflugers Arch 468 (11-12), 2031-2040 (2016).</rdfs:label>
+            </rdf:Description>
+        </bqmodel:isDescribedBy>
+        <!-- license -->
+        <!-- created -->
+        <dc:created>
+            <rdf:Description>
+                <dc:W3CDTF>2016-10-25</dc:W3CDTF>
+            </rdf:Description>
+        </dc:created>
+        <!-- modified -->
+        <dc:modified>
+            <rdf:Description>
+                <dc:W3CDTF>2022-02-25</dc:W3CDTF>
+            </rdf:Description>
+        </dc:modified>
+    </rdf:Description>
+</rdf:RDF>
