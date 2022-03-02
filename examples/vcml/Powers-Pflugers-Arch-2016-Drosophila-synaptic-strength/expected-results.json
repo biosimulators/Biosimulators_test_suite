@@ -1,0 +1,74 @@
+{
+  "name": "Regulation of quantal currents determines synaptic strength at neuromuscular synapses in larval Drosophila",
+  "filename": "Powers-Pflugers-Arch-2016-Drosophila-synaptic-strength.omex",
+  "taskRequirements": [
+    {
+      "modelFormat": "format_9000",
+      "modelFormatFeatures": [],
+      "simulationAlgorithm": "KISAO_0000019"
+    }
+  ],
+  "skippedSimulators": [],
+  "expectedReports": [
+    {
+      "id": "biomodel_100596964.sedml/report_Simulation1",
+      "dataSets": [
+        {
+          "id": "__data_set__plot2d_Simulation1time_tsk_0_0",
+          "label": "time_tsk_0_0"
+        },
+        {
+          "id": "__data_set__plot2d_Simulation1dataGen_tsk_0_0_GluR_plasma_membrane",
+          "label": "dataGen_tsk_0_0_GluR_plasma_membrane"
+        },
+        {
+          "id": "__data_set__plot2d_Simulation1dataGen_tsk_0_0_Leak_plasma_membrane",
+          "label": "dataGen_tsk_0_0_Leak_plasma_membrane"
+        },
+        {
+          "id": "__data_set__plot2d_Simulation1dataGen_tsk_0_0_ion_muscle",
+          "label": "dataGen_tsk_0_0_ion_muscle"
+        },
+        {
+          "id": "__data_set__plot2d_Simulation1dataGen_tsk_0_0_Sion_Extracellular",
+          "label": "dataGen_tsk_0_0_Sion_Extracellular"
+        },
+        {
+          "id": "__data_set__plot2d_Simulation1dataGen_tsk_0_0_ion_Extracellular",
+          "label": "dataGen_tsk_0_0_ion_Extracellular"
+        },
+        {
+          "id": "__data_set__plot2d_Simulation1dataGen_tsk_0_0_Sion_muscle",
+          "label": "dataGen_tsk_0_0_Sion_muscle"
+        }
+      ],
+      "points": [
+        5001
+      ],
+      "values": [
+        {
+          "id": "__data_set__plot2d_Simulation1time_tsk_0_0",
+          "label": "time_tsk_0_0",
+          "value": {
+            "0": 0,
+            "5000": 0.2
+          }
+        }
+      ]
+    }
+  ],
+  "expectedPlots": [
+    {
+      "id": "biomodel_100596964.sedml/plot2d_Simulation1"
+    }
+  ],
+  "runtimeFailureAlertType": "exception",
+  "author": "Andrew S. Powers, Jeffrey Grizzaffi, Richard Ribchester & Gregory A. Lnenicka",
+  "identifiers": [
+    {
+      "namespace": "url",
+      "id": "http://identifiers.org/vcell:100596964",
+      "url": "https://identifiers.org/vcell:100596964"
+    }
+  ]
+}
