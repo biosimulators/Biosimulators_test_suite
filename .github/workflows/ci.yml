@@ -7,7 +7,7 @@ jobs:
   getVersionNumber:
     name: Get version number
     if: startsWith(github.ref, 'refs/tags/') && github.actor != 'biosimulators-daemon' && !contains(github.event.head_commit.message, '[skip ci]')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     outputs:
       version: ${{ steps.get-version-number.outputs.version }}
     steps:
@@ -22,7 +22,7 @@ jobs:
   build:
     name: Lint, test, and compile documentation
     if: github.actor != 'biosimulators-daemon' && !contains(github.event.head_commit.message, '[skip ci]')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -167,7 +167,7 @@ jobs:
   release:
     name: Release a new version
     needs: [getVersionNumber, build]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     outputs:
       docsChanged: ${{ steps.commit-docs.outputs.docsChanged }}
     steps:
