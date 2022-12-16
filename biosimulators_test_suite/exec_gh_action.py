@@ -13,6 +13,7 @@ from .exec_core import SimulatorValidator
 from .results.data_model import TestCaseResult, TestCaseResultType, TestResultsReport  # noqa: F401
 from .results.io import write_test_results
 from .utils import get_singularity_image_filename
+from .globals import JSONType
 from biosimulators_utils.biosimulations.utils import validate_biosimulations_api_response
 from biosimulators_utils.config import Colors, Config as BioSimulatorsUtilsConfig
 from biosimulators_utils.gh_action.data_model import Comment, GitHubActionCaughtError  # noqa: F401
@@ -34,7 +35,7 @@ __all__ = [
 ]
 
 
-def get_uncaught_exception_msg(exception):
+def get_uncaught_exception_msg(exception: Exception) -> "list[Comment]":
     """ Create an error message to display to users for all exceptions not caught during the
     exception of the :obj:`run` method (exceptions of all types except :obj:`GitHubActionCaughtError`)
 
@@ -42,9 +43,9 @@ def get_uncaught_exception_msg(exception):
         exception (:obj:`Exception`): a failure encountered during the exception of the :obj:`run` method
 
     Returns:
-        :obj:`str`: error message to display to users
+        :obj:`list`: of :obj:`str`: error messages to display to users
     """
-    gh_action_run_url = GitHubAction.get_gh_action_run_url()
+    gh_action_run_url: str = GitHubAction.get_gh_action_run_url()
     return [
         Comment(text='The validation/submission of your simulator failed.'),
         Comment(text=str(exception), error=True),
@@ -64,13 +65,14 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
     """ Action to validate a containerized simulator
 
     Attributes:
+        config (:obj:`Config`): configuration of the app
         issue_number (:obj:`str`): number of GitHub issue which triggered the action
     """
 
     def __init__(self):
         super(ValidateCommitSimulatorGitHubAction, self).__init__()
-        self.config = Config()
-        self.issue_number = self.get_issue_number()
+        self.config: Config = Config()
+        self.issue_number: str = self.get_issue_number()
 
     @GitHubActionErrorHandling.catch_errors(uncaught_exception_msg_func=get_uncaught_exception_msg,
                                             caught_error_labels=[IssueLabel.invalid],
@@ -79,7 +81,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         """ Validate and commit a simulator."""
 
         # Get properties of submission
-        issue_props = self.get_issue(self.issue_number)
+        issue_props:JSONType = self.get_issue(self.issue_number)
         submission = get_simulator_submission_from_gh_issue_body(issue_props['body'])
         submitter = issue_props['user']['login']
 

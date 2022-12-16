@@ -7,6 +7,7 @@
 """
 
 import os
+from typing import Union
 
 
 class Config(object):
@@ -36,30 +37,27 @@ class Config(object):
         runbiosimulations_api_endpoint (:obj:`str`): Base URL for the runBioSimulations API
         test_case_timeout (:obj:`int`): time out for test cases in seconds
         user_to_exec_in_simulator_containers (:obj:`str` or :obj:`None`): user id or name to execute calls inside simulator containers
-
             * Use ``_CURRENT_USER_`` to indicate that the Docker container should execute commands as the current user (``os.getuid()``)
             * Use the format ``<name|uid>[:<group|gid>]`` to indicate any other user/group that the Docker container should use to
               execute commands
-
         singularity_image_dirname (:obj:`str`): directory to save Singularity images
     """
 
     def __init__(self,
-                 pull_docker_image=None, docker_hub_username=None, docker_hub_token=None,
-                 biosimulators_auth_endpoint=None, biosimulators_audience=None,
-                 biosimulators_api_client_id=None, biosimulators_api_client_secret=None,
-                 biosimulators_prod_api_endpoint=None,
-                 biosimulators_dev_api_endpoint=None,
-                 biosimulators_curator_gh_ids=None, biosimulators_default_specifications_version=None,
-                 biosimulators_default_image_version=None, biosimulators_docker_registry_url=None,
-                 biosimulators_docker_registry_username=None, biosimulators_docker_registry_token=None,
-                 biosimulators_docker_image_url_pattern=None,
-                 runbiosimulations_auth_endpoint=None, runbiosimulations_audience=None,
-                 runbiosimulations_api_client_id=None, runbiosimulations_api_client_secret=None,
-                 runbiosimulations_api_endpoint=None,
-                 test_case_timeout=None,
-                 user_to_exec_in_simulator_containers=None,
-                 singularity_image_dirname=None):
+                 pull_docker_image: bool = None, docker_hub_username: str = None, docker_hub_token: str = None,
+                 biosimulators_auth_endpoint: str = None, biosimulators_audience: str = None,
+                 biosimulators_api_client_id: str = None, biosimulators_api_client_secret: str = None,
+                 biosimulators_prod_api_endpoint: str = None, biosimulators_dev_api_endpoint: str = None,
+                 biosimulators_curator_gh_ids: "list[str]" = None, biosimulators_default_specifications_version: str = None,
+                 biosimulators_default_image_version: str = None, biosimulators_docker_registry_url: str = None,
+                 biosimulators_docker_registry_username: str = None, biosimulators_docker_registry_token: str = None,
+                 biosimulators_docker_image_url_pattern: str = None,
+                 runbiosimulations_auth_endpoint: str = None, runbiosimulations_audience: str = None,
+                 runbiosimulations_api_client_id: str = None, runbiosimulations_api_client_secret: str = None,
+                 runbiosimulations_api_endpoint: str = None,
+                 test_case_timeout: int = None,
+                 user_to_exec_in_simulator_containers: "Union[str, None]" = None,
+                 singularity_image_dirname: str = None):
         """
         Args:
             pull_docker_image (:obj:`bool`, optional): whether to pull the Docker image for the simulator (default: :obj:`True`)
@@ -94,134 +92,135 @@ class Config(object):
         """
         # Docker registry
         if pull_docker_image is None:
-            self.pull_docker_image = os.getenv('PULL_DOCKER_IMAGE', '1').lower() in ['1', 'true']
+            self.pull_docker_image: bool = os.getenv('PULL_DOCKER_IMAGE', '1').lower() in ['1', 'true']
         else:
-            self.pull_docker_image = pull_docker_image
+            self.pull_docker_image: bool = pull_docker_image
 
         # Docker Hub
         if docker_hub_username is None:
-            self.docker_hub_username = os.getenv('DOCKER_HUB_USERNAME')
+            self.docker_hub_username: str = os.getenv('DOCKER_HUB_USERNAME')
         else:
-            self.docker_hub_username = docker_hub_username
+            self.docker_hub_username: str = docker_hub_username
 
         if docker_hub_token is None:
-            self.docker_hub_token = os.getenv('DOCKER_HUB_TOKEN')
+            self.docker_hub_token: str = os.getenv('DOCKER_HUB_TOKEN')
         else:
-            self.docker_hub_token = docker_hub_token
+            self.docker_hub_token: str = docker_hub_token
 
         # BioSimulators
         if biosimulators_auth_endpoint is None:
-            self.biosimulators_auth_endpoint = os.getenv('BIOSIMULATORS_AUTH_ENDPOINT', 'https://auth.biosimulations.org/oauth/token')
+            self.biosimulators_auth_endpoint: str = os.getenv('BIOSIMULATORS_AUTH_ENDPOINT', 'https://auth.biosimulations.org/oauth/token')
         else:
-            self.biosimulators_auth_endpoint = biosimulators_auth_endpoint
+            self.biosimulators_auth_endpoint: str = biosimulators_auth_endpoint
 
         if biosimulators_audience is None:
-            self.biosimulators_audience = os.getenv('BIOSIMULATORS_AUDIENCE', 'api.biosimulators.org')
+            self.biosimulators_audience: str = os.getenv('BIOSIMULATORS_AUDIENCE', 'api.biosimulators.org')
         else:
-            self.biosimulators_audience = biosimulators_audience
+            self.biosimulators_audience: str = biosimulators_audience
 
         if biosimulators_api_client_id is None:
-            self.biosimulators_api_client_id = os.getenv('BIOSIMULATORS_API_CLIENT_ID')
+            self.biosimulators_api_client_id: str = os.getenv('BIOSIMULATORS_API_CLIENT_ID')
         else:
-            self.biosimulators_api_client_id = biosimulators_api_client_id
+            self.biosimulators_api_client_id: str = biosimulators_api_client_id
 
         if biosimulators_api_client_secret is None:
-            self.biosimulators_api_client_secret = os.getenv('BIOSIMULATORS_API_CLIENT_SECRET')
+            self.biosimulators_api_client_secret: str = os.getenv('BIOSIMULATORS_API_CLIENT_SECRET')
         else:
-            self.biosimulators_api_client_secret = biosimulators_api_client_secret
+            self.biosimulators_api_client_secret: str = biosimulators_api_client_secret
 
         if biosimulators_prod_api_endpoint is None:
-            self.biosimulators_prod_api_endpoint = os.getenv('BIOSIMULATORS_PROD_API_ENDPOINT', 'https://api.biosimulators.org/')
+            self.biosimulators_prod_api_endpoint: str = os.getenv('BIOSIMULATORS_PROD_API_ENDPOINT', 'https://api.biosimulators.org/')
         else:
-            self.biosimulators_prod_api_endpoint = biosimulators_prod_api_endpoint
+            self.biosimulators_prod_api_endpoint: str = biosimulators_prod_api_endpoint
 
         if biosimulators_dev_api_endpoint is None:
-            self.biosimulators_dev_api_endpoint = os.getenv('BIOSIMULATORS_DEV_API_ENDPOINT', 'https://api.biosimulators.dev/')
+            self.biosimulators_dev_api_endpoint: str = os.getenv('BIOSIMULATORS_DEV_API_ENDPOINT', 'https://api.biosimulators.dev/')
         else:
-            self.biosimulators_dev_api_endpoint = biosimulators_dev_api_endpoint
+            self.biosimulators_dev_api_endpoint: str = biosimulators_dev_api_endpoint
 
         if biosimulators_curator_gh_ids is None:
             ids = os.getenv('BIOSIMULATORS_CURATOR_GH_IDS', 'jonrkarr').strip()
             if ids:
-                self.biosimulators_curator_gh_ids = [id.strip() for id in ids.split(',')]
+                self.biosimulators_curator_gh_ids: "list[str]" = [id.strip() for id in ids.split(',')]
             else:
-                self.biosimulators_curator_gh_ids = []
+                self.biosimulators_curator_gh_ids: "list[str]" = []
         else:
-            self.biosimulators_curator_gh_ids = biosimulators_curator_gh_ids
+            self.biosimulators_curator_gh_ids: "list[str]" = biosimulators_curator_gh_ids
 
         if biosimulators_default_specifications_version is None:
-            self.biosimulators_default_specifications_version = os.getenv('BIOSIMULATORS_DEFAULT_SPECIFICATIONS_VERSION', '1.0.0')
+            self.biosimulators_default_specifications_version: str = os.getenv('BIOSIMULATORS_DEFAULT_SPECIFICATIONS_VERSION', '1.0.0')
         else:
-            self.biosimulators_default_specifications_version = biosimulators_default_specifications_version
+            self.biosimulators_default_specifications_version: str = biosimulators_default_specifications_version
 
         if biosimulators_default_image_version is None:
-            self.biosimulators_default_image_version = os.getenv('BIOSIMULATORS_DEFAULT_IMAGE_VERSION', '1.0.0')
+            self.biosimulators_default_image_version: str = os.getenv('BIOSIMULATORS_DEFAULT_IMAGE_VERSION', '1.0.0')
         else:
-            self.biosimulators_default_image_version = biosimulators_default_image_version
+            self.biosimulators_default_image_version: str = biosimulators_default_image_version
 
         if biosimulators_docker_registry_url is None:
-            self.biosimulators_docker_registry_url = os.getenv(
+            self.biosimulators_docker_registry_url: str = os.getenv(
                 'BIOSIMULATORS_DOCKER_REGISTRY_URL', os.getenv('DOCKER_REGISTRY_URL', 'ghcr.io'))
         else:
-            self.biosimulators_docker_registry_url = biosimulators_docker_registry_url
+            self.biosimulators_docker_registry_url: str = biosimulators_docker_registry_url
 
         if biosimulators_docker_registry_username is None:
-            self.biosimulators_docker_registry_username = os.getenv(
+            self.biosimulators_docker_registry_username: str = os.getenv(
                 'BIOSIMULATORS_DOCKER_REGISTRY_USERNAME', os.getenv('DOCKER_REGISTRY_USERNAME'))
         else:
-            self.biosimulators_docker_registry_username = biosimulators_docker_registry_username
+            self.biosimulators_docker_registry_username: str = biosimulators_docker_registry_username
 
         if biosimulators_docker_registry_token is None:
-            self.biosimulators_docker_registry_token = os.getenv(
+            self.biosimulators_docker_registry_token: str = os.getenv(
                 'BIOSIMULATORS_DOCKER_REGISTRY_TOKEN', os.getenv('DOCKER_REGISTRY_TOKEN'))
         else:
-            self.biosimulators_docker_registry_token = biosimulators_docker_registry_token
+            self.biosimulators_docker_registry_token: str = biosimulators_docker_registry_token
 
         if biosimulators_docker_image_url_pattern is None:
-            self.biosimulators_docker_image_url_pattern = os.getenv(
+            self.biosimulators_docker_image_url_pattern: str = os.getenv(
                 'BIOSIMULATORS_DOCKER_REGISTRY_IMAGE_URL_PATTERN', 'ghcr.io/biosimulators/{}:{}')
         else:
-            self.biosimulators_docker_image_url_pattern = biosimulators_docker_image_url_pattern
+            self.biosimulators_docker_image_url_pattern: str = biosimulators_docker_image_url_pattern
 
         # runBioSimulations
         if runbiosimulations_auth_endpoint is None:
-            self.runbiosimulations_auth_endpoint = os.getenv(
+            self.runbiosimulations_auth_endpoint: str = os.getenv(
                 'RUNBIOSIMULATIONS_AUTH_ENDPOINT', 'https://auth.biosimulations.org/oauth/token')
         else:
-            self.runbiosimulations_auth_endpoint = runbiosimulations_auth_endpoint
+            self.runbiosimulations_auth_endpoint: str = runbiosimulations_auth_endpoint
 
         if runbiosimulations_audience is None:
-            self.runbiosimulations_audience = os.getenv('RUNBIOSIMULATIONS_AUDIENCE', 'api.biosimulations.org')
+            self.runbiosimulations_audience: str = os.getenv('RUNBIOSIMULATIONS_AUDIENCE', 'api.biosimulations.org')
         else:
-            self.runbiosimulations_audience = runbiosimulations_audience
+            self.runbiosimulations_audience: str = runbiosimulations_audience
 
         if runbiosimulations_api_client_id is None:
-            self.runbiosimulations_api_client_id = os.getenv('RUNBIOSIMULATIONS_API_CLIENT_ID')
+            self.runbiosimulations_api_client_id: str = os.getenv('RUNBIOSIMULATIONS_API_CLIENT_ID')
         else:
-            self.runbiosimulations_api_client_id = runbiosimulations_api_client_id
+            self.runbiosimulations_api_client_id: str = runbiosimulations_api_client_id
 
         if runbiosimulations_api_client_secret is None:
-            self.runbiosimulations_api_client_secret = os.getenv('RUNBIOSIMULATIONS_API_CLIENT_SECRET')
+            self.runbiosimulations_api_client_secret: str = os.getenv('RUNBIOSIMULATIONS_API_CLIENT_SECRET')
         else:
-            self.runbiosimulations_api_client_secret = runbiosimulations_api_client_secret
+            self.runbiosimulations_api_client_secret: str = runbiosimulations_api_client_secret
 
         if runbiosimulations_api_endpoint is None:
-            self.runbiosimulations_api_endpoint = os.getenv('RUNBIOSIMULATIONS_API_ENDPOINT', 'https://api.biosimulations.org/')
+            self.runbiosimulations_api_endpoint: str = os.getenv('RUNBIOSIMULATIONS_API_ENDPOINT', 'https://api.biosimulations.org/')
         else:
-            self.runbiosimulations_api_endpoint = runbiosimulations_api_endpoint
+            self.runbiosimulations_api_endpoint: str = runbiosimulations_api_endpoint
 
         if test_case_timeout is None:
-            self.test_case_timeout = int(os.getenv('TEST_CASE_TIMEOUT', '600'))  # seconds
+            self.test_case_timeout: int = int(os.getenv('TEST_CASE_TIMEOUT', '600'))  # seconds
         else:
-            self.test_case_timeout = test_case_timeout
+            self.test_case_timeout: int = test_case_timeout
 
         if user_to_exec_in_simulator_containers is None:
-            self.user_to_exec_in_simulator_containers = os.getenv('USER_TO_EXEC_IN_SIMULATOR_CONTAINERS', '_CURRENT_USER_') or None
+            self.user_to_exec_in_simulator_containers: "Union[str, None]" = os.getenv(
+                'USER_TO_EXEC_IN_SIMULATOR_CONTAINERS', '_CURRENT_USER_') or None
         else:
-            self.user_to_exec_in_simulator_containers = user_to_exec_in_simulator_containers
+            self.user_to_exec_in_simulator_containers: "Union[str, None]" = user_to_exec_in_simulator_containers
 
         if singularity_image_dirname is None:
-            self.singularity_image_dirname = os.getenv('SINGULARITY_IMAGE_DIRNAME',
-                                                       os.path.join(os.path.expanduser('~'), '.biosimulators-test-suite', 'singularity'))
+            self.singularity_image_dirname: str = os.getenv('SINGULARITY_IMAGE_DIRNAME', os.path.join(os.path.expanduser('~'),
+                                                            '.biosimulators-test-suite', 'singularity'))
         else:
-            self.singularity_image_dirname = singularity_image_dirname
+            self.singularity_image_dirname: str = singularity_image_dirname
