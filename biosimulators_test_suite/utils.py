@@ -13,7 +13,7 @@ import os
 __all__ = ['get_singularity_image_filename', 'simulation_results_isnan']
 
 
-def get_singularity_image_filename(docker_image):
+def get_singularity_image_filename(docker_image: str) -> str:
     """ Get the location where a Singularity version of a Docker image should be saved
 
     Args:
