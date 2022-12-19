@@ -23,13 +23,13 @@ from biosimulators_utils.simulator_registry.data_model import SimulatorSubmissio
 from biosimulators_utils.simulator_registry.process_submission import get_simulator_submission_from_gh_issue_body
 from biosimulators_utils.simulator_registry.query import get_simulator_version_specs
 from natsort import natsort_keygen
+from docker.client import DockerClient
+from typing import Tuple
 import biosimulators_utils.image
 import biosimulators_utils.simulator.io
 import requests
 import requests.exceptions
 import termcolor
-import docker
-
 
 __all__ = [
     'ValidateCommitSimulatorGitHubAction',
@@ -83,7 +83,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
 
         # Get properties of submission
         issue_props: JSONType = self.get_issue(self.issue_number)
-        submission = get_simulator_submission_from_gh_issue_body(issue_props['body'])
+        submission: SimulatorSubmission = get_simulator_submission_from_gh_issue_body(issue_props['body'])
         submitter: str = issue_props['user']['login']
 
         # Send message that validation/submission is starting
@@ -99,12 +99,12 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         self.add_labels_to_issue(self.issue_number, [IssueLabel.validated.value])
 
         # get specifications of other versions of simulator
-        config = BioSimulatorsUtilsConfig()
-        existing_version_specifications = get_simulator_version_specs(specifications['id'], config)
+        config: Config = BioSimulatorsUtilsConfig()
+        existing_version_specifications: JSONType = get_simulator_version_specs(specifications['id'], config)
 
         # determine if simulator is approved: issue is a revision of an existing version of a validated simulator,
         # a new version of a validated simulator, or the issue has been manually approved by the BioSimulators Team
-        approved = self.is_simulator_approved(specifications, existing_version_specifications)
+        approved: bool = self.is_simulator_approved(specifications, existing_version_specifications)
 
         # if approved, label the issue as approved
         if approved and IssueLabel.approved.value not in self.get_labels_for_issue(self.issue_number):
@@ -174,7 +174,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                 'A complete log of your simulator {} job will be available for 90 days [here]({}).{}\n\n'
                 ).format(submitter, actions, not_actions, job_type, self.get_gh_action_run_url(), test_results_msg)
 
-    def exec_core(self, submission: SimulatorSubmission, submitter: str):
+    def exec_core(self, submission: SimulatorSubmission, submitter: str) -> Tuple[JSONType, list[TestCaseResult]]:
         """ Validate simulator
 
         * Validate specifications
@@ -187,8 +187,8 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         Returns:
             :obj:`tuple`:
 
-                * :obj:`dict`: specifications of a simulation tool
-                * :obj:`list` of :obj:`TestCaseResults`: results of test cases
+                * :obj:`dict`: json-parsed specifications of a simulation tool
+                * :obj:`list` of :obj:`TestCaseResult`: results of test cases
         """
         # validate specifications
         specifications: JSONType = biosimulators_utils.simulator.io.read_simulator_specs(
@@ -203,7 +203,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
 
         # validate image
         if submission.validate_image:
-            test_results = self.validate_image(specifications)
+            test_results: list[TestCaseResult] = self.validate_image(specifications)
             self.add_comment_to_issue(self.issue_number, 'The image for your simulator is valid!')
         else:
             test_results = None
@@ -290,7 +290,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         Returns:
             :obj:`list` of :obj:`TestCaseResults`: results of test cases
         """
-        docker_client: docker.client.DockerClient = biosimulators_utils.image.login_to_docker_registry(
+        docker_client: DockerClient = biosimulators_utils.image.login_to_docker_registry(
             'docker.io', self.config.docker_hub_username, self.config.docker_hub_token)
 
         # validate that container (Docker image) exists
@@ -303,7 +303,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             singularity_filename=get_singularity_image_filename(image_url))
 
         # validate that image is consistent with the BioSimulators standards
-        validator = SimulatorValidator(specifications, output_medium=OutputMedium.gh_issue)
+        validator: SimulatorValidator = SimulatorValidator(specifications, output_medium=OutputMedium.gh_issue)
         case_results: list[TestCaseResult] = validator.run()
         write_test_results(case_results, '.biosimulators-test-suite-results.json',
                            gh_issue=int(self.issue_number), gh_action_run=int(self.get_gh_action_run_id()))
