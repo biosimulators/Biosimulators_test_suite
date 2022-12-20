@@ -203,7 +203,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
 
         # validate image
         if submission.validate_image:
-            test_results: list[TestCaseResult] = self.validate_image(specifications)
+            test_results: list[TestCaseResult] = self.validate_image(specifications)  # Main executable
             self.add_comment_to_issue(self.issue_number, 'The image for your simulator is valid!')
         else:
             test_results = None
@@ -281,14 +281,14 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                 ).format(submitter, simulator_name, simulator_id, simulator_name, simulator_name)
                 self.add_error_comment_to_issue(self.issue_number, [Comment(text=msg, error=True)])
 
-    def validate_image(self, specifications: JSONType):
+    def validate_image(self, specifications: JSONType) -> list[TestCaseResult]:
         """ Validate a Docker image for simulation tool
 
         Args:
             specifications (:obj:`dict`): specifications of a simulation tool
 
         Returns:
-            :obj:`list` of :obj:`TestCaseResults`: results of test cases
+            :obj:`list` of :obj:`TestCaseResult`: results of test cases
         """
         docker_client: DockerClient = biosimulators_utils.image.login_to_docker_registry(
             'docker.io', self.config.docker_hub_username, self.config.docker_hub_token)
