@@ -14,6 +14,7 @@ from ..utils import get_singularity_image_filename, simulation_results_isnan
 from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning
 from .utils import are_array_shapes_equivalent
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContentFormatPattern  # noqa: F401
+from biosimulators_utils.globals import JSONType
 from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
 from biosimulators_utils.config import get_config
 from biosimulators_utils.image import convert_docker_image_to_singularity
@@ -899,7 +900,7 @@ class ExpectedResultOfSyntheticArchive(object):
         self.environment = environment or {}
 
 
-def find_cases(specifications, dir_name=None, output_medium=OutputMedium.console):
+def find_cases(specifications: JSONType, dir_name: str = None, output_medium: OutputMedium = OutputMedium.console):
     """ Collect test cases
 
     Args:
@@ -908,15 +909,17 @@ def find_cases(specifications, dir_name=None, output_medium=OutputMedium.console
         output_medium (:obj:`OutputMedium`, optional): medium the description should be formatted for
 
     Returns:
-        :obj:`list` of :obj:`SimulatorCanExecutePublishedProject`: test cases
+        :obj:`tuple`:
+                * :obj:`list` of :obj:`SimulatorCanExecutePublishedProject`: all test cases
+                * :obj:`list` of :obj:`SimulatorCanExecutePublishedProject`: compatible test cases
     """
     if dir_name is None:
         dir_name = EXAMPLES_DIR
     if not os.path.isdir(dir_name):
         warnings.warn('Directory of example COMBINE/OMEX archives is not available', IgnoredTestCaseWarning)
 
-    all_cases = []
-    compatible_cases = []
+    all_cases: list[SimulatorCanExecutePublishedProject] = []
+    compatible_cases: list[SimulatorCanExecutePublishedProject] = []
     for example_filename in glob.glob(os.path.join(dir_name, '**/*.omex'), recursive=True):
         md_filename = os.path.join(example_filename[0:-5], 'expected-results.json')
         rel_filename = os.path.relpath(md_filename, dir_name)

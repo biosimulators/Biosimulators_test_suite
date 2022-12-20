@@ -19,6 +19,7 @@ from .test_case import results_report
 from .test_case import sedml
 from .warnings import TestCaseWarning, IgnoredTestCaseWarning
 from typing import Union
+from types import ModuleType
 from biosimulators_utils.globals import JSONType
 from biosimulators_utils.config import Colors
 from biosimulators_utils.log.utils import StandardOutputErrorCapturer
@@ -91,7 +92,7 @@ class SimulatorValidator(object):
 
         self.test_case_timeout = Config().test_case_timeout
 
-    def find_cases(self, ids: list[str] = None):
+    def find_cases(self, ids: list[str] = None) -> collections.OrderedDict[ModuleType, TestCase]:
         """ Find test cases
 
         Args:
@@ -99,9 +100,9 @@ class SimulatorValidator(object):
                 is none, all test cases are verified.
 
         Returns:
-            :obj:`collections.OrderedDict` of :obj:`types.ModuleType` to :obj:`TestCase`: groups of test cases
+            :obj:`collections.OrderedDict` of :obj:`types.ModuleType` mapped to :obj:`list` of :obj:`TestCase`: groups of test cases
         """
-        cases = collections.OrderedDict()
+        cases: collections.OrderedDict[ModuleType, list[TestCase]] = collections.OrderedDict()
 
         # get cases involving curated published COMBINE/OMEX archives
         all_published_projects_test_cases, compatible_published_projects_test_cases = published_project.find_cases(
@@ -157,15 +158,16 @@ class SimulatorValidator(object):
         # return discovered cases
         return cases
 
-    def find_cases_in_module(self, module, published_projects_test_cases, ids=None):
+    def find_cases_in_module(self, module: ModuleType, published_projects_test_cases: list[published_project.SimulatorCanExecutePublishedProject],
+                             ids: list[str] = None):
         """ Discover test cases in a module
 
         Args:
             module (:obj:`types.ModuleType`): module
-            ids (:obj:`list` of :obj:`str`, optional): List of ids of test cases to verify. If :obj:`ids`
-                is none, all test cases are verified.
             published_projects_test_cases (:obj:`list` of :obj:`published_project.SimulatorCanExecutePublishedProject`): test cases involving
                 executing curated COMBINE/OMEX archives
+            ids (:obj:`list` of :obj:`str`, optional): List of ids of test cases to verify. If :obj:`ids`
+                is none, all test cases are verified.
 
         Returns:
             :obj:`list` of :obj:`TestCase`: test cases
@@ -236,7 +238,7 @@ class SimulatorValidator(object):
         start = datetime.datetime.now()
 
         # execute test cases and collect results
-        results = []
+        results: list[TestCaseResult] = []
         working_dirname = self.working_dirname or tempfile.mkdtemp()
         for suite_name, suite_cases in self.cases.items():
             print('\nExecuting {} {} tests ... {}'.format(len(suite_cases), suite_name, 'done' if not suite_cases else ''))
@@ -244,6 +246,7 @@ class SimulatorValidator(object):
                 print('  {}: {} ... '.format(i_case + 1, case.id), end='')
                 sys.stdout.flush()
 
+                # Process one test case.
                 result = self.eval_case(case, os.path.join(working_dirname, suite_name, case.id))
                 results.append(result)
 
@@ -266,7 +269,7 @@ class SimulatorValidator(object):
         # return results
         return results
 
-    def eval_case(self, case, working_dirname):
+    def eval_case(self, case: TestCase, working_dirname: str):
         """ Evaluate a test case for a simulator
 
         Args:
@@ -282,7 +285,7 @@ class SimulatorValidator(object):
             with warnings.catch_warnings(record=True) as caught_warnings:
                 warnings.simplefilter("ignore")
                 warnings.simplefilter("always", TestCaseWarning)
-
+                print (self.specifications, file=sys.stderr)
                 try:
 
                     with time_limit(seconds=self.test_case_timeout):
