@@ -174,7 +174,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                 'A complete log of your simulator {} job will be available for 90 days [here]({}).{}\n\n'
                 ).format(submitter, actions, not_actions, job_type, self.get_gh_action_run_url(), test_results_msg)
 
-    def exec_core(self, submission: SimulatorSubmission, submitter: str) -> Tuple[JSONType, list[TestCaseResult]]:
+    def exec_core(self, submission: SimulatorSubmission, submitter: str) -> Tuple[JSONType, "list[TestCaseResult]"]:
         """ Validate simulator
 
         * Validate specifications
@@ -281,7 +281,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                 ).format(submitter, simulator_name, simulator_id, simulator_name, simulator_name)
                 self.add_error_comment_to_issue(self.issue_number, [Comment(text=msg, error=True)])
 
-    def validate_image(self, specifications: JSONType) -> list[TestCaseResult]:
+    def validate_image(self, specifications: JSONType) -> "list[TestCaseResult]":
         """ Validate a Docker image for simulation tool
 
         Args:

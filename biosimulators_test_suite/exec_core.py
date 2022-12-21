@@ -57,7 +57,7 @@ class SimulatorValidator(object):
             archives rather than a Docker image
     """
 
-    def __init__(self, specifications: Union[str, JSONType], case_ids: list[str] = None, verbose: bool = False, synthetic_archives_dir: str = None,
+    def __init__(self, specifications: Union[str, JSONType], case_ids: "list[str]" = None, verbose: bool = False, synthetic_archives_dir: str = None,
                  output_medium: OutputMedium = OutputMedium.console, log_std_out_err: bool = True, working_dirname: str = None,
                  dry_run: bool = False, cli: str = None, validate_specs: bool = True):
         """
@@ -92,7 +92,7 @@ class SimulatorValidator(object):
 
         self.test_case_timeout = Config().test_case_timeout
 
-    def find_cases(self, ids: list[str] = None) -> collections.OrderedDict[ModuleType, TestCase]:
+    def find_cases(self, ids: "list[str]" = None) -> "collections.OrderedDict[ModuleType, TestCase]":
         """ Find test cases
 
         Args:
@@ -158,8 +158,8 @@ class SimulatorValidator(object):
         # return discovered cases
         return cases
 
-    def find_cases_in_module(self, module: ModuleType, published_projects_test_cases: list[published_project.SimulatorCanExecutePublishedProject],
-                             ids: list[str] = None):
+    def find_cases_in_module(self, module: ModuleType, published_projects_test_cases: "list[published_project.SimulatorCanExecutePublishedProject]",
+                             ids: "list[str]" = None):
         """ Discover test cases in a module
 
         Args:
@@ -285,7 +285,6 @@ class SimulatorValidator(object):
             with warnings.catch_warnings(record=True) as caught_warnings:
                 warnings.simplefilter("ignore")
                 warnings.simplefilter("always", TestCaseWarning)
-                print (self.specifications, file=sys.stderr)
                 try:
 
                     with time_limit(seconds=self.test_case_timeout):
