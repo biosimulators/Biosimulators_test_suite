@@ -1,2 +1,2 @@
 [logging]
-biosimulators_utils[logging]
+biosimulators_utils[logging] >= 0.1.172

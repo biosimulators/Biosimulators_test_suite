@@ -1,9 +1,9 @@
 biosimulators_utils[containers,bngl,cellml,lems,neuroml,sbml,smoldyn] >= 0.1.172
-cement
-docker
-natsort
-PyPDF2
-python_dateutil
-pyyaml
-simplejson
-termcolor
+cement <= 3.0.6
+docker <= 5.0.3
+natsort <= 8.1.0
+PyPDF2 <= 2.8.1
+python_dateutil <= 2.8.1
+pyyaml <= 5.3.1
+simplejson <= 3.16.0
+termcolor <= 1.1.0
