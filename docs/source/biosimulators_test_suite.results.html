@@ -1,233 +1,380 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>biosimulators_test_suite.results package &#8212; BioSimulators test suite 0.1.86 documentation</title>
-    
-    <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
   
-    
-    <link rel="stylesheet"
-      href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
   
-    
-      
   
-    
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/pydata-sphinx-theme.css" />
+    <link rel="icon" sizes="16x16" type="image/png" href="https://github.com/biosimulations/biosimulations/raw/dev/libs/shared/assets/src/assets/icons/favicon-16x16.png" />
+    <link rel="icon" sizes="32x32" type="image/png" href="https://github.com/biosimulations/biosimulations/raw/dev/libs/shared/assets/src/assets/icons/favicon-32x32.png" />
     <link rel="stylesheet" type="text/css" href="../_static/css/biosimulators.css" />
-    
-    <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
   
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/biosimulators_test_suite.results';</script>
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="biosimulators_test_suite.test_case package" href="biosimulators_test_suite.test_case.html" />
     <link rel="prev" title="biosimulators_test_suite package" href="biosimulators_test_suite.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-      
-      <link rel="icon" sizes="16x16" href="https://github.com/biosimulations/biosimulations/raw/dev/libs/shared/assets/src/assets/icons/favicon-16x16.png">
-      
-    
-      
-      <link rel="icon" sizes="32x32" href="https://github.com/biosimulations/biosimulations/raw/dev/libs/shared/assets/src/assets/icons/favicon-32x32.png">
-      
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
-
-  <div id="navbar-start">
-    
-    
-
-<a class="navbar-brand" href="../index.html">
-  <img src="../_static/biosimulators-logo.svg" class="logo" alt="logo">
-</a>
-
-
-    
-  </div>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
   
-  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
-    <div id="navbar-center" class="mr-auto">
-      
-    </div>
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Enter text to search for ..."
+         aria-label="Enter text to search for ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
 
-    <div id="navbar-end">
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
       
-      <div class="navbar-end-item">
-        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Quick links">
+    
+    
+    <img src="../_static/biosimulators-logo.svg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/biosimulators-logo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Quick links">
         <li class="nav-item">
-          <a class="nav-link" href="https://github.com/biosimulators/Biosimulators_test_suite" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github"></i></span>
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/biosimulators/Biosimulators_test_suite" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github"></i></span>
             <label class="sr-only">GitHub</label></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://twitter.com/biosimulators" rel="noopener" target="_blank" title="Twitter"><span><i class="fab fa-twitter"></i></span>
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/biosimulators" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter"></i></span>
             <label class="sr-only">Twitter</label></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="mailto:info@biosimulators.org" rel="noopener" target="_blank" title="Email"><span><i class="fas fa-envelope"></i></span>
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:info@biosimulators.org" title="Email" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-envelope"></i></span>
             <label class="sr-only">Email</label></a>
         </li>
-      </ul>
-      </div>
+</ul></div>
       
     </div>
-  </div>
-</div>
-    </nav>
     
-
-    <div class="container-xl">
-      <div class="row">
-          
-            
-            <!-- Only show if we have sidebars configured, else just a small margin  -->
-            <div class="col-12 col-md-3 bd-sidebar">
-              <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Enter text to search for ..." aria-label="Enter text to search for ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-  <div class="bd-toc-item active">
-    <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   biosimulators_test_suite.results package
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="biosimulators_test_suite.test_case.html">
-   biosimulators_test_suite.test_case package
-  </a>
- </li>
-</ul>
-
   </div>
-</nav>
-              </div>
-              <div class="sidebar-end-items">
-              </div>
-            </div>
-            
-          
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
 
-          
-          <div class="d-none d-xl-block col-xl-2 bd-toc">
-            
-              
-              <div class="toc-item">
-                
-<div class="tocsection onthispage pt-5 pb-3">
-    <i class="fas fa-list"></i> On this page
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
 </div>
 
-<nav id="bd-toc-nav">
-    <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#submodules">
-   Submodules
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-biosimulators_test_suite.results.data_model">
-   biosimulators_test_suite.results.data_model module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-biosimulators_test_suite.results.io">
-   biosimulators_test_suite.results.io module
-  </a>
- </li>
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Quick links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/biosimulators/Biosimulators_test_suite" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/biosimulators" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only">Twitter</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:info@biosimulators.org" title="Email" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-envelope"></i></span>
+            <label class="sr-only">Email</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Enter text to search for ..."
+         aria-label="Enter text to search for ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">biosimulators_test_suite.results package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biosimulators_test_suite.test_case.html">biosimulators_test_suite.test_case package</a></li>
 </ul>
-
-</nav>
-              </div>
-              
-              <div class="toc-item">
-                
-
-<div class="tocsection editthispage">
-    <a href="https://github.com/biosimulators/Biosimulators_test_suite/edit/dev/docs-src/source/biosimulators_test_suite.results.rst">
-        <i class="fas fa-pencil-alt"></i> Edit this page
-    </a>
 </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-              </div>
-              
-            
-          </div>
-          
 
-          
-          
-            
-          
-          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
               
-              <div>
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="biosimulators_test_suite.html" class="nav-link">biosimulators_test_suite package</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">biosimulators_test_suite.results package</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <section id="module-biosimulators_test_suite.results">
-<span id="biosimulators-test-suite-results-package"></span><h1>biosimulators_test_suite.results package<a class="headerlink" href="#module-biosimulators_test_suite.results" title="Permalink to this headline">¶</a></h1>
+<span id="biosimulators-test-suite-results-package"></span><h1>biosimulators_test_suite.results package<a class="headerlink" href="#module-biosimulators_test_suite.results" title="Permalink to this heading">#</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="module-biosimulators_test_suite.results.data_model">
-<span id="biosimulators-test-suite-results-data-model-module"></span><h2>biosimulators_test_suite.results.data_model module<a class="headerlink" href="#module-biosimulators_test_suite.results.data_model" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-results-data-model-module"></span><h2>biosimulators_test_suite.results.data_model module<a class="headerlink" href="#module-biosimulators_test_suite.results.data_model" title="Permalink to this heading">#</a></h2>
 <p>Data model for results of test cases</p>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Jonathan Karr &lt;<a class="reference external" href="mailto:karr&#37;&#52;&#48;mssm&#46;edu">karr<span>&#64;</span>mssm<span>&#46;</span>edu</a>&gt;</p>
 </dd>
-<dt class="field-even">Date</dt>
+<dt class="field-even">Date<span class="colon">:</span></dt>
 <dd class="field-even"><p>2021-01-01</p>
 </dd>
-<dt class="field-odd">Copyright</dt>
+<dt class="field-odd">Copyright<span class="colon">:</span></dt>
 <dd class="field-odd"><p>2021, Center for Reproducible Biomedical Modeling</p>
 </dd>
-<dt class="field-even">License</dt>
+<dt class="field-even">License<span class="colon">:</span></dt>
 <dd class="field-even"><p>MIT</p>
 </dd>
 </dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestCaseResult">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.results.data_model.</span></span><span class="sig-name descname"><span class="pre">TestCaseResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">case</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception_traceback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warnings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_reason</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.results.data_model.</span></span><span class="sig-name descname"><span class="pre">TestCaseResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">case</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception_traceback</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warnings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_reason</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A result of executing a test case</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestCaseResult.case">
-<span class="sig-name descname"><span class="pre">case</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.case" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">case</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.case" title="Permalink to this definition">#</a></dt>
 <dd><p>test case</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">TestCase</span></code></p>
 </dd>
 </dl>
@@ -235,10 +382,10 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestCaseResult.type">
-<span class="sig-name descname"><span class="pre">type</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.type" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">type</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.type" title="Permalink to this definition">#</a></dt>
 <dd><p>type</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">obj:`TestCaseResultType</span></code></p>
 </dd>
 </dl>
@@ -246,10 +393,10 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestCaseResult.duration">
-<span class="sig-name descname"><span class="pre">duration</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.duration" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">duration</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.duration" title="Permalink to this definition">#</a></dt>
 <dd><p>execution duration in seconds</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></p>
 </dd>
 </dl>
@@ -257,10 +404,10 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestCaseResult.exception">
-<span class="sig-name descname"><span class="pre">exception</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.exception" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">exception</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.exception" title="Permalink to this definition">#</a></dt>
 <dd><p>exception</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd>
 </dl>
@@ -268,10 +415,10 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestCaseResult.exception_traceback">
-<span class="sig-name descname"><span class="pre">exception_traceback</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.exception_traceback" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">exception_traceback</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.exception_traceback" title="Permalink to this definition">#</a></dt>
 <dd><p>traceback</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
 </dd>
 </dl>
@@ -279,10 +426,10 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestCaseResult.warnings">
-<span class="sig-name descname"><span class="pre">warnings</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.warnings" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">warnings</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.warnings" title="Permalink to this definition">#</a></dt>
 <dd><p>warnings</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">TestCaseWarning</span></code></p>
 </dd>
 </dl>
@@ -290,10 +437,10 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestCaseResult.skip_reason">
-<span class="sig-name descname"><span class="pre">skip_reason</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.skip_reason" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">skip_reason</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.skip_reason" title="Permalink to this definition">#</a></dt>
 <dd><p>Exception which explains reason for skip</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd>
 </dl>
@@ -301,10 +448,10 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestCaseResult.log">
-<span class="sig-name descname"><span class="pre">log</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.log" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">log</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.log" title="Permalink to this definition">#</a></dt>
 <dd><p>log of execution</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
 </dd>
 </dl>
@@ -312,20 +459,20 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestCaseResult.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_log_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.to_dict" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_log_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResult.to_dict" title="Permalink to this definition">#</a></dt>
 <dd><p>Generate a dictionary representation e.g., for export to JSON</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>max_log_len</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code>, optional) – maximum log length</p></li>
 <li><p><strong>debug</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">bool</span></code>, optional) – whether to display traceback information about each error
 with additional information for debugging</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>dictionary representation</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
 </dd>
 </dl>
@@ -335,37 +482,37 @@ with additional information for debugging</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestCaseResultType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.results.data_model.</span></span><span class="sig-name descname"><span class="pre">TestCaseResultType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResultType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.results.data_model.</span></span><span class="sig-name descname"><span class="pre">TestCaseResultType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResultType" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
 <p>Type of test case result</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestCaseResultType.failed">
-<span class="sig-name descname"><span class="pre">failed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'failed'</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResultType.failed" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">failed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'failed'</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResultType.failed" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestCaseResultType.passed">
-<span class="sig-name descname"><span class="pre">passed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'passed'</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResultType.passed" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">passed</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'passed'</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResultType.passed" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestCaseResultType.skipped">
-<span class="sig-name descname"><span class="pre">skipped</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'skipped'</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResultType.skipped" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">skipped</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'skipped'</span></em><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestCaseResultType.skipped" title="Permalink to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestResultsReport">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.results.data_model.</span></span><span class="sig-name descname"><span class="pre">TestResultsReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_suite_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.1.86'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gh_issue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gh_action_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestResultsReport" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.results.data_model.</span></span><span class="sig-name descname"><span class="pre">TestResultsReport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_suite_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.1.86'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gh_issue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gh_action_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestResultsReport" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A report of the results of executing the test suite with a simulation tool</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestResultsReport.test_suite_version">
-<span class="sig-name descname"><span class="pre">test_suite_version</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestResultsReport.test_suite_version" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">test_suite_version</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestResultsReport.test_suite_version" title="Permalink to this definition">#</a></dt>
 <dd><p>version of the test suite which was executed</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code></p>
 </dd>
 </dl>
@@ -373,10 +520,10 @@ with additional information for debugging</p></li>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestResultsReport.results">
-<span class="sig-name descname"><span class="pre">results</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestResultsReport.results" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">results</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestResultsReport.results" title="Permalink to this definition">#</a></dt>
 <dd><p>results of the test cases of the test suite</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <a class="reference internal" href="#biosimulators_test_suite.results.data_model.TestCaseResult" title="biosimulators_test_suite.results.data_model.TestCaseResult"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TestCaseResult</span></code></a></p>
 </dd>
 </dl>
@@ -384,10 +531,10 @@ with additional information for debugging</p></li>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestResultsReport.gh_issue">
-<span class="sig-name descname"><span class="pre">gh_issue</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestResultsReport.gh_issue" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gh_issue</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestResultsReport.gh_issue" title="Permalink to this definition">#</a></dt>
 <dd><p>GitHub issue for which the test suite was executed</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></p>
 </dd>
 </dl>
@@ -395,10 +542,10 @@ with additional information for debugging</p></li>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestResultsReport.gh_action_run">
-<span class="sig-name descname"><span class="pre">gh_action_run</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestResultsReport.gh_action_run" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gh_action_run</span></span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestResultsReport.gh_action_run" title="Permalink to this definition">#</a></dt>
 <dd><p>GitHub action run in which the test suite was executed</p>
 <dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code></p>
 </dd>
 </dl>
@@ -406,16 +553,16 @@ with additional information for debugging</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.data_model.TestResultsReport.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_log_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestResultsReport.to_dict" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_log_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/data_model.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.data_model.TestResultsReport.to_dict" title="Permalink to this definition">#</a></dt>
 <dd><p>Generate a dictionary representation e.g., for export to JSON</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>max_log_len</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">int</span></code>, optional) – maximum log length</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>dictionary representation</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
 </dd>
 </dl>
@@ -425,28 +572,28 @@ with additional information for debugging</p></li>
 
 </section>
 <section id="module-biosimulators_test_suite.results.io">
-<span id="biosimulators-test-suite-results-io-module"></span><h2>biosimulators_test_suite.results.io module<a class="headerlink" href="#module-biosimulators_test_suite.results.io" title="Permalink to this headline">¶</a></h2>
+<span id="biosimulators-test-suite-results-io-module"></span><h2>biosimulators_test_suite.results.io module<a class="headerlink" href="#module-biosimulators_test_suite.results.io" title="Permalink to this heading">#</a></h2>
 <p>Methods for export test results</p>
 <dl class="field-list simple">
-<dt class="field-odd">Author</dt>
+<dt class="field-odd">Author<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Jonathan Karr &lt;<a class="reference external" href="mailto:karr&#37;&#52;&#48;mssm&#46;edu">karr<span>&#64;</span>mssm<span>&#46;</span>edu</a>&gt;</p>
 </dd>
-<dt class="field-even">Date</dt>
+<dt class="field-even">Date<span class="colon">:</span></dt>
 <dd class="field-even"><p>2021-01-01</p>
 </dd>
-<dt class="field-odd">Copyright</dt>
+<dt class="field-odd">Copyright<span class="colon">:</span></dt>
 <dd class="field-odd"><p>2021, Center for Reproducible Biomedical Modeling</p>
 </dd>
-<dt class="field-even">License</dt>
+<dt class="field-even">License<span class="colon">:</span></dt>
 <dd class="field-even"><p>MIT</p>
 </dd>
 </dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="biosimulators_test_suite.results.io.write_test_results">
-<span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.results.io.</span></span><span class="sig-name descname"><span class="pre">write_test_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gh_issue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gh_action_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/io.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.io.write_test_results" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">biosimulators_test_suite.results.io.</span></span><span class="sig-name descname"><span class="pre">write_test_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">results</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gh_issue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gh_action_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/biosimulators/Biosimulators_test_suite/blob/dev/biosimulators_test_suite/results/io.py"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#biosimulators_test_suite.results.io.write_test_results" title="Permalink to this definition">#</a></dt>
 <dd><p>Write the results of test cases to a JSON file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>results</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">list</span></code> of <code class="xref py py-obj docutils literal notranslate"><span class="pre">TestCaseResult</span></code>) – results of test cases</p></li>
 <li><p><strong>filename</strong> (<code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code>) – path to save results</p></li>
@@ -461,26 +608,125 @@ with additional information for debugging</p></li>
 </section>
 
 
-              </div>
+                </article>
               
               
-          </main>
-          
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-      </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-biosimulators_test_suite.results.data_model">biosimulators_test_suite.results.data_model module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestCaseResult"><code class="docutils literal notranslate"><span class="pre">TestCaseResult</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestCaseResult.case"><code class="docutils literal notranslate"><span class="pre">TestCaseResult.case</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestCaseResult.type"><code class="docutils literal notranslate"><span class="pre">TestCaseResult.type</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestCaseResult.duration"><code class="docutils literal notranslate"><span class="pre">TestCaseResult.duration</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestCaseResult.exception"><code class="docutils literal notranslate"><span class="pre">TestCaseResult.exception</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestCaseResult.exception_traceback"><code class="docutils literal notranslate"><span class="pre">TestCaseResult.exception_traceback</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestCaseResult.warnings"><code class="docutils literal notranslate"><span class="pre">TestCaseResult.warnings</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestCaseResult.skip_reason"><code class="docutils literal notranslate"><span class="pre">TestCaseResult.skip_reason</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestCaseResult.log"><code class="docutils literal notranslate"><span class="pre">TestCaseResult.log</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestCaseResult.to_dict"><code class="docutils literal notranslate"><span class="pre">TestCaseResult.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestCaseResultType"><code class="docutils literal notranslate"><span class="pre">TestCaseResultType</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestCaseResultType.failed"><code class="docutils literal notranslate"><span class="pre">TestCaseResultType.failed</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestCaseResultType.passed"><code class="docutils literal notranslate"><span class="pre">TestCaseResultType.passed</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestCaseResultType.skipped"><code class="docutils literal notranslate"><span class="pre">TestCaseResultType.skipped</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestResultsReport"><code class="docutils literal notranslate"><span class="pre">TestResultsReport</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestResultsReport.test_suite_version"><code class="docutils literal notranslate"><span class="pre">TestResultsReport.test_suite_version</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestResultsReport.results"><code class="docutils literal notranslate"><span class="pre">TestResultsReport.results</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestResultsReport.gh_issue"><code class="docutils literal notranslate"><span class="pre">TestResultsReport.gh_issue</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestResultsReport.gh_action_run"><code class="docutils literal notranslate"><span class="pre">TestResultsReport.gh_action_run</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.data_model.TestResultsReport.to_dict"><code class="docutils literal notranslate"><span class="pre">TestResultsReport.to_dict()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-biosimulators_test_suite.results.io">biosimulators_test_suite.results.io module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biosimulators_test_suite.results.io.write_test_results"><code class="docutils literal notranslate"><span class="pre">write_test_results()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/biosimulators/Biosimulators_test_suite/edit/dev/docs-src/source/biosimulators_test_suite.results.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/source/biosimulators_test_suite.results.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, BioSimulators Team.
+      <br/>
+    
+  </p>
+</div>
+      
     </div>
   
-    <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-  <footer class="footer mt-5 mt-md-0">
-  <div class="container">
-    
-    <div class="footer-item">
-      <p class="copyright">
-    &copy; Copyright 2022, BioSimulators Team.<br>
-</p>
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
     </div>
-    
-  </div>
-</footer>
+  
+</div>
+
+  </footer>
   </body>
 </html>
