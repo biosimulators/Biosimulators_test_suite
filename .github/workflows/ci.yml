@@ -17,7 +17,7 @@ jobs:
           TAG: ${{ github.ref }}
         run: |
           version="${TAG/refs\/tags\//}"
-          echo "::set-output name=version::$version"
+          echo "version=$version" >> $GITHUB_OUTPUT
 
   build:
     name: Lint, test, and compile documentation
@@ -101,10 +101,10 @@ jobs:
           else
             archivesChanged=0
           fi
-          echo "::set-output name=archivesChanged::$archivesChanged"
+          echo "archivesChanged=$archivesChanged" >> $GITHUB_OUTPUT
 
           branch="${HEAD/refs\/heads\//}"
-          echo "::set-output name=branch::$branch"
+          echo "branch=$branch" >> $GITHUB_OUTPUT
 
       - name: Push the zipped COMBINE/OMEX archives
         if: steps.commit-archives.outputs.archivesChanged == '1' && startsWith(github.ref, 'refs/heads/')
@@ -221,7 +221,7 @@ jobs:
           else
             docsChanged=0
           fi
-          echo "::set-output name=docsChanged::$docsChanged"
+          echo "docsChanged=$docsChanged" >> $GITHUB_OUTPUT
 
       - name: Push the compiled documentation
         if: steps.commit-docs.outputs.docsChanged == '1'
