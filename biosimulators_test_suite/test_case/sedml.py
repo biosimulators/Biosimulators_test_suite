@@ -1575,7 +1575,7 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
         for file in archive.files:
             with open(file.local_path, 'rb') as file:
                 try:
-                    PyPDF2.PdfFileReader(file)
+                    PyPDF2.PdfReader(file)
                 except Exception:
                     shutil.rmtree(tempdir)
                     raise InvalidOutputsException('Simulator produced an invalid PDF plot')
