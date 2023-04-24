@@ -1,4 +1,4 @@
-biosimulators_utils[containers,bngl,cellml,lems,neuroml,sbml,smoldyn] >= 0.1.172
+biosimulators_utils[containers,bngl,cellml,lems,neuroml,sbml,smoldyn] >= 0.1.175
 cement <= 3.0.6
 docker <= 5.0.3
 natsort <= 8.1.0
