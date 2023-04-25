@@ -1,3 +1,4 @@
+numpy < 1.23.0
 biosimulators_utils[containers,bngl,cellml,lems,neuroml,sbml,smoldyn] >= 0.1.172
 cement
 docker

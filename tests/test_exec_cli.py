@@ -35,7 +35,7 @@ class MainTestCase(unittest.TestCase):
                     task_requirements=[
                         biosimulators_test_suite.data_model.SedTaskRequirements(
                             model_format='format_2585',
-                            simulation_algorithm='KISAO_000019',
+                            simulation_algorithm='KISAO_0000019',
                         )
                     ],
                 ),
@@ -65,7 +65,7 @@ class MainTestCase(unittest.TestCase):
                     'case': {
                         'id': 'case-id',
                         'description': ('Required model formats and simulation algorithms for SED tasks:\n\n'
-                                        '* Format: `format_2585`\n  Algorithm: `KISAO_000019`'),
+                                        '* Format: `format_2585`\n  Algorithm: `KISAO_0000019`'),
                     },
                     'resultType': 'passed',
                     'duration': 1.,
@@ -89,7 +89,7 @@ class MainTestCase(unittest.TestCase):
                     task_requirements=[
                         biosimulators_test_suite.data_model.SedTaskRequirements(
                             model_format='format_2585',
-                            simulation_algorithm='KISAO_000019',
+                            simulation_algorithm='KISAO_0000019',
                         )
                     ],
                 ),
@@ -122,7 +122,7 @@ class MainTestCase(unittest.TestCase):
                     task_requirements=[
                         biosimulators_test_suite.data_model.SedTaskRequirements(
                             model_format='format_2585',
-                            simulation_algorithm='KISAO_000019',
+                            simulation_algorithm='KISAO_0000019',
                         )
                     ],
                 ),

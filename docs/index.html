@@ -1,198 +1,454 @@
 
+
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BioSimulators test suite documentation &#8212; BioSimulators test suite 0.1.45 documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>BioSimulators test suite documentation &#8212; BioSimulators test suite 0.1.86 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="icon" sizes="16x16" type="image/png" href="https://github.com/biosimulations/biosimulations/raw/dev/libs/shared/assets/src/assets/icons/favicon-16x16.png" />
+    <link rel="icon" sizes="32x32" type="image/png" href="https://github.com/biosimulations/biosimulations/raw/dev/libs/shared/assets/src/assets/icons/favicon-32x32.png" />
+    <link rel="stylesheet" type="text/css" href="_static/css/biosimulators.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. Installation instructions" href="installation.html" />
-   
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="next" title="Installation instructions" href="installation.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
   
   
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-  </head><body>
-  <div class="document">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Enter text to search for ..."
+         aria-label="Enter text to search for ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
     
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">BioSimulators test suite</a></h1>
+      <div class="navbar-item">
+  
 
-
-
-<p class="blurb">Tool for validating that biosimulation software tools implement the BioSimulators standards for biosimulation tools</p>
-
-
-
-
-<p>
-<iframe src="https://ghbtns.com/github-btn.html?user=biosimulators&repo=Biosimulators_test_suite&type=watch&count=true&size=large&v=2"
-  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
-</p>
-
-
-
-
-
-<h3>Navigation</h3>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installation instructions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">2. Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="source/biosimulators_test_suite.html">3. API documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="about.html">4. About the BioSimulators test suite</a></li>
-<li class="toctree-l1"><a class="reference internal" href="genindex.html">5. Index</a></li>
-</ul>
-
-
-<hr />
-<ul>
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
     
-    <li class="toctree-l1"><a href="https://biosimulators.org">BioSimulators</a></li>
     
-    <li class="toctree-l1"><a href="https://run.biosimulations.org">runBioSimulations</a></li>
+      
     
-    <li class="toctree-l1"><a href="https://biosimulations.org">BioSimulations</a></li>
     
-</ul>
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="installation.html" title="next chapter"><span class="section-number">1. </span>Installation instructions</a></li>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="documentwrapper">
-        <div class="bodywrapper">
+    <img src="_static/biosimulators-logo.svg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/biosimulators-logo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
           
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Quick links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/biosimulators/Biosimulators_test_suite" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/biosimulators" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only">Twitter</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:info@biosimulators.org" title="Email" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-envelope"></i></span>
+            <label class="sr-only">Email</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
 
-          <div class="body" role="main">
-            
-  <div class="section" id="biosimulators-test-suite-documentation">
-<h1>BioSimulators test suite documentation<a class="headerlink" href="#biosimulators-test-suite-documentation" title="Permalink to this headline">¶</a></h1>
-<p>The BioSimulators test suite is a tool for validating that biosimulation software tools implement the <a class="reference external" href="https://biosimulators.org/conventions">BioSimulators conventions for biosimulation tools</a>.</p>
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Quick links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/biosimulators/Biosimulators_test_suite" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://twitter.com/biosimulators" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter"></i></span>
+            <label class="sr-only">Twitter</label></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="mailto:info@biosimulators.org" title="Email" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-envelope"></i></span>
+            <label class="sr-only">Email</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Enter text to search for ..."
+         aria-label="Enter text to search for ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="biosimulators-test-suite-documentation">
+<h1>BioSimulators test suite documentation<a class="headerlink" href="#biosimulators-test-suite-documentation" title="Permalink to this heading">#</a></h1>
+<p>The BioSimulators test suite is a tool for validating that biosimulation software tools implement the <a class="reference external" href="https://docs.biosimulations.org/concepts/conventions/">BioSimulators conventions for biosimulation tools</a>.</p>
 <p>The test suite is composed of two parts:</p>
 <ul>
 <li><p>A collection of example modeling projects. Each project is represented by a single <a class="reference external" href="https://combinearchive.org/">COMBINE/OMEX archive</a> that contains one or more simulation experiments described using the <a class="reference external" href="https://sed-ml.org">Simulation Experiment Description Markup Language (SED-ML)</a> and one or more models described using a format such as the <a class="reference external" href="https://bionetgen.org">BioNetGen Language (BNGL)</a>) or the <a class="reference external" href="http://sbml.org">Systems Biology Markup Language (SBML)</a>.</p></li>
 <li><p>Software for checking that biosimulation tools execute these projects according to the BioSimulators conventions.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Simulation tools support the <a class="reference external" href="https://biosimulators.org/conventions/simulator-interfaces">BioSimulators standard command-line arguments</a>.</p></li>
-<li><p>Simulation tools support the <a class="reference external" href="https://biosimulators.org/conventions/simulator-images">BioSimulators conventions for Docker images</a>.</p></li>
-<li><p>Simulation tools follow the <a class="reference external" href="https://biosimulators.org/conventions/simulation-experiments">BioSimulators conventions for executing simulations described by SED-ML files in COMBINE/OMEX archives</a>.</p></li>
-<li><p>Simulation tools support the <a class="reference external" href="https://biosimulators.org/conventions/simulation-reports">BioSimulators conventions for the outputs of SED-ML files in COMBINE/OMEX archives</a>.</p></li>
+<li><p>Simulation tools support the <a class="reference external" href="https://docs.biosimulations.org/concepts/conventions/simulator-interfaces/">BioSimulators standard command-line arguments</a>.</p></li>
+<li><p>Simulation tools support the <a class="reference external" href="https://docs.biosimulations.org/concepts/conventions/simulator-images/">BioSimulators conventions for Docker images</a>.</p></li>
+<li><p>Simulation tools follow the <a class="reference external" href="https://docs.biosimulations.org/concepts/conventions/simulation-experiments/">BioSimulators conventions for executing simulations described by SED-ML files in COMBINE/OMEX archives</a>.</p></li>
+<li><p>Simulation tools support the <a class="reference external" href="https://docs.biosimulations.org/concepts/conventions/simulation-run-reports/">BioSimulators conventions for the outputs of SED-ML files in COMBINE/OMEX archives</a>.</p></li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
-<div class="section" id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installation instructions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-the-dependencies-for-the-test-suite">1.1. Install the dependencies for the test suite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-the-optional-dependencies-for-the-test-suite">1.2. Install the optional dependencies for the test suite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#install-the-test-suite">1.3. Install the test suite</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation instructions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-the-dependencies-for-the-test-suite">Install the dependencies for the test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-the-optional-dependencies-for-the-test-suite">Install the optional dependencies for the test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#install-the-test-suite">Install the test suite</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="tutorial.html">2. Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#using-the-public-cloud-deployment-of-the-test-suite">2.1. Using the public cloud deployment of the test suite</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#issue-content-and-format">2.1.1. Issue content and format</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#validating-and-submitting-simulators-via-the-github-api">2.1.2. Validating and submitting simulators via the GitHub API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#using-the-public-cloud-deployment-of-the-test-suite">Using the public cloud deployment of the test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#running-the-test-suite-locally">Running the test suite locally</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#running-the-test-suite-locally">2.2. Running the test suite locally</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#directly-testing-a-command-line-interface-rather-than-a-docker-image">2.2.1. Directly testing a command-line interface (rather than a Docker image)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#executing-the-test-suite-with-stdout-stderr-capturing-disabled">2.2.2. Executing the test suite with stdout/stderr capturing disabled</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#saving-the-synthetic-combine-archives-generated-by-the-test-cases">2.2.3. Saving the synthetic COMBINE archives generated by the test cases</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tutorial.html#saving-the-results-of-the-test-cases-to-a-file">2.2.4. Saving the results of the test cases to a file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/biosimulators_test_suite.html">API documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.config">biosimulators_test_suite.config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.data_model">biosimulators_test_suite.data_model module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.exceptions">biosimulators_test_suite.exceptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.exec_cli">biosimulators_test_suite.exec_cli module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.exec_core">biosimulators_test_suite.exec_core module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.exec_gh_action">biosimulators_test_suite.exec_gh_action module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.utils">biosimulators_test_suite.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.warnings">biosimulators_test_suite.warnings module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About the BioSimulators test suite</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#license">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#development-team">Development team</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#contributing-to-the-biosimulators-test-suite">Contributing to the BioSimulators test suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#acknowledgements">Acknowledgements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="about.html#questions-and-comments">Questions and comments</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="source/biosimulators_test_suite.html">3. API documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#subpackages">3.1. Subpackages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="source/biosimulators_test_suite.results.html">3.1.1. biosimulators_test_suite.results package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="source/biosimulators_test_suite.test_case.html">3.1.2. biosimulators_test_suite.test_case package</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#submodules">3.2. Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.config">3.3. biosimulators_test_suite.config module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.data_model">3.4. biosimulators_test_suite.data_model module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.exceptions">3.5. biosimulators_test_suite.exceptions module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.exec_cli">3.6. biosimulators_test_suite.exec_cli module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.exec_core">3.7. biosimulators_test_suite.exec_core module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.exec_gh_action">3.8. biosimulators_test_suite.exec_gh_action module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.utils">3.9. biosimulators_test_suite.utils module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="source/biosimulators_test_suite.html#module-biosimulators_test_suite.warnings">3.10. biosimulators_test_suite.warnings module</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="about.html">4. About the BioSimulators test suite</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="about.html#license">4.1. License</a></li>
-<li class="toctree-l2"><a class="reference internal" href="about.html#development-team">4.2. Development team</a></li>
-<li class="toctree-l2"><a class="reference internal" href="about.html#contributing-to-the-biosimulators-test-suite">4.3. Contributing to the BioSimulators test suite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="about.html#acknowledgements">4.4. Acknowledgements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="about.html#questions-and-comments">4.5. Questions and comments</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="genindex.html">5. Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
 </ul>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
-          </div>
-          
-        </div>
-      </div>
-    <div class="clearer"></div>
+                </article>
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
   </div>
-    <div class="footer">
-      &copy;2021, BioSimulators Team.
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/biosimulators/Biosimulators_test_suite/edit/dev/docs-src/index.rst">
+      <i class="fa-solid fa-pencil"></i>
       
-      |
-      <a href="_sources/index.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-    <a href="https://github.com/biosimulators/Biosimulators_test_suite" class="github">
-        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
+      
+        
+          Edit on GitHub
+        
+      
     </a>
-    
+  </div>
+</div>
 
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/index.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
     
+      © Copyright 2023, BioSimulators Team.
+      <br/>
+    
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
   </body>
 </html>
