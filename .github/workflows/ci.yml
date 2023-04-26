@@ -7,7 +7,7 @@ jobs:
   getVersionNumber:
     name: Get version number
     if: startsWith(github.ref, 'refs/tags/') && github.actor != 'biosimulators-daemon' && !contains(github.event.head_commit.message, '[skip ci]')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     outputs:
       version: ${{ steps.get-version-number.outputs.version }}
     steps:
@@ -17,12 +17,13 @@ jobs:
           TAG: ${{ github.ref }}
         run: |
           version="${TAG/refs\/tags\//}"
-          echo "::set-output name=version::$version"
+          echo "version=$version" >> $GITHUB_OUTPUT
+          echo "version=$version"
 
   build:
     name: Lint, test, and compile documentation
     if: github.actor != 'biosimulators-daemon' && !contains(github.event.head_commit.message, '[skip ci]')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -50,7 +51,7 @@ jobs:
 
       - name: Install pip and setuptools
         run: |
-          python -m pip install --upgrade pip
+          #python -m pip install --upgrade pip
           python -m pip install --upgrade setuptools
 
       - name: Install Java # for pyNeuroML
@@ -66,20 +67,7 @@ jobs:
 
       - name: Install XPP
         run: |
-          sudo apt-get update -y
-          sudo apt-get install -y --no-install-recommends wget make gcc libx11-dev libc6-dev
-
-          cd /tmp
-          wget http://www.math.pitt.edu/~bard/bardware/xppaut_latest.tar.gz
-          mkdir xpp
-          tar zxvf xppaut_latest.tar.gz --directory xpp
-          cd xpp
-          make
-          sudo make install
-
-          cd /tmp
-          rm xppaut_latest.tar.gz
-          rm -r xpp
+          sudo apt-get install -y --no-install-recommends xppaut
 
       - name: Install Singularity # to validate that the Docker image can be converted into a Singularity image
         uses: eWaterCycle/setup-singularity@v6
@@ -114,10 +102,10 @@ jobs:
           else
             archivesChanged=0
           fi
-          echo "::set-output name=archivesChanged::$archivesChanged"
+          echo "archivesChanged=$archivesChanged" >> $GITHUB_OUTPUT
 
           branch="${HEAD/refs\/heads\//}"
-          echo "::set-output name=branch::$branch"
+          echo "branch=$branch" >> $GITHUB_OUTPUT
 
       - name: Push the zipped COMBINE/OMEX archives
         if: steps.commit-archives.outputs.archivesChanged == '1' && startsWith(github.ref, 'refs/heads/')
@@ -167,7 +155,7 @@ jobs:
   release:
     name: Release a new version
     needs: [getVersionNumber, build]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     outputs:
       docsChanged: ${{ steps.commit-docs.outputs.docsChanged }}
     steps:
@@ -198,7 +186,7 @@ jobs:
 
       - name: Install pip and setuptools
         run: |
-          python -m pip install --upgrade pip
+          #python -m pip install --upgrade pip
           python -m pip install --upgrade setuptools
 
       # install package
@@ -234,7 +222,7 @@ jobs:
           else
             docsChanged=0
           fi
-          echo "::set-output name=docsChanged::$docsChanged"
+          echo "docsChanged=$docsChanged" >> $GITHUB_OUTPUT
 
       - name: Push the compiled documentation
         if: steps.commit-docs.outputs.docsChanged == '1'
@@ -256,14 +244,7 @@ jobs:
       - name: Install pandoc
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y --no-install-recommends wget
-
-          wget https://github.com/jgm/pandoc/releases -O /tmp/pandocVersions.html
-          urlPart=`grep "\.deb" /tmp/pandocVersions.html | head -n 1 | cut -d'/' -f2-7 | cut -d'"' -f1`
-          wget "https://github.com/$urlPart" -O /tmp/pandoc.deb
-          sudo dpkg -i /tmp/pandoc.deb
-          rm /tmp/pandocVersions.html
-          rm /tmp/pandoc.deb
+          sudo apt-get install -y pandoc
 
       - name: Convert README to .rst format
         run: pandoc --from=gfm --output=README.rst --to=rst README.md
