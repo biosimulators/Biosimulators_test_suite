@@ -310,7 +310,7 @@ class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsT
                     )
                 )
             for mod in [model_1, model_2]:
-                for change in mod:
+                for change in mod.changes:
                     change.model = mod.id
             n_children = {}
             for child in node.getchildren():
@@ -451,7 +451,7 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
                     )
                 )
             for mod in [model_1, model_2]:
-                for change in mod:
+                for change in mod.changes:
                     change.model = mod.id
 
             n_children = {}
