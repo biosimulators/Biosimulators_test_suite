@@ -309,7 +309,9 @@ class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsT
                         new_value=value,
                     )
                 )
-
+            for mod in [model_1, model_2]:
+                for change in mod.changes:
+                    change.model = mod.id
             n_children = {}
             for child in node.getchildren():
                 _, _, _, child_target, _ = get_xml_node_namespace_tag_target(
@@ -448,6 +450,9 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
                         new_value=value,
                     )
                 )
+            for mod in [model_1, model_2]:
+                for change in mod.changes:
+                    change.model = mod.id
 
             n_children = {}
             for child in node.getchildren():
