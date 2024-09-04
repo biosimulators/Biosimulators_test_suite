@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "biosimulators-test-suite"
+version = "0.1.89"
+description = "The BioSimulators test suite is a tool for validating that biosimulation software tools implement the BioSimulators conventions for biosimulation tools."
+authors = ["Center for Reproducible Modeling <info@biosimulators.org>"]
+license = "MIT License (MIT)"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+biosimulators-utils = {git = "https://github.com/biosimulators/Biosimulators_utils.git", rev = "poetry-build", extras = ["containers", "bngl", "cellml", "lems", "neuroml", "sbml", "smoldyn", "logging"]}
+cement = "<=3.0.6"
+docker = "<=5.0.3"
+natsort = "<=8.1.0"
+pypdf2 = "<=2.8.1"
+requests = "<=2.28.1"
+python-dateutil = "<2.9"
+pyyaml = "<5.4"
+simplejson = "<3.17.0"
+termcolor = "<1.2"
+
+[tool.poetry.group.logging]
+optional = true
+
+[tool.poetry.group.logging.dependencies]
+
+
+[tool.poetry.group.experimental]
+optional = true
+
+[tool.poetry.group.experimental.dependencies]
+flake8 = "*"
+
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
