@@ -8,7 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-biosimulators-utils = {git = "https://github.com/biosimulators/Biosimulators_utils.git", rev = "poetry-build", extras = ["containers", "bngl", "cellml", "lems", "neuroml", "sbml", "smoldyn", "logging"]}
+
 cement = "<=3.0.6"
 docker = "<=5.0.3"
 natsort = "<=8.1.0"
@@ -18,7 +18,7 @@ python-dateutil = "<2.9"
 pyyaml = "<5.4"
 simplejson = "<3.17.0"
 termcolor = "<1.2"
-
+biosimulators-utils = {git = "https://github.com/biosimulators/Biosimulators_utils.git", rev = "poetry-build", extras = ["bngl","cellml","lems","neuroml","sbml","simularium","escher","containers","logging","rba","smoldyn"]}
 [tool.poetry.group.logging]
 optional = true
 
@@ -35,5 +35,5 @@ flake8 = "*"
 
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core", "flake8", "pytest"]
 build-backend = "poetry.core.masonry.api"
