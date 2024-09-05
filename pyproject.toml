@@ -7,7 +7,7 @@ license = "MIT License (MIT)"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "~3.10"
 
 cement = "<=3.0.6"
 docker = "<=5.0.3"
@@ -18,20 +18,12 @@ python-dateutil = "<2.9"
 pyyaml = "<5.4"
 simplejson = "<3.17.0"
 termcolor = "<1.2"
-biosimulators-utils = {git = "https://github.com/biosimulators/Biosimulators_utils.git", rev = "poetry-build", extras = ["bngl","cellml","lems","neuroml","sbml","simularium","escher","containers","logging","rba","smoldyn"]}
+biosimulators-utils = {git = "https://github.com/biosimulators/Biosimulators_utils.git", rev = "poetry-build", extras = ["bngl", "cellml", "lems", "neuroml", "sbml", "simularium", "escher", "containers", "logging", "rba", "smoldyn"]}
+
 [tool.poetry.group.logging]
 optional = true
 
 [tool.poetry.group.logging.dependencies]
-
-
-[tool.poetry.group.experimental]
-optional = true
-
-[tool.poetry.group.experimental.dependencies]
-flake8 = "*"
-
-
 
 
 [build-system]
