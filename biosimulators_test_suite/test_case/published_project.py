@@ -681,8 +681,10 @@ class SyntheticCombineArchiveTestCase(TestCase):
                 result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
                 os.remove(temp_filename)
                 if result.returncode != 0:
-                    msg = 'The Docker image could not be successfully executed as a Singularity image:\n  {}'.format(
-                        result.stderr.decode().replace('\n', '\n  '))
+                    returned_statement = result.stdout.decode().replace('\n', '\n  ') if result.stdout.strip() \
+                        else result.stdout.decode().replace('\n', '\n  ')
+                    msg = (f'The Docker image could not be successfully executed as a'
+                           f' Singularity image (error code {result.returncode}:\n  {returned_statement}')
                     raise TestCaseException(msg)
 
             else:
