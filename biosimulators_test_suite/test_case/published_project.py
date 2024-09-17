@@ -674,6 +674,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
                 cmd = [
                     'singularity', 'run',
                     '-B', outputs_dir + ':/root',
+                    "--containall",
                     singularity_filename,
                     '-i', '/root/' + os.path.basename(synthetic_archive_filename),
                     '-o', '/root',
