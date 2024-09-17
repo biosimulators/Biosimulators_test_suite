@@ -6,9 +6,10 @@
 :License: MIT
 """
 
-from .data_model import OutputMedium
-from .results.data_model import TestCaseResultType
-from .results.io import write_test_results
+from biosimulators_test_suite.data_model import OutputMedium
+from biosimulators_test_suite.results.data_model import TestCaseResultType
+from biosimulators_test_suite.results.io import write_test_results
+
 from biosimulators_utils.config import Colors
 import biosimulators_test_suite
 import biosimulators_test_suite.exec_core

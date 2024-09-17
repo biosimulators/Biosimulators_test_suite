@@ -1,6 +1,6 @@
 from biosimulators_test_suite.test_case import results_report
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
-from biosimulators_test_suite.warnings import TestCaseWarning
+from biosimulators_test_suite.test_warnings import TestCaseWarning
 from biosimulators_utils.report.data_model import DataSetResults
 from biosimulators_utils.report.io import ReportWriter
 from biosimulators_utils.sedml.data_model import SedDocument, Report, DataSet

@@ -4,7 +4,7 @@ from biosimulators_test_suite.results.data_model import TestCaseResult, TestCase
 from biosimulators_test_suite.test_case.published_project import (
     SimulatorCanExecutePublishedProject, find_cases, SyntheticCombineArchiveTestCase,
     ExpectedResultOfSyntheticArchive, UniformTimeCourseTestCase)
-from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning
+from biosimulators_test_suite.test_warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
 from biosimulators_utils.combine.data_model import CombineArchive

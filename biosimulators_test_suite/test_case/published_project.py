@@ -6,13 +6,15 @@
 :License: MIT
 """
 
-from ..config import Config
-from ..data_model import (TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedDataSet, ExpectedSedPlot,
-                          AlertType, OutputMedium)
-from ..exceptions import InvalidOutputsException, SkippedTestCaseException, TimeoutException, TestCaseException
-from ..utils import get_singularity_image_filename, simulation_results_isnan
-from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning
-from .utils import are_array_shapes_equivalent
+from biosimulators_test_suite.config import Config
+from biosimulators_test_suite.data_model import TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedDataSet, \
+    ExpectedSedPlot, AlertType, OutputMedium
+from biosimulators_test_suite.exceptions import InvalidOutputsException, SkippedTestCaseException, TimeoutException, \
+    TestCaseException
+from biosimulators_test_suite.utils import get_singularity_image_filename, simulation_results_isnan
+from biosimulators_test_suite.test_warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, \
+    InvalidOutputsWarning
+from biosimulators_test_suite.test_case.utils import are_array_shapes_equivalent
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContentFormatPattern  # noqa: F401
 from biosimulators_utils.globals import JSONType
 from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter

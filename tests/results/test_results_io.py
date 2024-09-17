@@ -2,7 +2,7 @@ from biosimulators_test_suite import __version__
 from biosimulators_test_suite.data_model import TestCase
 from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType
 from biosimulators_test_suite.results.io import write_test_results
-from biosimulators_test_suite.warnings import TestCaseWarning
+from biosimulators_test_suite.test_warnings import TestCaseWarning
 import json
 import os
 import shutil

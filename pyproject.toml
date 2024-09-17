@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "biosimulators-test-suite"
 version = "0.1.89"
-description = "The BioSimulators test suite is a tool for validating that biosimulation software tools implement the BioSimulators conventions for biosimulation tools."
+description = "Tools for validating that biosimulation tools are consistent with the BioSimulators standards"
 authors = ["Center for Reproducible Modeling <info@biosimulators.org>"]
 license = "MIT License (MIT)"
 readme = "README.md"
@@ -25,6 +25,8 @@ optional = true
 
 [tool.poetry.group.logging.dependencies]
 
+[tool.poetry.scripts]
+biosimulators-test-suite = "biosimulators_test_suite.exec_cli:main"
 
 [build-system]
 requires = ["poetry-core", "flake8", "pytest"]

@@ -7,12 +7,12 @@
 :License: MIT
 """
 
-from .config import Config
-from .data_model import OutputMedium
-from .exec_core import SimulatorValidator
-from .results.data_model import TestCaseResult, TestCaseResultType, TestResultsReport  # noqa: F401
-from .results.io import write_test_results
-from .utils import get_singularity_image_filename
+from biosimulators_test_suite.config import Config
+from biosimulators_test_suite.data_model import OutputMedium
+from biosimulators_test_suite.exec_core import SimulatorValidator
+from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType, TestResultsReport
+from biosimulators_test_suite.results.io import write_test_results
+from biosimulators_test_suite.utils import get_singularity_image_filename
 from biosimulators_utils.globals import JSONType
 from biosimulators_utils.biosimulations.utils import validate_biosimulations_api_response
 from biosimulators_utils.config import Colors, Config as BioSimulatorsUtilsConfig

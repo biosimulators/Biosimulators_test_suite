@@ -6,9 +6,9 @@
 :License: MIT
 """
 
-from ..utils import simulation_results_isnan
-from ..warnings import TestCaseWarning
-from .published_project import SingleMasterSedDocumentCombineArchiveTestCase
+from biosimulators_test_suite.utils import simulation_results_isnan
+from biosimulators_test_suite.test_warnings import TestCaseWarning
+from biosimulators_test_suite.test_case.published_project import SingleMasterSedDocumentCombineArchiveTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
 from biosimulators_utils.report.data_model import ReportFormat
 from biosimulators_utils.report.io import ReportReader

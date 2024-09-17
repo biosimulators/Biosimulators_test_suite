@@ -3,7 +3,7 @@ from biosimulators_test_suite import exec_core
 from biosimulators_test_suite.config import Config
 from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
-from biosimulators_test_suite.warnings import TestCaseWarning
+from biosimulators_test_suite.test_warnings import TestCaseWarning
 from biosimulators_utils.gh_action.data_model import GitHubActionCaughtError
 from biosimulators_utils.simulator_registry.data_model import SimulatorSubmission, IssueLabel
 from unittest import mock

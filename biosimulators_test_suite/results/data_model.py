@@ -6,8 +6,8 @@
 :License: MIT
 """
 
-from .._version import __version__
-from ..warnings import TestCaseWarning  # noqa: F401
+from biosimulators_test_suite._version import __version__
+from biosimulators_test_suite.test_warnings import TestCaseWarning
 import enum
 import traceback
 

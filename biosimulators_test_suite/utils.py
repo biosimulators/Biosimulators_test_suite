@@ -6,7 +6,7 @@
 :License: MIT
 """
 
-from .config import Config
+from biosimulators_test_suite.config import Config
 import numpy
 import os
 

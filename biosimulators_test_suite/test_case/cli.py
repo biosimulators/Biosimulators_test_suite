@@ -6,8 +6,8 @@
 :License: MIT
 """
 
-from ..data_model import TestCase
-from ..warnings import TestCaseWarning
+from biosimulators_test_suite.data_model import TestCase
+from biosimulators_test_suite.test_warnings import TestCaseWarning
 from biosimulators_utils.simulator.environ import ENVIRONMENT_VARIABLES
 import re
 import subprocess

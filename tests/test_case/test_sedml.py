@@ -1,7 +1,7 @@
 from biosimulators_test_suite.exceptions import InvalidOutputsException, SkippedTestCaseException
 from biosimulators_test_suite.test_case import sedml
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject, SyntheticCombineArchiveTestCase
-from biosimulators_test_suite.warnings import InvalidOutputsWarning
+from biosimulators_test_suite.test_warnings import InvalidOutputsWarning
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
 from biosimulators_utils.config import get_config

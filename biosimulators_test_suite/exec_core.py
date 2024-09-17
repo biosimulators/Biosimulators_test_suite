@@ -6,18 +6,18 @@
 :License: MIT
 """
 
-from .config import Config
-from .data_model import TestCase, OutputMedium
-from .exceptions import SkippedTestCaseException, TimeoutException
-from .results.data_model import TestCaseResult, TestCaseResultType
-from .test_case import cli
-from .test_case import combine_archive
-from .test_case import docker_image
-from .test_case import log
-from .test_case import published_project
-from .test_case import results_report
-from .test_case import sedml
-from .warnings import TestCaseWarning, IgnoredTestCaseWarning
+from biosimulators_test_suite.config import Config
+from biosimulators_test_suite.data_model import TestCase, OutputMedium
+from biosimulators_test_suite.exceptions import SkippedTestCaseException, TimeoutException
+from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType
+from biosimulators_test_suite.test_case import cli
+from biosimulators_test_suite.test_case import combine_archive
+from biosimulators_test_suite.test_case import docker_image
+from biosimulators_test_suite.test_case import log
+from biosimulators_test_suite.test_case import published_project
+from biosimulators_test_suite.test_case import results_report
+from biosimulators_test_suite.test_case import sedml
+from biosimulators_test_suite.test_warnings import TestCaseWarning, IgnoredTestCaseWarning
 from typing import Union
 from types import ModuleType
 from biosimulators_utils.globals import JSONType

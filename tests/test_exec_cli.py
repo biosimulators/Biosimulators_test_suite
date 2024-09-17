@@ -4,7 +4,7 @@ import biosimulators_test_suite.data_model
 import biosimulators_test_suite.exec_core
 import biosimulators_test_suite.results.data_model
 import biosimulators_test_suite.test_case.published_project
-import biosimulators_test_suite.warnings
+import biosimulators_test_suite.test_warnings
 import json
 import os
 import shutil
