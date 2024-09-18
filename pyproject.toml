@@ -36,8 +36,8 @@ sphinx = ">=1.8"
 sphinxprettysearchresults = { git = "https://github.com/biosimulators/sphinx-pretty-searchresults.git" }
 
 [tool.poetry.group.test.dependencies]
+setuptools = "^75.1.0"
 pytest = "*"
-pytest-cov = "*"
 flake8 = "*"
 parameterized = "*"
 biosimulators_simularium = "*"
