@@ -38,6 +38,9 @@ class ExamplesTestCase(unittest.TestCase):
 
     @parameterized.parameterized.expand(EXAMPLES)
     def test_example(self, name, example_filename):
+        ### TEMPORARY RBA REMOVAL
+        if "rba" in example_filename:
+            return
         example_specs_filename = os.path.join(example_filename[0:-5], 'expected-results.json')
 
         example_base_dir = os.path.join(os.path.dirname(example_filename))

@@ -276,10 +276,15 @@ class SimulatorCanExecutePublishedProject(TestCase):
             reqs_satisfied = False
             for alg_specs in specifications['algorithms']:
                 format_reqs_satisfied = False
-                for format in alg_specs['modelFormats']:
+                for format_in_specs in alg_specs['modelFormats']:
+                    # TEMPORARY RBA REMOVAL
+                    if task_reqs.model_format == "format_2585":
+                        raise RuntimeError("Error with Simulator Specification:\n\tDue to incompatible, "
+                                           "outdated releases of RBApy, BioSimulators can no longer "
+                                           "support RBA models (a.k.a. model_format 2585).")
                     if (
-                        task_reqs.model_format == format['id']
-                        and task_reqs.model_format_features == set(format.get('supportedFeatures', []) or [])
+                        task_reqs.model_format == format_in_specs['id']
+                        and task_reqs.model_format_features == set(format_in_specs.get('supportedFeatures', []) or [])
                     ):
                         format_reqs_satisfied = True
                         break
