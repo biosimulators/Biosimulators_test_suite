@@ -819,8 +819,8 @@ class SedmlTestCaseTest(unittest.TestCase):
             case.eval_outputs(None, None, {'./a.sedml': doc}, self.dirname)
 
         with open(plot_1_path, 'wb') as file:
-            writer = PyPDF2.PdfFileWriter()
-            writer.addBlankPage(width=20, height=20)
+            writer = PyPDF2.PdfWriter()
+            writer.add_blank_page(width=20, height=20)
             writer.write(file)
         ArchiveWriter().run(archive, plots_path)
         with self.assertRaisesRegex(InvalidOutputsException, 'did not produce'):
@@ -828,8 +828,8 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         plot_2_path = os.path.join(self.dirname, 'plot_2.pdf')
         with open(plot_2_path, 'wb') as file:
-            writer = PyPDF2.PdfFileWriter()
-            writer.addBlankPage(width=20, height=20)
+            writer = PyPDF2.PdfWriter()
+            writer.add_blank_page(width=20, height=20)
             writer.write(file)
         archive.files.append(ArchiveFile(archive_path='a.sedml/plot_2.pdf', local_path=plot_2_path))
         ArchiveWriter().run(archive, plots_path)
@@ -845,8 +845,8 @@ class SedmlTestCaseTest(unittest.TestCase):
 
         plot_3_path = os.path.join(self.dirname, 'plot_3.pdf')
         with open(plot_3_path, 'wb') as file:
-            writer = PyPDF2.PdfFileWriter()
-            writer.addBlankPage(width=20, height=20)
+            writer = PyPDF2.PdfWriter()
+            writer.add_blank_page(width=20, height=20)
             writer.write(file)
         archive.files.append(ArchiveFile(archive_path='a.sedml/plot_3.pdf', local_path=plot_3_path))
         ArchiveWriter().run(archive, plots_path)

@@ -4,7 +4,7 @@
   "taskRequirements": [{
     "modelFormat": "format_2585",
     "modelFormatFeatures": [],
-    "simulationAlgorithm": "KISAO_000019"
+    "simulationAlgorithm": "KISAO_0000019"
   }],
   "skippedSimulators": [],
   "expectedReports": [{

@@ -310,7 +310,9 @@ class SimulatorSupportsModelAttributeChanges(SimulatorSupportsModelsSimulationsT
                         new_value=value,
                     )
                 )
-
+            for mod in [model_1, model_2]:
+                for change in mod.changes:
+                    change.model = mod.id
             n_children = {}
             for child in node.getchildren():
                 _, _, _, child_target, _ = get_xml_node_namespace_tag_target(
@@ -449,6 +451,9 @@ class SimulatorSupportsComputeModelChanges(SimulatorSupportsModelsSimulationsTas
                         new_value=value,
                     )
                 )
+            for mod in [model_1, model_2]:
+                for change in mod.changes:
+                    change.model = mod.id
 
             n_children = {}
             for child in node.getchildren():
@@ -1576,7 +1581,7 @@ class SimulatorProducesPlotsTestCase(SingleMasterSedDocumentCombineArchiveTestCa
         for file in archive.files:
             with open(file.local_path, 'rb') as file:
                 try:
-                    PyPDF2.PdfFileReader(file)
+                    PyPDF2.PdfReader(file)
                 except Exception:
                     shutil.rmtree(tempdir)
                     raise InvalidOutputsException('Simulator produced an invalid PDF plot')

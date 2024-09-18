@@ -50,8 +50,9 @@ jobs:
 
       - name: Install pip and setuptools
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install --upgrade setuptools
+          python -m pip install pip==23.0.0
+          python -m pip install pip==23.0.0
+          python -m pip --version
 
       - name: Install Java # for pyNeuroML
         uses: actions/setup-java@v2
@@ -101,10 +102,10 @@ jobs:
           else
             archivesChanged=0
           fi
-          echo "::set-output name=archivesChanged::$archivesChanged"
+          echo "archivesChanged=$archivesChanged" >> $GITHUB_OUTPUT
 
           branch="${HEAD/refs\/heads\//}"
-          echo "::set-output name=branch::$branch"
+          echo "branch=$branch" >> $GITHUB_OUTPUT
 
       - name: Push the zipped COMBINE/OMEX archives
         if: steps.commit-archives.outputs.archivesChanged == '1' && startsWith(github.ref, 'refs/heads/')
