@@ -6,7 +6,7 @@
 :License: MIT
 """
 
-from biosimulators_test_suite.results.data_model import TestCaseResult, TestResultsReport
+from biosimulators_test_suite.results.data_model import TestResultsReport
 import json
 
 __all__ = ['write_test_results']

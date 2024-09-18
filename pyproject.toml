@@ -5,6 +5,15 @@ description = "Tools for validating that biosimulation tools are consistent with
 authors = ["Center for Reproducible Modeling <info@biosimulators.org>"]
 license = "MIT License (MIT)"
 readme = "README.md"
+homepage = "https://github.com/biosimulators/Biosimulators_test_suite"
+repository = "https://github.com/biosimulators/Biosimulators_test_suite"
+classifiers = [
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: MIT License',
+        'Topic :: Scientific/Engineering :: Bio-Informatics',
+]
+keywords = ['systems', 'biology', 'modeling', 'simulation', 'BioSimulators']
 
 [tool.poetry.dependencies]
 python = "~3.10"
@@ -18,12 +27,19 @@ python-dateutil = "<2.9"
 pyyaml = "<5.4"
 simplejson = "<3.17.0"
 termcolor = "<1.2"
-biosimulators-utils = {git = "https://github.com/biosimulators/Biosimulators_utils.git", rev = "poetry-build", extras = ["bngl", "cellml", "lems", "neuroml", "sbml", "simularium", "escher", "containers", "logging", "rba", "smoldyn"]}
+biosimulators-utils = {git = "https://github.com/biosimulators/Biosimulators_utils.git", rev = "dev", extras = ["bngl", "cellml", "lems", "neuroml", "sbml", "simularium", "escher", "containers", "logging", "rba", "smoldyn"]}
+#biosimulators-utils = {version = ">=0.1.189", extras = ["bngl", "cellml", "lems", "neuroml", "sbml", "simularium", "escher", "containers", "logging", "rba", "smoldyn"]}
 
-[tool.poetry.group.logging]
-optional = true
+[tool.poetry.group.docs.dependencies]
+pydata-sphinx-theme = "*"  # for building documentation
+sphinx = ">=1.8"
+sphinxprettysearchresults = { git = "https://github.com/biosimulators/sphinx-pretty-searchresults.git" }
 
-[tool.poetry.group.logging.dependencies]
+[tool.poetry.group.test.dependencies]
+pytest = "*"
+flake8 = "*"
+parameterized = "*"
+biosimulators_simularium = "*"
 
 [tool.poetry.scripts]
 biosimulators-test-suite = "biosimulators_test_suite.exec_cli:main"
