@@ -27,8 +27,8 @@ python-dateutil = "<2.9"
 pyyaml = "<5.4"
 simplejson = "<3.17.0"
 termcolor = "<1.2"
-biosimulators-utils = {git = "https://github.com/biosimulators/Biosimulators_utils.git", rev = "dev", extras = ["bngl", "cellml", "lems", "neuroml", "sbml", "simularium", "escher", "containers", "logging", "rba", "smoldyn"]}
-#biosimulators-utils = {version = ">=0.1.189", extras = ["bngl", "cellml", "lems", "neuroml", "sbml", "simularium", "escher", "containers", "logging", "rba", "smoldyn"]}
+#biosimulators-utils = {git = "https://github.com/biosimulators/Biosimulators_utils.git", rev = "dev", extras = ["bngl", "cellml", "lems", "neuroml", "sbml", "simularium", "escher", "containers", "logging", "rba", "smoldyn"]}
+biosimulators-utils = {version = ">=0.2", extras = ["bngl", "cellml", "lems", "neuroml", "sbml", "simularium", "escher", "containers", "logging", "smoldyn"]} # add back "rba" after it is fixed
 
 [tool.poetry.group.docs.dependencies]
 pydata-sphinx-theme = "*"  # for building documentation
