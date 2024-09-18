@@ -116,7 +116,7 @@ jobs:
 
       # lint
       - name: Lint the package
-        run: poetry run python -m flake8 ${{ github.repository }}
+        run: poetry run python -m flake8 $GITHUB_WORKSPACE
 
       - name: Run the tests
         uses: GabrielBB/xvfb-action@v1
