@@ -275,13 +275,15 @@ class SimulatorCanExecutePublishedProject(TestCase):
         for task_reqs in self.task_requirements:
             reqs_satisfied = False
             for alg_specs in specifications['algorithms']:
+                # TEMPORARY RBA REMOVAL
+                alg_id = alg_specs["id"]
+                if alg_specs['kisaoId']["id"] == "KISAO_0000669":
+                    raise RuntimeError("Error with Algorithm Specification (KISAO_0000669):\n\tDue to incompatible, "
+                                       "outdated releases of RBApy, BioSimulators can no longer "
+                                       "support RBA processing."
+                                       f"{alg_id}")
                 format_reqs_satisfied = False
                 for format_in_specs in alg_specs['modelFormats']:
-                    # TEMPORARY RBA REMOVAL
-                    if task_reqs.model_format == "format_2585":
-                        raise RuntimeError("Error with Simulator Specification:\n\tDue to incompatible, "
-                                           "outdated releases of RBApy, BioSimulators can no longer "
-                                           "support RBA models (a.k.a. model_format 2585).")
                     if (
                         task_reqs.model_format == format_in_specs['id']
                         and task_reqs.model_format_features == set(format_in_specs.get('supportedFeatures', []) or [])
