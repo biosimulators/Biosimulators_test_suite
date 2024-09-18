@@ -116,7 +116,7 @@ jobs:
 
       # lint
       - name: Lint the package
-        run: poetry run python -m flake8 $GITHUB_WORKSPACE
+        run: poetry run python -m flake8 $GITHUB_WORKSPACE/biosimulators_test_suite
 
       - name: Run the tests
         uses: GabrielBB/xvfb-action@v1
