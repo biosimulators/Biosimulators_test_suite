@@ -145,6 +145,11 @@ jobs:
           mkdir -p docs-src/_static
           poetry run sphinx-build docs-src docs
 
+      - name: Setup tmate session 3 (if failed)
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ failure() }}
+        timeout-minutes: 40
+
   release:
     name: Release a new version
     needs: [getVersionNumber, build]
