@@ -1,7 +1,7 @@
 from biosimulators_test_suite.test_case import docker_image
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
 from biosimulators_test_suite.exceptions import TestCaseException
-from biosimulators_test_suite.warnings import TestCaseWarning
+from biosimulators_test_suite.test_warnings import TestCaseWarning
 import os
 import shutil
 import tempfile

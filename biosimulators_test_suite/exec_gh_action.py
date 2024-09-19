@@ -7,12 +7,13 @@
 :License: MIT
 """
 
-from .config import Config
-from .data_model import OutputMedium
-from .exec_core import SimulatorValidator
-from .results.data_model import TestCaseResult, TestCaseResultType, TestResultsReport  # noqa: F401
-from .results.io import write_test_results
-from .utils import get_singularity_image_filename
+from biosimulators_test_suite.config import Config
+from biosimulators_test_suite.data_model import OutputMedium
+from biosimulators_test_suite.exec_core import SimulatorValidator
+from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType, TestResultsReport
+from biosimulators_test_suite.results.io import write_test_results
+from biosimulators_test_suite.utils import get_singularity_image_filename
+from biosimulators_utils.globals import JSONType
 from biosimulators_utils.biosimulations.utils import validate_biosimulations_api_response
 from biosimulators_utils.config import Colors, Config as BioSimulatorsUtilsConfig
 from biosimulators_utils.gh_action.data_model import Comment, GitHubActionCaughtError  # noqa: F401
@@ -22,19 +23,20 @@ from biosimulators_utils.simulator_registry.data_model import SimulatorSubmissio
 from biosimulators_utils.simulator_registry.process_submission import get_simulator_submission_from_gh_issue_body
 from biosimulators_utils.simulator_registry.query import get_simulator_version_specs
 from natsort import natsort_keygen
+from docker.client import DockerClient
+from typing import Tuple
 import biosimulators_utils.image
 import biosimulators_utils.simulator.io
 import requests
 import requests.exceptions
 import termcolor
 
-
 __all__ = [
     'ValidateCommitSimulatorGitHubAction',
 ]
 
 
-def get_uncaught_exception_msg(exception):
+def get_uncaught_exception_msg(exception: Exception) -> "list[Comment]":
     """ Create an error message to display to users for all exceptions not caught during the
     exception of the :obj:`run` method (exceptions of all types except :obj:`GitHubActionCaughtError`)
 
@@ -42,9 +44,9 @@ def get_uncaught_exception_msg(exception):
         exception (:obj:`Exception`): a failure encountered during the exception of the :obj:`run` method
 
     Returns:
-        :obj:`str`: error message to display to users
+        :obj:`list`: of :obj:`str`: error messages to display to users
     """
-    gh_action_run_url = GitHubAction.get_gh_action_run_url()
+    gh_action_run_url: str = GitHubAction.get_gh_action_run_url()
     return [
         Comment(text='The validation/submission of your simulator failed.'),
         Comment(text=str(exception), error=True),
@@ -64,13 +66,14 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
     """ Action to validate a containerized simulator
 
     Attributes:
+        config (:obj:`Config`): configuration of the app
         issue_number (:obj:`str`): number of GitHub issue which triggered the action
     """
 
     def __init__(self):
         super(ValidateCommitSimulatorGitHubAction, self).__init__()
-        self.config = Config()
-        self.issue_number = self.get_issue_number()
+        self.config: Config = Config()
+        self.issue_number: str = self.get_issue_number()
 
     @GitHubActionErrorHandling.catch_errors(uncaught_exception_msg_func=get_uncaught_exception_msg,
                                             caught_error_labels=[IssueLabel.invalid],
@@ -79,11 +82,11 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         """ Validate and commit a simulator."""
 
         # Get properties of submission
-        issue_props = self.get_issue(self.issue_number)
-        submission = get_simulator_submission_from_gh_issue_body(issue_props['body'])
-        submitter = issue_props['user']['login']
+        issue_props: JSONType = self.get_issue(self.issue_number)
+        submission: SimulatorSubmission = get_simulator_submission_from_gh_issue_body(issue_props['body'])
+        submitter: str = issue_props['user']['login']
 
-        # Send message that validation is starting
+        # Send message that validation/submission is starting
         self.add_comment_to_issue(self.issue_number, self.get_initial_message(submission, submitter))
 
         # reset labels except approved
@@ -96,12 +99,12 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         self.add_labels_to_issue(self.issue_number, [IssueLabel.validated.value])
 
         # get specifications of other versions of simulator
-        config = BioSimulatorsUtilsConfig()
-        existing_version_specifications = get_simulator_version_specs(specifications['id'], config)
+        config: Config = BioSimulatorsUtilsConfig()
+        existing_version_specifications: JSONType = get_simulator_version_specs(specifications['id'], config)
 
         # determine if simulator is approved: issue is a revision of an existing version of a validated simulator,
         # a new version of a validated simulator, or the issue has been manually approved by the BioSimulators Team
-        approved = self.is_simulator_approved(specifications, existing_version_specifications)
+        approved: bool = self.is_simulator_approved(specifications, existing_version_specifications)
 
         # if approved, label the issue as approved
         if approved and IssueLabel.approved.value not in self.get_labels_for_issue(self.issue_number):
@@ -135,38 +138,35 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                     ('A member of the BioSimulators team will review your submission and '
                      'publish your image before final committment to the registry.'))
 
-    def get_initial_message(self, submission, submitter):
+    def get_initial_message(self, submission: SimulatorSubmission, submitter: str) -> str:
         """ Peport message that validation is starting
 
         Args:
             submission (:obj:`SimulatorSubmission`): simulator submission
             submitter (:obj:`str`): GitHub user name of person who executed the submission
         """
-        actions = []
-        not_actions = []
+        actions_list: list[str] = []
+        not_actions_list: list[str] = []
 
-        actions.append('validating the specifications of your simulator')
+        actions_list.append('validating the specifications of your simulator')
         if submission.validate_image:
-            actions.append('validating your Docker image')
-            test_results_msg = (
+            actions_list.append('validating your Docker image')
+            test_results_msg: str = (
                 ' The results of the validation of your tool will also be saved as a JSON file. '
                 'A link to this file will be available for 90 days from the "Artifacts" section at the bottom of this page.'
             )
         else:
-            not_actions.append('You have chosen not to have the Docker image for your simulator validated.')
-            test_results_msg = ''
+            not_actions_list.append('You have chosen not to have the Docker image for your simulator validated.')
+            test_results_msg: str = ''
         if submission.commit_simulator:
-            job_type = 'submission'
-            actions.append('committing your simulator to the BioSimulators registry')
+            job_type: str = 'submission'
+            actions_list.append('committing your simulator to the BioSimulators registry')
         else:
-            job_type = 'validation'
-            not_actions.append('You have chosen not to submit your simulator to the BioSimulators registry.')
+            job_type: str = 'validation'
+            not_actions_list.append('You have chosen not to submit your simulator to the BioSimulators registry.')
 
-        if len(actions) == 1:
-            actions = actions[0]
-        else:
-            actions = ', '.join(actions[0:-1]) + ', and ' + actions[-1]
-        not_actions = ' '.join(action.strip() for action in not_actions)
+        actions: str = actions_list[0] if len(actions_list) == 1 else str(', '.join(actions_list[0:-1]) + ', and ' + actions_list[-1])
+        not_actions: str = str(' '.join(action.strip() for action in not_actions_list))
 
         return ('Thank you @{} for your submission to the BioSimulators simulator validation/submission system!\n\n'
                 'The BioSimulators validator bot is {}. {}\n\n'
@@ -174,7 +174,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                 'A complete log of your simulator {} job will be available for 90 days [here]({}).{}\n\n'
                 ).format(submitter, actions, not_actions, job_type, self.get_gh_action_run_url(), test_results_msg)
 
-    def exec_core(self, submission, submitter):
+    def exec_core(self, submission: SimulatorSubmission, submitter: str) -> Tuple[JSONType, "list[TestCaseResult]"]:
         """ Validate simulator
 
         * Validate specifications
@@ -187,11 +187,11 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         Returns:
             :obj:`tuple`:
 
-                * :obj:`dict`: specifications of a simulation tool
-                * :obj:`list` of :obj:`TestCaseResults`: results of test cases
+                * :obj:`dict`: json-parsed specifications of a simulation tool
+                * :obj:`list` of :obj:`TestCaseResult`: results of test cases
         """
         # validate specifications
-        specifications = biosimulators_utils.simulator.io.read_simulator_specs(
+        specifications: JSONType = biosimulators_utils.simulator.io.read_simulator_specs(
             submission.specifications_url, submission.specifications_patch,
             validate=True)
 
@@ -203,7 +203,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
 
         # validate image
         if submission.validate_image:
-            test_results = self.validate_image(specifications)
+            test_results: list[TestCaseResult] = self.validate_image(specifications)  # Main executable
             self.add_comment_to_issue(self.issue_number, 'The image for your simulator is valid!')
         else:
             test_results = None
@@ -281,20 +281,20 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
                 ).format(submitter, simulator_name, simulator_id, simulator_name, simulator_name)
                 self.add_error_comment_to_issue(self.issue_number, [Comment(text=msg, error=True)])
 
-    def validate_image(self, specifications):
+    def validate_image(self, specifications: JSONType) -> "list[TestCaseResult]":
         """ Validate a Docker image for simulation tool
 
         Args:
             specifications (:obj:`dict`): specifications of a simulation tool
 
         Returns:
-            :obj:`list` of :obj:`TestCaseResults`: results of test cases
+            :obj:`list` of :obj:`TestCaseResult`: results of test cases
         """
-        docker_client = biosimulators_utils.image.login_to_docker_registry(
+        docker_client: DockerClient = biosimulators_utils.image.login_to_docker_registry(
             'docker.io', self.config.docker_hub_username, self.config.docker_hub_token)
 
         # validate that container (Docker image) exists
-        image_url = specifications['image']['url']
+        image_url: str = specifications['image']['url']
         get_docker_image(docker_client, image_url, pull=True)
 
         # validate that Docker image can be converted to a Singularity image
@@ -303,8 +303,8 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
             singularity_filename=get_singularity_image_filename(image_url))
 
         # validate that image is consistent with the BioSimulators standards
-        validator = SimulatorValidator(specifications, output_medium=OutputMedium.gh_issue)
-        case_results = validator.run()
+        validator: SimulatorValidator = SimulatorValidator(specifications, output_medium=OutputMedium.gh_issue)
+        case_results: list[TestCaseResult] = validator.run()
         write_test_results(case_results, '.biosimulators-test-suite-results.json',
                            gh_issue=int(self.issue_number), gh_action_run=int(self.get_gh_action_run_id()))
         summary, failure_details, warning_details, skipped_details = validator.summarize_results(
@@ -584,7 +584,7 @@ class ValidateCommitSimulatorGitHubAction(GitHubAction):
         return {'Authorization': response_data['token_type'] + ' ' + response_data['access_token']}
 
     @classmethod
-    def add_comment_to_issue(cls, issue_number, comment, alternative_comment=None, max_len=65536):
+    def add_comment_to_issue(cls, issue_number: str, comment: str, alternative_comment: str = None, max_len: int = 65536) -> None:
         """ Post a comment to the GitHub issue
 
         Args:

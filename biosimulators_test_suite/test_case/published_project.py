@@ -6,14 +6,17 @@
 :License: MIT
 """
 
-from ..config import Config
-from ..data_model import (TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedDataSet, ExpectedSedPlot,
-                          AlertType, OutputMedium)
-from ..exceptions import InvalidOutputsException, SkippedTestCaseException, TimeoutException, TestCaseException
-from ..utils import get_singularity_image_filename, simulation_results_isnan
-from ..warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning
-from .utils import are_array_shapes_equivalent
+from biosimulators_test_suite.config import Config
+from biosimulators_test_suite.data_model import TestCase, SedTaskRequirements, ExpectedSedReport, ExpectedSedDataSet, \
+    ExpectedSedPlot, AlertType, OutputMedium
+from biosimulators_test_suite.exceptions import InvalidOutputsException, SkippedTestCaseException, TimeoutException, \
+    TestCaseException
+from biosimulators_test_suite.utils import get_singularity_image_filename, simulation_results_isnan
+from biosimulators_test_suite.test_warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, \
+    InvalidOutputsWarning
+from biosimulators_test_suite.test_case.utils import are_array_shapes_equivalent
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContentFormatPattern  # noqa: F401
+from biosimulators_utils.globals import JSONType
 from biosimulators_utils.combine.io import CombineArchiveReader, CombineArchiveWriter
 from biosimulators_utils.config import get_config
 from biosimulators_utils.image import convert_docker_image_to_singularity
@@ -272,11 +275,17 @@ class SimulatorCanExecutePublishedProject(TestCase):
         for task_reqs in self.task_requirements:
             reqs_satisfied = False
             for alg_specs in specifications['algorithms']:
+                # TEMPORARY RBA REMOVAL
+                if alg_specs['kisaoId']["id"] == "KISAO_0000669":
+                    raise RuntimeError("Error with Algorithm Specification (KISAO_0000669):\n\tDue to incompatible, "
+                                       "outdated releases of RBApy, BioSimulators can no longer "
+                                       "support RBA processing."
+                                       f"{(alg_specs['id']) if 'id' in alg_specs else alg_specs['kisaoId']}")
                 format_reqs_satisfied = False
-                for format in alg_specs['modelFormats']:
+                for format_in_specs in alg_specs['modelFormats']:
                     if (
-                        task_reqs.model_format == format['id']
-                        and task_reqs.model_format_features == set(format.get('supportedFeatures', []) or [])
+                        task_reqs.model_format == format_in_specs['id']
+                        and task_reqs.model_format_features == set(format_in_specs.get('supportedFeatures', []) or [])
                     ):
                         format_reqs_satisfied = True
                         break
@@ -673,6 +682,7 @@ class SyntheticCombineArchiveTestCase(TestCase):
                 cmd = [
                     'singularity', 'run',
                     '-B', outputs_dir + ':/root',
+                    "--containall",
                     singularity_filename,
                     '-i', '/root/' + os.path.basename(synthetic_archive_filename),
                     '-o', '/root',
@@ -680,8 +690,10 @@ class SyntheticCombineArchiveTestCase(TestCase):
                 result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
                 os.remove(temp_filename)
                 if result.returncode != 0:
-                    msg = 'The Docker image could not be successfully executed as a Singularity image:\n  {}'.format(
-                        result.stderr.decode().replace('\n', '\n  '))
+                    returned_statement = result.stdout.decode().replace('\n', '\n  ') if result.stdout.strip() \
+                        else result.stdout.decode().replace('\n', '\n  ')
+                    msg = (f'The Docker image could not be successfully executed as a'
+                           f' Singularity image (error code {result.returncode}:\n  {returned_statement}')
                     raise TestCaseException(msg)
 
             else:
@@ -899,7 +911,7 @@ class ExpectedResultOfSyntheticArchive(object):
         self.environment = environment or {}
 
 
-def find_cases(specifications, dir_name=None, output_medium=OutputMedium.console):
+def find_cases(specifications: JSONType, dir_name: str = None, output_medium: OutputMedium = OutputMedium.console):
     """ Collect test cases
 
     Args:
@@ -908,15 +920,17 @@ def find_cases(specifications, dir_name=None, output_medium=OutputMedium.console
         output_medium (:obj:`OutputMedium`, optional): medium the description should be formatted for
 
     Returns:
-        :obj:`list` of :obj:`SimulatorCanExecutePublishedProject`: test cases
+        :obj:`tuple`:
+                * :obj:`list` of :obj:`SimulatorCanExecutePublishedProject`: all test cases
+                * :obj:`list` of :obj:`SimulatorCanExecutePublishedProject`: compatible test cases
     """
     if dir_name is None:
         dir_name = EXAMPLES_DIR
     if not os.path.isdir(dir_name):
         warnings.warn('Directory of example COMBINE/OMEX archives is not available', IgnoredTestCaseWarning)
 
-    all_cases = []
-    compatible_cases = []
+    all_cases: list[SimulatorCanExecutePublishedProject] = []
+    compatible_cases: list[SimulatorCanExecutePublishedProject] = []
     for example_filename in glob.glob(os.path.join(dir_name, '**/*.omex'), recursive=True):
         md_filename = os.path.join(example_filename[0:-5], 'expected-results.json')
         rel_filename = os.path.relpath(md_filename, dir_name)

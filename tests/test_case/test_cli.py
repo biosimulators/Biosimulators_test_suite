@@ -1,5 +1,5 @@
 from biosimulators_test_suite.test_case import cli
-from biosimulators_test_suite.warnings import TestCaseWarning
+from biosimulators_test_suite.test_warnings import TestCaseWarning
 import shutil
 import tempfile
 import unittest

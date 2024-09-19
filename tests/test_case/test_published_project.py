@@ -1,10 +1,12 @@
+import pytest
+
 from biosimulators_test_suite import data_model
 from biosimulators_test_suite.exceptions import InvalidOutputsException, SkippedTestCaseException
 from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType
 from biosimulators_test_suite.test_case.published_project import (
     SimulatorCanExecutePublishedProject, find_cases, SyntheticCombineArchiveTestCase,
     ExpectedResultOfSyntheticArchive, UniformTimeCourseTestCase)
-from biosimulators_test_suite.warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning
+from biosimulators_test_suite.test_warnings import IgnoredTestCaseWarning, SimulatorRuntimeErrorWarning, InvalidOutputsWarning
 from biosimulators_utils.archive.data_model import Archive, ArchiveFile
 from biosimulators_utils.archive.io import ArchiveWriter
 from biosimulators_utils.combine.data_model import CombineArchive
@@ -57,6 +59,19 @@ class TestSimulatorCanExecutePublishedProject(unittest.TestCase):
             }, dir_name='does_not_exist')
         self.assertEqual(len(all_cases), 0)
         self.assertEqual(len(compatible_cases), 0)
+
+        ### TEMPORARY RBA REMOVAL, REMOVE THIS NEXT SECTION IF RESTORED
+        with pytest.raises(RuntimeError):
+            all_cases, _ = find_cases({
+                'algorithms': [
+                    {
+                        'id': "rba",
+                        'kisaoId': {'id': 'KISAO_0000669'},
+                        'modelFormats': [{'id': 'format_2585', 'supportedFeatures': []}],
+                    }
+                ]
+            })
+
 
     def test_SimulatorCanExecutePublishedProject_description(self):
         case = SimulatorCanExecutePublishedProject(task_requirements=[

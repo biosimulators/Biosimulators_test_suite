@@ -6,8 +6,7 @@
 :License: MIT
 """
 
-from .config import Config
-from .exceptions import SkippedTestCaseException  # noqa: F401
+from biosimulators_test_suite.config import Config
 from biosimulators_utils.image import get_docker_image
 import abc
 import docker

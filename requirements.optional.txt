@@ -1,2 +1,0 @@
-[logging]
-biosimulators_utils[logging]

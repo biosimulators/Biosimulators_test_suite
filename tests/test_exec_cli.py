@@ -4,7 +4,7 @@ import biosimulators_test_suite.data_model
 import biosimulators_test_suite.exec_core
 import biosimulators_test_suite.results.data_model
 import biosimulators_test_suite.test_case.published_project
-import biosimulators_test_suite.warnings
+import biosimulators_test_suite.test_warnings
 import json
 import os
 import shutil
@@ -96,8 +96,8 @@ class MainTestCase(unittest.TestCase):
                 type=biosimulators_test_suite.results.data_model.TestCaseResultType.passed,
                 duration=1.,
                 warnings=[
-                    mock.Mock(message=biosimulators_test_suite.warnings.TestCaseWarning('Warning-1')),
-                    mock.Mock(message=biosimulators_test_suite.warnings.TestCaseWarning('Warning-2')),
+                    mock.Mock(message=biosimulators_test_suite.test_warnings.TestCaseWarning('Warning-1')),
+                    mock.Mock(message=biosimulators_test_suite.test_warnings.TestCaseWarning('Warning-2')),
                 ],
             ),
         ]

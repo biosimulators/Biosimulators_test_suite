@@ -6,8 +6,8 @@
 :License: MIT
 """
 
-from ..warnings import InvalidOutputsWarning
-from .published_project import SingleMasterSedDocumentCombineArchiveTestCase
+from biosimulators_test_suite.test_warnings import InvalidOutputsWarning
+from biosimulators_test_suite.test_case.published_project import SingleMasterSedDocumentCombineArchiveTestCase
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContent, CombineArchiveContentFormat  # noqa: F401
 from biosimulators_utils.report.io import ReportReader
 from biosimulators_utils.sedml.data_model import SedDocument, Report  # noqa: F401

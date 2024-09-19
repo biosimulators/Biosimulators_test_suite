@@ -1,0 +1,61 @@
+[tool.poetry]
+name = "biosimulators-test-suite"
+version = "0.2"
+description = "Tools for validating that biosimulation tools are consistent with the BioSimulators standards"
+authors = ["Center for Reproducible Modeling <info@biosimulators.org>"]
+license = "MIT License (MIT)"
+readme = "README.md"
+homepage = "https://github.com/biosimulators/Biosimulators_test_suite"
+repository = "https://github.com/biosimulators/Biosimulators_test_suite"
+classifiers = [
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: MIT License',
+        'Topic :: Scientific/Engineering :: Bio-Informatics',
+]
+keywords = ['systems', 'biology', 'modeling', 'simulation', 'BioSimulators']
+
+[tool.poetry.dependencies]
+python = "~3.10"
+
+cement = "<=3.0.6"
+docker = "^7.1.0"
+natsort = "<=8.1.0"
+pypdf2 = "<=2.8.1"
+requests = "<=2.28.1"
+python-dateutil = "<2.9"
+pyyaml = "<5.4"
+simplejson = "<3.17.0"
+termcolor = "<1.2"
+#biosimulators-utils = {git = "https://github.com/biosimulators/Biosimulators_utils.git", rev = "dev", extras = ["bngl", "cellml", "lems", "neuroml", "sbml", "simularium", "escher", "containers", "logging", "rba", "smoldyn"]}
+biosimulators-utils = {version = ">=0.2", extras = ["bngl", "cellml", "lems", "neuroml", "sbml", "simularium", "escher", "containers", "logging", "smoldyn"]} # add back "rba" after it is fixed
+
+[tool.poetry.group.dev.dependencies]
+capturer = "^3.0"
+docker = "^7.1.0"
+bezier = "*"
+flake8 = "^7.1.1"
+pytest = "^8.3.2"
+pytest-cov = "^5.0.0"
+flaky = "^3.8.1"
+jsonschema = "^4.23.0"
+
+[tool.poetry.group.docs.dependencies]
+pydata-sphinx-theme = "*"  # for building documentation
+sphinx = ">=1.8"
+sphinxprettysearchresults = { git = "https://github.com/biosimulators/sphinx-pretty-searchresults.git" }
+
+[tool.poetry.group.test.dependencies]
+setuptools = "^75.1.0"
+pytest = "^8.3.2"
+pytest-cov = "^5.0.0"
+flake8 = "^7.1.1"
+parameterized = "*"
+biosimulators_simularium = "*"
+
+[tool.poetry.scripts]
+biosimulators-test-suite = "biosimulators_test_suite.exec_cli:main"
+
+[build-system]
+requires = ["poetry-core", "flake8", "pytest"]
+build-backend = "poetry.core.masonry.api"

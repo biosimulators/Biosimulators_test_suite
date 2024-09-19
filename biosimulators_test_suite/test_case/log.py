@@ -6,8 +6,8 @@
 :License: MIT
 """
 
-from ..config import Config
-from ..exceptions import InvalidOutputsException, SkippedTestCaseException
+from biosimulators_test_suite.config import Config
+from biosimulators_test_suite.exceptions import InvalidOutputsException, SkippedTestCaseException
 from .published_project import SingleMasterSedDocumentCombineArchiveTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
 from biosimulators_utils.config import get_config

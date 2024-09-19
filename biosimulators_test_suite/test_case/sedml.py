@@ -5,10 +5,11 @@
 :Copyright: 2020, Center for Reproducible Biomedical Modeling
 :License: MIT
 """
-from ..exceptions import InvalidOutputsException, SkippedTestCaseException
-from ..utils import simulation_results_isnan
-from ..warnings import InvalidOutputsWarning
-from .published_project import SingleMasterSedDocumentCombineArchiveTestCase, UniformTimeCourseTestCase, ExpectedResultOfSyntheticArchive
+from biosimulators_test_suite.exceptions import InvalidOutputsException, SkippedTestCaseException
+from biosimulators_test_suite.utils import simulation_results_isnan
+from biosimulators_test_suite.test_warnings import InvalidOutputsWarning
+from biosimulators_test_suite.test_case.published_project import SingleMasterSedDocumentCombineArchiveTestCase, \
+    UniformTimeCourseTestCase, ExpectedResultOfSyntheticArchive
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
 from biosimulators_utils.archive.io import ArchiveReader
 from biosimulators_utils.config import get_config

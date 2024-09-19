@@ -4,7 +4,7 @@ from biosimulators_test_suite.exceptions import SkippedTestCaseException
 from biosimulators_test_suite.results.data_model import TestCaseResult, TestCaseResultType
 from biosimulators_test_suite.test_case import published_project
 from biosimulators_test_suite.test_case.docker_image import HasBioContainersLabels
-from biosimulators_test_suite.warnings import TestCaseWarning, IgnoredTestCaseWarning
+from biosimulators_test_suite.test_warnings import TestCaseWarning, IgnoredTestCaseWarning
 from unittest import mock
 import sys
 import shutil

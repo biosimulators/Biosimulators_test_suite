@@ -1,6 +1,6 @@
 from biosimulators_test_suite.test_case import combine_archive
 from biosimulators_test_suite.test_case.published_project import SimulatorCanExecutePublishedProject
-from biosimulators_test_suite.warnings import InvalidOutputsWarning
+from biosimulators_test_suite.test_warnings import InvalidOutputsWarning
 from biosimulators_utils.combine.data_model import CombineArchive, CombineArchiveContent, CombineArchiveContentFormat
 from biosimulators_utils.report.data_model import DataSetResults
 from biosimulators_utils.report.io import ReportWriter

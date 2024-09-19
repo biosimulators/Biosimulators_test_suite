@@ -6,9 +6,9 @@
 :License: MIT
 """
 
-from ..utils import simulation_results_isnan
-from ..warnings import TestCaseWarning
-from .published_project import SingleMasterSedDocumentCombineArchiveTestCase
+from biosimulators_test_suite.utils import simulation_results_isnan
+from biosimulators_test_suite.test_warnings import TestCaseWarning
+from biosimulators_test_suite.test_case.published_project import SingleMasterSedDocumentCombineArchiveTestCase
 from biosimulators_utils.combine.data_model import CombineArchive  # noqa: F401
 from biosimulators_utils.report.data_model import ReportFormat
 from biosimulators_utils.report.io import ReportReader
@@ -73,17 +73,17 @@ class SimulatorGeneratesReportsOfSimulationResults(SingleMasterSedDocumentCombin
 
                     with h5py.File(os.path.join(outputs_dir, 'reports.h5'), 'r') as file:
 
-                        temp = file[uri].attrs.get('uri', None)
+                        temp = ReportReader.parse_dataset_str_value(file[uri].attrs.get('uri', None))
                         if temp != uri:
                             raise ValueError('`uri` of HDF5 data set `{}` must be `{}`, not `{}`.'.format(uri, uri, temp))
 
                         for i_group in range(len(uri_parts) - 1):
                             group_uri = '/'.join(uri_parts[0:i_group + 1])
-                            temp = file[group_uri].attrs.get('uri', None)
+                            temp = ReportReader.parse_dataset_str_value(file[group_uri].attrs.get('uri', None))
                             if temp != group_uri:
                                 raise ValueError('`uri` of HDF5 group `{}` must be `{}`, not `{}`.'.format(group_uri, group_uri, temp))
 
-                            temp = file[group_uri].attrs.get('combineArchiveLocation', None)
+                            temp = ReportReader.parse_dataset_str_value(file[group_uri].attrs.get('combineArchiveLocation', None))
                             if temp != group_uri:
                                 raise ValueError('`combineArchiveLocation` of HDF5 group `{}` must be `{}`, not `{}`.'.format(
                                     group_uri, group_uri, temp))

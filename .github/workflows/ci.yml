@@ -1,13 +1,14 @@
 name: Continuous integration
 
 on:
-  - push
+  push:
+  pull_request:
 
 jobs:
   getVersionNumber:
     name: Get version number
-    if: startsWith(github.ref, 'refs/tags/') && github.actor != 'biosimulators-daemon' && !contains(github.event.head_commit.message, '[skip ci]')
-    runs-on: ubuntu-20.04
+    if: "startsWith(github.ref, 'refs/tags/') && github.actor != 'allcontributors' && !contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-22.04
     outputs:
       version: ${{ steps.get-version-number.outputs.version }}
     steps:
@@ -18,15 +19,21 @@ jobs:
         run: |
           version="${TAG/refs\/tags\//}"
           echo "version=$version" >> $GITHUB_OUTPUT
-          echo "version=$version"
 
   build:
     name: Lint, test, and compile documentation
-    if: github.actor != 'biosimulators-daemon' && !contains(github.event.head_commit.message, '[skip ci]')
-    runs-on: ubuntu-20.04
+    if: "!contains(github.event.head_commit.message, '[skip ci]') && github.actor != 'allcontributors'"
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python-version: [ "3.10" ]
+      fail-fast: false
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
@@ -39,17 +46,9 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
+          python-version: '3.10'
 
-      - name: Setup pip cache
-        uses: actions/cache@v2
-        with:
-          path: /opt/hostedtoolcache/Python
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-${{ hashFiles('requirements.optional.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-      - name: Install pip
+      - name: Install pip and setuptools
         run: |
           python -m pip install pip==23.0.0
           python -m pip install pip==23.0.0
@@ -68,23 +67,23 @@ jobs:
 
       - name: Install XPP
         run: |
-          sudo apt-get install -y --no-install-recommends xppaut
+          sudo apt-get install -y --no-install-recommends wget make gcc libx11-dev libc6-dev xppaut
 
       - name: Install Singularity # to validate that the Docker image can be converted into a Singularity image
         uses: eWaterCycle/setup-singularity@v6
 
       # install package
-      - name: Install the package
-        run: |
-          python -m pip install git+https://github.com/biosimulators/RBApy.git#egg=rbapy
-          python -m pip install .[all]
+      - name: Set up the environment
+        uses: ./.github/actions/setup-poetry-env
+        with:
+          python-version: ${{ matrix.python-version }}
 
       # zip COMBINE/OMEX archives
       - name: Zip COMBINE/OMEX archives
         run: |
           sudo apt-get update -y
           sudo apt-get install -y --no-install-recommends zipcmp
-          python scripts/zip_examples.py
+          poetry run python scripts/zip_examples.py
 
       - id: commit-archives
         name: Commit zipped COMBINE/OMEX archives
@@ -116,25 +115,18 @@ jobs:
           branch: ${{ steps.commit-archives.outputs.branch }}
 
       # lint
-      - name: Install flake8
-        run: python -m pip install flake8
-
       - name: Lint the package
-        run: python -m flake8
-
-      # test and upload coverage report to Codecov
-      - name: Install pytest
-        run: python -m pip install pytest pytest-cov
-
-      - name: Install the requirements for the tests
-        run: python -m pip install .[tests]
+        run: poetry run python -m flake8 $GITHUB_WORKSPACE/biosimulators_test_suite
 
       - name: Run the tests
-        # env:
-        #   BIOSIMULATORS_API_ENDPOINT: https://api.biosimulators.dev/ # uncomment to run tests using the dev deployment
         uses: GabrielBB/xvfb-action@v1
+        env:
+          MPLBACKEND: PDF
+          # BIOSIMULATORS_API_ENDPOINT: https://api.biosimulators.dev/  # uncomment to execute tests with the dev deployment
         with:
-          run: python -m pytest tests/ --cov=./biosimulators_test_suite --cov-report=xml
+          run: |
+            poetry run python -m pip install --upgrade setuptools
+            poetry run python -m pytest tests/ --cov=./biosimulators_test_suite --cov-report=xml
 
       - name: Upload the coverage report to Codecov
         uses: codecov/codecov-action@v2
@@ -145,26 +137,31 @@ jobs:
 
       # compile documentation
       - name: Install the requirements for compiling the documentation
-        run: python -m pip install -r docs-src/requirements.txt
+        run: poetry install --with docs
 
       - name: Compile the documentation
         run: |
-          sphinx-apidoc . setup.py --output-dir docs-src/source --force --module-first --no-toc
+          poetry run sphinx-apidoc . setup.py --output-dir docs-src/source --force --module-first --no-toc
           mkdir -p docs-src/_static
-          sphinx-build docs-src docs
+          poetry run sphinx-build docs-src docs
+
+      - name: Setup tmate session 3 (if failed)
+        uses: mxschmitt/action-tmate@v3
+        if: ${{ failure() }}
+        timeout-minutes: 40
 
   release:
     name: Release a new version
     needs: [getVersionNumber, build]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     outputs:
       docsChanged: ${{ steps.commit-docs.outputs.docsChanged }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
-          branch: deploy
+          ref: dev
 
       - name: Configure Git
         run: |
@@ -172,65 +169,43 @@ jobs:
           git config --local user.name "biosimulatorsdaemon"
           git config pull.rebase false
 
-      - name: Install Python
-        uses: actions/setup-python@v2
+      - name: Set up the environment
+        uses: ./.github/actions/setup-poetry-env
         with:
-          python-version: '3.9'
-
-      - name: Setup pip cache
-        uses: actions/cache@v2
-        with:
-          path: /opt/hostedtoolcache/Python
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}-${{ hashFiles('requirements.optional.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-      - name: Install pip and setuptools
-        run: |
-          #python -m pip install --upgrade pip
-          python -m pip install --upgrade setuptools
-
-      # install package
-      - name: Install the package
-        run: |
-          python -m pip install git+https://github.com/biosimulators/RBApy.git#egg=rbapy
-          python -m pip install .[all]
+          python-version: ${{ matrix.python-version }}
 
       # compile and push documentation
       - name: Install the requirements for compiling the documentation
-        run: python -m pip install -r docs-src/requirements.txt
+        run: poetry install --with docs
 
       - name: Compile the documentation
         run: |
-          sphinx-apidoc . setup.py --output-dir docs-src/source --force --module-first --no-toc
+          poetry run sphinx-apidoc . setup.py --output-dir docs-src/source --force --module-first --no-toc
           mkdir -p docs-src/_static
-          sphinx-build docs-src docs
+          poetry run sphinx-build docs-src docs
 
       - id: commit-docs
         name: Commit the compiled documentation
         run: |
-          git stash || true
+          git stash
           git pull
           set +e
-          git stash pop || true
+          git stash pop
           git add docs
-          git add docs-src
-          git commit -m "chore: Updating compiled documentation [skip ci]"
-          git checkout .
-          git clean -f -d
+          git commit -m "chore: Updated compiled documentation [skip ci]"
           if [[ $? = 0 ]]; then
-            docsChanged=1
+            changed=1
           else
-            docsChanged=0
+            changed=0
           fi
-          echo "docsChanged=$docsChanged" >> $GITHUB_OUTPUT
+          echo "changed=$changed" >> $GITHUB_OUTPUT
 
       - name: Push the compiled documentation
-        if: steps.commit-docs.outputs.docsChanged == '1'
+        if: steps.commit-identifiers-namespaces.outputs.changed == '1' || steps.commit-docs.outputs.changed == '1'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: deploy
+          branch: dev
 
       # Create GitHub release
       - name: Create GitHub release
@@ -242,26 +217,12 @@ jobs:
           release_name: Release ${{ needs.getVersionNumber.outputs.version }}
 
       # Create PyPI release
-      - name: Install pandoc
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install -y pandoc
-
-      - name: Convert README to .rst format
-        run: pandoc --from=gfm --output=README.rst --to=rst README.md
-
-      - name: Install twine
-        run: |
-          python -m pip install wheel twine
-
       - name: Create packages to upload to PyPI
         run: |
-          python setup.py sdist
-          python setup.py bdist_wheel
+          poetry build
 
       - name: Upload packages to PyPI
         env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
         run: |
-          twine upload dist/*
+          poetry publish --no-interaction --username __token__ --password $POETRY_PYPI_TOKEN_PYPI
