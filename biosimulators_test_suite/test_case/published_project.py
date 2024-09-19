@@ -275,7 +275,7 @@ class SimulatorCanExecutePublishedProject(TestCase):
         for task_reqs in self.task_requirements:
             reqs_satisfied = False
             for alg_specs in specifications['algorithms']:
-                ### TEMPORARY RBA REMOVAL
+                # TEMPORARY RBA REMOVAL
                 if alg_specs['kisaoId']["id"] == "KISAO_0000669":
                     raise RuntimeError("Error with Algorithm Specification (KISAO_0000669):\n\tDue to incompatible, "
                                        "outdated releases of RBApy, BioSimulators can no longer "
