@@ -1,3 +1,4 @@
+import pytest
 from biosimulators_utils.combine.io import CombineArchiveReader
 from biosimulators_utils.combine.data_model import CombineArchiveContentFormat
 from biosimulators_utils.combine.utils import get_sedml_contents
@@ -37,10 +38,10 @@ class ExamplesTestCase(unittest.TestCase):
         shutil.rmtree(self.dirname)
 
     @parameterized.parameterized.expand(EXAMPLES)
-    def test_example(self, name, example_filename):
-        ### TEMPORARY RBA REMOVAL
-        if "rba" in example_filename:
-            return
+    def test_example_should_pass(self, name, example_filename):
+        self.run_test_example(name, example_filename)
+
+    def run_test_example(self, name, example_filename):
         example_specs_filename = os.path.join(example_filename[0:-5], 'expected-results.json')
 
         example_base_dir = os.path.join(os.path.dirname(example_filename))
