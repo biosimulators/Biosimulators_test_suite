@@ -1,46 +1,44 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Tutorial &#8212; BioSimulators test suite 0.1.87 documentation</title>
+    <title>Tutorial &#8212; BioSimulators test suite 0.2 documentation</title>
   
   
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="icon" sizes="16x16" type="image/png" href="https://github.com/biosimulations/biosimulations/raw/dev/libs/shared/assets/src/assets/icons/favicon-16x16.png" />
-    <link rel="icon" sizes="32x32" type="image/png" href="https://github.com/biosimulations/biosimulations/raw/dev/libs/shared/assets/src/assets/icons/favicon-32x32.png" />
-    <link rel="stylesheet" type="text/css" href="_static/css/biosimulators.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/css/biosimulators.css?v=be3f2583" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/documentation_options.js?v=10f1778b"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutorial';</script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
@@ -56,19 +54,23 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
   
   <input type="checkbox"
           class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
   
   <div class="search-button__wrapper">
     <div class="search-button__overlay"></div>
@@ -90,19 +92,29 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
-  <label class="sidebar-toggle primary-toggle" for="__primary">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
-  </label>
+  </button>
   
-  <div class="navbar-header-items__start">
+  
+  <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
+
+  
+    
   
 
 <a class="navbar-brand logo" href="index.html">
+  
   
   
   
@@ -112,14 +124,13 @@
       
     
     
-    <img src="_static/biosimulators-logo.svg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/biosimulators-logo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/biosimulators-logo.svg" class="logo__image only-light" alt="BioSimulators test suite 0.2 documentation - Home"/>
+    <script>document.write(`<img src="_static/biosimulators-logo.svg" class="logo__image only-dark" alt="BioSimulators test suite 0.2 documentation - Home"/>`);</script>
   
   
 </a></div>
     
   </div>
-  
   
   <div class="col-lg-9 navbar-header-items">
     
@@ -128,17 +139,20 @@
       
         <div class="navbar-item navbar-persistent--container">
           
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
         </div>
       
       
-        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+        <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Quick links">
         <li class="nav-item">
           
@@ -149,8 +163,8 @@ document.write(`
           
           
           
-          <a href="https://github.com/biosimulators/Biosimulators_test_suite" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
+          <a href="https://github.com/biosimulators/Biosimulators_test_suite" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
         </li>
         <li class="nav-item">
           
@@ -161,8 +175,8 @@ document.write(`
           
           
           
-          <a href="https://twitter.com/biosimulators" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter"></i></span>
-            <label class="sr-only">Twitter</label></a>
+          <a href="https://twitter.com/biosimulators" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
         </li>
         <li class="nav-item">
           
@@ -173,8 +187,8 @@ document.write(`
           
           
           
-          <a href="mailto:info@biosimulators.org" title="Email" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-envelope"></i></span>
-            <label class="sr-only">Email</label></a>
+          <a href="mailto:info@biosimulators.org" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
         </li>
 </ul></div>
       
@@ -184,27 +198,33 @@ document.write(`
   
   
     <div class="navbar-persistent--mobile">
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
     </div>
   
 
   
-    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
       <span class="fa-solid fa-outdent"></span>
-    </label>
+    </button>
   
 </div>
 
-    </nav>
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -217,7 +237,7 @@ document.write(`
     
       <div class="sidebar-header-items__end">
         
-          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+          <div class="navbar-item"><ul class="navbar-icon-links"
     aria-label="Quick links">
         <li class="nav-item">
           
@@ -228,8 +248,8 @@ document.write(`
           
           
           
-          <a href="https://github.com/biosimulators/Biosimulators_test_suite" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
+          <a href="https://github.com/biosimulators/Biosimulators_test_suite" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
         </li>
         <li class="nav-item">
           
@@ -240,8 +260,8 @@ document.write(`
           
           
           
-          <a href="https://twitter.com/biosimulators" title="Twitter" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fab fa-twitter"></i></span>
-            <label class="sr-only">Twitter</label></a>
+          <a href="https://twitter.com/biosimulators" title="Twitter" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Twitter</span></a>
         </li>
         <li class="nav-item">
           
@@ -252,8 +272,8 @@ document.write(`
           
           
           
-          <a href="mailto:info@biosimulators.org" title="Email" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fas fa-envelope"></i></span>
-            <label class="sr-only">Email</label></a>
+          <a href="mailto:info@biosimulators.org" title="Email" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Email</span></a>
         </li>
 </ul></div>
         
@@ -279,6 +299,12 @@ document.write(`
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
     </div>
   
   
@@ -290,13 +316,13 @@ document.write(`
 
       </div>
       
-      <main id="main-content" class="bd-main">
+      <main id="main-content" class="bd-main" role="main">
         
         
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article">
+              <div class="bd-header-article d-print-none">
 <div class="header-article-items header-article__inner">
   
     <div class="header-article-items__start">
@@ -305,8 +331,8 @@ document.write(`
 
 
 
-<nav aria-label="Breadcrumbs">
-  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
       <a href="index.html" class="nav-link" aria-label="Home">
@@ -328,17 +354,17 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section id="tutorial">
-<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this heading">#</a></h1>
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading">#</a></h1>
 <p>Simulation software developers can utilize the test suite in two ways. First, developers can install and execute the test suite locally on their own machines. Second, developers can use the public cloud deployment of the test suite. In most cases, we recommend that developers use the public cloud deployment, which is easy to use. We recommend that developers deploy the test suite locally if they wish to test their simulator offline or wish to continuously test their simulator such as within their own continuous integration workflows (e.g., CircleCI, GitHub Actions).</p>
 <section id="using-the-public-cloud-deployment-of-the-test-suite">
-<h2>Using the public cloud deployment of the test suite<a class="headerlink" href="#using-the-public-cloud-deployment-of-the-test-suite" title="Permalink to this heading">#</a></h2>
+<h2>Using the public cloud deployment of the test suite<a class="headerlink" href="#using-the-public-cloud-deployment-of-the-test-suite" title="Link to this heading">#</a></h2>
 <p>The test suite is deployed as a GitHub Action workflow on issues submitted to the BioSimulators repository. Developers can run the test suite on their simulation tool by creating an issue with the label <code class="docutils literal notranslate"><span class="pre">Validate/submit</span> <span class="pre">simulator</span></code>. Developers can create issues either using this <a class="reference external" href="https://github.com/biosimulators/Biosimulators/issues/new?assignees=&amp;labels=Validate%2Fsubmit+simulator&amp;template=validate-submit-a-simulator.md&amp;title=">form</a> or using the GitHub API.</p>
 <p>Once an issue is created, a GitHub Action workflow will use the test suite to validate and/or commit your simulator to the BioSimulators registry. If your simulator is valid, the workflow will post a success message to your issue. If the test suite finds that your simulator is invalid, the workflow will post a description of the error to your workflow.</p>
 <section id="issue-content-and-format">
-<h3>Issue content and format<a class="headerlink" href="#issue-content-and-format" title="Permalink to this heading">#</a></h3>
+<h3>Issue content and format<a class="headerlink" href="#issue-content-and-format" title="Link to this heading">#</a></h3>
 <p>The body of the issue should contain a YAML-encoded description of your simulator. This should describe the id of your simulator, the version of your simulator that you would like to validate or submit, a URL where the specifications of your simulator can be retrieved, and two flags which indicate whether you would like the Docker image for your simulator to be validated and whether you would like your simulator to be committed to the BioSimulators registry. Below is an example body for an issue.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>---
 id: tellurium
@@ -355,7 +381,7 @@ commitSimulator: true
 </div>
 </section>
 <section id="validating-and-submitting-simulators-via-the-github-api">
-<h3>Validating and submitting simulators via the GitHub API<a class="headerlink" href="#validating-and-submitting-simulators-via-the-github-api" title="Permalink to this heading">#</a></h3>
+<h3>Validating and submitting simulators via the GitHub API<a class="headerlink" href="#validating-and-submitting-simulators-via-the-github-api" title="Link to this heading">#</a></h3>
 <p>Please follow these steps to use the GitHub API to programmatically submit issues to validate and/or submit simulators to the BioSimulators registry.</p>
 <ol class="arabic simple">
 <li><p>Create a GitHub account</p></li>
@@ -382,7 +408,7 @@ curl \
 </section>
 </section>
 <section id="running-the-test-suite-locally">
-<h2>Running the test suite locally<a class="headerlink" href="#running-the-test-suite-locally" title="Permalink to this heading">#</a></h2>
+<h2>Running the test suite locally<a class="headerlink" href="#running-the-test-suite-locally" title="Link to this heading">#</a></h2>
 <p>The test suite can also be run locally as illustrated below.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># Run all tests
 biosimulators-test-suite /path/to/simulator/specifications.json
@@ -401,7 +427,7 @@ biosimulators-test-suite /path/to/simulator/specifications.json \
 </pre></div>
 </div>
 <section id="directly-testing-a-command-line-interface-rather-than-a-docker-image">
-<h3>Directly testing a command-line interface (rather than a Docker image)<a class="headerlink" href="#directly-testing-a-command-line-interface-rather-than-a-docker-image" title="Permalink to this heading">#</a></h3>
+<h3>Directly testing a command-line interface (rather than a Docker image)<a class="headerlink" href="#directly-testing-a-command-line-interface-rather-than-a-docker-image" title="Link to this heading">#</a></h3>
 <p>Optionally, the <code class="docutils literal notranslate"><span class="pre">--cli</span></code> argument can be used to instruct the test suite to directly verify a command interface
 rather than indirectly verify the interface through the entry point of a Docker image. Note, the Docker image tests will still
 use the Docker image.</p>
@@ -411,7 +437,7 @@ use the Docker image.</p>
 </div>
 </section>
 <section id="executing-the-test-suite-with-stdout-stderr-capturing-disabled">
-<h3>Executing the test suite with stdout/stderr capturing disabled<a class="headerlink" href="#executing-the-test-suite-with-stdout-stderr-capturing-disabled" title="Permalink to this heading">#</a></h3>
+<h3>Executing the test suite with stdout/stderr capturing disabled<a class="headerlink" href="#executing-the-test-suite-with-stdout-stderr-capturing-disabled" title="Link to this heading">#</a></h3>
 <p>Some Mac OS users have reported that capturer, the package that the test suite uses to collect the standard output and error produced by each test case, fails on their systems. In such cases, the <code class="docutils literal notranslate"><span class="pre">--do-not-log-std-out-err</span></code> option can be used to disable the collection of standard output and error.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>biosimulators-test-suite /path/to/simulator/specifications.json \
   --do-not-log-std-out-err
@@ -419,7 +445,7 @@ use the Docker image.</p>
 </div>
 </section>
 <section id="saving-the-synthetic-combine-archives-generated-by-the-test-cases">
-<h3>Saving the synthetic COMBINE archives generated by the test cases<a class="headerlink" href="#saving-the-synthetic-combine-archives-generated-by-the-test-cases" title="Permalink to this heading">#</a></h3>
+<h3>Saving the synthetic COMBINE archives generated by the test cases<a class="headerlink" href="#saving-the-synthetic-combine-archives-generated-by-the-test-cases" title="Link to this heading">#</a></h3>
 <p>Optionally, the <code class="docutils literal notranslate"><span class="pre">--synthetic-archives-dir</span></code> argument can be used to save the synthetic
 COMBINE/OMEX archives generated by the test cases to a directory. This enables developers
 to inspect how the test suite verifies simulation tools.</p>
@@ -443,7 +469,7 @@ without using your simulator to execute them.</p>
 </div>
 </section>
 <section id="saving-the-outputs-of-the-execution-of-combine-archives-involved-in-the-test-cases">
-<h3>Saving the outputs of the execution of COMBINE archives involved in the test cases<a class="headerlink" href="#saving-the-outputs-of-the-execution-of-combine-archives-involved-in-the-test-cases" title="Permalink to this heading">#</a></h3>
+<h3>Saving the outputs of the execution of COMBINE archives involved in the test cases<a class="headerlink" href="#saving-the-outputs-of-the-execution-of-combine-archives-involved-in-the-test-cases" title="Link to this heading">#</a></h3>
 <p>Optionally, the <code class="docutils literal notranslate"><span class="pre">--work-dir</span></code> argument can be used to save the COMBINE archives involved in the test cases and the
 outputs (reports and plots) generated by their execution to a directory. This enables developers
 to inspect how the test suite verifies simulation tools.</p>
@@ -459,7 +485,7 @@ test case will be saved to
 <code class="docutils literal notranslate"><span class="pre">/path/to/save/archives-and-their-outputs/sedml/SimulatorSupportsMultipleTasksPerSedDocument/</span></code>.</p>
 </section>
 <section id="display-additional-diagnostic-information-tracebacks-for-test-failures">
-<h3>Display additional diagnostic information (tracebacks for test failures)<a class="headerlink" href="#display-additional-diagnostic-information-tracebacks-for-test-failures" title="Permalink to this heading">#</a></h3>
+<h3>Display additional diagnostic information (tracebacks for test failures)<a class="headerlink" href="#display-additional-diagnostic-information-tracebacks-for-test-failures" title="Link to this heading">#</a></h3>
 <p>Optionally, the <code class="docutils literal notranslate"><span class="pre">--debug</span></code> argument can be used to display traceback information about the origin
 of each failed test (Line of Python code where the error occurred and the stack of calls which led
 to its execution).</p>
@@ -469,7 +495,7 @@ to its execution).</p>
 </div>
 </section>
 <section id="saving-the-results-of-the-test-cases-to-a-file">
-<h3>Saving the results of the test cases to a file<a class="headerlink" href="#saving-the-results-of-the-test-cases-to-a-file" title="Permalink to this heading">#</a></h3>
+<h3>Saving the results of the test cases to a file<a class="headerlink" href="#saving-the-results-of-the-test-cases-to-a-file" title="Link to this heading">#</a></h3>
 <p>Optionally, the <code class="docutils literal notranslate"><span class="pre">--report</span></code> argument can be used to save the results of the test cases
 to a JSON file.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>biosimulators-test-suite /path/to/simulator/specifications.json \
@@ -485,17 +511,22 @@ to a JSON file.</p>
               
               
               
+              
+              
             </div>
             
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
   <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav class="bd-toc-nav page-toc">
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-public-cloud-deployment-of-the-test-suite">Using the public cloud deployment of the test suite</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#issue-content-and-format">Issue content and format</a></li>
@@ -515,6 +546,7 @@ to a JSON file.</p>
   </nav></div>
 
   <div class="sidebar-secondary-item">
+
   
   <div class="tocsection editthispage">
     <a href="https://github.com/biosimulators/Biosimulators_test_suite/edit/dev/docs-src/tutorial.rst">
@@ -530,6 +562,7 @@ to a JSON file.</p>
 </div>
 
   <div class="sidebar-secondary-item">
+
   <div class="tocsection sourcelink">
     <a href="_sources/tutorial.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
@@ -550,8 +583,8 @@ to a JSON file.</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -559,21 +592,32 @@ to a JSON file.</p>
     <div class="footer-items__start">
       
         <div class="footer-item">
+
   <p class="copyright">
     
-      © Copyright 2023, BioSimulators Team.
+      © Copyright 2024, BioSimulators Team.
       <br/>
     
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
   </p>
 </div>
       
     </div>
   
   
+  
     <div class="footer-items__end">
       
-        <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
 </p></div>
       
     </div>
