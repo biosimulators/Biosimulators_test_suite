@@ -19,7 +19,7 @@ keywords = ['systems', 'biology', 'modeling', 'simulation', 'BioSimulators']
 python = "~3.10"
 
 cement = "<=3.0.6"
-docker = "<=5.0.3"
+docker = "^7.1.0"
 natsort = "<=8.1.0"
 pypdf2 = "<=2.8.1"
 requests = "<=2.28.1"
