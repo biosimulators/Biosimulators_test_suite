@@ -25,9 +25,9 @@ runs:
       run: echo "$HOME/.local/bin" >> $GITHUB_PATH
       shell: bash
 
-    - name: Configure Poetry virtual environment in project
-      run: poetry config virtualenvs.in-project true
-      shell: bash
+#    - name: Configure Poetry virtual environment in project
+#      run: poetry config virtualenvs.in-project true
+#      shell: bash
 
     - name: Load cached venv
       id: cached-poetry-dependencies

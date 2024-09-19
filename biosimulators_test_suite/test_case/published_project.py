@@ -276,12 +276,11 @@ class SimulatorCanExecutePublishedProject(TestCase):
             reqs_satisfied = False
             for alg_specs in specifications['algorithms']:
                 # TEMPORARY RBA REMOVAL
-                alg_id = alg_specs["id"]
                 if alg_specs['kisaoId']["id"] == "KISAO_0000669":
                     raise RuntimeError("Error with Algorithm Specification (KISAO_0000669):\n\tDue to incompatible, "
                                        "outdated releases of RBApy, BioSimulators can no longer "
                                        "support RBA processing."
-                                       f"{alg_id}")
+                                       f"{(alg_specs['id']) if 'id' in alg_specs else alg_specs['kisaoId']}")
                 format_reqs_satisfied = False
                 for format_in_specs in alg_specs['modelFormats']:
                     if (
