@@ -1,0 +1,58 @@
+{
+  "upload_type": "software",
+  "title": "BioSimulators test suite",
+  "license": "mit",
+  "creators": [
+    {
+      "name": "Karr, Jonathan R.",
+      "affiliation": "Icahn School of Medicine at Mount Sinai",
+      "orcid": "0000-0002-2605-5080"
+    },
+    {
+      "name": "Drescher, Logan",
+      "affiliation": "University of Connecticut School of Medicine"
+    },
+    {
+      "name": "Smith, Lucian P.",
+      "affiliation": "University of Washington",
+      "orcid": "0000-0001-7002-6386"
+    },
+    {
+      "name": "Jordan, Ryann",
+      "affiliation": "Icahn School of Medicine at Mount Sinai"
+    },
+    {
+      "name": "Agmon, Eran",
+      "affiliation": "University of Connecticut School of Medicine",
+      "orcid": "0000-0003-1279-2474"
+    },
+    {
+      "name": "Marupilla, Gnaneswara",
+      "affiliation": "University of Connecticut School of Medicine",
+      "orcid": "0000-0002-6030-8707"
+    },
+    {
+      "name": "Shaikh, Bilal",
+      "affiliation": "Icahn School of Medicine at Mount Sinai",
+      "orcid": "0000-0001-5801-5510"
+    },
+    {
+      "name": "Patrie, Alexander",
+      "affiliation": "University of Connecticut School of Medicine",
+      "orcid": "0009-0002-6886-2291"
+    },
+    {
+      "name": "Moraru, Ion I.",
+      "affiliation": "University of Connecticut School of Medicine",
+      "orcid": "0000-0002-3746-9676"
+    }
+  ],
+  "description": "<p>The BioSimulators test suite validates that biosimulation software tools implement the BioSimulators standards for simulators. Part of the BioSimulators project (Karr Lab, Icahn School of Medicine at Mount Sinai, and the Center for Cell Analysis and Modeling at UConn Health).</p>",
+  "related_identifiers": [
+    {
+      "relation": "continues",
+      "identifier": "10.5281/zenodo.5058109",
+      "scheme": "doi"
+    }
+  ]
+}
