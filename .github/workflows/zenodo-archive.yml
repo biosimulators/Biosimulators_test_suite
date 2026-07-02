@@ -1,0 +1,18 @@
+name: Archive release to Zenodo
+
+# On each published release, archive it as a new version of this repo's Zenodo
+# concept via the zenodo-maint reusable workflow. Concept + metadata come from
+# CITATION.cff (doi:) and .zenodo.json. Replaces the old native integration.
+# Requires a ZENODO_TOKEN secret owned by the account that owns the concept.
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  archive:
+    uses: virtualcell/zenodo-maint/.github/workflows/archive.reusable.yml@v1
+    with:
+      tag: ${{ github.event.release.tag_name }}
+    secrets:
+      ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
